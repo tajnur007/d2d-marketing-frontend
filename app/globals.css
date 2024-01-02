@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Metropolis";
+  src:
+    local("Metropolis"),
+    url("../assets/fonts/Metropolis-Regular.otf") format("opentype"),
+}
+
+* {
+  font-family: Metropolis, Arial, Helvetica, sans-serif;
+}
