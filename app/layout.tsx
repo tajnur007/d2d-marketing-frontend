@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Providers } from '../components/providers/redux-providers';
 import './globals.css';
 
@@ -13,7 +14,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <Providers>
       <html lang='en'>
-        <body className=''>{children}</body>
+        <body>
+          {children}.
+          <SpeedInsights />
+        </body>
       </html>
     </Providers>
   );
