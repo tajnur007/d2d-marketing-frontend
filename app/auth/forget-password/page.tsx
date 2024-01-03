@@ -4,7 +4,7 @@ import PasswordChanged from '@/components/password-changed';
 const ForgetPasswordPage = () => (
   <div className=''>
     This is <strong>Forget Password</strong> page
-    <EmailSent />
+    <PasswordChanged />
   </div>
 );
 

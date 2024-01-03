@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import emailSentImage from '@/assets/images/email-sent.png';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
+import Copyright from './copyright';
 
 const EmailSent = () => {
   return (
@@ -24,9 +26,12 @@ const EmailSent = () => {
           Check your email
         </button>
         <p className='text-lg font-normal my-20'>
-          Don&apos;t have an account? <span className='text-[#4318FF]'>Sign up</span>
+          Don&apos;t have an account?{' '}
+          <Link href='/auth/signup' className='text-[#4318FF]'>
+            Sign up
+          </Link>
         </p>
-        <p className='text-xs font-light'>© 2023 ALL RIGHTS RESERVED</p>;
+        <Copyright />
       </div>
     </section>
   );
