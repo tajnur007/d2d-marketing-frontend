@@ -1,5 +1,6 @@
 'use client';
 
+import { Logo } from '@/assets/svg-images';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -68,8 +69,8 @@ const sidebarItem = [
     icon: (
       <svg
         width='20'
-        height='19'
-        viewBox='0 0 20 19'
+        height='20'
+        viewBox='0 0 20 20'
         fill='currentColor'
         xmlns='http://www.w3.org/2000/svg'>
         <path
@@ -93,7 +94,7 @@ const Sidebar = () => {
   return (
     <div className='w-[88px] bg-white relative'>
       <div className='absolute w-full flex justify-center top-5'>
-        <Image src='/navbar/logo.png' alt='' height={20} width={37} />
+        <Logo />
       </div>
 
       <div className='relative left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col h-[147px] justify-between items-center w-full'>
