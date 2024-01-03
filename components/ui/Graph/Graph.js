@@ -29,7 +29,7 @@ function Graph({ graphData, color }) {
     datasets: [
       {
         label: 'Revenue',
-        data: graphData.map((data) => data.sales),
+        data: graphData.map((data) => data.value),
         borderColor: color,
         borderWidth: 3,
         pointBorderColor: color,

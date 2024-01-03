@@ -1,4 +1,4 @@
-import { graphConfig, graphData } from '@/utils/constants/graph-constants';
+import { graphConfig } from '@/utils/constants/graph-constants';
 import React from 'react';
 import Graph from '../Graph/Graph';
 
@@ -18,7 +18,7 @@ const GraphList: React.FC = () => {
             </div>
             <div>
               <div className='w-max-[300px] w-[100%] h-[139px] p-[20px] cursor-pointer'>
-                <Graph graphData={graphData} color={item.color} />
+                <Graph graphData={item.graphData} color={item.color} />
               </div>
             </div>
           </div>
