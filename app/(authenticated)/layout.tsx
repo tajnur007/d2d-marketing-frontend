@@ -6,7 +6,7 @@ import ServerAuthManager from '../../components/providers/server-auth-manager';
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   return (
     <ServerAuthManager>
-      <div className='flex min-h-screen'>
+      <div className='flex min-h-screen bg-[#F7F7FB]'>
         <Sidebar />
         <div className='flex-1'>
           <Navbar />
