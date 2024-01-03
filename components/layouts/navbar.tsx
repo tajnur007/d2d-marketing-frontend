@@ -3,6 +3,8 @@ import { MoonSolidIcon, NotificationIcon } from '@/assets/icons';
 import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+  const currentPage = usePathname();
+
   const capitalizeEachWord = (str: string): string => {
     return str
       .split('/')
@@ -10,7 +12,6 @@ const Navbar = () => {
       .join('/');
   };
 
-  const currentPage = usePathname();
   const formattedPage = capitalizeEachWord(
     currentPage.replace('/', '').replace('-', ' ')
   );
