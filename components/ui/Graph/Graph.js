@@ -33,13 +33,26 @@ function Graph({ graphData, graphConfig, color }) {
         borderWidth: 3,
         pointBorderColor: color,
         pointBorderWidth: 3,
-        pointRadius: 2,
+        pointRadius: 0,
         tension: 0.5,
         fill: true,
+        // backgroundColor: (context) => {
+        //   const ctx = context.chart.ctx;
+        //   const gradient = ctx.createLinearGradient(0, 0, 0, 90);
+        //   gradient.addColorStop(0, color);
+        //   gradient.addColorStop(1, 'white');
+        //   return gradient;
+        // },
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 200);
-          gradient.addColorStop(0, color);
+          const gradient = ctx.createLinearGradient(0, 0, 0, 100);
+          gradient.addColorStop(
+            0,
+            `rgba(${parseInt(color.slice(1, 3), 16)}, ${parseInt(
+              color.slice(3, 5),
+              16
+            )}, ${parseInt(color.slice(5, 7), 16)}, 0)`
+          ); // Set alpha value to 0
           gradient.addColorStop(1, 'white');
           return gradient;
         },
@@ -67,15 +80,8 @@ function Graph({ graphData, graphConfig, color }) {
 
   return (
     <>
-      <div
-        style={{
-          maxWidth: '450px',
-          width: '100%',
-          height: '250px',
-          padding: '20px',
-          cursor: 'pointer',
-        }}>
-        <Line data={data} options={options}></Line>     
+      <div className='w-max-[300px] w-[100%] h-[139px] p-[20px] cursor-pointer'>
+        <Line data={data} options={options}></Line>
       </div>
     </>
   );
