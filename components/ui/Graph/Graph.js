@@ -33,7 +33,7 @@ function Graph({ graphData, graphConfig, color }) {
         borderWidth: 3,
         pointBorderColor: color,
         pointBorderWidth: 3,
-        pointRadius: 1,
+        pointRadius: 2,
         tension: 0.5,
         fill: true,
         backgroundColor: (context) => {
@@ -54,6 +54,7 @@ function Graph({ graphData, graphConfig, color }) {
       },
     },
     responsive: true,
+    maintainAspectRatio: false, // Allow dynamic aspect ratio
     scales: {
       y: {
         display: false, // Hide y-axis labels
@@ -68,7 +69,8 @@ function Graph({ graphData, graphConfig, color }) {
     <>
       <div
         style={{
-          width: '450px',
+          maxWidth: '450px',
+          width: '100%',
           height: '250px',
           padding: '20px',
           cursor: 'pointer',
