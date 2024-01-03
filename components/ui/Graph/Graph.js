@@ -1,6 +1,7 @@
 'use client';
 import { Line } from 'react-chartjs-2';
 
+import { graphOptions } from '@/utils/constants/graph-constants';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -22,7 +23,7 @@ ChartJS.register(
   Filler
 );
 
-function Graph({ graphData, graphConfig, color }) {
+function Graph({ graphData, color }) {
   const data = {
     labels: graphData.map((data) => data.month),
     datasets: [
@@ -36,13 +37,6 @@ function Graph({ graphData, graphConfig, color }) {
         pointRadius: 0,
         tension: 0.5,
         fill: true,
-        // backgroundColor: (context) => {
-        //   const ctx = context.chart.ctx;
-        //   const gradient = ctx.createLinearGradient(0, 0, 0, 90);
-        //   gradient.addColorStop(0, color);
-        //   gradient.addColorStop(1, 'white');
-        //   return gradient;
-        // },
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 100);
@@ -52,7 +46,7 @@ function Graph({ graphData, graphConfig, color }) {
               color.slice(3, 5),
               16
             )}, ${parseInt(color.slice(5, 7), 16)}, 0)`
-          ); // Set alpha value to 0
+          );
           gradient.addColorStop(1, 'white');
           return gradient;
         },
@@ -60,31 +54,9 @@ function Graph({ graphData, graphConfig, color }) {
     ],
   };
 
-  const options = {
-    plugins: {
-      legend: {
-        display: false, // Set to false to hide the legend
-      },
-    },
-    responsive: true,
-    maintainAspectRatio: false, // Allow dynamic aspect ratio
-    scales: {
-      y: {
-        display: false, // Hide y-axis labels
-      },
-      x: {
-        display: false, // Hide x-axis labels
-      },
-    },
-  };
+  const options = graphOptions;
 
-  return (
-    <>
-      <div className='w-max-[300px] w-[100%] h-[139px] p-[20px] cursor-pointer'>
-        <Line data={data} options={options}></Line>
-      </div>
-    </>
-  );
+  return (<Line data={data} options={options}></Line>);
 }
 
 export default Graph;
