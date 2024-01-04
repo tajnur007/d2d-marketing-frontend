@@ -1,12 +1,11 @@
 import EmailSent from '@/components/email-sent';
+import ForgetPassword from '@/components/layouts/forget-password/foget-password';
 import PasswordChanged from '@/components/password-changed';
 
 const ForgetPasswordPage = () => (
-  <div className=''>
-    This is <strong>Forget Password</strong> page
-    <PasswordChanged />
-    <EmailSent />
-  </div>
+  <>
+  <ForgetPassword/>
+  </>
 );
 
 export default ForgetPasswordPage;
