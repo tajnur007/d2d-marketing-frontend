@@ -21,3 +21,12 @@ export interface SidebarItem {
   icon: () => JSX.Element;
   position: number;
 }
+
+export interface Person {
+  id: Number;
+  initials: string;
+  name: string;
+  role: string;
+  username: string;
+  totalLeads: number;
+}
