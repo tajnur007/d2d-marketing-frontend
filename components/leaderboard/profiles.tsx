@@ -1,25 +1,19 @@
+import { Person } from '@/models/global-types';
 import React from 'react';
 
-interface Person {
-  id: number;
-  initials: string;
-  name: string;
-  role: string;
-  username: string;
-  totalLeads: number;
-}
-
-const Profiles = ({ data }: any) => {
-  return <div>{Item(data)}</div>;
+const Profiles = ({ data }: { data: Person[] }) => {
+  return (
+    <div>
+      <Item dataProps={data} />
+    </div>
+  );
 };
 
-const Item = (data: Person[]) => {
+const Item = ({ dataProps }: { dataProps: Person[] }) => {
   return (
     <>
-      {data?.map((person) => (
-        <div
-          key={person?.id}
-          className={`relative w-[245px] h-[43px] mt-[16px] left-[25px]`}>
+      {dataProps?.map((person: Person, idx) => (
+        <div key={idx} className={`relative w-[245px] h-[43px] mt-[16px] left-[25px]`}>
           <div className='flex flex-col w-[50px] h-[43px] items-center justify-center gap-[10px] px-[7px] py-[13px] absolute top-0 left-0 bg-[#e5dfff] rounded-[16px] overflow-hidden'>
             <div className="relative w-fit [font-family:'Metropolis-SemiBold',Helvetica] font-semibold text-[#b8a9ff] text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap">
               {person?.initials}

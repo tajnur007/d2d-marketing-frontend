@@ -1,3 +1,4 @@
+import { Person } from '@/models/global-types';
 import { leaderBoard } from './database';
 import Profiles from './profiles';
 
@@ -25,7 +26,8 @@ const Leaderboard = () => {
 };
 export default Leaderboard;
 
-const between = (leaderBoard: any[]) => {
+const between = (leaderBoard: Person[]) => {
+
   const sortedLeaderboard = [...leaderBoard].sort((a, b) => b.totalLeads - a.totalLeads);
   // sort with decending order
   // const top12Leaderboard = sortedLeaderboard.slice(0, 12);
