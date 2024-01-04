@@ -13,3 +13,12 @@ export interface DocType {
   snippet?: 'short' | 'long' | 'special';
   version?: number;
 }
+
+export interface Person {
+  id: Number;
+  initials: string;
+  name: string;
+  role: string;
+  username: string;
+  totalLeads: number;
+}
