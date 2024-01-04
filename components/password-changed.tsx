@@ -21,6 +21,7 @@ const PasswordChanged = () => {
           buttonInfo={{
             className: 'w-full bg-[#4318FF] rounded-lg text-white p-4 font-normal my-4',
             text: 'Login now',
+            type: 'text'
           }}
         />
         <Copyright />
