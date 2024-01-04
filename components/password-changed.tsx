@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import passwordChangedImage from '@/assets/images/password-changed.png';
 import Copyright from './copyright';
+import ForgetPasswordCommon from './forget-password-common';
 
 const PasswordChanged = () => {
   return (
@@ -16,15 +17,12 @@ const PasswordChanged = () => {
           </p>
         </div>
         <Image className='my-4' src={passwordChangedImage} alt='page-logo' />
-        <button className='w-full bg-[#4318FF] rounded-lg text-white p-4 font-normal my-4'>
-          Login now
-        </button>
-        <p className='text-lg font-normal my-20'>
-          Don&apos;t have an account?{' '}
-          <Link href='/auth/signup' className='text-[#4318FF]'>
-            Sign up
-          </Link>
-        </p>
+        <ForgetPasswordCommon
+          buttonInfo={{
+            className: 'w-full bg-[#4318FF] rounded-lg text-white p-4 font-normal my-4',
+            text: 'Login now',
+          }}
+        />
         <Copyright />
       </div>
     </section>

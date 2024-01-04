@@ -5,6 +5,7 @@ import Link from 'next/link';
 import emailSentImage from '@/assets/images/email-sent.png';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
 import Copyright from './copyright';
+import ForgetPasswordCommon from './forget-password-common';
 
 const EmailSent = () => {
   return (
@@ -22,15 +23,12 @@ const EmailSent = () => {
           </p>
         </div>
         <Image className='my-4' src={emailSentImage} alt='page-logo' />
-        <button className='w-full bg-white rounded-lg text-[#4318FF] p-4 font-normal my-4'>
-          Check your email
-        </button>
-        <p className='text-lg font-normal my-20'>
-          Don&apos;t have an account?{' '}
-          <Link href='/auth/signup' className='text-[#4318FF]'>
-            Sign up
-          </Link>
-        </p>
+        <ForgetPasswordCommon
+          buttonInfo={{
+            className: 'w-full bg-white rounded-lg text-[#4318FF] p-4 font-normal my-4',
+            text: 'Check your email',
+          }}
+        />
         <Copyright />
       </div>
     </section>

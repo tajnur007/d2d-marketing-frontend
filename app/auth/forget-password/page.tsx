@@ -5,6 +5,7 @@ const ForgetPasswordPage = () => (
   <div className=''>
     This is <strong>Forget Password</strong> page
     <PasswordChanged />
+    <EmailSent />
   </div>
 );
 
