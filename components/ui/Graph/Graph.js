@@ -1,7 +1,7 @@
 'use client';
 import { Line } from 'react-chartjs-2';
 
-import { graphOptions } from '@/utils/constants/graph-constants';
+import { GRAPH_OPTIONS } from '@/utils/constants/graph-constants';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -54,7 +54,7 @@ function Graph({ graphData, color }) {
     ],
   };
 
-  const options = graphOptions;
+  const options = GRAPH_OPTIONS;
 
   return (<Line data={data} options={options}></Line>);
 }

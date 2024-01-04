@@ -1,4 +1,4 @@
-export const graphOptions = {
+export const GRAPH_OPTIONS = {
   plugins: {
     legend: {
       display: false, // Set to false to hide the legend
@@ -16,7 +16,7 @@ export const graphOptions = {
   },
 };
 
-export const graphConfig = [
+export const GRAPH_CONFIG = [
   {
     id: 1,
     label: 'Total Leads',
