@@ -1,10 +1,11 @@
 'use client';
 
-import { Logo } from '@/assets/svg-images';
+import { Logo } from '@/assets/icons';
 import { SIDEBAR_ITEMS } from '@/utils/constants/common-constants';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import profilePic from '../../assets/images/Avatar.png';
 
 const Sidebar = () => {
   const [selected, setSelected] = useState(-15);
@@ -42,7 +43,7 @@ const Sidebar = () => {
           }  h-[50px] w-1 bg-[#5630FF] rounded-tr rounded-br `}></div>
       </div>
       <div className='absolute w-full flex justify-center bottom-5'>
-        <Image src='/navbar/Avatar.png' alt='' height={46} width={46} />
+        <Image src={profilePic} alt='' height={46} width={46} />
       </div>
     </div>
   );
