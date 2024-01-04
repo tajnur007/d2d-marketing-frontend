@@ -1,7 +1,13 @@
-import React from 'react';
+import Leaderboard from '@/components/leaderboard/leaderboard';
+import GraphList from '@/components/ui/GraphList/GraphList';
 
 const DashboardPage = () => {
-  return <div>this is dashboard page</div>;
+  return (
+    <>
+      <GraphList />
+      <Leaderboard />
+    </>
+  );
 };
 
 export default DashboardPage;
