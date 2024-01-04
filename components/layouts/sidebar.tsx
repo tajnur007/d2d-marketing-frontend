@@ -1,7 +1,7 @@
 'use client';
 
 import { Logo } from '@/assets/svg-images';
-import { sidebarItems } from '@/utils/constants/common-constants';
+import { SIDEBAR_ITEMS } from '@/utils/constants/common-constants';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ const Sidebar = () => {
       </div>
 
       <div className='relative left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col h-[147px] justify-between items-center w-full'>
-        {sidebarItems.map(({ id, position, path, icon: Icon }) => (
+        {SIDEBAR_ITEMS.map(({ id, position, path, icon: Icon }) => (
           <p
             key={id}
             onClick={() => handleClick(position, path)}

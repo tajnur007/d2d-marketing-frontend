@@ -1,32 +1,31 @@
+import { SidebarItem } from '@/models/global-types';
 import { HomeIcon, BookIcon, SettingIcon } from '../../assets/icons';
 
-interface SidebarItem {
-  id: number;
-  iconName: string;
-  path: string;
-  icon: () => JSX.Element;
-  position: number;
-}
+const PAGE_ROUTES = {
+  Dashboard: '/dashboard',
+  Leads: '/leads',
+  Settings: '/settings',
+};
 
-export const sidebarItems: SidebarItem[] = [
+export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     id: 1,
     iconName: 'Home',
-    path: '/dashboard',
+    path: PAGE_ROUTES.Dashboard,
     icon: HomeIcon,
     position: -15,
   },
   {
     id: 2,
     iconName: 'Book',
-    path: '/leads',
+    path: PAGE_ROUTES.Leads,
     icon: BookIcon,
     position: 50,
   },
   {
     id: 3,
     iconName: 'Setting',
-    path: '/settings',
+    path: PAGE_ROUTES.Settings,
     icon: SettingIcon,
     position: 110,
   },
