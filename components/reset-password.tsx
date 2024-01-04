@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
 import { useState, FormEvent } from 'react';
+import ForgetPasswordCommon from './forget-password-common';
+import Copyright from './copyright';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
@@ -48,25 +50,15 @@ const ResetPassword = () => {
               />
             </div>
           </div>
-          <div>
-            <button
-              type='submit'
-              className='flex w-full my-5 justify-center rounded-md bg-purple-600 px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm'>
-              Submit
-            </button>
-          </div>
+          <ForgetPasswordCommon
+            buttonInfo={{
+              className: 'w-full bg-[#4318FF] rounded-lg text-white p-4 font-normal my-4',
+              text: 'Submit',
+              type: 'submit',
+            }}
+          />
         </form>
-
-        <p className='mt-20 text-center text-sm text-gray-500'>
-          Don&apos;t have an account ?{' '}
-          <Link href='/auth/signup' className='font-bold leading-6 text-purple-500'>
-            Sign Up
-          </Link>
-        </p>
-
-        <p className='mt-20 text-center text-sm text-gray-500'>
-          © 2023 ALL RIGHTS RESERVED
-        </p>
+        <Copyright />
       </div>
     </section>
   );

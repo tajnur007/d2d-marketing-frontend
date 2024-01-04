@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
 import { useState, FormEvent } from 'react';
+import Copyright from './copyright';
+import ForgetPasswordCommon from './forget-password-common';
 
 const NewPassword = () => {
   const [newPassword, setNewPassword] = useState('');
@@ -29,9 +31,7 @@ const NewPassword = () => {
           <h2 className='mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900'>
             New password 👋
           </h2>
-          <p className='my-5 text-md text-gray-500'>
-            Type your new password
-          </p>
+          <p className='my-5 text-md text-gray-500'>Type your new password</p>
         </div>
 
         <form onSubmit={onFormSubmit}>
@@ -65,25 +65,16 @@ const NewPassword = () => {
               />
             </div>
           </div>
-          <div>
-            <button
-              type='submit'
-              className='flex w-full my-5 justify-center rounded-md bg-purple-600 px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm'>
-              Submit
-            </button>
-          </div>
+          <ForgetPasswordCommon
+            buttonInfo={{
+              className: 'w-full bg-[#4318FF] rounded-lg text-white p-4 font-normal my-4',
+              text: 'Submit',
+              type: 'submit',
+            }}
+          />
         </form>
 
-        <p className='mt-20 text-center text-sm text-gray-500'>
-          Don&apos;t have an account ?{' '}
-          <Link href='/auth/signup' className='font-bold leading-6 text-purple-500'>
-            Sign Up
-          </Link>
-        </p>
-
-        <p className='mt-20 text-center text-sm text-gray-500'>
-          © 2023 ALL RIGHTS RESERVED
-        </p>
+        <Copyright />
       </div>
     </section>
   );
