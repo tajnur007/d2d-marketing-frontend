@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const LeadsModal = () => {
+const LeadDetails = () => {
   return (
     <div className='modal-main-body h-screen flex justify-center items-center fixed top-0 left-0 w-full h-full bg-opacity-50'>
       <div className='bg-white p-8 rounded-lg shadow-xl'>
@@ -52,4 +52,4 @@ const LeadsModal = () => {
   );
 };
 
-export default LeadsModal;
+export default LeadDetails;
