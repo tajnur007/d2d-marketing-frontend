@@ -9,8 +9,8 @@ interface Person {
   totalLeads: number;
 }
 
-const Profiles = ({ Leaderboard }: any) => {
-  return <div>{Item(Leaderboard)}</div>;
+const Profiles = ({ data }: any) => {
+  return <div>{Item(data)}</div>;
 };
 
 const Item = (data: Person[]) => {

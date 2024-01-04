@@ -16,7 +16,7 @@ const Leaderboard = () => {
             className={`absolute h-[89%] w-[100%] ${
               leaderBoard.length > 12 ? 'overflow-y-scroll' : 'overflow-hidden'
             } top-[9%]`}>
-            <Profiles Leaderboard={between(leaderBoard)}></Profiles>
+            <Profiles data={between(leaderBoard)}></Profiles>
           </div>
         </div>
       </div>
