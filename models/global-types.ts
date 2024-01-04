@@ -14,6 +14,14 @@ export interface DocType {
   version?: number;
 }
 
+export interface SidebarItem {
+  id: number;
+  iconName: string;
+  path: string;
+  icon: () => JSX.Element;
+  position: number;
+}
+
 export interface Person {
   id: Number;
   initials: string;
