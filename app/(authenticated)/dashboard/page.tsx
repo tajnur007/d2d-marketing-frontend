@@ -1,10 +1,11 @@
+import Leaderboard from '@/components/leaderboard/leaderboard';
 import React from 'react';
-import Board from './_components/board';
+
 
 
 const DashboardPage = () => {
   return <div>this is dashboard page
-    <Board/>
+    <Leaderboard/>
   </div>;
 };
 export default DashboardPage;
