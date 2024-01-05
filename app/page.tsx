@@ -1,9 +1,17 @@
+'use client';
+
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
 const HomePage = () => {
-  return (
-    <div className=''>
-      This is <strong>Home</strong> page
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push(PAGE_ROUTES.Dashboard);
+  }, []);
+
+  return <> </>;
 };
 
 export default HomePage;
