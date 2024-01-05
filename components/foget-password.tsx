@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import layoutTop from '@/assets/images/LayoutTop.png'
-import marketingForget from '@/assets/images/Marketing-forget-password.png'
+import marketingForgetPassword from '@/assets/images/Marketing-forget-password.png'
 import d2dIcon from '@/assets/images/D2DIcon.png'
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ const ForgetPassword = () => (
           </div>
         </div>
         <div className="pl-[37px] pd-[86px] pr-[38px]">
-          <Image src={marketingForget} alt='marketing' /> 
+          <Image src={marketingForgetPassword} alt='marketing' /> 
         </div>
       </div>
     </div>
