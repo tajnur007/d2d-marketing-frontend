@@ -4,7 +4,6 @@ import phoneImage from '/assets/images/leadslist-icons/call.png';
 import clockImage from '/assets/images/leadslist-icons/clock.png';
 import moreImage from '/assets/images/leadslist-icons/more_vert.png';
 import { getStatusColor } from '@/utils/helpers/common-helpers';
-// import { getStatusColor } from '@/utils/helpers/common-helpers';
 
 function LeadRow({item}:any) {
   return (

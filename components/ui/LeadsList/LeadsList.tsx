@@ -1,7 +1,6 @@
 
 
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
-import Image from 'next/image';
 import LeadRow from '../LeadRow/LeadRow';
 import CreateLeadsButton from '../CreateLeadsButton/CreateLeadsButton';
 
