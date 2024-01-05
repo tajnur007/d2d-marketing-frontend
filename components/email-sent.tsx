@@ -27,6 +27,7 @@ const EmailSent = () => {
           buttonInfo={{
             className: 'w-full bg-white rounded-lg text-[#4318FF] p-4 font-normal my-4',
             text: 'Check your email',
+            type: 'text'
           }}
         />
         <Copyright />
