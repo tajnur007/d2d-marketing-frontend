@@ -1,3 +1,5 @@
+import { LEAD_STATUS } from "./common-constants";
+
 export const LEADS_DATA = [
   {
     id: 1,
@@ -6,7 +8,7 @@ export const LEADS_DATA = [
     assignedByName: 'Saidul M Khan',
     assignedByNumber: '+88-01623364856',
     assignedToName: 'Rezaul Mursalin Khan',
-    status: 'Hot',
+    status: LEAD_STATUS.Hot,
   },
   {
     id: 2,
@@ -15,7 +17,7 @@ export const LEADS_DATA = [
     assignedByName: 'Nadia Rahman',
     assignedByNumber: '+88-01755432123',
     assignedToName: 'Aminul Islam',
-    status: 'In Progress',
+    status: LEAD_STATUS.Progress,
   },
   {
     id: 3,
@@ -24,7 +26,7 @@ export const LEADS_DATA = [
     assignedByName: 'Farah Ahmed',
     assignedByNumber: '+88-01987654321',
     assignedToName: 'Sadia Rahman',
-    status: 'Pending',
+    status: LEAD_STATUS.Pending,
   },
   {
     id: 4,
@@ -33,7 +35,7 @@ export const LEADS_DATA = [
     assignedByName: 'Imran Khan',
     assignedByNumber: '+88-01555667788',
     assignedToName: 'Tahmina Akhter',
-    status: 'Hot',
+    status: LEAD_STATUS.Hot,
   },
   {
     id: 5,
@@ -42,7 +44,7 @@ export const LEADS_DATA = [
     assignedByName: 'Mehnaz Islam',
     assignedByNumber: '+88-01898989898',
     assignedToName: 'Rahim Ali',
-    status: 'Completed',
+    status: LEAD_STATUS.Completed,
   },
   {
     id: 6,
@@ -51,7 +53,7 @@ export const LEADS_DATA = [
     assignedByName: 'Tasnim Rahman',
     assignedByNumber: '+88-01671234567',
     assignedToName: 'Arif Hossain',
-    status: 'In Progress',
+    status: LEAD_STATUS.Progress,
   },
   {
     id: 7,
@@ -60,7 +62,7 @@ export const LEADS_DATA = [
     assignedByName: 'Nabil Khan',
     assignedByNumber: '+88-01711223344',
     assignedToName: 'Shahrukh Ahmed',
-    status: 'Pending',
+    status: LEAD_STATUS.Pending,
   },
   {
     id: 8,
@@ -69,7 +71,7 @@ export const LEADS_DATA = [
     assignedByName: 'Faria Rahman',
     assignedByNumber: '+88-01998887766',
     assignedToName: 'Nashit Hasan',
-    status: 'Hot',
+    status: LEAD_STATUS.Hot,
   },
   {
     id: 9,
@@ -78,7 +80,7 @@ export const LEADS_DATA = [
     assignedByName: 'Anika Islam',
     assignedByNumber: '+88-01551122334',
     assignedToName: 'Mahir Ahmed',
-    status: 'Completed',
+    status: LEAD_STATUS.Completed,
   },
   {
     id: 10,
@@ -87,7 +89,7 @@ export const LEADS_DATA = [
     assignedByName: 'Khaled Khan',
     assignedByNumber: '+88-01777889900',
     assignedToName: 'Samina Akhtar',
-    status: 'In Progress',
+    status: LEAD_STATUS.Progress,
   },
   {
     id: 11,
@@ -96,6 +98,6 @@ export const LEADS_DATA = [
     assignedByName: 'Rifat Rahman',
     assignedByNumber: '+88-01991122334',
     assignedToName: 'Sakib Hasan',
-    status: 'Pending',
+    status: LEAD_STATUS.Pending,
   },
 ];
