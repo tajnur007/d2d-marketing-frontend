@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import layoutTop from '@/assets/images/LayoutTop.png'
-import MarketingForget from '@/assets/images/Marketing-forget-password.png'
-import D2DIcon from '@/assets/images/D2DIcon.png'
+import marketingForget from '@/assets/images/Marketing-forget-password.png'
+import d2dIcon from '@/assets/images/D2DIcon.png'
+import Link from 'next/link';
 
 const ForgetPassword = () => (
   <div className='flex w-full h-full'>
@@ -11,7 +12,7 @@ const ForgetPassword = () => (
       </div>
       <div className="flex flex-col gap-36 relative ">
         <div className="pl-[58px] pt-[63px]">
-          <Image src={D2DIcon} alt='icon'/>
+          <Image src={d2dIcon} alt='icon'/>
         </div>
         <div className="pl-14">
           <div className="text-base">
@@ -22,13 +23,16 @@ const ForgetPassword = () => (
           </div>
         </div>
         <div className="pl-[37px] pd-[86px] pr-[38px]">
-          <Image src={MarketingForget} alt='marketing' /> 
+          <Image src={marketingForget} alt='marketing' /> 
         </div>
       </div>
     </div>
     <div className="w-3/5 h-full flex flex-col ">
       <div className="ml-auto pt-[48px] pr-[45px]">
-        Have an account?  <a href="/auth/signin" className="text-primary-bg hover:underline">Sign In!</a>
+        Have an account?{' '}
+        <Link href="/auth/signin">
+          <span className="text-primary-bg hover:underline">Sign In!</span>
+        </Link>
       </div>
     </div>
  </div>

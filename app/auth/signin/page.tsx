@@ -2,9 +2,7 @@ import SignIn from "@/components/signin";
 
 const SignInPage = () => {
   return (
-    <>
     <SignIn/>
-    </>
   );
 };
 
