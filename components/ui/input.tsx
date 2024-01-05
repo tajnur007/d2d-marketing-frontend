@@ -1,3 +1,4 @@
+'use client';
 import { InputHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 

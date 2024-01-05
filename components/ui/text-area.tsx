@@ -1,3 +1,4 @@
+'use client';
 import { TextareaHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -14,7 +15,7 @@ export const TextArea = ({ label, htmlFor, className, ...props }: TextAreaProps)
     <textarea
       {...props}
       className={twMerge(
-        ' rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] resize-none text-base font-medium',
+        'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] resize-none text-base font-medium',
         className
       )}
     />

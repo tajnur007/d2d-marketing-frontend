@@ -1,3 +1,4 @@
+'use client';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -6,11 +7,9 @@ interface Button extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = ({ children, className, ...props }: Button) => (
-  <div className='flex flex-col'>
-    <button
-      {...props}
-      className={twMerge('text-white bg-[#5630FF] py-4 px-10', className)}>
-      {children}
-    </button>
-  </div>
+  <button
+    {...props}
+    className={twMerge('text-white bg-[#5630FF] py-4 px-10 w-full', className)}>
+    {children}
+  </button>
 );
