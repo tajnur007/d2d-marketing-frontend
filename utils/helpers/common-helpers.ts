@@ -3,7 +3,7 @@ export function ensureTrailingSlash(str: string = '/') {
 }
 
 // Define a function to get the appropriate color based on status
-export const getStatusColor = (status: string) => {
+export const getStatusColor = (status: string): string => {
   switch (status) {
     case 'Hot':
       return 'bg-blue-200';

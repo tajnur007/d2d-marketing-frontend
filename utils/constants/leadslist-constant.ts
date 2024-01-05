@@ -1,6 +1,17 @@
 import { LEAD_STATUS } from "./common-constants";
 
-export const LEADS_DATA = [
+export type LEADS_DATA_TYPE = {
+  id: number;
+  title: string;
+  date: string;
+  assignedByName: string;
+  assignedByNumber: string;
+  assignedToName: string;
+  status: string;
+};
+
+
+export const LEADS_DATA: LEADS_DATA_TYPE[] = [
   {
     id: 1,
     title: 'Social Media Marketing',
