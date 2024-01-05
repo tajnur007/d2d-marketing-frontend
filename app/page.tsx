@@ -1,18 +1,17 @@
 'use client';
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const HomePage = () => {
   const router = useRouter();
 
-  useEffect( () => {
-    router.push('/dashboard');
-  },[router]);
+  useEffect(() => {
+    router.push(PAGE_ROUTES.Dashboard);
+  }, []);
 
-  return (
-     <p>Redirecting...</p>
-  );
+  return <> </>;
 };
 
 export default HomePage;
