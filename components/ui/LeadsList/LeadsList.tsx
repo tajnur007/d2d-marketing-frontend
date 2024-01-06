@@ -1,5 +1,3 @@
-
-
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '../LeadRow/LeadRow';
 import CreateLeadsButton from '../CreateLeadsButton/CreateLeadsButton';
@@ -11,7 +9,7 @@ function LeadsList() {
     <>
       <div className=' w-full bg-white rounded-lg shadow'>
         <div className='border rounded-lg border-gray-100'>
-          <div className='py-4 md:py-6 pl-8'>
+          <div className='py-4 md:py-6 pl-8 h-[96px]'>
             <div className='flex justify-between items-center content-center'>
               <div className='flex items-center'>
                 <div>
@@ -27,11 +25,11 @@ function LeadsList() {
                 </div>
               </div>
               <div>
-                <CreateLeadsButton/>
+                <CreateLeadsButton />
               </div>
             </div>
           </div>
-          <div className='overflow-x-auto overflow-y-auto'>
+          <div className='overflow-x-auto overflow-y-scroll h-[715px]'>
             <table className="w-full  whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
               <tbody className='w-full'>
                 {LEADS_DATA.map((item, index) => (
