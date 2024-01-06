@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, ChangeEvent } from 'react';
-import { Passwordreveal } from '@/assets/icons';
-import { Googleicon } from '@/assets/icons';
-import { Facebookicon } from '@/assets/icons';
+import { PasswordRevealIcon } from '@/assets/icons';
+import { GoogleIcon } from '@/assets/icons';
+import { FacebookIcon } from '@/assets/icons';
 import { Vectorline } from '@/assets/icons';
 
-const Signupform = () => {
+const SignupForm = () => {
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -50,23 +50,21 @@ const Signupform = () => {
 
       </div>
       
-
       <div className="w-[126px] h-11 left-[878px] top-[220px] absolute">
         <div className="w-[126px] h-[43px] left-0 top-[1px] absolute bg-white rounded-[5px] border border-green-500"></div>
         <div className="left-[56px] top-0 absolute text-black text-xs font-medium  leading-[44px]">Google</div>
-        <div className="w-[22px] h-[22px] left-[26px] top-[11px] absolute"><Googleicon /></div>
+        <div className="w-[22px] h-[22px] left-[26px] top-[11px] absolute"><GoogleIcon /></div>
       </div>
 
       <div className="w-[126px] h-11 left-[1018px] top-[221px] absolute">
         <div className="w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200"></div>
         <div className="w-[26px] h-[26px] left-[17px] top-[8px] absolute">
-          <div className="w-[26px] h-[26px] left-0 top-0 absolute"><Facebookicon /></div>
+          <div className="w-[26px] h-[26px] left-0 top-0 absolute"><FacebookIcon /></div>
         </div>
         <div className="left-[51px] top-0 absolute text-black text-xs font-medium  leading-[44px]">Facebook</div>
       </div>
 
       <div className="left-[780px] top-[799px] absolute text-zinc-600 text-sm font-normal leading-[14.50px]">By continuing you indicate that you read and agreed to the Terms of Use</div>
-
 
       <div className="h-[77px] left-[816px] top-[317px] absolute flex-col justify-start items-start gap-2 inline-flex">
         <div className="text-blue-900 text-xs font-medium  leading-[14px]">Name</div>
@@ -102,7 +100,6 @@ const Signupform = () => {
         </div>
       </div>
 
-
       <div className="h-[77px] left-[816px] top-[497px] absolute flex-col justify-start items-start gap-2 inline-flex">
         <div className="text-blue-900 text-xs font-medium  leading-[14px]">Password</div>
         <div className="w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex">
@@ -118,12 +115,10 @@ const Signupform = () => {
             />
           </div>
           <div className="w-5 h-5 relative cursor-pointer" onClick={handlePasswordVisibilityToggle}>
-            <Passwordreveal />
+            <PasswordRevealIcon />
           </div>
         </div>
       </div>
-
-
 
       <div className="h-[77px] left-[816px] top-[587px] absolute flex-col justify-start items-start gap-2 inline-flex">
         <div className="text-blue-900 text-xs font-medium  leading-[14px]">Confirm password</div>
@@ -140,13 +135,10 @@ const Signupform = () => {
             />
           </div>
           <div className="w-5 h-5 relative cursor-pointer" onClick={handleConfirmPasswordVisibilityToggle}>
-            <Passwordreveal />
+            <PasswordRevealIcon />
           </div>
         </div>
       </div>
-
-
-
 
       <div className="w-[400px] h-[57.75px] left-[816px] top-[685px] absolute">
         <button
@@ -161,4 +153,4 @@ const Signupform = () => {
   );
 };
 
-export default Signupform;
+export default SignupForm;

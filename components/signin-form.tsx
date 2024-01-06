@@ -1,14 +1,12 @@
 "use client"
 
 import React, { useState, ChangeEvent } from 'react';
-import { Passwordreveal } from '@/assets/icons';
-import { Googleicon } from '@/assets/icons';
-import { Facebookicon } from '@/assets/icons';
+import { PasswordRevealIcon } from '@/assets/icons';
+import { GoogleIcon } from '@/assets/icons';
+import { FacebookIcon } from '@/assets/icons';
 import { Vectorline } from '@/assets/icons';
 
-
-
-const Signinpage = () => {
+const SigninForm = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
@@ -42,33 +40,27 @@ const Signinpage = () => {
       <div className="w-[1440px] h-[900px] relative bg-white">
         <div className="w-[619px] h-[900px] left-0 top-0 absolute bg-white"></div>
 
-       
         <div >
-
-          <div className="left-[840px] top-[382px] absolute leading-[14.50px]"><Vectorline/></div>
+          <div className="left-[840px] top-[382px] absolute leading-[14.50px]"><Vectorline /></div>
           <div className="left-[981px] top-[376px] absolute text-black text-[13px] font-normal  leading-[14.50px]">Or continue with</div>
           <div className="left-[1095px] top-[382px] absolute leading-[14.50px]"><Vectorline /></div>
-
         </div>
-
-       
 
         <div className="w-[126px] h-[43px] left-[902px] top-[294px] absolute">
           <div className="w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500"></div>
           <div className="left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]">Google</div>
-          <div className="w-[22px] h-[22px] left-[26px] top-[10px] absolute"><Googleicon /></div>
+          <div className="w-[22px] h-[22px] left-[26px] top-[10px] absolute"><GoogleIcon /></div>
         </div>
 
         <div className="w-[126px] h-[43px] left-[1042px] top-[294px] absolute">
           <div className="w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200"></div>
           <div className="w-[26px] h-[26px] left-[17px] top-[8px] absolute">
-            <div className="w-[26px] h-[26px] left-0 top-0 absolute"><Facebookicon /></div>
+            <div className="w-[26px] h-[26px] left-0 top-0 absolute"><FacebookIcon /></div>
           </div>
           <div className="left-[51px] top-[px] absolute text-black text-xs font-medium leading-[44px]">Facebook</div>
         </div>
 
         <div className="left-[1108px] top-[626px] absolute text-red-600 text-sm font-normal  leading-[14.50px] cursor-pointer">Recover Password</div>
-
 
         <div className="w-[148px] h-5 left-[835px] top-[623px] absolute">
           <label className="relative inline-flex items-center mb-5 cursor-pointer">
@@ -115,7 +107,7 @@ const Signinpage = () => {
               />
             </div>
             <div className="w-5 h-5 relative cursor-pointer" onClick={handlePasswordVisibilityToggle} >
-              <Passwordreveal />
+              <PasswordRevealIcon />
             </div>
           </div>
         </div>
@@ -137,4 +129,4 @@ const Signinpage = () => {
   );
 };
 
-export default Signinpage;
+export default SigninForm;

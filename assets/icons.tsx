@@ -156,7 +156,7 @@ export const MoonSolidIcon = () => {
     </svg>
   );
 };
-export const Passwordreveal = () => {
+export const PasswordRevealIcon = () => {
   return (
     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M2.74577 13.5911C3.07127 13.9165 3.59887 13.9164 3.92425 13.5909C4.24963 13.2654 4.24955 12.7378 3.92405 12.4124L2.01189 10.5009L4.90245 7.61037C6.64724 5.86558 9.12414 5.15467 11.4945 5.65411C11.9448 5.74899 12.3868 5.46083 12.4817 5.0105C12.5766 4.56016 12.2884 4.11818 11.8381 4.0233C8.92216 3.40895 5.87129 4.28455 3.72394 6.43189L0.244064 9.91177C-0.0813936 10.2372 -0.0813546 10.7649 0.244181 11.0903L2.74577 13.5911Z" fill="#B8B8B8" />
@@ -168,7 +168,7 @@ export const Passwordreveal = () => {
 
   );
 };
-export const Googleicon = () => {
+export const GoogleIcon = () => {
   return (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_49_2239)">
@@ -185,12 +185,9 @@ export const Googleicon = () => {
         </clipPath>
       </defs>
     </svg>
-
-
-
   );
 };
-export const Facebookicon = () => {
+export const FacebookIcon = () => {
   return (
     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_49_2137)">
@@ -203,9 +200,6 @@ export const Facebookicon = () => {
         </clipPath>
       </defs>
     </svg>
-
-
-
   );
 };
 
