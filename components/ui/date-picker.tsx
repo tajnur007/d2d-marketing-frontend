@@ -19,7 +19,7 @@ export const DatePicker = ({
       <input
         {...props}
         className={twMerge(
-          'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px]',
+          'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase',
           className
         )}
       />
