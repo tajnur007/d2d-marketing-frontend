@@ -1,7 +1,7 @@
 import { SidebarItem } from '@/models/global-types';
 import { HomeIcon, BookIcon, SettingIcon } from '../../assets/icons';
 
-const PAGE_ROUTES = {
+export const PAGE_ROUTES = {
   Dashboard: '/dashboard',
   Leads: '/leads',
   Settings: '/settings',
@@ -30,3 +30,10 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     position: 110,
   },
 ];
+
+export const LEAD_STATUS = {
+  Pending: 'Pending',
+  Progress: 'Progress',
+  Completed: 'Completed',
+  Hot: 'Hot',
+};
