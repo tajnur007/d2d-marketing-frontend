@@ -35,12 +35,12 @@ export const Select = ({
 
   return (
     <div className='flex flex-col' ref={ref}>
-      <label className='text-[#00156A] text-sm font-medium'>{label}</label>
+      <label className='text-[#00156A] text-xs mb-1 font-medium'>{label}</label>
       <div className='relative text-[#25254C] font-medium '>
         <div
           onClick={() => handleClick(selected)}
           className={twMerge(
-            'w-full rounded-[10px] border-2 border-[#F3F3F3] border-solid py-[19px] px-3 text-base cursor-pointer flex justify-between items-center',
+            'w-full rounded-[10px] border-2 border-[#F3F3F3] border-solid py-[19px] px-3 text-base cursor-pointer flex justify-between items-center font-medium text-[14px]',
             className
           )}>
           <p>{selected}</p>
@@ -56,7 +56,9 @@ export const Select = ({
             <p
               key={label}
               onClick={() => handleClick(label)}
-              className='cursor-pointer hover:bg-[#F3F3F3] my-1 px-5 py-2'>
+              className={`cursor-pointer ${
+                selected === label && 'bg-[#F7F7FB]'
+              } hover:bg-[#F3F3F3] my-1 px-5 py-2 font-medium text-[14px]`}>
               {label}
             </p>
           ))}

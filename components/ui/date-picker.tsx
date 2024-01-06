@@ -12,7 +12,7 @@ export const DatePicker = ({
   ...props
 }: InputProps) => (
   <div className='flex flex-col w-full text-[#B9C1D9]'>
-    <label htmlFor={htmlFor} className='text-[#00156A] text-sm font-medium'>
+    <label htmlFor={htmlFor} className='text-[#00156A] text-xs mb-1 font-medium'>
       {label}{' '}
       {errorMessage && <span className='text-red-500 text-xs ml-1'>{errorMessage}</span>}
     </label>
@@ -20,7 +20,7 @@ export const DatePicker = ({
       <input
         {...props}
         className={twMerge(
-          'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none text-base font-medium',
+          'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none text-base font-medium text-[14px]',
           className
         )}
       />

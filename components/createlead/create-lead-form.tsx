@@ -58,13 +58,12 @@ const CreateLeadForm = () => {
         className={`w-[40%] mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
         onChange={handleInputChange}
       />
-      <div className='h-[342px] rounded-2xl relative'>
+      <div className='rounded-2xl relative'>
         <Image
           src={mapImage}
           alt='map'
-          layout='fill'
-          objectFit='cover'
-          className=' rounded-2xl'
+          height={342}
+          width={2860}
           onChange={handleInputChange}
         />
       </div>
@@ -153,7 +152,7 @@ const CreateLeadForm = () => {
       </div>
       <div className='flex justify-between mt-5 gap-5 items-end'>
         <div className='flex flex-col items-start justify-center w-1/2'>
-          <p className='text-[#00156A] text-sm font-medium'>Image</p>
+          <p className='text-[#00156A] font-medium text-xs mb-1'>Image</p>
           <ImageUpload
             label='Image'
             placeholder='Upload image'

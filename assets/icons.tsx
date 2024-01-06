@@ -160,9 +160,9 @@ export const MoonSolidIcon = () => {
 export const BackArrowIcon = () => {
   return (
     <svg
-      width='11'
-      height='20'
-      viewBox='0 0 11 20'
+      width='9'
+      height='18'
+      viewBox='0 0 9 18'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'>
       <path

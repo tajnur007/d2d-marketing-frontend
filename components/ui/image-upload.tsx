@@ -12,7 +12,7 @@ export const ImageUpload = ({
   ...props
 }: InputProps) => (
   <div className='w-full'>
-    <label htmlFor={htmlFor} className='text-[#00156A] text-sm font-medium w-full'>
+    <label htmlFor={htmlFor} className='text-[#00156A] font-medium w-full'>
       <div
         className={twMerge(
           'w-full rounded-[10px] border-none bg-[#F3F3F3] flex flex-col items-center justify-center gap-2 cursor-pointer',
