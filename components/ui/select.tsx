@@ -40,7 +40,7 @@ export const Select = ({
         <div
           onClick={() => handleClick(selected)}
           className={twMerge(
-            'w-full rounded-[10px] border-2 border-[#F3F3F3] border-solid py-[19px] px-3 text-base cursor-pointer flex justify-between items-center font-medium text-[14px]',
+            'w-full rounded-[10px] border-2 border-[#F3F3F3] border-solid py-[19px] px-3 cursor-pointer flex justify-between items-center font-medium text-[14px]',
             className
           )}>
           <p>{selected}</p>

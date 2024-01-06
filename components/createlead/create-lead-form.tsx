@@ -132,7 +132,7 @@ const CreateLeadForm = () => {
           <div className='flex items-center justify-between gap-5'>
             <Input
               label='Reminder Title'
-              placeholder='Reminder title)'
+              placeholder='Reminder title'
               name='Reminder'
               errorMessage={formErrors.Reminder}
               onChange={handleInputChange}

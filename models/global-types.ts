@@ -48,18 +48,17 @@ export interface FormItems {
   Date?: string;
   Image?: string;
 }
-
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  htmlFor?: string;
-  errorMessage?: string;
-}
-
 export interface SelectProps {
   label?: string;
   className?: string;
   selected?: string;
   setSelected?: (item: string) => void;
+}
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  htmlFor?: string;
+  errorMessage?: string;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {

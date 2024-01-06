@@ -11,8 +11,7 @@ export const TextArea = ({
 }: TextAreaProps) => (
   <div className='flex flex-col w-full'>
     <label htmlFor={htmlFor} className='text-[#00156A] text-xs mb-1 font-medium'>
-      {label}{' '}
-      {errorMessage && <span className='text-red-500 text-xs ml-1'>{errorMessage}</span>}
+      {label} {errorMessage && <span className='text-red-500 ml-1'>{errorMessage}</span>}
     </label>
     <textarea
       {...props}
