@@ -1,12 +1,7 @@
 'use client';
 import { GalleryIcon } from '@/assets/icons';
-import { InputHTMLAttributes } from 'react';
+import { InputProps } from '@/models/global-types';
 import { twMerge } from 'tailwind-merge';
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  htmlFor?: string;
-}
 
 export const ImageUpload = ({
   label,

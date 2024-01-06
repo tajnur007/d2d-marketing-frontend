@@ -1,4 +1,4 @@
-import { SidebarItem } from '@/models/global-types';
+import { FormItems, SidebarItem } from '@/models/global-types';
 import { HomeIcon, BookIcon, SettingIcon } from '../../assets/icons';
 
 const PAGE_ROUTES = {
@@ -30,3 +30,16 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     position: 110,
   },
 ];
+
+export const FORMITEMS: FormItems = {
+  Title: '',
+  Name: '',
+  Phone: '',
+  Email: '',
+  Reference: '',
+  Note: '',
+  Status: '',
+  Reminder: '',
+  Date: '',
+  Image: '',
+};

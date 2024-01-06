@@ -1,16 +1,18 @@
 'use client';
-import { TextareaHTMLAttributes } from 'react';
+import { TextAreaProps } from '@/models/global-types';
 import { twMerge } from 'tailwind-merge';
 
-interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  htmlFor?: string;
-}
-
-export const TextArea = ({ label, htmlFor, className, ...props }: TextAreaProps) => (
+export const TextArea = ({
+  label,
+  htmlFor,
+  className,
+  errorMessage,
+  ...props
+}: TextAreaProps) => (
   <div className='flex flex-col w-full'>
     <label htmlFor={htmlFor} className='text-[#00156A] text-sm font-medium'>
-      {label}
+      {label}{' '}
+      {errorMessage && <span className='text-red-500 text-xs ml-1'>{errorMessage}</span>}
     </label>
     <textarea
       {...props}

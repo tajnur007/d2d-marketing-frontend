@@ -1,16 +1,18 @@
 'use client';
-import { InputHTMLAttributes } from 'react';
+import { InputProps } from '@/models/global-types';
 import { twMerge } from 'tailwind-merge';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  htmlFor?: string;
-}
-
-export const Input = ({ label, htmlFor, className, ...props }: InputProps) => (
+export const Input = ({
+  label,
+  htmlFor,
+  className,
+  errorMessage,
+  ...props
+}: InputProps) => (
   <div className='flex flex-col w-full'>
     <label htmlFor={htmlFor} className='text-[#00156A] text-sm font-medium'>
       {label}
+      {errorMessage && <span className='text-red-500 text-xs ml-1'>{errorMessage}</span>}
     </label>
     <input
       {...props}

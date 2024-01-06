@@ -1,16 +1,16 @@
 'use client';
 
 import { DownArrowIcon } from '@/assets/icons';
+import { SelectProps } from '@/models/global-types';
 import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface SelectProps {
-  label?: string;
-  className?: string;
-}
-
-export const Select = ({ label, className }: SelectProps) => {
-  const [selected, setSelected] = useState('Pending');
+export const Select = ({
+  label,
+  className,
+  setSelected = () => {},
+  selected = 'Pending',
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -20,8 +20,8 @@ export const Select = ({ label, className }: SelectProps) => {
   };
 
   useEffect(() => {
-    const handleOutSideClick = (event: any) => {
-      if (!ref.current?.contains(event.target)) {
+    const handleOutSideClick = (event: MouseEvent) => {
+      if (!ref.current?.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -34,7 +34,7 @@ export const Select = ({ label, className }: SelectProps) => {
   }, [ref]);
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col' ref={ref}>
       <label className='text-[#00156A] text-sm font-medium'>{label}</label>
       <div className='relative text-[#25254C] font-medium '>
         <div
@@ -49,7 +49,6 @@ export const Select = ({ label, className }: SelectProps) => {
           </p>
         </div>
         <div
-          ref={ref}
           className={`absolute rounded-[10px] shadow-md z-10 bg-white w-full ${
             !isOpen ? 'hidden' : 'visible'
           }`}>
