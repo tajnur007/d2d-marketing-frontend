@@ -1,4 +1,4 @@
-import { SidebarItem } from '@/models/global-types';
+import { FormItems, SidebarItem } from '@/models/global-types';
 import { HomeIcon, BookIcon, SettingIcon } from '../../assets/icons';
 
 export const PAGE_ROUTES = {
@@ -31,9 +31,29 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   },
 ];
 
+export const FORMITEMS: FormItems = {
+  Title: '',
+  Name: '',
+  Phone: '',
+  Email: '',
+  Reference: '',
+  Note: '',
+  Status: '',
+  Reminder: '',
+  Date: '',
+  Image: '',
+};
+
 export const LEAD_STATUS = {
   Pending: 'Pending',
   Progress: 'Progress',
   Completed: 'Completed',
   Hot: 'Hot',
 };
+
+export const CREATE_LEAD_STATUS: string[] = [
+  LEAD_STATUS.Pending,
+  LEAD_STATUS.Progress,
+  LEAD_STATUS.Completed,
+  LEAD_STATUS.Hot,
+];

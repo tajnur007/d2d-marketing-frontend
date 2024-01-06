@@ -211,6 +211,99 @@ export const Vectorline= () => {
       );
 };
 
+export const BackArrowIcon = () => {
+  return (
+    <svg
+      width='9'
+      height='18'
+      viewBox='0 0 9 18'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M10 19L1 10L10 1'
+        stroke='#00156A'
+        stroke-width='1.5'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+    </svg>
+  );
+};
+
+export const DownArrowIcon = () => {
+  return (
+    <svg
+      width='15'
+      height='8'
+      viewBox='0 0 15 8'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M14 1.5L7.5 6.5L1 1.5'
+        stroke='#181818'
+        stroke-width='1.5'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+    </svg>
+  );
+};
+
+export const ClockIcon = () => {
+  return (
+    <svg
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M12 23.25C6.07 23.25 1.25 18.43 1.25 12.5C1.25 6.57 6.07 1.75 12 1.75C17.93 1.75 22.75 6.57 22.75 12.5C22.75 18.43 17.93 23.25 12 23.25ZM12 3.25C6.9 3.25 2.75 7.4 2.75 12.5C2.75 17.6 6.9 21.75 12 21.75C17.1 21.75 21.25 17.6 21.25 12.5C21.25 7.4 17.1 3.25 12 3.25Z'
+        fill='#191D31'
+      />
+      <path
+        d='M15.7099 16.43C15.5799 16.43 15.4499 16.4 15.3299 16.32L12.2299 14.47C11.4599 14.01 10.8899 13 10.8899 12.11V8.01001C10.8899 7.60001 11.2299 7.26001 11.6399 7.26001C12.0499 7.26001 12.3899 7.60001 12.3899 8.01001V12.11C12.3899 12.47 12.6899 13 12.9999 13.18L16.0999 15.03C16.4599 15.24 16.5699 15.7 16.3599 16.06C16.2099 16.3 15.9599 16.43 15.7099 16.43Z'
+        fill='#191D31'
+      />
+    </svg>
+  );
+};
+
+export const GalleryIcon = () => {
+  return (
+    <svg
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M9.5 22H15.5C20.5 22 22.5 20 22.5 15V9C22.5 4 20.5 2 15.5 2H9.5C4.5 2 2.5 4 2.5 9V15C2.5 20 4.5 22 9.5 22Z'
+        stroke='#191D31'
+        stroke-width='1.5'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        opacity='0.4'
+        d='M9.5 10C10.6046 10 11.5 9.10457 11.5 8C11.5 6.89543 10.6046 6 9.5 6C8.39543 6 7.5 6.89543 7.5 8C7.5 9.10457 8.39543 10 9.5 10Z'
+        stroke='#191D31'
+        stroke-width='1.5'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        opacity='0.4'
+        d='M3.16992 18.9501L8.09992 15.6401C8.88992 15.1101 10.0299 15.1701 10.7399 15.7801L11.0699 16.0701C11.8499 16.7401 13.1099 16.7401 13.8899 16.0701L18.0499 12.5001C18.8299 11.8301 20.0899 11.8301 20.8699 12.5001L22.4999 13.9001'
+        stroke='#191D31'
+        stroke-width='1.5'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+    </svg>
+  );
+};
+
 export const Logo = () => {
   return (
     <svg
