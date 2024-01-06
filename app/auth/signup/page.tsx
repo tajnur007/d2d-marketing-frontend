@@ -1,8 +1,8 @@
+import SignUp from "@/components/signup";
+
 const SignUpPage = () => {
   return (
-    <div className=''>
-      This is <strong>Signup</strong> page
-    </div>
+    <SignUp/>
   );
 };
 

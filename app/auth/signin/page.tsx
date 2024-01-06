@@ -1,8 +1,8 @@
+import SignIn from "@/components/signin";
+
 const SignInPage = () => {
   return (
-    <div className=''>
-      This is <strong>Signin</strong> page
-    </div>
+    <SignIn/>
   );
 };
 
