@@ -152,13 +152,18 @@ const CreateLeadForm = () => {
       </div>
       <div className='flex justify-between mt-5 gap-5 items-end'>
         <div className='flex flex-col items-start justify-center w-1/2'>
-          <p className='text-[#00156A] font-medium text-xs mb-1'>Image</p>
+          <p className='text-[#00156A] font-medium text-xs mb-1'>
+            Image
+            {formErrors.Image && (
+              <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
+            )}
+          </p>
           <ImageUpload
             label='Image'
             placeholder='Upload image'
-            className='h-[92px]'
             name='Image'
             onChange={handleInputChange}
+            className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
           />
         </div>
         <div className='w-1/2 flex justify-end '>

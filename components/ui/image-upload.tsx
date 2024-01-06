@@ -15,7 +15,7 @@ export const ImageUpload = ({
     <label htmlFor={htmlFor} className='text-[#00156A] font-medium w-full'>
       <div
         className={twMerge(
-          'w-full rounded-[10px] border-none bg-[#F3F3F3] flex flex-col items-center justify-center gap-2 cursor-pointer',
+          'w-full rounded-[10px] border-[#F3F3F3] border-2 bg-[#F3F3F3] flex flex-col items-center justify-center gap-2 cursor-pointer',
           className
         )}>
         <GalleryIcon />
