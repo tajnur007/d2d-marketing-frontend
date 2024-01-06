@@ -30,3 +30,10 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     position: 110,
   },
 ];
+
+export const LEAD_STATUS = {
+  Pending: 'Pending',
+  Progress: 'Progress',
+  Completed: 'Completed',
+  Hot: 'Hot',
+};
