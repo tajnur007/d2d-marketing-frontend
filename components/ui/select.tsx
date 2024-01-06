@@ -10,6 +10,7 @@ export const Select = ({
   className,
   setSelected = () => {},
   selected = 'Pending',
+  options = [],
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -52,7 +53,7 @@ export const Select = ({
           className={`absolute rounded-[10px] shadow-md z-10 bg-white w-full ${
             !isOpen ? 'hidden' : 'visible'
           }`}>
-          {['Pending', 'Accept', 'Reject', 'Active'].map((label) => (
+          {options.map((label: string) => (
             <p
               key={label}
               onClick={() => handleClick(label)}

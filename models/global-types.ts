@@ -53,6 +53,7 @@ export interface SelectProps {
   className?: string;
   selected?: string;
   setSelected?: (item: string) => void;
+  options?: string[];
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

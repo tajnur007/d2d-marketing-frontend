@@ -8,7 +8,7 @@ import { Button } from '../ui/button';
 import { Select } from '../ui/select';
 import { DatePicker } from '../ui/date-picker';
 import { useEffect, useState } from 'react';
-import { FORMITEMS } from '@/utils/constants/common-constants';
+import { CREATE_LEAD_STATUS, FORMITEMS } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 
 const CreateLeadForm = () => {
@@ -127,7 +127,12 @@ const CreateLeadForm = () => {
         </div>
 
         <div className='flex flex-col justify-between gap-5 w-1/2'>
-          <Select label='Status' selected={selected} setSelected={setSelected} />
+          <Select
+            label='Status'
+            selected={selected}
+            setSelected={setSelected}
+            options={CREATE_LEAD_STATUS}
+          />
 
           <div className='flex items-center justify-between gap-5'>
             <Input

@@ -43,3 +43,17 @@ export const FORMITEMS: FormItems = {
   Date: '',
   Image: '',
 };
+
+export const LEAD_STATUS = {
+  Pending: 'Pending',
+  Progress: 'Progress',
+  Completed: 'Completed',
+  Hot: 'Hot',
+};
+
+export const CREATE_LEAD_STATUS: string[] = [
+  LEAD_STATUS.Pending,
+  LEAD_STATUS.Progress,
+  LEAD_STATUS.Completed,
+  LEAD_STATUS.Hot,
+];
