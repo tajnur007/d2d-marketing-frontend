@@ -1,18 +1,18 @@
 import Image from 'next/image';
-import layoutTop from '@/assets/images/LayoutTop.png'
-import marketingForgetPassword from '@/assets/images/Marketing-forget-password.png'
-import d2dIcon from '@/assets/images/D2DIcon.png'
+import layoutTop from '@/assets/images/layoutTop.png'
+import marketingForgetPassword from '@/assets/images/marketing-forget-password.png'
+import d2dIcon from '@/assets/images/d2dIcon.png'
 import Link from 'next/link';
 
-const ForgetPassword = () => (
+const ForgetPasswordPageLayout = () => (
   <div className='flex w-full h-full'>
     <div className="w-2/5 h-full  bg-primary-bg  text-white relative">
       <div className="absolute top-0 left-0  flex z-1 justify-between items-start">
-        <Image src={layoutTop} alt='top'/>
+        <Image src={layoutTop} alt='top' />
       </div>
       <div className="flex flex-col gap-36 relative ">
         <div className="pl-[58px] pt-[63px]">
-          <Image src={d2dIcon} alt='icon'/>
+          <Image src={d2dIcon} alt='icon' />
         </div>
         <div className="pl-14">
           <div className="text-base">
@@ -23,7 +23,7 @@ const ForgetPassword = () => (
           </div>
         </div>
         <div className="pl-[37px] pd-[86px] pr-[38px]">
-          <Image src={marketingForgetPassword} alt='marketing' /> 
+          <Image src={marketingForgetPassword} alt='marketing' />
         </div>
       </div>
     </div>
@@ -35,8 +35,8 @@ const ForgetPassword = () => (
         </Link>
       </div>
     </div>
- </div>
+  </div>
 
 );
 
-export default ForgetPassword;
+export default ForgetPasswordPageLayout;

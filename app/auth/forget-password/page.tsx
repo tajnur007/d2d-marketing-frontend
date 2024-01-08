@@ -1,18 +1,16 @@
 import EmailSent from '@/components/email-sent';
-import ForgetPassword from '@/components/foget-password';
+import ForgetPasswordPageLayout from '@/components/forget-password-layout';
 import NewPassword from '@/components/new-password';
 import PasswordChanged from '@/components/password-changed';
 import ResetPassword from '@/components/reset-password';
 
 const ForgetPasswordPage = () => (
   <div className=''>
-    This is <strong>Forget Password</strong> page
-    <ForgetPassword/>
     <ResetPassword/>
     <NewPassword/>
+    <ForgetPasswordPageLayout/>
     <PasswordChanged />
-    <EmailSent />
-    <ForgetPassword/>
+    <EmailSent /> 
   </div>
 );
 

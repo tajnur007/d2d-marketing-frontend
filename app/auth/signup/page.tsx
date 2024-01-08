@@ -1,8 +1,8 @@
-import SignUp from "@/components/signup";
+import SignUpPageLayout from "@/components/signup-layout"
 
 const SignUpPage = () => {
   return (
-    <SignUp/>
+    <SignUpPageLayout/>
   );
 };
 

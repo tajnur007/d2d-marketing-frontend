@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import layoutTop from '@/assets/images/LayoutTop.png'
-import marketingSignUp from '@/assets/images/Marketing-signup.png'
-import d2dIcon from '@/assets/images/D2DIcon.png'
+import layoutTop from '@/assets/images/layoutTop.png'
+import marketingSignUp from '@/assets/images/marketing-signup.png'
+import d2dIcon from '@/assets/images/d2dIcon.png'
 import Link from 'next/link';
 
-const SignUp= () => {
+const SignUpPageLayout= () => {
   return (
     <div className='flex w-full h-full'>
       <div className="w-2/5 h-full  bg-primary-bg  text-white relative">
@@ -41,4 +41,4 @@ const SignUp= () => {
   );
 };
 
-export default SignUp;
+export default SignUpPageLayout;
