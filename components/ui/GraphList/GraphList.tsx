@@ -5,7 +5,7 @@ import Graph from '../Graph/Graph';
 const GraphList: React.FC = () => {
   return (
     <div className='bg-[#F7F7FB]'>
-      <div className='grid lg:grid-cols-3 sm:grid-cols-1 justify-center p-6 gap-2'>
+      <div className='grid lg:grid-cols-3 sm:grid-cols-1 justify-between p-6 gap-5'>
         {GRAPH_CONFIG.map((item, index) => (
           <div key={index} className='grid grid-cols-1 bg-white rounded-xl px-2 py-4'>
             <div className='flex justify-between items-center mx-7'>

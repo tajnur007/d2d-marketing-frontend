@@ -1,8 +1,8 @@
+import CreateLeadForm from "@/components/createlead/create-lead-form";
+
 const LeadsCreatePage = () => {
   return (
-    <div className='mt-10'>
-      This is <strong>Leads Create</strong> page
-    </div>
+    <CreateLeadForm/>
   );
 };
 

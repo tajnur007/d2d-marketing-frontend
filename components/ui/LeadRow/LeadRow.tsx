@@ -2,8 +2,23 @@ import React from 'react'
 import Image from 'next/image';
 import phoneImage from '/assets/images/leadslist-icons/call.png';
 import clockImage from '/assets/images/leadslist-icons/clock.png';
-import moreImage from '/assets/images/leadslist-icons/more_vert.png';
+import LeadDetailsButton from '../LeadDetailsButton/LeadDetailsButton';
 import { getStatusColor } from '@/utils/helpers/common-helpers';
+
+// const getStatusColor = (status: string): string => {
+//   switch (status) {
+//     case 'Hot':
+//       return 'bg-blue-200';
+//     case 'Pending':
+//       return 'bg-red-200';
+//     case 'Progress':
+//       return 'bg-orange-200';
+//     case 'Completed':
+//       return 'bg-green-200';
+//     default:
+//       return 'bg-gray-200';
+//   }
+// };
 
 function LeadRow({item}:any) {
   return (
@@ -52,7 +67,7 @@ function LeadRow({item}:any) {
           </p>
         </td>
         <td className=''>
-          <Image className=' cursor-pointer' src={moreImage} alt='' />
+          <LeadDetailsButton/>
         </td>
       </tr>
     </>
