@@ -1,9 +1,7 @@
-import SignInPageLayout from "@/components/signin-layout";
-
-
+import SignIn from "@/components/signin";
 const SignInPage = () => {
   return (
-    <SignInPageLayout/>
+    <SignIn/>
   );
 };
 

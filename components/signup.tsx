@@ -1,16 +1,15 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import layoutTop from '@/assets/images/layoutTop.png'
-import marketingSignIn from '@/assets/images/marketing-signin.png'
+import marketingSignUp from '@/assets/images/marketing-signup.png'
 import d2dIcon from '@/assets/images/d2dIcon.png'
+import Link from 'next/link';
 
-
-const SignInPageLayout= () => {
+const SignUp= () => {
   return (
     <div className='flex w-full h-full'>
       <div className="w-2/5 h-full  bg-primary-bg  text-white relative">
         <div className="absolute top-0 left-0  flex z-1 justify-between items-start">
-          <Image src={layoutTop} alt='top'/>
+          <Image src={layoutTop} alt='top' />
         </div>
         <div className="flex flex-col gap-36 relative ">
           <div className="pl-[58px] pt-[63px]">
@@ -24,16 +23,17 @@ const SignInPageLayout= () => {
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s
             </div>
           </div>
+
           <div className="pl-[37px] pd-[86px] pr-[38px]">
-            <Image src={marketingSignIn} alt='signinImage'/>
+            <Image src={marketingSignUp} alt='marketing' /> 
           </div>
         </div>
       </div>
       <div className="w-3/5 h-full flex flex-col ">
         <div className="ml-auto pt-[48px] pr-[45px]">
-          Don&apos;t Have an account?{' '}
-          <Link href="/auth/signup">
-            <span className="text-primary-bg hover:underline">Sign Up!</span>
+          Have an account?{' '}
+          <Link href="/auth/signin">
+          <span className="text-primary-bg hover:underline">Sign In!</span>
           </Link>
         </div>
       </div>
@@ -41,4 +41,4 @@ const SignInPageLayout= () => {
   );
 };
 
-export default SignInPageLayout;
+export default SignUp;

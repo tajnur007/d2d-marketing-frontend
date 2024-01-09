@@ -1,5 +1,5 @@
 import EmailSent from '@/components/email-sent';
-import ForgetPasswordPageLayout from '@/components/forget-password-layout';
+import ForgetPassword from '@/components/foget-password';
 import NewPassword from '@/components/new-password';
 import PasswordChanged from '@/components/password-changed';
 import ResetPassword from '@/components/reset-password';
@@ -8,7 +8,7 @@ const ForgetPasswordPage = () => (
   <div className=''>
     <ResetPassword/>
     <NewPassword/>
-    <ForgetPasswordPageLayout/>
+    <ForgetPassword/>
     <PasswordChanged />
     <EmailSent /> 
   </div>
