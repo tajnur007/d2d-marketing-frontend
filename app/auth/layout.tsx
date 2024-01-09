@@ -1,8 +1,7 @@
-import React from 'react';
-import type { Metadata } from 'next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Providers } from '@/components/providers/redux-providers';
-import './globals.css';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from 'next';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'D2D Marketing',
