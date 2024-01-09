@@ -3,13 +3,15 @@
 import { Logo } from '@/assets/icons';
 import { SIDEBAR_ITEMS } from '@/utils/constants/common-constants';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import profileImage from '@/assets/images/profile.png';
 
 const Sidebar = () => {
-  const [selected, setSelected] = useState(-15);
   const router = useRouter();
+  const currentPage = usePathname().split('/')[1];
+  const currPosition = SIDEBAR_ITEMS.find((item) => '/' + currentPage === item.path);
+  const [selected, setSelected] = useState(currPosition?.position);
 
   const handleClick = (position: number, path: string) => {
     setSelected(position);
