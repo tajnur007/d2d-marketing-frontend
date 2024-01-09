@@ -1,11 +1,11 @@
 "use client";
 
 import Image from 'next/image';
-import leadImage from '/assets/images/Marketing-signin.png';
-import clockImage from '/assets/images/leadslist-icons/clock.png';
-import crossImage from '/assets/images/leadslist-icons/close-circle.png';
-import downImage from '/assets/images/leadslist-icons/down-arrow.png';
-import flagImage from '/assets/images/leadslist-icons/triangle-flag.png';
+import leadImage from '@/assets/images/Marketing-signin.png';
+import clockImage from '@/assets/images/leadslist-icons/clock.png';
+import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
+import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
+import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 
 const LeadDetails = ({ setShowModal }: any) => {
   return (

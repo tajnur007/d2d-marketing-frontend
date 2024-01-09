@@ -1,5 +1,4 @@
 'use client';
-
 import { BackArrowIcon } from '@/assets/icons';
 import CreateLeadForm from '@/components/createlead/create-lead-form';
 import { useRouter } from 'next/navigation';

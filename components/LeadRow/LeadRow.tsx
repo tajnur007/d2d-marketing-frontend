@@ -1,8 +1,10 @@
 import { getStatusColor } from '@/utils/helpers/common-helpers';
 import Image from 'next/image';
-import clockImage from '/assets/images/leadslist-icons/clock.png';
+import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
+import phoneImage from '@/assets/images/leadslist-icons/call.png';
+import clockImage from '@/assets/images/leadslist-icons/clock.png';
 
-function LatestLeadRow({ item }: any) {
+function LeadRow({ item }: any) {
   return (
     <>
       <tr
@@ -18,6 +20,19 @@ function LatestLeadRow({ item }: any) {
             </div>
             <div className='text-gray-400 text-xs whitespace-nowrap text-capitalize inline-block'>
               {item.date}
+            </div>
+          </div>
+        </td>
+        <td className='pl-16'>
+          <p className='leading-trim font-semibold text-[16px] tracking-tight'>
+            {item.assignedByName}
+          </p>
+          <div className='flex items-center mt-[10px]'>
+            <div className='mr-1'>
+              <Image src={phoneImage} alt='' />
+            </div>
+            <div className='text-[#5630FF] text-xs whitespace-nowrap text-capitalize inline-block'>
+              {item.assignedByNumber}
             </div>
           </div>
         </td>
@@ -37,9 +52,12 @@ function LatestLeadRow({ item }: any) {
             {item.assignedToName}
           </p>
         </td>
+        <td className=''>
+          <LeadDetailsButton />
+        </td>
       </tr>
     </>
   );
 }
 
-export default LatestLeadRow;
+export default LeadRow;

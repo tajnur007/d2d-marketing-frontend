@@ -1,11 +1,11 @@
 "use client";
 import Image from 'next/image';
-import React from 'react'
-import moreImage from '/assets/images/leadslist-icons/more_vert.png';
-import LeadDetails from '../LeadDetails/lead-details';
+import { useState } from 'react'
+import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
+import LeadDetails from '@/components/LeadDetails/lead-details';
 
 const LeadDetailsButton = () => {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <button onClick={() => setShowModal(true)}>

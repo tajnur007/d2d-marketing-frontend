@@ -1,6 +1,6 @@
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
-import LeadRow from '../LeadRow/LeadRow';
-import CreateLeadsButton from '../CreateLeadsButton/CreateLeadsButton';
+import LeadRow from '@/components/LeadRow/LeadRow';
+import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 
 function LeadsList() {
   

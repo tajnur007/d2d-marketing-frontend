@@ -1,6 +1,6 @@
 import { Person } from '@/models/global-types';
 import { leaderBoard } from './database';
-import Profiles from './profiles';
+import Profiles from '@/components/leaderboard/profiles';
 
 const Leaderboard = () => {
   return (

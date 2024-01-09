@@ -1,15 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import exportImage from '/assets/images/leadslist-icons/export.png';
+import exportImage from '@/assets/images/leadslist-icons/export.png';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 function ViewAllLeadsButton() {
   const router = useRouter();
   const handleCreateLeadButtonClick = () => {
-    router.push('/leads/');
+    router.push(PAGE_ROUTES.Leads);
   };
+
   return (
     <button
       type='button'
