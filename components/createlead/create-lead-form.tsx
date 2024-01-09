@@ -1,12 +1,12 @@
 'use client';
 import Image from 'next/image';
 import mapImage from '@/assets/images/dummy-map.png';
-import { Input } from '../ui/input';
-import { TextArea } from '../ui/text-area';
-import { ImageUpload } from '../ui/image-upload';
-import { Button } from '../ui/button';
-import { Select } from '../ui/select';
-import { DatePicker } from '../ui/date-picker';
+import { Input } from '@/components/input';
+import { TextArea } from '@/components/text-area';
+import { ImageUpload } from '@/components/image-upload';
+import { Button } from '@/components/button';
+import { Select } from '@/components/select';
+import { DatePicker } from '@/components/date-picker';
 import { useEffect, useState } from 'react';
 import { CREATE_LEAD_STATUS, FORMITEMS } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
@@ -46,7 +46,7 @@ const CreateLeadForm = () => {
   };
 
   return (
-    <div className='mt-10'>
+    <div className='m-5 p-10 rounded-xl bg-white'>
       <Input
         label='Title'
         placeholder='Title here'

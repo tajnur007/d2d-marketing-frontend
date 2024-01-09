@@ -1,14 +1,14 @@
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
-import LeadRow from '../LeadRow/LeadRow';
-import CreateLeadsButton from '../CreateLeadsButton/CreateLeadsButton';
+import LeadRow from '@/components/LeadRow/LeadRow';
+import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 
 function LeadsList() {
   
 
   return (
     <>
-      <div className=' w-full bg-white rounded-lg shadow'>
-        <div className='border rounded-lg border-gray-100'>
+      <div className=' w-full justify-center p-6 gap-5'>
+        <div className='border border-gray-100 bg-white rounded-xl'>
           <div className='py-4 md:py-6 pl-8 h-[96px]'>
             <div className='flex justify-between items-center content-center'>
               <div className='flex items-center'>
