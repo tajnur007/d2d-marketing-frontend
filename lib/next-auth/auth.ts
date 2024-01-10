@@ -2,6 +2,7 @@ import { AuthService } from '@/services/auth-service';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { createAuthData } from '../actions';
+import axios from 'axios';
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -27,10 +28,18 @@ export const authOptions: NextAuthOptions = {
             email,
             password,
           };
-          console.log(loginData);
-          const apiService = new AuthService('http://157.245.204.196:8021/v1/auth/login');
-          const response = await apiService.login(loginData);
-          createAuthData(response);
+
+          // const apiService = new AuthService('http://157.245.204.196:8021/v1/auth/login');
+
+          // const response = await apiService.login(loginData);
+          // console.log(response);
+          // createAuthData(response);
+          const response = await axios.post('http://157.245.204.196:8021/v1/auth/login', {
+            email,
+            password,
+            // Add any other required fields in the request body
+          });
+
           return response.data;
         } catch (error: any) {
           let callbackUrl: any;

@@ -21,9 +21,11 @@ const SigninForm = () => {
         email,
         password,
         redirect: false,
-        // callbackUrl: '/dashboard',
       });
-      router.push('/dashboard');
+
+      if (res?.ok) {
+        router.push('/dashboard');
+      }
 
       console.log(res);
     } catch (err) {
