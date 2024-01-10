@@ -4,8 +4,9 @@ import Link from 'next/link';
 
 import emailSentImage from '@/assets/images/email-sent.png';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
-import Copyright from './copyright';
-import ForgetPasswordCommon from './forget-password-common';
+import Copyright from './common/copyright';
+import ForgetPasswordCommon from './common/forget-password-common';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 const EmailSent = () => {
   return (
@@ -13,7 +14,7 @@ const EmailSent = () => {
       <div className='max-w-[600px] mx-auto px-6 py-12'>
         <div>
           <div className='mt-10 my-6 text-[16px] flex flex-row text-gray-500'>
-            <Link href='/auth/signin' className='mr-2'>
+            <Link href={PAGE_ROUTES.Signin} className='mr-2'>
               <ArrowLeftCircleIcon />
             </Link>
             Back to Login

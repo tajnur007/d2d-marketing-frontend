@@ -1,20 +1,12 @@
-'use client';
-
 import Image from 'next/image';
 import layoutTop from '@/assets/images/LayoutTop.png';
-import marketingForgetPassword from '@/assets/images/Marketing-forget-password.png';
+import marketingSignUp from '@/assets/images/Marketing-signup.png';
 import d2dIcon from '@/assets/images/D2DIcon.png';
 import Link from 'next/link';
-import ResetPassword from './reset-password';
-import NewPassword from './new-password';
-import PasswordChanged from './password-changed';
-import { useState } from 'react';
+import SignupForm from './form/signup-form';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
-const ForgetPassword = () => {
-  const [resetPassword, setResetPassword] = useState(true);
-  const [newPassword, setNewPassword] = useState(false);
-  const [passwordChanged, setPasswordC] = useState(false);
-
+const SignUp = () => {
   return (
     <div className='flex w-full h-screen'>
       <div className='w-2/5 h-full  bg-primary-bg  text-white relative'>
@@ -34,26 +26,24 @@ const ForgetPassword = () => {
               Lorem Ipsum has been the industry&apos;s
             </div>
           </div>
+
           <div className='pl-[37px] pd-[86px] pr-[38px]'>
-            <Image src={marketingForgetPassword} alt='marketing' />
+            <Image src={marketingSignUp} alt='marketing' />
           </div>
         </div>
       </div>
-
-      <div className='w-3/5 max-h-full flex flex-col relative'>
+      <div className='w-3/5 h-screen flex flex-col items-center'>
         <div className='ml-auto pt-[48px] pr-[45px]'>
           Have an account?{' '}
-          <Link href='/auth/signin'>
+          <Link href={PAGE_ROUTES.Signin}>
             <span className='text-primary-bg hover:underline'>Sign In!</span>
           </Link>
         </div>
 
-        {resetPassword && <ResetPassword />}
-        {newPassword && <NewPassword />}
-        {passwordChanged && <PasswordChanged />}
+        <SignupForm />
       </div>
     </div>
   );
 };
 
-export default ForgetPassword;
+export default SignUp;

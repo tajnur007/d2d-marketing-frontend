@@ -3,8 +3,7 @@ import layoutTop from '@/assets/images/LayoutTop.png';
 import marketingForgetPassword from '@/assets/images/Marketing-forget-password.png';
 import d2dIcon from '@/assets/images/D2DIcon.png';
 import Link from 'next/link';
-import EmailSent from '@/components/email-sent';
-
+import EmailSent from '@/components/auth/email-sent';
 
 const ForgetPassword = () => (
   <div className='flex w-full h-screen'>
@@ -39,7 +38,7 @@ const ForgetPassword = () => (
         </Link>
       </div>
 
-      <EmailSent/>
+      <EmailSent />
     </div>
   </div>
 );

@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import passwordChangedImage from '@/assets/images/password-changed.png';
-import Copyright from './copyright';
-import ForgetPasswordCommon from './forget-password-common';
+import Copyright from './common/copyright';
+import ForgetPasswordCommon from './common/forget-password-common';
 
 const PasswordChanged = () => {
   return (
