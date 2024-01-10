@@ -7,26 +7,28 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/singin',
+    signIn: '/auth/signin',
   },
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'safwan@example.com' },
-        password: { label: 'Password', type: 'password' },
-      },
+      name: 'credentials',
+      credentials: {},
       async authorize(credentials) {
-        if (!credentials?.username || !credentials.password) {
+        const { email, password } = credentials as { email: string; password: string };
+
+        if (!email || !password) {
           return null;
         }
+
         try {
           const loginData = {
-            username: credentials?.username,
-            password: credentials?.password,
+            email,
+            password,
           };
-          const apiService = new AuthService();
+          console.log(loginData);
+          const apiService = new AuthService('http://157.245.204.196:8021/v1/auth/login');
           const response = await apiService.login(loginData);
           createAuthData(response);
           return response.data;
@@ -49,6 +51,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  debug: process.env.NODE_ENV === 'development',
 };
 
 async function refreshAccessToken(refreshToken: any) {
