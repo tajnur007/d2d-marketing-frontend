@@ -1,7 +1,9 @@
+import SettingsPage from '@/components/settings-page';
+
 const LeadsCreatePage = () => {
   return (
     <div className='mt-10'>
-      This is <strong>Settings</strong> page
+      <SettingsPage />
     </div>
   );
 };

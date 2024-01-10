@@ -1,10 +1,8 @@
-import LeadsList from "@/components/ui/LeadsList/LeadsList";
+import LeadsList from "@/components/LeadsList/LeadsList";
 
 const LeadsPage = () => {
   return (
-    <div className=''>
       <LeadsList/>
-    </div>
   );
 };
 
