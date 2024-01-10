@@ -6,13 +6,11 @@ import ResetPassword from '@/components/reset-password';
 
 const ForgetPasswordPage = () => (
   <div className=''>
-    This is <strong>Forget Password</strong> page
-    <ForgetPassword/>
     <ResetPassword/>
     <NewPassword/>
-    <PasswordChanged />
-    <EmailSent />
     <ForgetPassword/>
+    <PasswordChanged />
+    <EmailSent /> 
   </div>
 );
 
