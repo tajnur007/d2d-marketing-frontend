@@ -43,11 +43,15 @@ const SettingsPage = () => {
     setFormErrors(newFormErrors);
   };
 
+  const handleCancel = () => {
+    console.log('reset form clicked');
+  };
+
   return (
     <section className='flex justify-center w-full'>
-      <div className='flex flex-col items-center w-full'>
+      <div className='flex flex-col items-center w-[60vh]'>
         <p className='text-4xl font-bold m-8'>Update Profile</p>
-        <form onSubmit={submitData}>
+        <form onSubmit={submitData} id='settings-form'>
           <div className='w-full flex justify-center bottom-5'>
             <Image src={profileImage} alt='' height={46} width={46} />
           </div>
@@ -73,11 +77,18 @@ const SettingsPage = () => {
             onChange={handleInputChange}
             className={` ${formErrors.Name && 'border-red-500 shadow'}`}
           />
-          <Button
-            type='submit'
-            className='text-white text-lg rounded-lg p-3 bg-[#4318FF] '>
-            Save changes
-          </Button>
+          <div className=' m-0 p-0 gap-2'>
+            <Button
+              onClick={handleCancel}
+              className='text-[#4318FF] text-lg rounded-lg m-2 p-3 bg-white '>
+              Cancel
+            </Button>
+            <Button
+              type='submit'
+              className='text-white text-lg rounded-lg m-2 p-3 bg-[#4318FF] '>
+              Save changes
+            </Button>
+          </div>
         </form>
       </div>
     </section>
