@@ -3,11 +3,14 @@ import Link from 'next/link';
 import layoutTop from '@/assets/images/LayoutTop.png'
 import marketingSignIn from '@/assets/images/Marketing-signin.png'
 import d2dIcon from '@/assets/images/D2DIcon.png'
+import SigninForm from './signin-form';
+
 
 
 const SignIn= () => {
   return (
     <div className='flex w-full h-full'>
+
       <div className="w-2/5 h-full  bg-primary-bg  text-white relative">
         <div className="absolute top-0 left-0  flex z-1 justify-between items-start">
           <Image src={layoutTop} alt='top'/>
@@ -29,13 +32,17 @@ const SignIn= () => {
           </div>
         </div>
       </div>
-      <div className="w-3/5 h-full flex flex-col ">
+      <div className="w-3/5 h-screen flex flex-col items-center">
         <div className="ml-auto pt-[48px] pr-[45px]">
           Don&apos;t Have an account?{' '}
           <Link href="/auth/signup">
             <span className="text-primary-bg hover:underline">Sign Up!</span>
           </Link>
         </div>
+
+        {/**signin form */}
+        <SigninForm/>
+
       </div>
     </div>
   );
