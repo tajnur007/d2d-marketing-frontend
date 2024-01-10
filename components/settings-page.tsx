@@ -3,11 +3,13 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import Image from 'next/image';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+// import { Button } from '@/components/ui/button';
+// import { Input } from '@/components/ui/input';
 import { FormItems } from '@/models/global-types';
 import { FORMITEMS } from '@/utils/constants/common-constants';
 import profileImage from '@/assets/images/profile.png';
+import { Input } from './input';
+import { Button } from './button';
 
 const SettingsPage = () => {
   const [selected, setSelected] = useState('Pending');
