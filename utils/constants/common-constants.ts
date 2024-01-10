@@ -5,7 +5,7 @@ export const PAGE_ROUTES = {
   Dashboard: '/dashboard',
   Leads: '/leads',
   Settings: '/settings',
-  Signin: 'auth/signin',
+  Signin: '/auth/signin',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
