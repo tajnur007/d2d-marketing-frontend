@@ -14,7 +14,6 @@ const SigninForm = () => {
   const [password, setPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -24,14 +23,10 @@ const SigninForm = () => {
         redirect: false,
       });
 
-      if (res?.error) {
-        setError(true);
-      } else if (res?.ok) {
-        setError(false);
+      if (res?.ok) {
         router.push('/dashboard');
       }
     } catch (err) {
-      setError(true);
       console.error('Login failed:', err);
     }
   };
