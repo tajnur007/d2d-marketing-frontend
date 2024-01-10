@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import layoutTop from '@/assets/images/layoutTop.png'
-import marketingSignUp from '@/assets/images/marketing-signup.png'
-import d2dIcon from '@/assets/images/d2dIcon.png'
+import layoutTop from '@/assets/images/LayoutTop.png'
+import marketingSignUp from '@/assets/images/Marketing-signup.png'
+import d2dIcon from '@/assets/images/D2DIcon.png'
 import Link from 'next/link';
 
 const SignUp= () => {

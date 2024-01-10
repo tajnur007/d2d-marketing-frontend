@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import layoutTop from '@/assets/images/layoutTop.png'
-import marketingSignIn from '@/assets/images/marketing-signin.png'
-import d2dIcon from '@/assets/images/d2dIcon.png'
+import layoutTop from '@/assets/images/LayoutTop.png'
+import marketingSignIn from '@/assets/images/Marketing-signin.png'
+import d2dIcon from '@/assets/images/D2DIcon.png'
 
 const SignIn= () => {
   return (
