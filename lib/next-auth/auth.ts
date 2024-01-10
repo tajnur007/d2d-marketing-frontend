@@ -34,11 +34,10 @@ export const authOptions: NextAuthOptions = {
           // const response = await apiService.login(loginData);
           // console.log(response);
           // createAuthData(response);
-          const response = await axios.post('http://157.245.204.196:8021/v1/auth/login', {
-            email,
-            password,
-            // Add any other required fields in the request body
-          });
+          const response = await axios.post(
+            'http://157.245.204.196:8021/v1/auth/login',
+            loginData
+          );
 
           return response.data;
         } catch (error: any) {
@@ -60,7 +59,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  debug: process.env.NODE_ENV === 'development',
 };
 
 async function refreshAccessToken(refreshToken: any) {

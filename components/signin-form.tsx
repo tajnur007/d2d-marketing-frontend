@@ -26,8 +26,6 @@ const SigninForm = () => {
       if (res?.ok) {
         router.push('/dashboard');
       }
-
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
