@@ -1,14 +1,10 @@
 'use client';
+
 import { MoonSolidIcon, NotificationIcon } from '@/assets/icons';
-import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const currentPage = usePathname();
-
-  const session = useSession();
-
-  console.log(session);
 
   const capitalizeEachWord = (str: string): string => {
     return str

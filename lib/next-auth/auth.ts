@@ -4,11 +4,15 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { createAuthData } from '../actions';
 import axios from 'axios';
 
+//.env credentials
+const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
+const BASE_URL = 'http://157.245.204.196:8021/v1';
+
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/signin',
   },
@@ -17,27 +21,18 @@ export const authOptions: NextAuthOptions = {
       name: 'credentials',
       credentials: {},
       async authorize(credentials) {
-        const { email, password } = credentials as { email: string; password: string };
-
-        if (!email || !password) {
-          return null;
-        }
-
         try {
-          const loginData = {
-            email,
-            password,
+          const { email, password } = credentials as {
+            email: string;
+            password: string;
           };
 
-          // const apiService = new AuthService('http://157.245.204.196:8021/v1/auth/login');
+          if (!email || !password) {
+            return null;
+          }
+          const loginData = { email, password };
 
-          // const response = await apiService.login(loginData);
-          // console.log(response);
-          // createAuthData(response);
-          const response = await axios.post(
-            'http://157.245.204.196:8021/v1/auth/login',
-            loginData
-          );
+          const response = await axios.post(`${BASE_URL}/auth/login`, loginData);
 
           return response.data;
         } catch (error: any) {
@@ -78,3 +73,9 @@ async function refreshAccessToken(refreshToken: any) {
     };
   }
 }
+
+// const apiService = new AuthService('http://157.245.204.196:8021/v1/auth/login');
+
+// const response = await apiService.login(loginData);
+// console.log(response);
+// createAuthData(response);
