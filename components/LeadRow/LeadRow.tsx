@@ -1,11 +1,10 @@
-import React from 'react'
-import Image from 'next/image';
-import phoneImage from '/assets/images/leadslist-icons/call.png';
-import clockImage from '/assets/images/leadslist-icons/clock.png';
-import moreImage from '/assets/images/leadslist-icons/more_vert.png';
 import { getStatusColor } from '@/utils/helpers/common-helpers';
+import Image from 'next/image';
+import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
+import phoneImage from '@/assets/images/leadslist-icons/call.png';
+import clockImage from '@/assets/images/leadslist-icons/clock.png';
 
-function LeadRow({item}:any) {
+function LeadRow({ item }: any) {
   return (
     <>
       <tr
@@ -39,7 +38,9 @@ function LeadRow({item}:any) {
         </td>
         <td className='w-1 text-center pl-28'>
           <div
-            className={`flex items-center justify-center h-6 ${getStatusColor(item.status)} p-2 rounded-full`}>
+            className={`flex items-center justify-center h-6 ${getStatusColor(
+              item.status
+            )} p-2 rounded-full`}>
             <p className='text-sm text-black'>{item.status}</p>
           </div>
         </td>
@@ -52,13 +53,11 @@ function LeadRow({item}:any) {
           </p>
         </td>
         <td className=''>
-          <Image className=' cursor-pointer' src={moreImage} alt='' />
+          <LeadDetailsButton />
         </td>
       </tr>
     </>
   );
 }
 
-
-
-export default LeadRow
+export default LeadRow;
