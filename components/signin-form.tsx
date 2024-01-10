@@ -26,7 +26,6 @@ const SigninForm = () => {
 
       if (res?.error) {
         setError(true);
-        console.error(`Login failed: ${res.error}`);
       } else if (res?.ok) {
         setError(false);
         router.push('/dashboard');
