@@ -3,8 +3,8 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import Image from 'next/image';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
 import { FormItems } from '@/models/global-types';
 import { FORMITEMS } from '@/utils/constants/common-constants';
 import profileImage from '@/assets/images/profile.png';
