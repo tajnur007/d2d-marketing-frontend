@@ -8,7 +8,7 @@ export const PAGE_ROUTES = {
   Signin: '/auth/signin',
   Signup: '/auth/signup',
   Forgetpassword: '/auth/forget-password',
-  EmailSent:'/auth/forget-password/email-sent'
+  EmailSent: '/auth/forget-password/email-sent',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -61,3 +61,6 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
 ];
+
+export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
+export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';

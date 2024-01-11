@@ -35,3 +35,9 @@
 input[type='date']::-webkit-calendar-picker-indicator {
   opacity: 0;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

@@ -7,6 +7,7 @@ import { FacebookIcon } from '@/assets/icons';
 import { Vectorline } from '@/assets/icons';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 const SigninForm = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const SigninForm = () => {
       });
 
       if (res?.ok) {
-        router.push('/dashboard');
+        router.push(PAGE_ROUTES?.Dashboard);
       }
     } catch (err) {
       console.error('Login failed:', err);

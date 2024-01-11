@@ -3,8 +3,6 @@ import LeadRow from '@/components/LeadRow/LeadRow';
 import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 
 function LeadsList() {
-  
-
   return (
     <>
       <div className=' w-full justify-center p-6 gap-5'>
