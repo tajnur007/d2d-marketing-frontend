@@ -3,8 +3,6 @@ import LeadRow from '@/components/LeadRow/LeadRow';
 import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 
 function LeadsList() {
-  
-
   return (
     <>
       <div className=' w-full justify-center p-6 gap-5'>
@@ -13,13 +11,13 @@ function LeadsList() {
             <div className='flex justify-between items-center content-center'>
               <div className='flex items-center'>
                 <div>
-                  <p className="[font-family:'Metropolis-Bold',Helvetica] font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]">
+                  <p className="[font-family:'Metropolis-Bold',Helvetica] font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]">
                     Leads
                   </p>
                 </div>
 
                 <div className='flex items-center justify-center h-6 bg-green-200 rounded-full ms-2 p-2'>
-                  <p className="leading-3 text-black [font-family:'Metropolis-Bold',Helvetica] font-bold text-[16px] tracking-[-0.32px] whitespace-nowrap text-capitalize">
+                  <p className="leading-3 text-black [font-family:'Metropolis-Bold',Helvetica] font-semibold text-[16px] tracking-[-0.32px] whitespace-nowrap text-capitalize">
                     {LEADS_DATA.length}
                   </p>
                 </div>
