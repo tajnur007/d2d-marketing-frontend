@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
 import { useState, FormEvent } from 'react';
-import Copyright from './copyright';
-import ForgetPasswordCommon from './forget-password-common';
+import ForgetPasswordCommon from './common/forget-password-common';
+import Copyright from './common/copyright';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 const NewPassword = () => {
   const [newPassword, setNewPassword] = useState('');
@@ -18,32 +19,33 @@ const NewPassword = () => {
     console.log(retypePassword);
     setReTypePassword('');
   };
+
   return (
     <section>
-      <div className='min-h-full flex flex-col justify-center px-6 py-12'>
+      <div className='max-w-[600px] mx-auto px-6 py-12'>
         <div>
-          <p className='my-5 text-md flex flex-row text-gray-500'>
-            <Link href='/auth/signin' className='mr-2'>
+          <div className='mt-10 my-6 text-[16px] flex flex-row text-gray-500'>
+            <Link href={PAGE_ROUTES.Signin} className='mr-2'>
               <ArrowLeftCircleIcon />
             </Link>
             Back to Login
-          </p>
-          <h2 className='mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900'>
+          </div>
+          <div className='mt-10 text-[36px] font-bold leading-9 tracking-tight text-gray-900'>
             New password 👋
-          </h2>
-          <p className='my-5 text-md text-gray-500'>Type your new password</p>
+          </div>
+          <div className='my-5 text-[16px]'>Type your new password</div>
         </div>
 
         <form onSubmit={onFormSubmit}>
           <div>
             <label>New password</label>
-            <div className='my-2'>
+            <div className='mt-4 mb-4'>
               <input
                 id='newPassword'
                 type='password'
                 name='newPassword'
                 value={newPassword}
-                className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
+                className='block w-full rounded-md border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
                 placeholder='New password'
                 autoComplete='off'
                 required
@@ -51,13 +53,13 @@ const NewPassword = () => {
               />
             </div>
             <label>Re-type password</label>
-            <div className='my-2'>
+            <div className='mt-4 mb-4'>
               <input
                 id='retypePassword'
                 type='password'
                 name='retypePassword'
                 value={retypePassword}
-                className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
+                className='block w-full rounded-md border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
                 placeholder='Re-type password'
                 autoComplete='off'
                 required

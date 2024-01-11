@@ -1,18 +1,12 @@
-import EmailSent from '@/components/email-sent';
-import ForgetPassword from '@/components/foget-password';
-import NewPassword from '@/components/new-password';
-import PasswordChanged from '@/components/password-changed';
-import ResetPassword from '@/components/reset-password';
+import EmailSent from '@/components/auth/email-sent';
+import ForgetPassword from '@/components/auth/foget-password';
+import NewPassword from '@/components/auth/new-password';
+import PasswordChanged from '@/components/auth/password-changed';
+import ResetPassword from '@/components/auth/reset-password';
 
 const ForgetPasswordPage = () => (
   <div className=''>
-    This is <strong>Forget Password</strong> page
-    <ForgetPassword/>
-    <ResetPassword/>
-    <NewPassword/>
-    <PasswordChanged />
-    <EmailSent />
-    <ForgetPassword/>
+    <ForgetPassword />
   </div>
 );
 
