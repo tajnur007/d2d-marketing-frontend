@@ -3,8 +3,9 @@ import Image from 'next/image';
 import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
+import { LEADS_DATA_TYPE } from '@/utils/constants/leadslist-constant';
 
-function LeadRow({ item }: any) {
+function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
   return (
     <>
       <tr
@@ -53,7 +54,7 @@ function LeadRow({ item }: any) {
           </p>
         </td>
         <td className=''>
-          <LeadDetailsButton />
+          <LeadDetailsButton data={item} />
         </td>
       </tr>
     </>

@@ -3129,6 +3129,7 @@ __metadata:
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.48.2"
     react-modal: "npm:^3.16.1"
+    react-modern-drawer: "npm:^1.2.2"
     react-redux: "npm:^8.1.3"
     redux-logger: "npm:^3.0.6"
     sharp: "npm:^0.33.1"
@@ -3742,6 +3743,15 @@ __metadata:
     react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
     react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
   checksum: 7b56e2c505b2b924736c471a34754a4211df40ac2d6fb0949cf095aea5e65d3326bd9f111fa7898acf40afa54f526809ad8aa47e02b8328663d11422568dc7b1
+  languageName: node
+  linkType: hard
+
+"react-modern-drawer@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "react-modern-drawer@npm:1.2.2"
+  peerDependencies:
+    react: ">16.0.0"
+  checksum: 09d8af7b62c5065acc201f0fb2084b192d67b30cac1b83df9a5953e2a0fe2ce136fdc33ac5d0fde575f381546515a690138ba4d4926db6f47a7cb798c2e56608
   languageName: node
   linkType: hard
 
