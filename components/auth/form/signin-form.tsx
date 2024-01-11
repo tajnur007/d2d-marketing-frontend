@@ -5,17 +5,30 @@ import { PasswordRevealIcon } from '@/assets/icons';
 import { GoogleIcon } from '@/assets/icons';
 import { FacebookIcon } from '@/assets/icons';
 import { Vectorline } from '@/assets/icons';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const SigninForm = () => {
+  const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Remember me:', rememberMe);
+  const handleLogin = async () => {
+    try {
+      const res = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.ok) {
+        router.push('/dashboard');
+      }
+    } catch (err) {
+      console.error('Login failed:', err);
+    }
   };
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {

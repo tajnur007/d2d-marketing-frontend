@@ -1,4 +1,5 @@
 'use client';
+
 import { MoonSolidIcon, NotificationIcon } from '@/assets/icons';
 import { usePathname } from 'next/navigation';
 
