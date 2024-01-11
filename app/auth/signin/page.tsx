@@ -1,7 +1,10 @@
-import SigninForm from "@/components/signin-form";
+import SignIn from '@/components/auth/signin';
+
 const SignInPage = () => {
   return (
-    <SigninForm />
+    <>
+      <SignIn />
+    </>
   );
 };
 

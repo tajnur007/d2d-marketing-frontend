@@ -6,6 +6,9 @@ export const PAGE_ROUTES = {
   Leads: '/leads',
   Settings: '/settings',
   Signin: '/auth/signin',
+  Signup: '/auth/signup',
+  Forgetpassword: '/auth/forget-password',
+  EmailSent:'/auth/forget-password/email-sent'
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
