@@ -14,7 +14,7 @@ function CreateLeadsButton() {
     <button
       type='button'
       onClick={handleCreateLeadButtonClick}
-      className='text-white bg-[#5630ff] shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5'>
+      className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
       <div className='flex justify-between items-center'>
         <div className='mr-2'>
           <Image src={plusImage} alt='' />
