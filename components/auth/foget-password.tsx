@@ -14,12 +14,10 @@ const ForgetPassword = () => {
   const [passwordChanged, setPasswordC] = useState(true);
 
   return (
-    <div className='flex w-full h-screen'>
-      <div className='relative'>
-        <ForgetPasswordLeft />
-      </div>
+    <div className='flex w-full h-screen overflow-hidden'>
+      <ForgetPasswordLeft />
 
-      <div className='w-3/5 max-h-full flex flex-col'>
+      <div className='w-3/5 max-h-full flex flex-col items-center '>
         <div className='ml-auto pt-[48px] pr-[45px]'>
           Have an account?{' '}
           <Link href={PAGE_ROUTES.Signin}>

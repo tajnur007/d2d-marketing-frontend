@@ -6,7 +6,7 @@ import d2dIcon from '@/assets/images/D2DIcon.png';
 
 const ForgetPasswordLeft = () => {
   return (
-    <div className='w-2/5 h-screen fixed bg-primary-bg  text-white'>
+    <div className='w-2/5 h-screen flex overflow-hidden  bg-primary-bg  text-white'>
       <div className='absolute top-0 left-0  flex z-1 justify-between items-start'>
         <Image src={layoutTop} alt='top' />
       </div>
