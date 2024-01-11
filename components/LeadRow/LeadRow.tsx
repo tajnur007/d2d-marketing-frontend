@@ -53,7 +53,7 @@ function LeadRow({ item }: any) {
           </p>
         </td>
         <td className=''>
-          <LeadDetailsButton />
+          <LeadDetailsButton data={item} />
         </td>
       </tr>
     </>

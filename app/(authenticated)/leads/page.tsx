@@ -1,9 +1,7 @@
-import LeadsList from "@/components/LeadsList/LeadsList";
+import LeadsList from '@/components/LeadsList/LeadsList';
 
 const LeadsPage = () => {
-  return (
-      <LeadsList/>
-  );
+  return <LeadsList />;
 };
 
 export default LeadsPage;
