@@ -1,10 +1,11 @@
 import { FormItems, SidebarItem } from '@/models/global-types';
-import { HomeIcon, BookIcon, SettingIcon } from '../../assets/icons';
+import { BookIcon, HomeIcon, SettingIcon } from '../../assets/icons';
 
 export const PAGE_ROUTES = {
   Dashboard: '/dashboard',
   Leads: '/leads',
   Settings: '/settings',
+  Signin: '/auth/signin',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [

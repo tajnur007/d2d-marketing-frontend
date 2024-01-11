@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import plusImage from '/assets/images/leadslist-icons/add-circle.png';
+import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
