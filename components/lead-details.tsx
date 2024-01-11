@@ -6,8 +6,15 @@ import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
+import { LEADS_DATA_TYPE } from '@/utils/constants/leadslist-constant';
 
-const LeadDetails = ({ setShowModal, data }: any) => {
+const LeadDetails = ({
+  setShowModal,
+  data,
+}: {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  data: LEADS_DATA_TYPE;
+}) => {
   console.log(data);
   return (
     <div className='modal-main-body flex justify-end items-center absolute top-0 left-0 w-full bg-opacity-50'>

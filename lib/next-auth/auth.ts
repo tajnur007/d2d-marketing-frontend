@@ -3,10 +3,11 @@ import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { createAuthData } from '../actions';
 import axios from 'axios';
-
-//.env credentials
-const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
-const BASE_URL = 'http://157.245.204.196:8021/v1';
+import {
+  NEXTAUTH_SECRET,
+  PAGE_ROUTES,
+  SERVER_BASE_URL,
+} from '@/utils/constants/common-constants';
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -14,7 +15,7 @@ export const authOptions: NextAuthOptions = {
   },
   secret: NEXTAUTH_SECRET,
   pages: {
-    signIn: '/auth/signin',
+    signIn: PAGE_ROUTES?.Signin,
   },
   providers: [
     CredentialsProvider({
@@ -32,7 +33,7 @@ export const authOptions: NextAuthOptions = {
           }
           const loginData = { email, password };
 
-          const response = await axios.post(`${BASE_URL}/auth/login`, loginData);
+          const response = await axios.post(`${SERVER_BASE_URL}/auth/login`, loginData);
 
           return response.data;
         } catch (error: any) {
