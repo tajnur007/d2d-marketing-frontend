@@ -1,11 +1,18 @@
+'use client'
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/LeadRow/LeadRow';
 import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
+import { useRouter } from 'next/navigation';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 function LeadsList() {
+  const router = useRouter();
+  const handleCreateLeadButtonClick = () => {
+    router.push(PAGE_ROUTES.LeadCreate)
+  };
   return (
     <>
-      <div className=' w-full justify-center p-6 gap-5'>
+      <div className='w-full justify-center p-6 gap-5'>
         <div className='border border-gray-100 bg-white rounded-xl'>
           <div className='py-4 md:py-6 pl-8 h-[96px]'>
             <div className='flex justify-between items-center content-center'>
@@ -16,13 +23,13 @@ function LeadsList() {
                   </p>
                 </div>
 
-                <div className='flex items-center justify-center h-6 bg-green-200 rounded-full ms-2 p-2'>
-                  <p className="leading-3 text-black [font-family:'Metropolis-Bold',Helvetica] font-semibold text-[16px] tracking-[-0.32px] whitespace-nowrap text-capitalize">
+                <div className='flex items-center justify-center h-6 bg-[#D2FBE7] rounded-[17px] ms-2 p-2'>
+                  <p className="leading-[normal] text-black [font-family:'Metropolis-Bold',Helvetica] font-semibold text-[16px] tracking-[-0.32px] whitespace-nowrap text-capitalize">
                     {LEADS_DATA.length}
                   </p>
                 </div>
               </div>
-              <div>
+              <div onClick={handleCreateLeadButtonClick}>
                 <CreateLeadsButton />
               </div>
             </div>

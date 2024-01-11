@@ -8,7 +8,8 @@ export const PAGE_ROUTES = {
   Signin: '/auth/signin',
   Signup: '/auth/signup',
   Forgetpassword: '/auth/forget-password',
-  EmailSent:'/auth/forget-password/email-sent'
+  EmailSent:'/auth/forget-password/email-sent',
+  LeadCreate:'/leads/create',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
