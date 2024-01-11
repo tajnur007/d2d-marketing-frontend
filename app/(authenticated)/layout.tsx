@@ -7,8 +7,7 @@ import ServerAuthManager from '../../components/providers/server-auth-manager';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
-
-  let isAuthenticated = false;
+  let isAuthenticated = true;
   if (!isAuthenticated) {
     redirect(PAGE_ROUTES.Signin);
   }
