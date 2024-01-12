@@ -9,7 +9,7 @@ import ForgetPasswordCommon from './common/forget-password-common';
 const PasswordChanged = () => {
   return (
     <section>
-      <div className='max-w-[600px] mx-auto px-6 py-12'>
+      <div className='max-w-[600px] mx-auto px-6 py-12 '>
         <div>
           <div className='mt-10 my-6 text-[16px] flex flex-row text-gray-500'></div>
           <div className='mt-10 text-[36px] font-bold leading-9 tracking-tight text-gray-900'>

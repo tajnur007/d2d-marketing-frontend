@@ -1,8 +1,9 @@
-import { getStatusColor } from '@/utils/helpers/common-helpers';
 import Image from 'next/image';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
+import { getStatusColor } from '@/utils/constants/common-constants';
+import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
 
-function LatestLeadRow({ item }: any) {
+const LatestLeadRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
   return (
     <div
       key={item.id}
@@ -22,9 +23,9 @@ function LatestLeadRow({ item }: any) {
       </div>
       <div className='w-[30%]'>
         <span
-          className={` text-sm text-black ${getStatusColor(
-            item.status
-          )} py-2 px-[10px] rounded-full`}>
+          className={` text-sm text-black ${
+            getStatusColor[item.status as keyof statusColor]
+          } py-2 px-[10px] rounded-full`}>
           {item.status}
         </span>
       </div>
@@ -39,6 +40,6 @@ function LatestLeadRow({ item }: any) {
       </div>
     </div>
   );
-}
+};
 
 export default LatestLeadRow;

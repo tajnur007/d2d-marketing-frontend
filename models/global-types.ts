@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image';
 import React, {
   ButtonHTMLAttributes,
   InputHTMLAttributes,
@@ -34,6 +35,32 @@ export interface Person {
   totalLeads: number;
 }
 
+export interface statusColor {
+  Cool?: string;
+  Hot?: string;
+  Warm?: string;
+}
+
+export interface LEADS_DATA_TYPE {
+  id: number;
+  title: string;
+  date: string;
+  assignedByName: string;
+  assignedByNumber: string;
+  assignedByEmail: string;
+  assignedToName: string;
+  status: string;
+  location: string;
+  meetingNote: string;
+  image: string;
+  reminder: {
+    reminderTitle: string;
+    reminderDate: string;
+    reminderStatus: string;
+  };
+  timestamp: string;
+}
+
 export interface FormItems {
   Title?: string;
   Name?: string;
@@ -67,4 +94,12 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 }
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
+}
+
+export interface AuthCommonProps {
+  pageImage: StaticImageData;
+}
+
+export interface NoAccountProps {
+  signupPage: boolean;
 }
