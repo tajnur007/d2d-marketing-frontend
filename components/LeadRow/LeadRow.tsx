@@ -1,10 +1,17 @@
-import { getStatusColor } from '@/utils/helpers/common-helpers';
 import Image from 'next/image';
 import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
+// import { getStatusColor } from '@/utils/constants/common-constants';
+import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
 
-function LeadRow({ item }: any) {
+const getStatusColor: statusColor = {
+  Cool: 'bg-blue-200',
+  Hot: 'bg-[#FFD9D9]',
+  Warm: 'bg-[#FFEFB8]',
+};
+
+const LeadRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
   return (
     <>
       <tr
@@ -38,9 +45,9 @@ function LeadRow({ item }: any) {
         </td>
         <td className='w-1 text-center pl-28'>
           <div
-            className={`flex items-center font-medium text-black text-[12px] tracking-[-0.24px] leading-[normal] whitespace-nowrap justify-center h-6 ${getStatusColor(
-              item.status
-            )} p-2 rounded-full`}>
+            className={`flex items-center font-medium text-black text-[12px] tracking-[-0.24px] leading-[normal] whitespace-nowrap justify-center h-6 ${
+              getStatusColor[item.status as keyof statusColor]
+            } p-2 rounded-full`}>
             <p className='text-sm text-black'>{item.status}</p>
           </div>
         </td>
@@ -58,6 +65,6 @@ function LeadRow({ item }: any) {
       </tr>
     </>
   );
-}
+};
 
 export default LeadRow;

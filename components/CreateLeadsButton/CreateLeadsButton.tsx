@@ -1,19 +1,11 @@
-'use client';
-
 import Image from 'next/image';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 
 function CreateLeadsButton() {
-  const router = useRouter();
-  const handleCreateLeadButtonClick = () => {
-    router.push('/leads/create');
-  };
   return (
     <button
       type='button'
-      onClick={handleCreateLeadButtonClick}
       className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
       <div className='flex justify-between items-center'>
         <div className='mr-2'>
