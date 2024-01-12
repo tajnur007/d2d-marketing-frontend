@@ -2,10 +2,11 @@ import marketingForgetPassword from '@/assets/images/Marketing-forget-password.p
 import EmailSent from '@/components/auth/email-sent';
 import AuthLayout from '@/components/layouts/auth-layout';
 import NoAccount from '@/components/auth/common/no-account';
+import { AUTH_LEFT_TEXT } from '@/utils/constants/common-constants';
 
 const ForgetPassword = () => {
   return (
-    <AuthLayout text='forget password' image={marketingForgetPassword}>
+    <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>
       <NoAccount signupPage={false} />
       <EmailSent />
     </AuthLayout>
