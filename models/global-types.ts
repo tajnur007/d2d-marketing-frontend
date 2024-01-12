@@ -37,6 +37,32 @@ export interface Person {
   totalLeads: number;
 }
 
+export interface statusColor {
+  Cool?: string;
+  Hot?: string;
+  Warm?: string;
+}
+
+export interface LEADS_DATA_TYPE {
+  id: number;
+  title: string;
+  date: string;
+  assignedByName: string;
+  assignedByNumber: string;
+  assignedByEmail: string;
+  assignedToName: string;
+  status: string;
+  location: string;
+  meetingNote: string;
+  image: string;
+  reminder: {
+    reminderTitle: string;
+    reminderDate: string;
+    reminderStatus: string;
+  };
+  timestamp: string;
+}
+
 export interface FormItems {
   Title?: string;
   Name?: string;

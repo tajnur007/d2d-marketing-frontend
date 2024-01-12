@@ -1,24 +1,5 @@
+import { LEADS_DATA_TYPE } from '@/models/global-types';
 import { LEAD_STATUS } from './common-constants';
-
-export interface LEADS_DATA_TYPE {
-  id: number;
-  title: string;
-  date: string;
-  assignedByName: string;
-  assignedByNumber: string;
-  assignedByEmail: string;
-  assignedToName: string;
-  status: string;
-  location: string;
-  meetingNote: string;
-  image: string;
-  reminder: {
-    reminderTitle: string;
-    reminderDate: string;
-    reminderStatus: string;
-  };
-  timestamp: string;
-}
 
 export const LEADS_DATA: LEADS_DATA_TYPE[] = [
   {
@@ -49,14 +30,14 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01755432123',
     assignedByEmail: 'nadia@gmail.com',
     assignedToName: 'Aminul Islam',
-    status: LEAD_STATUS.Progress,
+    status: LEAD_STATUS.Warm,
     location: '123/B Creative Street',
     meetingNote: 'Create engaging content for the website.',
     image: 'https://example.com/content-creation.jpg',
     reminder: {
       reminderTitle: 'Finalize content strategy.',
       reminderDate: 'Sat 25 Nov, 2023 01:00 AM',
-      reminderStatus: LEAD_STATUS.Pending,
+      reminderStatus: LEAD_STATUS.Warm,
     },
     timestamp: '2023-11-22T14:45:00.000Z',
   },
@@ -68,7 +49,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01987654321',
     assignedByEmail: 'farah@gmail.com',
     assignedToName: 'Sadia Rahman',
-    status: LEAD_STATUS.Pending,
+    status: LEAD_STATUS.Cool,
     location: '789/C Web Avenue',
     meetingNote: 'Redesign the website for a modern look.',
     image: 'https://example.com/website-redesign.jpg',
@@ -106,7 +87,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01898989898',
     assignedByEmail: 'mehnaz@gmail.com',
     assignedToName: 'Rahim Ali',
-    status: LEAD_STATUS.Completed,
+    status: LEAD_STATUS.Warm,
     location: '789/E SEO Avenue',
     meetingNote: 'Optimize website for search engines.',
     image: 'https://example.com/seo-optimization.jpg',
@@ -125,7 +106,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01671234567',
     assignedByEmail: 'tasnim@gmail.com',
     assignedToName: 'Arif Hossain',
-    status: LEAD_STATUS.Progress,
+    status: LEAD_STATUS.Hot,
     location: '567/G Launch Avenue',
     meetingNote: 'Plan and execute the launch event for the new product.',
     image: 'https://example.com/product-launch.jpg',
@@ -144,7 +125,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01711223344',
     assignedByEmail: 'nabil@gmail.com',
     assignedToName: 'Shahrukh Ahmed',
-    status: LEAD_STATUS.Pending,
+    status: LEAD_STATUS.Cool,
     location: '789/H Design Street',
     meetingNote: 'Create visually appealing graphics for marketing materials.',
     image: 'https://example.com/graphic-design.jpg',
@@ -182,7 +163,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01551122334',
     assignedByEmail: 'anika@gmail.com',
     assignedToName: 'Mahir Ahmed',
-    status: LEAD_STATUS.Completed,
+    status: LEAD_STATUS.Warm,
     location: '456/J Market Street',
     meetingNote: 'Conduct market research to identify trends and opportunities.',
     image: 'https://example.com/market-research.jpg',
@@ -201,7 +182,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01777889900',
     assignedByEmail: 'khaled@gmail.com',
     assignedToName: 'Samina Akhtar',
-    status: LEAD_STATUS.Progress,
+    status: LEAD_STATUS.Cool,
     location: '789/K Video Street',
     meetingNote: 'Create engaging videos for marketing purposes.',
     image: 'https://example.com/video-production.jpg',
@@ -220,7 +201,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     assignedByNumber: '+88-01991122334',
     assignedByEmail: 'rifat@gmail.com',
     assignedToName: 'Sakib Hasan',
-    status: LEAD_STATUS.Pending,
+    status: LEAD_STATUS.Hot,
     location: '123/L Customer Avenue',
     meetingNote: 'Develop strategies to enhance customer engagement.',
     image: 'https://example.com/customer-engagement.jpg',
