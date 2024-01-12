@@ -5,37 +5,26 @@ import ViewAllLeadsButton from '@/components/ViewAllLeadsButton/ViewAllLeadsButt
 
 function LatestLeadsList() {
   return (
-    <div className='w-full bg-#F7F7FB justify-center px-6 gap-5 '>
-      <div className='border bg-white rounded-xl border-gray-100'>
-        <div className='py-4 md:py-6 pl-8 h-[96px]'>
-          <div className='flex justify-between items-center content-center'>
-            <div className='flex items-center'>
-              <div>
-                <p className="[font-family:'Metropolis-Bold',Helvetica] font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]">
-                  Latest Leads
-                </p>
-              </div>
+    <div className='w-full bg-white p-5 rounded-xl'>
+      <div className='flex justify-between items-center '>
+        <div className='flex items-center'>
+          <p className="[font-family:'Metropolis-Bold',Helvetica] font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]">
+            Latest Leads
+          </p>
 
-              <div className='flex items-center justify-center h-6 bg-green-200 rounded-full ms-2 p-2'>
-                <p className="leading-3 text-black [font-family:'Metropolis-Bold',Helvetica] font-bold text-[16px] tracking-[-0.32px] whitespace-nowrap text-capitalize">
-                  {getLatestLeads(LEADS_DATA).length}
-                </p>
-              </div>
-            </div>
-            <div>
-              <ViewAllLeadsButton />
-            </div>
-          </div>
+          <p className='flex items-center justify-center text-black  font-bold text-capitalize text-[16px] h-6 bg-[#D2FBE7] rounded-full ms-2 p-2 leading-3 tracking-[-0.32px] whitespace-nowrap  '>
+            {getLatestLeads(LEADS_DATA).length}
+          </p>
         </div>
-        <div className='overflow-x-auto overflow-y-scroll h-[532px]'>
-          <table className="w-full  whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
-            <tbody className='w-full'>
-              {getLatestLeads(LEADS_DATA).map((item, index) => (
-                <LatestLeadRow key={index} item={item} />
-              ))}
-            </tbody>
-          </table>
+        <div>
+          <ViewAllLeadsButton />
         </div>
+      </div>
+
+      <div className="w-full max-h-screen overflow-y-auto no-scrollbar  whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
+        {getLatestLeads(LEADS_DATA).map((item, index) => (
+          <LatestLeadRow key={index} item={item} />
+        ))}
       </div>
     </div>
   );

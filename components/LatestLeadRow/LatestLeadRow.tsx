@@ -4,10 +4,10 @@ import clockImage from '@/assets/images/leadslist-icons/clock.png';
 
 function LatestLeadRow({ item }: any) {
   return (
-    <tr
+    <div
       key={item.id}
-      className='h-20 text-sm leading-none text-gray-800 border-b border-white'>
-      <td className=' pl-8'>
+      className='h-20 flex gap-5 justify-between items-center text-sm leading-none text-gray-800 '>
+      <div className='w-[40%]'>
         <p className='leading-trim font-semibold text-[18px] tracking-tight'>
           {item.title}
         </p>
@@ -19,24 +19,25 @@ function LatestLeadRow({ item }: any) {
             {item.date}
           </div>
         </div>
-      </td>
-      <td className='w-1 text-center pl-28'>
-        <div
-          className={`flex items-center justify-center h-6 ${getStatusColor(
+      </div>
+      <div className='w-[30%]'>
+        <span
+          className={` text-sm text-black ${getStatusColor(
             item.status
-          )} p-2 rounded-full`}>
-          <p className='text-sm text-black'>{item.status}</p>
-        </div>
-      </td>
-      <td className='pl-56'>
+          )} py-2 px-[10px] rounded-full`}>
+          {item.status}
+        </span>
+      </div>
+
+      <div className='w-[30%]'>
         <p className='text-[#5630FF] text-xs whitespace-nowrap text-capitalize inline-block'>
           Assigned to
         </p>
         <p className='leading-trim font-semibold text-[16px] tracking-tight mt-[10px]'>
           {item.assignedToName}
         </p>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }
 
