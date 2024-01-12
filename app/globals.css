@@ -41,7 +41,3 @@ input[type='date']::-webkit-calendar-picker-indicator {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-
-body {
-  overflow: hidden;
-}
