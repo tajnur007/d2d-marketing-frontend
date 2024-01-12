@@ -7,11 +7,11 @@ import { LEADS_DATA_TYPE } from '@/utils/constants/leadslist-constant';
 
 function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
   return (
-    <>
-      <tr
+    <div>
+      <div
         key={item.id}
-        className='h-20 text-sm leading-none text-gray-800 border-b border-white'>
-        <td className=' pl-8'>
+        className='h-20 flex gap-5 justify-between items-center text-sm leading-none text-gray-800 border-b border-white'>
+        <div className='w-[30%]'>
           <p className='leading-trim font-semibold text-[18px] tracking-tight'>
             {item.title}
           </p>
@@ -23,8 +23,8 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
               {item.date}
             </div>
           </div>
-        </td>
-        <td className='pl-16'>
+        </div>
+        <div className='w-[25%]'>
           <p className='leading-trim font-semibold text-[16px] tracking-tight'>
             {item.assignedByName}
           </p>
@@ -36,28 +36,29 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
               {item.assignedByNumber}
             </div>
           </div>
-        </td>
-        <td className='w-1 text-center pl-28'>
-          <div
-            className={`flex items-center justify-center h-6 ${getStatusColor(
+        </div>
+        <div className='w-[20%]'>
+          <span
+            className={`text-sm text-black h-6 ${getStatusColor(
               item.status
             )} p-2 rounded-full`}>
-            <p className='text-sm text-black'>{item.status}</p>
-          </div>
-        </td>
-        <td className='pl-56'>
+            {item.status}
+          </span>
+        </div>
+        <div className='w-[25%]'>
           <p className='text-[#5630FF] text-xs whitespace-nowrap text-capitalize inline-block'>
             Assigned to
           </p>
           <p className='leading-trim font-semibold text-[16px] tracking-tight mt-[10px]'>
             {item.assignedToName}
           </p>
-        </td>
-        <td className=''>
+        </div>
+        <div className='w-[2%]'>
+          {' '}
           <LeadDetailsButton data={item} />
-        </td>
-      </tr>
-    </>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -14,7 +14,12 @@ const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
   };
   return (
     <>
-      <Image className='cursor-pointer' src={moreImage} alt='' onClick={toggleDrawer} />
+      <Image
+        className='cursor-pointer h-6 w-6'
+        src={moreImage}
+        alt=''
+        onClick={toggleDrawer}
+      />
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
