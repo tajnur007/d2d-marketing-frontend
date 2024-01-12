@@ -101,3 +101,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export interface AuthCommonProps {
   pageImage: StaticImageData;
 }
+
+export interface NoAccountProps {
+  signupPage: boolean;
+}
