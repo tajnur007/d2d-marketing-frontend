@@ -14,7 +14,7 @@ export const PAGE_ROUTES = {
   Signin: '/auth/signin',
   Signup: '/auth/signup',
   Forgetpassword: '/auth/forget-password',
-  EmailSent: '/auth/forget-password/email-sent',
+  EmailSent:  '/auth/forget-password/email-sent',,
   LeadCreate: '/leads/create',
 };
 
@@ -72,3 +72,6 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Cool,
   LEAD_STATUS.Warm,
 ];
+
+export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
+export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';

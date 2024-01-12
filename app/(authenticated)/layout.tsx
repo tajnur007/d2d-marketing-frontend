@@ -1,4 +1,5 @@
 'use client';
+
 import { redirect } from 'next/navigation';
 import Main from '../../components/layouts/main';
 import Navbar from '../../components/layouts/navbar';

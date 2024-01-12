@@ -2,16 +2,9 @@ import Image from 'next/image';
 import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
-// import { getStatusColor } from '@/utils/constants/common-constants';
-import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+import { LEADS_DATA_TYPE } from '@/utils/constants/leadslist-constant';
 
-const getStatusColor: statusColor = {
-  Cool: 'bg-blue-200',
-  Hot: 'bg-[#FFD9D9]',
-  Warm: 'bg-[#FFEFB8]',
-};
-
-const LeadRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
+function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
   return (
     <>
       <tr
@@ -60,7 +53,7 @@ const LeadRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
           </p>
         </td>
         <td className=''>
-          <LeadDetailsButton />
+          <LeadDetailsButton data={item} />
         </td>
       </tr>
     </>
