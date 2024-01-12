@@ -9,10 +9,10 @@ const LeadsCreatePage = () => {
   return (
     <div className='bg-white rounded-[10px] p-6'>
       <div className='flex items-center gap-5'>
-        <p onClick={() => router.back()} className=' cursor-pointer'>
+        <p onClick={() => router.push('/leads')} className=' cursor-pointer'>
           <BackArrowIcon />
         </p>
-        <p className='text-[#25254C] text-xl font-medium'>Create</p>
+        <p className='Metropolis text-[#25254C] text-[20px] font-medium tracking-[.6px]'>Create</p>
       </div>
       <CreateLeadForm />
     </div>
