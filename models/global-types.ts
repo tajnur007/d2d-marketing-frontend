@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image';
 import React, {
   ButtonHTMLAttributes,
   InputHTMLAttributes,
@@ -69,4 +70,8 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 }
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
+}
+
+export interface AuthCommonProps {
+  pageImage: StaticImageData;
 }

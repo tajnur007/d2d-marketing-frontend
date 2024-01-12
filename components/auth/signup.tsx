@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import SignupForm from './form/signup-form';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import SignupLeft from './signup-left';
+import AuthCommonLayout from './common/auth-common-layout';
+import marketingSignUp from '@/assets/images/Marketing-signup.png';
 
 const SignUp = () => {
   return (
     <div className='flex w-full h-screen'>
-      <SignupLeft />
+      <AuthCommonLayout pageImage={marketingSignUp} />
       <div className='w-3/5 h-screen flex flex-col items-center'>
         <div className='ml-auto pt-[48px] pr-[45px]'>
           Have an account?{' '}

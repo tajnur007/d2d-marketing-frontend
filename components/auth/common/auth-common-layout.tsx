@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import layoutTop from '@/assets/images/LayoutTop.png';
-import marketingForgetPassword from '@/assets/images/Marketing-forget-password.png';
 import d2dIcon from '@/assets/images/D2DIcon.png';
+import { AuthCommonProps } from '@/models/global-types';
 
-const ForgetPasswordLeft = () => {
+const AuthCommonLayout = ({ pageImage }: AuthCommonProps) => {
   return (
-    <div className='w-2/5 h-screen flex overflow-hidden  bg-primary-bg  text-white'>
+    <div className='w-2/5 h-screen flex overflow-hidden bg-primary-bg  text-white p-0 m-0'>
       <div className='absolute top-0 left-0  flex z-1 justify-between items-start'>
         <Image src={layoutTop} alt='top' />
       </div>
@@ -24,11 +24,11 @@ const ForgetPasswordLeft = () => {
           </div>
         </div>
         <div className='pl-[37px] pd-[86px] pr-[38px]'>
-          <Image src={marketingForgetPassword} alt='marketing' />
+          <Image src={pageImage} alt='marketing' />
         </div>
       </div>
     </div>
   );
 };
 
-export default ForgetPasswordLeft;
+export default AuthCommonLayout;
