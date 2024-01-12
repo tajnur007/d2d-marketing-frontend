@@ -21,8 +21,8 @@ function LatestLeadsList() {
         </div>
       </div>
 
-      <div className="w-full max-h-screen overflow-y-auto no-scrollbar  whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
-        {getLatestLeads(LEADS_DATA).map((item, index) => (
+      <div className="w-full max-h-[calc(100vh-250px)] overflow-y-auto whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
+        {LEADS_DATA.map((item, index) => (
           <LatestLeadRow key={index} item={item} />
         ))}
       </div>
