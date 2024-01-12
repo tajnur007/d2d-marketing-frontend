@@ -2,7 +2,14 @@ import Image from 'next/image';
 import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
-import { LEADS_DATA_TYPE } from '@/utils/constants/leadslist-constant';
+// import { getStatusColor } from '@/utils/constants/common-constants';
+import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+
+const getStatusColor: statusColor = {
+  Cool: 'bg-blue-200',
+  Hot: 'bg-[#FFD9D9]',
+  Warm: 'bg-[#FFEFB8]',
+};
 
 function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
   return (
@@ -58,6 +65,6 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
       </tr>
     </>
   );
-};
+}
 
 export default LeadRow;

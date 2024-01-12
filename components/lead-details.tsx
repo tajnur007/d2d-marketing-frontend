@@ -6,8 +6,8 @@ import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
-import { LEADS_DATA_TYPE } from '@/utils/constants/leadslist-constant';
 import { Dispatch, SetStateAction } from 'react';
+import { LEADS_DATA_TYPE } from '@/models/global-types';
 
 const LeadDetails = ({
   setIsOpen,
