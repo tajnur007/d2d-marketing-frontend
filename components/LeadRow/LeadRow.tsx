@@ -54,7 +54,6 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
           </p>
         </div>
         <div className='w-[2%]'>
-          {' '}
           <LeadDetailsButton data={item} />
         </div>
       </div>
