@@ -1,5 +1,11 @@
-import { FormItems, SidebarItem } from '@/models/global-types';
+import { FormItems, SidebarItem, statusColor } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon } from '../../assets/icons';
+
+export const getStatusColor: statusColor = {
+  Cool: 'bg-blue-200',
+  Hot: 'bg-[#FFD9D9]',
+  Warm: 'bg-[#FFEFB8]',
+};
 
 export const PAGE_ROUTES = {
   Dashboard: '/dashboard',
@@ -8,7 +14,8 @@ export const PAGE_ROUTES = {
   Signin: '/auth/signin',
   Signup: '/auth/signup',
   Forgetpassword: '/auth/forget-password',
-  EmailSent: '/auth/forget-password/email-sent',
+  EmailSent:  '/auth/forget-password/email-sent',
+  LeadCreate: '/leads/create',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -53,6 +60,8 @@ export const LEAD_STATUS = {
   Progress: 'Progress',
   Completed: 'Completed',
   Hot: 'Hot',
+  Cool: 'Cool',
+  Warm: 'Warm',
 };
 
 export const CREATE_LEAD_STATUS: string[] = [
@@ -60,6 +69,8 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Progress,
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
+  LEAD_STATUS.Cool,
+  LEAD_STATUS.Warm,
 ];
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
