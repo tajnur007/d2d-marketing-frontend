@@ -13,16 +13,16 @@ const EmailSent = () => {
     <section>
       <div className='max-w-[600px] mx-auto px-6 py-12'>
         <div>
-          <div className='mt-10 my-6 text-[16px] flex flex-row text-gray-500'>
+          <div className='mt-10 my-6 text-[16px] flex flex-row tracking-[0] leading-[16px] whitespace-nowrap text-black'>
             <Link href={PAGE_ROUTES.Signin} className='mr-2'>
               <ArrowLeftCircleIcon />
             </Link>
             Back to Login
           </div>
-          <div className='mt-10 text-[36px] font-bold leading-9 tracking-tight text-gray-900'>
+          <div className='mt-10 text-[36px] font-bold leading-[36px] text-[#0B1420] tracking-[0.36px] whitespace-nowrap'>
             Email sent 📨
           </div>
-          <div className='w-[600px] my-5 text-[23px] text-[#313957] '>
+          <div className='w-[600px] font-extralight my-5 text-[16px] tracking-[0.16px] leading-[25.6px] text-[#313957] '>
             An email has been sent to the provided address
             <br />
             with instructions on how to reset your password.
@@ -34,7 +34,7 @@ const EmailSent = () => {
         <ForgetPasswordCommon
           buttonInfo={{
             className:
-              'w-full bg-[#F3F0FF] rounded-lg text-[#4318FF] p-4 font-normal my-4',
+              'w-full bg-[#F3F0FF] rounded-[12px] font-extralight text-[16px] tracking-[0] leading-[16px] text-[#4318FF] p-4 font-normal my-4 whitespace-nowrap',
             text: 'Check your email',
             type: 'text',
           }}
