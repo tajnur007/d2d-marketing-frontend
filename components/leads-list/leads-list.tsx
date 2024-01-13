@@ -1,7 +1,7 @@
 'use client'
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
-import LeadRow from '@/components/LeadRow/LeadRow';
-import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
+import LeadRow from '@/components/lead-row/lead-row';
+import CreateLeadsButton from '@/components/create-leads-button/create-leads-button';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
