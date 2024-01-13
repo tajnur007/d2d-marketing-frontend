@@ -1,23 +1,23 @@
 'use client';
 
-import Link from 'next/link';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
-import { useState, FormEvent } from 'react';
-import ForgetPasswordCommon from './common/forget-password-common';
-import Copyright from './common/copyright';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import Link from 'next/link';
+import { FormEvent, useState } from 'react';
+import Copyright from './common/copyright';
+import ForgetPasswordCommon from './common/forget-password-common';
 
-const NewPassword = () => {
+const NewPassword = ({ handleNewPassword }: any) => {
   const [newPassword, setNewPassword] = useState('');
   const [retypePassword, setReTypePassword] = useState('');
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    console.log(newPassword);
-    setNewPassword('');
-    console.log(retypePassword);
-    setReTypePassword('');
+    if (newPassword !== retypePassword) {
+      alert('Password is not matching!');
+    } else {
+      handleNewPassword({ newPassword });
+    }
   };
 
   return (

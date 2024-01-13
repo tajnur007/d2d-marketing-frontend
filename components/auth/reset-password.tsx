@@ -1,21 +1,22 @@
 'use client';
 
-import { ArrowLeftCircleIcon } from '@/assets/icons';
-import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
-import Copyright from './common/copyright';
+import { ArrowLeftCircleIcon } from '@/assets/icons';
+import { useState, FormEvent } from 'react';
 import ForgetPasswordCommon from './common/forget-password-common';
+import Copyright from './common/copyright';
+import { useRouter } from 'next/navigation';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
-const ResetPassword = ({ onFormData }:any) => {
+const ResetPassword = () => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
-  
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onFormData({ email });
+    console.log(email);
     setEmail('');
+    router.push(PAGE_ROUTES.EmailSent);
   };
-
   return (
     <section>
       <div className='max-w-[600px] mx-auto px-6 py-12'>
