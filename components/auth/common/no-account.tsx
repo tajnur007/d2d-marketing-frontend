@@ -6,9 +6,10 @@ import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 const NoAccount = ({ signupPage }: NoAccountProps) => {
   const [isSignup, setIsSignup] = useState<boolean>(true);
+
   useEffect(() => {
-    setIsSignup(signupPage);
-  }, []);
+    setIsSignup(!!signupPage);
+  }, [signupPage]);
 
   return (
     <>

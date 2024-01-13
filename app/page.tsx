@@ -9,7 +9,7 @@ const HomePage = () => {
 
   useEffect(() => {
     router.push(PAGE_ROUTES.Dashboard);
-  }, []);
+  });
 
   return <> </>;
 };
