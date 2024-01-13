@@ -1,7 +1,7 @@
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import { getLatestLeads } from '@/utils/helpers/common-helpers';
-import LatestLeadRow from '@/components/latest-lead-row/latest-lead-row';
-import ViewAllLeadsButton from '@/components/view-all-leads-button/view-all-leads-button';
+import LatestLeadRow from '@/components/LatestLeadRow/LatestLeadRow';
+import ViewAllLeadsButton from '@/components/ViewAllLeadsButton/ViewAllLeadsButton';
 
 function LatestLeadsList() {
   return (

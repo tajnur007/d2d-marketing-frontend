@@ -1,6 +1,6 @@
 import { GRAPH_CONFIG } from '@/utils/constants/graph-constants';
 import React from 'react';
-import Graph from '@/components/graph/graph';
+import Graph from '@/components/Graph/Graph';
 
 const GraphList: React.FC = () => {
   return (

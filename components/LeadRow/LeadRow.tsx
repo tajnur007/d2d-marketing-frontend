@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import LeadDetailsButton from '@/components/lead-details-button/lead-details-button';
+import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 // import { getStatusColor } from '@/utils/constants/common-constants';
