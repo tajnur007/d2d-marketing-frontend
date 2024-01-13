@@ -21,21 +21,21 @@ export const PAGE_ROUTES = {
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     id: 1,
-    iconName: 'Home',
+    iconName: 'Dashboard',
     path: PAGE_ROUTES.Dashboard,
     icon: HomeIcon,
     position: -15,
   },
   {
     id: 2,
-    iconName: 'Book',
+    iconName: 'Leads',
     path: PAGE_ROUTES.Leads,
     icon: BookIcon,
     position: 50,
   },
   {
     id: 3,
-    iconName: 'Setting',
+    iconName: 'Settings',
     path: PAGE_ROUTES.Settings,
     icon: SettingIcon,
     position: 110,
