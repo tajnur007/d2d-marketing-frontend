@@ -51,7 +51,7 @@ const SettingsPage = () => {
 
   return (
     <section className='flex justify-center w-full'>
-      <div className='flex flex-col items-center w-[60vh]'>
+      <div className='flex flex-col items-center '>
         <p className='text-4xl font-bold m-8'>Update Profile</p>
         <form onSubmit={submitData} id='settings-form'>
           <div className='w-full flex justify-center bottom-5'>

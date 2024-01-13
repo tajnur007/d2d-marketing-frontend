@@ -29,11 +29,9 @@ export interface SidebarItem {
 }
 
 export interface Person {
-  id: Number;
+  id: number;
   initials: string;
   name: string;
-  role: string;
-  username: string;
   totalLeads: number;
 }
 

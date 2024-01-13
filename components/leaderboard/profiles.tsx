@@ -3,41 +3,26 @@ import React from 'react';
 
 const Profiles = ({ data }: { data: Person[] }) => {
   return (
-    <div>
-      <Item dataProps={data} />
-    </div>
-  );
-};
-
-const Item = ({ dataProps }: { dataProps: Person[] }) => {
-  return (
-    <>
-      {dataProps?.map((person: Person, idx) => (
-        <div key={idx} className={`relative w-[245px] h-[43px] mt-[16px] left-[25px]`}>
-          <div className='flex flex-col w-[50px] h-[43px] items-center justify-center gap-[10px] px-[7px] py-[13px] absolute top-0 left-0 bg-[#e5dfff] rounded-[16px] overflow-hidden'>
-            <div className="relative w-fit [font-family:'Metropolis-SemiBold',Helvetica] font-semibold text-[#b8a9ff] text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap">
-              {person?.initials}
-            </div>
+    <div className='max-h-screen overflow-y-auto no-scrollbar'>
+      {data?.map((person: Person) => (
+        <div key={person?.id} className='flex items-center gap-5 mb-5'>
+          <div className='bg-[#E5DFFF] p-[13px] rounded-2xl font-semibold text-[#b8a9ff] text-[16px]'>
+            {person?.initials}
           </div>
+
           {/* width based on name length */}
-          <div
-            className={`w-[${
-              person?.name.length * 8
-            }px] absolute h-[31px] top-[6px] left-[70px]`}>
-            <div className="absolute top-0 left-0 [font-family:'Metropolis-SemiBold',Helvetica] font-semibold text-[#00156a] text-[16px] tracking-[0] leading-[normal] whitespace-nowrap">
+          <div>
+            <div className=' font-semibold text-[#00156a] text-[16px]'>
               {person?.name}
             </div>
-            <p className="absolute top-[22px] left-0 [font-family:'Metropolis-Bold',Helvetica] font-normal text-transparent text-[13px] tracking-[0] leading-[normal] whitespace-nowrap">
-              <span className='font-bold text-[#5630ff]'>{person?.totalLeads}</span>
-              <span className="[font-family:'Metropolis-Medium',Helvetica] font-medium text-[#9aa1b1]">
-                {' '}
-                of leads
-              </span>
+            <p className='text-[13px] text-[#9aa1b1]'>
+              <span className='font-bold text-[#5630ff]  mr-1'>{person?.totalLeads}</span>
+              of leads
             </p>
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
