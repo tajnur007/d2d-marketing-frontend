@@ -4,16 +4,12 @@ import LatestLeadsList from '@/components/LatestLeadsList/LatestLeadsList';
 
 const DashboardPage = () => {
   return (
-    <div className='grid lg:grid-cols-5 sm:grid-cols-1'>
-      <div className='col-span-4'>
+    <div className='flex flex-col lg:flex-row justify-between gap-5 '>
+      <div className='w-full lg:w-[70%]'>
         <GraphList />
-        <div className=''>
-          <LatestLeadsList />
-        </div>
+        <LatestLeadsList />
       </div>
-      <div className=''>
-        <Leaderboard />
-      </div>
+      <Leaderboard />
     </div>
   );
 };

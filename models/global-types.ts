@@ -29,11 +29,9 @@ export interface SidebarItem {
 }
 
 export interface Person {
-  id: Number;
+  id: number;
   initials: string;
   name: string;
-  role: string;
-  username: string;
   totalLeads: number;
 }
 
@@ -100,8 +98,16 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export interface AuthCommonProps {
   pageImage: StaticImageData;
+  text: string;
 }
 
 export interface NoAccountProps {
   signupPage: boolean;
+}
+
+
+export interface AuthLayoutProps {
+  text: string;
+  image: StaticImageData;
+  children?: ReactNode;
 }

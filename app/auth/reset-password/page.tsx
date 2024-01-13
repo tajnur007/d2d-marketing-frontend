@@ -7,7 +7,6 @@ import ResetPassword from '@/components/auth/reset-password';
 const ForgetPasswordPage = () => (
   <div className=''>
     <ForgetPassword />
-    <EmailSent />
   </div>
 );
 

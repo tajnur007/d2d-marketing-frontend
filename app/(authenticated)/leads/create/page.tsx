@@ -1,6 +1,7 @@
 'use client';
 import { BackArrowIcon } from '@/assets/icons';
 import CreateLeadForm from '@/components/createlead/create-lead-form';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useRouter } from 'next/navigation';
 
 const LeadsCreatePage = () => {
@@ -9,10 +10,10 @@ const LeadsCreatePage = () => {
   return (
     <div className='bg-white rounded-[10px] p-6'>
       <div className='flex items-center gap-5'>
-        <p onClick={() => router.back()} className=' cursor-pointer'>
+        <p onClick={() => router.push(PAGE_ROUTES.Leads)} className='cursor-pointer'>
           <BackArrowIcon />
         </p>
-        <p className='text-[#25254C] text-xl font-medium'>Create</p>
+        <p className='font-sans text-[#25254C] text-[20px] font-medium tracking-[.6px]'>Create</p>
       </div>
       <CreateLeadForm />
     </div>

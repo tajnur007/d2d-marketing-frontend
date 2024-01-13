@@ -35,13 +35,11 @@ function LeadsList() {
             </div>
           </div>
           <div className='overflow-x-auto overflow-y-scroll h-[715px]'>
-            <table className="w-full  whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
-              <tbody className='w-full'>
-                {LEADS_DATA.map((item, index) => (
-                  <LeadRow key={index} item={item} />
-                ))}
-              </tbody>
-            </table>
+            <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
+              {LEADS_DATA.map((item, index) => (
+                <LeadRow key={index} item={item} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
