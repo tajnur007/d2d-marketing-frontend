@@ -15,7 +15,7 @@ const Profiles = ({ data }: { data: Person[] }) => {
             <div className=' font-semibold text-[#00156a] text-[16px]'>
               {person?.name}
             </div>
-            <p className='text-[13px] text-[#9aa1b1]'>
+            <p className='text-[13px]  text-[#9aa1b1]'>
               <span className='font-bold text-[#5630ff]  mr-1'>{person?.totalLeads}</span>
               of leads
             </p>
