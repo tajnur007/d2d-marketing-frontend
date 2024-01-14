@@ -78,7 +78,7 @@ export interface SelectProps {
   className?: string;
   selected?: string;
   setSelected?: (item: string) => void;
-  options?: string[];
+  options?: CreateLeadStatusItems[];
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -110,4 +110,10 @@ export interface AuthLayoutProps {
   text: string;
   image: StaticImageData;
   children?: ReactNode;
+}
+
+
+export interface CreateLeadStatusItems {
+  value: string;
+  label: string;
 }

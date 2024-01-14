@@ -5,16 +5,16 @@ import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { ImageUpload } from '@/components/image-upload';
 import { Button } from '@/components/button';
-import { Select } from '@/components/select';
+import { CustomSelect } from '@/components/custom-select';
 import { DatePicker } from '@/components/date-picker';
 import { useEffect, useState } from 'react';
-import { CREATE_LEAD_STATUS, FORMITEMS } from '@/utils/constants/common-constants';
+import { CREATE_LEAD_STATUS_NEW, FORM_ITEMS } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 
 const CreateLeadForm = () => {
   const [selected, setSelected] = useState('Pending');
-  const [formData, setFormData] = useState<FormItems>(FORMITEMS);
-  const [formErrors, setFormErrors] = useState<FormItems>(FORMITEMS);
+  const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
+  const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -127,11 +127,11 @@ const CreateLeadForm = () => {
         </div>
 
         <div className='flex flex-col justify-between gap-5 w-1/2'>
-          <Select
+          <CustomSelect
             label='Status'
             selected={selected}
             setSelected={setSelected}
-            options={CREATE_LEAD_STATUS}
+            options={CREATE_LEAD_STATUS_NEW}
           />
 
           <div className='flex items-center justify-between gap-5'>
