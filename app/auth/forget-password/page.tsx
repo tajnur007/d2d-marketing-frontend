@@ -10,9 +10,9 @@ import AuthLayout from '@/components/layouts/auth-layout';
 import marketingForgetPassword from '@/assets/images/Marketing-forget-password.png';
 
 const ForgetPasswordPage = () => {
-  const [resetPassword, setResetPassword] = useState<boolean>(true);
+  const [resetPassword, setResetPassword] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<boolean>(false);
-  const [passwordChanged, setPasswordC] = useState<boolean>(false);
+  const [passwordChanged, setPasswordC] = useState<boolean>(true);
 
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>
