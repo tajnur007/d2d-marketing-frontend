@@ -5,18 +5,26 @@ import { ArrowLeftCircleIcon } from '@/assets/icons';
 import { useState, FormEvent } from 'react';
 import ForgetPasswordCommon from './common/forget-password-common';
 import Copyright from './common/copyright';
-import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import EmailSent from './email-sent';
 
 const ResetPassword = () => {
-  const router = useRouter();
   const [email, setEmail] = useState('');
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(email);
     setEmail('');
-    router.push(PAGE_ROUTES.EmailSent);
+    setEmailSubmitted(true);
   };
+  // We should not navigate user to another page after submitting an email, keep the user into same route
+  if (emailSubmitted) {
+    return (
+      <>
+        <EmailSent />
+      </>
+    );
+  }
   return (
     <section>
       <div className='max-w-[600px] mx-auto px-6 py-12'>
