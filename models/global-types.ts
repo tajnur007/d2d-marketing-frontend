@@ -29,9 +29,11 @@ export interface SidebarItem {
 }
 
 export interface Person {
-  id: number;
+  id: Number;
   initials: string;
   name: string;
+  role: string;
+  username: string;
   totalLeads: number;
 }
 
@@ -74,7 +76,7 @@ export interface FormItems {
   Image?: string;
 }
 export interface SelectProps {
-  label?: string;
+  label?: React.ReactNode;
   className?: string;
   selected?: string;
   setSelected?: (item: string) => void;
@@ -82,13 +84,13 @@ export interface SelectProps {
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
+  label?: React.ReactNode;
   htmlFor?: string;
   errorMessage?: string;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
+  label?: React.ReactNode;
   htmlFor?: string;
   errorMessage?: string;
 }
@@ -98,16 +100,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export interface AuthCommonProps {
   pageImage: StaticImageData;
-  text: string;
 }
 
 export interface NoAccountProps {
   signupPage: boolean;
-}
-
-
-export interface AuthLayoutProps {
-  text: string;
-  image: StaticImageData;
-  children?: ReactNode;
 }
