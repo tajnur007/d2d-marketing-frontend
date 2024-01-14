@@ -1,4 +1,4 @@
-import { FormItems, SidebarItem, statusColor } from '@/models/global-types';
+import { FormItems, SidebarItem, statusColor, CreateLeadStatusItems } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
@@ -42,7 +42,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   },
 ];
 
-export const FORMITEMS: FormItems = {
+export const FORM_ITEMS: FormItems = {
   Title: '',
   Name: '',
   Phone: '',
@@ -63,6 +63,16 @@ export const LEAD_STATUS = {
   Cool: 'Cool',
   Warm: 'Warm',
 };
+
+export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
+  { value: 'Pending', label: 'Pending' },
+  { value: 'Progress', label: 'Progress' },
+  { value: 'Completed', label: 'Completed' },
+  { value: 'Hot', label: 'Hot' },
+  { value: 'Cool', label: 'Cool' },
+  { value: 'Warm', label: 'Warm' },
+  
+]
 
 export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Pending,

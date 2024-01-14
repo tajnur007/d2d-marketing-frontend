@@ -5,16 +5,16 @@ import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { ImageUpload } from '@/components/image-upload';
 import { Button } from '@/components/button';
-import { Select } from '@/components/select';
+import { CustomSelect } from '@/components/custom-select';
 import { DatePicker } from '@/components/date-picker';
 import { useEffect, useState } from 'react';
-import { CREATE_LEAD_STATUS, FORMITEMS } from '@/utils/constants/common-constants';
+import { CREATE_LEAD_STATUS_NEW, FORM_ITEMS } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 
 const CreateLeadForm = () => {
   const [selected, setSelected] = useState('Pending');
-  const [formData, setFormData] = useState<FormItems>(FORMITEMS);
-  const [formErrors, setFormErrors] = useState<FormItems>(FORMITEMS);
+  const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
+  const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -48,7 +48,7 @@ const CreateLeadForm = () => {
   return (
     <div className='ml-0 p-10 rounded-xl bg-white'>
       <Input
-        label={<p className="text-[#00156A] font-medium text-xs mb-1">Title</p>}
+        label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
         placeholder='Title here'
         type='text'
         id='title'
@@ -71,7 +71,7 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-10 gap-5'>
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label={<p className="text-[#00156A] font-medium text-xs mb-1">Name</p>}
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Name</p>}
             placeholder='Name'
             type='text'
             id='name'
@@ -82,7 +82,7 @@ const CreateLeadForm = () => {
             className={` ${formErrors.Name && 'border-red-500 shadow'}`}
           />
           <Input
-            label={<p className="text-[#00156A] font-medium text-xs mb-1">Phone</p>}
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Phone</p>}
             placeholder='Phone number'
             type='text'
             id='phone'
@@ -95,7 +95,7 @@ const CreateLeadForm = () => {
         </div>
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label={<p className="text-[#00156A] font-medium text-xs mb-1">Email</p>}
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Email</p>}
             placeholder='Email (Optional)'
             type='email'
             id='email'
@@ -104,7 +104,7 @@ const CreateLeadForm = () => {
             onChange={handleInputChange}
           />
           <Input
-            label={<p className="text-[#00156A] font-medium text-xs mb-1">Reference</p>}
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reference</p>}
             placeholder='Reference (Optional)'
             type='text'
             id='reference'
@@ -117,7 +117,9 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-5 gap-5'>
         <div className='w-1/2'>
           <TextArea
-            label={<p className="text-[#00156A] font-medium text-xs mb-1">Meeting Notes</p>}
+            label={
+              <p className='text-[#00156A] font-medium text-xs mb-1'>Meeting Notes</p>
+            }
             placeholder='Notes'
             name='Note'
             errorMessage={formErrors.Note}
@@ -127,16 +129,17 @@ const CreateLeadForm = () => {
         </div>
 
         <div className='flex flex-col justify-between gap-5 w-1/2'>
-          <Select
-            label={<p className="text-[#00156A] font-medium text-xs mb-1">Status</p>}
-            selected={selected}
+          <CustomSelect
+            label='Status'
             setSelected={setSelected}
-            options={CREATE_LEAD_STATUS}
+            options={CREATE_LEAD_STATUS_NEW}
           />
 
           <div className='flex items-center justify-between gap-5'>
             <Input
-              label={<p className="text-[#00156A] font-medium text-xs mb-1">Reminder Title</p>}
+              label={
+                <p className='text-[#00156A] font-medium text-xs mb-1'>Reminder Title</p>
+              }
               placeholder='Reminder title'
               name='Reminder'
               errorMessage={formErrors.Reminder}
@@ -144,7 +147,7 @@ const CreateLeadForm = () => {
               className={`${formErrors.Reminder && 'border-red-500 shadow'}`}
             />
             <DatePicker
-              label={<p className="text-[#00156A] font-medium text-xs mb-1">Reminder</p>}
+              label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reminder</p>}
               placeholder='DD:MM:YY TT:TT'
               type='date'
               name='Date'
@@ -164,7 +167,7 @@ const CreateLeadForm = () => {
             )}
           </p>
           <ImageUpload
-            label={<p className="text-[#00156A] font-medium text-xs mb-1">Image</p>}
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Image</p>}
             placeholder='Upload image'
             name='Image'
             onChange={handleInputChange}
