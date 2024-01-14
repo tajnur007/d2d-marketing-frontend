@@ -10,7 +10,7 @@ const DashboardPage = () => {
         <LatestLeadsList />
       </div>
       <Leaderboard />
-    </div>
+    </div> 
   );
 };
 
