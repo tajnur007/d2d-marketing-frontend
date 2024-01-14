@@ -46,9 +46,9 @@ const CreateLeadForm = () => {
   };
 
   return (
-    <div className='m-5 p-10 rounded-xl bg-white'>
+    <div className='ml-0 p-10 rounded-xl bg-white'>
       <Input
-        label='Title'
+        label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
         placeholder='Title here'
         type='text'
         id='title'
@@ -71,7 +71,7 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-10 gap-5'>
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label='Name'
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Name</p>}
             placeholder='Name'
             type='text'
             id='name'
@@ -82,7 +82,7 @@ const CreateLeadForm = () => {
             className={` ${formErrors.Name && 'border-red-500 shadow'}`}
           />
           <Input
-            label='Phone'
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Phone</p>}
             placeholder='Phone number'
             type='text'
             id='phone'
@@ -95,7 +95,7 @@ const CreateLeadForm = () => {
         </div>
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label='Email'
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Email</p>}
             placeholder='Email (Optional)'
             type='email'
             id='email'
@@ -104,7 +104,7 @@ const CreateLeadForm = () => {
             onChange={handleInputChange}
           />
           <Input
-            label='Reference'
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reference</p>}
             placeholder='Reference (Optional)'
             type='text'
             id='reference'
@@ -117,7 +117,9 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-5 gap-5'>
         <div className='w-1/2'>
           <TextArea
-            label='Meeting Notes'
+            label={
+              <p className='text-[#00156A] font-medium text-xs mb-1'>Meeting Notes</p>
+            }
             placeholder='Notes'
             name='Note'
             errorMessage={formErrors.Note}
@@ -136,7 +138,9 @@ const CreateLeadForm = () => {
 
           <div className='flex items-center justify-between gap-5'>
             <Input
-              label='Reminder Title'
+              label={
+                <p className='text-[#00156A] font-medium text-xs mb-1'>Reminder Title</p>
+              }
               placeholder='Reminder title'
               name='Reminder'
               errorMessage={formErrors.Reminder}
@@ -144,7 +148,7 @@ const CreateLeadForm = () => {
               className={`${formErrors.Reminder && 'border-red-500 shadow'}`}
             />
             <DatePicker
-              label='Reminder'
+              label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reminder</p>}
               placeholder='DD:MM:YY TT:TT'
               type='date'
               name='Date'
@@ -164,7 +168,7 @@ const CreateLeadForm = () => {
             )}
           </p>
           <ImageUpload
-            label='Image'
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Image</p>}
             placeholder='Upload image'
             name='Image'
             onChange={handleInputChange}

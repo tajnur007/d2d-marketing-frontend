@@ -74,7 +74,7 @@ export interface FormItems {
   Image?: string;
 }
 export interface SelectProps {
-  label?: string;
+  label?: React.ReactNode;
   className?: string;
   selected?: string;
   setSelected?: (item: string) => void;
@@ -82,13 +82,13 @@ export interface SelectProps {
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
+  label?: React.ReactNode;
   htmlFor?: string;
   errorMessage?: string;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
+  label?: React.ReactNode;
   htmlFor?: string;
   errorMessage?: string;
 }

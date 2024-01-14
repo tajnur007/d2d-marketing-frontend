@@ -9,7 +9,7 @@ import ResetPassword from '@/components/auth/reset-password';
 import AuthLayout from '@/components/layouts/auth-layout';
 import marketingForgetPassword from '@/assets/images/Marketing-forget-password.png';
 
-const ForgetPassword = () => {
+const ForgetPasswordPage = () => {
   const [resetPassword, setResetPassword] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<boolean>(false);
   const [passwordChanged, setPasswordC] = useState<boolean>(true);
@@ -24,4 +24,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default ForgetPasswordPage;
