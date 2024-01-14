@@ -8,7 +8,6 @@ import Copyright from './common/copyright';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
-
 const ResetPassword = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
