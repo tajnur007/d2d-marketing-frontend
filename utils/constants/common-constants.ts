@@ -65,9 +65,13 @@ export const LEAD_STATUS = {
 };
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+  { value: 'Pending', label: 'Pending' },
+  { value: 'Progress', label: 'Progress' },
+  { value: 'Completed', label: 'Completed' },
+  { value: 'Hot', label: 'Hot' },
+  { value: 'Cool', label: 'Cool' },
+  { value: 'Warm', label: 'Warm' },
+  
 ]
 
 export const CREATE_LEAD_STATUS: string[] = [
