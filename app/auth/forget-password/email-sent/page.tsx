@@ -4,7 +4,7 @@ import AuthLayout from '@/components/layouts/auth-layout';
 import NoAccount from '@/components/auth/common/no-account';
 import { AUTH_LEFT_TEXT } from '@/utils/constants/common-constants';
 
-const ForgetPassword = () => {
+const EmailSentPage = () => {
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>
       <NoAccount signupPage={false} />
@@ -13,4 +13,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default EmailSentPage;

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Fragment, Suspense } from 'react';
 import type { Metadata } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Providers } from '../components/providers/redux-providers';
+
 import './globals.css';
-import { NextAuthProvider } from '@/components/providers/next-auth-provider';
 
 export const metadata: Metadata = {
   title: 'D2D Marketing',
@@ -13,15 +12,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <NextAuthProvider>
-      <Providers>
-        <html lang='en'>
-          <body>
-            {children}.
-            <SpeedInsights />
-          </body>
-        </html>
-      </Providers>
-    </NextAuthProvider>
+    <html lang='en'>
+      <body>
+        {children}
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

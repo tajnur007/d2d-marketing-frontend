@@ -33,19 +33,23 @@ const Sidebar = () => {
             data-tooltip-id='my-tooltip'
             data-tooltip-content={iconName}
             data-tooltip-place='right'
-            className={`flex items-center p-5 cursor-pointer transition-all duration-500 hover:bg-purple-200 hover:duration-300 group${
+            className={`flex items-center cursor-pointer transition-all duration-500 ${
               selected === position ? 'text-[#5630FF]' : 'text-[#69708C]'
             }`}>
-            {<Icon />}
+            {
+              <div className='flex items-center px-8 py-3 hover:bg-purple-200 hover:duration-300 group'>
+                <Icon />
+              </div>
+            }
           </div>
         ))}
         <div
           className={`absolute left-0 transition-all duration-500 ${
-            selected === -15
-              ? 'top-[10px]'
-              : selected === 50
-              ? 'top-[70px]'
-              : 'top-[135px]'
+            selected === 50
+              ? 'top-[50px]'
+              : selected === -15
+              ? 'top-[0px]'
+              : 'top-[98px]'
           }  h-[50px] w-1 bg-[#5630FF] rounded-tr rounded-br `}></div>
       </div>
       <Tooltip id='my-tooltip' />
