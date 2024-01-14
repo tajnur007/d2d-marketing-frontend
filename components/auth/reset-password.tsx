@@ -17,6 +17,7 @@ const ResetPassword = () => {
     setEmail('');
     setEmailSubmitted(true);
   };
+  // We should not navigate user to another page after submitting an email, keep the user into same route
   if (emailSubmitted) {
     return (
       <>
