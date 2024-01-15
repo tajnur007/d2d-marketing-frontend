@@ -2,8 +2,6 @@
 
 import React, { useState, ChangeEvent } from 'react';
 import { PasswordRevealIcon } from '@/assets/icons';
-import { GoogleIcon } from '@/assets/icons';
-import { FacebookIcon } from '@/assets/icons';
 import { Vectorline } from '@/assets/icons';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -56,38 +54,7 @@ const SigninForm = () => {
           <div className='left-[60%] -translate-x-1/2 top-[280px] absolute leading-[14.50px]'>
             <Vectorline />
           </div>
-          {/* <div className='left-[60%] -translate-x-1/2 top-[376px] absolute text-black text-[13px] font-normal  leading-[14.50px]'>
-            Or continue with
-          </div> */}
-          {/* <div className='left-[67%] -translate-x-1/2 top-[382px] absolute leading-[14.50px]'>
-            <Vectorline />
-          </div> */}
         </div>
-        {/* <div className='max-w-[600px] w-full h-min m-auto flex flex-col gap-2'>
-          <div className='w-[126px] h-[43px] left-[53.5%] -translate-x-1/2 top-[294px] absolute'>
-            <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500'>
-              <div className='left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-                Google
-              </div>
-              <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
-                <GoogleIcon />
-              </div>
-            </div>
-          </div>
-
-          <div className='w-[126px] h-[43px] left-[66%] -translate-x-1/2 top-[294px] absolute'>
-            <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'>
-              <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
-                <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
-                  <FacebookIcon />
-                </div>
-              </div>
-              <div className='left-[51px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-                Facebook
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         <div className='left-[67%] -translate-x-1/2 top-[539px] absolute text-red-600 text-sm font-normal  leading-[14.50px] cursor-pointer'>
           <Link href={PAGE_ROUTES.Forgetpassword} className='mr-2'>

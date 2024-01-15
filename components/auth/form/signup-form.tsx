@@ -2,8 +2,6 @@
 
 import React, { useState, ChangeEvent } from 'react';
 import { PasswordRevealIcon } from '@/assets/icons';
-import { GoogleIcon } from '@/assets/icons';
-import { FacebookIcon } from '@/assets/icons';
 import { Vectorline } from '@/assets/icons';
 
 const SignupForm = () => {
@@ -49,38 +47,8 @@ const SignupForm = () => {
             <div className="left-[60%] -translate-x-1/2 top-[215px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
               <Vectorline />
             </div>
-            {/* <div className="left-[60%] -translate-x-1/2 top-[277px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              Or continue with
-            </div> */}
-            {/* <div className="left-[66.9%] -translate-x-1/2 top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              <Vectorline />
-            </div> */}
           </div>
         </div>
-
-        {/* <div className='w-[126px] h-[43px] left-[53.5%] -translate-x-1/2 top-[220px] absolute'>
-          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500'>
-            <div className='left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-              Google
-            </div>
-            <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
-              <GoogleIcon />
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div className='w-[126px] h-[43px] left-[66%] -translate-x-1/2 top-[220px] absolute'>
-          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'>
-            <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
-              <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
-                <FacebookIcon />
-              </div>
-            </div>
-            <div className='left-[51px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-              Facebook
-            </div>
-          </div>
-        </div> */}
 
         <div className='left-[60%] -translate-x-1/2 top-[730px] absolute text-[#5A5A5A] text-sm font-normal leading-[14.50px]'>
           By continuing you indicate that you read and agreed to the Terms of Use
