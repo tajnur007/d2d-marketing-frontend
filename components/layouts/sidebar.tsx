@@ -20,7 +20,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className='w-[88px] h-screen bg-white relative'>
+    <div className='w-[88px] bg-white relative'>
       <div className='absolute w-full flex justify-center top-5'>
         <Logo />
       </div>
@@ -45,11 +45,7 @@ const Sidebar = () => {
         ))}
         <div
           className={`absolute left-0 transition-all duration-500 ${
-            selected === 50
-              ? 'top-[50px]'
-              : selected === -15
-              ? 'top-[0px]'
-              : 'top-[98px]'
+            selected === 50 ? 'top-[50px]' : selected === -15 ? 'top-[0px]' : 'top-[98px]'
           }  h-[50px] w-1 bg-[#5630FF] rounded-tr rounded-br `}></div>
       </div>
       <Tooltip id='my-tooltip' />
