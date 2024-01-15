@@ -25,7 +25,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     iconName: 'Dashboard',
     path: PAGE_ROUTES.Dashboard,
     icon: HomeIcon,
-    position: -15,
+    position: 0,
   },
   {
     id: 2,
@@ -39,14 +39,14 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     iconName: 'Settings',
     path: PAGE_ROUTES.Settings,
     icon: SettingIcon,
-    position: 110,
+    position: 100,
   },
   {
     id: 4,
     iconName:'Employee List',
     path: PAGE_ROUTES.EmployeeList,
     icon: EmployeeListIcon,
-    position: 120
+    position: 150
   },
 ];
 
