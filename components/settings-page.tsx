@@ -6,15 +6,15 @@ import Image from 'next/image';
 // import { Button } from '@/components/ui/button';
 // import { Input } from '@/components/ui/input';
 import { FormItems } from '@/models/global-types';
-import { FORMITEMS } from '@/utils/constants/common-constants';
+import { FORM_ITEMS } from '@/utils/constants/common-constants';
 import profileImage from '@/assets/images/profile.png';
 import { Input } from './input';
 import { Button } from './button';
 
 const SettingsPage = () => {
   const [selected, setSelected] = useState('Pending');
-  const [formData, setFormData] = useState<FormItems>(FORMITEMS);
-  const [formErrors, setFormErrors] = useState<FormItems>(FORMITEMS);
+  const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
+  const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
