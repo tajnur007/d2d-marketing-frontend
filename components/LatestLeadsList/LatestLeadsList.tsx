@@ -5,7 +5,7 @@ import ViewAllLeadsButton from '@/components/ViewAllLeadsButton/ViewAllLeadsButt
 
 function LatestLeadsList() {
   return (
-    <div className='w-full bg-white p-5 rounded-xl h-[70vh]'>
+    <div className='w-full bg-white p-5 rounded-xl h-[69vh]'>
       <div className='flex justify-between items-center '>
         <div className='flex items-center'>
           <p className='font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
