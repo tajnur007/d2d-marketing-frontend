@@ -10,12 +10,14 @@ const GraphList: React.FC = () => {
           <div key={index} className='grid grid-cols-1 bg-white rounded-xl px-2 py-4'>
             <div className='flex justify-between items-center mx-7'>
               <div>
-                <p className='text-lg font-semibold text-[#00156A]'>{item.label}</p>
+                <p className='text-[14px] font-medium leading-[14.976px] text-[#00156A]'>
+                  {item.label}
+                </p>
               </div>
               <div
                 style={{ backgroundColor: item.countColor }}
                 className='bg-[#E5DFFF] py-2 px-4 rounded-2xl'>
-                <h4 className='text-xl font-semibold'>{item.count}</h4>
+                <h4 className='text-[16px] font-semibold'>{item.count}</h4>
               </div>
             </div>
             <div>

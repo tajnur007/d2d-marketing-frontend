@@ -16,14 +16,14 @@ const LatestLeadRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
           <div className='mr-1'>
             <Image src={clockImage} alt='' />
           </div>
-          <div className='text-gray-400 text-xs whitespace-nowrap text-capitalize inline-block'>
+          <div className='text-gray-400 font-medium whitespace-nowrap text-capitalize inline-block'>
             {item.date}
           </div>
         </div>
       </div>
       <div className='w-[30%]'>
         <span
-          className={` text-sm text-black ${
+          className={` text-[12px] font-medium text-black ${
             getStatusColor[item.status as keyof statusColor]
           } py-2 px-[10px] rounded-full`}>
           {item.status}
@@ -31,7 +31,7 @@ const LatestLeadRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
       </div>
 
       <div className='w-[30%]'>
-        <p className='text-[#5630FF] text-xs whitespace-nowrap text-capitalize inline-block'>
+        <p className='text-[#5630FF] text-[12px] font-medium whitespace-nowrap text-capitalize inline-block'>
           Assigned to
         </p>
         <p className='leading-trim font-semibold text-[16px] tracking-tight mt-[10px]'>
