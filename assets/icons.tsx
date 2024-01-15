@@ -259,12 +259,19 @@ export const FacebookIcon = () => {
 export const Vectorline = () => {
   return (
     <svg
-      width='130'
+      width='400'
       height='1'
-      viewBox='0 0 130 1'
+      viewBox='0 0 400 1'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'>
-      <path d='M0 0.5H130' stroke='#DBDBDB' />
+      <line
+        x1='-2.18557e-08'
+        y1='0.75'
+        x2='400'
+        y2='0.749965'
+        stroke='#DBDBDB'
+        stroke-width='0.5'
+      />
     </svg>
   );
 };
