@@ -6,15 +6,15 @@ import { AuthCommonProps } from '@/models/global-types';
 
 const LeftSide = ({ pageImage, text }: AuthCommonProps) => {
   return (
-    <div className='w-2/5 h-screen overflow-hidden relative bg-primary-bg  text-white p-20 lg:p-0 m-0 container block'>
+    <div className='w-2/5 h-screen h-max-screen overflow-hidden relative bg-primary-bg  text-white block'>
       <div className='absolute w-full top-0 left-0  flex z-1 justify-between items-start'>
         <Image style={{ width: '100%' }} src={layoutTop} alt='top' />
       </div>
-      <div className='h-full flex flex-col justify-between items-start relative'>
-        <div className='lg:p-10 lg:pt-20'>
+      <div className='h-full flex flex-col justify-between items-start relative pb-20'>
+        <div className='p-10 lg:pt-10'>
           <Image src={d2dIcon} alt='icon' />
         </div>
-        <div className='w-full lg:p-10'>
+        <div className='w-full p-10'>
           <div className='text-base'>
             <h5 className='2xl:text-3xl'>Door 2 door marketing 🙂</h5>
           </div>
@@ -22,9 +22,13 @@ const LeftSide = ({ pageImage, text }: AuthCommonProps) => {
             {text}
           </div>
         </div>
-        <div className='container flex w-full p-20 xl:p-20'>
-          <Image className='object-contain w-full' src={pageImage} alt='marketing' />
-        </div>
+
+        <Image
+          className='object-contain h-[42%] self-center'
+          // height={100}
+          src={pageImage}
+          alt='marketing'
+        />
       </div>
     </div>
   );
