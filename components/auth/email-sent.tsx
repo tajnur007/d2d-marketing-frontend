@@ -13,11 +13,13 @@ const EmailSent = () => {
     <section>
       <div className='max-w-[600px] mx-auto px-6 py-12'>
         <div>
-          <div className='mt-10 my-6 text-[16px] flex flex-row tracking-[0] leading-[16px] whitespace-nowrap text-black'>
-            <Link href={PAGE_ROUTES.Signin} className='mr-2'>
-              <ArrowLeftCircleIcon />
-            </Link>
-            Back to Login
+          <div className='mt-10 my-6 text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
+            <div className='mr-2'>
+              <Link href={PAGE_ROUTES.Signin}>
+                <ArrowLeftCircleIcon />
+              </Link>
+            </div>
+            <div>Back to Login</div>
           </div>
           <div className='mt-10 text-[36px] font-bold leading-[36px] text-[#0B1420] tracking-[0.36px] whitespace-nowrap'>
             Email sent 📨
