@@ -17,14 +17,12 @@ const ResetPassword = () => {
     setEmail('');
     setEmailSubmitted(true);
   };
+
   // We should not navigate user to another page after submitting an email, keep the user into same route
   if (emailSubmitted) {
-    return (
-      <>
-        <EmailSent />
-      </>
-    );
+    return <EmailSent />;
   }
+
   return (
     <section>
       <div className='max-w-[600px] mx-auto px-6 py-12'>
