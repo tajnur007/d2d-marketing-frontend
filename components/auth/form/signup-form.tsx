@@ -36,56 +36,57 @@ const SignupForm = () => {
   };
 
   return (
-    <div>
-      <div className='w-full h-full flex-col flex justify-center'>
+    <div className='container'>
+      <div className='w-full  h-full flex-col flex justify-center'>
         <div className='max-w-[600px] w-full h-min m-auto flex flex-col gap-2'>
-          <div className='left-[1086px] top-[133px] absolute text-black text-2xl font-semibold '>
+          <div className='left-[60%] -translate-x-1/2 top-[133px] absolute text-black text-2xl font-semibold '>
             Get Started With D2D
           </div>
-          <div className='left-[1131px] top-[167px] absolute text-zinc-500 text-[15.04px] font-normal  leading-[10.90px]'>
+          <div className='left-[60%] -translate-x-1/2 top-[167px] absolute text-zinc-500 text-[15.04px] font-normal  leading-[10.90px]'>
             Getting started is easy
           </div>
           <div>
-            <div className="left-[1010px] top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
+            <div className="left-[53%] -translate-x-1/2 top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
               <Vectorline />
             </div>
-            <div className="left-[1157px] top-[277px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
+            <div className="left-[60%] -translate-x-1/2 top-[277px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
               Or continue with
             </div>
-            <div className="left-[1280px] top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
+            <div className="left-[66.9%] -translate-x-1/2 top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
               <Vectorline />
             </div>
           </div>
         </div>
 
-        <div className='w-[126px] h-11 left-[1078px] top-[220px] absolute'>
-          <div className='w-[126px] h-[43px] left-0 top-[1px] absolute bg-white rounded-[5px] border border-green-500'>
-            <div className='left-[56px] top-[px] absolute text-black text-xs font-medium  leading-[44px]'>
+        <div className='w-[126px] h-[43px] left-[53.5%] -translate-x-1/2 top-[220px] absolute'>
+          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500'>
+            <div className='left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
               Google
             </div>
-            <div className='w-[22px] h-[22px] left-[26px] top-[11px] absolute'>
+            <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
               <GoogleIcon />
             </div>
           </div>
         </div>
 
-        <div className='w-[126px] h-11 left-[1218px] top-[221px] absolute'>
-          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'></div>
-          <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
-            <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
-              <FacebookIcon />
+        <div className='w-[126px] h-[43px] left-[66%] -translate-x-1/2 top-[220px] absolute'>
+          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'>
+            <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
+              <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
+                <FacebookIcon />
+              </div>
             </div>
-          </div>
-          <div className='left-[51px] top-0 absolute text-black text-xs font-medium  leading-[44px]'>
-            Facebook
+            <div className='left-[51px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
+              Facebook
+            </div>
           </div>
         </div>
 
-        <div className='left-[980px] top-[799px] absolute text-zinc-600 text-sm font-normal leading-[14.50px]'>
+        <div className='left-[60%] -translate-x-1/2 top-[799px] absolute text-zinc-600 text-sm font-normal leading-[14.50px]'>
           By continuing you indicate that you read and agreed to the Terms of Use
         </div>
 
-        <div className='h-[77px] left-[1016px] top-[317px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[317px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium  leading-[14px]'>Name</div>
           <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
@@ -96,13 +97,13 @@ const SignupForm = () => {
                 name='name'
                 value={name}
                 onChange={handleNameChange}
-                className='w-[70%] px-2 py- focus:outline-none focus:ring focus:border-blue-300'
+                className='w-[70%] px-2 py- focus:outline-none '
               />
             </div>
           </div>
         </div>
 
-        <div className='h-[77px] left-[1016px] top-[407px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[407px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium leading-[14px]'>Email</div>
           <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
@@ -113,13 +114,13 @@ const SignupForm = () => {
                 name='email'
                 value={email}
                 onChange={handleEmailChange}
-                className='w-[70%] px-2 py- focus:outline-none focus:ring focus:border-blue-300'
+                className='w-[70%] px-2 py- focus:outline-none '
               />
             </div>
           </div>
         </div>
 
-        <div className='h-[77px] left-[1016px] top-[497px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[497px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium  leading-[14px]'>
             Password
           </div>
@@ -132,7 +133,7 @@ const SignupForm = () => {
                 name='password'
                 value={password}
                 onChange={handlePasswordChange}
-                className='w-[80%] px-2 py-  focus:outline-none focus:ring focus:border-blue-300'
+                className='w-[80%] px-2 py-  focus:outline-none'
               />
             </div>
             <div
@@ -143,7 +144,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[1016px] top-[587px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[587px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-sm font-medium  leading-[14px]'>
             Confirm password
           </div>
@@ -156,7 +157,7 @@ const SignupForm = () => {
                 name='confirmPassword'
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
-                className='w-[80%] px-2  focus:outline-none focus:ring'
+                className='w-[80%] px-2  focus:outline-none'
               />
             </div>
             <div
@@ -167,7 +168,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='w-[400px] h-[57.75px] left-[1016px] top-[685px] absolute'>
+        <div className='w-[400px] h-[57.75px] left-[60%] -translate-x-1/2 top-[685px] absolute'>
           <button
             style={{ backgroundColor: '#FBBD1D' }}
             className='w-full h-full rounded-md'

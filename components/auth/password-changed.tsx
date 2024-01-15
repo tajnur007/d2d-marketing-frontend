@@ -12,10 +12,10 @@ const PasswordChanged = () => {
       <div className='max-w-[600px] mx-auto px-6 py-12 '>
         <div>
           <div className='mt-10 my-6 text-[16px] flex flex-row text-gray-500'></div>
-          <div className='mt-10 text-[36px] font-bold leading-9 tracking-tight text-gray-900'>
+          <div className='mt-10 text-[36px] font-bold leading-[36px] tracking-[0.36px] text-[#0B1420] whitespace-nowrap'>
             Password changed!
           </div>
-          <div className='w-[600px] my-5 text-[23px] text-[#313957] '>
+          <div className='w-[600px] my-5 text-[16px] text-[#313957] font-extralight tracking-[0.16px] leading-[25.6px] whitespace-nowrap'>
             Your password has been updated successfully.
             <br />
           </div>
@@ -25,7 +25,7 @@ const PasswordChanged = () => {
         </div>
         <ForgetPasswordCommon
           buttonInfo={{
-            className: 'w-full bg-[#4318FF] rounded-lg text-white p-4 font-normal my-4',
+            className: 'w-full bg-[#4318FF] rounded-[12px] text-[16px] tracking-[0] leading-[16px] text-white p-4 font-extralight my-4',
             text: 'Login now',
             type: 'text',
           }}

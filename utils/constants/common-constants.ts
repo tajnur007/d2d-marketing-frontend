@@ -1,4 +1,4 @@
-import { FormItems, SidebarItem, statusColor } from '@/models/global-types';
+import { FormItems, SidebarItem, statusColor, CreateLeadStatusItems } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
@@ -21,28 +21,28 @@ export const PAGE_ROUTES = {
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     id: 1,
-    iconName: 'Home',
+    iconName: 'Dashboard',
     path: PAGE_ROUTES.Dashboard,
     icon: HomeIcon,
     position: -15,
   },
   {
     id: 2,
-    iconName: 'Book',
+    iconName: 'Leads',
     path: PAGE_ROUTES.Leads,
     icon: BookIcon,
     position: 50,
   },
   {
     id: 3,
-    iconName: 'Setting',
+    iconName: 'Settings',
     path: PAGE_ROUTES.Settings,
     icon: SettingIcon,
     position: 110,
   },
 ];
 
-export const FORMITEMS: FormItems = {
+export const FORM_ITEMS: FormItems = {
   Title: '',
   Name: '',
   Phone: '',
@@ -64,6 +64,16 @@ export const LEAD_STATUS = {
   Warm: 'Warm',
 };
 
+export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
+  { value: 'Pending', label: 'Pending' },
+  { value: 'Progress', label: 'Progress' },
+  { value: 'Completed', label: 'Completed' },
+  { value: 'Hot', label: 'Hot' },
+  { value: 'Cool', label: 'Cool' },
+  { value: 'Warm', label: 'Warm' },
+  
+]
+
 export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Pending,
   LEAD_STATUS.Progress,
@@ -72,6 +82,8 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Cool,
   LEAD_STATUS.Warm,
 ];
+
+export const AUTH_LEFT_TEXT = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
 export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';
