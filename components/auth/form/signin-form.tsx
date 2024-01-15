@@ -51,51 +51,68 @@ const SigninForm = () => {
 
   return (
     <div>
-      <div className='w-full h-full flex-col flex justify-center'>
+      <div className='max-w-[600px] mx-auto px-6 py-12'>
         <div className='max-w-[600px] w-full h-min m-auto flex flex-col gap-2'>
-          <div className='left-[53%] -translate-x-1/2 top-[382px] absolute leading-[14.50px]'>
-            <Vectorline />
-          </div>
-          <div className='left-[60%] -translate-x-1/2 top-[376px] absolute text-black text-[13px] font-normal  leading-[14.50px]'>
-            Or continue with
-          </div>
-          <div className='left-[67%] -translate-x-1/2 top-[382px] absolute leading-[14.50px]'>
-            <Vectorline />
-          </div>
-        </div>
-        <div className='max-w-[600px] w-full h-min m-auto flex flex-col gap-2'>
-          <div className='w-[126px] h-[43px] left-[53.5%] -translate-x-1/2 top-[294px] absolute'>
-            <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500'>
-              <div className='left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-                Google
-              </div>
-              <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
-                <GoogleIcon />
-              </div>
-            </div>
+          <div className='mt-[30%] my-6  flex flex-row text-black leading-trim-both font-semibold text-4xl leading-11'>
+            Welcome Back
           </div>
 
-          <div className='w-[126px] h-[43px] left-[66%] -translate-x-1/2 top-[294px] absolute'>
-            <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'>
-              <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
-                <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
-                  <FacebookIcon />
-                </div>
-              </div>
-              <div className='left-[51px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-                Facebook
-              </div>
+          <div className='mt-[-29px] ml-6  flex flex-row text-zinc-500 text-[18px] font-normal'>
+            Login into your account
+          </div>
+        </div>
+
+        <div className='w-[126px] h-[43px] left-[22%] -translate-x-1/2 top-[25px] relative'>
+          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500'>
+            <div className='left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
+              Google
+            </div>
+            <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
+              <GoogleIcon />
             </div>
           </div>
         </div>
 
-        <div className='left-[67%] -translate-x-1/2 top-[626px] absolute text-red-600 text-sm font-normal  leading-[14.50px] cursor-pointer'>
+        <div className='w-[126px] h-[43px] left-[80%] -translate-x-1/2 top-[-18px] relative'>
+          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'>
+            <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
+              <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
+                <FacebookIcon />
+              </div>
+            </div>
+            <div className='left-[51px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
+              Facebook
+            </div>
+          </div>
+        </div>
+
+        <div className='mt-[-5px] ml-20  flex flex-row text-black text-[13px] font-normal'>
+          Or continue with
+        </div>
+
+        <div className='w-[126px] h-[43px] left-[-10%] -translate-x-1/2 top-[-21px] relative'>
+          <div className='w-[126px] h-[43px] left-0 top-0 absolute '>
+            <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
+              <Vectorline />
+            </div>
+          </div>
+        </div>
+
+        <div className='w-[126px] h-[43px] left-[95%] -translate-x-1/2 top-[-61px] relative'>
+          <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
+            <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
+              <Vectorline />
+            </div>
+          </div>
+        </div>
+
+        <div className='left-[82%]  top-[150px] relative text-red-600 text-sm font-normal  cursor-pointer'>
           <Link href={PAGE_ROUTES.Forgetpassword} className='mr-2'>
             Recover Password
           </Link>
         </div>
 
-        <div className='w-[148px] h-5 left-[53.5%] -translate-x-1/2 top-[623px] absolute'>
+        <div className='left-[-23%]  top-[130px] relative'>
           <label className='relative inline-flex items-center mb-5 cursor-pointer'>
             <input
               type='checkbox'
@@ -108,7 +125,7 @@ const SigninForm = () => {
           </label>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[407px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[70.5%] -translate-x-1/2 top-[390px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium leading-[14px]'>Email</div>
           <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
@@ -125,7 +142,7 @@ const SigninForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[497px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[70.5%] -translate-x-1/2 top-[490px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium  leading-[14px]'>
             Password
           </div>
@@ -153,17 +170,10 @@ const SigninForm = () => {
         <div>
           <button
             style={{ backgroundColor: '#5630FF' }}
-            className='w-[400px] h-[57.75px] left-[60%] -translate-x-1/2 top-[699px] absolute text-white text-lg font-semibold  leading-[14.50px] rounded-md px-4 py-2 cursor-pointer'
+            className='w-[400px] h-[57.75px] left-[70.5%] -translate-x-1/2 top-[660px] absolute text-white text-lg font-semibold  leading-[14.50px] rounded-md px-4 py-2 cursor-pointer'
             onClick={handleLogin}>
             Log in
           </button>
-        </div>
-
-        <div className='left-[60%] -translate-x-1/2 top-[234px] absolute text-black text-lg font-normal leading-[29.16px]'>
-          Login into your account
-        </div>
-        <div className='left-[60%] -translate-x-1/2 top-[184px] absolute text-black text-4xl font-semibold  leading-[44px]'>
-          Welcome Back
         </div>
       </div>
     </div>

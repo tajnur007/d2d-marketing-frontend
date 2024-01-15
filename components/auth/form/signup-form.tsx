@@ -36,29 +36,19 @@ const SignupForm = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='w-full  h-full flex-col flex justify-center'>
+    <div className=''>
+      <div className=' max-w-[600px] mx-auto px-6 py-12 '>
         <div className='max-w-[600px] w-full h-min m-auto flex flex-col gap-2'>
-          <div className='left-[60%] -translate-x-1/2 top-[133px] absolute text-black text-2xl font-semibold '>
+          <div className='mt-[5%] my-6  flex flex-row text-black text-2xl font-semibold'>
             Get Started With D2D
           </div>
-          <div className='left-[60%] -translate-x-1/2 top-[167px] absolute text-zinc-500 text-[15.04px] font-normal  leading-[10.90px]'>
+
+          <div className='mt-[-25px] ml-12  flex flex-row text-zinc-500 text-[15.04px] font-normal'>
             Getting started is easy
-          </div>
-          <div>
-            <div className="left-[53%] -translate-x-1/2 top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              <Vectorline />
-            </div>
-            <div className="left-[60%] -translate-x-1/2 top-[277px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              Or continue with
-            </div>
-            <div className="left-[66.9%] -translate-x-1/2 top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              <Vectorline />
-            </div>
           </div>
         </div>
 
-        <div className='w-[126px] h-[43px] left-[53.5%] -translate-x-1/2 top-[220px] absolute'>
+        <div className='w-[126px] h-[43px] left-[27%] -translate-x-1/2 top-[25px] relative'>
           <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500'>
             <div className='left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
               Google
@@ -69,7 +59,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='w-[126px] h-[43px] left-[66%] -translate-x-1/2 top-[220px] absolute'>
+        <div className='w-[126px] h-[43px] left-[84%] -translate-x-1/2 top-[-18px] relative'>
           <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'>
             <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
               <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
@@ -82,11 +72,31 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='left-[60%] -translate-x-1/2 top-[799px] absolute text-zinc-600 text-sm font-normal leading-[14.50px]'>
+        <div className='mt-[-5px] ml-20  flex flex-row text-black text-[13px] font-normal'>
+          Or continue with
+        </div>
+
+        <div className='w-[126px] h-[43px] left-[-10%] -translate-x-1/2 top-[-21px] relative'>
+          <div className='w-[126px] h-[43px] left-0 top-0 absolute '>
+            <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
+              <Vectorline />
+            </div>
+          </div>
+        </div>
+
+        <div className='w-[126px] h-[43px] left-[95%] -translate-x-1/2 top-[-61px] relative'>
+          <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
+            <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
+              <Vectorline />
+            </div>
+          </div>
+        </div>
+
+        <div className='left-[70.5%] -translate-x-1/2 top-[820px] absolute text-zinc-600 text-sm font-normal leading-[14.50px]'>
           By continuing you indicate that you read and agreed to the Terms of Use
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[317px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[70.5%] -translate-x-1/2 top-[320px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium  leading-[14px]'>Name</div>
           <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
@@ -103,7 +113,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[407px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[70.5%] -translate-x-1/2 top-[415px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium leading-[14px]'>Email</div>
           <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
@@ -120,7 +130,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[497px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[70.5%] -translate-x-1/2 top-[510px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium  leading-[14px]'>
             Password
           </div>
@@ -144,7 +154,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[587px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[70.5%] -translate-x-1/2 top-[610px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-sm font-medium  leading-[14px]'>
             Confirm password
           </div>
@@ -168,7 +178,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='w-[400px] h-[57.75px] left-[60%] -translate-x-1/2 top-[685px] absolute'>
+        <div className='w-[400px] h-[57.75px] left-[70.5%] -translate-x-1/2 top-[710px] absolute'>
           <button
             style={{ backgroundColor: '#FBBD1D' }}
             className='w-full h-full rounded-md'
