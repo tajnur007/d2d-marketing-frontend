@@ -256,19 +256,6 @@ export const FacebookIcon = () => {
   );
 };
 
-export const Vectorline = () => {
-  return (
-    <svg
-      width='130'
-      height='1'
-      viewBox='0 0 130 1'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'>
-      <path d='M0 0.5H130' stroke='#DBDBDB' />
-    </svg>
-  );
-};
-
 export const BackArrowIcon = () => {
   return (
     <svg

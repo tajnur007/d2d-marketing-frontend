@@ -2,9 +2,6 @@
 
 import React, { useState, ChangeEvent } from 'react';
 import { PasswordRevealIcon } from '@/assets/icons';
-import { GoogleIcon } from '@/assets/icons';
-import { FacebookIcon } from '@/assets/icons';
-import { Vectorline } from '@/assets/icons';
 
 const SignupForm = () => {
   const [name, setName] = useState<string>('');
@@ -42,51 +39,17 @@ const SignupForm = () => {
           <div className='left-[60%] -translate-x-1/2 top-[133px] absolute text-black text-2xl font-semibold '>
             Get Started With D2D
           </div>
-          <div className='left-[60%] -translate-x-1/2 top-[167px] absolute text-zinc-500 text-[15.04px] font-normal  leading-[10.90px]'>
+          <div className='left-[60%] -translate-x-1/2 top-[175px] absolute text-zinc-500 text-[15.04px] font-normal  leading-[10.90px]'>
             Getting started is easy
           </div>
-          <div>
-            <div className="left-[53%] -translate-x-1/2 top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              <Vectorline />
-            </div>
-            <div className="left-[60%] -translate-x-1/2 top-[277px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              Or continue with
-            </div>
-            <div className="left-[66.9%] -translate-x-1/2 top-[284px] absolute text-black text-[13px] font-normal font-['Poppins'] leading-[14.50px]">
-              <Vectorline />
-            </div>
-          </div>
+          <div className='w-[395px] absolute border-b-2 border-b-[#DBDBDB] border-solid md:left-[44%] xl:left-[46%] 2xl:left-[49.5%] top-[215px]'></div>
         </div>
 
-        <div className='w-[126px] h-[43px] left-[53.5%] -translate-x-1/2 top-[220px] absolute'>
-          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-green-500'>
-            <div className='left-[56px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-              Google
-            </div>
-            <div className='w-[22px] h-[22px] left-[26px] top-[10px] absolute'>
-              <GoogleIcon />
-            </div>
-          </div>
-        </div>
-
-        <div className='w-[126px] h-[43px] left-[66%] -translate-x-1/2 top-[220px] absolute'>
-          <div className='w-[126px] h-[43px] left-0 top-0 absolute bg-white rounded-[5px] border border-neutral-200'>
-            <div className='w-[26px] h-[26px] left-[17px] top-[8px] absolute'>
-              <div className='w-[26px] h-[26px] left-0 top-0 absolute'>
-                <FacebookIcon />
-              </div>
-            </div>
-            <div className='left-[51px] top-[px] absolute text-black text-xs font-medium leading-[44px]'>
-              Facebook
-            </div>
-          </div>
-        </div>
-
-        <div className='left-[60%] -translate-x-1/2 top-[799px] absolute text-zinc-600 text-sm font-normal leading-[14.50px]'>
+        <div className='left-[60%] -translate-x-1/2 top-[730px] absolute text-[#5A5A5A] text-sm font-normal leading-[14.50px]'>
           By continuing you indicate that you read and agreed to the Terms of Use
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[317px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[248px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium  leading-[14px]'>Name</div>
           <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
@@ -103,7 +66,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[407px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[338px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium leading-[14px]'>Email</div>
           <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
@@ -120,7 +83,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[497px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[428px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium  leading-[14px]'>
             Password
           </div>
@@ -144,7 +107,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[587px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[518px] absolute flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-sm font-medium  leading-[14px]'>
             Confirm password
           </div>
@@ -168,7 +131,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className='w-[400px] h-[57.75px] left-[60%] -translate-x-1/2 top-[685px] absolute'>
+        <div className='w-[400px] h-[57.75px] left-[60%] -translate-x-1/2 top-[616px] absolute'>
           <button
             style={{ backgroundColor: '#FBBD1D' }}
             className='w-full h-full rounded-md'
