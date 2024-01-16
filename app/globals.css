@@ -11,24 +11,35 @@
 * {
   font-family: Metropolis, Arial, Helvetica, sans-serif;
 }
-::-webkit-scrollbar {
-  width: 10px;
+
+/* Tiny scrollbar styles */
+.tiny-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Adjust the width as needed */
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+.tiny-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4f46e5;
+  border-radius: 8px;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+.tiny-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #6b63e5;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.tiny-scrollbar::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* Firefox scrollbar styles */
+.tiny-scrollbar {
+  scrollbar-color: #4f46e5 #f1f1f1;
+  scrollbar-width: thin;
+}
+
+/* Optional: hover style for Firefox */
+.tiny-scrollbar:hover {
+  scrollbar-color: #6b63e5 #f1f1f1;
 }
 
 /*Hide default calendar icon*/

@@ -39,15 +39,19 @@ function Graph({ graphData, color }) {
         fill: true,
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 100);
+          const gradient = ctx.createLinearGradient(0, 0, 0, 50);
+
+          // Make the color at the top more intense
           gradient.addColorStop(
             0,
             `rgba(${parseInt(color.slice(1, 3), 16)}, ${parseInt(
               color.slice(3, 5),
               16
-            )}, ${parseInt(color.slice(5, 7), 16)}, 0)`
+            )}, ${parseInt(color.slice(5, 7), 16)}, 0.5)`
           );
+
           gradient.addColorStop(1, 'white');
+
           return gradient;
         },
       },
