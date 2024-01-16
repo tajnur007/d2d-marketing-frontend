@@ -45,7 +45,13 @@ const Sidebar = () => {
         ))}
         <div
           className={`absolute left-0 transition-all duration-500 ${
-            selected === 50 ? 'top-[50px]' : selected === -15 ? 'top-[0px]' : 'top-[98px]'
+            selected === 0
+              ? 'top-[0px]'
+              : selected === 50
+              ? 'top-[50px]'
+              : selected === 100
+              ? 'top-[100px]'
+              : 'top-[150px]'
           }  h-[50px] w-1 bg-[#5630FF] rounded-tr rounded-br `}></div>
       </div>
       <Tooltip id='my-tooltip' />

@@ -1,5 +1,5 @@
 import { FormItems, SidebarItem, statusColor, CreateLeadStatusItems } from '@/models/global-types';
-import { BookIcon, HomeIcon, SettingIcon } from '../../assets/icons';
+import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
   Cool: 'bg-blue-200',
@@ -16,6 +16,7 @@ export const PAGE_ROUTES = {
   Forgetpassword: '/auth/forget-password',
   EmailSent:  '/auth/forget-password/email-sent',
   LeadCreate: '/leads/create',
+  EmployeeList:'/employee-list'
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -24,7 +25,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     iconName: 'Dashboard',
     path: PAGE_ROUTES.Dashboard,
     icon: HomeIcon,
-    position: -15,
+    position: 0,
   },
   {
     id: 2,
@@ -38,7 +39,14 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     iconName: 'Settings',
     path: PAGE_ROUTES.Settings,
     icon: SettingIcon,
-    position: 110,
+    position: 100,
+  },
+  {
+    id: 4,
+    iconName:'Employee List',
+    path: PAGE_ROUTES.EmployeeList,
+    icon: EmployeeListIcon,
+    position: 150
   },
 ];
 
@@ -71,7 +79,7 @@ export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'Hot', label: 'Hot' },
   { value: 'Cool', label: 'Cool' },
   { value: 'Warm', label: 'Warm' },
-  
+
 ]
 
 export const CREATE_LEAD_STATUS: string[] = [
