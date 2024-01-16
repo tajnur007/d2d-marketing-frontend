@@ -52,7 +52,7 @@ const CreateLeadForm = () => {
   };
 
   return (
-    <div className='ml-0 p-10 rounded-xl bg-white'>
+    <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
       <Input
         label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
         placeholder='Title here'

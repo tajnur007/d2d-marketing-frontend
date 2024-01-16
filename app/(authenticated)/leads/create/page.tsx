@@ -8,9 +8,9 @@ const LeadsCreatePage = () => {
   const router = useRouter();
 
   return (
-    <div className='bg-white rounded-[10px] p-6'>
-      <div className='flex items-center gap-5'>
-        <p onClick={() => router.push(PAGE_ROUTES.Leads)} className=' cursor-pointer'>
+    <div className='bg-white rounded-[10px] py-6 h-[86vh]'>
+      <div className='flex items-center gap-5 mx-6'>
+        <p onClick={() => router.push(PAGE_ROUTES.Leads)} className='cursor-pointer'>
           <BackArrowIcon />
         </p>
         <p className='text-[#25254C] text-[20px] font-medium tracking-[.6px]'>Create</p>
