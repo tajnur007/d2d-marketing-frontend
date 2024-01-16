@@ -85,6 +85,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
   htmlFor?: string;
   errorMessage?: string;
+  getDate?: any;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -105,13 +106,11 @@ export interface NoAccountProps {
   signupPage: boolean;
 }
 
-
 export interface AuthLayoutProps {
   text: string;
   image: StaticImageData;
   children?: ReactNode;
 }
-
 
 export interface CreateLeadStatusItems {
   value: string;

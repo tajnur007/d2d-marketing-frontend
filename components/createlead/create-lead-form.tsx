@@ -16,8 +16,14 @@ const CreateLeadForm = () => {
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
 
+  const getDate = (e: string) => {
+    console.log(e);
+  };
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
+
+    console.log(value);
 
     setFormData((prev) => {
       return { ...prev, [name]: value };
@@ -46,7 +52,7 @@ const CreateLeadForm = () => {
   };
 
   return (
-    <div className='ml-0 p-10 rounded-xl bg-white'>
+    <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
       <Input
         label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
         placeholder='Title here'
@@ -148,11 +154,9 @@ const CreateLeadForm = () => {
             />
             <DatePicker
               label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reminder</p>}
-              placeholder='DD:MM:YY TT:TT'
-              type='date'
               name='Date'
               errorMessage={formErrors.Date}
-              onChange={handleInputChange}
+              getDate={getDate}
               className={`${formErrors.Date && 'border-red-500 shadow'}`}
             />
           </div>
