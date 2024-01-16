@@ -5,11 +5,16 @@ import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { ImageUpload } from '@/components/image-upload';
 import { Button } from '@/components/button';
-import { CustomSelect } from '@/components/custom-select';
 import { DatePicker } from '@/components/date-picker';
 import { useEffect, useState } from 'react';
-import { CREATE_LEAD_STATUS_NEW, FORM_ITEMS } from '@/utils/constants/common-constants';
+import {
+  ASSIGN_TO_NEW,
+  CREATE_LEAD_STATUS_NEW,
+  FORM_ITEMS,
+} from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
+import { AssignToSelect } from '../select/assign-to-select';
+import { StatusSelect } from '../select/status-select';
 
 const CreateLeadForm = () => {
   const [selected, setSelected] = useState('Pending');
@@ -53,17 +58,26 @@ const CreateLeadForm = () => {
 
   return (
     <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
-      <Input
-        label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
-        placeholder='Title here'
-        type='text'
-        id='title'
-        name='Title'
-        htmlFor='title'
-        errorMessage={formErrors.Title}
-        className={`w-[40%] mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
-        onChange={handleInputChange}
-      />
+      <div className='flex items-center justify-between mt-10 gap-5'>
+        <Input
+          label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
+          placeholder='Title here'
+          type='text'
+          id='title'
+          name='Title'
+          htmlFor='title'
+          errorMessage={formErrors.Title}
+          className={`w-full mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
+          onChange={handleInputChange}
+        />
+        <div className='flex flex-col justify-between gap-5 w-full'>
+          <AssignToSelect
+            label='Assign to'
+            setSelected={setSelected}
+            options={ASSIGN_TO_NEW}
+          />
+        </div>
+      </div>
       <div className='rounded-2xl relative'>
         <Image
           src={mapImage}
@@ -135,7 +149,7 @@ const CreateLeadForm = () => {
         </div>
 
         <div className='flex flex-col justify-between gap-5 w-1/2'>
-          <CustomSelect
+          <StatusSelect
             label='Status'
             setSelected={setSelected}
             options={CREATE_LEAD_STATUS_NEW}
