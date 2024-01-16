@@ -41,3 +41,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.date-picker-placeholder::placeholder {
+  color: #b9c1d9 !important;
+  font-size: 14px !important;
+}
