@@ -4,6 +4,7 @@ import LeadRow from '@/components/LeadRow/LeadRow';
 import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import FilterLeadsButton from '../FilterLeadsButton/FilterLeadsButton';
 
 function LeadsList() {
   const router = useRouter();
@@ -27,8 +28,13 @@ function LeadsList() {
               </p>
             </div>
           </div>
-          <div onClick={handleCreateLeadButtonClick}>
-            <CreateLeadsButton />
+          <div className='flex justify-around items-center'>
+            <div>
+              <FilterLeadsButton />
+            </div>
+            <div onClick={handleCreateLeadButtonClick}>
+              <CreateLeadsButton />
+            </div>
           </div>
         </div>
       </div>
