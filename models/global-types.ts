@@ -81,6 +81,14 @@ export interface SelectProps {
   options?: CreateLeadStatusItems[];
 }
 
+export interface AssignSelectProps {
+  label?: React.ReactNode;
+  className?: string;
+  selected?: string;
+  setSelected?: (item: string) => void;
+  options?: CreateAssignToItems[];
+}
+
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
   htmlFor?: string;
@@ -116,4 +124,9 @@ export interface AuthLayoutProps {
 export interface CreateLeadStatusItems {
   value: string;
   label: string;
+}
+export interface CreateAssignToItems {
+  value: string;
+  label: string;
+  isPublic: boolean;
 }
