@@ -5,9 +5,9 @@ import ViewAllLeadsButton from '@/components/ViewAllLeadsButton/ViewAllLeadsButt
 
 function LatestLeadsList() {
   return (
-    <div className='w-full bg-white p-5 rounded-xl h-[69vh]'>
-      <div className='flex justify-between items-center '>
-        <div className='flex items-center'>
+    <div className='w-full bg-white py-5 rounded-xl h-[66vh]'>
+      <div className='flex justify-between items-center'>
+        <div className='flex items-center pl-6'>
           <p className='font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
             Latest Leads
           </p>
@@ -21,7 +21,7 @@ function LatestLeadsList() {
         </div>
       </div>
 
-      <div className='w-full h-[calc(100%-40px)] overflow-y-auto whitespace-nowrap font-semibold text-[18px] leading-[normal]'>
+      <div className='w-full h-[calc(100%-40px)] pl-6 overflow-y-auto tiny-scrollbar overflow-x-hidden whitespace-nowrap font-semibold text-[18px] leading-[normal]'>
         {LEADS_DATA.map((item, index) => (
           <LatestLeadRow key={index} item={item} />
         ))}
