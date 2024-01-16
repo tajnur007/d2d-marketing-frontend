@@ -3,7 +3,7 @@ import React from 'react';
 
 const Profiles = ({ data }: { data: Person[] }) => {
   return (
-    <div className='h-[calc(100%-40px)] overflow-y-auto no-scrollbar'>
+    <div className='h-[calc(100%-40px)] overflow-y-auto tiny-scrollbar px-5'>
       {data?.map((person: Person) => (
         <div key={person?.id} className='flex items-center gap-5 mb-5'>
           <div className='bg-[#E5DFFF] p-[13px] rounded-2xl font-semibold text-[#b8a9ff] text-[16px]'>
