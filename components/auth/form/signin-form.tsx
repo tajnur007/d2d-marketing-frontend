@@ -6,6 +6,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import Link from 'next/link';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
 
 const SigninForm = () => {
   const router = useRouter();
@@ -47,20 +49,72 @@ const SigninForm = () => {
   };
 
   return (
-    <div>
-      <div className='w-full h-full flex-col flex justify-center'>
-        <div className='max-w-[600px] w-full h-min m-auto flex flex-col gap-2'>
-          <div className='w-[395px] absolute border-b-2 border-b-[#DBDBDB] border-solid md:left-[44%] xl:left-[46%] 2xl:left-[49.5%] top-[285px]'></div>
+    <div className='w-full h-full flex items-center justify-center'>
+      <div className='w-[47%]'>
+        <div className='mb-7 border-gray-[#DBDBDB] border-b text-center'>
+          <h1 className='text-black text-4xl font-semibold'>Welcome Back</h1>
+          <p className='mt-3 text-black text-lg font-normal mb-5'>
+            Login into your account
+          </p>
         </div>
-
-        <div className='left-[67%] -translate-x-1/2 top-[539px] absolute text-red-600 text-sm font-normal  leading-[14.50px] cursor-pointer'>
+        {/* <div className=' text-red-600 text-sm font-normal   cursor-pointer'>
           <Link href={PAGE_ROUTES.Forgetpassword} className='mr-2'>
             Recover Password
           </Link>
-        </div>
+        </div> */}
+        <div className=' '>
+          <Input
+            label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>}
+            placeholder='Email'
+            type='text'
+            id='email'
+            name='Email'
+            htmlFor='email'
+            onChange={handleEmailChange}
+          />
+          <div className='relative'>
+            <Input
+              label={
+                <p className='text-[#00156A] font-medium text-xs mb-[2px] my-3'>
+                  Password
+                </p>
+              }
+              placeholder='Password'
+              type={showPassword ? 'text' : 'password'}
+              id='password'
+              name='Password'
+              htmlFor='password'
+              onChange={handleEmailChange}
+            />
+            <p
+              className='absolute top-[52px] right-6 cursor-pointer'
+              onClick={handlePasswordVisibilityToggle}>
+              <PasswordRevealIcon />
+            </p>
+          </div>
+          <div className='my-10 flex items-center justify-between'>
+            <label className='relative items-center cursor-pointer flex '>
+              <input
+                type='checkbox'
+                checked={rememberMe}
+                onChange={handleRememberMeChange}
+                className='sr-only peer'
+              />
+              <div className="w-9 h-5 bg-[#ECECEC] rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-600"></div>
+              <span className='ms-2 font-normal text-[#1A1A1A] text-sm'>Remember me</span>
+            </label>
 
-        <div className='w-[148px] h-5 left-[53.5%] -translate-x-1/2 top-[536px] absolute'>
-          <label className='relative inline-flex items-center mb-5 cursor-pointer'>
+            <Link
+              href={PAGE_ROUTES.Forgetpassword}
+              className=' text-[#D93F21] text-sm font-normal '>
+              Recover Password
+            </Link>
+          </div>
+          <Button onClick={handleLogin} className='rounded-[10px] h-[55px]'>
+            Log In
+          </Button>
+
+          {/* <label className=' items-center mb-5 cursor-pointer'>
             <input
               type='checkbox'
               checked={rememberMe}
@@ -69,12 +123,11 @@ const SigninForm = () => {
             />
             <div className="w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-600"></div>
             <span className='ms-3 text-sm'>Remember me</span>
-          </label>
+          </label> */}
         </div>
-
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[320px] absolute flex-col justify-start items-start gap-2 inline-flex'>
+        {/* <div className=' flex-col justify-start items-start gap-2 inline-flex'>
           <div className='text-blue-900 text-xs font-medium leading-[14px]'>Email</div>
-          <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
+          <div className=' px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
               <input
                 placeholder='Email here'
@@ -83,17 +136,14 @@ const SigninForm = () => {
                 name='email'
                 value={email}
                 onChange={handleEmailChange}
-                className='w-[70%] px-2 py- focus:outline-none '
+                className=' px-2 focus:outline-none '
               />
             </div>
           </div>
-        </div>
-
-        <div className='h-[77px] left-[60%] -translate-x-1/2 top-[410px] absolute flex-col justify-start items-start gap-2 inline-flex'>
-          <div className='text-blue-900 text-xs font-medium  leading-[14px]'>
-            Password
-          </div>
-          <div className='w-[400px] px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
+        </div> */}
+        {/* <div className=' flex-col justify-start items-start gap-2 '>
+          <div className='text-blue-900 text-xs font-medium  '>Password</div>
+          <div className=' bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
             <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
               <input
                 placeholder='Password'
@@ -102,7 +152,7 @@ const SigninForm = () => {
                 name='password'
                 value={password}
                 onChange={handlePasswordChange}
-                className='w-[80%] px-2 py-  focus:outline-none '
+                className=' px-2 focus:outline-none '
               />
             </div>
 
@@ -112,23 +162,15 @@ const SigninForm = () => {
               <PasswordRevealIcon />
             </div>
           </div>
-        </div>
-
-        <div>
+        </div> */}
+        {/* <div>
           <button
             style={{ backgroundColor: '#5630FF' }}
-            className='w-[400px] h-[57.75px] left-[60%] -translate-x-1/2 top-[612px] absolute text-white text-lg font-semibold  leading-[14.50px] rounded-md px-4 py-2 cursor-pointer'
+            className=' text-white text-lg font-semibold rounded-md px-4 py-2 cursor-pointer'
             onClick={handleLogin}>
             Log in
           </button>
-        </div>
-
-        <div className='left-[60%] -translate-x-1/2 top-[234px] absolute text-black text-lg font-normal leading-[29.16px]'>
-          Login into your account
-        </div>
-        <div className='left-[60%] -translate-x-1/2 top-[184px] absolute text-black text-4xl font-semibold  leading-[44px]'>
-          Welcome Back
-        </div>
+        </div> */}
       </div>
     </div>
   );
