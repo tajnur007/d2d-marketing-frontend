@@ -1,3 +1,4 @@
+import SearchBar from '@/components/search-bar';
 import Link from 'next/link';
 
 export default function NotFound() {
@@ -13,6 +14,7 @@ export default function NotFound() {
           Return Home
         </Link>
       </div>
+      <SearchBar />
     </section>
   );
 }
