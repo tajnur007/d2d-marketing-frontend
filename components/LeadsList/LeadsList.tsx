@@ -5,12 +5,16 @@ import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton'
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import FilterLeadsButton from '../FilterLeadsButton/FilterLeadsButton';
+import { useState } from 'react';
 
 function LeadsList() {
   const router = useRouter();
   const handleCreateLeadButtonClick = () => {
     router.push(PAGE_ROUTES.LeadCreate);
   };
+  const [filterData, setFilterData] = useState({});
+  console.log('Filter Data => ', filterData);
+
   return (
     <div className='border border-gray-100 bg-white rounded-xl h-[88vh] w-full'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
@@ -30,7 +34,7 @@ function LeadsList() {
           </div>
           <div className='flex justify-around items-center'>
             <div>
-              <FilterLeadsButton />
+              <FilterLeadsButton onFilterData={(data:any) => setFilterData(data)} />
             </div>
             <div onClick={handleCreateLeadButtonClick}>
               <CreateLeadsButton />

@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import FilterLeadsCard from '../FilterLeadsCard/FilterLeadsCard';
 
-function FilterLeadsButton() {
+function FilterLeadsButton({ onFilterData }:any) {
   const [isFilterCardOpen, setFilterCardOpen] = useState(false);
+  const [filterData, setFilterData] = useState({});
 
   const toggleFilterCard = () => {
     setFilterCardOpen(!isFilterCardOpen);
   };
+
+  !isFilterCardOpen && onFilterData(filterData);
 
   return (
     <>
@@ -43,7 +46,12 @@ function FilterLeadsButton() {
           </div>
         </div>
       </button>
-      {isFilterCardOpen && <FilterLeadsCard />}
+      {isFilterCardOpen && (
+        <FilterLeadsCard
+          setFilterCardOpen={setFilterCardOpen}
+          onFilterData={(data: any) => setFilterData(data)}
+        />
+      )}
     </>
   );
 }

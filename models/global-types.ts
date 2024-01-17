@@ -79,6 +79,7 @@ export interface SelectProps {
   selected?: string;
   setSelected?: (item: string) => void;
   options?: CreateLeadStatusItems[];
+  onSelectChange?: any;
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
