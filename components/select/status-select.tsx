@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Select from 'react-select';
 
-export const CustomSelect = ({
+export const StatusSelect = ({
   label,
   className,
   setSelected = () => {},
