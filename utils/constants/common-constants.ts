@@ -4,6 +4,7 @@ import {
   statusColor,
   CreateLeadStatusItems,
   User,
+  CreateAssignToItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -94,6 +95,15 @@ export const users: User[] = [
   { value: 'RK Shawon', label: 'Assign to RK Shawon' },
   { value: 'Mursalin Khan', label: 'Assign to Mursalin Khan' },
 ];
+
+export const ASSIGN_TO_NEW : CreateAssignToItems[] = [
+  { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das', isPublic: true },
+  { value: 'Rezaul Mursalin Khan', label: 'Rezaul Mursalin Khan', isPublic: false },
+  { value: 'Aminul Islam', label: 'Aminul Islam' , isPublic: true},
+  { value: 'Sadia Rahman', label: 'Sadia Rahman' , isPublic: true},
+  { value: 'Tahmina Akhter', label: 'Tahmina Akhter', isPublic: false },
+  { value: 'Rahim Ali', label: 'Rahim Ali' , isPublic:false},
+]
 
 export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Pending,

@@ -82,10 +82,19 @@ export interface SelectProps {
   options?: CreateLeadStatusItems[];
 }
 
+export interface AssignSelectProps {
+  label?: React.ReactNode;
+  className?: string;
+  selected?: string;
+  setSelected?: (item: string) => void;
+  options?: CreateAssignToItems[];
+}
+
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
   htmlFor?: string;
   errorMessage?: string;
+  getDate?: any;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -120,4 +129,10 @@ export interface CreateLeadStatusItems {
 export interface User {
   value: string;
   label: string;
+}
+
+export interface CreateAssignToItems {
+  value: string;
+  label: string;
+  isPublic: boolean;
 }

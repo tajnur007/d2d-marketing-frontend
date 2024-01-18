@@ -8,7 +8,7 @@ const GraphList: React.FC = () => {
       {GRAPH_CONFIG.map((item, index) => (
         <div key={index} className='grid grid-cols-1 bg-white rounded-xl px-6 py-2'>
           <div className='flex justify-between items-center '>
-            <p className='text-[14px] font-medium leading-[14.976px] text-[#00156A]'>
+            <p className='text-[14px] font-semibold leading-[14.976px] text-[#00156A]'>
               {item.label}
             </p>
 

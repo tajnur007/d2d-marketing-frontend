@@ -11,7 +11,7 @@ function LeadsList() {
     router.push(PAGE_ROUTES.LeadCreate);
   };
   return (
-    <div className='border border-gray-100 bg-white rounded-xl h-[87vh] w-full'>
+    <div className='border border-gray-100 bg-white rounded-xl h-[88vh] w-full'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
         <div className='flex justify-between items-center content-center'>
           <div className='flex items-center'>
@@ -32,7 +32,7 @@ function LeadsList() {
           </div>
         </div>
       </div>
-      <div className='overflow-y-scroll h-[74vh]'>
+      <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {LEADS_DATA.map((item, index) => (
             <LeadRow key={index} item={item} />
