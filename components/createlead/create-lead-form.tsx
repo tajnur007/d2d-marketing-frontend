@@ -148,7 +148,7 @@ const CreateLeadForm = () => {
           />
         </div>
 
-        <div className='flex flex-col justify-between gap-5 w-1/2'>
+        <div className='flex flex-col justify-between gap-2 w-1/2'>
           <StatusSelect
             label='Status'
             setSelected={setSelected}
