@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
-import Drawer from 'react-modern-drawer';
-import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
 import Image from 'next/image';
+import Drawer from 'react-modern-drawer';
+
+import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
 import LeadDetails from '@/components/lead-details';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import 'react-modern-drawer/dist/index.css';

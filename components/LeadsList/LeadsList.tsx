@@ -1,11 +1,12 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/LeadRow/LeadRow';
 import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
-import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import SearchBar from '@/components/search-bar';
+import SearchBar from '@/components/search-bar/search-bar';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
 
 function LeadsList() {

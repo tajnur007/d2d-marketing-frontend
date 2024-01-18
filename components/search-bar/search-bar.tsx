@@ -1,11 +1,12 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
+
 import { SearchIcon } from '@/assets/icons';
 import { SearchBarProps } from '@/models/global-types';
-import { useState, useEffect, useRef } from 'react';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
-import SuggestionRow from './suggestion-row';
+import SuggestionRow from '@/components/search-bar/suggestion-row';
 
 const SearchBar = ({
   value = '',
@@ -45,7 +46,7 @@ const SearchBar = ({
 
   return (
     <div className='m-0 p-0' ref={newRef}>
-      <div className='w-[563px] h-12 p-3 bg-white rounded-[14px] border border-zinc-100 justify-start items-center gap-[5px] inline-flex'>
+      <div className='w-[30vw] h-12 p-3 bg-white rounded-[14px] border border-zinc-100 justify-start items-center gap-[5px] inline-flex'>
         <SearchIcon />
         <input
           className='w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium'
