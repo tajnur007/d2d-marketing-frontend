@@ -50,7 +50,7 @@ const SigninForm = () => {
 
   return (
     <div className='w-full h-full flex items-center justify-center'>
-      <div className='w-[47%]'>
+      <div className='w-[49%]'>
         <div className='mb-7 border-gray-[#DBDBDB] border-b text-center'>
           <h1 className='text-black text-4xl font-semibold'>Welcome Back</h1>
           <p className='mt-3 text-black text-lg font-normal mb-5'>
@@ -62,7 +62,7 @@ const SigninForm = () => {
             Recover Password
           </Link>
         </div> */}
-        <div className=' '>
+        <div>
           <Input
             label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>}
             placeholder='Email'
@@ -113,64 +113,7 @@ const SigninForm = () => {
           <Button onClick={handleLogin} className='rounded-[10px] h-[55px]'>
             Log In
           </Button>
-
-          {/* <label className=' items-center mb-5 cursor-pointer'>
-            <input
-              type='checkbox'
-              checked={rememberMe}
-              onChange={handleRememberMeChange}
-              className='sr-only peer'
-            />
-            <div className="w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-600"></div>
-            <span className='ms-3 text-sm'>Remember me</span>
-          </label> */}
         </div>
-        {/* <div className=' flex-col justify-start items-start gap-2 inline-flex'>
-          <div className='text-blue-900 text-xs font-medium leading-[14px]'>Email</div>
-          <div className=' px-3 py-[15.50px] bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
-            <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
-              <input
-                placeholder='Email here'
-                type='email'
-                id='email'
-                name='email'
-                value={email}
-                onChange={handleEmailChange}
-                className=' px-2 focus:outline-none '
-              />
-            </div>
-          </div>
-        </div> */}
-        {/* <div className=' flex-col justify-start items-start gap-2 '>
-          <div className='text-blue-900 text-xs font-medium  '>Password</div>
-          <div className=' bg-white rounded-[10px] border border-zinc-100 justify-start items-center gap-5 inline-flex'>
-            <div className='grow shrink basis-0 h-6 justify-start items-start gap-3 flex'>
-              <input
-                placeholder='Password'
-                type={showPassword ? 'text' : 'password'}
-                id='password'
-                name='password'
-                value={password}
-                onChange={handlePasswordChange}
-                className=' px-2 focus:outline-none '
-              />
-            </div>
-
-            <div
-              className='w-5 h-5 relative cursor-pointer'
-              onClick={handlePasswordVisibilityToggle}>
-              <PasswordRevealIcon />
-            </div>
-          </div>
-        </div> */}
-        {/* <div>
-          <button
-            style={{ backgroundColor: '#5630FF' }}
-            className=' text-white text-lg font-semibold rounded-md px-4 py-2 cursor-pointer'
-            onClick={handleLogin}>
-            Log in
-          </button>
-        </div> */}
       </div>
     </div>
   );
