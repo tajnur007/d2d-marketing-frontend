@@ -3,15 +3,13 @@
 import React, { useState, ChangeEvent } from 'react';
 import { PasswordRevealIcon } from '@/assets/icons';
 import Link from 'next/link';
-import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { PAGE_ROUTES, SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
+import { SignUpFormItems } from '@/models/global-types';
 
 const SignupForm = () => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [formData, setFormData] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -24,20 +22,22 @@ const SignupForm = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value);
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setPassword(e.target.value);
-  const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setConfirmPassword(e.target.value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    console.log(value);
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
 
   const handleSubmit = () => {
-    console.log('Form submitted:', { name, email, password, confirmPassword });
+    console.log('Form submitted:', formData);
   };
 
   return (
-    <div className='w-full h-full flex items-center justify-center flex-col mb-20'>
+    <div className='w-full flex items-center justify-center flex-col mt-10 mb-20'>
       <div className='w-[49%]'>
         <div className='mb-7 border-gray-[#DBDBDB] border-b text-center'>
           <h1 className='text-black text-2xl font-semibold'>Get Started With D2D</h1>
@@ -53,7 +53,7 @@ const SignupForm = () => {
             id='name'
             name='Name'
             htmlFor='name'
-            onChange={handleEmailChange}
+            onChange={handleInputChange}
             className='mb-3'
           />
           <Input
@@ -63,7 +63,7 @@ const SignupForm = () => {
             id='email'
             name='Email'
             htmlFor='email'
-            onChange={handleEmailChange}
+            onChange={handleInputChange}
             className='mb-3'
           />
           <Input
@@ -74,10 +74,10 @@ const SignupForm = () => {
             }
             placeholder='Organization Name'
             type='text'
-            id='organization name'
-            name='Organization  Name'
-            htmlFor='organization name'
-            onChange={handleEmailChange}
+            id='organizationname'
+            name='OrganizationName'
+            htmlFor='organizationname'
+            onChange={handleInputChange}
             className='mb-3'
           />
           <div className='relative mb-3'>
@@ -90,7 +90,7 @@ const SignupForm = () => {
               id='password'
               name='Password'
               htmlFor='password'
-              onChange={handleEmailChange}
+              onChange={handleInputChange}
             />
             <p
               className='absolute top-[40px] right-6 cursor-pointer'
@@ -107,10 +107,10 @@ const SignupForm = () => {
               }
               placeholder='Confirm Password'
               type={showConfirmPassword ? 'text' : 'password'}
-              id='confirm password'
-              name='Confirm Password'
-              htmlFor='confirm password'
-              onChange={handleEmailChange}
+              id='confirmpassword'
+              name='ConfirmPassword'
+              htmlFor='confirmpassword'
+              onChange={handleInputChange}
             />
             <p
               className='absolute top-[40px] right-6 cursor-pointer'
@@ -118,7 +118,9 @@ const SignupForm = () => {
               <PasswordRevealIcon />
             </p>
           </div>
-          <Button className='rounded-[10px] h-[57px] mt-6 mb-[30px] text-black text-[14.85px] bg-[#FBBD1D]'>
+          <Button
+            onClick={handleSubmit}
+            className='rounded-[10px] h-[57px] mt-6 mb-[30px] text-black text-[14.85px] bg-[#FBBD1D] hover:bg-[#f3c655]'>
             Create Account
           </Button>
         </div>

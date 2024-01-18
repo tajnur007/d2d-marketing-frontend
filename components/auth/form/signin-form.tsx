@@ -49,7 +49,7 @@ const SigninForm = () => {
   };
 
   return (
-    <div className='w-full h-full flex items-center justify-center'>
+    <div className='w-full flex items-center justify-center my-20'>
       <div className='w-[49%]'>
         <div className='mb-7 border-gray-[#DBDBDB] border-b text-center'>
           <h1 className='text-black text-4xl font-semibold'>Welcome Back</h1>
@@ -57,11 +57,6 @@ const SigninForm = () => {
             Login into your account
           </p>
         </div>
-        {/* <div className=' text-red-600 text-sm font-normal   cursor-pointer'>
-          <Link href={PAGE_ROUTES.Forgetpassword} className='mr-2'>
-            Recover Password
-          </Link>
-        </div> */}
         <div>
           <Input
             label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>}
