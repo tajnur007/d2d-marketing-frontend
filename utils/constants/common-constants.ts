@@ -103,3 +103,4 @@ export const AUTH_LEFT_TEXT = "Lorem Ipsum is simply dummy text of the printing 
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
 export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';
+

@@ -1,23 +1,17 @@
 'use-client';
 
-import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
+import { FilterLeadsCardProps, StatusState } from '@/models/global-types';
+import {
+  ASSIGNEE_USERS_LIST,
+  CREATED_BY_USERS_LIST,
+} from '@/utils/constants/leadslist-constant';
+import { Moment } from 'moment';
 import { useState } from 'react';
-import { CustomMultiSelect } from '../CustomMultiSelect/custom-multi-select';
+import { DateRangePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import { DateRangePicker } from 'react-dates';
-import { Moment } from 'moment';
-
-interface statusState {
-  hot: boolean;
-  warm: boolean;
-  cold: boolean;
-}
-
-interface FilterLeadsCardProps {
-  setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onFilterData: (data: any) => void;
-}
+import { CustomMultiSelect } from '../CustomMultiSelect';
+import StatusCheckbox from '../StatusCheckBox/StatusCheckbox';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
@@ -29,13 +23,13 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   const [focusedInput, setFocusedInput] = useState<'startDate' | 'endDate' | null>(null);
 
   //! State for status
-  const [status, setStatus] = useState<statusState>({
+  const [status, setStatus] = useState<StatusState>({
     hot: false,
     warm: false,
     cold: false,
   });
 
-  const handleCheckboxChange = (statusName: keyof statusState) => {
+  const handleCheckboxChange = (statusName: keyof StatusState) => {
     setStatus((prevStatus) => ({
       ...prevStatus,
       [statusName]: !prevStatus[statusName],
@@ -46,23 +40,6 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   const [selectedCreatedBy, setCreatedBy] = useState<string | null>(null);
   const [selectedAssignee, setAssignee] = useState<string | null>(null);
 
-  const createdByUsersList: { value: string; label: string }[] = [];
-  const assigneeUsersList: { value: string; label: string }[] = [];
-
-  LEADS_DATA.map((item) =>
-    createdByUsersList.push({
-      value: item.assignedByName,
-      label: item.assignedByName,
-    })
-  );
-
-  LEADS_DATA.map((item) =>
-    assigneeUsersList.push({
-      value: item.assignedToName,
-      label: item.assignedToName,
-    })
-  );
-
   //* Output
   const filterData = {
     startDate: startDate,
@@ -72,7 +49,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     assignee: selectedAssignee,
   };
 
-  const handleApplyFilterButton = () => {
+  const ApplyFilter = () => {
     if (
       filterData.createdBy === null &&
       filterData.assignee === null &&
@@ -89,7 +66,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     }
   };
 
-  const handleCancelFilterButton = () => {
+  const CancelFilter = () => {
     setFilterCardOpen(false);
   };
 
@@ -103,16 +80,12 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
             <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
               Created by
             </label>
-            <div className=''>
-              <div className=''>
-                <div>
-                  <CustomMultiSelect
-                    setSelected={setCreatedBy}
-                    options={createdByUsersList}
-                    onSelectChange={(value:any) => setCreatedBy(value)}
-                  />
-                </div>
-              </div>
+            <div>
+              <CustomMultiSelect
+                setSelected={setCreatedBy}
+                options={CREATED_BY_USERS_LIST}
+                onSelectChange={(value: any) => setCreatedBy(value)}
+              />
             </div>
           </div>
 
@@ -123,16 +96,12 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
             <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
               Assignee
             </label>
-            <div className=''>
-              <div className=' items-center'>
-                <div>
-                  <CustomMultiSelect
-                    setSelected={setAssignee}
-                    options={assigneeUsersList}
-                    onSelectChange={(value:any) => setAssignee(value)}
-                  />
-                </div>
-              </div>
+            <div className='items-center'>
+              <CustomMultiSelect
+                setSelected={setAssignee}
+                options={ASSIGNEE_USERS_LIST}
+                onSelectChange={(value: any) => setAssignee(value)}
+              />
             </div>
           </div>
 
@@ -143,50 +112,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
             <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
               Status
             </label>
-            <div className='flex ml-1 my-1'>
-              <div className='flex items-center me-4'>
-                <input
-                  id='hot-checkbox'
-                  type='checkbox'
-                  checked={status.hot}
-                  onChange={() => handleCheckboxChange('hot')}
-                  className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-                />
-                <label
-                  htmlFor='hot-checkbox'
-                  className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                  Hot
-                </label>
-              </div>
-              <div className='flex items-center me-4'>
-                <input
-                  id='warm-checkbox'
-                  type='checkbox'
-                  checked={status.warm}
-                  onChange={() => handleCheckboxChange('warm')}
-                  className='w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-                />
-                <label
-                  htmlFor='warm-checkbox'
-                  className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                  Warm
-                </label>
-              </div>
-              <div className='flex items-center me-4'>
-                <input
-                  id='cold-checkbox'
-                  type='checkbox'
-                  checked={status.cold}
-                  onChange={() => handleCheckboxChange('cold')}
-                  className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-                />
-                <label
-                  htmlFor='cold-checkbox'
-                  className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                  Cold
-                </label>
-              </div>
-            </div>
+            <StatusCheckbox status={status} handleCheckboxChange={handleCheckboxChange} />
           </div>
 
           <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF]'></div>
@@ -217,12 +143,12 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           {/* Apply and Cancel Buttons */}
           <div className='flex justify-between my-10'>
             <button
-              onClick={handleCancelFilterButton}
+              onClick={CancelFilter}
               className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl'>
               Cancel
             </button>
             <button
-              onClick={handleApplyFilterButton}
+              onClick={ApplyFilter}
               className='bg-[#5630FF] text-white font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl'>
               Apply
             </button>

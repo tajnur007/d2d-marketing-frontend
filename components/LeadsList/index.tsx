@@ -4,7 +4,7 @@ import LeadRow from '@/components/LeadRow/LeadRow';
 import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import FilterLeadsButton from '../FilterLeadsButton/FilterLeadsButton';
+import FilterLeadsButton from '../FilterLeadsButton';
 import { useState } from 'react';
 
 function LeadsList() {

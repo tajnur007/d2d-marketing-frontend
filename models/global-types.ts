@@ -131,3 +131,14 @@ export interface CreateAssignToItems {
   label: string;
   isPublic: boolean;
 }
+
+export interface StatusState {
+  hot: boolean;
+  warm: boolean;
+  cold: boolean;
+}
+
+export interface FilterLeadsCardProps {
+  setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onFilterData: (data: any) => void;
+}
