@@ -4,7 +4,7 @@ import modalpng from '@/assets/images/assign-modal.png';
 import Image from 'next/image';
 import './dropdown-select.css';
 import { useState } from 'react';
-import { users } from '@/utils/constants/common-constants';
+import { ASSIGN_USERS } from '@/utils/constants/common-constants';
 
 export const DemoSelect = () => {
   const [transferButton, setTransferButton] = useState(false);
@@ -23,7 +23,7 @@ export const DemoSelect = () => {
 
   const handleChange = (selectedOption: any) => {
     {
-      users.map((option) => {
+      ASSIGN_USERS.map((option) => {
         if (option.value === selectedOption.value) {
           setSelected(option.value);
           setTransferButton(true);
@@ -37,7 +37,7 @@ export const DemoSelect = () => {
       <div className='flex place-items-center'>
         <div className='w-[205px] font-medium py-[8px]'>
           <Select
-            options={users}
+            options={ASSIGN_USERS}
             className='customselect font-medium text-[14px] tracking-[-0.28px] leading-[normal]'
             onChange={handleChange}
           />

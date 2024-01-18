@@ -3,8 +3,8 @@ import {
   SidebarItem,
   statusColor,
   CreateLeadStatusItems,
-  User,
   CreateAssignToItems,
+  AssignToUsers,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -88,7 +88,7 @@ export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'Warm', label: 'Warm' },
 ];
 
-export const users: User[] = [
+export const ASSIGN_USERS: AssignToUsers[] = [
   { value: 'Tajnur Vai', label: 'Assign to Tajnur Vai' },
   { value: 'Fardin Vai', label: 'Assign to Fardin Vai' },
   { value: 'MA Hridoy', label: 'Assign to MA Hridoy' },

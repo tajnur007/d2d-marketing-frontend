@@ -126,7 +126,7 @@ export interface CreateLeadStatusItems {
   label: string;
 }
 
-export interface User {
+export interface AssignToUsers {
   value: string;
   label: string;
 }
