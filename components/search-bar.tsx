@@ -2,7 +2,7 @@
 
 import { SearchIcon } from '@/assets/icons';
 import { SearchBarProps } from '@/models/global-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
 import SuggestionRow from './suggestion-row';
@@ -14,10 +14,10 @@ const SearchBar = ({
 }: SearchBarProps) => {
   const [isSuggestionCardOpen, setIsSuggestionCardOpen] = useState<boolean>(false);
   const [suggestionData, setSuggestionData] = useState<LEADS_DATA_TYPE[]>([]);
+  const newRef = useRef<any>(null);
 
   const onChange = (e: any) => {
     setValue(e.target.value);
-    console.log(value);
   };
 
   useEffect(() => {
@@ -27,14 +27,24 @@ const SearchBar = ({
       });
       setSuggestionData(newFilteredData);
     }
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
   }, [value]);
 
+  const handleOutsideClick = (e: any) => {
+    if (newRef.current && !newRef.current.contains(e.target)) {
+      setIsSuggestionCardOpen(false);
+    }
+  };
+
   const toggleSuggestionCard = () => {
-    setIsSuggestionCardOpen(!isSuggestionCardOpen);
+    setIsSuggestionCardOpen(true);
   };
 
   return (
-    <div className='m-0 p-0'>
+    <div className='m-0 p-0' ref={newRef}>
       <div className='w-[563px] h-12 p-3 bg-white rounded-[14px] border border-zinc-100 justify-start items-center gap-[5px] inline-flex'>
         <SearchIcon />
         <input
@@ -45,11 +55,12 @@ const SearchBar = ({
           onChange={onChange}
           onClick={toggleSuggestionCard}
           onKeyDown={handleKeyDown}
+          onFocus={toggleSuggestionCard}
         />
       </div>
       {isSuggestionCardOpen && (
         <div className='bg-white'>
-          {suggestionData.map((item, index) => (
+          {suggestionData.slice(0, 5).map((item, index) => (
             <SuggestionRow key={index} item={item} />
           ))}
         </div>

@@ -30,7 +30,6 @@ function LeadsList() {
   }, [keyPress]);
 
   const handleKeyDown = (e: any) => {
-    console.log('key: ', e.key);
     if (e.key === 'Enter') {
       setKeyPress(true);
     } else setKeyPress(false);
