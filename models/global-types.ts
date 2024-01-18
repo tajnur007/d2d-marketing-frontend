@@ -81,10 +81,19 @@ export interface SelectProps {
   options?: CreateLeadStatusItems[];
 }
 
+export interface AssignSelectProps {
+  label?: React.ReactNode;
+  className?: string;
+  selected?: string;
+  setSelected?: (item: string) => void;
+  options?: CreateAssignToItems[];
+}
+
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
   htmlFor?: string;
   errorMessage?: string;
+  getDate?: any;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -105,15 +114,19 @@ export interface NoAccountProps {
   signupPage: boolean;
 }
 
-
 export interface AuthLayoutProps {
   text: string;
   image: StaticImageData;
   children?: ReactNode;
 }
 
-
 export interface CreateLeadStatusItems {
   value: string;
   label: string;
+}
+
+export interface CreateAssignToItems {
+  value: string;
+  label: string;
+  isPublic: boolean;
 }

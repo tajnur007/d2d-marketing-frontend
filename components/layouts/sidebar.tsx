@@ -4,20 +4,24 @@ import { Logo } from '@/assets/icons';
 import { SIDEBAR_ITEMS } from '@/utils/constants/common-constants';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import profileImage from '@/assets/images/profile.png';
 import { Tooltip } from 'react-tooltip';
 
 const Sidebar = () => {
   const router = useRouter();
   const currentPage = usePathname().split('/')[1];
-  const currPosition = SIDEBAR_ITEMS.find((item) => '/' + currentPage === item.path);
+  const currPosition = SIDEBAR_ITEMS.find((item) => '/' + currentPage === item?.path);
   const [selected, setSelected] = useState(currPosition?.position);
 
   const handleClick = (position: number, path: string) => {
     setSelected(position);
     router.push(path);
   };
+
+  useEffect(() => {
+    setSelected(currPosition?.position);
+  }, [currPosition]);
 
   return (
     <div className='w-[88px] bg-white relative'>
