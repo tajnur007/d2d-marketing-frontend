@@ -2,18 +2,35 @@
 
 import { SearchIcon } from '@/assets/icons';
 import { SearchBarProps } from '@/models/global-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
+import { LEADS_DATA_TYPE } from '@/models/global-types';
+import SuggestionRow from './suggestion-row';
 
-const SearchBar = ({ value, setValue = () => {}, handleKeyDown }: SearchBarProps) => {
-  const [suggestionCardOpen, setSuggestionCardOpen] = useState<boolean>(false);
+const SearchBar = ({
+  value = '',
+  setValue = () => {},
+  handleKeyDown,
+}: SearchBarProps) => {
+  const [isSuggestionCardOpen, setIsSuggestionCardOpen] = useState<boolean>(false);
+  const [suggestionData, setSuggestionData] = useState<LEADS_DATA_TYPE[]>([]);
 
   const onChange = (e: any) => {
     setValue(e.target.value);
     console.log(value);
   };
 
+  useEffect(() => {
+    if (value !== '') {
+      const newFilteredData = LEADS_DATA.filter((data) => {
+        return data.title.toLowerCase().includes(value.toLowerCase());
+      });
+      setSuggestionData(newFilteredData);
+    }
+  }, [value]);
+
   const toggleSuggestionCard = () => {
-    setSuggestionCardOpen(!suggestionCardOpen);
+    setIsSuggestionCardOpen(!isSuggestionCardOpen);
   };
 
   return (
@@ -30,9 +47,13 @@ const SearchBar = ({ value, setValue = () => {}, handleKeyDown }: SearchBarProps
           onKeyDown={handleKeyDown}
         />
       </div>
-      <div>
-        <div className='w-[563px] h-[257px] bg-white rounded-[10px] shadow'></div>
-      </div>
+      {isSuggestionCardOpen && (
+        <div className='bg-white'>
+          {suggestionData.map((item, index) => (
+            <SuggestionRow key={index} item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

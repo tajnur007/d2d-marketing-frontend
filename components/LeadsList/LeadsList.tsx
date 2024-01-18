@@ -23,10 +23,9 @@ function LeadsList() {
       const newFilteredData = LEADS_DATA.filter((data) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
-      console.log(newFilteredData);
       setSearchData(newFilteredData);
-      setSearchValue('');
-      setKeyPress(false);
+    } else {
+      setSearchData([]);
     }
   }, [keyPress]);
 
