@@ -4,15 +4,22 @@ import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import Image from 'next/image';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import profileImage from '@/assets/images/profilePic.png';
-import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import EmployeelistRow from '@/components/row/employee-list-row';
+import { useState } from 'react';
 
 const EmployeeListPage = () => {
-  const router = useRouter();
-  const handleCreateLeadButtonClick = () => {
-    router.push(PAGE_ROUTES.LeadCreate);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+
+    const handleSearchChange = (event: any) => {
+      setSearchTerm(event.target.value);
+    };
+  const handleNewEmployeeButtonClick = () => {
+    console.log("Button Clicked.");
   };
+  const filteredEmployeeList = EMPLOYEE_LIST_DATA.filter((employee) =>
+    employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div className='border border-gray-100 bg-white rounded-xl h-[88vh] w-full'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
@@ -47,11 +54,12 @@ const EmployeeListPage = () => {
                   type='search'
                   id='default-search'
                   className='w-[800px] mx-1 p-3 ps-10 text-md border border-gray-300 rounded-lg'
-                  required
+                  value={searchTerm}
+                  onChange={handleSearchChange}
                 />
               </div>
             </form>
-            <div onClick={handleCreateLeadButtonClick}>
+            <div onClick={handleNewEmployeeButtonClick}>
               <button
                 type='button'
                 className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
@@ -71,7 +79,7 @@ const EmployeeListPage = () => {
 
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
         <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-          <div className='flex justify-between items-center content-center'>
+          {/* <div className='flex justify-between items-center content-center'>
             <div className='flex items-center'>
               <div className='font-medium text-[12px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
                 A
@@ -79,12 +87,12 @@ const EmployeeListPage = () => {
 
               <div className='flex items-center justify-center h-6 bg-[#E5DFFF] rounded-[17px] ms-2 p-2'>
                 <p className='leading-[normal] text-black font-bold text-[12px] tracking-[-0.32px] whitespace-nowrap text-capitalize'>
-                  {`2`}
+                  {EMPLOYEE_LIST_DATA.length}
                 </p>
               </div>
             </div>
-          </div>
-          {EMPLOYEE_LIST_DATA.map((item, index) => (
+          </div> */}
+          {filteredEmployeeList.map((item, index) => (
             <EmployeelistRow key={index} item={item} />
           ))}
         </div>
