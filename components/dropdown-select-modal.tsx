@@ -2,6 +2,7 @@ import Select from 'react-select';
 import { Button } from './button';
 import modalpng from '@/assets/images/assign-modal.png';
 import Image from 'next/image';
+import './dropdown-select.css';
 import { useState } from 'react';
 import { users } from '@/utils/constants/common-constants';
 
