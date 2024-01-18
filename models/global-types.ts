@@ -73,6 +73,7 @@ export interface FormItems {
   Date?: string;
   Image?: string;
 }
+
 export interface SelectProps {
   label?: React.ReactNode;
   className?: string;
@@ -105,15 +106,18 @@ export interface NoAccountProps {
   signupPage: boolean;
 }
 
-
 export interface AuthLayoutProps {
   text: string;
   image: StaticImageData;
   children?: ReactNode;
 }
 
-
 export interface CreateLeadStatusItems {
+  value: string;
+  label: string;
+}
+
+export interface User {
   value: string;
   label: string;
 }

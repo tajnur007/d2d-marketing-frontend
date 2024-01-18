@@ -1,4 +1,10 @@
-import { FormItems, SidebarItem, statusColor, CreateLeadStatusItems } from '@/models/global-types';
+import {
+  FormItems,
+  SidebarItem,
+  statusColor,
+  CreateLeadStatusItems,
+  User,
+} from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
@@ -14,9 +20,9 @@ export const PAGE_ROUTES = {
   Signin: '/auth/signin',
   Signup: '/auth/signup',
   Forgetpassword: '/auth/forget-password',
-  EmailSent:  '/auth/forget-password/email-sent',
+  EmailSent: '/auth/forget-password/email-sent',
   LeadCreate: '/leads/create',
-  EmployeeList:'/employee-list'
+  EmployeeList: '/employee-list',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -43,10 +49,10 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   },
   {
     id: 4,
-    iconName:'Employee List',
+    iconName: 'Employee List',
     path: PAGE_ROUTES.EmployeeList,
     icon: EmployeeListIcon,
-    position: 150
+    position: 150,
   },
 ];
 
@@ -79,8 +85,15 @@ export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'Hot', label: 'Hot' },
   { value: 'Cool', label: 'Cool' },
   { value: 'Warm', label: 'Warm' },
+];
 
-]
+export const users: User[] = [
+  { value: 'Tajnur Vai', label: 'Assign to Tajnur Vai' },
+  { value: 'Fardin Vai', label: 'Assign to Fardin Vai' },
+  { value: 'MA Hridoy', label: 'Assign to MA Hridoy' },
+  { value: 'RK Shawon', label: 'Assign to RK Shawon' },
+  { value: 'Mursalin Khan', label: 'Assign to Mursalin Khan' },
+];
 
 export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Pending,
@@ -91,7 +104,8 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Warm,
 ];
 
-export const AUTH_LEFT_TEXT = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
+export const AUTH_LEFT_TEXT =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
 export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';
