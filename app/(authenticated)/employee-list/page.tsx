@@ -1,11 +1,13 @@
 'use client';
-import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
+
+import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import LeadRow from '@/components/LeadRow/LeadRow';
 import Image from 'next/image';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import profileImage from '@/assets/images/profilePic.png';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import EmployeelistRow from '@/components/row/employee-list-row';
 
 const EmployeeListPage = () => {
   const router = useRouter();
@@ -39,11 +41,11 @@ const EmployeeListPage = () => {
           </div>
         </div>
       </div>
-      
+
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
         <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-          {LEADS_DATA.map((item, index) => (
-            <LeadRow key={index} item={item} />
+          {EMPLOYEE_LIST_DATA.map((item, index) => (
+            <EmployeelistRow key={index} item={item} />
           ))}
         </div>
       </div>
