@@ -70,22 +70,20 @@ const EmployeeListPage = () => {
       </div>
 
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
-        <div className='flex justify-between items-center content-center'>
-          <div className='flex items-center'>
-            <div className='ml-12'>
-              <p className=' font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
+        <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
+          <div className='flex justify-between items-center content-center'>
+            <div className='flex items-center'>
+              <div className='font-medium text-[12px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
                 A
-              </p>
-            </div>
+              </div>
 
-            <div className='flex items-center justify-center h-6 bg-[#E5DFFF] rounded-[17px] ms-2 p-2'>
-              <p className='leading-[normal] text-black font-semibold text-[16px] tracking-[-0.32px] whitespace-nowrap text-capitalize'>
-                {`7`}
-              </p>
+              <div className='flex items-center justify-center h-6 bg-[#E5DFFF] rounded-[17px] ms-2 p-2'>
+                <p className='leading-[normal] text-black font-bold text-[12px] tracking-[-0.32px] whitespace-nowrap text-capitalize'>
+                  {`2`}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
           {EMPLOYEE_LIST_DATA.map((item, index) => (
             <EmployeelistRow key={index} item={item} />
           ))}
