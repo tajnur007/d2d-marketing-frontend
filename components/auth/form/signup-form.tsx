@@ -106,7 +106,7 @@ const SignupForm = () => {
                 </p>
               }
               placeholder='Confirm Password'
-              type={showPassword ? 'text' : 'password'}
+              type={showConfirmPassword ? 'text' : 'password'}
               id='confirm password'
               name='Confirm Password'
               htmlFor='confirm password'
@@ -114,7 +114,7 @@ const SignupForm = () => {
             />
             <p
               className='absolute top-[40px] right-6 cursor-pointer'
-              onClick={handlePasswordVisibilityToggle}>
+              onClick={handleConfirmPasswordVisibilityToggle}>
               <PasswordRevealIcon />
             </p>
           </div>
