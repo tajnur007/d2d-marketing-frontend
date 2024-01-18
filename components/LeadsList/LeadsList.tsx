@@ -21,7 +21,7 @@ function LeadsList() {
   useEffect(() => {
     if (searchValue !== '') {
       const newFilteredData = LEADS_DATA.filter((data) => {
-        return data.title.includes(searchValue);
+        return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
       console.log(newFilteredData);
       setSearchData(newFilteredData);
