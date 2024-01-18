@@ -51,14 +51,14 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
             {item.status}
           </span>
         </div>
-        <div className='w-[25%]'>
+        {/* <div className='w-[25%]'>
           <p className='text-[#5630FF] text-xs whitespace-nowrap text-capitalize inline-block'>
             Assigned to
           </p>
           <p className='leading-[14px] text-black font-semibold text-[16px] tracking-[0] mt-[10px] whitespace-nowrap'>
             {item.assignedToName}
           </p>
-        </div>
+        </div> */}
         <div className='w-[2%]'>
           <LeadDetailsButton data={item} />
         </div>
