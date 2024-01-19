@@ -11,7 +11,7 @@ function CreateLeadsButton() {
         <div className='mr-2'>
           <Image src={plusImage} alt='' />
         </div>
-        <div className="[font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal] tracking-[0] whitespace-nowrap">
+        <div className="font-medium text-[14px] leading-[normal] tracking-[0] whitespace-nowrap">
           Create leads
         </div>
       </div>

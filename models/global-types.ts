@@ -61,6 +61,21 @@ export interface LEADS_DATA_TYPE {
   timestamp: string;
 }
 
+export interface EmployeestatusColor {
+  Active?: string;
+  Inactive?: string;
+}
+
+export interface EMPLOYEE_LIST_DATA_TYPE {
+  id: number;
+  employeeName: string;
+  employeeDesignation: string;
+  employeeEmail: string;
+  employeePhone: string;
+  employeeStatus: string;
+  employeeImage: string;
+}
+
 export interface FormItems {
   Title?: string;
   Name?: string;
