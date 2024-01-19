@@ -1,4 +1,4 @@
-import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { LEADS_DATA_TYPE, StatusState } from '@/models/global-types';
 import { LEAD_STATUS } from './common-constants';
 
 export const LEADS_DATA: LEADS_DATA_TYPE[] = [
@@ -213,3 +213,13 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     timestamp: '2023-12-01T09:30:00.000Z',
   },
 ];
+
+export const CREATED_BY_USERS_LIST = LEADS_DATA.map((item) => ({
+  value: item.assignedByName,
+  label: item.assignedByName,
+}));
+
+export const ASSIGNEE_USERS_LIST = LEADS_DATA.map((item) => ({
+  value: item.assignedToName,
+  label: item.assignedToName,
+}));

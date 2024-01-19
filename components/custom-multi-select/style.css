@@ -1,0 +1,19 @@
+.test > div > div > :nth-child(2) > span {
+  background-color: transparent !important;
+}
+
+.test > div > div {
+  border-color: transparent;
+}
+
+.test > div > div > :nth-child(1) > div > div {
+  color: #fff;
+  background-color: #4318ff !important;
+  height: 20px;
+  border-radius: 50px 0px 0px 50px;
+}
+
+.test > div > div > :nth-child(1) > div > :nth-child(2) {
+  border-radius: 0px 50px 50px 0px;
+  padding: 2px 4px 2px 5px;
+}

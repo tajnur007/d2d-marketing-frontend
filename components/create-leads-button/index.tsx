@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
-import React from 'react';
+import Image from 'next/image';
 
 function CreateLeadsButton() {
   return (

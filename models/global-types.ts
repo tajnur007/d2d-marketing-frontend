@@ -103,6 +103,7 @@ export interface SelectProps {
   selected?: string;
   setSelected?: (item: string) => void;
   options?: CreateLeadStatusItems[];
+  onSelectChange?: any;
 }
 
 export interface AssignSelectProps {
@@ -160,6 +161,23 @@ export interface CreateAssignToItems {
   isPublic: boolean;
 }
 
+export interface StatusState {
+  hot: boolean;
+  warm: boolean;
+  cold: boolean;
+}
+
+export interface FilterLeadsCardProps {
+  setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onFilterData: (data: any) => void;
+}
+
+export interface StatusCheckboxProps {
+  id: any;
+  onChange: any;
+  children: any;
+  checked: any;
+}
 
 export interface SearchBarProps {
   className?: string;

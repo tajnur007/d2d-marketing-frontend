@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation';
 
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/LeadRow/LeadRow';
-import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
+// import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
+import FilterLeadsButton from '../filter-leads-button';
+import CreateLeadsButton from '../create-leads-button';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -18,6 +20,8 @@ function LeadsList() {
   const handleCreateLeadButtonClick = () => {
     router.push(PAGE_ROUTES.LeadCreate);
   };
+  const [filterData, setFilterData] = useState({});
+  console.log('Filter Data => ', filterData);
 
   useEffect(() => {
     if (searchValue !== '') {
@@ -53,16 +57,21 @@ function LeadsList() {
               </p>
             </div>
           </div>
-          <div className='flex m-0 p-0'>
-            <div className='m-0 p-0'>
-              <SearchBar
-                handleKeyDown={handleKeyDown}
-                value={searchValue}
-                setValue={setSearchValue}
-              />
-            </div>
-            <div onClick={handleCreateLeadButtonClick}>
-              <CreateLeadsButton />
+          <div className='flex justify-around items-center'>
+            <div className='flex m-0 p-0'>
+              <div className='m-0 p-0'>
+                <SearchBar
+                  handleKeyDown={handleKeyDown}
+                  value={searchValue}
+                  setValue={setSearchValue}
+                />
+              </div>
+              <div>
+                <FilterLeadsButton onFilterData={(data: any) => setFilterData(data)} />
+              </div>
+              <div onClick={handleCreateLeadButtonClick}>
+                <CreateLeadsButton />
+              </div>
             </div>
           </div>
         </div>
