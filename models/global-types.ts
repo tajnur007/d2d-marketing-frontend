@@ -73,6 +73,13 @@ export interface FormItems {
   Date?: string;
   Image?: string;
 }
+export interface SignUpFormItems {
+  Name?: string;
+  Email?: string;
+  OrganizationName?: string;
+  Password?: string;
+  ConfirmPassword?: string;
+}
 export interface SelectProps {
   label?: React.ReactNode;
   className?: string;
