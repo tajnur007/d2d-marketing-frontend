@@ -193,7 +193,7 @@ const CreateLeadForm = () => {
           />
         </div>
         <div className='w-1/2 flex justify-end '>
-          <Button onClick={submitData} className='w-[193px] rounded-[10px] h-[60px] '>
+          <Button onClick={submitData} className='w-[193px] rounded-[10px] h-[60px]'>
             Create
           </Button>
         </div>

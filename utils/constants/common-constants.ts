@@ -5,6 +5,7 @@ import {
   CreateLeadStatusItems,
   CreateAssignToItems,
   AssignToUsers,
+  SignUpFormItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -69,6 +70,13 @@ export const FORM_ITEMS: FormItems = {
   Date: '',
   Image: '',
 };
+export const SignUpFORM_ITEMS: SignUpFormItems = {
+  Name: '',
+  Email: '',
+  OrganizationName: '',
+  Password: '',
+  ConfirmPassword: '',
+};
 
 export const LEAD_STATUS = {
   Pending: 'Pending',
@@ -96,14 +104,14 @@ export const ASSIGN_USERS: AssignToUsers[] = [
   { value: 'Mursalin Khan', label: 'Assign to Mursalin Khan' },
 ];
 
-export const ASSIGN_TO_NEW : CreateAssignToItems[] = [
+export const ASSIGN_TO_NEW: CreateAssignToItems[] = [
   { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das', isPublic: true },
   { value: 'Rezaul Mursalin Khan', label: 'Rezaul Mursalin Khan', isPublic: false },
-  { value: 'Aminul Islam', label: 'Aminul Islam' , isPublic: true},
-  { value: 'Sadia Rahman', label: 'Sadia Rahman' , isPublic: true},
+  { value: 'Aminul Islam', label: 'Aminul Islam', isPublic: true },
+  { value: 'Sadia Rahman', label: 'Sadia Rahman', isPublic: true },
   { value: 'Tahmina Akhter', label: 'Tahmina Akhter', isPublic: false },
-  { value: 'Rahim Ali', label: 'Rahim Ali' , isPublic:false},
-]
+  { value: 'Rahim Ali', label: 'Rahim Ali', isPublic: false },
+];
 
 export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Pending,
