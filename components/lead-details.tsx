@@ -8,7 +8,7 @@ import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 import { Dispatch, SetStateAction } from 'react';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
-import { DemoSelect } from './dropdown-select-modal';
+import { DemoSelect } from './assign-dropdown-select';
 
 const LeadDetails = ({
   setIsOpen,

@@ -1,58 +1,19 @@
-import Select from 'react-select';
-import { Button } from './button';
 import modalpng from '@/assets/images/assign-modal.png';
 import Image from 'next/image';
-import './dropdown-select.css';
-import { useState } from 'react';
-import { ASSIGN_USERS } from '@/utils/constants/common-constants';
 
-export const DemoSelect = () => {
-  const [transferButton, setTransferButton] = useState(false);
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [selected, setSelected] = useState('');
-
-  const handleConfirm = () => {
-    setShowConfirmationModal(true);
-  };
-
-  const handleTransfer = () => {
-    // Perform transfer action with the selected value
-    console.log('Transfer confirmed for:', selected);
-    setShowConfirmationModal(false);
-  };
-
-  const handleChange = (selectedOption: any) => {
-    {
-      ASSIGN_USERS.map((option) => {
-        if (option.value === selectedOption.value) {
-          setSelected(option.value);
-          setTransferButton(true);
-        }
-      });
-    }
-  };
-
+const ShowModal = ({
+  showConfirmationModal,
+  setShowConfirmationModal,
+  selected,
+  handleTransfer,
+}: {
+  showConfirmationModal: boolean;
+  setShowConfirmationModal: (show: boolean) => void;
+  selected: string;
+  handleTransfer: () => void;
+}) => {
   return (
     <>
-      <div className='flex place-items-center'>
-        <div className='w-[205px] font-medium py-[8px]'>
-          <Select
-            options={ASSIGN_USERS}
-            className='customselect font-medium text-[14px] tracking-[-0.28px] leading-[normal]'
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          {transferButton && (
-            <Button
-              onClick={handleConfirm}
-              className='bg-[#5630FF] text-[14px] text-white rounded-[11px] w-[80px] px-[8px] py-[10px] ml-2 justify-center items-center content-center gap-[10px] transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 font-medium tracking-[-0.28px] leading-[normal] whitespace-nowrap'>
-              Transfer
-            </Button>
-          )}
-        </div>
-      </div>
-
       {showConfirmationModal && (
         <div className='absolute 2xl:left-[-1450px] xl:left-[-1080px] lg:left-[-830px] md:left-[-575px] sm:left-[-350px] inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50'>
           <div className='w-[404px] h-[377px] bg-white rounded-[12px] overflow-hidden border border-solid border-gray-200'>
@@ -97,3 +58,4 @@ export const DemoSelect = () => {
     </>
   );
 };
+export default ShowModal;
