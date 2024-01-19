@@ -6,7 +6,7 @@ import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/LeadRow/LeadRow';
 import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import SearchBar from '@/components/search-bar/search-bar';
+import SearchBar from '@/components/search-bar';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
 
 function LeadsList() {
