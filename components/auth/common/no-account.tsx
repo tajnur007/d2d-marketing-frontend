@@ -14,17 +14,17 @@ const NoAccount = ({ signupPage }: NoAccountProps) => {
   return (
     <>
       {!isSignup ? (
-        <div className='ml-auto pt-[48px] pr-[45px]'>
-          Have an account?{' '}
+        <div className='pt-12 pr-10 flex items-center justify-end w-full text-[14px] text-black font-normal gap-2'>
+          Have an account?
           <Link href={PAGE_ROUTES.Signin}>
-            <span className='text-primary-bg hover:underline'>Sign in!</span>
+            <span className='text-[#5630FF] font-medium'>Sign In!</span>
           </Link>
         </div>
       ) : (
-        <div className='ml-auto pt-[48px] font-extralight text-[18px] leading-[28.8px] tracking-[0.18px] text-[#313957] pr-[45px]'>
-          Don&apos;t Have an account?{' '}
+        <div className='pt-12 pr-10 flex items-center justify-end w-full text-[14px] text-black font-normal gap-2'>
+          Don&apos;t Have an account?
           <Link href={PAGE_ROUTES.Signup}>
-            <span className='text-[#4318FF] hover:underline'>Sign Up!</span>
+            <span className='text-[#5630FF] font-medium'>Sign Up!</span>
           </Link>
         </div>
       )}

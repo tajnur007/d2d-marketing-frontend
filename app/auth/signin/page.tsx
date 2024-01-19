@@ -7,7 +7,7 @@ import { AUTH_LEFT_TEXT } from '@/utils/constants/common-constants';
 const SignInPage = () => {
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingSignIn}>
-      <NoAccount signupPage={false} />
+      <NoAccount signupPage={true} />
       <SigninForm />
     </AuthLayout>
   );
