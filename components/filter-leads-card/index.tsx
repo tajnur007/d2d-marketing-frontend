@@ -10,8 +10,8 @@ import { useState } from 'react';
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import { CustomMultiSelect } from '../CustomMultiSelect';
-import StatusCheckbox from '../StatusCheckBox/StatusCheckbox';
+import { CustomMultiSelect } from '../custom-multi-select';
+import StatusCheckbox from '../status-checkbox';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
@@ -112,7 +112,27 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
             <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
               Status
             </label>
-            <StatusCheckbox status={status} handleCheckboxChange={handleCheckboxChange} />
+            {/* <StatusCheckbox status={status} handleCheckboxChange={handleCheckboxChange} /> */}
+            <div className='flex items-center'>
+              <StatusCheckbox
+                id='hot-checkbox'
+                checked={status.hot}
+                onChange={() => handleCheckboxChange('hot')}>
+                Hot
+              </StatusCheckbox>
+              <StatusCheckbox
+                id='warm-checkbox'
+                checked={status.warm}
+                onChange={() => handleCheckboxChange('warm')}>
+                Warm
+              </StatusCheckbox>
+              <StatusCheckbox
+                id='cold-checkbox'
+                checked={status.cold}
+                onChange={() => handleCheckboxChange('cold')}>
+                Cold
+              </StatusCheckbox>
+            </div>
           </div>
 
           <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF]'></div>

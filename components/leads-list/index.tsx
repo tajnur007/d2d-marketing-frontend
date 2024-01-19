@@ -1,10 +1,10 @@
 'use client';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/LeadRow/LeadRow';
-import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
+import CreateLeadsButton from '@/components/create-leads-button';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import FilterLeadsButton from '../FilterLeadsButton';
+import FilterLeadsButton from '../filter-leads-button';
 import { useState } from 'react';
 
 function LeadsList() {

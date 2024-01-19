@@ -1,4 +1,4 @@
-import LeadsList from '@/components/LeadsList';
+import LeadsList from '@/components/leads-list';
 
 const LeadsPage = () => {
   return <LeadsList />;

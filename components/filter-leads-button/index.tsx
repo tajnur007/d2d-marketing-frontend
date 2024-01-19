@@ -1,6 +1,6 @@
 import { FilterLeadsIcon } from '@/assets/icons';
 import { useState } from 'react';
-import FilterLeadsCard from '../FilterLeadsCard';
+import FilterLeadsCard from '../filter-leads-card';
 
 function FilterLeadsButton({ onFilterData }: any) {
   const [isFilterCardOpen, setFilterCardOpen] = useState(false);

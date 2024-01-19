@@ -142,3 +142,10 @@ export interface FilterLeadsCardProps {
   setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onFilterData: (data: any) => void;
 }
+
+export interface StatusCheckboxProps {
+  id: any;
+  onChange: any;
+  children: any;
+  checked: any;
+}

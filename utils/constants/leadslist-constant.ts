@@ -223,8 +223,3 @@ export const ASSIGNEE_USERS_LIST = LEADS_DATA.map((item) => ({
   value: item.assignedToName,
   label: item.assignedToName,
 }));
-
-export interface StatusCheckboxProps {
-  status: StatusState;
-  handleCheckboxChange: (statusName: keyof StatusState) => void;
-}
