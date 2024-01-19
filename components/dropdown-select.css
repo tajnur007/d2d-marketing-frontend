@@ -1,0 +1,26 @@
+.customselect > div {
+  background-color: #a38eff;
+  border-radius: 11px;
+}
+
+.customselect > :nth-child(4) {
+  background-color: white;
+  border-radius: 2px;
+}
+
+.customselect > :nth-child(4) > div > div {
+  border-radius: 11px;
+  color: black !important;
+}
+
+.customselect > div > :nth-child(1) > div {
+  color: white;
+}
+
+.customselect > div > :nth-child(2) > span {
+  background: transparent;
+}
+
+.customselect > div > :nth-child(2) > div > svg {
+  color: white;
+}

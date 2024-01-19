@@ -73,6 +73,7 @@ export interface FormItems {
   Date?: string;
   Image?: string;
 }
+
 export interface SignUpFormItems {
   Name?: string;
   Email?: string;
@@ -80,6 +81,7 @@ export interface SignUpFormItems {
   Password?: string;
   ConfirmPassword?: string;
 }
+
 export interface SelectProps {
   label?: React.ReactNode;
   className?: string;
@@ -128,6 +130,11 @@ export interface AuthLayoutProps {
 }
 
 export interface CreateLeadStatusItems {
+  value: string;
+  label: string;
+}
+
+export interface AssignToUsers {
   value: string;
   label: string;
 }
