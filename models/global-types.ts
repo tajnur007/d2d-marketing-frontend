@@ -159,3 +159,11 @@ export interface CreateAssignToItems {
   label: string;
   isPublic: boolean;
 }
+
+
+export interface SearchBarProps {
+  className?: string;
+  value?: string;
+  setValue?: (item: string) => void;
+  handleKeyDown?: (e:any) => void; 
+}
