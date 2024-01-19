@@ -1,7 +1,7 @@
-import modalpng from '@/assets/images/assign-modal.png';
+import modalImage from '@/assets/images/assign-modal.png';
 import Image from 'next/image';
 
-const ShowModal = ({
+const TransferConfirmationModal = ({
   showConfirmationModal,
   setShowConfirmationModal,
   selected,
@@ -48,7 +48,7 @@ const ShowModal = ({
                   </div>
                 </div>
                 <div className='absolute w-[185px] h-[148px] top-0 left-[74px]'>
-                  <Image src={modalpng} alt='error' />
+                  <Image src={modalImage} alt='error' />
                 </div>
               </div>
             </div>
@@ -58,4 +58,5 @@ const ShowModal = ({
     </>
   );
 };
-export default ShowModal;
+
+export default TransferConfirmationModal;

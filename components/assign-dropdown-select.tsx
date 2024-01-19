@@ -3,9 +3,9 @@ import { Button } from './button';
 import './dropdown-select.css';
 import { useState } from 'react';
 import { ASSIGN_USERS } from '@/utils/constants/common-constants';
-import ShowModal from './assign-modal';
+import TransferConfirmationModal from './transfer-confirmation-modal';
 
-export const DemoSelect = () => {
+export const AssignDropdownSelect = () => {
   const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selected, setSelected] = useState('');
@@ -51,7 +51,7 @@ export const DemoSelect = () => {
           )}
         </div>
       </div>
-      <ShowModal
+      <TransferConfirmationModal
         showConfirmationModal={showConfirmationModal}
         setShowConfirmationModal={setShowConfirmationModal}
         selected={selected}

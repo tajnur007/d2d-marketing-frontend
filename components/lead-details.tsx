@@ -8,7 +8,7 @@ import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 import { Dispatch, SetStateAction } from 'react';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
-import { DemoSelect } from './assign-dropdown-select';
+import { AssignDropdownSelect } from './assign-dropdown-select';
 
 const LeadDetails = ({
   setIsOpen,
@@ -55,7 +55,7 @@ const LeadDetails = ({
             {data?.date}
           </div>
         </div>
-        <DemoSelect />
+        <AssignDropdownSelect />
       </div>
       <div className='poc bg-[#EDEBF4] p-4 rounded-lg mt-4 whitespace-normal'>
         <h4 className='text-[#5630FF] mb-2 text-[12px]'>Points of Contact</h4>
