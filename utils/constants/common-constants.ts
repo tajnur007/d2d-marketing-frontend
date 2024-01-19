@@ -1,4 +1,12 @@
-import { FormItems, SidebarItem, statusColor, CreateLeadStatusItems, CreateAssignToItems } from '@/models/global-types';
+import {
+  FormItems,
+  SidebarItem,
+  statusColor,
+  CreateLeadStatusItems,
+  CreateAssignToItems,
+  AssignToUsers,
+  SignUpFormItems,
+} from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
@@ -14,9 +22,9 @@ export const PAGE_ROUTES = {
   Signin: '/auth/signin',
   Signup: '/auth/signup',
   Forgetpassword: '/auth/forget-password',
-  EmailSent:  '/auth/forget-password/email-sent',
+  EmailSent: '/auth/forget-password/email-sent',
   LeadCreate: '/leads/create',
-  EmployeeList:'/employee-list'
+  EmployeeList: '/employee-list',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -43,10 +51,10 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   },
   {
     id: 4,
-    iconName:'Employee List',
+    iconName: 'Employee List',
     path: PAGE_ROUTES.EmployeeList,
     icon: EmployeeListIcon,
-    position: 150
+    position: 150,
   },
 ];
 
@@ -61,6 +69,13 @@ export const FORM_ITEMS: FormItems = {
   Reminder: '',
   Date: '',
   Image: '',
+};
+export const SignUpFORM_ITEMS: SignUpFormItems = {
+  Name: '',
+  Email: '',
+  OrganizationName: '',
+  Password: '',
+  ConfirmPassword: '',
 };
 
 export const LEAD_STATUS = {
@@ -79,16 +94,24 @@ export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'Hot', label: 'Hot' },
   { value: 'Cool', label: 'Cool' },
   { value: 'Warm', label: 'Warm' },
-]
+];
 
-export const ASSIGN_TO_NEW : CreateAssignToItems[] = [
+export const ASSIGN_USERS: AssignToUsers[] = [
+  { value: 'Tajnur Vai', label: 'Assign to Tajnur Vai' },
+  { value: 'Fardin Vai', label: 'Assign to Fardin Vai' },
+  { value: 'MA Hridoy', label: 'Assign to MA Hridoy' },
+  { value: 'RK Shawon', label: 'Assign to RK Shawon' },
+  { value: 'Mursalin Khan', label: 'Assign to Mursalin Khan' },
+];
+
+export const ASSIGN_TO_NEW: CreateAssignToItems[] = [
   { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das', isPublic: true },
   { value: 'Rezaul Mursalin Khan', label: 'Rezaul Mursalin Khan', isPublic: false },
-  { value: 'Aminul Islam', label: 'Aminul Islam' , isPublic: true},
-  { value: 'Sadia Rahman', label: 'Sadia Rahman' , isPublic: true},
+  { value: 'Aminul Islam', label: 'Aminul Islam', isPublic: true },
+  { value: 'Sadia Rahman', label: 'Sadia Rahman', isPublic: true },
   { value: 'Tahmina Akhter', label: 'Tahmina Akhter', isPublic: false },
-  { value: 'Rahim Ali', label: 'Rahim Ali' , isPublic:false},
-]
+  { value: 'Rahim Ali', label: 'Rahim Ali', isPublic: false },
+];
 
 export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Pending,
@@ -99,7 +122,8 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Warm,
 ];
 
-export const AUTH_LEFT_TEXT = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
+export const AUTH_LEFT_TEXT =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
 export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';

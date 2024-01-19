@@ -61,6 +61,21 @@ export interface LEADS_DATA_TYPE {
   timestamp: string;
 }
 
+export interface EmployeestatusColor {
+  Active?: string;
+  Inactive?: string;
+}
+
+export interface EMPLOYEE_LIST_DATA_TYPE {
+  id: number;
+  employeeName: string;
+  employeeDesignation: string;
+  employeeEmail: string;
+  employeePhone: string;
+  employeeStatus: string;
+  employeeImage: string;
+}
+
 export interface FormItems {
   Title?: string;
   Name?: string;
@@ -73,6 +88,15 @@ export interface FormItems {
   Date?: string;
   Image?: string;
 }
+
+export interface SignUpFormItems {
+  Name?: string;
+  Email?: string;
+  OrganizationName?: string;
+  Password?: string;
+  ConfirmPassword?: string;
+}
+
 export interface SelectProps {
   label?: React.ReactNode;
   className?: string;
@@ -126,6 +150,11 @@ export interface CreateLeadStatusItems {
   label: string;
 }
 
+export interface AssignToUsers {
+  value: string;
+  label: string;
+}
+
 export interface CreateAssignToItems {
   value: string;
   label: string;
@@ -148,4 +177,11 @@ export interface StatusCheckboxProps {
   onChange: any;
   children: any;
   checked: any;
+}
+
+export interface SearchBarProps {
+  className?: string;
+  value?: string;
+  setValue?: (item: string) => void;
+  handleKeyDown?: (e:any) => void; 
 }
