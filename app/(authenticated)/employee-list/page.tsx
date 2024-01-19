@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import Image from 'next/image';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
@@ -7,19 +8,21 @@ import profileImage from '@/assets/images/profilePic.png';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import EmployeelistRow from '@/components/row/employee-list-row';
 import { useState } from 'react';
+import { EMPLOYEE_LIST_DATA_TYPE } from '@/models/global-types';
 
 const EmployeeListPage = () => {
-    const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-    const handleSearchChange = (event: any) => {
-      setSearchTerm(event.target.value);
-    };
+  const handleSearchChange = (event: any) => {
+    setSearchTerm(event.target.value);
+  };
   const handleNewEmployeeButtonClick = () => {
-    console.log("Button Clicked.");
+    console.log('Button Clicked.');
   };
   const filteredEmployeeList = EMPLOYEE_LIST_DATA.filter((employee) =>
     employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   return (
     <div className='border border-gray-100 bg-white rounded-xl h-[88vh] w-full'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
@@ -53,7 +56,7 @@ const EmployeeListPage = () => {
                 <input
                   type='search'
                   id='default-search'
-                  className='w-[800px] mx-1 p-3 ps-10 text-md border border-gray-300 rounded-lg'
+                  className='mx-1 p-3 ps-10 text-md border border-gray-300 rounded-lg lg:w-[800px]'
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
@@ -79,19 +82,19 @@ const EmployeeListPage = () => {
 
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
         <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-          {/* <div className='flex justify-between items-center content-center'>
-            <div className='flex items-center'>
-              <div className='font-medium text-[12px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
-                A
-              </div>
+            <div className='flex justify-between items-center content-center'>
+              <div className='flex items-center'>
+                <div className='font-semibold text-[12px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
+                  Total:
+                </div>
 
-              <div className='flex items-center justify-center h-6 bg-[#E5DFFF] rounded-[17px] ms-2 p-2'>
-                <p className='leading-[normal] text-black font-bold text-[12px] tracking-[-0.32px] whitespace-nowrap text-capitalize'>
-                  {EMPLOYEE_LIST_DATA.length}
-                </p>
+                <div className='flex items-center justify-center h-6 bg-[#E5DFFF] rounded-[17px] ms-2 p-2'>
+                  <p className='leading-[normal] text-black font-bold text-[12px] tracking-[-0.32px] whitespace-nowrap text-capitalize'>
+                    {filteredEmployeeList.length}
+                  </p>
+                </div>
               </div>
             </div>
-          </div> */}
           {filteredEmployeeList.map((item, index) => (
             <EmployeelistRow key={index} item={item} />
           ))}
