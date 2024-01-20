@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Modal from 'react-modal';
+import { Modal } from './Modal';
 
 const CreateEmployeeModal = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
