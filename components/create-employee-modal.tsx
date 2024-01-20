@@ -14,8 +14,6 @@ const CreateEmployeeModal = ({
   formErrors,
   setFormErrors = () => {},
 }: CreateEmployeeModalProps) => {
-  const [isEmpty, setIsEmpty] = useState<boolean>(false);
-
   const closeModal = () => {
     setModalIsOpen(false);
   };
@@ -40,19 +38,18 @@ const CreateEmployeeModal = ({
 
   const submitData = () => {
     const newFormErrors: any = {};
-    setIsEmpty(false);
 
     for (let field in formData) {
       if (formData[field as keyof typeof formData] === '') {
         newFormErrors[field] = `(${field} is required)`;
-        setIsEmpty(true);
       }
     }
     setFormErrors(newFormErrors);
 
     console.log(formData);
-    if (isEmpty === false) {
-      console.log('modal closing', isEmpty);
+    if (Object.values(formData).includes('')) {
+      setModalIsOpen(true);
+    } else {
       setModalIsOpen(false);
     }
   };
