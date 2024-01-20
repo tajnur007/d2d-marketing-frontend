@@ -15,7 +15,6 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@types/react-date-range": "^1.4.9",
     "@types/react-dates": "^21.8.6",
-    "@types/react-modal": "^3.16.3",
     "@vercel/speed-insights": "^1.0.2",
     "axios": "^1.6.2",
     "chart.js": "^4.4.1",
@@ -56,6 +55,5 @@
   },
   "engines": {
     "node": "20.x"
-  },
-  "packageManager": "yarn@4.0.1"
+  }
 }
