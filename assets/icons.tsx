@@ -472,3 +472,22 @@ export const EditIcon = () => {
     </svg>
   );
 };
+
+export const ExIcon = () => {
+  return (
+    <svg
+      width='20'
+      height='20'
+      viewBox='0 0 20 20'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M14.2461 6.5L7.24609 13.5M7.24609 6.5L14.2461 13.5'
+        stroke='#667085'
+        strokeWidth='1.66667'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
+  );
+};

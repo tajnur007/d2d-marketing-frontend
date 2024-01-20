@@ -73,7 +73,7 @@ export interface EMPLOYEE_LIST_DATA_TYPE {
   employeeEmail: string;
   employeePhone: string;
   employeeStatus: string;
-  employeeImage: string;
+  employeeImage?: string;
 }
 
 export interface FormItems {
@@ -167,6 +167,15 @@ export interface StatusState {
   cold: boolean;
 }
 
+export interface CreateEmployeeModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  formData: CreateEmployeeItems;
+  setFormData: (item: any) => void;
+  formErrors: CreateEmployeeItems;
+  setFormErrors: (item: any) => void;
+}
+
 export interface FilterLeadsCardProps {
   setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onFilterData: (data: any) => void;
@@ -184,4 +193,21 @@ export interface SearchBarProps {
   value?: string;
   setValue?: (item: string) => void;
   handleKeyDown?: (e:any) => void; 
+}
+
+
+export interface CreateEmployeeItems {
+  Name?: string;
+  Phone?: string;
+  Email?: string;
+  Designation?: string;
+}
+
+export interface CreateEmployeeModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  formData: CreateEmployeeItems;
+  setFormData: (item: any) => void;
+  formErrors: CreateEmployeeItems;
+  setFormErrors: (item: any) => void;
 }

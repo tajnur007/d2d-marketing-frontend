@@ -6,6 +6,7 @@ import {
   CreateAssignToItems,
   AssignToUsers,
   SignUpFormItems,
+  CreateEmployeeItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -121,6 +122,13 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Cool,
   LEAD_STATUS.Warm,
 ];
+
+export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
+  Name: '',
+  Phone: '',
+  Email: '',
+  Designation: '',
+}
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
