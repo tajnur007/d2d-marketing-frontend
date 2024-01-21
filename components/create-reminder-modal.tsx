@@ -60,7 +60,7 @@ const CreateReminderModal = ({
     setModalIsOpen(false);
   };
 
-  const handleChange = (selectedOption: any) => {
+  const handleSelectChange = (selectedOption: any) => {
     CREATE_LEAD_STATUS_NEW.map((option) => {
       if (option.value === selectedOption.value) {
         setSelected(option.value);
@@ -163,7 +163,7 @@ const CreateReminderModal = ({
                 borderRadius: '10px',
               }),
             }}
-            onChange={handleChange}
+            onChange={handleSelectChange}
           />
         </div>
 
