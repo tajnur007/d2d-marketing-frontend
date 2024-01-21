@@ -1,4 +1,5 @@
 import { StaticImageData } from 'next/image';
+
 import React, {
   ButtonHTMLAttributes,
   InputHTMLAttributes,
@@ -126,6 +127,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   htmlFor?: string;
   errorMessage?: string;
 }
+
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
@@ -183,5 +185,29 @@ export interface SearchBarProps {
   className?: string;
   value?: string;
   setValue?: (item: string) => void;
-  handleKeyDown?: (e:any) => void; 
+  handleKeyDown?: (e: any) => void;
+}
+
+export interface MyModalProps {
+  isModalOpen: boolean;
+  closeModal: () => void;
+}
+
+export interface CreateReminderItems {
+  Title?: string;
+  AssociatedLead?: string;
+  Note?: string;
+  Status?: string;
+  Date?: string;
+}
+
+export interface CreateReminderModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  formData: CreateReminderItems;
+  setFormData: (item: any) => void;
+  formErrors: CreateReminderItems;
+  setFormErrors: (item: any) => void;
+  selected: string;
+  setSelected: (item: string) => void;
 }

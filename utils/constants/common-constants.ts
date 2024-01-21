@@ -6,6 +6,7 @@ import {
   CreateAssignToItems,
   AssignToUsers,
   SignUpFormItems,
+  CreateReminderItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -70,6 +71,15 @@ export const FORM_ITEMS: FormItems = {
   Date: '',
   Image: '',
 };
+
+export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
+  Title: '',
+  AssociatedLead: '',
+  Note: '',
+  Status: '',
+  Date: '',
+};
+
 export const SignUpFORM_ITEMS: SignUpFormItems = {
   Name: '',
   Email: '',
