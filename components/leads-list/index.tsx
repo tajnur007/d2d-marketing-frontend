@@ -32,7 +32,7 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress]);
+  }, [keyPress, searchValue]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
