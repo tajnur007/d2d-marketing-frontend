@@ -34,7 +34,7 @@ const CreateEmployeeModal = ({
     setFormData((prev: any) => {
       return { ...prev };
     });
-  }, [formErrors]);
+  }, [formErrors, setFormData]);
 
   const submitData = () => {
     const newFormErrors: any = {};
