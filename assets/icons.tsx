@@ -472,3 +472,89 @@ export const EditIcon = () => {
     </svg>
   );
 };
+
+export const CalendarIcon = () => {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='20'
+      height='20'
+      viewBox='0 0 20 20'
+      fill='none'>
+      <path
+        d='M6.66675 1.66669V4.16669'
+        stroke='#101828'
+        stroke-width='1.5'
+        stroke-miterlimit='10'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M13.3333 1.66669V4.16669'
+        stroke='#101828'
+        stroke-width='1.5'
+        stroke-miterlimit='10'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M2.91675 7.57507H17.0834'
+        stroke='#101828'
+        stroke-width='1.5'
+        stroke-miterlimit='10'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M17.5 7.08335V14.1667C17.5 16.6667 16.25 18.3334 13.3333 18.3334H6.66667C3.75 18.3334 2.5 16.6667 2.5 14.1667V7.08335C2.5 4.58335 3.75 2.91669 6.66667 2.91669H13.3333C16.25 2.91669 17.5 4.58335 17.5 7.08335Z'
+        stroke='#101828'
+        stroke-width='1.5'
+        stroke-miterlimit='10'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M13.0786 11.4166H13.0861'
+        stroke='#101828'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M13.0786 13.9166H13.0861'
+        stroke='#101828'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M9.99585 11.4166H10.0034'
+        stroke='#101828'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M9.99585 13.9166H10.0034'
+        stroke='#101828'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M6.91162 11.4166H6.91911'
+        stroke='#101828'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+      <path
+        d='M6.91162 13.9166H6.91911'
+        stroke='#101828'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+    </svg>
+  );
+};

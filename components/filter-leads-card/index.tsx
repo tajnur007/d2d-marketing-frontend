@@ -1,26 +1,27 @@
 'use-client';
 
+import { CalendarIcon } from '@/assets/icons';
 import { FilterLeadsCardProps, StatusState } from '@/models/global-types';
 import {
   ASSIGNEE_USERS_LIST,
   CREATED_BY_USERS_LIST,
 } from '@/utils/constants/leadslist-constant';
-import { Moment } from 'moment';
 import { useState } from 'react';
-import { DateRangePicker } from 'react-dates';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { CustomMultiSelect } from '../custom-multi-select';
 import StatusCheckbox from '../status-checkbox';
+import './style.css'
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
   setFilterCardOpen,
 }) => {
   //! State for date range
-  const [startDate, setStartDate] = useState<Moment | null>(null);
-  const [endDate, setEndDate] = useState<Moment | null>(null);
-  const [focusedInput, setFocusedInput] = useState<'startDate' | 'endDate' | null>(null);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
 
   //! State for status
   const [status, setStatus] = useState<StatusState>({
@@ -76,8 +77,8 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
       <div className='absolute z-10 w-[389px] h-[452px] rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 right-0'>
         <div className='p-[20px]'>
           {/* Created by */}
-          <div className='my-2'>
-            <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
+          <div className='mt-[10px]'>
+            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
               Created by
             </label>
             <div>
@@ -92,8 +93,8 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF]'></div>
 
           {/* Assignee */}
-          <div className='my-2'>
-            <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
+          <div className='mt-[10px]'>
+            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
               Assignee
             </label>
             <div className='items-center'>
@@ -108,12 +109,11 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF]'></div>
 
           {/* Status */}
-          <div className='my-2'>
-            <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
+          <div className='mt-[10px]'>
+            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
               Status
             </label>
-            {/* <StatusCheckbox status={status} handleCheckboxChange={handleCheckboxChange} /> */}
-            <div className='flex items-center'>
+            <div className='m-[10px] flex items-center'>
               <StatusCheckbox
                 id='hot-checkbox'
                 checked={status.hot}
@@ -138,30 +138,53 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF]'></div>
 
           {/* Date Range */}
-          <div className='my-2'>
-            <label className='font-semibold text-[#00156A] text-[16px] mb-1'>
+          <div className='my-[10px]'>
+            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
               Date Range
             </label>
             <div className='bg-white w-full mt-2 text-center'>
-              <DateRangePicker
-                startDate={startDate}
-                startDateId='your_unique_start_date_id'
-                endDate={endDate}
-                endDateId='your_unique_end_date_id'
-                onDatesChange={({ startDate, endDate }) => {
-                  setStartDate(startDate);
-                  setEndDate(endDate);
-                }}
-                focusedInput={focusedInput}
-                onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
-                displayFormat={() => 'MMM D, YYYY'}
-                anchorDirection='left'
-              />
+              <div className='flex space-x-2 items-center'>
+                <div className='relative w-[159px] h-[44px]'>
+                  <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start'>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date: any) => setStartDate(date)}
+                      selectsStart
+                      startDate={startDate}
+                      endDate={endDate}
+                      dateFormat='MMM d, yyyy'
+                    />
+                  </div>
+                  <span className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'>
+                    <CalendarIcon />
+                  </span>
+                </div>
+                <span className='text-[#667085]'>–</span>
+                <div className='relative w-[159px] h-[44px]'>
+                  <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start'>
+                    <DatePicker
+                      selected={endDate}
+                      onChange={(date: any) => setEndDate(date)}
+                      selectsEnd
+                      startDate={startDate}
+                      endDate={endDate}
+                      minDate={startDate}
+                      // withPortal
+                      dateFormat='MMM d, yyyy'
+                      icon={<CalendarIcon />}
+                      // showIcon
+                    />
+                  </div>
+                  <span className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'>
+                    <CalendarIcon />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Apply and Cancel Buttons */}
-          <div className='flex justify-between my-10'>
+          <div className='flex justify-between my-[18px]'>
             <button
               onClick={CancelFilter}
               className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl'>

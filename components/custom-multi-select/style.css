@@ -15,5 +15,33 @@
 
 .test > div > div > :nth-child(1) > div > :nth-child(2) {
   border-radius: 0px 50px 50px 0px;
-  padding: 2px 4px 2px 5px;
+  display: inline-flex;
+padding: 2px 4px 2px 5px;
+justify-content: center;
+align-items: center;
+gap: 3px;
+}
+
+.test > div > div > :nth-child(1) > :nth-child(1) {
+  background-color: white !important;
+}
+
+.test > div > div > :nth-child(1) > :nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.test > div > div > :nth-child(1) > :nth-child(1) > :nth-child(1) {
+  color: #fff;
+  text-align: center;
+  font-family: Metropolis;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: -0.24px;
+  padding-bottom: 10px;
 }
