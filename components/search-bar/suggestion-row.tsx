@@ -22,17 +22,14 @@ const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
   };
 
   return (
-    <div className='relative bg-white shadow-md p-3' onClick={toggleDrawer}>
-      <div className='flex justify-between items-center w-[100%] z-10 p-2 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5'>
+    <div className='relative bg-white shadow-md rounded-xl' onClick={toggleDrawer}>
+      <div className='flex justify-between items-center rounded-xl w-[100%] z-10 p-2 border-b-2 border-indigo-50 bg-white ring-1 ring-black ring-opacity-5'>
         <div className='p-2'>
-          <p className='leading-trim font-semibold text-indigo-950 text-sm leading-[14px]'>
-            {item.title}
-          </p>
-          <div className='flex items-center mt-[2px]'>
-            <div className='mr-1'>
-              <Image src={clockImage} alt='' />
-            </div>
-            <div className='text-[#9d9d9d] text-[12px] leading-[14.5px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
+          <p className='leading-3 font-semibold text-indigo-950 text-sm'>{item.title}</p>
+          <div className='flex items-center mt-[4px]'>
+            <Image src={clockImage} alt='' />
+
+            <div className='text-[#9d9d9d] font-normal text-[12px] leading-[14.5px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
               {item.date}
             </div>
           </div>
