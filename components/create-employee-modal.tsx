@@ -16,13 +16,13 @@ const CreateEmployeeModal = ({
   formErrors,
   setFormErrors = () => {},
 }: CreateEmployeeModalProps) => {
-  const [selected, setSelected] = useState('Pending');
+  const [selected, setSelected] = useState('Executive');
 
   useEffect(() => {
     setFormData((prev: any) => {
-      return { ...prev, Status: selected };
+      return { ...prev };
     });
-  }, [selected, formErrors]);
+  }, [formErrors]);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -112,7 +112,7 @@ const CreateEmployeeModal = ({
           className='mb-4'
         />
 
-        <Button onClick={submitData} className='w-full rounded-[10px] h-[60px]'>
+        <Button onClick={submitData} className='w-full rounded-[10px] h-[60px] mt-8'>
           Create
         </Button>
       </Modal>

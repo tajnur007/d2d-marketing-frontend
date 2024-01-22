@@ -22,7 +22,7 @@ export const CustomSelect = ({
       <label className='text-[#00156A] text-xs mb-1 font-medium'>{label}</label>
       <div className='relative font-medium '>
         <Select
-          className='customselect font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+          className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
           defaultValue={options[0]}
           options={options}
           onChange={handleChange}
