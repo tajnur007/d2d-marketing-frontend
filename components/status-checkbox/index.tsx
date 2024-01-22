@@ -18,7 +18,7 @@ const StatusCheckbox: React.FC<StatusCheckboxProps> = ({
       />
       <label
         htmlFor={id}
-        className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+        className='ms-[8px] text-[14px] font-500 text-[#344054] dark:text-gray-300'>
         {children}
       </label>
     </div>
