@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Modal } from '@/components/modal';
+import { Modal } from './modal';
 import { CreateEmployeeModalProps } from '@/models/global-types';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
