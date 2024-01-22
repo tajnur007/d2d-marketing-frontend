@@ -1,6 +1,6 @@
-import { EmployeeType } from '@/models/global-types';
+import { EMPLOYEE_LIST_DATA_TYPE } from '@/models/global-types';
 
-export const EMPLOYEE_LIST_DATA: EmployeeType[] = [
+export const EMPLOYEE_LIST_DATA: EMPLOYEE_LIST_DATA_TYPE[] = [
   {
     id: 1,
     employeeName: 'Adela Parkson',

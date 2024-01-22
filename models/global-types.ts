@@ -66,16 +66,25 @@ export interface EmployeestatusColor {
   Inactive?: string;
 }
 
-export interface EmployeeType {
+export interface EMPLOYEE_LIST_DATA_TYPE {
   id: number;
   employeeName: string;
   employeeDesignation: string;
   employeeEmail: string;
   employeePhone: string;
   employeeStatus: string;
-  employeeImage?: string;
+  employeeImage: string;
 }
 
+export interface GeoLocation {
+  lat: number;
+  lng: number;
+}
+
+export interface LocationProps {
+  setLocation: React.Dispatch<React.SetStateAction<GeoLocation>>;
+  location: GeoLocation;
+}
 export interface FormItems {
   Title?: string;
   Name?: string;
@@ -87,6 +96,7 @@ export interface FormItems {
   Reminder?: string;
   Date?: string;
   Image?: string;
+  location?: GeoLocation;
 }
 
 export interface SignUpFormItems {
@@ -167,15 +177,6 @@ export interface StatusState {
   cold: boolean;
 }
 
-export interface CreateEmployeeModalProps {
-  modalIsOpen: boolean;
-  setModalIsOpen: (item: boolean) => void;
-  formData: CreateEmployeeItems;
-  setFormData: (item: any) => void;
-  formErrors: CreateEmployeeItems;
-  setFormErrors: (item: any) => void;
-}
-
 export interface FilterLeadsCardProps {
   setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onFilterData: (data: any) => void;
@@ -192,22 +193,5 @@ export interface SearchBarProps {
   className?: string;
   value?: string;
   setValue?: (item: string) => void;
-  handleKeyDown?: (e:any) => void; 
-}
-
-
-export interface CreateEmployeeItems {
-  Name?: string;
-  Phone?: string;
-  Email?: string;
-  Designation?: string;
-}
-
-export interface CreateEmployeeModalProps {
-  modalIsOpen: boolean;
-  setModalIsOpen: (item: boolean) => void;
-  formData: CreateEmployeeItems;
-  setFormData: (item: any) => void;
-  formErrors: CreateEmployeeItems;
-  setFormErrors: (item: any) => void;
+  handleKeyDown?: (e: any) => void;
 }

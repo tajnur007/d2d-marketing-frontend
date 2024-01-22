@@ -6,7 +6,6 @@ import {
   CreateAssignToItems,
   AssignToUsers,
   SignUpFormItems,
-  CreateEmployeeItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -45,19 +44,18 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   },
   {
     id: 3,
-    iconName: 'Employee List',
-    path: PAGE_ROUTES.EmployeeList,
-    icon: EmployeeListIcon,
+    iconName: 'Settings',
+    path: PAGE_ROUTES.Settings,
+    icon: SettingIcon,
     position: 100,
   },
   {
     id: 4,
-    iconName: 'Settings',
-    path: PAGE_ROUTES.Settings,
-    icon: SettingIcon,
+    iconName: 'Employee List',
+    path: PAGE_ROUTES.EmployeeList,
+    icon: EmployeeListIcon,
     position: 150,
   },
-
 ];
 
 export const FORM_ITEMS: FormItems = {
@@ -71,7 +69,9 @@ export const FORM_ITEMS: FormItems = {
   Reminder: '',
   Date: '',
   Image: '',
+  location: { lat: 0, lng: 0 },
 };
+
 export const SignUpFORM_ITEMS: SignUpFormItems = {
   Name: '',
   Email: '',
@@ -124,16 +124,8 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Warm,
 ];
 
-export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
-  Name: '',
-  Phone: '',
-  Email: '',
-  Designation: '',
-}
-
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
 export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';
-
