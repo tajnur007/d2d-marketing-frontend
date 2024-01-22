@@ -23,6 +23,15 @@ export const CustomSelect = ({
       <div className='relative font-medium '>
         <Select
           className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+          styles={{
+            control: (baseStyles) => ({
+              ...baseStyles,
+              borderColor: '2px #F3F3F3 solid',
+              width: '100%',
+              height: '46px',
+              borderRadius: '10px',
+            }),
+          }}
           defaultValue={options[0]}
           options={options}
           onChange={handleChange}
