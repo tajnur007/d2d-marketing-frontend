@@ -59,7 +59,7 @@ function LeadsList() {
           </div>
           <div className='flex justify-around items-center'>
             <div className='flex m-0 p-0'>
-              <div className='m-0 p-0'>
+              <div className='m-0 mr-2 p-0'>
                 <SearchBar
                   handleKeyDown={handleKeyDown}
                   value={searchValue}
