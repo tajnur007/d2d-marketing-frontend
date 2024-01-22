@@ -6,9 +6,13 @@ import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
-import { Dispatch, SetStateAction } from 'react';
-import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { CreateReminderItems, LEADS_DATA_TYPE } from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
+import { Button } from './button';
+import ModalComponent from './create-reminder-modal';
+import React from 'react';
+import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 
 const LeadDetails = ({
   setIsOpen,
@@ -17,6 +21,17 @@ const LeadDetails = ({
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   data: LEADS_DATA_TYPE;
 }) => {
+  const [selected, setSelected] = useState('');
+  const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
+  const [formErrors, setFormErrors] =
+    useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
+
+  const handleAddReminderButtonClick = () => {
+    console.log('Button Clicked.');
+    setModalIsOpen(true);
+  };
+
   return (
     <div className='p-8  h-full overflow-y-auto no-scrollbar '>
       <div className='flex justify-between items-center'>
@@ -29,7 +44,9 @@ const LeadDetails = ({
           </button>
         </div>
       </div>
+
       <h4 className='text-[#00156A] font-medium text-[12px]'>Location</h4>
+
       <div className='flex items-center gap-4'>
         <div className='flex justify-between items-center gap-1'>
           <div>
@@ -39,6 +56,7 @@ const LeadDetails = ({
         </div>
         <button className='text-[#5630FF]'>Change</button>
       </div>
+
       <div className='desc'>
         <div className='flex items-center gap-4 mt-3'>
           <div className='flex-grow break-all'>{data?.title}</div>
@@ -57,33 +75,42 @@ const LeadDetails = ({
         </div>
         <AssignDropdownSelect />
       </div>
+
       <div className='poc bg-[#EDEBF4] p-4 rounded-lg mt-4 whitespace-normal'>
         <h4 className='text-[#5630FF] mb-2 text-[12px]'>Points of Contact</h4>
+
         <div className='rounded-lg bg-white mb-4 p-4'>
           <div className='text-[#5630FF] mb-2 text-[12px]'>Name</div>
           <div className='font-bold text-black text-[16px]'>{data?.assignedByName}</div>
         </div>
+
         <div className='rounded-lg bg-white mb-4 p-4'>
           <div className='text-[#5630FF] mb-2 text-[12px]'>Phone</div>
           <div className='font-bold text-black text-[16px]'>{data?.assignedByNumber}</div>
         </div>
+
         <div className='rounded-lg bg-white mb-4 p-4'>
           <div className='text-[#5630FF] mb-2 text-[12px]'>Email</div>
           <div className='font-bold text-black text-[16px]'>{data?.assignedByEmail}</div>
         </div>
+
         <div className='rounded-lg bg-white mb-4 p-4'>
           <div className='text-[#5630FF] mb-2 text-[12px]'>Reference</div>
           <div className='font-bold text-black text-[16px]'>{data?.assignedToName}</div>
         </div>
-        <div className='rounded-lg bg-white p-4 '>
+
+        <div className='rounded-lg bg-white p-4'>
           <div className='text-[#5630FF] mb-2 text-[12px]'>Meeting notes</div>
           <p className='font-bold text-black text-[16px]'>{data?.meetingNote}</p>
         </div>
       </div>
+
       <div className=''>
         <h4 className='text-[#00156A] font-medium text-[12px] mt-5'>Image</h4>
+
         <Image src={leadImage} alt='image' className='w-[108px] h-[108px]' />
       </div>
+
       <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
         <div className='text-[#5630FF] mb-2 text-[12px]'>Reminder</div>
         <div className='font-bold text-black'>{data?.reminder?.reminderTitle}</div>
@@ -92,9 +119,24 @@ const LeadDetails = ({
           {data?.reminder?.reminderStatus}
         </button>
       </div>
+
       <div className='flex justify-center items-center'>
-        <button className='text-[#5630FF] my-8'>Add Reminder</button>
+        <Button
+          onClick={handleAddReminderButtonClick}
+          className='text-white text-[14px] rounded-[10px] font-semibold leading-[14px] w-[183px] h-[50px] my-8'>
+          Add Reminder
+        </Button>
       </div>
+      <ModalComponent
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        formData={formData}
+        setFormData={setFormData}
+        formErrors={formErrors}
+        setFormErrors={setFormErrors}
+        selected={selected}
+        setSelected={setSelected}
+      />
     </div>
   );
 };
