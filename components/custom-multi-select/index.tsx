@@ -40,7 +40,7 @@ export const CustomMultiSelect = ({
           classNames={{
             control: ({ isFocused }) =>
               twMerge(
-                'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid text-[14px] font-medium bg-[] px-3',
+                'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid text-[14px] font-medium test2',
                 isFocused ? 'border-primary-500' : 'border-[#F3F3F3]',
                 controlStyles.base
               ),
