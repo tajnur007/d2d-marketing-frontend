@@ -45,11 +45,11 @@ const SearchBar = ({
   };
 
   return (
-    <div className='m-0 p-0' ref={newRef}>
-      <div className='w-[30vw] h-12 p-3 bg-white rounded-[14px] border border-zinc-100 justify-start items-center gap-[5px] inline-flex'>
+    <div className='mr-2 p-0' ref={newRef}>
+      <div className='w-[30vw] h-14 m-0  pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex '>
         <SearchIcon />
         <input
-          className='w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium'
+          className='w-full rounded-[14px]  outline-none py-4 px-3 placeholder-[#2B3674] text-[14px] font-medium'
           type='text'
           autoComplete='off'
           value={value}
@@ -60,7 +60,7 @@ const SearchBar = ({
         />
       </div>
       {isSuggestionCardOpen && (
-        <div className='bg-white'>
+        <div className='bg-white w-[30vw] m-0 p-0'>
           {suggestionData.slice(0, 5).map((item, index) => (
             <SuggestionRow key={index} item={item} />
           ))}
