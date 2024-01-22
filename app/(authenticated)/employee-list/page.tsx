@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmployeeSearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
-import EmployeelistRow from '@/components/row/employee-list-row';
+import EmployeeListRow from '@/components/row/employee-list-row';
 import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
 import { CreateEmployeeItems } from '@/models/global-types';
@@ -114,14 +114,14 @@ const EmployeeListPage = () => {
 
               // Pass isFirstChar prop only when it's true
               return isFirstChar ? (
-                <EmployeelistRow
+                <EmployeeListRow
                   key={index}
                   item={item}
                   uniqueCharCount={uniqueCharCount}
                   isFirstChar={isFirstChar}
                 />
               ) : (
-                <EmployeelistRow
+                <EmployeeListRow
                   key={index}
                   item={item}
                   uniqueCharCount={uniqueCharCount}

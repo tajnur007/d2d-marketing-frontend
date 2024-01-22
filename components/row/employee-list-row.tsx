@@ -1,19 +1,19 @@
 import Image from 'next/image';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import profileImage from '@/assets/images/profile.png';
-import { EMPLOYEE_LIST_DATA_TYPE, EmployeestatusColor } from '@/models/global-types';
+import { EmployeeType, EmployeestatusColor } from '@/models/global-types';
 
 const getStatusColor: EmployeestatusColor = {
   Active: 'bg-[#D2FBE7]',
   Inactive: 'bg-red-200',
 };
 
-function EmployeelistRow({
+function EmployeeListRow({
   item,
   uniqueCharCount,
   isFirstChar,
 }: {
-  item: EMPLOYEE_LIST_DATA_TYPE;
+  item: EmployeeType;
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
 }) {
@@ -29,7 +29,9 @@ function EmployeelistRow({
             {uniqueCharCount[firstChar]}
           </div>
         </div>
-      ) : <div className='border-t-[1px] border-[#E9F0FF]'></div>}
+      ) : (
+        <div className='border-t-[1px] border-[#E9F0FF]'></div>
+      )}
 
       <div
         key={item.id}
@@ -93,4 +95,4 @@ function EmployeelistRow({
   );
 }
 
-export default EmployeelistRow;
+export default EmployeeListRow;
