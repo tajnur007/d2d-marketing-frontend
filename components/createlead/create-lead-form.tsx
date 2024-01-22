@@ -14,7 +14,7 @@ import {
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { AssignToSelect } from '../select/assign-to-select';
-import { StatusSelect } from '../select/status-select';
+import { CustomSelect } from '../select/custom-select';
 
 const CreateLeadForm = () => {
   const [selected, setSelected] = useState('Pending');
@@ -149,7 +149,7 @@ const CreateLeadForm = () => {
         </div>
 
         <div className='flex flex-col justify-between gap-2 w-1/2'>
-          <StatusSelect
+          <CustomSelect
             label='Status'
             setSelected={setSelected}
             options={CREATE_LEAD_STATUS_NEW}
