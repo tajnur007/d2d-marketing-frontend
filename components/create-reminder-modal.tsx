@@ -12,7 +12,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import { ClockIcon, CloseIcon } from '@/assets/icons';
+import { ClockIcon, ExIcon } from '@/assets/icons';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -101,7 +101,7 @@ const CreateReminderModal = ({
           </div>
 
           <button onClick={closeModal} className='pr-[15px]'>
-            <CloseIcon />
+            <ExIcon />
           </button>
         </div>
 
