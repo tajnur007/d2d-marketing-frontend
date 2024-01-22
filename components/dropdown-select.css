@@ -24,3 +24,19 @@
 .customselect > div > :nth-child(2) > div > svg {
   color: white;
 }
+
+.create-reminder-select > :nth-child(3) > :nth-child(2) > span {
+  background: transparent;
+}
+
+.create-reminder-select > :nth-child(3) > :nth-child(2) > :nth-child(2) {
+  color: black;
+}
+
+.create-reminder-select > :nth-child(3) > div :nth-child(2) {
+  color: black;
+}
+
+.date-picker > div > div > input {
+  color: black;
+}
