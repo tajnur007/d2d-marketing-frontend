@@ -12,7 +12,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import { ClockIcon } from '@/assets/icons';
+import { ClockIcon, CloseIcon } from '@/assets/icons';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -28,6 +28,19 @@ const CreateReminderModal = ({
   selected,
   setSelected = () => {},
 }: CreateReminderModalProps) => {
+  const inputProps = {
+    placeholder: 'DD:MM:YY TT:TT',
+    className: `w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase text-[#B9C1D9] date-picker-placeholder ${
+      formErrors.Note && 'border-red-500'
+    }`,
+  };
+
+  useEffect(() => {
+    setFormData((prev: any) => {
+      return { ...prev, Status: selected };
+    });
+  }, [selected, formErrors, setFormData]);
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
 
@@ -39,12 +52,6 @@ const CreateReminderModal = ({
       return { ...prev, [name]: '' };
     });
   };
-
-  useEffect(() => {
-    setFormData((prev: any) => {
-      return { ...prev, Status: selected };
-    });
-  }, [selected, formErrors, setFormData]);
 
   const submitData = () => {
     const newFormErrors: any = {};
@@ -68,15 +75,8 @@ const CreateReminderModal = ({
     });
   };
 
-  function closeModal() {
+  const closeModal = () => {
     setModalIsOpen(false);
-  }
-
-  let inputProps = {
-    placeholder: 'DD:MM:YY TT:TT',
-    className: `w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase text-[#B9C1D9] date-picker-placeholder ${
-      formErrors.Note && 'border-red-500'
-    }`,
   };
 
   const getDate = (e: any) => {
@@ -100,7 +100,7 @@ const CreateReminderModal = ({
             <span>Create reminder</span>
           </div>
           <button onClick={closeModal} className='pr-[15px]'>
-            x
+            <CloseIcon />
           </button>
         </div>
 
