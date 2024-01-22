@@ -10,9 +10,9 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { CreateReminderItems, LEADS_DATA_TYPE } from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
-import ModalComponent from './create-reminder-modal';
 import React from 'react';
 import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
+import CreateReminderModal from './create-reminder-modal';
 
 const LeadDetails = ({
   setIsOpen,
@@ -123,11 +123,11 @@ const LeadDetails = ({
       <div className='flex justify-center items-center'>
         <Button
           onClick={handleAddReminderButtonClick}
-          className='text-white text-[14px] rounded-[10px] font-semibold leading-[14px] w-[183px] h-[50px] my-8'>
+          className='text-white text-[14px] rounded-[10px] font-semibold leading-[14px] w-[183px] h-[50px] my-8 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
           Add Reminder
         </Button>
       </div>
-      <ModalComponent
+      <CreateReminderModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         formData={formData}
