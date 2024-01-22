@@ -44,18 +44,19 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   },
   {
     id: 3,
-    iconName: 'Settings',
-    path: PAGE_ROUTES.Settings,
-    icon: SettingIcon,
+    iconName: 'Employee List',
+    path: PAGE_ROUTES.EmployeeList,
+    icon: EmployeeListIcon,
     position: 100,
   },
   {
     id: 4,
-    iconName: 'Employee List',
-    path: PAGE_ROUTES.EmployeeList,
-    icon: EmployeeListIcon,
+    iconName: 'Settings',
+    path: PAGE_ROUTES.Settings,
+    icon: SettingIcon,
     position: 150,
   },
+
 ];
 
 export const FORM_ITEMS: FormItems = {
