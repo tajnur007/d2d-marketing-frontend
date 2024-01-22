@@ -9,8 +9,6 @@ import {
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
 import { CustomMultiSelect } from '../custom-multi-select';
 import StatusCheckbox from '../status-checkbox';
 import './style.css'
@@ -169,10 +167,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
                       startDate={startDate}
                       endDate={endDate}
                       minDate={startDate}
-                      // withPortal
                       dateFormat='MMM d, yyyy'
-                      icon={<CalendarIcon />}
-                      // showIcon
                     />
                   </div>
                   <span className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'>
