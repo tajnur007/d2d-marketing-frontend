@@ -99,6 +99,7 @@ const CreateReminderModal = ({
           <div className='left-0 font-bold text-[#25254c] text-[24px] tracking-[0] leading-[14px] whitespace-nowrap'>
             <span>Create reminder</span>
           </div>
+
           <button onClick={closeModal} className='pr-[15px]'>
             <CloseIcon />
           </button>
