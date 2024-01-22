@@ -1,13 +1,15 @@
 import { FilterLeadsIcon } from '@/assets/icons';
 import { useState } from 'react';
 import FilterLeadsCard from '../filter-leads-card';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
 
 function FilterLeadsButton({ onFilterData }: any) {
   const [isFilterCardOpen, setFilterCardOpen] = useState(false);
   const [filterData, setFilterData] = useState({});
 
   const toggleFilterCard = () => {
-    setFilterCardOpen(!isFilterCardOpen);
+    setFilterCardOpen((prevState) => !prevState);
   };
 
   !isFilterCardOpen && onFilterData(filterData);
@@ -27,13 +29,18 @@ function FilterLeadsButton({ onFilterData }: any) {
           </div>
         </div>
       </button>
-
-      {isFilterCardOpen && (
+      <Drawer
+        open={isFilterCardOpen}
+        onClose={toggleFilterCard}
+        direction='top'
+        className='filter-drawer-style'
+        size={0}
+        overlayOpacity={0}>
         <FilterLeadsCard
           setFilterCardOpen={setFilterCardOpen}
           onFilterData={(data: any) => setFilterData(data)}
         />
-      )}
+      </Drawer>
     </>
   );
 }

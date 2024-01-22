@@ -1,3 +1,4 @@
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { StaticImageData } from 'next/image';
 
 import React, {
@@ -150,6 +151,7 @@ export interface AuthLayoutProps {
 export interface CreateLeadStatusItems {
   value: string;
   label: string;
+  image?: any;
 }
 
 export interface AssignToUsers {

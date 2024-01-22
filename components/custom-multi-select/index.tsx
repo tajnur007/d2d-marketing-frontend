@@ -1,10 +1,11 @@
 'use client';
 
 import { SelectProps } from '@/models/global-types';
+import Image from 'next/image';
 import { useRef, useState } from 'react';
 import Select from 'react-select';
 import { twMerge } from 'tailwind-merge';
-import './style.css' 
+import './style.css';
 
 export const CustomMultiSelect = ({
   setSelected = () => {},
@@ -33,14 +34,15 @@ export const CustomMultiSelect = ({
     selected: 'bg-[#4318FF] text-white',
   };
 
+
   return (
     <div className='flex flex-col' ref={ref}>
-      <div className='relative font-medium test'>
+      <div className='relative font-medium multi-select'>
         <Select
           classNames={{
             control: ({ isFocused }) =>
               twMerge(
-                'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid text-[14px] font-medium test2',
+                'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid text-[14px] font-medium',
                 isFocused ? 'border-primary-500' : 'border-[#F3F3F3]',
                 controlStyles.base
               ),
