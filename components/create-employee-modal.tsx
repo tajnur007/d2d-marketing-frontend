@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Modal } from './Modal';
+import { Modal } from '@/components/modal';
 import { CreateEmployeeModalProps } from '@/models/global-types';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
@@ -14,6 +14,12 @@ const CreateEmployeeModal = ({
   formErrors,
   setFormErrors = () => {},
 }: CreateEmployeeModalProps) => {
+  useEffect(() => {
+    setFormData((prev: any) => {
+      return { ...prev };
+    });
+  }, [formErrors, setFormData]);
+
   const closeModal = () => {
     setModalIsOpen(false);
   };
@@ -29,12 +35,6 @@ const CreateEmployeeModal = ({
       return { ...prev, [name]: '' };
     });
   };
-
-  useEffect(() => {
-    setFormData((prev: any) => {
-      return { ...prev };
-    });
-  }, [formErrors, setFormData]);
 
   const submitData = () => {
     const newFormErrors: any = {};

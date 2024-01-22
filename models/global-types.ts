@@ -66,7 +66,7 @@ export interface EmployeestatusColor {
   Inactive?: string;
 }
 
-export interface EMPLOYEE_LIST_DATA_TYPE {
+export interface EmployeeType {
   id: number;
   employeeName: string;
   employeeDesignation: string;
