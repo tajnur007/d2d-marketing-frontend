@@ -67,25 +67,26 @@ export interface EmployeestatusColor {
   Inactive?: string;
 }
 
-export interface EMPLOYEE_LIST_DATA_TYPE {
+export interface EmployeeType {
   id: number;
   employeeName: string;
   employeeDesignation: string;
   employeeEmail: string;
   employeePhone: string;
   employeeStatus: string;
-  employeeImage: string;
+  employeeImage?: string;
 }
 
-export interface GeoLocation {
+interface MapLocation {
   lat: number;
   lng: number;
 }
 
 export interface LocationProps {
-  setLocation: React.Dispatch<React.SetStateAction<GeoLocation>>;
-  location: GeoLocation;
+  location: MapLocation;
+  setLocation: (newLocation: MapLocation) => void;
 }
+
 export interface FormItems {
   Title?: string;
   Name?: string;
@@ -97,7 +98,7 @@ export interface FormItems {
   Reminder?: string;
   Date?: string;
   Image?: string;
-  location?: GeoLocation;
+  location: MapLocation;
 }
 
 export interface SignUpFormItems {
@@ -177,6 +178,15 @@ export interface StatusState {
   hot: boolean;
   warm: boolean;
   cold: boolean;
+}
+
+export interface CreateEmployeeModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  formData: CreateEmployeeItems;
+  setFormData: (item: any) => void;
+  formErrors: CreateEmployeeItems;
+  setFormErrors: (item: any) => void;
 }
 
 export interface FilterLeadsCardProps {

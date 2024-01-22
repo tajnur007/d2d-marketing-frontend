@@ -1,6 +1,5 @@
 'use client';
-import Image from 'next/image';
-import mapImage from '@/assets/images/dummy-map.png';
+
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { ImageUpload } from '@/components/image-upload';
@@ -51,6 +50,7 @@ const CreateLeadForm = () => {
   }, [selected, formErrors]);
 
   const submitData = () => {
+    // This is temporary form update, until map key implemented.
     setFormData((prev) => {
       return { ...prev, location };
     });

@@ -7,6 +7,7 @@ import {
   AssignToUsers,
   SignUpFormItems,
   CreateReminderItems,
+  CreateEmployeeItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -45,16 +46,16 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   },
   {
     id: 3,
-    iconName: 'Settings',
-    path: PAGE_ROUTES.Settings,
-    icon: SettingIcon,
+    iconName: 'Employee List',
+    path: PAGE_ROUTES.EmployeeList,
+    icon: EmployeeListIcon,
     position: 100,
   },
   {
     id: 4,
-    iconName: 'Employee List',
-    path: PAGE_ROUTES.EmployeeList,
-    icon: EmployeeListIcon,
+    iconName: 'Settings',
+    path: PAGE_ROUTES.Settings,
+    icon: SettingIcon,
     position: 150,
   },
 ];
@@ -132,6 +133,13 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.Cool,
   LEAD_STATUS.Warm,
 ];
+
+export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
+  Name: '',
+  Phone: '',
+  Email: '',
+  Designation: '',
+};
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
