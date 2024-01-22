@@ -1,24 +1,46 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { EmployeeSearchIcon } from '@/assets/icons';
+import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
+import EmployeelistRow from '@/components/row/employee-list-row';
 import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import Image from 'next/image';
-import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
-import profileImage from '@/assets/images/profilePic.png';
-import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import EmployeelistRow from '@/components/row/employee-list-row';
 import { useState } from 'react';
-import { EMPLOYEE_LIST_DATA_TYPE } from '@/models/global-types';
 
 const EmployeeListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
+  const [uniqueCharCount, setUniqueCharCount] = useState<{ [key: string]: number }>({});
+
+  let displayedChars: string[] = [];
+
+  useEffect(() => {
+    EMPLOYEE_LIST_DATA.sort((a, b) => a.employeeName.localeCompare(b.employeeName));
+
+    const updatedUniqueCharCount: { [key: string]: number } = {};
+
+    for (let i = 0; i < EMPLOYEE_LIST_DATA.length; i++) {
+      const firstChar = EMPLOYEE_LIST_DATA[i].employeeName.charAt(0).toUpperCase();
+
+      if (updatedUniqueCharCount[firstChar]) {
+        updatedUniqueCharCount[firstChar]++;
+      } else {
+        updatedUniqueCharCount[firstChar] = 1;
+      }
+    }
+
+    setUniqueCharCount(updatedUniqueCharCount);
+  }, [EMPLOYEE_LIST_DATA]);
+
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
   };
+
   const handleNewEmployeeButtonClick = () => {
     console.log('Button Clicked.');
   };
+
   const filteredEmployeeList = EMPLOYEE_LIST_DATA.filter((employee) =>
     employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -38,20 +60,7 @@ const EmployeeListPage = () => {
             <form>
               <div className='relative'>
                 <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
-                  <svg
-                    className='w-4 h-4 text-gray-500'
-                    aria-hidden='true'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 20 20'>
-                    <path
-                      stroke='currentColor'
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z'
-                    />
-                  </svg>
+                  <EmployeeSearchIcon/>
                 </div>
                 <input
                   type='search'
@@ -82,22 +91,32 @@ const EmployeeListPage = () => {
 
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
         <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-            <div className='flex justify-between items-center content-center'>
-              <div className='flex items-center'>
-                <div className='font-semibold text-[12px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
-                  Total:
-                </div>
+          {filteredEmployeeList.map((item, index) => {
+            const firstChar = item.employeeName.charAt(0).toUpperCase();
+            let isFirstChar = false;
 
-                <div className='flex items-center justify-center h-6 bg-[#E5DFFF] rounded-[17px] ms-2 p-2'>
-                  <p className='leading-[normal] text-black font-bold text-[12px] tracking-[-0.32px] whitespace-nowrap text-capitalize'>
-                    {filteredEmployeeList.length}
-                  </p>
-                </div>
-              </div>
-            </div>
-          {filteredEmployeeList.map((item, index) => (
-            <EmployeelistRow key={index} item={item} />
-          ))}
+            // If the character has not been displayed, add it to the array and set isFirstChar to true
+            if (!displayedChars.includes(firstChar)) {
+              displayedChars.push(firstChar);
+              isFirstChar = true;
+            }
+
+            // Pass isFirstChar prop only when it's true
+            return isFirstChar ? (
+              <EmployeelistRow
+                key={index}
+                item={item}
+                uniqueCharCount={uniqueCharCount}
+                isFirstChar={isFirstChar}
+              />
+            ) : (
+              <EmployeelistRow
+                key={index}
+                item={item}
+                uniqueCharCount={uniqueCharCount}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
