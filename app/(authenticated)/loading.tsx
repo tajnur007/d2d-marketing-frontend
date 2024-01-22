@@ -1,13 +1,22 @@
 'use client';
 
-import { InfinitySpin } from 'react-loader-spinner';
+import { useEffect } from 'react';
+import '../nprogress.css';
+// @ts-ignore
+import NProgress from 'nprogress';
+
+NProgress.configure({ showSpinner: false });
 
 function LoadingPage() {
-  return (
-    <div className='flex items-center justify-center w-full h-[calc(100vh-100px)]'>
-      <InfinitySpin width='200' color='#4f46e5' />
-    </div>
-  );
+  useEffect(() => {
+    NProgress.start();
+
+    return () => {
+      NProgress.done();
+    };
+  }, []);
+
+  return null;
 }
 
 export default LoadingPage;

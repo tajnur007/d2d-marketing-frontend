@@ -148,15 +148,15 @@ const SettingsPage = () => {
             />
 
           </div>
-          <div className='flex ml-[795px] mb-3'>
+          <div className='relative mb-8 mr-7 flex justify-end'>
             <Button
               onClick={handleCancel}
-              className='text-[#69708C] w-40 h-25 p-18 rounded-lg m-2 p-3 bg-[#EBEBEB]'>
+              className='text-[#69708C] w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#EBEBEB] mb-4'>
               Cancel
             </Button>
             <Button
               type='submit'
-              className='text-white w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#4318FF]'>
+              className='text-white w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#4318FF] mb-4'>
               Save
             </Button>
           </div>
