@@ -122,6 +122,7 @@ const CreateEmployeeModal = ({
           />
           <Select
             options={EMPLOYEE_ROLE}
+            defaultValue={EMPLOYEE_ROLE[0]}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
             styles={{
               control: (baseStyles) => ({
