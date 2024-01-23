@@ -1,47 +1,41 @@
-.test > div > div > :nth-child(2) > span {
+.multi-select > div > div > :nth-child(2) > span {
   background-color: transparent !important;
 }
 
-.test > div > div {
-  border-color: transparent;
+.multi-select > div > div {
+  border-color: transparent !important;
 }
 
-.test > div > div > :nth-child(1) > div > div {
+.multi-select > div > div > :nth-child(1) > div > div {
   color: #fff;
-  background-color: #4318ff !important;
-  height: 20px;
-  border-radius: 50px 0px 0px 50px;
+  background-color: #4318ff ;
+  height: 24px !important;
+  border-radius: 50px 0px 0px 50px !important;
 }
 
-.test > div > div > :nth-child(1) > div > :nth-child(2) {
-  border-radius: 0px 50px 50px 0px;
-  display: inline-flex;
-padding: 2px 4px 2px 5px;
-justify-content: center;
-align-items: center;
-gap: 3px;
+.multi-select > div > div > :nth-child(1) > div {
+  background-color: transparent;
 }
 
-.test > div > div > :nth-child(1) > :nth-child(1) {
+.multi-select > div > div > :nth-child(1) > div > :nth-child(2) {
+  border-radius: 0px 50px 50px 0px !important;
+  display: inline-flex !important;
+  padding: 1px 2px 1px 2px !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.multi-select > div > div > :nth-child(1) > :nth-child(1) {
   background-color: white !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  justify-items: center !important;
+  align-items: center !important;
 }
 
-.test > div > div > :nth-child(1) > :nth-child(1) {
-  display: flex;
-  justify-content: space-between;
-  justify-items: center;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.test > div > div > :nth-child(1) > :nth-child(1) > :nth-child(1) {
+.multi-select > div > div > :nth-child(1) > :nth-child(1) > :nth-child(1) {
   color: #fff;
   text-align: center;
-  font-family: Metropolis;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 166.667% */
-  letter-spacing: -0.24px;
-  padding-bottom: 10px;
+  align-items: center;
+  width: 100% !important;
 }
