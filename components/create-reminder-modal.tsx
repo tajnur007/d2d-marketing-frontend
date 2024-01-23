@@ -64,6 +64,12 @@ const CreateReminderModal = ({
 
     setFormErrors(newFormErrors);
     console.log(formData);
+
+    if (Object.values(formData).includes('')) {
+      setModalIsOpen(true);
+    } else {
+      setModalIsOpen(false);
+    }
   };
 
   const handleSelectChange = (selectedOption: any) => {
