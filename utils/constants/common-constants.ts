@@ -58,7 +58,6 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     icon: SettingIcon,
     position: 150,
   },
-
 ];
 
 export const FORM_ITEMS: FormItems = {
@@ -72,6 +71,7 @@ export const FORM_ITEMS: FormItems = {
   Reminder: '',
   Date: '',
   Image: '',
+  location: { lat: 0, lng: 0 },
 };
 
 export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
@@ -139,11 +139,10 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   Phone: '',
   Email: '',
   Designation: '',
-}
+};
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
 export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';
-
