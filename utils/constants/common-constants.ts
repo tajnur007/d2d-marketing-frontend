@@ -58,7 +58,6 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     icon: SettingIcon,
     position: 150,
   },
-
 ];
 
 export const FORM_ITEMS: FormItems = {
@@ -72,6 +71,7 @@ export const FORM_ITEMS: FormItems = {
   Reminder: '',
   Date: '',
   Image: '',
+  location: { lat: 0, lng: 0 },
 };
 
 export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
@@ -151,4 +151,3 @@ export const AUTH_LEFT_TEXT =
 
 export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
 export const SERVER_BASE_URL = 'http://157.245.204.196:8021/v1';
-

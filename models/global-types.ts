@@ -77,6 +77,16 @@ export interface EmployeeType {
   employeeImage?: string;
 }
 
+interface MapLocation {
+  lat: number;
+  lng: number;
+}
+
+export interface LocationProps {
+  location: MapLocation;
+  setLocation: (newLocation: MapLocation) => void;
+}
+
 export interface FormItems {
   Title?: string;
   Name?: string;
@@ -88,6 +98,7 @@ export interface FormItems {
   Reminder?: string;
   Date?: string;
   Image?: string;
+  location: MapLocation;
 }
 
 export interface SignUpFormItems {

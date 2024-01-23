@@ -1,6 +1,5 @@
 'use client';
-import Image from 'next/image';
-import mapImage from '@/assets/images/dummy-map.png';
+
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { ImageUpload } from '@/components/image-upload';
@@ -15,11 +14,16 @@ import {
 import { FormItems } from '@/models/global-types';
 import { AssignToSelect } from '../select/assign-to-select';
 import { CustomSelect } from '../select/custom-select';
+import Map from './map';
 
 const CreateLeadForm = () => {
   const [selected, setSelected] = useState('Pending');
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
+  const [location, setLocation] = useState({
+    lat: 27.6729,
+    lng: 85.3118,
+  });
 
   const getDate = (e: string) => {
     console.log(e);
@@ -46,6 +50,11 @@ const CreateLeadForm = () => {
   }, [selected, formErrors]);
 
   const submitData = () => {
+    // This is temporary form update, until map key implemented.
+    setFormData((prev) => {
+      return { ...prev, location };
+    });
+
     const newFormErrors: any = {};
 
     for (let field in formData) {
@@ -55,6 +64,8 @@ const CreateLeadForm = () => {
     }
     setFormErrors(newFormErrors);
   };
+
+  console.log(formData);
 
   return (
     <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
@@ -78,14 +89,8 @@ const CreateLeadForm = () => {
           />
         </div>
       </div>
-      <div className='rounded-2xl relative'>
-        <Image
-          src={mapImage}
-          alt='map'
-          height={342}
-          width={2860}
-          onChange={handleInputChange}
-        />
+      <div className='rounded-2xl relative h-[342px] w-full'>
+        <Map setLocation={setLocation} location={location} />
       </div>
 
       <div className='flex items-center justify-between mt-10 gap-5'>
@@ -148,31 +153,50 @@ const CreateLeadForm = () => {
           />
         </div>
 
-        <div className='flex flex-col justify-between gap-2 w-1/2'>
+        <div className='flex flex-col justify-between gap-5 w-1/2'>
           <CustomSelect
             label='Status'
             setSelected={setSelected}
             options={CREATE_LEAD_STATUS_NEW}
           />
 
-          <div className='flex flex-col items-start justify-center '>
-            <p className='text-[#00156A] font-medium text-xs mb-1'>
-              Image
-              {formErrors.Image && (
-                <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
-              )}
-            </p>
-            <ImageUpload
-              label={<p className='text-[#00156A] font-medium text-xs mb-1'>Image</p>}
-              placeholder='Upload image'
-              name='Image'
+          <div className='flex items-center justify-between gap-5'>
+            <Input
+              label={
+                <p className='text-[#00156A] font-medium text-xs mb-1'>Reminder Title</p>
+              }
+              placeholder='Reminder title'
+              name='Reminder'
+              errorMessage={formErrors.Reminder}
               onChange={handleInputChange}
-              className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
+              className={`${formErrors.Reminder && 'border-red-500 shadow'}`}
+            />
+            <DatePicker
+              label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reminder</p>}
+              name='Date'
+              errorMessage={formErrors.Date}
+              getDate={getDate}
+              className={`${formErrors.Date && 'border-red-500 shadow'}`}
             />
           </div>
         </div>
       </div>
-      <div className='flex justify-end mt-5 gap-5 items-end'>
+      <div className='flex justify-between mt-5 gap-5 items-end'>
+        <div className='flex flex-col items-start justify-center w-1/2'>
+          <p className='text-[#00156A] font-medium text-xs mb-1'>
+            Image
+            {formErrors.Image && (
+              <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
+            )}
+          </p>
+          <ImageUpload
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Image</p>}
+            placeholder='Upload image'
+            name='Image'
+            onChange={handleInputChange}
+            className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
+          />
+        </div>
         <div className='w-1/2 flex justify-end '>
           <Button onClick={submitData} className='w-[193px] rounded-[10px] h-[60px]'>
             Create
