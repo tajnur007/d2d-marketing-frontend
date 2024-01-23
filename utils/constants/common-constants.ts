@@ -143,7 +143,7 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   Name: '',
   Phone: '',
   Email: '',
-  Role: 'Executive',
+  Role: '',
 }
 
 export const AUTH_LEFT_TEXT =
