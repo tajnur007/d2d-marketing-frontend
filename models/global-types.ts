@@ -236,7 +236,7 @@ export interface CreateEmployeeItems {
   Name?: string;
   Phone?: string;
   Email?: string;
-  Designation?: string;
+  Role?: string;
 }
 
 export interface CreateEmployeeModalProps {

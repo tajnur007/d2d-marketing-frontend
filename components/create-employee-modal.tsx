@@ -1,10 +1,12 @@
 'use client';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal } from './modal';
 import { CreateEmployeeModalProps } from '@/models/global-types';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { ExIcon } from '@/assets/icons';
+import { EMPLOYEE_ROLE } from '@/utils/constants/common-constants';
+import { CustomSelect } from './select/custom-select';
 
 const CreateEmployeeModal = ({
   modalIsOpen,
@@ -14,11 +16,13 @@ const CreateEmployeeModal = ({
   formErrors,
   setFormErrors = () => {},
 }: CreateEmployeeModalProps) => {
+  const [selected, setSelected] = useState('Executive');
+
   useEffect(() => {
     setFormData((prev: any) => {
       return { ...prev };
     });
-  }, [formErrors, setFormData]);
+  }, [formErrors]);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -101,19 +105,14 @@ const CreateEmployeeModal = ({
           className={`w-full mb-5 ${formErrors.Email && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
-        <Input
-          label={<p className='text-[#00156A] font-medium text-xs mb-1'>Designation</p>}
-          placeholder='Designation'
-          type='text'
-          id='designation'
-          name='Designation'
-          htmlFor='designation'
-          errorMessage={formErrors.Designation}
-          className={`w-full mb-5 ${formErrors.Designation && 'border-red-500 shadow'}`}
-          onChange={handleInputChange}
+        <CustomSelect
+          label='Role'
+          setSelected={setSelected}
+          options={EMPLOYEE_ROLE}
+          className='mb-4'
         />
 
-        <Button onClick={submitData} className='w-full rounded-[10px] h-[60px]'>
+        <Button onClick={submitData} className='w-full rounded-[10px] h-[60px] mt-8'>
           Create
         </Button>
       </Modal>

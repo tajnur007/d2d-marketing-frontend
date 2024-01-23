@@ -5,7 +5,7 @@ import ReactModal, { Props } from 'react-modal';
 const modalStyles = {
   overlay: {
     zIndex: 10000,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: '#00000054',
     opacity: 1,
   },
   content: {

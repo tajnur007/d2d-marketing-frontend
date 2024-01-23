@@ -116,6 +116,11 @@ export const ASSIGN_USERS: AssignToUsers[] = [
   { value: 'Mursalin Khan', label: 'Assign to Mursalin Khan' },
 ];
 
+export const EMPLOYEE_ROLE: AssignToUsers[] = [
+  { value: 'Manager', label: 'Manager' },
+  { value: 'Executive', label: 'Executive' },
+];
+
 export const ASSIGN_TO_NEW: CreateAssignToItems[] = [
   { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das', isPublic: true },
   { value: 'Rezaul Mursalin Khan', label: 'Rezaul Mursalin Khan', isPublic: false },
@@ -138,8 +143,8 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   Name: '',
   Phone: '',
   Email: '',
-  Designation: '',
-};
+  Role: 'Executive',
+}
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
