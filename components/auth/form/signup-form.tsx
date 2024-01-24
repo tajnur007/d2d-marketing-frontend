@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, ChangeEvent } from 'react';
 import { PasswordRevealIcon } from '@/assets/icons';
-import Link from 'next/link';
-import { PAGE_ROUTES, SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
-import { SignUpFormItems } from '@/models/global-types';
+import { SignUpFormItems, TSignupPayload } from '@/models/global-types';
+import { SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
+import axios, { AxiosError } from 'axios';
+import { ChangeEvent, useState } from 'react';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
@@ -24,16 +24,45 @@ const SignupForm = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    console.log(value);
-
     setFormData((prev) => {
       return { ...prev, [name]: value };
     });
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
+  const handleSubmit = async () => {
+    try {
+      const payload: TSignupPayload = {
+        company_name: formData.OrganizationName,
+        user_info: {
+          name: formData.FullName,
+          email: formData.Email,
+          password: formData.Password,
+        },
+      };
+
+      console.log(payload);
+
+      const apiBaseUrl = process.env.API_BASE_URL;
+      const apiVersion = process.env.API_VERSION;
+      const signUpEndpoint = 'auth/sign-up';
+      const api = `http://${apiBaseUrl}/${apiVersion}/${signUpEndpoint}`;
+
+      const response = await axios.post(api, payload);
+
+      console.log("Response: ", response.data);
+      
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      console.error('Error submitting form:', axiosError);
+
+      if (axiosError.request) {
+        // The request was made but no response was received
+        console.log('Request details:', axiosError.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error setting up the request:', axiosError.message);
+      }
+    }
   };
 
   return (
@@ -48,11 +77,11 @@ const SignupForm = () => {
         <div>
           <Input
             label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Name</p>}
-            placeholder='Name'
+            placeholder='FullName'
             type='text'
-            id='name'
-            name='Name'
-            htmlFor='name'
+            id='fullName'
+            name='FullName'
+            htmlFor='FullName'
             onChange={handleInputChange}
             className='mb-3'
           />
@@ -74,9 +103,9 @@ const SignupForm = () => {
             }
             placeholder='Organization Name'
             type='text'
-            id='organizationname'
+            id='organizationName'
             name='OrganizationName'
-            htmlFor='organizationname'
+            htmlFor='organizationName'
             onChange={handleInputChange}
             className='mb-3'
           />
@@ -107,9 +136,9 @@ const SignupForm = () => {
               }
               placeholder='Confirm Password'
               type={showConfirmPassword ? 'text' : 'password'}
-              id='confirmpassword'
+              id='confirmPassword'
               name='ConfirmPassword'
-              htmlFor='confirmpassword'
+              htmlFor='confirmPassword'
               onChange={handleInputChange}
             />
             <p

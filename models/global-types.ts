@@ -104,7 +104,7 @@ export interface FormItems {
 }
 
 export interface SignUpFormItems {
-  Name?: string;
+  FullName?: string;
   Email?: string;
   OrganizationName?: string;
   Password?: string;
@@ -251,3 +251,13 @@ export interface CreateEmployeeModalProps {
   formErrors: CreateEmployeeItems;
   setFormErrors: (item: any) => void;
 }
+
+export interface TSignupPayload {
+  company_name: string | undefined;
+  user_info: {
+    name: string | undefined;
+    email: string | undefined;
+    user_type?: 'admin' | 'user';
+    password: string | undefined;
+  };
+};
