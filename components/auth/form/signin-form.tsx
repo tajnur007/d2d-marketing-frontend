@@ -9,7 +9,13 @@ import Link from 'next/link';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 
-const SigninForm = () => {
+const SigninForm = ({
+  setLoading,
+  loading,
+}: {
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -18,12 +24,13 @@ const SigninForm = () => {
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const res = await signIn('credentials', {
         email,
         password,
         redirect: false,
       });
-
+      setLoading(false);
       if (res?.ok) {
         router.push(PAGE_ROUTES?.Dashboard);
       } else {

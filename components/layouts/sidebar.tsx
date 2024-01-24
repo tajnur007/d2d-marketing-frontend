@@ -77,9 +77,8 @@ const Sidebar = () => {
           }}
           arrow={false}>
           <div
-            className='flex items-center gap-1 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#ff3030]'
+            className='flex items-center gap-1 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#d93f21]'
             onClick={() => {
-              localStorage.setItem('isLoading', 'false');
               signOut();
             }}>
             <LogoutIcon /> <p>Log out</p>
