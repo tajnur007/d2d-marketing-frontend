@@ -30,14 +30,13 @@ const SigninForm = ({
         password,
         redirect: false,
       });
-      setLoading(false);
+
       if (res?.ok) {
         router.push(PAGE_ROUTES?.Dashboard);
-      } else {
-        router.push(PAGE_ROUTES?.Signin);
       }
     } catch (err) {
       console.error('Login failed:', err);
+      setLoading(false);
       router.push(PAGE_ROUTES?.Signin);
     }
   };
