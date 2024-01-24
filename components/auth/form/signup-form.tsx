@@ -16,8 +16,8 @@ const SignupForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
-  const [selected, setSelected] = useState('jack365@gmail.com');
-  
+  const [selectedEmail, setSelectedEmail] = useState('jack365@gmail.com');
+
 
 
   const handlePasswordVisibilityToggle = () => {
@@ -140,7 +140,7 @@ const SignupForm = () => {
       <CheckYourEmailModal
         showModal={showModal}
         setShowModal={setShowModal}
-        selected={selected}
+        selectedEmail={selectedEmail}
       />
     </>
   );
