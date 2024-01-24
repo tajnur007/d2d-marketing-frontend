@@ -83,6 +83,9 @@ export const FORM_ITEMS: FormItems = {
   Reminder: '',
   Date: '',
   Image: '',
+  CurrentPassword: '',
+  NewPassword: '',
+  ConfirmPassword: '',
   location: { lat: 0, lng: 0 },
 };
 
