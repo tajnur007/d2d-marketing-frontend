@@ -6,8 +6,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/proxy/:path*',
-        destination: `https://${process.env.API_BASE_URL}/${process.env.API_VERSION}/:path*`,
+        source: '/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/${process.env.NEXT_PUBLIC_API_VERSION}/:path*`,
       },
     ];
   },

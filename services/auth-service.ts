@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpClient, Response } from './axios-base-query';
+import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 
 /**
  * AuthService is used to call login and logout endpoints from the NextAuth API routes.
@@ -10,6 +11,16 @@ export class AuthService {
   constructor(baseUrl?: string) {
     this.client = new HttpClient(baseUrl);
   }
+
+  public signup = async (data: any) => {
+    const resp: Response<any> = await this.client.request({
+      url: API_PATHS.Signup,
+      method: API_METHODS.POST,
+      data,
+    });
+
+    return resp.data;
+  };
 
   public login = async (data: any) => {
     const resp: Response<any> = await this.client.request({
