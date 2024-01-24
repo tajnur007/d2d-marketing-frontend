@@ -15,14 +15,9 @@ const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [selected, setSelected] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [selected, setSelected] = useState('jack365@gmail.com');
 
-  // const handleTransfer = () => {
-  //       // Perform transfer action with the selected value
-  //       console.log('Transfer confirmed for:', selected);
-  //       setShowConfirmationModal(false);
-  //     };
 
   const handlePasswordVisibilityToggle = () => {
     setShowPassword(!showPassword);
@@ -44,7 +39,7 @@ const SignupForm = () => {
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    setShowConfirmationModal(true);
+    setShowModal(true);
   };
 
   return (
@@ -142,8 +137,8 @@ const SignupForm = () => {
         </p>
       </div>
       <CheckYourEmailModal
-        showConfirmationModal={showConfirmationModal}
-        setShowConfirmationModal={setShowConfirmationModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
         selected={selected}
       />
     </>
