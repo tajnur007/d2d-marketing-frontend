@@ -11,7 +11,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomMultiSelect } from '../custom-multi-select';
 import StatusCheckbox from '../status-checkbox';
-import './style.css'
+import './style.css';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
@@ -70,13 +70,13 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   };
 
   return (
-    <div className='relative text-left bg-white shadow-md'>
+    <div className='relative text-left'>
       {/* Dropdown Content */}
-      <div className='absolute z-10 w-[389px] h-[452px] rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 right-0'>
-        <div className='p-[20px]'>
+      <div className='absolute z-50 w-[389px] h-[450px] right-[200px] top-[160px] overflow-y-scroll tiny-scrollbar shadow-lg rounded-xl bg-white'>
+        <div className='p-[20px] bg-white rounded-lg mt-2'>
           {/* Created by */}
-          <div className='mt-[10px]'>
-            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
+          <div>
+            <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1'>
               Created by
             </label>
             <div>
@@ -92,10 +92,10 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
           {/* Assignee */}
           <div className='mt-[10px]'>
-            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
+            <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1'>
               Assignee
             </label>
-            <div className='items-center'>
+            <div>
               <CustomMultiSelect
                 setSelected={setAssignee}
                 options={ASSIGNEE_USERS_LIST}
@@ -108,7 +108,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
           {/* Status */}
           <div className='mt-[10px]'>
-            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
+            <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1'>
               Status
             </label>
             <div className='m-[10px] flex items-center'>
@@ -137,7 +137,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
           {/* Date Range */}
           <div className='my-[10px]'>
-            <label className='font-600 leading-[28px] text-[#00156A] text-[16px] mb-1'>
+            <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1'>
               Date Range
             </label>
             <div className='bg-white w-full mt-2 text-center'>
@@ -179,15 +179,15 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           </div>
 
           {/* Apply and Cancel Buttons */}
-          <div className='flex justify-between my-[18px]'>
+          <div className='flex justify-between mt-[18px] gap-2'>
             <button
               onClick={CancelFilter}
-              className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl'>
+              className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5'>
               Cancel
             </button>
             <button
               onClick={ApplyFilter}
-              className='bg-[#5630FF] text-white font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl'>
+              className='bg-[#5630FF] text-white font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5'>
               Apply
             </button>
           </div>

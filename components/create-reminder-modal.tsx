@@ -64,7 +64,12 @@ const CreateReminderModal = ({
 
     setFormErrors(newFormErrors);
     console.log(formData);
-    setModalIsOpen(false);
+
+    if (Object.values(formData).includes('')) {
+      setModalIsOpen(true);
+    } else {
+      setModalIsOpen(false);
+    }
   };
 
   const handleSelectChange = (selectedOption: any) => {
@@ -90,7 +95,7 @@ const CreateReminderModal = ({
   return (
     <Modal
       className={
-        'absolute w-[646px] h-auto rounded-[12px] border border-gray-200 shadow-[100px] bg-white -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
+        'absolute w-[646px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
       isOpen={modalIsOpen}
       onRequestClose={closeModal}>
@@ -184,7 +189,7 @@ const CreateReminderModal = ({
         <div className='mt-[16px]'>
           <Button
             onClick={submitData}
-            className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px]'>
+            className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
             Create
           </Button>
         </div>

@@ -13,7 +13,7 @@ import {
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { AssignToSelect } from '../select/assign-to-select';
-import { StatusSelect } from '../select/status-select';
+import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 
 const CreateLeadForm = () => {
@@ -138,33 +138,30 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-5 gap-5'>
         <div className='w-1/2'>
           <TextArea
-            label={
-              <p className='text-[#00156A] font-medium text-xs mb-1'>Meeting Notes</p>
-            }
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Remarks</p>}
             placeholder='Notes'
             name='Note'
             errorMessage={formErrors.Note}
-            className={`h-[161px] ${formErrors.Note && 'border-red-500 shadow'}`}
+            className={`h-[182px] ${formErrors.Note && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
         </div>
 
         <div className='flex flex-col justify-between gap-2 w-1/2'>
-          <StatusSelect
+          <CustomSelect
             label='Status'
             setSelected={setSelected}
             options={CREATE_LEAD_STATUS_NEW}
           />
 
           <div className='flex flex-col items-start justify-center '>
-            <p className='text-[#00156A] font-medium text-xs mb-1'>
+            <p className='text-[#00156A] font-medium text-xs mb-2'>
               Image
               {formErrors.Image && (
                 <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
               )}
             </p>
             <ImageUpload
-              label={<p className='text-[#00156A] font-medium text-xs mb-1'>Image</p>}
               placeholder='Upload image'
               name='Image'
               onChange={handleInputChange}

@@ -1,0 +1,33 @@
+.custom-select> :nth-child(3)> :nth-child(2)>span {
+  background: transparent;
+    border-radius: 11px;
+}
+
+.custom-select> :nth-child(3)> :nth-child(2)> :nth-child(2) {
+  color: black;
+}
+
+.custom-select> :nth-child(3)>div :nth-child(2) {
+  color: black;
+}
+
+.custom-select > div {
+  border-radius: 11px;
+}
+
+.custom-select > :nth-child(4) {
+  background-color: white;
+  border-radius: 2px;
+}
+
+.custom-select > :nth-child(4) > div > div {
+  border-radius: 11px;
+  color: black !important;
+}
+
+
+.custom-select > div > :nth-child(2) > span {
+  background: transparent;
+}
+
+
