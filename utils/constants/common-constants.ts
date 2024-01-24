@@ -121,7 +121,6 @@ export const EMPLOYEE_ROLE: AssignToUsers[] = [
   { value: 'Executive', label: 'Executive' },
 ];
 
-
 export const MANAGERS: AssignToUsers[] = [
   { value: '', label: '' },
   { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das' },
@@ -156,7 +155,7 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   Email: '',
   Role: '',
   Manager: '',
-}
+};
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
