@@ -1,11 +1,10 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import Drawer from 'react-modern-drawer';
-
-import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
 import LeadDetails from '@/components/lead-details';
-import clockImage from '@/assets/images/leadslist-icons/clock.png';
+import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+import Image from 'next/image';
+import { useState } from 'react';
+import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 
 const getStatusColor: statusColor = {
@@ -22,20 +21,26 @@ const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
   };
 
   return (
-    <div className='relative bg-white shadow-md rounded-xl' onClick={toggleDrawer}>
-      <div className='flex justify-between items-center rounded-xl w-[100%] z-10 p-2 border-b-2 border-indigo-50 bg-white ring-1 ring-black ring-opacity-5'>
-        <div className='p-2'>
-          <p className='leading-3 font-semibold text-indigo-950 text-sm'>{item.title}</p>
-          <div className='flex items-center mt-[4px]'>
-            <Image src={clockImage} alt='' />
+    <div className='relative bg-white rounded-[10px]' onClick={toggleDrawer}>
+      <div className='flex justify-between items-center w-[100%] z-10 p-2 bg-white ring-1 ring-black ring-opacity-0 rounded-[10px]'>
+        <div className='flex flex-col p-2 gap-1'>
+          <div>
+            <p className='leading-3 font-semibold text-indigo-950 text-sm'>
+              {item.title}
+            </p>
+          </div>
+          <div className='flex items-center gap-1 mt-1'>
+            <div>
+              <Image src={ClockIcon} alt='' width={16} height={16} />
+            </div>
 
             <div className='text-[#9d9d9d] font-normal text-[12px] leading-[14.5px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
               {item.date}
             </div>
           </div>
           <div className='w-[25%]'>
-            <p className='text-neutral-700 text-xs whitespace-nowrap text-capitalize inline-block'>
-              Assigned to{' '}
+            <p className='text-neutral-700 text-xs whitespace-nowrap font-semibold inline-block'>
+              Assignee:{' '}
               <span className='text-slate-400 text-xs font-medium leading-tight'>
                 {item.assignedToName}
               </span>
@@ -44,9 +49,9 @@ const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
         </div>
         <div className='pr-4'>
           <span
-            className={`text-blue-950 text-[10px] font-medium ${
+            className={`text-[#00156A] text-[10px] font-medium ${
               getStatusColor[item.status as keyof statusColor]
-            } p-2 rounded-full`}>
+            } px-[6px] py-[5px] rounded-[12px]`}>
             {item.status}
           </span>
         </div>

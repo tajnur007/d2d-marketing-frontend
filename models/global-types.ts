@@ -1,3 +1,4 @@
+import { MANAGERS } from './../utils/constants/common-constants';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { StaticImageData } from 'next/image';
 
@@ -239,6 +240,7 @@ export interface CreateEmployeeItems {
   Phone?: string;
   Email?: string;
   Role?: string;
+  Manager?: string;
 }
 
 export interface CreateEmployeeModalProps {
