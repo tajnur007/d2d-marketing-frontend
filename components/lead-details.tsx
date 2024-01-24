@@ -47,7 +47,7 @@ const LeadDetails = ({
 
       <h4 className='text-[#00156A] font-medium text-[12px] mb-[19px]'>Location</h4>
 
-      <div className='flex items-center gap-4'>
+      <div className='flex items-center justify-between gap-4'>
         <div className='flex justify-between items-center gap-1'>
           <div>
             <Image src={flagImage} alt='location' />
