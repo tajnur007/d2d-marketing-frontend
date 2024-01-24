@@ -26,9 +26,12 @@ const SigninForm = () => {
 
       if (res?.ok) {
         router.push(PAGE_ROUTES?.Dashboard);
+      } else {
+        router.push(PAGE_ROUTES?.Signin);
       }
     } catch (err) {
       console.error('Login failed:', err);
+      router.push(PAGE_ROUTES?.Signin);
     }
   };
 
