@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { SearchIcon } from '@/assets/icons';
-import { SearchBarProps } from '@/models/global-types';
-import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
-import { LEADS_DATA_TYPE } from '@/models/global-types';
 import SuggestionRow from '@/components/search-bar/suggestion-row';
+import { LEADS_DATA_TYPE, SearchBarProps } from '@/models/global-types';
+import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 
 const SearchBar = ({
   value = '',
@@ -46,10 +45,10 @@ const SearchBar = ({
 
   return (
     <div className='mr-2 p-0' ref={newRef}>
-      <div className='w-[30vw] h-14 m-0  pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex '>
+      <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex '>
         <SearchIcon />
         <input
-          className='w-full rounded-[14px]  outline-none py-4 px-3 placeholder-[#2B3674] text-[14px] font-medium'
+          className='w-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium'
           type='text'
           autoComplete='off'
           value={value}
@@ -60,9 +59,12 @@ const SearchBar = ({
         />
       </div>
       {isSuggestionCardOpen && (
-        <div className='bg-white w-[30vw] m-0 p-0'>
-          {suggestionData.slice(0, 5).map((item, index) => (
-            <SuggestionRow key={index} item={item} />
+        <div className='bg-white shadow-md rounded-[10px] w-[563px] m-0 p-0'>
+          {suggestionData.slice(0, 3).map((item, index) => (
+            <div key={index}>
+              <SuggestionRow item={item} />
+              <div className='mx-auto border-b border-solid border-[#E9F0FF] border-t-0 border-r-0 border-l-0 w-[523px]'></div>
+            </div>
           ))}
         </div>
       )}
