@@ -27,7 +27,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env
+.env.local
+.env.prod
+.env.dev
 
 # vercel
 .vercel
@@ -35,7 +38,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-
-.env
-yarn.lock

@@ -19,7 +19,7 @@ export const CustomSelect = ({
   };
   return (
     <div className='flex flex-col' ref={ref}>
-      <label className='text-[#00156A] text-xs mb-1 font-medium'>{label}</label>
+      <label className='text-[#00156A] text-xs mb-2 font-medium'>{label}</label>
       <div className='relative font-medium '>
         <Select
           className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
@@ -28,7 +28,7 @@ export const CustomSelect = ({
               ...baseStyles,
               borderColor: '2px #F3F3F3 solid',
               width: '100%',
-              height: '46px',
+              height: '56px',
               borderRadius: '10px',
             }),
           }}

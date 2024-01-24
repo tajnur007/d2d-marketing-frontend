@@ -24,7 +24,7 @@ const Sidebar = () => {
   }, [currPosition]);
 
   return (
-    <div className='w-[88px] bg-white relative'>
+    <div className='w-[88px] bg-white relative z-50'>
       <div className='absolute w-full flex justify-center top-5'>
         <Logo />
       </div>

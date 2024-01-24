@@ -121,6 +121,16 @@ export const EMPLOYEE_ROLE: AssignToUsers[] = [
   { value: 'Executive', label: 'Executive' },
 ];
 
+export const MANAGERS: AssignToUsers[] = [
+  { value: '', label: '' },
+  { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das' },
+  { value: 'Rezaul Mursalin Khan', label: 'Rezaul Mursalin Khan' },
+  { value: 'Aminul Islam', label: 'Aminul Islam' },
+  { value: 'Sadia Rahman', label: 'Sadia Rahman' },
+  { value: 'Tahmina Akhter', label: 'Tahmina Akhter' },
+  { value: 'Rahim Ali', label: 'Rahim Ali' },
+];
+
 export const ASSIGN_TO_NEW: CreateAssignToItems[] = [
   { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das', isPublic: true },
   { value: 'Rezaul Mursalin Khan', label: 'Rezaul Mursalin Khan', isPublic: false },
@@ -144,7 +154,8 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   Phone: '',
   Email: '',
   Role: '',
-}
+  Manager: '',
+};
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";

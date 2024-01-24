@@ -6,7 +6,7 @@ import { CreateEmployeeModalProps } from '@/models/global-types';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { ExIcon } from '@/assets/icons';
-import { EMPLOYEE_ROLE } from '@/utils/constants/common-constants';
+import { EMPLOYEE_ROLE, MANAGERS } from '@/utils/constants/common-constants';
 import './dropdown-select.css';
 
 if (Modal.defaultStyles.overlay) {
@@ -21,13 +21,20 @@ const CreateEmployeeModal = ({
   formErrors,
   setFormErrors = () => {},
 }: CreateEmployeeModalProps) => {
-  const [selected, setSelected] = useState('Executive');
+  const [selected, setSelected] = useState<string>('Manager');
+  const [manager, setManager] = useState<string>('');
+  const [isExecutive, setIsExecutive] = useState<boolean>(false);
 
   useEffect(() => {
     setFormData((prev: any) => {
-      return { ...prev, Role: selected };
+      return { ...prev, Role: selected, Manager: manager };
     });
-  }, [selected, formErrors]);
+    if (selected === 'Executive') {
+      setIsExecutive(true);
+    } else {
+      setIsExecutive(false);
+    }
+  }, [selected, manager, formErrors]);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -35,6 +42,10 @@ const CreateEmployeeModal = ({
 
   const handleSelectChange = (selectedOption: any) => {
     setSelected(selectedOption.value);
+  };
+
+  const handleManagerChange = (selectedOption: any) => {
+    setManager(selectedOption.value);
   };
 
   const handleInputChange = (e: any) => {
@@ -120,10 +131,11 @@ const CreateEmployeeModal = ({
             className={`w-full mb-5 ${formErrors.Email && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
+          <label className='text-[#00156A] text-xs mb-1 font-medium'>Role</label>
           <Select
             options={EMPLOYEE_ROLE}
             defaultValue={EMPLOYEE_ROLE[0]}
-            className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+            className='create-reminder-select mb-5 font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
@@ -135,8 +147,29 @@ const CreateEmployeeModal = ({
             }}
             onChange={handleSelectChange}
           />
-
-          <Button onClick={submitData} className='w-full rounded-[10px] h-[60px] mt-8'>
+          {isExecutive && (
+            <>
+              <label className='text-[#00156A] text-xs mb-1 font-medium'>
+                Select Manager
+              </label>
+              <Select
+                options={MANAGERS}
+                defaultValue={MANAGERS[0]}
+                className='create-reminder-select mb-5 font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+                styles={{
+                  control: (baseStyles) => ({
+                    ...baseStyles,
+                    borderColor: '2px #F3F3F3 solid',
+                    width: '100%',
+                    height: '56px',
+                    borderRadius: '10px',
+                  }),
+                }}
+                onChange={handleManagerChange}
+              />
+            </>
+          )}
+          <Button onClick={submitData} className='w-full rounded-[10px] h-[60px] '>
             Create
           </Button>
         </div>

@@ -40,7 +40,7 @@ const PlacesAutocomplete = ({
   };
 
   return (
-    <div className='z-50 absolute bottom-4 left-4 bg-white h-[65px] w-[392px] rounded-[10px] p-3'>
+    <div className=' absolute bottom-4 left-4 bg-white h-[65px] w-[392px] rounded-[10px] p-3'>
       <h3 className='text-[14px] font-semibold'>Selected Location</h3>
       <div className='flex items-center gap-2 '>
         <MapFlagIcon />
