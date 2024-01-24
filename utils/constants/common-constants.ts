@@ -144,7 +144,7 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   Phone: '',
   Email: '',
   Role: '',
-}
+};
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
