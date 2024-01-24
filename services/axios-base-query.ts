@@ -27,7 +27,7 @@ export class HttpClient {
         ensureTrailingSlash(
           typeof window !== 'undefined'
             ? window.location.origin
-            : process.env.API_BASE_URL
+            : `${process.env.API_BASE_URL}/${process.env.API_VERSION}`
         ) + baseUrl,
     });
 
