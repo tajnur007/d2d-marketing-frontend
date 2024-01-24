@@ -7,10 +7,10 @@ import Sidebar from '../../components/layouts/sidebar';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
-  let isAuthenticated = false;
-  if (isAuthenticated) {
-    redirect(PAGE_ROUTES.Signin);
-  }
+  // let isAuthenticated = false;
+  // if (isAuthenticated) {
+  //   redirect(PAGE_ROUTES.Signin);
+  // }
 
   return (
     <div className='flex h-screen bg-[#F7F7FB] overflow-hidden'>

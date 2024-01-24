@@ -79,7 +79,7 @@ const SigninForm = () => {
               id='password'
               name='Password'
               htmlFor='password'
-              onChange={handleEmailChange}
+              onChange={handlePasswordChange}
             />
             <p
               className='absolute top-[52px] right-6 cursor-pointer'

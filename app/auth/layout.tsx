@@ -5,11 +5,11 @@ import { redirect } from 'next/navigation';
 import { Fragment } from 'react';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
-  let isAuthenticated = false;
+  // let isAuthenticated = false;
 
-  if (isAuthenticated) {
-    redirect(PAGE_ROUTES.Dashboard);
-  }
+  // if (isAuthenticated) {
+  //   redirect(PAGE_ROUTES.Dashboard);
+  // }
 
   return <Fragment>{children}</Fragment>;
 };

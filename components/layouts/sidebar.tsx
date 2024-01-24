@@ -7,6 +7,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import profileImage from '@/assets/images/profile.png';
 import { Tooltip } from 'react-tooltip';
+import { signOut } from 'next-auth/react';
 
 const Sidebar = () => {
   const router = useRouter();
@@ -60,7 +61,9 @@ const Sidebar = () => {
       </div>
       <Tooltip id='my-tooltip' />
 
-      <div className='absolute w-full flex justify-center bottom-5'>
+      <div
+        className='absolute w-full flex justify-center bottom-5'
+        onClick={() => signOut()}>
         <Image src={profileImage} alt='' height={46} width={46} />
       </div>
     </div>

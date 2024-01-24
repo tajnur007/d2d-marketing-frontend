@@ -3,17 +3,13 @@ import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { createAuthData } from '../actions';
 import axios from 'axios';
-import {
-  NEXTAUTH_SECRET,
-  PAGE_ROUTES,
-  SERVER_BASE_URL,
-} from '@/utils/constants/common-constants';
+import { PAGE_ROUTES, SERVER_BASE_URL } from '@/utils/constants/common-constants';
 
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  secret: NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: PAGE_ROUTES?.Signin,
   },
