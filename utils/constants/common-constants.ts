@@ -29,6 +29,18 @@ export const PAGE_ROUTES = {
   EmployeeList: '/employee-list',
 };
 
+export const API_METHODS = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  PATCH: 'PATCH',
+  DELETE: 'DELETE',
+};
+
+export const API_PATHS = {
+  Signup: '/auth/sign-up',
+};
+
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     id: 1,
@@ -71,6 +83,9 @@ export const FORM_ITEMS: FormItems = {
   Reminder: '',
   Date: '',
   Image: '',
+  CurrentPassword: '',
+  NewPassword: '',
+  ConfirmPassword: '',
   location: { lat: 0, lng: 0 },
 };
 
