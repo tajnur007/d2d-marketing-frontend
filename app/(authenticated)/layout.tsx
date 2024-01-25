@@ -12,6 +12,7 @@ export default async function AuthenticatedLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+
   if (!session) {
     redirect(PAGE_ROUTES.Signin);
   }

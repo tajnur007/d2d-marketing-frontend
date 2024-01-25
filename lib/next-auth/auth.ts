@@ -2,8 +2,8 @@ import { AuthService } from '@/services/auth-service';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { createAuthData } from '../actions';
-import axios from 'axios';
-import { PAGE_ROUTES, SERVER_BASE_URL } from '@/utils/constants/common-constants';
+
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -29,9 +29,11 @@ export const authOptions: NextAuthOptions = {
           }
           const loginData = { email, password };
 
-          const response = await axios.post(`${SERVER_BASE_URL}/auth/login`, loginData);
+          const AuthServices = new AuthService();
+          const response = await AuthServices.login(loginData);
+          createAuthData(response);
 
-          return response.data;
+          return response;
         } catch (error: any) {
           let callbackUrl: any;
           throw `/auth/login?callbackUrl=${encodeURIComponent(
