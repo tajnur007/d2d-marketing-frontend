@@ -1,6 +1,6 @@
 import Leaderboard from '@/components/leaderboard/leaderboard';
-import LatestLeadsList from '@/components/LatestLeadsList/LatestLeadsList';
-import GraphList from '@/components/GraphList/GraphList';
+import GraphList from '@/components/graph-list';
+import LatestLeadsList from '@/components/latest-leads-list';
 
 const DashboardPage = () => {
   return (
