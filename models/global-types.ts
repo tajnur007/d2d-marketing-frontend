@@ -257,3 +257,11 @@ export interface CreateEmployeeModalProps {
   formErrors: CreateEmployeeItems;
   setFormErrors: (item: any) => void;
 }
+
+
+export interface LeadOptionsProps {
+  isOpen: boolean;
+  setIsOpen: (item: any) => void;
+  options: boolean;
+  setOptions: (item: any) => void;
+}
