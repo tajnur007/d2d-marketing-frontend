@@ -27,7 +27,7 @@
 }
 
 .tiny-scrollbar::-webkit-scrollbar-track {
-  background-color: #fff;
+  background-color: none;
   border-radius: 8px;
 }
 
@@ -85,4 +85,17 @@ input[type='date']::-webkit-calendar-picker-indicator {
   100% {
     transform: scale(1);
   }
+}
+
+.filter-drawer-style{
+  height: 452px !important;
+  width: 389px !important;
+  left: auto !important;
+  right: 205px !important;
+  top: 155px !important;
+  transform: translate3d(0px, -12%, 0px) !important;
+}
+
+.EZDrawer__overlay {
+  background-color: transparent !important;
 }
