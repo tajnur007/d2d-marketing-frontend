@@ -29,6 +29,18 @@ export const PAGE_ROUTES = {
   EmployeeList: '/employee-list',
 };
 
+export const API_METHODS = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  PATCH: 'PATCH',
+  DELETE: 'DELETE',
+};
+
+export const API_PATHS = {
+  Signup: '/auth/sign-up',
+};
+
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     id: 1,
@@ -71,6 +83,9 @@ export const FORM_ITEMS: FormItems = {
   Reminder: '',
   Date: '',
   Image: '',
+  CurrentPassword: '',
+  NewPassword: '',
+  ConfirmPassword: '',
   location: { lat: 0, lng: 0 },
 };
 
@@ -121,7 +136,6 @@ export const EMPLOYEE_ROLE: AssignToUsers[] = [
   { value: 'Executive', label: 'Executive' },
 ];
 
-
 export const MANAGERS: AssignToUsers[] = [
   { value: '', label: '' },
   { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das' },
@@ -156,7 +170,7 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   Email: '',
   Role: '',
   Manager: '',
-}
+};
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
