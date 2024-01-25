@@ -2,12 +2,13 @@ import {
   FormItems,
   SidebarItem,
   statusColor,
-  CreateLeadStatusItems,
   CreateAssignToItems,
   AssignToUsers,
   SignUpFormItems,
   CreateReminderItems,
   CreateEmployeeItems,
+  CreateReminderStatusItems,
+  CreateLeadStatusItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -106,18 +107,18 @@ export const SignUpFORM_ITEMS: SignUpFormItems = {
 };
 
 export const LEAD_STATUS = {
-  Pending: 'Pending',
-  Progress: 'Progress',
-  Completed: 'Completed',
   Hot: 'Hot',
   Cool: 'Cool',
   Warm: 'Warm',
 };
 
-export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
+export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
   { value: 'Pending', label: 'Pending' },
-  { value: 'Progress', label: 'Progress' },
+  { value: 'In-Progress', label: 'In-Progress' },
   { value: 'Completed', label: 'Completed' },
+];
+
+export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'Hot', label: 'Hot' },
   { value: 'Cool', label: 'Cool' },
   { value: 'Warm', label: 'Warm' },
@@ -156,9 +157,6 @@ export const ASSIGN_TO_NEW: CreateAssignToItems[] = [
 ];
 
 export const CREATE_LEAD_STATUS: string[] = [
-  LEAD_STATUS.Pending,
-  LEAD_STATUS.Progress,
-  LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
   LEAD_STATUS.Cool,
   LEAD_STATUS.Warm,
