@@ -2,13 +2,13 @@
 
 import { PasswordRevealIcon } from '@/assets/icons';
 import { Button } from '@/components/button';
-import CheckYourEmailModal from '@/components/check-mail-modal';
 import { Input } from '@/components/input';
 import { SignUpFormItems } from '@/models/global-types';
 import { AuthService } from '@/services/auth-service';
 import { SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
 import { AxiosError } from 'axios';
 import { ChangeEvent, useState } from 'react';
+import CheckYourEmailModal from '@/components/check-mail-modal';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
@@ -20,6 +20,7 @@ const SignupForm = () => {
   const [selectedEmail, setSelectedEmail] = useState('jack365@gmail.com');
 
   const AuthServices = new AuthService();
+
 
   const handlePasswordVisibilityToggle = () => {
     setShowPassword(!showPassword);
@@ -113,9 +114,9 @@ const SignupForm = () => {
               }
               placeholder='Organization Name'
               type='text'
-              id='organizationName'
+              id='organizationname'
               name='OrganizationName'
-              htmlFor='organizationName'
+              htmlFor='organizationname'
               onChange={handleInputChange}
               className='mb-3'
             />
@@ -146,9 +147,9 @@ const SignupForm = () => {
                 }
                 placeholder='Confirm Password'
                 type={showConfirmPassword ? 'text' : 'password'}
-                id='confirmPassword'
+                id='confirmpassword'
                 name='ConfirmPassword'
-                htmlFor='confirmPassword'
+                htmlFor='confirmpassword'
                 onChange={handleInputChange}
               />
               <p

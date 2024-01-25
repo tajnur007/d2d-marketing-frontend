@@ -1,12 +1,15 @@
 'use client';
 
-import { Logo } from '@/assets/icons';
+import { Logo, LogoutIcon } from '@/assets/icons';
 import { SIDEBAR_ITEMS } from '@/utils/constants/common-constants';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import profileImage from '@/assets/images/profile.png';
 import { Tooltip } from 'react-tooltip';
+import { signOut } from 'next-auth/react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const Sidebar = () => {
   const router = useRouter();
@@ -61,7 +64,23 @@ const Sidebar = () => {
       <Tooltip id='my-tooltip' />
 
       <div className='absolute w-full flex justify-center bottom-5'>
-        <Image src={profileImage} alt='' height={46} width={46} />
+        <Popup
+          trigger={<Image src={profileImage} alt='' height={46} width={46} />}
+          position='top left'
+          on='hover'
+          closeOnDocumentClick
+          mouseLeaveDelay={100}
+          mouseEnterDelay={10}
+          contentStyle={{
+            padding: '8px',
+            width: '110px',
+          }}>
+          <div
+            className='flex items-center gap-1 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#d93f21]'
+            onClick={() => signOut()}>
+            <LogoutIcon /> <p>Log out</p>
+          </div>
+        </Popup>
       </div>
     </div>
   );

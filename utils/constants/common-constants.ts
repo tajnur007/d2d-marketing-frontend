@@ -174,8 +174,3 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
-
-export const NEXTAUTH_SECRET = `JMKLDJKLDJgdfgdfKLDSJKLgkljgdkl`;
-export const NEXT_PUBLIC_API_BASE_URL = 'http://157.245.204.196:8021';
-export const NEXT_PUBLIC_API_VERSION = 'v1';
-export const SERVER_BASE_URL = `${NEXT_PUBLIC_API_BASE_URL}/${NEXT_PUBLIC_API_VERSION}`;
