@@ -16,6 +16,7 @@ export default async function AuthenticatedLayout({
   if (!session) {
     redirect(PAGE_ROUTES.Signin);
   }
+
   return (
     <div className='flex h-screen bg-[#F7F7FB] overflow-hidden'>
       <Sidebar />

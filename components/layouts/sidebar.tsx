@@ -77,9 +77,7 @@ const Sidebar = () => {
           }}>
           <div
             className='flex items-center gap-1 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#d93f21]'
-            onClick={() => {
-              signOut();
-            }}>
+            onClick={() => signOut()}>
             <LogoutIcon /> <p>Log out</p>
           </div>
         </Popup>

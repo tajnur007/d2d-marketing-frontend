@@ -72,9 +72,3 @@ async function refreshAccessToken(refreshToken: any) {
     };
   }
 }
-
-// const apiService = new AuthService('http://157.245.204.196:8021/v1/auth/login');
-
-// const response = await apiService.login(loginData);
-// console.log(response);
-// createAuthData(response);

@@ -23,6 +23,7 @@ const SigninForm = ({
   const handleLogin = async () => {
     try {
       setLoading(true);
+
       const res = await signIn('credentials', {
         email,
         password,
