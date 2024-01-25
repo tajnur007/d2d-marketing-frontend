@@ -21,12 +21,12 @@ export type Response<T> = {
 export class HttpClient {
   private client: AxiosInstance;
   //  @ts-ignore
-  constructor(baseUrl: string = typeof window === 'undefined' ? '' : 'api') {
+  constructor(baseUrl: string = typeof window === 'undefined' ? '' : 'api/proxy') {
     this.client = axios.create({
       baseURL:
         ensureTrailingSlash(
           typeof window !== 'undefined'
-            ?  window.location.origin
+            ? window.location.origin
             : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${process.env.NEXT_PUBLIC_API_VERSION}`
         ) + baseUrl,
     });

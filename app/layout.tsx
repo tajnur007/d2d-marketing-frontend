@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import './globals.css';
+import { NextAuthProvider } from '@/components/providers/next-auth-provider';
 
 export const metadata: Metadata = {
   title: 'D2D Marketing',
@@ -14,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body>
-        {children}
+        <NextAuthProvider>{children}</NextAuthProvider>
         <SpeedInsights />
       </body>
     </html>

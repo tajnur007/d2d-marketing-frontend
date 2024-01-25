@@ -33,6 +33,7 @@ export class AuthService {
   };
 
   public logout = async (token: string): Promise<any> => {
+    console.log(token);
     const config: AxiosRequestConfig = {};
 
     if (token) {
