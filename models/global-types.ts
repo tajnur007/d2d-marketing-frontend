@@ -107,7 +107,7 @@ export interface FormItems {
 }
 
 export interface SignUpFormItems {
-  Name?: string;
+  FullName?: string;
   Email?: string;
   OrganizationName?: string;
   Password?: string;

@@ -98,7 +98,7 @@ export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
 };
 
 export const SignUpFORM_ITEMS: SignUpFormItems = {
-  Name: '',
+  FullName: '',
   Email: '',
   OrganizationName: '',
   Password: '',
