@@ -684,3 +684,42 @@ export const SearchClockIcon = () => {
     </svg>
   );
 };
+
+export const CheckCircleIcon = () => {
+  return (
+    <svg
+      width='76'
+      height='77'
+      viewBox='0 0 76 77'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
+      <rect
+        x='10'
+        y='10.5'
+        width='56'
+        height='56'
+        rx='28'
+        fill='#07BEAA'
+        fillOpacity='0.24'
+      />
+      <rect
+        x='5'
+        y='5.5'
+        width='66'
+        height='66'
+        rx='33'
+        stroke='#07BEAA'
+        strokeOpacity='0.12'
+        strokeWidth='10'
+      />
+      <path
+        d='M32.7502 38.4999L36.2502 41.9999L43.2502 34.9999M49.6668 38.4999C49.6668 44.9432 44.4435 50.1666 38.0002 50.1666C31.5568 50.1666 26.3335 44.9432 26.3335 38.4999C26.3335 32.0566 31.5568 26.8333 38.0002 26.8333C44.4435 26.8333 49.6668 32.0566 49.6668 38.4999Z'
+        stroke='#07BEAA'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
+  );
+};
+

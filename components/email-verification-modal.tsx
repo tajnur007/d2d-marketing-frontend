@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import Modal from 'react-modal';
-// import { ArrowLeftIcon, FeaturedIcon } from '@/assets/icons';
+import { ArrowLeftIcon, CheckCircleIcon } from '@/assets/icons';
+import { Button } from './button';
 
 const EmailVerificationModal = ({
   showModal,
@@ -21,26 +21,23 @@ const EmailVerificationModal = ({
           isOpen={showModal}
           onRequestClose={closeModal}
           ariaHideApp={false}>
-          <div className='p-[42px]'>
-            <div className='pb-[24px]'>{/* <FeaturedIcon /> */}</div>
+          <div className='px-[48px] py-[32px]'>
+            <div className='flex justify-center items-center pb-[24px]'>
+              <CheckCircleIcon />
+            </div>
 
             <div className='text-center'>
-              <div className='text-[30px] font-semibold'>Check your email</div>
-              <p className='text-[20px] font-medium'>
-                <span>We’ve sent a verification link to </span>
-                <span className='font-semibold'>RIP</span>
+              <div className='text-[30px] font-semibold'>Email verified</div>
+              <p className='text-[16px] font-normal'>
+                Your email has been successfully verified.
               </p>
             </div>
-
-            <div className='relative w-[360px] font-normal text-transparent text-[14px] text-center tracking-[0] leading-[20px] py-8'>
-              <span className='text-[#131212]'>
-                If you can’t find the email, check your spam folder or{' '}
-              </span>
-              <span className='font-semibold text-[#5630ff] '>Click to resend</span>
+            <div className='py-[32px]'>
+              <Button className='text-[16px] rounded'>Log In</Button>
             </div>
 
-            <button onClick={closeModal} className='mx-auto space-x-2'>
-              {/* <ArrowLeftIcon /> */}
+            <button onClick={closeModal} className='flex mx-auto items-center space-x-2'>
+              <ArrowLeftIcon />
               <span className='text-[14px] font-semibold'>Back to Sign Up</span>
             </button>
           </div>

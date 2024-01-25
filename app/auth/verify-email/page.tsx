@@ -1,7 +1,8 @@
 'use client';
 
 import EmailVerificationModal from '@/components/email-verification-modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 const VerifyEmailPage = () => {
   const [showModal, setShowModal] = useState(true);
