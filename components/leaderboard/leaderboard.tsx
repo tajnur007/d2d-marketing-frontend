@@ -16,7 +16,7 @@ leaderBoard.sort((a, b) => {
 
 const Leaderboard = () => {
   return (
-    <div className='bg-white rounded-2xl w-full mt-5 lg:mt-0 lg:w-[27%] h-[85vh]'>
+    <div className='bg-white rounded-2xl w-full lg:w-[27%] h-[84vh]'>
       <h2 className='font-bold text-[#2b3674] text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap p-5'>
         Leaderboard
       </h2>
