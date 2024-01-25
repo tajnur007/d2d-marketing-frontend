@@ -38,7 +38,7 @@ export const LEADS_DATA: LEADS_DATA_TYPE[] = [
     reminder: {
       reminderTitle: 'Finalize content strategy.',
       reminderDate: 'Sat 25 Nov, 2023 01:00 AM',
-      reminderStatus: LEAD_STATUS.Warm,
+      reminderStatus: LEAD_STATUS.Completed,
     },
     timestamp: '2023-11-22T14:45:00.000Z',
   },

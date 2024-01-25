@@ -107,6 +107,9 @@ export const SignUpFORM_ITEMS: SignUpFormItems = {
 };
 
 export const LEAD_STATUS = {
+  Pending: 'Pending',
+  InProgress: 'In-Progress',
+  Completed: 'Completed',
   Hot: 'Hot',
   Cool: 'Cool',
   Warm: 'Warm',
@@ -157,6 +160,9 @@ export const ASSIGN_TO_NEW: CreateAssignToItems[] = [
 ];
 
 export const CREATE_LEAD_STATUS: string[] = [
+  LEAD_STATUS.Pending,
+  LEAD_STATUS.InProgress,
+  LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
   LEAD_STATUS.Cool,
   LEAD_STATUS.Warm,
