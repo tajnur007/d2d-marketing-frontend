@@ -45,18 +45,22 @@ const SearchBar = ({
 
   return (
     <div className='mr-2 p-0' ref={newRef}>
-      <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex '>
-        <SearchIcon />
-        <input
-          className='w-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium'
-          type='text'
-          autoComplete='off'
-          value={value}
-          onChange={onChange}
-          onClick={toggleSuggestionCard}
-          onKeyDown={handleKeyDown}
-          onFocus={toggleSuggestionCard}
-        />
+      <div className='relative w-[563px]'>
+        <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
+          <SearchIcon />
+        </div>
+        <div className='w-full h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200'>
+          <input
+            className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium'
+            type='text'
+            autoComplete='off'
+            value={value}
+            onChange={onChange}
+            onClick={toggleSuggestionCard}
+            onKeyDown={handleKeyDown}
+            onFocus={toggleSuggestionCard}
+          />
+        </div>
       </div>
       {isSuggestionCardOpen && (
         <div className='bg-white shadow-md rounded-[10px] w-[563px] m-0 p-0'>

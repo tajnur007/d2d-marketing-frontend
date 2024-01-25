@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import LeadDetailsButton from '@/components/LeadDetailsButton/LeadDetailsButton';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 // import { getStatusColor } from '@/utils/constants/common-constants';
 import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+import LeadDetailsButton from '../lead-details-button';
 
 const getStatusColor: statusColor = {
   Cool: 'bg-blue-200',

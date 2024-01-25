@@ -27,7 +27,7 @@
 }
 
 .tiny-scrollbar::-webkit-scrollbar-track {
-  background-color: #fff;
+  background-color: none;
   border-radius: 8px;
 }
 
@@ -85,4 +85,41 @@ input[type='date']::-webkit-calendar-picker-indicator {
   100% {
     transform: scale(1);
   }
+}
+
+.filter-drawer-style {
+  height: 452px !important;
+  width: 389px !important;
+  left: auto !important;
+  right: 205px !important;
+  top: 155px !important;
+  transform: translate3d(0px, -12%, 0px) !important;
+}
+
+.EZDrawer__overlay {
+  background-color: transparent !important;
+}
+
+/* animation for sidebar profile popup menu */
+
+@keyframes anvil {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  1% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+    box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+  }
+}
+
+.popup-content {
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
 }

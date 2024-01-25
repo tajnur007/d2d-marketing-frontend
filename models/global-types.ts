@@ -107,7 +107,7 @@ export interface FormItems {
 }
 
 export interface SignUpFormItems {
-  Name?: string;
+  FullName?: string;
   Email?: string;
   OrganizationName?: string;
   Password?: string;
@@ -253,4 +253,12 @@ export interface CreateEmployeeModalProps {
   setFormData: (item: any) => void;
   formErrors: CreateEmployeeItems;
   setFormErrors: (item: any) => void;
+}
+
+
+export interface LeadOptionsProps {
+  isOpen: boolean;
+  setIsOpen: (item: any) => void;
+  options: boolean;
+  setOptions: (item: any) => void;
 }

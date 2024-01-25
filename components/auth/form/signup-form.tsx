@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, ChangeEvent } from 'react';
 import { PasswordRevealIcon } from '@/assets/icons';
-import Link from 'next/link';
-import { PAGE_ROUTES, SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { SignUpFormItems } from '@/models/global-types';
+import { AuthService } from '@/services/auth-service';
+import { SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
+import { AxiosError } from 'axios';
+import { ChangeEvent, useState } from 'react';
 import CheckYourEmailModal from '@/components/check-mail-modal';
 
 const SignupForm = () => {
@@ -18,6 +19,7 @@ const SignupForm = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState('jack365@gmail.com');
 
+  const AuthServices = new AuthService();
 
 
   const handlePasswordVisibilityToggle = () => {
@@ -38,9 +40,39 @@ const SignupForm = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    setShowModal(true);
+  const handleSubmit = async () => {
+    try {
+      const payload = {
+        company_name: formData.OrganizationName,
+        user_info: {
+          name: formData.FullName,
+          email: formData.Email,
+          password: formData.Password,
+        },
+      };
+
+      console.log(payload);
+
+      
+      const response = await AuthServices.signup(payload);
+
+      console.log('Response: ', response);
+      if (response.Message === 'created successfully') {
+        setSelectedEmail(payload.user_info.email as string);
+        setShowModal(true);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      console.error('Error submitting form:', axiosError);
+
+      if (axiosError.request) {
+        // The request was made but no response was received
+        console.log('Request details:', axiosError.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error setting up the request:', axiosError.message);
+      }
+    }
   };
 
   return (
@@ -56,11 +88,11 @@ const SignupForm = () => {
           <div>
             <Input
               label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Name</p>}
-              placeholder='Name'
+              placeholder='FullName'
               type='text'
-              id='name'
-              name='Name'
-              htmlFor='name'
+              id='fullName'
+              name='FullName'
+              htmlFor='FullName'
               onChange={handleInputChange}
               className='mb-3'
             />

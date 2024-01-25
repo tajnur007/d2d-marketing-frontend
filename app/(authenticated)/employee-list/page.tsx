@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmployeeSearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
-import EmployeeListRow from '@/components/row/employee-list-row';
+import EmployeeListRow from '@/components/employee-list-row';
 import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
 import { CreateEmployeeItems } from '@/models/global-types';
@@ -40,7 +40,7 @@ const EmployeeListPage = () => {
     }
 
     setUniqueCharCount(updatedUniqueCharCount);
-  }, [EMPLOYEE_LIST_DATA]);
+  }, []);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -73,13 +73,15 @@ const EmployeeListPage = () => {
                   <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
                     <EmployeeSearchIcon />
                   </div>
-                  <input
-                    type='search'
-                    id='default-search'
-                    className='mx-1 p-3 ps-10 text-md border border-gray-300 rounded-lg lg:w-[800px]'
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                  />
+                  <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200'>
+                    <input
+                      type='search'
+                      id='default-search'
+                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium'
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                    />
+                  </div>
                 </div>
               </form>
               <div onClick={handleNewEmployeeButtonClick}>
