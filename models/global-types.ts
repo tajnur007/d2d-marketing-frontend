@@ -100,6 +100,9 @@ export interface FormItems {
   Reminder?: string;
   Date?: string;
   Image?: string;
+  CurrentPassword?: string;
+  NewPassword?: string;
+  ConfirmPassword?: string;
   location: MapLocation;
 }
 
