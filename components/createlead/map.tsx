@@ -23,7 +23,7 @@ const Map = ({ setLocation, location }: LocationProps) => {
     } else {
       console.error('Geolocation is not supported by your browser.');
     }
-  }, []);
+  }, [setLocation]);
 
   const libraries = useMemo(() => ['places'], []);
 

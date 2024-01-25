@@ -16,6 +16,7 @@ const LeadsOptions = ({
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, options]);
 
   const handleOutsideClick = (e: any) => {

@@ -40,7 +40,7 @@ const EmployeeListPage = () => {
     }
 
     setUniqueCharCount(updatedUniqueCharCount);
-  }, [EMPLOYEE_LIST_DATA]);
+  }, []);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);

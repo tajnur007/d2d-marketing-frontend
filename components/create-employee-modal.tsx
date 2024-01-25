@@ -34,6 +34,7 @@ const CreateEmployeeModal = ({
     } else {
       setIsExecutive(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, manager, formErrors]);
 
   const closeModal = () => {
