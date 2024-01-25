@@ -9,7 +9,11 @@ import Link from 'next/link';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 
-const SigninForm = () => {
+const SigninForm = ({
+  setLoading,
+}: {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -18,6 +22,8 @@ const SigninForm = () => {
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
+
       const res = await signIn('credentials', {
         email,
         password,
@@ -26,9 +32,13 @@ const SigninForm = () => {
 
       if (res?.ok) {
         router.push(PAGE_ROUTES?.Dashboard);
+      } else {
+        setLoading(false);
       }
     } catch (err) {
       console.error('Login failed:', err);
+      setLoading(false);
+      router.push(PAGE_ROUTES?.Signin);
     }
   };
 
@@ -79,7 +89,7 @@ const SigninForm = () => {
               id='password'
               name='Password'
               htmlFor='password'
-              onChange={handleEmailChange}
+              onChange={handlePasswordChange}
             />
             <p
               className='absolute top-[52px] right-6 cursor-pointer'

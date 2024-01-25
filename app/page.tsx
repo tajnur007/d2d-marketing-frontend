@@ -8,7 +8,7 @@ const HomePage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push(PAGE_ROUTES.Dashboard);
+    router.push(PAGE_ROUTES.Signin);
   });
 
   return <> </>;

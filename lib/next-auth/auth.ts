@@ -2,18 +2,14 @@ import { AuthService } from '@/services/auth-service';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { createAuthData } from '../actions';
-import axios from 'axios';
-import {
-  NEXTAUTH_SECRET,
-  PAGE_ROUTES,
-  SERVER_BASE_URL,
-} from '@/utils/constants/common-constants';
+
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  secret: NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: PAGE_ROUTES?.Signin,
   },
@@ -33,9 +29,11 @@ export const authOptions: NextAuthOptions = {
           }
           const loginData = { email, password };
 
-          const response = await axios.post(`${SERVER_BASE_URL}/auth/login`, loginData);
+          const AuthServices = new AuthService();
+          const response = await AuthServices.login(loginData);
+          createAuthData(response);
 
-          return response.data;
+          return response;
         } catch (error: any) {
           let callbackUrl: any;
           throw `/auth/login?callbackUrl=${encodeURIComponent(
@@ -74,9 +72,3 @@ async function refreshAccessToken(refreshToken: any) {
     };
   }
 }
-
-// const apiService = new AuthService('http://157.245.204.196:8021/v1/auth/login');
-
-// const response = await apiService.login(loginData);
-// console.log(response);
-// createAuthData(response);
