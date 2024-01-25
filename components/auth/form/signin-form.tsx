@@ -33,6 +33,8 @@ const SigninForm = ({
 
       if (res?.ok) {
         router.push(PAGE_ROUTES?.Dashboard);
+      } else {
+        setLoading(false);
       }
     } catch (err) {
       console.error('Login failed:', err);

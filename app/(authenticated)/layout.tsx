@@ -5,7 +5,6 @@ import Sidebar from '../../components/layouts/sidebar';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/next-auth/auth';
-import { useEffect, useState } from 'react';
 
 export default async function AuthenticatedLayout({
   children,

@@ -8,7 +8,7 @@ const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect(PAGE_ROUTES.Dashboard);
+    redirect(PAGE_ROUTES?.Dashboard);
   }
 
   return <Fragment>{children}</Fragment>;
