@@ -1,6 +1,6 @@
 'use client';
 import { BackArrowIcon } from '@/assets/icons';
-import CreateLeadForm from '@/components/createlead/create-lead-form';
+import CreateLeadForm from '@/components/create-lead/create-lead-form';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useRouter } from 'next/navigation';
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
-import LeadRow from '@/components/LeadRow/LeadRow';
+import LeadRow from '@/components/lead-row';
 // import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';

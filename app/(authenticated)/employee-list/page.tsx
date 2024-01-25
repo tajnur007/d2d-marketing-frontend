@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmployeeSearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
-import EmployeeListRow from '@/components/row/employee-list-row';
+import EmployeeListRow from '@/components/employee-list-row';
 import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
 import { CreateEmployeeItems } from '@/models/global-types';
@@ -40,7 +40,7 @@ const EmployeeListPage = () => {
     }
 
     setUniqueCharCount(updatedUniqueCharCount);
-  }, [EMPLOYEE_LIST_DATA]);
+  }, []);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
