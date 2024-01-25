@@ -1,19 +1,15 @@
-'use client';
-
+import { authOptions } from '@/lib/next-auth/auth';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { Fragment, useEffect } from 'react';
 
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
-  const session = useSession();
+const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getServerSession(authOptions);
 
-  useEffect(() => {
-    if (session?.data) {
-      redirect(PAGE_ROUTES?.Dashboard);
-    }
-  }, [session?.data]);
-
+  if (session) {
+    redirect(PAGE_ROUTES.Dashboard);
+  }
   return <Fragment>{children}</Fragment>;
 };
 

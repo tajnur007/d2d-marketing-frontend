@@ -4,12 +4,21 @@ import AuthLayout from '@/components/layouts/auth-layout';
 import marketingSignIn from '@/assets/images/Marketing-signin.png';
 import NoAccount from '@/components/auth/common/no-account';
 import SigninForm from '@/components/auth/form/signin-form';
-import { AUTH_LEFT_TEXT } from '@/utils/constants/common-constants';
-import { useState } from 'react';
+import { AUTH_LEFT_TEXT, PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { useEffect, useState } from 'react';
 import { InfinitySpin } from 'react-loader-spinner';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 const SignInPage = () => {
   const [loading, setLoading] = useState(false);
+  const session = useSession();
+
+  useEffect(() => {
+    if (session?.data) {
+      redirect(PAGE_ROUTES?.Dashboard);
+    }
+  }, [session?.data]);
 
   if (loading) {
     return (
