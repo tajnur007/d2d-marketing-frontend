@@ -74,8 +74,7 @@ const Sidebar = () => {
           contentStyle={{
             padding: '8px',
             width: '110px',
-          }}
-          arrow={false}>
+          }}>
           <div
             className='flex items-center gap-1 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#d93f21]'
             onClick={() => {
