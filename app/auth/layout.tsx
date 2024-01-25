@@ -2,7 +2,7 @@ import { authOptions } from '@/lib/next-auth/auth';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getServerSession(authOptions);
