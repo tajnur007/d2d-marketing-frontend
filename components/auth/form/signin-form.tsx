@@ -11,9 +11,7 @@ import { Button } from '@/components/button';
 
 const SigninForm = ({
   setLoading,
-  loading,
 }: {
-  loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const router = useRouter();

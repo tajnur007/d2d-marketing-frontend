@@ -21,7 +21,7 @@ const SignInPage = () => {
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingSignIn}>
       <NoAccount signupPage={true} />
-      <SigninForm loading={loading} setLoading={setLoading} />
+      <SigninForm setLoading={setLoading} />
     </AuthLayout>
   );
 };

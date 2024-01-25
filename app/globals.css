@@ -87,7 +87,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   }
 }
 
-/* sidebar profile popup menu animation */
+/* animation for sidebar profile popup menu */
 
 @keyframes anvil {
   0% {
