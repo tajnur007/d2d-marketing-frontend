@@ -114,16 +114,6 @@ export interface SignUpFormItems {
   ConfirmPassword?: string;
 }
 
-export interface SignupPayload {
-  company_name: string | undefined;
-  user_info: {
-    name: string | undefined;
-    email: string | undefined;
-    user_type?: 'admin' | 'user';
-    password: string | undefined;
-  };
-};
-
 export interface SelectProps {
   label?: React.ReactNode;
   className?: string;

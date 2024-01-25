@@ -4,9 +4,9 @@ import { PasswordRevealIcon } from '@/assets/icons';
 import { Button } from '@/components/button';
 import CheckYourEmailModal from '@/components/check-mail-modal';
 import { Input } from '@/components/input';
-import { SignUpFormItems, SignupPayload } from '@/models/global-types';
+import { SignUpFormItems } from '@/models/global-types';
 import { AuthService } from '@/services/auth-service';
-import { SERVER_BASE_URL, SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
+import { SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
 import { AxiosError } from 'axios';
 import { ChangeEvent, useState } from 'react';
 
@@ -18,6 +18,8 @@ const SignupForm = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState('jack365@gmail.com');
+
+  const AuthServices = new AuthService();
 
   const handlePasswordVisibilityToggle = () => {
     setShowPassword(!showPassword);
@@ -50,7 +52,7 @@ const SignupForm = () => {
 
       console.log(payload);
 
-      const AuthServices = new AuthService();
+      
       const response = await AuthServices.signup(payload);
 
       console.log('Response: ', response);

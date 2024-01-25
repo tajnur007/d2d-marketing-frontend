@@ -1,6 +1,10 @@
 import { ArrowLeftIcon, FeaturedIcon } from '@/assets/icons';
 import Modal from 'react-modal';
 
+if (Modal.defaultStyles.overlay) {
+  Modal.defaultStyles.overlay.backgroundColor = '#00000054';
+}
+
 const CheckYourEmailModal = ({
   showModal,
   setShowModal,
@@ -35,7 +39,7 @@ const CheckYourEmailModal = ({
                   Check your email
                 </div>
                 <p className='flex flex-col items-center text-[20px] font-medium'>
-                  <span>We’ve sent a verification link to </span>
+                  <span>We have sent a verification link to </span>
                   <span className='font-semibold'>{selectedEmail}</span>
                 </p>
               </div>
