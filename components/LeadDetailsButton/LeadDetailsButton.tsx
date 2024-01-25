@@ -11,39 +11,31 @@ import LeadsOptions from './leads-options';
 const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState(false);
-  const newRef = useRef<any>(null);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  });
 
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
+    setIsOpen((prevState: any) => !prevState);
   };
 
   const toggleButtons = () => {
     setOptions((prevState) => !prevState);
   };
 
-  const handleOutsideClick = (e: any) => {
-    if (newRef.current && !newRef.current.contains(e.target)) {
-      setOptions(false);
-    }
-  };
-
   return (
     <>
       <Image
-        ref={newRef}
         className='cursor-pointer h-6 w-6'
         src={moreImage}
         alt=''
         onClick={toggleButtons}
       />
-      {options && <LeadsOptions />}
+      {options && (
+        <LeadsOptions
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          options={options}
+          setOptions={setOptions}
+        />
+      )}
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
