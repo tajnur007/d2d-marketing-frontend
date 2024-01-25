@@ -1,6 +1,10 @@
 import Modal from 'react-modal';
 import { ArrowLeftIcon, FeaturedIcon } from '@/assets/icons';
 
+if (Modal.defaultStyles.overlay) {
+  Modal.defaultStyles.overlay.backgroundColor = '#00000054';
+}
+
 const CheckYourEmailModal = ({
   showModal,
   setShowModal,
