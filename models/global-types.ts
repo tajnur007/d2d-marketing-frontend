@@ -95,12 +95,8 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Reminder?: string;
-  Date?: string;
   Image?: string;
-  CurrentPassword?: string;
-  NewPassword?: string;
-  ConfirmPassword?: string;
+  AssignedTo?: string;
   location: MapLocation;
 }
 

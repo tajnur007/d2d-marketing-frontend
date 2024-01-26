@@ -41,6 +41,7 @@ export const API_METHODS = {
 export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
+  CreateLead: '/lead/create',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -82,13 +83,29 @@ export const FORM_ITEMS: FormItems = {
   Reference: '',
   Note: '',
   Status: '',
-  Reminder: '',
-  Date: '',
   Image: '',
-  CurrentPassword: '',
-  NewPassword: '',
-  ConfirmPassword: '',
+  AssignedTo: '',
   location: { lat: 0, lng: 0 },
+
+  // title: '',
+  // executive_id: 143,
+  // executive_name: 'aa_user2',
+  // latitude: 0,
+  // longitude: 0,
+  // meeting_status: '',
+  // point_of_contact: {
+  //   name: '',
+  //   number: '',
+  //   email: '',
+  //   meeting_notes: '',
+  //   reference: '',
+  // },
+  // image_infos: [
+  //   {
+  //     image_name: '',
+  //     image_path: '',
+  //   },
+  // ],
 };
 
 export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
@@ -123,9 +140,9 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 ];
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
-  { value: 'Hot', label: 'Hot' },
-  { value: 'Cool', label: 'Cool' },
-  { value: 'Warm', label: 'Warm' },
+  { value: 'hot', label: 'Hot' },
+  { value: 'cool', label: 'Cool' },
+  { value: 'warm', label: 'Warm' },
 ];
 
 export const ASSIGN_USERS: AssignToUsers[] = [
