@@ -40,6 +40,7 @@ export const API_METHODS = {
 
 export const API_PATHS = {
   Signup: '/auth/sign-up',
+  CreateUser: '/user/create',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -136,12 +137,11 @@ export const ASSIGN_USERS: AssignToUsers[] = [
 ];
 
 export const EMPLOYEE_ROLE: AssignToUsers[] = [
-  { value: 'Manager', label: 'Manager' },
-  { value: 'Executive', label: 'Executive' },
+  { value: 'manager', label: 'Manager' },
+  { value: 'executive', label: 'Executive' },
 ];
 
 export const MANAGERS: AssignToUsers[] = [
-  { value: '', label: '' },
   { value: 'Nibaron Kumar Das', label: 'Nibaron Kumar Das' },
   { value: 'Rezaul Mursalin Khan', label: 'Rezaul Mursalin Khan' },
   { value: 'Aminul Islam', label: 'Aminul Islam' },
@@ -169,11 +169,12 @@ export const CREATE_LEAD_STATUS: string[] = [
 ];
 
 export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
-  Name: '',
-  Phone: '',
-  Email: '',
-  Role: '',
-  Manager: '',
+  name: '',
+  phone: '',
+  email: '',
+  user_type: '',
+  manager_name: '',
+  manager_id: 1,
 };
 
 export const AUTH_LEFT_TEXT =
