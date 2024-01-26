@@ -91,7 +91,7 @@ const SettingsPage = () => {
 
   return (
     <section>
-      <div className='bg-white w-full mt-0 mb-5 rounded-[10px]'>
+      <div className='bg-white w-full mt-0 rounded-[10px]'>
         <div className='ml-6'>
           {changePasswordClicked ? (
             <div>
@@ -164,7 +164,7 @@ const SettingsPage = () => {
           ) : (
             <div>
               <div className='flex mt-2 ml-6'>
-                <div className="flex items-center w-20 mt-[8px] ">
+                <div className="flex items-center w-20 mt-[8px]">
                   <Image
                     src={profileImageSrc || profileImage}
                     alt="Profile Picture"
@@ -195,7 +195,7 @@ const SettingsPage = () => {
               </div>
 
               {!changePasswordClicked && (
-                <div className='gap-[10px] ml-6 mr-8 mb-4 mt-2'>
+                <div className='gap-[10px] ml-6 mr-8 mb-2 mt-2'>
                   <Input
                     label={<p className='text-[#00156A] font-medium text-xs mt-6 mb-1'>Full Name</p>}
                     placeholder='Full Name'
@@ -241,7 +241,7 @@ const SettingsPage = () => {
                   />
                 </div>
               )}
-              <div className='relative mb-8 mr-7 flex justify-end'>
+              <div className='relative mr-7 flex justify-end'>
                 <Button
                   onClick={handleCancel}
                   className='text-[#69708C] w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#EBEBEB] mb-4 hover:text-white'>

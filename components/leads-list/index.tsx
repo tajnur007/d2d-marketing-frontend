@@ -1,10 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/lead-row';
-// import CreateLeadsButton from '@/components/CreateLeadsButton/CreateLeadsButton';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
@@ -41,7 +39,7 @@ function LeadsList() {
   };
 
   return (
-    <div className='border border-gray-100 bg-white rounded-xl h-[88vh] w-full'>
+    <div className='border border-gray-100 bg-white rounded-xl h-[84vh] w-full'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
         <div className='flex justify-between items-start content-center'>
           <div className='flex items-center pt-2'>
@@ -76,7 +74,7 @@ function LeadsList() {
           </div>
         </div>
       </div>
-      <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
+      <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
             ? searchData.map((item, index) => <LeadRow key={index} item={item} />)
