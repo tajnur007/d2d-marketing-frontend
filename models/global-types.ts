@@ -63,18 +63,22 @@ export interface LEADS_DATA_TYPE {
 }
 
 export interface EmployeestatusColor {
-  Active?: string;
-  Inactive?: string;
+  active?: string;
+  inactive?: string;
 }
 
 export interface EmployeeType {
   id: number;
-  employeeName: string;
-  employeeDesignation: string;
-  employeeEmail: string;
-  employeePhone: string;
-  employeeStatus: string;
-  employeeImage?: string;
+  company_id: number;
+  manager_id?: number;
+  name: string;
+  manager_name?: string;
+  user_type: string;
+  email: string;
+  phone: string;
+  status?: string;
+  image_path?: string;
+  image_name?: string;
 }
 
 interface MapLocation {

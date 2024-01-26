@@ -41,6 +41,7 @@ export const API_METHODS = {
 export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
+  GetExecutiveList: '/user/executive-list',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
