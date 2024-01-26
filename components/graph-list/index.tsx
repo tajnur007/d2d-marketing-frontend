@@ -1,29 +1,51 @@
+'use client';
 import { GRAPH_CONFIG } from '@/utils/constants/graph-constants';
-import React from 'react';
-import Graph from '../graph';
+import React, { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { API_PATHS } from '@/utils/constants/common-constants';
+import axios from 'axios';
+import GraphCard from '../graph-card';
 
 const GraphList: React.FC = () => {
+  const { data } = useSession();
+  //@ts-ignore den
+  const token: string = data?.user?.access_token;
+  const [dashboardInfo, setDashboardInfo] = useState({
+    total_leads: 0,
+    hot_leads: 0,
+    warm_leads: 0,
+    cold_leads: 0,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://157.245.204.196:8021/v1${API_PATHS.DashboardInfo}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setDashboardInfo(response.data.Data);
+      } catch (error) {
+        console.error('Error fetching dashboard info:', error);
+      }
+    };
+
+    if (token) {
+      fetchData();
+    }
+  }, [token]);
+
+  console.log(dashboardInfo);
+
   return (
     <div className='grid lg:grid-cols-3 sm:grid-cols-1 justify-between gap-[1.1rem] mb-6 lg:h-[15vh]'>
-      {GRAPH_CONFIG.map((item, index) => (
-        <div key={index} className='grid grid-cols-1 bg-white rounded-xl px-6 py-2'>
-          <div className='flex justify-between items-center '>
-            <p className='text-[14px] font-semibold leading-[14.976px] text-[#00156A]'>
-              {item.label}
-            </p>
-
-            <div
-              style={{ backgroundColor: item.countColor }}
-              className='bg-[#E5DFFF] py-2 px-4 rounded-2xl'>
-              <h4 className='text-[16px] font-semibold'>{item.count}</h4>
-            </div>
-          </div>
-
-          <div className='w-full h-[6vh] cursor-pointer mt-2'>
-            <Graph graphData={item.graphData} color={item.color} />
-          </div>
-        </div>
-      ))}
+      <GraphCard graphConfig={GRAPH_CONFIG.TotalLeads} data={dashboardInfo.total_leads} />
+      <GraphCard graphConfig={GRAPH_CONFIG.HotDeals} data={dashboardInfo.hot_leads} />
+      <GraphCard graphConfig={GRAPH_CONFIG.WarmDeals} data={dashboardInfo.warm_leads} />
     </div>
   );
 };
