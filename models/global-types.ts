@@ -37,9 +37,45 @@ export interface Person {
 }
 
 export interface statusColor {
-  Cool?: string;
-  Hot?: string;
-  Warm?: string;
+  cool?: string;
+  hot?: string;
+  warm?: string;
+}
+
+export interface LATEST_LEADS_LIST_DATA_TYPE {
+  id: number;
+  title: string;
+  latitude: number;
+  longitude: number;
+  meeting_status: string;
+  assignment_status: string;
+  image_info_json: [
+    {
+      image_name: string;
+      image_path: string;
+    }
+  ];
+  executive_id: number;
+  executive_name: string;
+  previous_user_id: number;
+  manager_id: number;
+  manager_name: string;
+  point_of_contact: {
+    name: string;
+    phone: string;
+    email: string;
+    reference: string;
+    meeting_notes: string;
+  };
+  company_id: number;
+  created_at: string;
+  created_by: string;
+  reminders: string;
+}
+
+export interface LATEST_LEADS_DATA_TYPE {
+  Count: number;
+  Data: [LATEST_LEADS_LIST_DATA_TYPE];
 }
 
 export interface LEADS_DATA_TYPE {
