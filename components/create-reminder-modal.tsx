@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { useEffect } from 'react';
 import { Input } from './input';
 import { CreateReminderModalProps } from '@/models/global-types';
-import { CREATE_LEAD_STATUS_NEW } from '@/utils/constants/common-constants';
+import { CREATE_REMINDER_STATUS } from '@/utils/constants/common-constants';
 import { TextArea } from './text-area';
 import { Button } from './button';
 import './dropdown-select.css';
@@ -73,7 +73,7 @@ const CreateReminderModal = ({
   };
 
   const handleSelectChange = (selectedOption: any) => {
-    CREATE_LEAD_STATUS_NEW.map((option) => {
+    CREATE_REMINDER_STATUS.map((option) => {
       if (option.value === selectedOption.value) {
         setSelected(option.value);
       }
@@ -158,7 +158,7 @@ const CreateReminderModal = ({
           </div>
 
           <Select
-            options={CREATE_LEAD_STATUS_NEW}
+            options={CREATE_REMINDER_STATUS}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
             styles={{
               control: (baseStyles) => ({
@@ -176,7 +176,7 @@ const CreateReminderModal = ({
         <div className='mt-[16px]'>
           <TextArea
             label={
-              <p className='text-[#00156A] font-medium text-xs mb-1'>Meeting Notes</p>
+              <p className='text-[#00156A] font-medium text-xs mb-1'>Notes</p>
             }
             placeholder='Notes'
             name='Note'
