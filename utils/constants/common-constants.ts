@@ -43,6 +43,7 @@ export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
   CreateLead: '/lead/create',
+  DashboardInfo: '/lead/dashboard-info',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [

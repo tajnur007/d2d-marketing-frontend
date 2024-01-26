@@ -1,6 +1,6 @@
+import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
 import { HttpClient, Response } from './axios-base-query';
-import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 
 export class ApiService {
   client;
@@ -39,7 +39,23 @@ export class ApiService {
       ...config,
       data,
     });
-    
+
+    return resp;
+  };
+
+  public dashboardInfo = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.DashboardInfo,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
     return resp;
   };
 
