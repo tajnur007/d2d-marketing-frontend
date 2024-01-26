@@ -26,7 +26,7 @@ export class ApiService {
     return resp;
   };
 
-  public getExecutiveList = async (token: string): Promise<any> => {
+  public getManagerList = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -34,7 +34,7 @@ export class ApiService {
     }
 
     const resp = await this.client.request({
-      url: API_PATHS.GetExecutiveList,
+      url: API_PATHS.GetManagerList,
       method: API_METHODS.GET,
       ...config,
       data: {},
