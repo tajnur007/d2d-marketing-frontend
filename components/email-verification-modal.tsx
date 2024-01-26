@@ -1,10 +1,7 @@
 import Modal from 'react-modal';
-import { ArrowLeftIcon, CheckCircleIcon, CrossCircleIcon } from '@/assets/icons';
+import { ArrowLeftIcon, CheckCircleIcon, CloseCircleIcon } from '@/assets/icons';
 import { Button } from './button';
 
-// if (Modal.defaultStyles.overlay) {
-//   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
-// }
 
 const EmailVerificationModal = ({
   showModal,
@@ -17,7 +14,7 @@ const EmailVerificationModal = ({
     setShowModal(false);
   };
 
-  let verified = true;
+  let verified = false;
 
   return (
     <>
@@ -46,7 +43,7 @@ const EmailVerificationModal = ({
             {!verified && (
               <>
                 <div className='flex justify-center items-center pb-[24px]'>
-                  <CrossCircleIcon />
+                  <CloseCircleIcon />
                 </div>
 
                 <div className='text-center'>

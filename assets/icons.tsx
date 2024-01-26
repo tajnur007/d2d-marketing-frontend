@@ -819,7 +819,7 @@ export const CheckCircleIcon = () => {
   );
 };
 
-export const CrossCircleIcon = () => {
+export const CloseCircleIcon = () => {
   return (
     <svg
       width='76'
@@ -834,7 +834,7 @@ export const CrossCircleIcon = () => {
         height='56'
         rx='28'
         fill='#FF0000'
-        fill-opacity='0.24'
+        fillOpacity='0.24'
       />
       <rect
         x='5'
@@ -843,16 +843,17 @@ export const CrossCircleIcon = () => {
         height='66'
         rx='33'
         stroke='#FF0000'
-        stroke-opacity='0.12'
-        stroke-width='10'
+        strokeOpacity='0.12'
+        strokeWidth='10'
       />
       <path
-        d='M32.7502 38.4999L36.2502 41.9999L43.2502 34.9999M49.6668 38.4999C49.6668 44.9432 44.4435 50.1666 38.0002 50.1666C31.5568 50.1666 26.3335 44.9432 26.3335 38.4999C26.3335 32.0566 31.5568 26.8333 38.0002 26.8333C44.4435 26.8333 49.6668 32.0566 49.6668 38.4999Z'
+        d='M34 34 L42 42 M34 42 L42 34'
         stroke='#FF0000'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
+      <circle cx='38' cy='38' r='12' stroke='#FF0000' strokeWidth='2' />
     </svg>
   );
 };
