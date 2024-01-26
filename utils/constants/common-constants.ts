@@ -9,6 +9,7 @@ import {
   CreateEmployeeItems,
   CreateReminderStatusItems,
   CreateLeadStatusItems,
+  SettingFormItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -86,27 +87,17 @@ export const FORM_ITEMS: FormItems = {
   Image: '',
   AssignedTo: '',
   location: { lat: 0, lng: 0 },
-
-  // title: '',
-  // executive_id: 143,
-  // executive_name: 'aa_user2',
-  // latitude: 0,
-  // longitude: 0,
-  // meeting_status: '',
-  // point_of_contact: {
-  //   name: '',
-  //   number: '',
-  //   email: '',
-  //   meeting_notes: '',
-  //   reference: '',
-  // },
-  // image_infos: [
-  //   {
-  //     image_name: '',
-  //     image_path: '',
-  //   },
-  // ],
 };
+
+export const SETTING_FORM_ITEMS: SettingFormItems = {
+  Name: '',
+  Phone: '',
+  Email: '',
+  Image: '',
+  CurrentPassword: '',
+  NewPassword: '',
+  ConfirmPassword: '',
+}
 
 export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
   Title: '',

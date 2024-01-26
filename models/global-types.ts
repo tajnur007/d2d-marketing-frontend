@@ -100,6 +100,16 @@ export interface FormItems {
   location: MapLocation;
 }
 
+export interface SettingFormItems {
+  Name?: string;
+  Phone?: string;
+  Email?: string;
+  Image?: string;
+  CurrentPassword?: string;
+  NewPassword?: string;
+  ConfirmPassword?: string;
+}
+
 export interface SignUpFormItems {
   FullName?: string;
   Email?: string;
