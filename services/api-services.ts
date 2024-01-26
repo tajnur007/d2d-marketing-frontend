@@ -26,6 +26,23 @@ export class ApiService {
     return resp;
   };
 
+  public createLead = async (data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.CreateLead,
+      method: API_METHODS.POST,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
+
   public dashboardInfo = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 

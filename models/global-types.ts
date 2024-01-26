@@ -131,13 +131,19 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Reminder?: string;
-  Date?: string;
+  Image?: string;
+  AssignedTo?: string;
+  location: MapLocation;
+}
+
+export interface SettingFormItems {
+  Name?: string;
+  Phone?: string;
+  Email?: string;
   Image?: string;
   CurrentPassword?: string;
   NewPassword?: string;
   ConfirmPassword?: string;
-  location: MapLocation;
 }
 
 export interface SignUpFormItems {
