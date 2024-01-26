@@ -1,12 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import leadImage from '@/assets/images/Marketing-signin.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { CreateReminderItems, LEADS_DATA_TYPE } from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
@@ -26,11 +27,14 @@ const LeadDetails = ({
   const [formErrors, setFormErrors] =
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const { data: sessionData } = useSession();
 
   const handleAddReminderButtonClick = () => {
     console.log('Button Clicked.');
     setModalIsOpen(true);
   };
+
+  useEffect(() => {});
 
   return (
     <div className='p-8  h-full overflow-y-auto no-scrollbar '>

@@ -44,6 +44,8 @@ export const API_PATHS = {
   CreateUser: '/user/create',
   CreateLead: '/lead/create',
   DashboardInfo: '/lead/dashboard-info',
+  GetExecutives: '/user/executive-list',
+  ResetPassword: '/user/forget-password',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
