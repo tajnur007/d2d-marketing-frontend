@@ -6,7 +6,11 @@ import { CreateEmployeeModalProps } from '@/models/global-types';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { ExIcon } from '@/assets/icons';
-import { EMPLOYEE_ROLE, MANAGERS } from '@/utils/constants/common-constants';
+import {
+  CREATE_EMPLOYEE_FORM_ITEMS,
+  EMPLOYEE_ROLE,
+  MANAGERS,
+} from '@/utils/constants/common-constants';
 import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
 import { ApiService } from '@/services/api-services';
@@ -54,6 +58,7 @@ const CreateEmployeeModal = ({
   const closeModal = () => {
     setModalIsOpen(false);
     setIsExecutive(false);
+    setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
   };
 
   const handleSelectChange = (selectedOption: any) => {
@@ -86,15 +91,21 @@ const CreateEmployeeModal = ({
         }
       }
       setFormErrors(newFormErrors);
-      // @ts-ignore
-      const token = data?.user?.access_token;
 
-      const UserServices = new ApiService();
-      const resp = await UserServices.createUser(formData, token);
+      if (Object.keys(newFormErrors).length === 0) {
+        //@ts-ignore
+        const token = data?.user?.access_token;
 
-      if (!Object.values(formData).includes('') || resp?.status === 201) {
-        setModalIsOpen(false);
-        setIsExecutive(false);
+        const UserServices = new ApiService();
+        const resp = await UserServices.createUser(formData, token);
+
+        console.log(resp);
+
+        if (resp?.status === 201) {
+          setModalIsOpen(false);
+          setIsExecutive(false);
+          setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -105,7 +116,7 @@ const CreateEmployeeModal = ({
     <div>
       <Modal
         className={
-          'absolute w-[646px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
+          'absolute w-[646px] h-auto -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
         }
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
