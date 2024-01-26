@@ -22,7 +22,7 @@ const LatestLeadsList: React.FC = () => {
         const response = await DashboardServices.latestLeads(token);
         setLatestLeads(response.data.Data);
       } catch (error) {
-        console.error('Error fetching dashboard info:', error);
+        console.error('Error fetching latest leads:', error);
       }
     };
 
