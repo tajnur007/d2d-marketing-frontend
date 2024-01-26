@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
+import React, { useState, ChangeEvent, useRef } from 'react';
 import Image from 'next/image';
-import { FormItems } from '@/models/global-types';
-import { FORM_ITEMS } from '@/utils/constants/common-constants';
+import {  SettingFormItems } from '@/models/global-types';
+import {  SETTING_FORM_ITEMS } from '@/utils/constants/common-constants';
 import profileImage from '@/assets/images/profilePic.png';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button'
@@ -11,8 +11,8 @@ import { EditIcon } from '@/assets/icons';
 
 const SettingsPage = () => {
   const [selected, setSelected] = useState('Pending');
-  const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
-  const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
+  const [formData, setFormData] = useState<SettingFormItems>(SETTING_FORM_ITEMS);
+  const [formErrors, setFormErrors] = useState<SettingFormItems>(SETTING_FORM_ITEMS);
   const [changePasswordClicked, setChangePasswordClicked] = useState(false);
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
