@@ -39,6 +39,16 @@ export class ApiService {
       ...config,
       data,
     });
+    
+    return resp;
+  };
+
+  public resetPassword = async (data: any) => {
+    const resp: Response<any> = await this.client.request({
+      url: '/user/forget-password',
+      method: 'post',
+      data: data,
+    });
 
     return resp;
   };
