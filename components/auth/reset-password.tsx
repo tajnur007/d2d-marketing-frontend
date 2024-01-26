@@ -7,15 +7,30 @@ import ForgetPasswordCommon from './common/forget-password-common';
 import Copyright from './common/copyright';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import EmailSent from './email-sent';
+import { ApiService } from '@/services/api-services';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(email);
-    setEmail('');
-    setEmailSubmitted(true);
+  const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      console.log(email);
+      const payload = {
+        email,
+      };
+
+      const UserServices = new ApiService();
+      const resp = await UserServices.resetPassword(payload);
+
+      console.log(resp);
+      if (resp?.status === 201) {
+        setEmail('');
+        setEmailSubmitted(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // We should not navigate user to another page after submitting an email, keep the user into same route
