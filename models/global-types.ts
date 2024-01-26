@@ -1,5 +1,3 @@
-import { MANAGERS } from './../utils/constants/common-constants';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { StaticImageData } from 'next/image';
 
 import React, {
@@ -163,10 +161,15 @@ export interface AuthLayoutProps {
   children?: ReactNode;
 }
 
-export interface CreateLeadStatusItems {
+export interface CreateReminderStatusItems {
   value: string;
   label: string;
   image?: any;
+}
+
+export interface CreateLeadStatusItems {
+  value: string;
+  label: string;
 }
 
 export interface AssignToUsers {
@@ -257,8 +260,5 @@ export interface CreateEmployeeModalProps {
 
 
 export interface LeadOptionsProps {
-  isOpen: boolean;
-  setIsOpen: (item: any) => void;
-  options: boolean;
-  setOptions: (item: any) => void;
+  handleViewButton: () => void;
 }

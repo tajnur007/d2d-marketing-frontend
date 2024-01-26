@@ -73,11 +73,11 @@ const EmployeeListPage = () => {
                   <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
                     <EmployeeSearchIcon />
                   </div>
-                  <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200'>
+                  <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                     <input
                       type='search'
                       id='default-search'
-                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium'
+                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium ml-3'
                       value={searchTerm}
                       onChange={handleSearchChange}
                     />
