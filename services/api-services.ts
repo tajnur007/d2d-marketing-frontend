@@ -1,6 +1,6 @@
+import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
 import { HttpClient, Response } from './axios-base-query';
-import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 
 export class ApiService {
   client;
@@ -37,6 +37,16 @@ export class ApiService {
       url: API_PATHS.DashboardInfo,
       method: API_METHODS.GET,
       ...config,
+    });
+
+    return resp;
+  };
+
+  public resetPassword = async (data: any) => {
+    const resp: Response<any> = await this.client.request({
+      url: '/user/forget-password',
+      method: 'post',
+      data: data,
     });
 
     return resp;
