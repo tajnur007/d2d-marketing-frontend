@@ -188,7 +188,9 @@ export interface StatusState {
 
 export interface CreateEmployeeModalProps {
   modalIsOpen: boolean;
+  isExecutive: boolean;
   setModalIsOpen: (item: boolean) => void;
+  setIsExecutive: (item: boolean) => void;
   formData: CreateEmployeeItems;
   setFormData: (item: any) => void;
   formErrors: CreateEmployeeItems;
@@ -239,11 +241,12 @@ export interface CreateReminderModalProps {
 }
 
 export interface CreateEmployeeItems {
-  Name?: string;
-  Phone?: string;
-  Email?: string;
-  Role?: string;
-  Manager?: string;
+  name?: string;
+  phone?: string;
+  email?: string;
+  user_type?: string;
+  manager_name?: string;
+  manager_id?: number;
 }
 
 export interface CreateEmployeeModalProps {
@@ -254,7 +257,6 @@ export interface CreateEmployeeModalProps {
   formErrors: CreateEmployeeItems;
   setFormErrors: (item: any) => void;
 }
-
 
 export interface LeadOptionsProps {
   isOpen: boolean;

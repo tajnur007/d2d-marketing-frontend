@@ -8,6 +8,8 @@ import { Button } from '@/components/button';
 import { ExIcon } from '@/assets/icons';
 import { EMPLOYEE_ROLE, MANAGERS } from '@/utils/constants/common-constants';
 import './dropdown-select.css';
+import { useSession } from 'next-auth/react';
+import { ApiService } from '@/services/api-services';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -15,30 +17,43 @@ if (Modal.defaultStyles.overlay) {
 
 const CreateEmployeeModal = ({
   modalIsOpen,
+  isExecutive,
   setModalIsOpen = () => {},
+  setIsExecutive = () => {},
   formData,
   setFormData = () => {},
   formErrors,
   setFormErrors = () => {},
 }: CreateEmployeeModalProps) => {
-  const [selected, setSelected] = useState<string>('Manager');
-  const [manager, setManager] = useState<string>('');
-  const [isExecutive, setIsExecutive] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>(EMPLOYEE_ROLE[0]?.value);
+  const [manager, setManager] = useState<string>(MANAGERS[0]?.value);
+
+  const { data } = useSession();
 
   useEffect(() => {
+    const selectedManager = selected === 'executive' ? manager : '';
+    const selectedManagerId = MANAGERS.findIndex(
+      (item) => item.value === selectedManager
+    );
     setFormData((prev: any) => {
-      return { ...prev, Role: selected, Manager: manager };
+      return {
+        ...prev,
+        user_type: selected,
+        manager_name: selectedManager,
+        manager_id: selectedManagerId + 1,
+      };
     });
-    if (selected === 'Executive') {
+    if (selected === 'executive') {
       setIsExecutive(true);
     } else {
       setIsExecutive(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, manager, formErrors]);
 
   const closeModal = () => {
     setModalIsOpen(false);
+    setIsExecutive(false);
   };
 
   const handleSelectChange = (selectedOption: any) => {
@@ -61,21 +76,28 @@ const CreateEmployeeModal = ({
     });
   };
 
-  const submitData = () => {
-    const newFormErrors: any = {};
+  const submitData = async () => {
+    try {
+      const newFormErrors: any = {};
 
-    for (let field in formData) {
-      if (formData[field as keyof typeof formData] === '') {
-        newFormErrors[field] = `(${field} is required)`;
+      for (let field in formData) {
+        if (field !== 'manager_name' && formData[field as keyof typeof formData] === '') {
+          newFormErrors[field] = `(${field} is required)`;
+        }
       }
-    }
-    setFormErrors(newFormErrors);
+      setFormErrors(newFormErrors);
+      // @ts-ignore
+      const token = data?.user?.access_token;
 
-    console.log(formData);
-    if (Object.values(formData).includes('')) {
-      setModalIsOpen(true);
-    } else {
-      setModalIsOpen(false);
+      const UserServices = new ApiService();
+      const resp = await UserServices.createUser(formData, token);
+
+      if (!Object.values(formData).includes('') || resp?.status === 201) {
+        setModalIsOpen(false);
+        setIsExecutive(false);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -102,10 +124,10 @@ const CreateEmployeeModal = ({
             placeholder='Name'
             type='text'
             id='name'
-            name='Name'
+            name='name'
             htmlFor='name'
-            errorMessage={formErrors.Name}
-            className={`w-full mb-5 ${formErrors.Name && 'border-red-500 shadow'}`}
+            errorMessage={formErrors.name}
+            className={`w-full mb-5 ${formErrors.name && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
           <Input
@@ -115,10 +137,10 @@ const CreateEmployeeModal = ({
             placeholder='Phone Number'
             type='text'
             id='phone'
-            name='Phone'
+            name='phone'
             htmlFor='phone'
-            errorMessage={formErrors.Phone}
-            className={`w-full mb-5 ${formErrors.Phone && 'border-red-500 shadow'}`}
+            errorMessage={formErrors.phone}
+            className={`w-full mb-5 ${formErrors.phone && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
           <Input
@@ -126,10 +148,10 @@ const CreateEmployeeModal = ({
             placeholder='Email'
             type='text'
             id='email'
-            name='Email'
+            name='email'
             htmlFor='email'
-            errorMessage={formErrors.Email}
-            className={`w-full mb-5 ${formErrors.Email && 'border-red-500 shadow'}`}
+            errorMessage={formErrors.email}
+            className={`w-full mb-5 ${formErrors.email && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
           <label className='text-[#00156A] text-xs mb-1 font-medium'>Role</label>
