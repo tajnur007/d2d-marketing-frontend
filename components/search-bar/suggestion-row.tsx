@@ -8,9 +8,9 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 
 const getStatusColor: statusColor = {
-  Cool: 'bg-blue-200',
-  Hot: 'bg-[#FFD9D9]',
-  Warm: 'bg-[#FFEFB8]',
+  cool: 'bg-blue-200',
+  hot: 'bg-[#FFD9D9]',
+  warm: 'bg-[#FFEFB8]',
 };
 
 const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
