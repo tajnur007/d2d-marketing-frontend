@@ -13,6 +13,7 @@ import CreateEmployeeModal from '@/components/create-employee-modal';
 const EmployeeListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [isExecutive, setIsExecutive] = useState<boolean>(false);
   const [formData, setFormData] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
@@ -47,7 +48,6 @@ const EmployeeListPage = () => {
   };
 
   const handleNewEmployeeButtonClick = () => {
-    console.log('Button Clicked.');
     setModalIsOpen(true);
   };
 
@@ -135,7 +135,9 @@ const EmployeeListPage = () => {
       </div>
       <CreateEmployeeModal
         modalIsOpen={modalIsOpen}
+        isExecutive={isExecutive}
         setModalIsOpen={setModalIsOpen}
+        setIsExecutive={setIsExecutive}
         formData={formData}
         setFormData={setFormData}
         formErrors={formErrors}
