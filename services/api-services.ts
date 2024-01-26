@@ -25,4 +25,20 @@ export class ApiService {
 
     return resp;
   };
+
+  public dashboardInfo = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.DashboardInfo,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
 }
