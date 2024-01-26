@@ -9,6 +9,7 @@ import {
   CreateEmployeeItems,
   CreateReminderStatusItems,
   CreateLeadStatusItems,
+  SettingFormItems,
 } from '@/models/global-types';
 import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
 
@@ -42,6 +43,8 @@ export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
   GetManagerList: '/user/manager-list',
+  CreateLead: '/lead/create',
+  DashboardInfo: '/lead/dashboard-info',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -83,13 +86,19 @@ export const FORM_ITEMS: FormItems = {
   Reference: '',
   Note: '',
   Status: '',
-  Reminder: '',
-  Date: '',
+  Image: '',
+  AssignedTo: '',
+  location: { lat: 0, lng: 0 },
+};
+
+export const SETTING_FORM_ITEMS: SettingFormItems = {
+  Name: '',
+  Phone: '',
+  Email: '',
   Image: '',
   CurrentPassword: '',
   NewPassword: '',
   ConfirmPassword: '',
-  location: { lat: 0, lng: 0 },
 };
 
 export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
@@ -124,9 +133,9 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 ];
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
-  { value: 'Hot', label: 'Hot' },
-  { value: 'Cool', label: 'Cool' },
-  { value: 'Warm', label: 'Warm' },
+  { value: 'hot', label: 'Hot' },
+  { value: 'cool', label: 'Cool' },
+  { value: 'warm', label: 'Warm' },
 ];
 
 export const ASSIGN_USERS: AssignToUsers[] = [
