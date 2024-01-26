@@ -63,11 +63,20 @@ export interface LEADS_DATA_TYPE {
 }
 
 export interface EmployeestatusColor {
-  active?: string;
-  inactive?: string;
+  Active?: string;
+  Inactive?: string;
 }
 
 export interface EmployeeType {
+  id: number;
+  employeeName: string;
+  employeeDesignation: string;
+  employeeEmail: string;
+  employeePhone: string;
+  employeeStatus: string;
+  employeeImage?: string;
+}
+export interface ManagerType {
   id: number;
   company_id: number;
   manager_id?: number;
@@ -76,7 +85,6 @@ export interface EmployeeType {
   user_type: string;
   email: string;
   phone: string;
-  status?: string;
   image_path?: string;
   image_name?: string;
 }

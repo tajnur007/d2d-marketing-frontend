@@ -4,19 +4,16 @@ import React, { useState, useEffect } from 'react';
 import { EmployeeSearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import EmployeeListRow from '@/components/employee-list-row';
+import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
-import { CreateEmployeeItems, EmployeeType } from '@/models/global-types';
+import { CreateEmployeeItems } from '@/models/global-types';
 import Image from 'next/image';
 import CreateEmployeeModal from '@/components/create-employee-modal';
-import { useSession } from 'next-auth/react';
-import { ApiService } from '@/services/api-services';
 
 const EmployeeListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [isExecutive, setIsExecutive] = useState<boolean>(false);
-  const [employees, setEmployees] = useState<EmployeeType[]>();
-  const { data } = useSession();
   const [formData, setFormData] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
@@ -29,38 +26,22 @@ const EmployeeListPage = () => {
   let displayedChars: string[] = [];
 
   useEffect(() => {
-    const getData = async () => {
-      //@ts-ignore
-      const token = data?.user?.access_token;
-      const Services = new ApiService();
-      if (token) {
-        const resp = await Services.getManagerList(token);
-        const data = resp?.data?.Data?.Data?.sort((a: EmployeeType, b: EmployeeType) =>
-          a?.name?.localeCompare(b?.name)
-        );
-        setEmployees([...data]);
-      }
-    };
-    getData();
-
-    console.log(employees);
+    EMPLOYEE_LIST_DATA.sort((a, b) => a.employeeName.localeCompare(b.employeeName));
 
     const updatedUniqueCharCount: { [key: string]: number } = {};
-    if (employees) {
-      for (let i = 0; i < employees?.length; i++) {
-        const firstChar = employees[i]?.name?.charAt(0).toUpperCase();
 
-        if (updatedUniqueCharCount[firstChar]) {
-          updatedUniqueCharCount[firstChar]++;
-        } else {
-          updatedUniqueCharCount[firstChar] = 1;
-        }
+    for (let i = 0; i < EMPLOYEE_LIST_DATA.length; i++) {
+      const firstChar = EMPLOYEE_LIST_DATA[i].employeeName.charAt(0).toUpperCase();
+
+      if (updatedUniqueCharCount[firstChar]) {
+        updatedUniqueCharCount[firstChar]++;
+      } else {
+        updatedUniqueCharCount[firstChar] = 1;
       }
     }
 
     setUniqueCharCount(updatedUniqueCharCount);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, []);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -70,13 +51,13 @@ const EmployeeListPage = () => {
     setModalIsOpen(true);
   };
 
-  const filteredEmployeeList = employees?.filter((employee) =>
-    employee?.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredEmployeeList = EMPLOYEE_LIST_DATA.filter((employee) =>
+    employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <>
-      <div className='border border-gray-100 bg-white rounded-xl h-[84vh] w-full'>
+      <div className='border border-gray-100 bg-white rounded-xl h-[88vh] w-full'>
         <div className='py-4 md:py-6 pl-8 h-[96px]'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
@@ -121,10 +102,10 @@ const EmployeeListPage = () => {
           </div>
         </div>
 
-        <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
+        <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
           <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-            {filteredEmployeeList?.map((item, index) => {
-              const firstChar = item?.name.charAt(0).toUpperCase();
+            {filteredEmployeeList.map((item, index) => {
+              const firstChar = item.employeeName.charAt(0).toUpperCase();
               let isFirstChar = false;
 
               // If the character has not been displayed, add it to the array and set isFirstChar to true

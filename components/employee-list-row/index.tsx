@@ -4,8 +4,8 @@ import profileImage from '@/assets/images/profile.png';
 import { EmployeeType, EmployeestatusColor } from '@/models/global-types';
 
 const getStatusColor: EmployeestatusColor = {
-  active: 'bg-[#D2FBE7]',
-  inactive: 'bg-red-200',
+  Active: 'bg-[#D2FBE7]',
+  Inactive: 'bg-red-200',
 };
 
 function EmployeeListRow({
@@ -17,7 +17,7 @@ function EmployeeListRow({
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
 }) {
-  const firstChar = item?.name.charAt(0).toUpperCase();
+  const firstChar = item.employeeName.charAt(0).toUpperCase();
 
   return (
     <div>
@@ -34,7 +34,7 @@ function EmployeeListRow({
       )}
 
       <div
-        key={item?.id}
+        key={item.id}
         className='h-20 flex gap-5 justify-between items-center text-sm leading-none text-gray-800 mb-1'>
         <div className='w-5%'>
           <div className='flex items-center w-15 mt-[8px] '>
@@ -48,11 +48,11 @@ function EmployeeListRow({
 
         <div className='w-[25%]'>
           <p className='leading-[28px] font-bold text-[16px] tracking-[-0.32] text-[#2B3674] mt-2 whitespace-nowrap'>
-            {item?.name}
+            {item.employeeName}
           </p>
           <div className='flex items-center mt-[4px]'>
             <div className='text-[#444444] font-medium text-[12px] leading-[20px] tracking-[-0.24] whitespace-nowrap text-capitalize inline-block'>
-              {item?.user_type}
+              {item.employeeDesignation}
             </div>
           </div>
         </div>
@@ -60,23 +60,23 @@ function EmployeeListRow({
         <div className='w-[25%]'>
           <div className='flex flex-row leading-[20px] font-medium text-[12px] tracking-[-0.24px] whitespace-nowrap'>
             <p className='text-[#444444] mr-1'>Phone:</p>
-            <div className='text-[#828DAD]'>{item?.phone}</div>
+            <div className='text-[#828DAD]'>{item.employeePhone}</div>
           </div>
         </div>
 
         <div className='w-[25%]'>
           <div className='flex flex-row leading-[20px] font-medium text-[12px] text-transparent tracking-[-0.24px] whitespace-nowrap'>
             <p className='text-[#444444] mr-1'>Email:</p>
-            <div className='text-[#828DAD]'>{item?.email}</div>
+            <div className='text-[#828DAD]'>{item.employeeEmail}</div>
           </div>
         </div>
-        {/* Status is currently missing from api responnse. or (||) is temporary used */}
+
         <div className='w-[10%]'>
           <span
             className={`text-[10px] w-fit font-medium tracking-[0] leading-[normal] text-[#00156A] h-[19px] mt-[-1px] ${
-              getStatusColor[item?.status as keyof EmployeestatusColor] || 'bg-[#D2FBE7]'
+              getStatusColor[item.employeeStatus as keyof EmployeestatusColor]
             } px-[10px] py-[6px] rounded-[12px]`}>
-            {item?.status || 'Active'}
+            {item.employeeStatus}
           </span>
         </div>
 
