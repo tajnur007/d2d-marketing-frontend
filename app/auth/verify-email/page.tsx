@@ -1,8 +1,11 @@
 import { ArrowLeftIcon, CheckCircleIcon, CloseCircleIcon } from '@/assets/icons';
 import { Button } from '@/components/button';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { useRouter } from 'next/navigation';
 
 const VerifyEmailPage = () => {
   let verified = false;
+  const router = useRouter();
 
   return (
     <div className='flex justify-center items-center absolute w-[455px] -translate-x-2/4 -translate-y-2/4 left-[50%] top-[50%] rounded border border-gray-200 bg-white shadow-sm'>
@@ -34,9 +37,15 @@ const VerifyEmailPage = () => {
             </div>
           </>
         )}
-        <Button className='text-[16px] rounded my-[32px]'>Log In</Button>
+        <Button
+          onClick={() => router.push(PAGE_ROUTES.Signin)}
+          className='text-[16px] rounded my-[32px]'>
+          Log In
+        </Button>
 
-        <button className='flex mx-auto items-center space-x-2'>
+        <button
+          onClick={() => router.push(PAGE_ROUTES.Signup)}
+          className='flex mx-auto items-center space-x-2'>
           <ArrowLeftIcon />
           <span className='text-[14px] font-semibold'>Back to Sign Up</span>
         </button>
