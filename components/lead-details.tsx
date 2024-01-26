@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
 import leadImage from '@/assets/images/Marketing-signin.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
@@ -18,6 +17,7 @@ import CreateReminderModal from './create-reminder-modal';
 const LeadDetails = ({
   setIsOpen,
   data,
+  executivesOption,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   data: LEADS_DATA_TYPE;
@@ -27,7 +27,6 @@ const LeadDetails = ({
   const [formErrors, setFormErrors] =
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
-  const { data: sessionData } = useSession();
 
   const handleAddReminderButtonClick = () => {
     console.log('Button Clicked.');
@@ -77,7 +76,7 @@ const LeadDetails = ({
             {data?.date}
           </div>
         </div>
-        <AssignDropdownSelect />
+        <AssignDropdownSelect executivesOption={executivesOption} />
       </div>
 
       <div className='poc border-[#EDEBF4] bg-[#F8F8F8] p-4 rounded-lg mt-4 whitespace-normal'>

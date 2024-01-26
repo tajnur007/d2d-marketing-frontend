@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ASSIGN_USERS } from '@/utils/constants/common-constants';
 import TransferConfirmationModal from './transfer-confirmation-modal';
 
-export const AssignDropdownSelect = () => {
+export const AssignDropdownSelect = ({ executivesOption }) => {
   const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selected, setSelected] = useState('');
@@ -36,7 +36,7 @@ export const AssignDropdownSelect = () => {
       <div className='flex place-items-center'>
         <div className='w-[205px] font-medium py-[8px]'>
           <Select
-            options={ASSIGN_USERS}
+            options={executivesOption}
             className='customselect font-medium text-[14px] tracking-[-0.28px] leading-[normal]'
             onChange={handleChange}
           />

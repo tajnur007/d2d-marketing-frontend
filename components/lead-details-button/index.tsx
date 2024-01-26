@@ -9,7 +9,7 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 
-const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
+const LeadDetailsButton = ({ data, executivesOption }: { data: LEADS_DATA_TYPE }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState(false);
   const ref = useRef<any>(null);
@@ -59,7 +59,11 @@ const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
         direction='right'
         size={450}
         overlayOpacity={0}>
-        <LeadDetails setIsOpen={setIsOpen} data={data} />
+        <LeadDetails
+          setIsOpen={setIsOpen}
+          data={data}
+          executivesOption={executivesOption}
+        />
       </Drawer>
     </>
   );

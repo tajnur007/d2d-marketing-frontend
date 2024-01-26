@@ -1,11 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/lead-row';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
 import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { ApiService } from '@/services/api-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
 
@@ -13,16 +15,23 @@ function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchData, setSearchData] = useState<LEADS_DATA_TYPE[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
+  const [executivesOption, setExecutivesOption] = useState([]);
+  const { data: sessionData } = useSession();
+  //@ts-ignore den
+  const token: string = sessionData?.user?.access_token;
 
   const router = useRouter();
   const handleCreateLeadButtonClick = () => {
     router.push(PAGE_ROUTES.LeadCreate);
   };
   const [filterData, setFilterData] = useState({});
-  console.log('Filter Data => ', filterData);
 
   useEffect(() => {
-    if (searchValue !== '') {
+    if (token) {
+      getExecutivesData();
+    }
+
+    if (keyPress && searchValue !== '') {
       const newFilteredData = LEADS_DATA.filter((data) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
@@ -30,7 +39,30 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress, searchValue]);
+  }, [keyPress, token]);
+
+  const getExecutivesData = async () => {
+    try {
+      const LeadServices = new ApiService();
+      const response = await LeadServices.getExecutives(token);
+      console.log(response);
+      const executivesData = createSelectData(response.data.Data.Data);
+      setExecutivesOption(executivesData);
+      console.log(executivesOption);
+    } catch (error) {
+      console.error('Error fetching executives:', error);
+    }
+  };
+
+  const createSelectData = (items: any): any => {
+    const selectOptions: any = [];
+    items.map((item: any) => {
+      const newItem = { value: item.name, label: item.name };
+      selectOptions.push(newItem);
+    });
+
+    return selectOptions;
+  };
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
@@ -77,8 +109,12 @@ function LeadsList() {
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
-            ? searchData.map((item, index) => <LeadRow key={index} item={item} />)
-            : LEADS_DATA.map((item, index) => <LeadRow key={index} item={item} />)}
+            ? searchData.map((item, index) => (
+                <LeadRow key={index} item={item} executivesOption={executivesOption} />
+              ))
+            : LEADS_DATA.map((item, index) => (
+                <LeadRow key={index} item={item} executivesOption={executivesOption} />
+              ))}
         </div>
       </div>
     </div>

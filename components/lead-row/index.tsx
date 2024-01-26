@@ -11,7 +11,7 @@ const getStatusColor: statusColor = {
   Warm: 'bg-[#FFEFB8]',
 };
 
-function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
+function LeadRow({ item, executivesOption }: { item: LEADS_DATA_TYPE }) {
   return (
     <div>
       <div
@@ -60,7 +60,7 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
           </p>
         </div>
         <div className='w-[2%]'>
-          <LeadDetailsButton data={item} />
+          <LeadDetailsButton data={item} executivesOption={executivesOption} />
         </div>
       </div>
     </div>
