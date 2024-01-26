@@ -41,6 +41,7 @@ export const API_METHODS = {
 export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
+  DashboardInfo: '/lead/dashboard-info',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
