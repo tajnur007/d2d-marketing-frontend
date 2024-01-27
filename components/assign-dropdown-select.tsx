@@ -2,7 +2,6 @@ import Select from 'react-select';
 import { Button } from './button';
 import './dropdown-select.css';
 import { useState } from 'react';
-import { ASSIGN_USERS } from '@/utils/constants/common-constants';
 import TransferConfirmationModal from './transfer-confirmation-modal';
 import { AssignToUsers } from '@/models/global-types';
 
@@ -27,7 +26,7 @@ export const AssignDropdownSelect = ({
 
   const handleChange = (selectedOption: any) => {
     {
-      ASSIGN_USERS.map((option) => {
+      executivesOption.map((option) => {
         if (option.value === selectedOption.value) {
           setSelected(option.value);
           setTransferButton(true);
