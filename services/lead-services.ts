@@ -6,7 +6,6 @@ export class LeadService {
       try {
         const LeadServices = new ApiService();
         const response = await LeadServices.getExecutives(token);
-        console.log(response);
         const executivesOption = this.createSelectData(response.data.Data.Data);
         setExecutivesOption(executivesOption);
       } catch (error) {
