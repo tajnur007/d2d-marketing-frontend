@@ -90,7 +90,7 @@ const CreateLeadForm = () => {
             { image_name: `${formData?.Name}_img`, image_path: formData?.Image },
           ],
           //! There is no assign_to in payload
-          assign_to: formData.AssignedTo,
+          // assign_to: formData.AssignedTo,
         };
 
         // @ts-ignore
