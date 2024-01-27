@@ -14,7 +14,7 @@ import {
 import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
 import { ApiService } from '@/services/api-services';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 if (Modal.defaultStyles.overlay) {
@@ -235,7 +235,6 @@ const CreateEmployeeModal = ({
           <Button onClick={submitData} className='w-full rounded-[10px] h-[60px] '>
             Create
           </Button>
-          <ToastContainer limit={1} theme='dark' />
         </div>
       </Modal>
     </div>

@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
 import type { Metadata } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -16,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body>
         <NextAuthProvider>{children}</NextAuthProvider>
+        <ToastContainer limit={1} theme='dark' />
         <SpeedInsights />
       </body>
     </html>
