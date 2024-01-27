@@ -42,7 +42,7 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress, token]);
+  }, [keyPress, searchValue, token]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
@@ -74,6 +74,7 @@ function LeadsList() {
                   handleKeyDown={handleKeyDown}
                   value={searchValue}
                   setValue={setSearchValue}
+                  executivesOption={executivesOption}
                 />
               </div>
               <div>

@@ -282,6 +282,7 @@ export interface SearchBarProps {
   value?: string;
   setValue?: (item: string) => void;
   handleKeyDown?: (e: any) => void;
+  executivesOption: AssignToUsers[];
 }
 
 export interface MyModalProps {

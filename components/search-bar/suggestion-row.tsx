@@ -1,7 +1,7 @@
 'use client';
 import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
 import LeadDetails from '@/components/lead-details';
-import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+import { LeadsDataType, statusColor, AssignToUsers } from '@/models/global-types';
 import Image from 'next/image';
 import { useState } from 'react';
 import Drawer from 'react-modern-drawer';
@@ -13,7 +13,13 @@ const getStatusColor: statusColor = {
   warm: 'bg-[#FFEFB8]',
 };
 
-const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
+const SuggestionRow = ({
+  item,
+  executivesOption,
+}: {
+  item: LeadsDataType;
+  executivesOption: AssignToUsers[];
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleDrawer = () => {
@@ -62,7 +68,11 @@ const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
         direction='right'
         size={450}
         overlayOpacity={0}>
-        <LeadDetails setIsOpen={setIsOpen} data={item} />
+        <LeadDetails
+          setIsOpen={setIsOpen}
+          data={item}
+          executivesOption={executivesOption}
+        />
       </Drawer>
     </div>
   );

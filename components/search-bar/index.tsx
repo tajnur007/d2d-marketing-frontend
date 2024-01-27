@@ -4,16 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 
 import { SearchIcon } from '@/assets/icons';
 import SuggestionRow from '@/components/search-bar/suggestion-row';
-import { LEADS_DATA_TYPE, SearchBarProps } from '@/models/global-types';
+import { LeadsDataType, SearchBarProps } from '@/models/global-types';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 
 const SearchBar = ({
   value = '',
   setValue = () => {},
   handleKeyDown,
+  executivesOption,
 }: SearchBarProps) => {
   const [isSuggestionCardOpen, setIsSuggestionCardOpen] = useState<boolean>(false);
-  const [suggestionData, setSuggestionData] = useState<LEADS_DATA_TYPE[]>([]);
+  const [suggestionData, setSuggestionData] = useState<LeadsDataType[]>([]);
   const newRef = useRef<any>(null);
 
   const onChange = (e: any) => {
@@ -66,7 +67,7 @@ const SearchBar = ({
         <div className='bg-white shadow-md rounded-[10px] w-[563px] m-0 p-0'>
           {suggestionData.slice(0, 3).map((item, index) => (
             <div key={index}>
-              <SuggestionRow item={item} />
+              <SuggestionRow item={item} executivesOption={executivesOption} />
               <div className='mx-auto border-b border-solid border-[#E9F0FF] border-t-0 border-r-0 border-l-0 w-[523px]'></div>
             </div>
           ))}
