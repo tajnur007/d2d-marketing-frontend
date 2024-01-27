@@ -2,7 +2,7 @@ import Image from 'next/image';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 // import { getStatusColor } from '@/utils/constants/common-constants';
-import { LEADS_DATA_TYPE, statusColor, AssignToUsers } from '@/models/global-types';
+import { LeadsDataType, statusColor, AssignToUsers } from '@/models/global-types';
 import LeadDetailsButton from '../lead-details-button';
 
 const getStatusColor: statusColor = {
@@ -15,7 +15,7 @@ function LeadRow({
   item,
   executivesOption,
 }: {
-  item: LEADS_DATA_TYPE;
+  item: LeadsDataType;
   executivesOption: AssignToUsers[];
 }) {
   return (

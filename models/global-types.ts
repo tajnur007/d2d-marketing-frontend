@@ -42,7 +42,7 @@ export interface statusColor {
   Warm?: string;
 }
 
-export interface LEADS_DATA_TYPE {
+export interface LeadsDataType {
   id: number;
   title: string;
   date: string;
@@ -180,8 +180,8 @@ export interface CreateLeadStatusItems {
 
 export interface AssignToUsers {
   value: string;
-  label: string;
-  company_id:number;
+  label?: string;
+  company_id?:number;
   email?: string;
   id?: number;
   image_name?: string;
@@ -190,7 +190,7 @@ export interface AssignToUsers {
   manager_name?: string;
   name?: string;
   phone?: string;
-  user_type: string;
+  user_type?: string;
 
 }
 

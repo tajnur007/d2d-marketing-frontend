@@ -7,7 +7,7 @@ import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import { CreateReminderItems, LEADS_DATA_TYPE } from '@/models/global-types';
+import { CreateReminderItems, LeadsDataType, AssignToUsers } from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import React from 'react';
@@ -20,7 +20,8 @@ const LeadDetails = ({
   executivesOption,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  data: LEADS_DATA_TYPE;
+  data: LeadsDataType;
+  executivesOption: AssignToUsers[];
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);

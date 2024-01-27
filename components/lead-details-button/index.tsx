@@ -4,7 +4,7 @@ import Popup from 'reactjs-popup';
 import { useState, useRef } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
-import { LEADS_DATA_TYPE, AssignToUsers } from '@/models/global-types';
+import { LeadsDataType, AssignToUsers } from '@/models/global-types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
@@ -13,7 +13,7 @@ const LeadDetailsButton = ({
   data,
   executivesOption,
 }: {
-  data: LEADS_DATA_TYPE;
+  data: LeadsDataType;
   executivesOption: AssignToUsers[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);

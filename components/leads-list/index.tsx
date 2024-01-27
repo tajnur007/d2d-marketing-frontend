@@ -6,14 +6,15 @@ import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/lead-row';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
-import { LEADS_DATA_TYPE, AssignToUsers } from '@/models/global-types';
+import { LeadsDataType, AssignToUsers } from '@/models/global-types';
 import { ApiService } from '@/services/api-services';
+import { LeadService } from '@/services/lead-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchData, setSearchData] = useState<LEADS_DATA_TYPE[]>([]);
+  const [searchData, setSearchData] = useState<LeadsDataType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
   const [executivesOption, setExecutivesOption] = useState<AssignToUsers[]>([]);
   const { data: sessionData } = useSession();
@@ -28,7 +29,8 @@ function LeadsList() {
 
   useEffect(() => {
     if (token) {
-      getExecutivesData();
+      const LeadServices = new LeadService();
+      LeadServices.getExecutivesData(setExecutivesOption, token);
     }
 
     if (keyPress && searchValue !== '') {
@@ -40,29 +42,6 @@ function LeadsList() {
       setSearchData([]);
     }
   }, [keyPress, token]);
-
-  const getExecutivesData = async () => {
-    try {
-      const LeadServices = new ApiService();
-      const response = await LeadServices.getExecutives(token);
-      console.log(response);
-      const executivesData = createSelectData(response.data.Data.Data);
-      setExecutivesOption(executivesData);
-      console.log(executivesOption);
-    } catch (error) {
-      console.error('Error fetching executives:', error);
-    }
-  };
-
-  const createSelectData = (items: any): any => {
-    const selectOptions: any = [];
-    items.map((item: any) => {
-      const newItem = { ...item, value: item.name, label: item.name };
-      selectOptions.push(newItem);
-    });
-    console.log(selectOptions);
-    return selectOptions;
-  };
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
