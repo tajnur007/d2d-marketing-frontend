@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Graph from '../graph';
 
-const GraphCard = ({ graphConfig, data }: {graphConfig: any, data: number}) => {
+const GraphCard = ({ graphConfig, data }: { graphConfig: any; data: number }) => {
   return (
     <div className='grid grid-cols-1 bg-white rounded-xl px-6 py-2'>
       <div className='flex justify-between items-center '>

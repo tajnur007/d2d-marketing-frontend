@@ -17,7 +17,7 @@ export const GRAPH_OPTIONS = {
 };
 
 export const GRAPH_CONFIG = {
-  'TotalLeads': {
+  TotalLeads: {
     id: 1,
     label: 'Total Leads',
     count: 10,
@@ -38,7 +38,7 @@ export const GRAPH_CONFIG = {
       { month: 'December', value: 200 },
     ],
   },
-  'HotDeals': {
+  HotDeals: {
     id: 2,
     label: 'Hot Deals',
     count: 20,
@@ -59,7 +59,7 @@ export const GRAPH_CONFIG = {
       { month: 'December', value: 200 },
     ],
   },
-  'WarmDeals': {
+  WarmDeals: {
     id: 3,
     label: 'Warm Deals',
     count: 30,

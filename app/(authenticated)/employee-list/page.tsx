@@ -57,7 +57,7 @@ const EmployeeListPage = () => {
 
   return (
     <>
-      <div className='border border-gray-100 bg-white rounded-xl h-[84vh] w-full'>
+      <div className='border border-gray-100 bg-white rounded-xl h-[88vh] w-full'>
         <div className='py-4 md:py-6 pl-8 h-[96px]'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
@@ -102,7 +102,7 @@ const EmployeeListPage = () => {
           </div>
         </div>
 
-        <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
+        <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
           <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
             {filteredEmployeeList.map((item, index) => {
               const firstChar = item.employeeName.charAt(0).toUpperCase();

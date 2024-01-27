@@ -1,9 +1,8 @@
 'use client';
+import { ApiService } from '@/services/api-services';
 import { GRAPH_CONFIG } from '@/utils/constants/graph-constants';
-import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { API_PATHS } from '@/utils/constants/common-constants';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import GraphCard from '../graph-card';
 
 const GraphList: React.FC = () => {
@@ -20,14 +19,8 @@ const GraphList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://157.245.204.196:8021/v1${API_PATHS.DashboardInfo}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const DashboardServices = new ApiService();
+        const response = await DashboardServices.dashboardInfo(token);
         setDashboardInfo(response.data.Data);
       } catch (error) {
         console.error('Error fetching dashboard info:', error);
