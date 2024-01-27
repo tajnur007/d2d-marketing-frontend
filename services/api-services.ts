@@ -83,4 +83,36 @@ export class ApiService {
 
     return resp;
   };
+
+  public latestLeads = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.LatestLeads,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
+
+  public leaderboard = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.Leaderboard,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
 }
