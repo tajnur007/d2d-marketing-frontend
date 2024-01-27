@@ -1,15 +1,21 @@
 'use client';
 import Image from 'next/image';
 import Popup from 'reactjs-popup';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
-import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { LEADS_DATA_TYPE, AssignToUsers } from '@/models/global-types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 
-const LeadDetailsButton = ({ data, executivesOption }: { data: LEADS_DATA_TYPE }) => {
+const LeadDetailsButton = ({
+  data,
+  executivesOption,
+}: {
+  data: LEADS_DATA_TYPE;
+  executivesOption: AssignToUsers[];
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState(false);
   const ref = useRef<any>(null);
@@ -21,7 +27,6 @@ const LeadDetailsButton = ({ data, executivesOption }: { data: LEADS_DATA_TYPE }
   const handleViewButton = () => {
     setIsOpen(true);
     ref.current.close();
-    console.log('button');
   };
 
   const toggleButtons = () => {
@@ -33,7 +38,7 @@ const LeadDetailsButton = ({ data, executivesOption }: { data: LEADS_DATA_TYPE }
       <Popup
         ref={ref}
         trigger={
-          <div className='menu-item'>
+          <div className=''>
             <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
           </div>
         }

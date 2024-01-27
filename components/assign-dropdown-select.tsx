@@ -4,8 +4,13 @@ import './dropdown-select.css';
 import { useState } from 'react';
 import { ASSIGN_USERS } from '@/utils/constants/common-constants';
 import TransferConfirmationModal from './transfer-confirmation-modal';
+import { AssignToUsers } from '@/models/global-types';
 
-export const AssignDropdownSelect = ({ executivesOption }) => {
+export const AssignDropdownSelect = ({
+  executivesOption,
+}: {
+  executivesOption: AssignToUsers[];
+}) => {
   const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selected, setSelected] = useState('');

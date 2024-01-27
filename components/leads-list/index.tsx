@@ -6,7 +6,7 @@ import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/lead-row';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
-import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { LEADS_DATA_TYPE, AssignToUsers } from '@/models/global-types';
 import { ApiService } from '@/services/api-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
@@ -15,7 +15,7 @@ function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchData, setSearchData] = useState<LEADS_DATA_TYPE[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
-  const [executivesOption, setExecutivesOption] = useState([]);
+  const [executivesOption, setExecutivesOption] = useState<AssignToUsers[]>([]);
   const { data: sessionData } = useSession();
   //@ts-ignore den
   const token: string = sessionData?.user?.access_token;
@@ -57,10 +57,10 @@ function LeadsList() {
   const createSelectData = (items: any): any => {
     const selectOptions: any = [];
     items.map((item: any) => {
-      const newItem = { value: item.name, label: item.name };
+      const newItem = { ...item, value: item.name, label: item.name };
       selectOptions.push(newItem);
     });
-
+    console.log(selectOptions);
     return selectOptions;
   };
 

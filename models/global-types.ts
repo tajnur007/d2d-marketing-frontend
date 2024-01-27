@@ -181,6 +181,17 @@ export interface CreateLeadStatusItems {
 export interface AssignToUsers {
   value: string;
   label: string;
+  company_id:number;
+  email?: string;
+  id?: number;
+  image_name?: string;
+  image_path?: string;
+  manager_id?: number;
+  manager_name?: string;
+  name?: string;
+  phone?: string;
+  user_type: string;
+
 }
 
 export interface CreateAssignToItems {
