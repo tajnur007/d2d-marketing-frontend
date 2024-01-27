@@ -42,6 +42,11 @@ export interface statusColor {
   warm?: string;
 }
 
+export interface LEADERBOARD {
+  Count: number;
+  Data: Person[] | null;
+}
+
 export interface LATEST_LEADS_LIST_DATA_TYPE {
   id: number;
   title: string;

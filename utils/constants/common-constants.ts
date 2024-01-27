@@ -7,10 +7,11 @@ import {
   CreateReminderStatusItems,
   FormItems,
   LATEST_LEADS_DATA_TYPE,
+  LEADERBOARD,
+  SettingFormItems,
   SidebarItem,
   SignUpFormItems,
   statusColor,
-  SettingFormItems,
 } from '@/models/global-types';
 import { BookIcon, EmployeeListIcon, HomeIcon, SettingIcon } from '../../assets/icons';
 
@@ -225,6 +226,18 @@ export const LATEST_LEADS_ITEMS: LATEST_LEADS_DATA_TYPE = {
       created_at: ' ',
       created_by: ' ',
       reminders: ' ',
+    },
+  ],
+};
+
+export const LEADERBOARD_ITEMS: LEADERBOARD = {
+  Count: 0,
+  Data: [
+    {
+      id: 0,
+      initials: '',
+      name: '',
+      totalLeads: 0,
     },
   ],
 };
