@@ -1,18 +1,16 @@
+'use client';
+import { useState, useContext } from 'react';
 import Select from 'react-select';
 import { Button } from './button';
 import './dropdown-select.css';
-import { useState } from 'react';
 import TransferConfirmationModal from './transfer-confirmation-modal';
-import { AssignToUsers } from '@/models/global-types';
+import { ExecutiveContext } from '@/components/Context/executives-context';
 
-export const AssignDropdownSelect = ({
-  executivesOption,
-}: {
-  executivesOption: AssignToUsers[];
-}) => {
+export const AssignDropdownSelect = () => {
   const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selected, setSelected] = useState('');
+  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
 
   const handleConfirm = () => {
     setShowConfirmationModal(true);
@@ -26,7 +24,7 @@ export const AssignDropdownSelect = ({
 
   const handleChange = (selectedOption: any) => {
     {
-      executivesOption.map((option) => {
+      executivesOption.map((option: any) => {
         if (option.value === selectedOption.value) {
           setSelected(option.value);
           setTransferButton(true);

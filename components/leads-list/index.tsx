@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
@@ -7,16 +7,16 @@ import LeadRow from '@/components/lead-row';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
 import { LeadsDataType, AssignToUsers } from '@/models/global-types';
-import { ApiService } from '@/services/api-services';
 import { LeadService } from '@/services/lead-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
+import { ExecutiveContext } from '@/components/Context/executives-context';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchData, setSearchData] = useState<LeadsDataType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
-  const [executivesOption, setExecutivesOption] = useState<AssignToUsers[]>([]);
+  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
   const { data: sessionData } = useSession();
   //@ts-ignore den
   const token: string = sessionData?.user?.access_token;
@@ -42,7 +42,7 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress, searchValue, token]);
+  }, [keyPress, token]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
@@ -74,7 +74,6 @@ function LeadsList() {
                   handleKeyDown={handleKeyDown}
                   value={searchValue}
                   setValue={setSearchValue}
-                  executivesOption={executivesOption}
                 />
               </div>
               <div>
@@ -90,12 +89,8 @@ function LeadsList() {
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
-            ? searchData.map((item, index) => (
-                <LeadRow key={index} item={item} executivesOption={executivesOption} />
-              ))
-            : LEADS_DATA.map((item, index) => (
-                <LeadRow key={index} item={item} executivesOption={executivesOption} />
-              ))}
+            ? searchData.map((item, index) => <LeadRow key={index} item={item} />)
+            : LEADS_DATA.map((item, index) => <LeadRow key={index} item={item} />)}
         </div>
       </div>
     </div>

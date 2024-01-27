@@ -17,11 +17,9 @@ import CreateReminderModal from './create-reminder-modal';
 const LeadDetails = ({
   setIsOpen,
   data,
-  executivesOption,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   data: LeadsDataType;
-  executivesOption: AssignToUsers[];
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
@@ -77,7 +75,7 @@ const LeadDetails = ({
             {data?.date}
           </div>
         </div>
-        <AssignDropdownSelect executivesOption={executivesOption} />
+        <AssignDropdownSelect />
       </div>
 
       <div className='poc border-[#EDEBF4] bg-[#F8F8F8] p-4 rounded-lg mt-4 whitespace-normal'>

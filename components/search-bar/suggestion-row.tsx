@@ -13,13 +13,7 @@ const getStatusColor: statusColor = {
   warm: 'bg-[#FFEFB8]',
 };
 
-const SuggestionRow = ({
-  item,
-  executivesOption,
-}: {
-  item: LeadsDataType;
-  executivesOption: AssignToUsers[];
-}) => {
+const SuggestionRow = ({ item }: { item: LeadsDataType }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleDrawer = () => {
@@ -68,11 +62,7 @@ const SuggestionRow = ({
         direction='right'
         size={450}
         overlayOpacity={0}>
-        <LeadDetails
-          setIsOpen={setIsOpen}
-          data={item}
-          executivesOption={executivesOption}
-        />
+        <LeadDetails setIsOpen={setIsOpen} data={item} />
       </Drawer>
     </div>
   );
