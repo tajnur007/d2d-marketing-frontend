@@ -14,6 +14,8 @@ import {
 import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
 import { ApiService } from '@/services/api-services';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -58,6 +60,7 @@ const CreateEmployeeModal = ({
   const closeModal = () => {
     setModalIsOpen(false);
     setIsExecutive(false);
+    setSelected('manager');
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
   };
 
@@ -102,12 +105,17 @@ const CreateEmployeeModal = ({
         console.log(resp);
 
         if (resp?.status === 201) {
-          setModalIsOpen(false);
+          toast.success('Successfully created employee!', {
+            position: 'top-center',
+          });
           setIsExecutive(false);
           setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
         }
       }
     } catch (err) {
+      toast.error('Failed to create employee!', {
+        position: 'top-center',
+      });
       console.log(err);
     }
   };
@@ -137,6 +145,7 @@ const CreateEmployeeModal = ({
             id='name'
             name='name'
             htmlFor='name'
+            value={formData?.name}
             errorMessage={formErrors.name}
             className={`w-full mb-5 ${formErrors.name && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
@@ -150,6 +159,7 @@ const CreateEmployeeModal = ({
             id='phone'
             name='phone'
             htmlFor='phone'
+            value={formData?.phone}
             errorMessage={formErrors.phone}
             className={`w-full mb-5 ${formErrors.phone && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
@@ -161,6 +171,7 @@ const CreateEmployeeModal = ({
             id='email'
             name='email'
             htmlFor='email'
+            value={formData?.email}
             errorMessage={formErrors.email}
             className={`w-full mb-5 ${formErrors.email && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
@@ -206,6 +217,7 @@ const CreateEmployeeModal = ({
           <Button onClick={submitData} className='w-full rounded-[10px] h-[60px] '>
             Create
           </Button>
+          <ToastContainer limit={1} theme='dark' />
         </div>
       </Modal>
     </div>
