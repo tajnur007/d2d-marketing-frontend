@@ -91,7 +91,7 @@ const SettingsPage = () => {
 
   return (
     <section>
-      <div className='bg-white w-full mt-0 rounded-[10px]'>
+      <div className='h-[84vh] w-full mt-0 rounded-[10px] bg-white'>
         <div className='ml-6'>
           {changePasswordClicked ? (
             <div>
@@ -110,11 +110,15 @@ const SettingsPage = () => {
             </div>
           )}
         </div>
-        <form onSubmit={submitData} id='settings-form'>
+        <form className='bg-white' onSubmit={submitData} id='settings-form'>
           {changePasswordClicked ? (
-            <div className='gap-[10px] ml-6 mr-8 mb-4 mt-2'>
+            <div className='bg-white gap-[10px] ml-6 mr-8 mb-4 mt-2'>
               <Input
-                label={<p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>Current Password</p>}
+                label={
+                  <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
+                    Current Password
+                  </p>
+                }
                 placeholder='Current Password'
                 type='password'
                 id='currentPassword'
@@ -124,7 +128,11 @@ const SettingsPage = () => {
               />
 
               <Input
-                label={<p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>New Password</p>}
+                label={
+                  <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
+                    New Password
+                  </p>
+                }
                 placeholder='New Password'
                 type='password'
                 id='newPassword'
@@ -134,7 +142,11 @@ const SettingsPage = () => {
               />
 
               <Input
-                label={<p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>Confirm Password</p>}
+                label={
+                  <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
+                    Confirm Password
+                  </p>
+                }
                 placeholder='Confirm Password'
                 type='password'
                 id='confirmPassword'
@@ -164,21 +176,21 @@ const SettingsPage = () => {
           ) : (
             <div>
               <div className='flex mt-2 ml-6'>
-                <div className="flex items-center w-20 mt-[8px]">
+                <div className='flex items-center w-20 mt-[8px]'>
                   <Image
                     src={profileImageSrc || profileImage}
-                    alt="Profile Picture"
+                    alt='Profile Picture'
                     width={20}
                     height={20}
-                    className="rounded-full w-20 h-20 flex-shrink-0"
+                    className='rounded-full w-20 h-20 flex-shrink-0'
                   />
                 </div>
                 <div className='mt-9 ml-4 cursor-pointer' onClick={handleEditIconClick}>
                   <EditIcon />
                 </div>
                 <input
-                  type="file"
-                  accept="image/*"
+                  type='file'
+                  accept='image/*'
                   style={{ display: 'none' }}
                   ref={fileInputRef}
                   onChange={handleFileChange}
@@ -197,7 +209,11 @@ const SettingsPage = () => {
               {!changePasswordClicked && (
                 <div className='gap-[10px] ml-6 mr-8 mb-2 mt-2'>
                   <Input
-                    label={<p className='text-[#00156A] font-medium text-xs mt-6 mb-1'>Full Name</p>}
+                    label={
+                      <p className='text-[#00156A] font-medium text-xs mt-6 mb-1'>
+                        Full Name
+                      </p>
+                    }
                     placeholder='Full Name'
                     type='text'
                     id='fullName'
@@ -208,7 +224,11 @@ const SettingsPage = () => {
                     className={` ${formErrors.Name && 'border-red-500 shadow'}`}
                   />
                   <Input
-                    label={<p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>Email</p>}
+                    label={
+                      <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
+                        Email
+                      </p>
+                    }
                     placeholder='Email'
                     type='text'
                     id='email'
@@ -220,7 +240,11 @@ const SettingsPage = () => {
                   />
 
                   <Input
-                    label={<p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>Phone Number</p>}
+                    label={
+                      <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
+                        Phone Number
+                      </p>
+                    }
                     placeholder='Phone Number'
                     type='text'
                     id='phone'
@@ -232,7 +256,11 @@ const SettingsPage = () => {
                   />
 
                   <Input
-                    label={<p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>Role (View Only)</p>}
+                    label={
+                      <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
+                        Role (View Only)
+                      </p>
+                    }
                     placeholder='Assignee'
                     type='text'
                     id='role'
