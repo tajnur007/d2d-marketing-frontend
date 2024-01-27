@@ -12,7 +12,15 @@ import {
   statusColor,
   SettingFormItems,
 } from '@/models/global-types';
-import { BookIcon, EmployeeListIcon, HomeIcon, SettingIcon } from '../../assets/icons';
+import {
+  BookIcon,
+  DeleteIcon,
+  EditIcon,
+  EmployeeListIcon,
+  EyeIcon,
+  HomeIcon,
+  SettingIcon,
+} from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
   cool: 'bg-blue-200',
@@ -228,3 +236,18 @@ export const LATEST_LEADS_ITEMS: LATEST_LEADS_DATA_TYPE = {
     },
   ],
 };
+
+export const OPTION_MENU = [
+  {
+    label: 'View Details',
+    icon: EyeIcon,
+  },
+  {
+    label: 'Edit',
+    icon: EditIcon,
+  },
+  {
+    label: 'Delete',
+    icon: DeleteIcon,
+  },
+];
