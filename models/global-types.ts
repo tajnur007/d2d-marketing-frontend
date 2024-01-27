@@ -76,6 +76,18 @@ export interface EmployeeType {
   employeeStatus: string;
   employeeImage?: string;
 }
+export interface ManagerType {
+  id: number;
+  company_id: number;
+  manager_id?: number;
+  name: string;
+  manager_name?: string;
+  user_type: string;
+  email: string;
+  phone: string;
+  image_path?: string;
+  image_name?: string;
+}
 
 interface MapLocation {
   lat: number;

@@ -42,6 +42,7 @@ export const API_METHODS = {
 export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
+  GetManagerList: '/user/manager-list',
   CreateLead: '/lead/create',
   DashboardInfo: '/lead/dashboard-info',
 };
@@ -98,7 +99,7 @@ export const SETTING_FORM_ITEMS: SettingFormItems = {
   CurrentPassword: '',
   NewPassword: '',
   ConfirmPassword: '',
-}
+};
 
 export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
   Title: '',

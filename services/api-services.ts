@@ -26,6 +26,22 @@ export class ApiService {
     return resp;
   };
 
+  public getManagerList = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.GetManagerList,
+      method: API_METHODS.GET,
+      ...config,
+      data: {},
+    });
+
+    return resp;
+  };
   public createLead = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -42,7 +58,6 @@ export class ApiService {
 
     return resp;
   };
-
   public dashboardInfo = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
