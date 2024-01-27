@@ -37,9 +37,45 @@ export interface Person {
 }
 
 export interface statusColor {
-  Cool?: string;
-  Hot?: string;
-  Warm?: string;
+  cool?: string;
+  hot?: string;
+  warm?: string;
+}
+
+export interface LATEST_LEADS_LIST_DATA_TYPE {
+  id: number;
+  title: string;
+  latitude: number;
+  longitude: number;
+  meeting_status: string;
+  assignment_status: string;
+  image_info_json: [
+    {
+      image_name: string;
+      image_path: string;
+    }
+  ];
+  executive_id: number;
+  executive_name: string;
+  previous_user_id: number;
+  manager_id: number;
+  manager_name: string;
+  point_of_contact: {
+    name: string;
+    phone: string;
+    email: string;
+    reference: string;
+    meeting_notes: string;
+  };
+  company_id: number;
+  created_at: string;
+  created_by: string;
+  reminders: string;
+}
+
+export interface LATEST_LEADS_DATA_TYPE {
+  Count: number;
+  Data: [LATEST_LEADS_LIST_DATA_TYPE];
 }
 
 export interface LEADS_DATA_TYPE {
@@ -76,6 +112,18 @@ export interface EmployeeType {
   employeeStatus: string;
   employeeImage?: string;
 }
+export interface ManagerType {
+  id: number;
+  company_id: number;
+  manager_id?: number;
+  name: string;
+  manager_name?: string;
+  user_type: string;
+  email: string;
+  phone: string;
+  image_path?: string;
+  image_name?: string;
+}
 
 interface MapLocation {
   lat: number;
@@ -95,13 +143,19 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Reminder?: string;
-  Date?: string;
+  Image?: string;
+  AssignedTo?: string;
+  location: MapLocation;
+}
+
+export interface SettingFormItems {
+  Name?: string;
+  Phone?: string;
+  Email?: string;
   Image?: string;
   CurrentPassword?: string;
   NewPassword?: string;
   ConfirmPassword?: string;
-  location: MapLocation;
 }
 
 export interface SignUpFormItems {

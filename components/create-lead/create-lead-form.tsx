@@ -4,33 +4,32 @@ import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { ImageUpload } from '@/components/image-upload';
 import { Button } from '@/components/button';
-import { DatePicker } from '@/components/date-picker';
 import { useEffect, useState } from 'react';
 import {
   ASSIGN_TO_NEW,
-  CREATE_LEAD_STATUS,
   CREATE_LEAD_STATUS_NEW,
-  CREATE_REMINDER_STATUS,
   FORM_ITEMS,
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
-import { AssignToSelect } from '../select/assign-to-select';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
+import { ApiService } from '@/services/api-services';
+import { useSession } from 'next-auth/react';
 
 const CreateLeadForm = () => {
-  const [selected, setSelected] = useState('Pending');
+  const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
+  const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [location, setLocation] = useState({
-    lat: 27.6729,
-    lng: 85.3118,
+    lat: 22.04,
+    lng: 30.0,
   });
+
+  const { data } = useSession();
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-
-    console.log(value);
 
     setFormData((prev) => {
       return { ...prev, [name]: value };
@@ -43,27 +42,69 @@ const CreateLeadForm = () => {
 
   useEffect(() => {
     setFormData((prev) => {
-      return { ...prev, Status: selected };
+      return { ...prev, Status: statusSelected, AssignedTo: assignedToSelected };
     });
-  }, [selected, formErrors]);
+  }, [statusSelected, assignedToSelected, formErrors]);
 
-  const submitData = () => {
-    // This is temporary form update, until map key implemented.
+  const submitData = async () => {
     setFormData((prev) => {
       return { ...prev, location };
     });
 
-    const newFormErrors: any = {};
+    try {
+      const newFormErrors: any = {};
 
-    for (let field in formData) {
-      if (formData[field as keyof typeof formData] === '') {
-        newFormErrors[field] = `(${field} is required)`;
+      for (let field in formData) {
+        if (
+          formData[field as keyof typeof formData] === '' &&
+          field !== 'Reference' &&
+          field !== 'Email' &&
+          field !== 'Status' &&
+          field !== 'AssignedTo'
+        ) {
+          newFormErrors[field] = `(${field} is required)`;
+        }
       }
-    }
-    setFormErrors(newFormErrors);
-  };
 
-  console.log(formData);
+      if (Object.keys(newFormErrors).length === 0) {
+
+        //! Payload object
+
+        const payloadObj = {
+          title: formData?.Title,
+          executive_id: 143,
+          executive_name: 'aa_user2',
+          latitude: location?.lat,
+          longitude: location?.lng,
+          meeting_status: formData?.Status,
+
+          point_of_contact: {
+            name: formData?.Name,
+            number: formData?.Phone,
+            email: formData?.Email,
+            meeting_notes: formData?.Note,
+            reference: formData?.Reference,
+          },
+
+          image_infos: [
+            { image_name: `${formData?.Name}_img`, image_path: formData?.Image },
+          ],
+          //! There is no assign_to in payload
+          assign_to: formData.AssignedTo,
+        };
+
+        // @ts-ignore
+        const token = data?.user?.access_token;
+
+        const ApiServices = new ApiService();
+        const resp = await ApiServices.createLead(payloadObj, token);
+
+        console.log(`server response ${resp}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
@@ -79,14 +120,16 @@ const CreateLeadForm = () => {
           className={`w-full mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
-        <div className='flex flex-col justify-between gap-5 w-full'>
-          <AssignToSelect
-            label='Assign to'
-            setSelected={setSelected}
+
+        <div className='flex flex-col justify-between gap-5 w-full mb-[21px]'>
+          <CustomSelect
+            label='AssignedTo'
+            setSelected={setAssignedToSelected}
             options={ASSIGN_TO_NEW}
           />
         </div>
       </div>
+
       <div className='rounded-2xl relative h-[342px] w-full'>
         <Map setLocation={setLocation} location={location} />
       </div>
@@ -104,6 +147,7 @@ const CreateLeadForm = () => {
             onChange={handleInputChange}
             className={` ${formErrors.Name && 'border-red-500 shadow'}`}
           />
+
           <Input
             label={<p className='text-[#00156A] font-medium text-xs mb-1'>Phone</p>}
             placeholder='Phone number'
@@ -116,6 +160,7 @@ const CreateLeadForm = () => {
             className={` ${formErrors.Phone && 'border-red-500 shadow'}`}
           />
         </div>
+
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
             label={<p className='text-[#00156A] font-medium text-xs mb-1'>Email</p>}
@@ -126,6 +171,7 @@ const CreateLeadForm = () => {
             htmlFor='email'
             onChange={handleInputChange}
           />
+
           <Input
             label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reference</p>}
             placeholder='Reference (Optional)'
@@ -152,7 +198,7 @@ const CreateLeadForm = () => {
         <div className='flex flex-col justify-between gap-2 w-1/2'>
           <CustomSelect
             label='Status'
-            setSelected={setSelected}
+            setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
           />
 
@@ -163,6 +209,7 @@ const CreateLeadForm = () => {
                 <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
               )}
             </p>
+
             <ImageUpload
               placeholder='Upload image'
               name='Image'

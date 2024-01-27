@@ -1,21 +1,23 @@
 import {
-  FormItems,
-  SidebarItem,
-  statusColor,
-  CreateAssignToItems,
   AssignToUsers,
-  SignUpFormItems,
-  CreateReminderItems,
+  CreateAssignToItems,
   CreateEmployeeItems,
-  CreateReminderStatusItems,
   CreateLeadStatusItems,
+  CreateReminderItems,
+  CreateReminderStatusItems,
+  FormItems,
+  LATEST_LEADS_DATA_TYPE,
+  SidebarItem,
+  SignUpFormItems,
+  statusColor,
+  SettingFormItems,
 } from '@/models/global-types';
-import { BookIcon, HomeIcon, SettingIcon, EmployeeListIcon } from '../../assets/icons';
+import { BookIcon, EmployeeListIcon, HomeIcon, SettingIcon } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
-  Cool: 'bg-blue-200',
-  Hot: 'bg-[#FFD9D9]',
-  Warm: 'bg-[#FFEFB8]',
+  cool: 'bg-blue-200',
+  hot: 'bg-[#FFD9D9]',
+  warm: 'bg-[#FFEFB8]',
 };
 
 export const PAGE_ROUTES = {
@@ -41,7 +43,11 @@ export const API_METHODS = {
 export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
+  GetManagerList: '/user/manager-list',
+  CreateLead: '/lead/create',
   DashboardInfo: '/lead/dashboard-info',
+  LatestLeads: '/lead/dashboard-info-latest-leads',
+  Leaderboard: '/user/leaderboard',
   EmployeeListInfo:'/user/list',
 };
 
@@ -84,13 +90,19 @@ export const FORM_ITEMS: FormItems = {
   Reference: '',
   Note: '',
   Status: '',
-  Reminder: '',
-  Date: '',
+  Image: '',
+  AssignedTo: '',
+  location: { lat: 0, lng: 0 },
+};
+
+export const SETTING_FORM_ITEMS: SettingFormItems = {
+  Name: '',
+  Phone: '',
+  Email: '',
   Image: '',
   CurrentPassword: '',
   NewPassword: '',
   ConfirmPassword: '',
-  location: { lat: 0, lng: 0 },
 };
 
 export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
@@ -125,9 +137,9 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 ];
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
-  { value: 'Hot', label: 'Hot' },
-  { value: 'Cool', label: 'Cool' },
-  { value: 'Warm', label: 'Warm' },
+  { value: 'hot', label: 'Hot' },
+  { value: 'cool', label: 'Cool' },
+  { value: 'warm', label: 'Warm' },
 ];
 
 export const ASSIGN_USERS: AssignToUsers[] = [
@@ -181,3 +193,39 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
 
 export const AUTH_LEFT_TEXT =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.";
+
+export const LATEST_LEADS_ITEMS: LATEST_LEADS_DATA_TYPE = {
+  Count: 0,
+  Data: [
+    {
+      id: 0,
+      title: ' ',
+      latitude: 0,
+      longitude: 0,
+      meeting_status: ' ',
+      assignment_status: ' ',
+      image_info_json: [
+        {
+          image_name: ' ',
+          image_path: ' ',
+        },
+      ],
+      executive_id: 0,
+      executive_name: ' ',
+      previous_user_id: 0,
+      manager_id: 0,
+      manager_name: ' ',
+      point_of_contact: {
+        name: ' ',
+        phone: ' ',
+        email: ' ',
+        reference: ' ',
+        meeting_notes: ' ',
+      },
+      company_id: 0,
+      created_at: ' ',
+      created_by: ' ',
+      reminders: ' ',
+    },
+  ],
+};

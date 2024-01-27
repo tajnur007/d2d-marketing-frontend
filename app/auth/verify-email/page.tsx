@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowLeftIcon, CheckCircleIcon, CloseCircleIcon } from '@/assets/icons';
 import { Button } from '@/components/button';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
