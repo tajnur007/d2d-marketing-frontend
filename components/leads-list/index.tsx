@@ -26,6 +26,7 @@ function LeadsList() {
     router.push(PAGE_ROUTES.LeadCreate);
   };
   const [filterData, setFilterData] = useState({});
+  // console.log('Filter Data => ', filterData);
 
   useEffect(() => {
     if (token) {

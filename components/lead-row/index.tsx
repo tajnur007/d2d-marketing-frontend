@@ -1,14 +1,14 @@
-import Image from 'next/image';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
+import Image from 'next/image';
 // import { getStatusColor } from '@/utils/constants/common-constants';
 import { LeadsDataType, statusColor, AssignToUsers } from '@/models/global-types';
 import LeadDetailsButton from '../lead-details-button';
 
 const getStatusColor: statusColor = {
-  Cool: 'bg-blue-200',
-  Hot: 'bg-[#FFD9D9]',
-  Warm: 'bg-[#FFEFB8]',
+  cool: 'bg-blue-200',
+  hot: 'bg-[#FFD9D9]',
+  warm: 'bg-[#FFEFB8]',
 };
 
 function LeadRow({
