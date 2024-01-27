@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Select from 'react-select';
-import { CreateEmployeeModalProps } from '@/models/global-types';
+import { CreateEmployeeModalProps, ManagerType } from '@/models/global-types';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { ExIcon } from '@/assets/icons';
@@ -32,9 +32,26 @@ const CreateEmployeeModal = ({
   setFormErrors = () => {},
 }: CreateEmployeeModalProps) => {
   const [selected, setSelected] = useState<string>(EMPLOYEE_ROLE[0]?.value);
+  const [managers, setManagers] = useState<ManagerType[]>();
   const [manager, setManager] = useState<string>(MANAGERS[0]?.value);
 
   const { data } = useSession();
+
+  useEffect(() => {
+    const getData = async () => {
+      //@ts-ignore
+      const token = data?.user?.access_token;
+      const Services = new ApiService();
+      if (token) {
+        const resp = await Services.getManagerList(token);
+        const data = resp?.data?.Data?.Data?.map((item: ManagerType) => {
+          return { value: item?.name, label: item?.name };
+        });
+        setManagers([...data]);
+      }
+    };
+    getData();
+  }, [data]);
 
   useEffect(() => {
     const selectedManager = selected === 'executive' ? manager : '';
@@ -60,7 +77,7 @@ const CreateEmployeeModal = ({
   const closeModal = () => {
     setModalIsOpen(false);
     setIsExecutive(false);
-    setSelected('manager');
+    setSelected(EMPLOYEE_ROLE[0]?.value);
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
   };
 
@@ -109,6 +126,7 @@ const CreateEmployeeModal = ({
             position: 'top-center',
           });
           setIsExecutive(false);
+          setSelected(EMPLOYEE_ROLE[0]?.value);
           setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
         }
       }
@@ -198,8 +216,8 @@ const CreateEmployeeModal = ({
                 Select Manager
               </label>
               <Select
-                options={MANAGERS}
-                defaultValue={MANAGERS[0]}
+                options={managers}
+                defaultValue={managers && managers[0]}
                 className='create-reminder-select mb-5 font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
                 styles={{
                   control: (baseStyles) => ({
