@@ -16,6 +16,9 @@ function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchData, setSearchData] = useState<LeadsDataType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
+  const [filterData, setFilterData] = useState({});
+  // console.log('Filter Data => ', filterData);
+
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
   const { data: sessionData } = useSession();
   //@ts-ignore den
@@ -25,8 +28,6 @@ function LeadsList() {
   const handleCreateLeadButtonClick = () => {
     router.push(PAGE_ROUTES.LeadCreate);
   };
-  const [filterData, setFilterData] = useState({});
-  // console.log('Filter Data => ', filterData);
 
   useEffect(() => {
     if (token) {

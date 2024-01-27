@@ -4,8 +4,8 @@ export class LeadService {
 
   public getExecutivesData = async (setExecutivesOption: any, token: string) => {
       try {
-        const LeadServices = new ApiService();
-        const response = await LeadServices.getExecutives(token);
+        const ApiServices = new ApiService();
+        const response = await ApiServices.getExecutives(token);
         const executivesOption = this.createSelectData(response.data.Data.Data);
         setExecutivesOption(executivesOption);
       } catch (error) {
