@@ -15,7 +15,6 @@ import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
 import { ApiService } from '@/services/api-services';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -122,18 +121,14 @@ const CreateEmployeeModal = ({
         console.log(resp);
 
         if (resp?.status === 201) {
-          toast.success('Successfully created employee!', {
-            position: 'top-center',
-          });
+          toast.success('Successfully created employee!');
           setIsExecutive(false);
           setSelected(EMPLOYEE_ROLE[0]?.value);
           setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
         }
       }
     } catch (err) {
-      toast.error('Failed to create employee!', {
-        position: 'top-center',
-      });
+      toast.error('Failed to create employee!');
       console.log(err);
     }
   };
