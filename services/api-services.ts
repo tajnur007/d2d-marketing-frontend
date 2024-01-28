@@ -133,35 +133,5 @@ export class ApiService {
     return resp;
   };
 
-  public getExecutives = async (token: string): Promise<any> => {
-    const config: AxiosRequestConfig = {};
-
-    if (token) {
-      config.headers = { Authorization: `Bearer ${token}` };
-    }
-    const resp = await this.client.request({
-      url: API_PATHS.GetExecutives,
-      method: API_METHODS.GET,
-      ...config,
-    });
-
-    return resp;
-  };
-
-   public getLeads = async (token: string): Promise<any> => {
-    const config: AxiosRequestConfig = {};
-
-    if (token) {
-      config.headers = { Authorization: `Bearer ${token}` };
-    }
-
-    const resp = await this.client.request({
-      url: API_PATHS.GetLeads,
-      method: API_METHODS.GET,
-      ...config,
-    });
-
-    return resp;
-  };
 
 }
