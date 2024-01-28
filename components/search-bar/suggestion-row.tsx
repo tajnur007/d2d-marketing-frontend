@@ -1,4 +1,5 @@
 'use client';
+import moment from 'moment';
 import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
 import LeadDetails from '@/components/lead-details';
 import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
@@ -35,12 +36,12 @@ const SuggestionRow = ({ item }: { item: LeadListType }) => {
             </div>
 
             <div className='text-[#9d9d9d] font-normal text-[12px] leading-[14.5px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
-              {item?.meeting_status}
+              {moment(item.created_at).format('ddd DD MMM, YYYY hh:mm A')}
             </div>
           </div>
           <div className='w-[25%]'>
             <p className='text-neutral-700 text-xs whitespace-nowrap font-semibold inline-block'>
-              Assignee:{' '}
+              Assigned to:{' '}
               <span className='text-slate-400 text-xs font-medium leading-tight'>
                 {item?.executive_name}
               </span>

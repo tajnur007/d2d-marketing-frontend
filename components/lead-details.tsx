@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import moment from 'moment';
 import leadImage from '@/assets/images/Marketing-signin.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
@@ -91,7 +92,7 @@ const LeadDetails = ({
             <Image src={clockImage} alt='' />
           </div>
           <div className='text-gray-400 text-xs whitespace-nowrap text-capitalize inline-block'>
-            {data?.created_at}
+            {moment(data.created_at).format('ddd DD MMM, YYYY hh:mm A')}
           </div>
         </div>
         <AssignDropdownSelect />

@@ -131,7 +131,7 @@ export interface ImageInfoType {
 export interface LeadListType{
   assignment_status: string;
   company_id: number; 
-  created_at: ReactNode;
+  created_at: string;
   created_by: string; 
   executive_id: number; 
   executive_name: string; 

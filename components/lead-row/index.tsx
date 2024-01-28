@@ -1,9 +1,10 @@
-import phoneImage from '@/assets/images/leadslist-icons/call.png';
-import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import Image from 'next/image';
+import moment from 'moment';
 // import { getStatusColor } from '@/utils/constants/common-constants';
 import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
 import LeadDetailsButton from '../lead-details-button';
+import phoneImage from '@/assets/images/leadslist-icons/call.png';
+import clockImage from '@/assets/images/leadslist-icons/clock.png';
 
 const getStatusColor: statusColor = {
   cool: 'bg-blue-200',
@@ -26,7 +27,7 @@ function LeadRow({ item }: { item: LeadListType }) {
               <Image src={clockImage} alt='' />
             </div>
             <div className='text-[#9d9d9d] text-[12px] leading-[14.5px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
-              {item.created_at}
+              {moment(item.created_at).format('ddd DD MMM, YYYY hh:mm A')}
             </div>
           </div>
         </div>
