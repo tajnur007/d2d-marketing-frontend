@@ -35,7 +35,7 @@ const LatestLeadRow = ({ item }: { item: LATEST_LEADS_LIST_DATA_TYPE }) => {
           Assigned to
         </p>
         <p className='leading-trim font-semibold text-[16px] tracking-tight mt-[10px]'>
-          {item?.point_of_contact?.name}
+          {item?.executive_name}
         </p>
       </div>
     </div>
