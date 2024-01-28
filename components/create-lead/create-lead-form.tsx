@@ -75,7 +75,7 @@ const CreateLeadForm = () => {
         const payloadObj = {
           title: formData?.Title,
           executive_id: 143,
-          executive_name: 'aa_user2',
+          executive_name: formData?.AssignedTo,
           latitude: location?.lat,
           longitude: location?.lng,
           meeting_status: formData?.Status,
@@ -91,8 +91,6 @@ const CreateLeadForm = () => {
           image_infos: [
             { image_name: `${formData?.Name}_img`, image_path: formData?.Image },
           ],
-          //! There is no assign_to in payload
-          assign_to: formData.AssignedTo,
         };
 
         // @ts-ignore
