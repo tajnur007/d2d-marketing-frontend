@@ -14,6 +14,7 @@ import {
 import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
 import { ApiService } from '@/services/api-services';
+import { toast } from 'react-toastify';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -120,13 +121,14 @@ const CreateEmployeeModal = ({
         console.log(resp);
 
         if (resp?.status === 201) {
-          setModalIsOpen(false);
+          toast.success('Successfully created employee!');
           setIsExecutive(false);
           setSelected(EMPLOYEE_ROLE[0]?.value);
           setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
         }
       }
     } catch (err) {
+      toast.error('Failed to create employee!');
       console.log(err);
     }
   };
@@ -156,6 +158,7 @@ const CreateEmployeeModal = ({
             id='name'
             name='name'
             htmlFor='name'
+            value={formData?.name}
             errorMessage={formErrors.name}
             className={`w-full mb-5 ${formErrors.name && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
@@ -169,6 +172,7 @@ const CreateEmployeeModal = ({
             id='phone'
             name='phone'
             htmlFor='phone'
+            value={formData?.phone}
             errorMessage={formErrors.phone}
             className={`w-full mb-5 ${formErrors.phone && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
@@ -180,6 +184,7 @@ const CreateEmployeeModal = ({
             id='email'
             name='email'
             htmlFor='email'
+            value={formData?.email}
             errorMessage={formErrors.email}
             className={`w-full mb-5 ${formErrors.email && 'border-red-500 shadow'}`}
             onChange={handleInputChange}

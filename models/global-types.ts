@@ -83,7 +83,7 @@ export interface LATEST_LEADS_DATA_TYPE {
   Data: [LATEST_LEADS_LIST_DATA_TYPE];
 }
 
-export interface LEADS_DATA_TYPE {
+export interface LeadsDataType {
   id: number;
   title: string;
   date: string;
@@ -233,7 +233,18 @@ export interface CreateLeadStatusItems {
 
 export interface AssignToUsers {
   value: string;
-  label: string;
+  label?: string;
+  company_id?:number;
+  email?: string;
+  id?: number;
+  image_name?: string;
+  image_path?: string;
+  manager_id?: number;
+  manager_name?: string;
+  name?: string;
+  phone?: string;
+  user_type?: string;
+
 }
 
 export interface CreateAssignToItems {

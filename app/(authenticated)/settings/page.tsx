@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState, ChangeEvent, useRef } from 'react';
+import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import {  SettingFormItems } from '@/models/global-types';
-import {  SETTING_FORM_ITEMS } from '@/utils/constants/common-constants';
+import { SettingFormItems } from '@/models/global-types';
+import { SETTING_FORM_ITEMS } from '@/utils/constants/common-constants';
 import profileImage from '@/assets/images/profilePic.png';
 import { Input } from '@/components/input';
-import { Button } from '@/components/button'
+import { Button } from '@/components/button';
 import { EditIcon } from '@/assets/icons';
+import { ApiService } from '@/services/api-services';
+import { useSession } from 'next-auth/react';
 
 const SettingsPage = () => {
   const [selected, setSelected] = useState('Pending');
@@ -18,7 +20,22 @@ const SettingsPage = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [profileImageSrc, setProfileImageSrc] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [userInfo, setUserInfo] = useState<any>();
+  const { data } = useSession();
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      //@ts-ignore
+      const token = data?.user?.access_token;
+
+      if (token) {
+        const Service = new ApiService();
+        const resp = await Service.getUserInfo(token);
+        setUserInfo(resp?.data?.Data);
+      }
+    };
+    getUserInfo();
+  }, [data]);
 
   const handleEditIconClick = () => {
     if (fileInputRef.current) {
@@ -57,10 +74,14 @@ const SettingsPage = () => {
 
     setConfirmPassword(value);
     if (value !== formData.NewPassword) {
-      setFormErrors((prev) => ({ ...prev, ConfirmPassword: 'Confirm password does not match the new password.' }));
+      setFormErrors((prev) => ({
+        ...prev,
+        ConfirmPassword: 'Confirm password does not match the new password.',
+      }));
     } else {
       setFormErrors((prev) => ({
-        ...prev, ConfirmPassword: ''
+        ...prev,
+        ConfirmPassword: '',
       }));
     }
   };
@@ -218,6 +239,7 @@ const SettingsPage = () => {
                     type='text'
                     id='fullName'
                     name='Name'
+                    value={userInfo?.name}
                     errorMessage={formErrors.Name}
                     htmlFor='name'
                     onChange={handleInputChange}
@@ -233,8 +255,10 @@ const SettingsPage = () => {
                     type='text'
                     id='email'
                     name='Email'
-                    errorMessage={formErrors.Email}
                     htmlFor='email'
+                    readOnly
+                    value={userInfo?.email}
+                    errorMessage={formErrors.Email}
                     onChange={handleInputChange}
                     className={` ${formErrors.Email && 'border-red-500 shadow'}`}
                   />
@@ -249,6 +273,7 @@ const SettingsPage = () => {
                     type='text'
                     id='phone'
                     name='Phone'
+                    value={userInfo?.phone}
                     errorMessage={formErrors.Phone}
                     htmlFor='phone'
                     onChange={handleInputChange}
@@ -265,6 +290,7 @@ const SettingsPage = () => {
                     type='text'
                     id='role'
                     name='Role'
+                    value={userInfo?.user_type}
                     readOnly
                   />
                 </div>
@@ -290,4 +316,3 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
-

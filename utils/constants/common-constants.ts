@@ -13,7 +13,15 @@ import {
   SignUpFormItems,
   statusColor,
 } from '@/models/global-types';
-import { BookIcon, EmployeeListIcon, HomeIcon, SettingIcon } from '../../assets/icons';
+import {
+  BookIcon,
+  DeleteIcon,
+  EditIcon,
+  EmployeeListIcon,
+  EyeIcon,
+  HomeIcon,
+  SettingIcon,
+} from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
   cool: 'bg-blue-200',
@@ -44,9 +52,12 @@ export const API_METHODS = {
 export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
+  GetUserInfo: '/user/info',
   GetManagerList: '/user/manager-list',
   CreateLead: '/lead/create',
   DashboardInfo: '/lead/dashboard-info',
+  GetExecutives: '/user/executive-list',
+  ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
 };
@@ -142,14 +153,6 @@ export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'warm', label: 'Warm' },
 ];
 
-export const ASSIGN_USERS: AssignToUsers[] = [
-  { value: 'Tajnur Vai', label: 'Assign to Tajnur Vai' },
-  { value: 'Fardin Vai', label: 'Assign to Fardin Vai' },
-  { value: 'MA Hridoy', label: 'Assign to MA Hridoy' },
-  { value: 'RK Shawon', label: 'Assign to RK Shawon' },
-  { value: 'Mursalin Khan', label: 'Assign to Mursalin Khan' },
-];
-
 export const EMPLOYEE_ROLE: AssignToUsers[] = [
   { value: 'manager', label: 'Manager' },
   { value: 'executive', label: 'Executive' },
@@ -230,6 +233,20 @@ export const LATEST_LEADS_ITEMS: LATEST_LEADS_DATA_TYPE = {
   ],
 };
 
+export const OPTION_MENU = [
+  {
+    label: 'View Details',
+    icon: EyeIcon,
+  },
+  {
+    label: 'Edit',
+    icon: EditIcon,
+  },
+  {
+    label: 'Delete',
+    icon: DeleteIcon,
+  },
+];
 export const LEADERBOARD_ITEMS: LEADERBOARD = {
   Count: 0,
   Data: [

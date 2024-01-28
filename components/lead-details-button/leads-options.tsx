@@ -7,7 +7,7 @@ const LeadsOptions = ({ handleViewButton }: LeadOptionsProps) => {
       <div className='py-1'>
         <button
           type='button'
-          className='menu-item flex justify-start items-center pl-4 '
+          className='flex justify-start items-center pl-4 '
           onClick={handleViewButton}>
           <div>
             <EyeIcon />
@@ -16,7 +16,7 @@ const LeadsOptions = ({ handleViewButton }: LeadOptionsProps) => {
             View Details
           </div>
         </button>
-        <button className='menu-item flex justify-start items-center pl-4'>
+        <button className='flex justify-start items-center pl-4'>
           <div>
             <EditIcon />
           </div>
@@ -24,7 +24,7 @@ const LeadsOptions = ({ handleViewButton }: LeadOptionsProps) => {
             Edit
           </div>
         </button>
-        <button className='menu-item flex justify-start items-center pl-4'>
+        <button className='flex justify-start items-center pl-4'>
           <div>
             <DeleteIcon />
           </div>
