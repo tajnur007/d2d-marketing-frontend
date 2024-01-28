@@ -2,7 +2,7 @@ import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import Image from 'next/image';
 // import { getStatusColor } from '@/utils/constants/common-constants';
-import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+import { LeadsDataType, statusColor, AssignToUsers } from '@/models/global-types';
 import LeadDetailsButton from '../lead-details-button';
 
 const getStatusColor: statusColor = {
@@ -11,7 +11,7 @@ const getStatusColor: statusColor = {
   warm: 'bg-[#FFEFB8]',
 };
 
-function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
+function LeadRow({ item }: { item: LeadsDataType }) {
   return (
     <div>
       <div

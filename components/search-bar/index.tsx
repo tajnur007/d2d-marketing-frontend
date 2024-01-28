@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { SearchIcon } from '@/assets/icons';
 import SuggestionRow from '@/components/search-bar/suggestion-row';
-import { LEADS_DATA_TYPE, SearchBarProps } from '@/models/global-types';
+import { LeadsDataType, SearchBarProps } from '@/models/global-types';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 
 const SearchBar = ({
@@ -13,7 +13,7 @@ const SearchBar = ({
   handleKeyDown,
 }: SearchBarProps) => {
   const [isSuggestionCardOpen, setIsSuggestionCardOpen] = useState<boolean>(false);
-  const [suggestionData, setSuggestionData] = useState<LEADS_DATA_TYPE[]>([]);
+  const [suggestionData, setSuggestionData] = useState<LeadsDataType[]>([]);
   const newRef = useRef<any>(null);
 
   const onChange = (e: any) => {

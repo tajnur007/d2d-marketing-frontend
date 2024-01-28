@@ -4,7 +4,7 @@ import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { ImageUpload } from '@/components/image-upload';
 import { Button } from '@/components/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
@@ -15,6 +15,7 @@ import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
+import { ExecutiveContext } from '@/components/Context/executives-context';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
@@ -25,6 +26,8 @@ const CreateLeadForm = () => {
     lat: 22.04,
     lng: 30.0,
   });
+
+  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
 
   const { data } = useSession();
 
@@ -67,7 +70,6 @@ const CreateLeadForm = () => {
       }
 
       if (Object.keys(newFormErrors).length === 0) {
-
         //! Payload object
 
         const payloadObj = {
@@ -125,7 +127,7 @@ const CreateLeadForm = () => {
           <CustomSelect
             label='AssignedTo'
             setSelected={setAssignedToSelected}
-            options={ASSIGN_TO_NEW}
+            options={executivesOption}
           />
         </div>
       </div>

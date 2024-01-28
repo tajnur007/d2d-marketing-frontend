@@ -73,11 +73,12 @@ export class ApiService {
 
     return resp;
   };
+  
 
-  public resetPassword = async (data: any) => {
-    const resp: Response<any> = await this.client.request({
-      url: '/user/forget-password',
-      method: 'post',
+ public resetPassword = async (data: any) => {
+      const resp: Response<any> = await this.client.request({
+      url: API_PATHS.ResetPassword,
+      method: API_METHODS.POST,
       data: data,
     });
 
@@ -109,6 +110,22 @@ export class ApiService {
 
     const resp = await this.client.request({
       url: API_PATHS.Leaderboard,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
+
+  public getExecutives = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.GetExecutives,
       method: API_METHODS.GET,
       ...config,
     });

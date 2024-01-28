@@ -1,28 +1,41 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/lead-row';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
-import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { LeadsDataType, AssignToUsers } from '@/models/global-types';
+import { LeadService } from '@/services/lead-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
+import { ExecutiveContext } from '@/components/Context/executives-context';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchData, setSearchData] = useState<LEADS_DATA_TYPE[]>([]);
+  const [searchData, setSearchData] = useState<LeadsDataType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
+  const [filterData, setFilterData] = useState({});
+  // console.log('Filter Data => ', filterData);
+
+  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
+  const { data: sessionData } = useSession();
+  //@ts-ignore den
+  const token: string = sessionData?.user?.access_token;
 
   const router = useRouter();
   const handleCreateLeadButtonClick = () => {
     router.push(PAGE_ROUTES.LeadCreate);
   };
-  const [filterData, setFilterData] = useState({});
-  // console.log('Filter Data => ', filterData);
 
   useEffect(() => {
-    if (searchValue !== '') {
+    if (token) {
+      const LeadServices = new LeadService();
+      LeadServices.getExecutivesData(setExecutivesOption, token);
+    }
+
+    if (keyPress && searchValue !== '') {
       const newFilteredData = LEADS_DATA.filter((data) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
@@ -30,7 +43,7 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress, searchValue]);
+  }, [keyPress, token]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
