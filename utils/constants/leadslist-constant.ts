@@ -1,7 +1,7 @@
-import { LEADS_DATA_TYPE, StatusState } from '@/models/global-types';
+import { LeadsDataType, StatusState } from '@/models/global-types';
 import { LEAD_STATUS } from './common-constants';
 
-export const LEADS_DATA: LEADS_DATA_TYPE[] = [
+export const LEADS_DATA: LeadsDataType[] = [
   {
     id: 1,
     title: 'Social Media Marketing',

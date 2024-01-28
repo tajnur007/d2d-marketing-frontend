@@ -76,8 +76,8 @@ export class ApiService {
 
   public resetPassword = async (data: any) => {
     const resp: Response<any> = await this.client.request({
-      url: '/user/forget-password',
-      method: 'post',
+      url: API_PATHS.ResetPassword,
+      method: API_METHODS.POST,
       data: data,
     });
 
@@ -128,6 +128,21 @@ export class ApiService {
       method: API_METHODS.GET,
       ...config,
       data: {},
+    });
+
+    return resp;
+  };
+
+  public getExecutives = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+    const resp = await this.client.request({
+      url: API_PATHS.GetExecutives,
+      method: API_METHODS.GET,
+      ...config,
     });
 
     return resp;
