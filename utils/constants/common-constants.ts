@@ -44,6 +44,7 @@ export const API_METHODS = {
 export const API_PATHS = {
   Signup: '/auth/sign-up',
   CreateUser: '/user/create',
+  GetUserInfo: '/user/info',
   GetManagerList: '/user/manager-list',
   CreateLead: '/lead/create',
   DashboardInfo: '/lead/dashboard-info',
