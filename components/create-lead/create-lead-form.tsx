@@ -15,7 +15,7 @@ import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
-import { ExecutiveContext } from '@/components/Context/executives-context';
+import { ExecutiveContext } from '@/components/context/executives-context';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);

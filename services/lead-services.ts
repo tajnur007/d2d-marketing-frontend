@@ -23,5 +23,16 @@ export class LeadService {
     });
     return selectOptions;
   };
+
+  public getLeadsData = async (setLeadsData:any, token: string) => {
+    try {
+      const ApiServices = new ApiService();
+      const response = await ApiServices.getLeads(token);
+      console.log(response);
+      setLeadsData(response.data.Data.Data);
+    } catch (error) {
+      console.error('Error fetching leads:', error);
+    }
+  };
  
 }

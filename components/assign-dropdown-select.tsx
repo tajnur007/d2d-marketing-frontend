@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { Button } from './button';
 import './dropdown-select.css';
 import TransferConfirmationModal from './transfer-confirmation-modal';
-import { ExecutiveContext } from '@/components/Context/executives-context';
+import { ExecutiveContext } from '@/components/context/executives-context';
 
 export const AssignDropdownSelect = () => {
   const [transferButton, setTransferButton] = useState(false);

@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { ExecutiveContext } from '@/components/Context/executives-context';
+import { ExecutiveContext } from '@/components/context/executives-context';
 import { AssignToUsers } from '@/models/global-types';
 
 export default async function LeedsLayout({ children }: { children: React.ReactNode }) {

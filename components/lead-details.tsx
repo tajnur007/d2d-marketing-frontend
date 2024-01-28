@@ -7,7 +7,7 @@ import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import { CreateReminderItems, LeadsDataType, AssignToUsers } from '@/models/global-types';
+import { CreateReminderItems, LeadListType, AssignToUsers } from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import React from 'react';
@@ -19,7 +19,7 @@ const LeadDetails = ({
   data,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  data: LeadsDataType;
+  data: LeadListType;
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
@@ -54,7 +54,7 @@ const LeadDetails = ({
           <div>
             <Image src={flagImage} alt='location' />
           </div>
-          <div>{data?.location}</div>
+          <div>{data?.latitude}</div>
         </div>
         <button className='text-[#5630FF]'>Change</button>
       </div>
@@ -63,7 +63,9 @@ const LeadDetails = ({
         <div className='flex items-center gap-4 mt-3'>
           <div className='flex-grow break-all'>{data?.title}</div>
           <div className='flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center bg-[#FFD9D9] cursor-pointer'>
-            <button className='text-black text-sm font-medium'>{data?.status}</button>
+            <button className='text-black text-sm font-medium'>
+              {data?.meeting_status}
+            </button>
             <Image src={downImage} alt='close' />
           </div>
         </div>
@@ -72,7 +74,7 @@ const LeadDetails = ({
             <Image src={clockImage} alt='' />
           </div>
           <div className='text-gray-400 text-xs whitespace-nowrap text-capitalize inline-block'>
-            {data?.date}
+            {data?.created_at}
           </div>
         </div>
         <AssignDropdownSelect />
@@ -88,7 +90,7 @@ const LeadDetails = ({
             Name
           </div>
           <div className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.assignedByName}
+            {data?.point_of_contact?.name}
           </div>
         </div>
 
@@ -97,7 +99,7 @@ const LeadDetails = ({
             Phone
           </div>
           <div className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.assignedByNumber}
+            {data?.point_of_contact?.phone}
           </div>
         </div>
 
@@ -106,7 +108,7 @@ const LeadDetails = ({
             Email
           </div>
           <div className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.assignedByEmail}
+            {data?.point_of_contact?.email}
           </div>
         </div>
 
@@ -115,7 +117,7 @@ const LeadDetails = ({
             Reference
           </div>
           <div className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.assignedToName}
+            {data?.point_of_contact?.reference}
           </div>
         </div>
 
@@ -124,7 +126,7 @@ const LeadDetails = ({
             Meeting notes
           </div>
           <p className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.meetingNote}
+            {data?.point_of_contact?.meeting_notes}
           </p>
         </div>
       </div>
@@ -134,22 +136,28 @@ const LeadDetails = ({
           Image
         </h4>
 
-        <Image src={leadImage} alt='image' className='w-[108px] h-[108px]' />
+        <Image
+          src={data?.image_info_json?.image_name}
+          alt='image'
+          className='w-[108px] h-[108px]'
+        />
       </div>
-
-      <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
-        <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
-          Reminder
+      {data?.remainders && (
+        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
+          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
+            Reminder
+          </div>
+          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
+            {data?.remainders?.title}
+          </div>
+          <div className='text-[#8A8A8A] mb-[10px]'>
+            {data?.remainders?.reminder_time}
+          </div>
+          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
+            {data?.remainders?.status}
+          </button>
         </div>
-        <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
-          {data?.reminder?.reminderTitle}
-        </div>
-        <div className='text-[#8A8A8A] mb-[10px]'>{data?.reminder?.reminderDate}</div>
-        <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-          {data?.reminder?.reminderStatus}
-        </button>
-      </div>
-
+      )}
       <div className='flex justify-center items-center'>
         <Button
           onClick={handleAddReminderButtonClick}
