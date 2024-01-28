@@ -13,7 +13,15 @@ import {
   SignUpFormItems,
   statusColor,
 } from '@/models/global-types';
-import { BookIcon, EmployeeListIcon, HomeIcon, SettingIcon } from '../../assets/icons';
+import {
+  BookIcon,
+  DeleteIcon,
+  EditIcon,
+  EmployeeListIcon,
+  EyeIcon,
+  HomeIcon,
+  SettingIcon,
+} from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
   cool: 'bg-blue-200',
@@ -145,7 +153,6 @@ export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'warm', label: 'Warm' },
 ];
 
-
 export const EMPLOYEE_ROLE: AssignToUsers[] = [
   { value: 'manager', label: 'Manager' },
   { value: 'executive', label: 'Executive' },
@@ -226,6 +233,20 @@ export const LATEST_LEADS_ITEMS: LATEST_LEADS_DATA_TYPE = {
   ],
 };
 
+export const OPTION_MENU = [
+  {
+    label: 'View Details',
+    icon: EyeIcon,
+  },
+  {
+    label: 'Edit',
+    icon: EditIcon,
+  },
+  {
+    label: 'Delete',
+    icon: DeleteIcon,
+  },
+];
 export const LEADERBOARD_ITEMS: LEADERBOARD = {
   Count: 0,
   Data: [
