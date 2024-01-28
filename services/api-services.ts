@@ -73,6 +73,7 @@ export class ApiService {
 
     return resp;
   };
+  
 
  public resetPassword = async (data: any) => {
       const resp: Response<any> = await this.client.request({
