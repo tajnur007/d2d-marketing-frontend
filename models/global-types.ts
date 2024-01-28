@@ -357,6 +357,7 @@ export interface CreateReminderModalProps {
   setFormErrors: (item: any) => void;
   selected: string;
   setSelected: (item: string) => void;
+  leadsData: LeadListType;
 }
 
 export interface CreateEmployeeItems {
