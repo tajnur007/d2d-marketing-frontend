@@ -1,6 +1,4 @@
 'use client';
-import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
-import { getLatestLeads } from '@/utils/helpers/common-helpers';
 import LatestLeadRow from '@/components/latest-lead-row';
 import ViewAllLeadsButton from '../view-all-leads-button';
 import React, { useEffect, useState } from 'react';
