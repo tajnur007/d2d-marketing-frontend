@@ -32,7 +32,7 @@ const SearchBar = ({
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [value]);
+  }, [value, leadsData]);
 
   const handleOutsideClick = (e: any) => {
     if (newRef.current && !newRef.current.contains(e.target)) {

@@ -11,7 +11,7 @@ import { LeadService } from '@/services/lead-services';
 import { ApiService } from '@/services/api-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
-import { ExecutiveContext } from '@/components/context/executives-context';
+import { ExecutiveContext } from '@/context/executives-context';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -38,7 +38,9 @@ function LeadsList() {
       LeadServices.getExecutivesData(setExecutivesOption, token);
       LeadServices.getLeadsData(setLeadsData, token);
     }
+  }, [token, setExecutivesOption]);
 
+  useEffect(() => {
     if (keyPress && searchValue !== '') {
       const newFilteredData = leadsData.filter((data) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
@@ -47,7 +49,7 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress, token]);
+  }, [keyPress, leadsData, searchValue]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
