@@ -1,4 +1,4 @@
-import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { LeadsDataType } from '@/models/global-types';
 
 export function ensureTrailingSlash(str: string = '/') {
   return str.endsWith('/') ? str : `${str}/`;
@@ -6,7 +6,7 @@ export function ensureTrailingSlash(str: string = '/') {
 
 // Define a function to get the appropriate color based on status
 
-export function getLatestLeads(data: LEADS_DATA_TYPE[]): LEADS_DATA_TYPE[] {
+export function getLatestLeads(data: LeadsDataType[]): LeadsDataType[] {
   const convertedData = data.map((item) => {
     const convertedTimestamp = new Date(item.timestamp).toISOString();
     return { ...item, timestamp: convertedTimestamp };

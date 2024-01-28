@@ -46,6 +46,8 @@ export const API_PATHS = {
   GetManagerList: '/user/manager-list',
   CreateLead: '/lead/create',
   DashboardInfo: '/lead/dashboard-info',
+  GetExecutives: '/user/executive-list',
+  ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
 };
@@ -141,13 +143,6 @@ export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'warm', label: 'Warm' },
 ];
 
-export const ASSIGN_USERS: AssignToUsers[] = [
-  { value: 'Tajnur Vai', label: 'Assign to Tajnur Vai' },
-  { value: 'Fardin Vai', label: 'Assign to Fardin Vai' },
-  { value: 'MA Hridoy', label: 'Assign to MA Hridoy' },
-  { value: 'RK Shawon', label: 'Assign to RK Shawon' },
-  { value: 'Mursalin Khan', label: 'Assign to Mursalin Khan' },
-];
 
 export const EMPLOYEE_ROLE: AssignToUsers[] = [
   { value: 'manager', label: 'Manager' },
