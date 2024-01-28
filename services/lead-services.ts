@@ -1,4 +1,5 @@
 import { ApiService } from '@/services/api-services';
+import moment from 'moment';
 
 export class LeadService {
 
@@ -29,7 +30,8 @@ export class LeadService {
       const ApiServices = new ApiService();
       const response = await ApiServices.getLeads(token);
       console.log(response);
-      setLeadsData(response.data.Data.Data);
+      const data = response.data.Data.Data;
+      setLeadsData(data);
     } catch (error) {
       console.error('Error fetching leads:', error);
     }

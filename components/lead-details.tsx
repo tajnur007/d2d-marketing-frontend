@@ -7,12 +7,23 @@ import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import { CreateReminderItems, LeadListType, AssignToUsers } from '@/models/global-types';
+import {
+  CreateReminderItems,
+  LeadListType,
+  AssignToUsers,
+  statusColor,
+} from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import React from 'react';
 import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
+
+const getStatusColor: statusColor = {
+  cool: 'bg-blue-200',
+  hot: 'bg-[#FFD9D9]',
+  warm: 'bg-[#FFEFB8]',
+};
 
 const LeadDetails = ({
   setIsOpen,
@@ -26,6 +37,8 @@ const LeadDetails = ({
   const [formErrors, setFormErrors] =
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+
+  const src = data.image_info_json[0].image_name;
 
   const handleAddReminderButtonClick = () => {
     console.log('Button Clicked.');
@@ -62,7 +75,11 @@ const LeadDetails = ({
       <div className='desc'>
         <div className='flex items-center gap-4 mt-3'>
           <div className='flex-grow break-all'>{data?.title}</div>
-          <div className='flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center bg-[#FFD9D9] cursor-pointer'>
+          <div
+            className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center  
+                ${
+                  getStatusColor[data.meeting_status as keyof statusColor]
+                } cursor-pointer`}>
             <button className='text-black text-sm font-medium'>
               {data?.meeting_status}
             </button>
@@ -137,9 +154,12 @@ const LeadDetails = ({
         </h4>
 
         <Image
-          src={data?.image_info_json?.image_name}
+          src={src}
+          loader={() => src}
           alt='image'
           className='w-[108px] h-[108px]'
+          width='108'
+          height='108'
         />
       </div>
       {data?.remainders && (

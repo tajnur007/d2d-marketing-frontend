@@ -136,7 +136,7 @@ export interface LeadListType{
   executive_id: number; 
   executive_name: string; 
   id: number;
-  image_info_json: ImageInfoType;
+  image_info_json: ImageInfoType[];
   latitude: number; 
   longitude: number; 
   manager_id: number
@@ -330,6 +330,7 @@ export interface StatusCheckboxProps {
 export interface SearchBarProps {
   className?: string;
   value?: string;
+  leadsData: LeadListType[];
   setValue?: (item: string) => void;
   handleKeyDown?: (e: any) => void;
 }

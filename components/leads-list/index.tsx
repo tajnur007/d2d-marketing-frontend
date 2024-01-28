@@ -79,6 +79,7 @@ function LeadsList() {
                   handleKeyDown={handleKeyDown}
                   value={searchValue}
                   setValue={setSearchValue}
+                  leadsData={leadsData}
                 />
               </div>
               <div>
