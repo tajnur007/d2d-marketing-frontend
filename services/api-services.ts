@@ -59,6 +59,7 @@ export class ApiService {
 
     return resp;
   };
+  
   public dashboardInfo = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -75,15 +76,6 @@ export class ApiService {
     return resp;
   };
 
-  public resetPassword = async (data: any) => {
-    const resp: Response<any> = await this.client.request({
-      url: API_PATHS.ResetPassword,
-      method: API_METHODS.POST,
-      data: data,
-    });
-
-    return resp;
-  };
 
   public latestLeads = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
@@ -133,6 +125,7 @@ export class ApiService {
 
     return resp;
   };
+
 
 
   public EmployeeListInfo = async (token: string): Promise<any> => {
