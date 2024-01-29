@@ -60,7 +60,8 @@ export const API_PATHS = {
   ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
-  GetLeads: '/lead/list'
+  GetLeads: '/lead/list',
+  EmployeeListInfo:'/user/list',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [

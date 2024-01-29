@@ -16,11 +16,11 @@ function EmployeeListRow({
   uniqueCharCount,
   isFirstChar,
 }: {
-  item: EmployeeType;
+  item: any;
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
 }) {
-  const firstChar = item.employeeName.charAt(0).toUpperCase();
+  const firstChar = item.name.charAt(0).toUpperCase();
 
   const handleViewButton = () => {
     console.log('button');
@@ -55,11 +55,11 @@ function EmployeeListRow({
 
         <div className='w-[25%]'>
           <p className='leading-[28px] font-bold text-[16px] tracking-[-0.32] text-[#2B3674] mt-2 whitespace-nowrap'>
-            {item.employeeName}
+            {item.name}
           </p>
           <div className='flex items-center mt-[4px]'>
             <div className='text-[#444444] font-medium text-[12px] leading-[20px] tracking-[-0.24] whitespace-nowrap text-capitalize inline-block'>
-              {item.employeeDesignation}
+              {item.user_type}
             </div>
           </div>
         </div>
@@ -67,23 +67,21 @@ function EmployeeListRow({
         <div className='w-[25%]'>
           <div className='flex flex-row leading-[20px] font-medium text-[12px] tracking-[-0.24px] whitespace-nowrap'>
             <p className='text-[#444444] mr-1'>Phone:</p>
-            <div className='text-[#828DAD]'>{item.employeePhone}</div>
+            <div className='text-[#828DAD]'>{item.phone}</div>
           </div>
         </div>
 
         <div className='w-[25%]'>
           <div className='flex flex-row leading-[20px] font-medium text-[12px] text-transparent tracking-[-0.24px] whitespace-nowrap'>
             <p className='text-[#444444] mr-1'>Email:</p>
-            <div className='text-[#828DAD]'>{item.employeeEmail}</div>
+            <div className='text-[#828DAD]'>{item.email}</div>
           </div>
         </div>
 
         <div className='w-[10%]'>
           <span
-            className={`text-[10px] w-fit font-medium tracking-[0] leading-[normal] text-[#00156A] h-[19px] mt-[-1px] ${
-              getStatusColor[item.employeeStatus as keyof EmployeestatusColor]
-            } px-[10px] py-[6px] rounded-[12px]`}>
-            {item.employeeStatus}
+            className={`text-[10px] w-fit font-medium tracking-[0] leading-[normal] text-[#00156A] h-[19px] mt-[-1px] bg-[#D2FBE7] px-[10px] py-[6px] rounded-[12px]`}>
+            {item?.employeeStatus || 'Active'}
           </span>
         </div>
         <Popup

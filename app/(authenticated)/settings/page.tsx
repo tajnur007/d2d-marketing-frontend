@@ -112,7 +112,7 @@ const SettingsPage = () => {
 
   return (
     <section>
-      <div className='bg-white w-full mt-0 rounded-[10px]'>
+      <div className='h-[84vh] w-full mt-0 rounded-[10px] bg-white'>
         <div className='ml-6'>
           {changePasswordClicked ? (
             <div>
@@ -131,9 +131,9 @@ const SettingsPage = () => {
             </div>
           )}
         </div>
-        <form onSubmit={submitData} id='settings-form'>
+        <form className='bg-white' onSubmit={submitData} id='settings-form'>
           {changePasswordClicked ? (
-            <div className='gap-[10px] ml-6 mr-8 mb-4 mt-2'>
+            <div className='bg-white gap-[10px] ml-6 mr-8 mb-4 mt-2'>
               <Input
                 label={
                   <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>

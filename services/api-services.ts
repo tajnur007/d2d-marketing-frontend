@@ -42,6 +42,7 @@ export class ApiService {
 
     return resp;
   };
+
   public createLead = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -58,6 +59,7 @@ export class ApiService {
 
     return resp;
   };
+  
   public dashboardInfo = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -74,15 +76,6 @@ export class ApiService {
     return resp;
   };
 
-  public resetPassword = async (data: any) => {
-    const resp: Response<any> = await this.client.request({
-      url: API_PATHS.ResetPassword,
-      method: API_METHODS.POST,
-      data: data,
-    });
-
-    return resp;
-  };
 
   public latestLeads = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
@@ -134,4 +127,20 @@ export class ApiService {
   };
 
 
+
+  public EmployeeListInfo = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.EmployeeListInfo,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
 }

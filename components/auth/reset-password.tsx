@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
 import { useState, FormEvent } from 'react';
 import ForgetPasswordCommon from './common/forget-password-common';
 import Copyright from './common/copyright';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import EmailSent from './email-sent';
-import { ApiService } from '@/services/api-services';
+import { AuthService } from '@/services/auth-service';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ const ResetPassword = () => {
         email,
       };
 
-      const UserServices = new ApiService();
+      const UserServices = new AuthService();
       const resp = await UserServices.resetPassword(payload);
 
       console.log(resp);
@@ -29,7 +30,8 @@ const ResetPassword = () => {
         setEmailSubmitted(true);
       }
     } catch (err) {
-      console.log(err);
+      toast.error('Please use a valid email.');
+      console.log('Error in forget password page: ', err);
     }
   };
 
