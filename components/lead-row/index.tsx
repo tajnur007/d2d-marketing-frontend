@@ -35,14 +35,16 @@ function LeadRow({ item }: { item: LeadListType }) {
           <p className='leading-trim font-semibold text-[16px] tracking-tight'>
             {item.point_of_contact.name}
           </p>
-          <div className='flex items-center mt-[10px]'>
-            <div className='mr-1'>
-              <Image src={phoneImage} alt='' />
+          {item.point_of_contact.phone !== '' && (
+            <div className='flex items-center mt-[10px]'>
+              <div className='mr-1'>
+                <Image src={phoneImage} alt='' />
+              </div>
+              <div className='text-[#5630FF] text-[12px] leading-[14px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
+                {item.point_of_contact.phone}
+              </div>
             </div>
-            <div className='text-[#5630FF] text-[12px] leading-[14px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
-              {item.point_of_contact.phone}
-            </div>
-          </div>
+          )}
         </div>
         <div className='w-[20%]'>
           <span
