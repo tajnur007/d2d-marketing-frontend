@@ -6,17 +6,19 @@ import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/lead-row';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
-import { LeadsDataType, AssignToUsers } from '@/models/global-types';
+import { LeadsDataType, LeadListType } from '@/models/global-types';
 import { LeadService } from '@/services/lead-services';
+import { ApiService } from '@/services/api-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
-import { ExecutiveContext } from '@/components/Context/executives-context';
+import { ExecutiveContext } from '@/context/executives-context';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchData, setSearchData] = useState<LeadsDataType[]>([]);
+  const [searchData, setSearchData] = useState<LeadListType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
   const [filterData, setFilterData] = useState({});
+  const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   // console.log('Filter Data => ', filterData);
 
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
@@ -25,6 +27,7 @@ function LeadsList() {
   const token: string = sessionData?.user?.access_token;
 
   const router = useRouter();
+
   const handleCreateLeadButtonClick = () => {
     router.push(PAGE_ROUTES.LeadCreate);
   };
@@ -33,17 +36,20 @@ function LeadsList() {
     if (token) {
       const LeadServices = new LeadService();
       LeadServices.getExecutivesData(setExecutivesOption, token);
+      LeadServices.getLeadsData(setLeadsData, token);
     }
+  }, [token, setExecutivesOption]);
 
+  useEffect(() => {
     if (keyPress && searchValue !== '') {
-      const newFilteredData = LEADS_DATA.filter((data) => {
+      const newFilteredData = leadsData.filter((data) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
       setSearchData(newFilteredData);
     } else {
       setSearchData([]);
     }
-  }, [keyPress, token]);
+  }, [keyPress, leadsData, searchValue]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
@@ -75,6 +81,7 @@ function LeadsList() {
                   handleKeyDown={handleKeyDown}
                   value={searchValue}
                   setValue={setSearchValue}
+                  leadsData={leadsData}
                 />
               </div>
               <div>
@@ -91,7 +98,7 @@ function LeadsList() {
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
             ? searchData.map((item, index) => <LeadRow key={index} item={item} />)
-            : LEADS_DATA.map((item, index) => <LeadRow key={index} item={item} />)}
+            : leadsData.map((item, index) => <LeadRow key={index} item={item} />)}
         </div>
       </div>
     </div>
