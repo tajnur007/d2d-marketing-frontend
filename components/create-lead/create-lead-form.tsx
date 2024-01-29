@@ -63,7 +63,8 @@ const CreateLeadForm = () => {
           field !== 'Reference' &&
           field !== 'Email' &&
           field !== 'Status' &&
-          field !== 'AssignedTo'
+          field !== 'AssignedTo' &&
+          field !== 'Image'
         ) {
           newFormErrors[field] = `(${field} is required)`;
         }
@@ -89,7 +90,7 @@ const CreateLeadForm = () => {
           },
 
           image_infos: [
-            { image_name: `${formData?.Name}_img`, image_path: formData?.Image },
+            { image_name: "60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png", image_path: "http://157.245.204.196:8021/v1/auth/image-by-path?image_path=files/60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png" },
           ],
         };
 
