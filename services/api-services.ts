@@ -115,4 +115,59 @@ export class ApiService {
 
     return resp;
   };
+
+  //! Get User data
+
+  public getUser = async (user_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.UserView}?user_id=${user_id}`,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
+
+  //! Update Lead data
+
+  public updateLead = async (lead_id: number, data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.UpdateLead}?lead_id=${lead_id}`,
+      method: API_METHODS.PATCH,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
+
+  //! Delete Lead data
+
+  public deleteLead = async (lead_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.DeleteLead}?lead_id=${lead_id}`,
+      method: API_METHODS.DELETE,
+      ...config,
+    });
+
+    return resp;
+  };
 }

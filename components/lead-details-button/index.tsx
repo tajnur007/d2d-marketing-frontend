@@ -8,11 +8,15 @@ import { LEADS_DATA_TYPE } from '@/models/global-types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
+import { roundToNearestMinutes } from 'date-fns';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { useRouter } from 'next/navigation';
 
 const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState(false);
   const ref = useRef<any>(null);
+  const router = useRouter();
 
   const toggleDrawer = () => {
     setIsOpen((prevState: any) => !prevState);
@@ -26,6 +30,11 @@ const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
 
   const toggleButtons = () => {
     setOptions((prevState) => !prevState);
+  };
+
+  //! data.id pass in lead update page
+  const handleEditButton = () => {
+    router.push(`${PAGE_ROUTES.LeadUpdate}?id=${data.id}`);
   };
 
   return (
@@ -51,7 +60,10 @@ const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
           marginLeft: '10px',
         }}
         arrow={false}>
-        <LeadsOptions handleViewButton={handleViewButton} />
+        <LeadsOptions
+          handleViewButton={handleViewButton}
+          handleEditButton={handleEditButton}
+        />
       </Popup>
       <Drawer
         open={isOpen}

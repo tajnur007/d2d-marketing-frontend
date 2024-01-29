@@ -1,7 +1,7 @@
 import { EyeIcon, EditIcon, DeleteIcon } from '@/assets/icons';
 import { LeadOptionsProps } from '@/models/global-types';
 
-const LeadsOptions = ({ handleViewButton }: LeadOptionsProps) => {
+const LeadsOptions = ({ handleViewButton, handleEditButton }: LeadOptionsProps) => {
   return (
     <div className='menu'>
       <div className='py-1'>
@@ -16,7 +16,11 @@ const LeadsOptions = ({ handleViewButton }: LeadOptionsProps) => {
             View Details
           </div>
         </button>
-        <button className='menu-item flex justify-start items-center pl-4'>
+        <button 
+        type='button'
+        className='menu-item flex justify-start items-center pl-4'
+        onClick={handleEditButton}
+        >
           <div>
             <EditIcon />
           </div>

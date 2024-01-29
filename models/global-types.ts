@@ -317,4 +317,5 @@ export interface CreateEmployeeModalProps {
 
 export interface LeadOptionsProps {
   handleViewButton: () => void;
+  handleEditButton: () => void;
 }

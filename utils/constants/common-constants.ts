@@ -30,6 +30,7 @@ export const PAGE_ROUTES = {
   EmailSent: '/auth/forget-password/email-sent',
   LeadCreate: '/leads/create',
   EmployeeList: '/employee-list',
+  LeadUpdate: '/leads/edit',
 };
 
 export const API_METHODS = {
@@ -48,6 +49,9 @@ export const API_PATHS = {
   DashboardInfo: '/lead/dashboard-info',
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
+  UserView: '/user/view',
+  UpdateLead: '/lead/update',
+  DeleteLead: '/lead/delete',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
