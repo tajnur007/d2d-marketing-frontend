@@ -72,5 +72,21 @@ export class LeadService {
       console.error('Error fetching leads:', error);
     }
   };
- 
+
+  public uploadImage = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.UploadLeadImage,
+      method: API_METHODS.POST,
+      ...config,
+    });
+
+    return resp;
+  };
+
 }
