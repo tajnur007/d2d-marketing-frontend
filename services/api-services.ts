@@ -42,6 +42,7 @@ export class ApiService {
 
     return resp;
   };
+
   public createLead = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -58,6 +59,7 @@ export class ApiService {
 
     return resp;
   };
+
   public dashboardInfo = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -69,16 +71,6 @@ export class ApiService {
       url: API_PATHS.DashboardInfo,
       method: API_METHODS.GET,
       ...config,
-    });
-
-    return resp;
-  };
-
-  public resetPassword = async (data: any) => {
-    const resp: Response<any> = await this.client.request({
-      url: '/user/forget-password',
-      method: 'post',
-      data: data,
     });
 
     return resp;
@@ -116,9 +108,42 @@ export class ApiService {
     return resp;
   };
 
-  //! Get User data
+  public getUserInfo = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
 
-  public getUser = async (user_id: number, token: string): Promise<any> => {
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.GetUserInfo,
+      method: API_METHODS.GET,
+      ...config,
+      data: {},
+    });
+
+    return resp;
+  };
+
+  public EmployeeListInfo = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.EmployeeListInfo,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
+
+  //! Get single Lead data
+
+  public getUserLead = async (user_id: number, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {

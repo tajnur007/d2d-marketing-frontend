@@ -1,9 +1,10 @@
+import Image from 'next/image';
+import moment from 'moment';
+// import { getStatusColor } from '@/utils/constants/common-constants';
+import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
+import LeadDetailsButton from '../lead-details-button';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
-import Image from 'next/image';
-// import { getStatusColor } from '@/utils/constants/common-constants';
-import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
-import LeadDetailsButton from '../lead-details-button';
 
 const getStatusColor: statusColor = {
   cool: 'bg-blue-200',
@@ -11,7 +12,7 @@ const getStatusColor: statusColor = {
   warm: 'bg-[#FFEFB8]',
 };
 
-function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
+function LeadRow({ item }: { item: LeadListType }) {
   return (
     <div>
       <div
@@ -26,29 +27,29 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
               <Image src={clockImage} alt='' />
             </div>
             <div className='text-[#9d9d9d] text-[12px] leading-[14.5px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
-              {item.date}
+              {moment(item.created_at).format('ddd DD MMM, YYYY hh:mm A')}
             </div>
           </div>
         </div>
         <div className='w-[25%]'>
           <p className='leading-trim font-semibold text-[16px] tracking-tight'>
-            {item.assignedByName}
+            {item.point_of_contact.name}
           </p>
           <div className='flex items-center mt-[10px]'>
             <div className='mr-1'>
               <Image src={phoneImage} alt='' />
             </div>
             <div className='text-[#5630FF] text-[12px] leading-[14px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
-              {item.assignedByNumber}
+              {item.point_of_contact.phone}
             </div>
           </div>
         </div>
         <div className='w-[20%]'>
           <span
             className={`text-sm text-black h-6 ${
-              getStatusColor[item.status as keyof statusColor]
+              getStatusColor[item.meeting_status as keyof statusColor]
             } p-2 rounded-full`}>
-            {item.status}
+            {item.meeting_status}
           </span>
         </div>
         <div className='w-[25%]'>
@@ -56,7 +57,7 @@ function LeadRow({ item }: { item: LEADS_DATA_TYPE }) {
             Assigned to
           </p>
           <p className='leading-[14px] text-black font-semibold text-[16px] tracking-[0] mt-[10px] whitespace-nowrap'>
-            {item.assignedToName}
+            {item.executive_name}
           </p>
         </div>
         <div className='w-[2%]'>

@@ -1,14 +1,16 @@
+'use client';
+import { useState, useContext } from 'react';
 import Select from 'react-select';
 import { Button } from './button';
 import './dropdown-select.css';
-import { useState } from 'react';
-import { ASSIGN_USERS } from '@/utils/constants/common-constants';
 import TransferConfirmationModal from './transfer-confirmation-modal';
+import { ExecutiveContext } from '@/context/executives-context';
 
 export const AssignDropdownSelect = () => {
   const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selected, setSelected] = useState('');
+  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
 
   const handleConfirm = () => {
     setShowConfirmationModal(true);
@@ -22,7 +24,7 @@ export const AssignDropdownSelect = () => {
 
   const handleChange = (selectedOption: any) => {
     {
-      ASSIGN_USERS.map((option) => {
+      executivesOption.map((option: any) => {
         if (option.value === selectedOption.value) {
           setSelected(option.value);
           setTransferButton(true);
@@ -36,7 +38,7 @@ export const AssignDropdownSelect = () => {
       <div className='flex place-items-center'>
         <div className='w-[205px] font-medium py-[8px]'>
           <Select
-            options={ASSIGN_USERS}
+            options={executivesOption}
             className='customselect font-medium text-[14px] tracking-[-0.28px] leading-[normal]'
             onChange={handleChange}
           />

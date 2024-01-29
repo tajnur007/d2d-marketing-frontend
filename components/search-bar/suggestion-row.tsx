@@ -1,7 +1,8 @@
 'use client';
+import moment from 'moment';
 import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
 import LeadDetails from '@/components/lead-details';
-import { LEADS_DATA_TYPE, statusColor } from '@/models/global-types';
+import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
 import Image from 'next/image';
 import { useState } from 'react';
 import Drawer from 'react-modern-drawer';
@@ -13,7 +14,7 @@ const getStatusColor: statusColor = {
   warm: 'bg-[#FFEFB8]',
 };
 
-const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
+const SuggestionRow = ({ item }: { item: LeadListType }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleDrawer = () => {
@@ -35,14 +36,14 @@ const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
             </div>
 
             <div className='text-[#9d9d9d] font-normal text-[12px] leading-[14.5px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
-              {item.date}
+              {moment(item.created_at).format('ddd DD MMM, YYYY hh:mm A')}
             </div>
           </div>
           <div className='w-[25%]'>
             <p className='text-neutral-700 text-xs whitespace-nowrap font-semibold inline-block'>
-              Assignee:{' '}
+              Assigned to:{' '}
               <span className='text-slate-400 text-xs font-medium leading-tight'>
-                {item.assignedToName}
+                {item?.executive_name}
               </span>
             </p>
           </div>
@@ -50,9 +51,9 @@ const SuggestionRow = ({ item }: { item: LEADS_DATA_TYPE }) => {
         <div className='pr-4'>
           <span
             className={`text-[#00156A] text-[10px] font-medium ${
-              getStatusColor[item.status as keyof statusColor]
+              getStatusColor[item?.meeting_status as keyof statusColor]
             } px-[6px] py-[5px] rounded-[12px]`}>
-            {item.status}
+            {item?.meeting_status}
           </span>
         </div>
       </div>

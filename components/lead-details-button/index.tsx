@@ -1,10 +1,10 @@
 'use client';
 import Image from 'next/image';
 import Popup from 'reactjs-popup';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
-import { LEADS_DATA_TYPE } from '@/models/global-types';
+import { LeadListType, AssignToUsers } from '@/models/global-types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
@@ -12,7 +12,7 @@ import { roundToNearestMinutes } from 'date-fns';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useRouter } from 'next/navigation';
 
-const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
+const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState(false);
   const ref = useRef<any>(null);
@@ -25,11 +25,6 @@ const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
   const handleViewButton = () => {
     setIsOpen(true);
     ref.current.close();
-    console.log('button');
-  };
-
-  const toggleButtons = () => {
-    setOptions((prevState) => !prevState);
   };
 
   //! data.id pass in lead update page
@@ -42,7 +37,7 @@ const LeadDetailsButton = ({ data }: { data: LEADS_DATA_TYPE }) => {
       <Popup
         ref={ref}
         trigger={
-          <div className='menu-item'>
+          <div className=''>
             <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
           </div>
         }

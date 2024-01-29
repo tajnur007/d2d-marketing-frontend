@@ -42,6 +42,11 @@ export interface statusColor {
   warm?: string;
 }
 
+export interface LEADERBOARD {
+  Count: number;
+  Data: Person[] | null;
+}
+
 export interface LATEST_LEADS_LIST_DATA_TYPE {
   id: number;
   title: string;
@@ -78,7 +83,7 @@ export interface LATEST_LEADS_DATA_TYPE {
   Data: [LATEST_LEADS_LIST_DATA_TYPE];
 }
 
-export interface LEADS_DATA_TYPE {
+export interface LeadsDataType {
   id: number;
   title: string;
   date: string;
@@ -96,6 +101,51 @@ export interface LEADS_DATA_TYPE {
     reminderStatus: string;
   };
   timestamp: string;
+
+  
+}
+
+export interface PointsOfContactType {
+  email: string;
+  meeting_notes?: string;
+  name: string;
+  phone: string;
+  reference: string
+}
+
+export interface ImageInfoType {
+  image_name: string;
+  image_path?: string;
+}
+
+ export interface RemainderType {
+    title: string;
+    lead_id: number;
+    reminder_time: ReactNode;
+    notes: string;
+    status:string;
+}
+
+
+
+export interface LeadListType{
+  assignment_status: string;
+  company_id: number; 
+  created_at: string;
+  created_by: string; 
+  executive_id: number; 
+  executive_name: string; 
+  id: number;
+  image_info_json: ImageInfoType[];
+  latitude: number; 
+  longitude: number; 
+  manager_id: number
+  manager_name: string;
+  meeting_status: string; 
+  point_of_contact: PointsOfContactType
+  previous_user_id: number;
+  remainders: any;
+  title: string; 
 }
 
 export interface EmployeestatusColor {
@@ -228,7 +278,18 @@ export interface CreateLeadStatusItems {
 
 export interface AssignToUsers {
   value: string;
-  label: string;
+  label?: string;
+  company_id?:number;
+  email?: string;
+  id?: number;
+  image_name?: string;
+  image_path?: string;
+  manager_id?: number;
+  manager_name?: string;
+  name?: string;
+  phone?: string;
+  user_type?: string;
+
 }
 
 export interface CreateAssignToItems {
@@ -269,6 +330,7 @@ export interface StatusCheckboxProps {
 export interface SearchBarProps {
   className?: string;
   value?: string;
+  leadsData: LeadListType[];
   setValue?: (item: string) => void;
   handleKeyDown?: (e: any) => void;
 }

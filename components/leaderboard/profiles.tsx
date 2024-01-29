@@ -1,7 +1,7 @@
 import { Person } from '@/models/global-types';
 import React from 'react';
 
-const Profiles = ({ data }: { data: Person[] }) => {
+const Profiles = ({ data }: { data: Person[] | null }) => {
   return (
     <div className='h-[calc(100%-70px)] overflow-y-auto tiny-scrollbar px-5'>
       {data?.map((person: Person) => (

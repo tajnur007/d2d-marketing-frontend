@@ -4,16 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 
 import { SearchIcon } from '@/assets/icons';
 import SuggestionRow from '@/components/search-bar/suggestion-row';
-import { LEADS_DATA_TYPE, SearchBarProps } from '@/models/global-types';
+import { LeadListType, SearchBarProps } from '@/models/global-types';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 
 const SearchBar = ({
   value = '',
   setValue = () => {},
   handleKeyDown,
+  leadsData,
 }: SearchBarProps) => {
   const [isSuggestionCardOpen, setIsSuggestionCardOpen] = useState<boolean>(false);
-  const [suggestionData, setSuggestionData] = useState<LEADS_DATA_TYPE[]>([]);
+  const [suggestionData, setSuggestionData] = useState<LeadListType[]>([]);
   const newRef = useRef<any>(null);
 
   const onChange = (e: any) => {
@@ -22,7 +23,7 @@ const SearchBar = ({
 
   useEffect(() => {
     if (value !== '') {
-      const newFilteredData = LEADS_DATA.filter((data) => {
+      const newFilteredData = leadsData.filter((data) => {
         return data.title.toLowerCase().includes(value.toLowerCase());
       });
       setSuggestionData(newFilteredData);
@@ -31,7 +32,7 @@ const SearchBar = ({
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [value]);
+  }, [value, leadsData]);
 
   const handleOutsideClick = (e: any) => {
     if (newRef.current && !newRef.current.contains(e.target)) {
