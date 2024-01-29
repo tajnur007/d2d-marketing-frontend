@@ -1,10 +1,11 @@
 'use client';
 
+import { ApiService } from '@/services/api-services';
+import { useSession } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
 import { EmployeeSearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import EmployeeListRow from '@/components/employee-list-row';
-import { EMPLOYEE_LIST_DATA } from '@/utils/constants/employee-list-constant';
 import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
 import { CreateEmployeeItems } from '@/models/global-types';
 import Image from 'next/image';
@@ -25,13 +26,52 @@ const EmployeeListPage = () => {
 
   let displayedChars: string[] = [];
 
+  const { data } = useSession();
+  //@ts-ignore den
+  const token: string = data?.user?.access_token;
+  const [employeeInfo, setEmployeeInfo] = useState([
+    {
+      id: 0,
+      name: '',
+      user_type: '',
+      phone: 0,
+      email: '',
+    },
+  ]);
+
   useEffect(() => {
-    EMPLOYEE_LIST_DATA.sort((a, b) => a.employeeName.localeCompare(b.employeeName));
+    const fetchData = async () => {
+      try {
+        const UserListServices = new ApiService();
+        const response = await UserListServices.EmployeeListInfo(token);
+
+        // Extract the Data array from the response
+        const data = response.data?.Data?.Data || [];
+
+        // Map each item in the Data array to a new object
+        const formattedData = data.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          user_type: item.user_type,
+          phone: item.phone,
+          email: item.email,
+        }));
+
+        setEmployeeInfo(formattedData);
+      } catch (error) {
+        console.error('Error fetching Users info:', error);
+      }
+    };
+
+    if (token) {
+      fetchData();
+    }
+    employeeInfo.sort((a, b) => a.name.localeCompare(b.name));
 
     const updatedUniqueCharCount: { [key: string]: number } = {};
 
-    for (let i = 0; i < EMPLOYEE_LIST_DATA.length; i++) {
-      const firstChar = EMPLOYEE_LIST_DATA[i].employeeName.charAt(0).toUpperCase();
+    for (let i = 0; i < employeeInfo.length; i++) {
+      const firstChar = employeeInfo[i].name.charAt(0).toUpperCase();
 
       if (updatedUniqueCharCount[firstChar]) {
         updatedUniqueCharCount[firstChar]++;
@@ -41,7 +81,7 @@ const EmployeeListPage = () => {
     }
 
     setUniqueCharCount(updatedUniqueCharCount);
-  }, []);
+  }, [token, employeeInfo]);
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -51,8 +91,8 @@ const EmployeeListPage = () => {
     setModalIsOpen(true);
   };
 
-  const filteredEmployeeList = EMPLOYEE_LIST_DATA.filter((employee) =>
-    employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredEmployeeList = employeeInfo.filter((employee) =>
+    employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -105,7 +145,7 @@ const EmployeeListPage = () => {
         <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[71vh]'>
           <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
             {filteredEmployeeList.map((item, index) => {
-              const firstChar = item.employeeName.charAt(0).toUpperCase();
+              const firstChar = item.name.charAt(0).toUpperCase();
               let isFirstChar = false;
 
               // If the character has not been displayed, add it to the array and set isFirstChar to true
