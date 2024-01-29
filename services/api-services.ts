@@ -42,6 +42,7 @@ export class ApiService {
 
     return resp;
   };
+
   public createLead = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -134,4 +135,19 @@ export class ApiService {
   };
 
 
+  public EmployeeListInfo = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.EmployeeListInfo,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
 }

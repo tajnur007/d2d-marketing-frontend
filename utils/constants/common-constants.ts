@@ -62,6 +62,7 @@ export const API_PATHS = {
   Leaderboard: '/user/leaderboard',
   GetLeads: '/lead/list',
   CreateReminder: '/reminder/create',
+  EmployeeListInfo:'/user/list',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
