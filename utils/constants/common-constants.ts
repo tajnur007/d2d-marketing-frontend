@@ -61,7 +61,7 @@ export const API_PATHS = {
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
   GetLeads: '/lead/list',
-  EmployeeListInfo:'/user/list',
+  EmployeeListInfo: '/user/list'
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [

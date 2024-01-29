@@ -380,3 +380,9 @@ export interface CreateEmployeeModalProps {
 export interface LeadOptionsProps {
   handleViewButton: () => void;
 }
+
+export interface EmployeeOptionsProps {
+  handleViewButton: () => void;
+  handleDeleteButton: () => Promise<void>;
+}
+
