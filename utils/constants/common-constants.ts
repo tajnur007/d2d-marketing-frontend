@@ -152,7 +152,7 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'hot', label: 'Hot' },
-  { value: 'cool', label: 'Cool' },
+  { value: 'cold', label: 'Cold' },
   { value: 'warm', label: 'Warm' },
 ];
 
