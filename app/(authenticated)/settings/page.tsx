@@ -112,7 +112,7 @@ const SettingsPage = () => {
 
   return (
     <section>
-      <div className='h-[calc(100vh-102px)] w-full mt-0 rounded-[10px] bg-white'>
+      <div className='w-full h-[calc(100vh-102px)] mt-0 rounded-[10px] bg-white'>
         <div className='ml-6'>
           {changePasswordClicked ? (
             <div>

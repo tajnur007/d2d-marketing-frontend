@@ -45,7 +45,7 @@ const Leaderboard: React.FC = () => {
   console.log(leaderboard);
 
   return (
-    <div className='bg-white rounded-2xl w-full lg:w-[27%] h-[calc(100vh-102px)]'>
+    <div className='bg-white rounded-2xl w-full h-[calc(100vh-102px)] lg:w-[27%]'>
       <h2 className='font-bold text-[#2b3674] text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap p-5'>
         Leaderboard
       </h2>

@@ -56,7 +56,7 @@ function LeadsList() {
   };
 
   return (
-    <div className='border border-gray-100 bg-white rounded-xl h-[calc(100vh-102px)] w-full'>
+    <div className='border border-gray-100 bg-white rounded-xl] w-ful h-[calc(100vh-102px)l'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
         <div className='flex justify-between items-start content-center'>
           <div className='flex items-center pt-2'>
