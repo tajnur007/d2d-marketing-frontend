@@ -50,7 +50,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01987654321',
     assignedByEmail: 'farah@gmail.com',
     assignedToName: 'Sadia Rahman',
-    status: LEAD_STATUS.Cold,
+    status: LEAD_STATUS.Cool,
     location: '789/C Web Avenue',
     meetingNote: 'Redesign the website for a modern look.',
     image:
@@ -130,7 +130,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01711223344',
     assignedByEmail: 'nabil@gmail.com',
     assignedToName: 'Shahrukh Ahmed',
-    status: LEAD_STATUS.Cold,
+    status: LEAD_STATUS.Cool,
     location: '789/H Design Street',
     meetingNote: 'Create visually appealing graphics for marketing materials.',
     image:
@@ -190,7 +190,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01777889900',
     assignedByEmail: 'khaled@gmail.com',
     assignedToName: 'Samina Akhtar',
-    status: LEAD_STATUS.Cold,
+    status: LEAD_STATUS.Cool,
     location: '789/K Video Street',
     meetingNote: 'Create engaging videos for marketing purposes.',
     image:

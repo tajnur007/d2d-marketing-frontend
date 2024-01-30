@@ -30,10 +30,10 @@ export interface SidebarItem {
 }
 
 export interface Person {
-  id: number;
+  executive_id: number;
+  executive_name: string;
+  count_of_leads: number;
   initials: string;
-  name: string;
-  totalLeads: number;
 }
 
 export interface statusColor {
@@ -296,7 +296,7 @@ export interface CreateAssignToItems {
 export interface StatusState {
   hot: boolean;
   warm: boolean;
-  cold: boolean;
+  cool: boolean;
 }
 
 export interface CreateEmployeeModalProps {
@@ -352,7 +352,7 @@ export interface CreateReminderModalProps {
   setFormErrors: (item: any) => void;
   selected: string;
   setSelected: (item: string) => void;
-  leadsData: LeadListType;
+  leadsData: any;
 }
 
 export interface DeleteModalProps {
@@ -386,25 +386,7 @@ export interface LeadOptionsProps {
   handleDeleteButton: () => void;
 }
 
-
-export interface LeadsDataType {
-  id: number;
-  title: string;
-  date: string;
-  assignedByName: string;
-  assignedByNumber: string;
-  assignedByEmail: string;
-  assignedToName: string;
-  status: string;
-  location: string;
-  meetingNote: string;
-  image: string;
-  reminder: {
-    reminderTitle: string;
-    reminderDate: string;
-    reminderStatus: string;
-  };
-  timestamp: string;
-
-  
+export interface EmployeeOptionsProps {
+  handleViewButton: () => void;
+  handleDeleteButton: () => Promise<void>;
 }
