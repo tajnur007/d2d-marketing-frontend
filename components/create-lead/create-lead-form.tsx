@@ -9,6 +9,7 @@ import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
+  IMAGE_DETAIL,
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
@@ -96,7 +97,12 @@ const CreateLeadForm = () => {
             reference: formData?.Reference,
           },
 
-          image_infos: [{ image_name: `img_name`, image_path: formData?.Image || '' }], //dummy image until image upload api is integrated.
+          image_infos: [
+            {
+              image_name: IMAGE_DETAIL.name,
+              image_path: IMAGE_DETAIL.path,
+            },
+          ],
         };
 
         // @ts-ignore
