@@ -16,6 +16,7 @@ import Map from './map';
 import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
+import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
@@ -58,17 +59,14 @@ const CreateLeadForm = () => {
       const newFormErrors: any = {};
 
       for (let field in formData) {
-        if (
-          formData[field as keyof typeof formData] === '' &&
-          field !== 'Reference' &&
-          field !== 'Email' &&
-          field !== 'Status' &&
-          field !== 'AssignedTo'
-        ) {
-          newFormErrors[field] = `(${field} is required)`;
+        if (leadFormErrorCheck(formData, field)) {
+          console.log(leadFormErrorCheck(formData, field));
+          newFormErrors[field] = leadFormErrorCheck(formData, field);
         }
       }
 
+      setFormErrors(newFormErrors);
+      console.log(newFormErrors);
       if (Object.keys(newFormErrors).length === 0) {
         //! Payload object
 
@@ -110,7 +108,7 @@ const CreateLeadForm = () => {
     <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
       <div className='flex items-center justify-between mt-10 gap-5'>
         <Input
-          label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
+          label='Title'
           placeholder='Title here'
           type='text'
           id='title'
@@ -137,7 +135,7 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-10 gap-5'>
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Name</p>}
+            label='Name'
             placeholder='Name'
             type='text'
             id='name'
@@ -149,7 +147,7 @@ const CreateLeadForm = () => {
           />
 
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Phone</p>}
+            label='Phone'
             placeholder='Phone number'
             type='text'
             id='phone'
@@ -163,17 +161,19 @@ const CreateLeadForm = () => {
 
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Email</p>}
+            label='Email'
             placeholder='Email (Optional)'
             type='email'
             id='email'
             name='Email'
             htmlFor='email'
+            errorMessage={formErrors.Email}
             onChange={handleInputChange}
+            className={` ${formErrors.Email && 'border-red-500 shadow'}`}
           />
 
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reference</p>}
+            label='Reference'
             placeholder='Reference (Optional)'
             type='text'
             id='reference'
@@ -186,7 +186,7 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-5 gap-5'>
         <div className='w-1/2'>
           <TextArea
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Remarks</p>}
+            label='Remarks'
             placeholder='Notes'
             name='Note'
             errorMessage={formErrors.Note}
