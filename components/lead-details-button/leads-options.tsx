@@ -3,7 +3,7 @@ import { LeadOptionsProps } from '@/models/global-types';
 
 const LeadsOptions = ({ handleViewButton }: LeadOptionsProps) => {
   return (
-    <div className='menu'>
+    <div>
       <div className='py-1'>
         <button
           type='button'
