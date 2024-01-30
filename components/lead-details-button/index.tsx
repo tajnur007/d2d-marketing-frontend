@@ -4,14 +4,15 @@ import Popup from 'reactjs-popup';
 import { useState, useRef } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
-import { LeadListType, AssignToUsers } from '@/models/global-types';
+import { LeadListType } from '@/models/global-types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
+import DeleteConfirmationModal from '../delete-confirmation-modal';
 
 const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [options, setOptions] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<any>(null);
 
   const toggleDrawer = () => {
@@ -21,6 +22,10 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
   const handleViewButton = () => {
     setIsOpen(true);
     ref.current.close();
+  };
+
+  const handleDeleteButton = async () => {
+    setModalIsOpen(true);
   };
 
   return (
@@ -46,7 +51,12 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
           marginLeft: '10px',
         }}
         arrow={false}>
-        <LeadsOptions handleViewButton={handleViewButton} />
+        {!modalIsOpen && (
+          <LeadsOptions
+            handleViewButton={handleViewButton}
+            handleDeleteButton={handleDeleteButton}
+          />
+        )}
       </Popup>
       <Drawer
         open={isOpen}
@@ -56,6 +66,12 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
         overlayOpacity={0}>
         <LeadDetails setIsOpen={setIsOpen} data={data} />
       </Drawer>
+      <DeleteConfirmationModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        data={data}
+      />
+      ;
     </>
   );
 };
