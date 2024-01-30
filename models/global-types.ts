@@ -37,7 +37,7 @@ export interface Person {
 }
 
 export interface statusColor {
-  cool?: string;
+  cold?: string;
   hot?: string;
   warm?: string;
 }
