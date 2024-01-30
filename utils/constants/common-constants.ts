@@ -61,6 +61,7 @@ export const API_PATHS = {
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
   GetLeads: '/lead/list',
+  CreateReminder: '/reminder/create',
   EmployeeListInfo:'/user/list',
 };
 
@@ -151,7 +152,7 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'hot', label: 'Hot' },
-  { value: 'cool', label: 'Cool' },
+  { value: 'cold', label: 'Cold' },
   { value: 'warm', label: 'Warm' },
 ];
 

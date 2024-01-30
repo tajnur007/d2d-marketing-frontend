@@ -2,9 +2,14 @@
 
 import Select from 'react-select';
 import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 import { Input } from './input';
 import { CreateReminderModalProps } from '@/models/global-types';
-import { CREATE_REMINDER_STATUS } from '@/utils/constants/common-constants';
+import {
+  CREATE_REMINDER_STATUS,
+  CREATE_REMINDER_ITEMS,
+} from '@/utils/constants/common-constants';
 import { TextArea } from './text-area';
 import { Button } from './button';
 import './dropdown-select.css';
@@ -13,6 +18,7 @@ import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { ClockIcon, ExIcon } from '@/assets/icons';
+import { LeadService } from '@/services/lead-services';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -27,7 +33,12 @@ const CreateReminderModal = ({
   setFormErrors = () => {},
   selected,
   setSelected = () => {},
+  leadsData,
 }: CreateReminderModalProps) => {
+  const { data } = useSession();
+  //@ts-ignore
+  const token = data?.user?.access_token;
+
   const inputProps = {
     placeholder: 'DD:MM:YY TT:TT',
     className: `w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase text-[#B9C1D9] date-picker-placeholder ${
@@ -53,22 +64,45 @@ const CreateReminderModal = ({
     });
   };
 
-  const submitData = () => {
-    const newFormErrors: any = {};
+  const submitData = async () => {
+    try {
+      const newFormErrors: any = {};
 
-    for (let field in formData) {
-      if (formData[field as keyof typeof formData] === '') {
-        newFormErrors[field] = `(${field} is required)`;
+      for (let field in formData) {
+        if (field === 'AssociatedLead') {
+          continue;
+        }
+        if (formData[field as keyof typeof formData] === '') {
+          newFormErrors[field] = `(${field} is required)`;
+        }
       }
-    }
 
-    setFormErrors(newFormErrors);
-    console.log(formData);
+      setFormErrors(newFormErrors);
 
-    if (Object.values(formData).includes('')) {
-      setModalIsOpen(true);
-    } else {
-      setModalIsOpen(false);
+      if (Object.keys(newFormErrors).length === 0) {
+        const payloadObj = {
+          title: formData.Title,
+          lead_id: leadsData.id,
+          reminder_time: formData.Date,
+          notes: formData.Note,
+          status: formData.Status,
+        };
+
+        if (token) {
+          const LeadServices = new LeadService();
+          const response = await LeadServices.createReminder(payloadObj, token);
+          if (response.status === 201) {
+            setFormData(CREATE_REMINDER_ITEMS);
+            setModalIsOpen(false);
+            toast.success('Remainder created successfully.');
+          }
+        } else {
+          toast.error('failed to create remainder.');
+        }
+      }
+    } catch (error) {
+      toast.error('Something went wrong.');
+      console.log('Error in create-remainder-modal: ', error);
     }
   };
 
@@ -98,7 +132,8 @@ const CreateReminderModal = ({
         'absolute w-[646px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
       isOpen={modalIsOpen}
-      onRequestClose={closeModal}>
+      onRequestClose={closeModal}
+      ariaHideApp={false}>
       <div className='m-[30px]'>
         <div className='flex mb-[26px] justify-between'>
           <div className='left-0 font-bold text-[#25254c] text-[24px] tracking-[0] leading-[14px] whitespace-nowrap'>
@@ -175,9 +210,7 @@ const CreateReminderModal = ({
 
         <div className='mt-[16px]'>
           <TextArea
-            label={
-              <p className='text-[#00156A] font-medium text-xs mb-1'>Notes</p>
-            }
+            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Notes</p>}
             placeholder='Notes'
             name='Note'
             onChange={handleInputChange}

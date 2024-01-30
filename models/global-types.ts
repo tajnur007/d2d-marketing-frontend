@@ -37,7 +37,7 @@ export interface Person {
 }
 
 export interface statusColor {
-  cool?: string;
+  cold?: string;
   hot?: string;
   warm?: string;
 }
@@ -83,27 +83,6 @@ export interface LATEST_LEADS_DATA_TYPE {
   Data: [LATEST_LEADS_LIST_DATA_TYPE];
 }
 
-export interface LeadsDataType {
-  id: number;
-  title: string;
-  date: string;
-  assignedByName: string;
-  assignedByNumber: string;
-  assignedByEmail: string;
-  assignedToName: string;
-  status: string;
-  location: string;
-  meetingNote: string;
-  image: string;
-  reminder: {
-    reminderTitle: string;
-    reminderDate: string;
-    reminderStatus: string;
-  };
-  timestamp: string;
-
-  
-}
 
 export interface PointsOfContactType {
   email: string;
@@ -357,6 +336,7 @@ export interface CreateReminderModalProps {
   setFormErrors: (item: any) => void;
   selected: string;
   setSelected: (item: string) => void;
+  leadsData: LeadListType;
 }
 
 export interface CreateEmployeeItems {
