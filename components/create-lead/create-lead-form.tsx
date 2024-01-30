@@ -86,7 +86,7 @@ const CreateLeadForm = () => {
             reference: formData?.Reference,
           },
 
-          image_infos: [{ image_name: `img_name`, image_path: formData?.Image || '' }], //dummy image until image upload api is integrated
+          image_infos: [{ image_name: `img_name`, image_path: formData?.Image || '' }], //dummy image until image upload api is integrated.
         };
 
         // @ts-ignore
