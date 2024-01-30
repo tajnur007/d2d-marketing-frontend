@@ -29,11 +29,9 @@ const getStatusColor: statusColor = {
 const LeadDetails = ({
   setIsOpen,
   data,
-  isOpen,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   data: LeadListType;
-  isOpen: boolean;
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);

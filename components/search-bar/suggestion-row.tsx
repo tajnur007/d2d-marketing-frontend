@@ -58,7 +58,7 @@ const SuggestionRow = ({ item }: { item: LeadListType }) => {
         </div>
       </div>
       <Drawer open={isOpen} onClose={() => setIsOpen(false)} direction='right' size={450}>
-        <LeadDetails setIsOpen={setIsOpen} data={item} isOpen={isOpen} />
+        <LeadDetails setIsOpen={setIsOpen} data={item} />
       </Drawer>
     </div>
   );
