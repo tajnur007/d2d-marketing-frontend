@@ -14,6 +14,7 @@ import { FormItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import { ApiService } from '@/services/api-services';
+import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
 
@@ -30,6 +31,8 @@ const CreateLeadForm = () => {
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
 
   const { data } = useSession();
+  // @ts-ignore
+  const token = data?.user?.access_token;
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -42,6 +45,13 @@ const CreateLeadForm = () => {
       return { ...prev, [name]: '' };
     });
   };
+
+  useEffect(() => {
+    if (token) {
+      const LeadServices = new LeadService();
+      LeadServices.getExecutivesData(setExecutivesOption, token);
+    }
+  }, [token, setExecutivesOption]);
 
   useEffect(() => {
     setFormData((prev) => {

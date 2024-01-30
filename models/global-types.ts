@@ -37,7 +37,7 @@ export interface Person {
 }
 
 export interface statusColor {
-  cool?: string;
+  cold?: string;
   hot?: string;
   warm?: string;
 }
@@ -352,6 +352,7 @@ export interface CreateReminderModalProps {
   setFormErrors: (item: any) => void;
   selected: string;
   setSelected: (item: string) => void;
+  leadsData: LeadListType;
 }
 
 export interface DeleteModalProps {

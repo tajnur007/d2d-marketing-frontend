@@ -195,6 +195,7 @@ const LeadDetails = ({
         setFormErrors={setFormErrors}
         selected={selected}
         setSelected={setSelected}
+        leadsData={data}
       />
     </div>
   );

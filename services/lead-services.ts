@@ -1,3 +1,4 @@
+import { CreateReminderItems } from './../models/global-types';
 import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
 import { HttpClient, Response } from './axios-base-query';
@@ -68,6 +69,23 @@ export class LeadService {
     } catch (error) {
       console.error('Error fetching leads:', error);
     }
+  };
+
+  public createReminder = async (data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.CreateReminder,
+      method: API_METHODS.POST,
+      ...config,
+      data,
+    });
+
+    return resp;
   };
 
   public deleteLead = async (lead_id: number, token: string): Promise<any> => {

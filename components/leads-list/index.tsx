@@ -2,13 +2,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
 import LeadRow from '@/components/lead-row';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import SearchBar from '@/components/search-bar';
-import { LeadsDataType, LeadListType } from '@/models/global-types';
+import { LeadListType } from '@/models/global-types';
 import { LeadService } from '@/services/lead-services';
-import { ApiService } from '@/services/api-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
 import { ExecutiveContext } from '@/context/executives-context';
@@ -70,7 +68,7 @@ function LeadsList() {
 
             <div className='flex items-center justify-center h-6 bg-[#D2FBE7] rounded-[17px] ms-2 p-2'>
               <p className="leading-[normal] text-black [font-family:'Metropolis-Bold',Helvetica] font-semibold text-[16px] tracking-[-0.32px] whitespace-nowrap text-capitalize">
-                {LEADS_DATA.length}
+                {searchData.length > 0 ? searchData.length : leadsData.length}
               </p>
             </div>
           </div>
