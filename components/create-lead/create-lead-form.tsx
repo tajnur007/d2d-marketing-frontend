@@ -9,6 +9,7 @@ import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
+  IMAGE_DETAIL,
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
@@ -73,7 +74,8 @@ const CreateLeadForm = () => {
           field !== 'Reference' &&
           field !== 'Email' &&
           field !== 'Status' &&
-          field !== 'AssignedTo'
+          field !== 'AssignedTo' &&
+          field !== 'Image'
         ) {
           newFormErrors[field] = `(${field} is required)`;
         }
@@ -99,7 +101,10 @@ const CreateLeadForm = () => {
           },
 
           image_infos: [
-            { image_name: `${formData?.Name}_img`, image_path: formData?.Image },
+            {
+              image_name: IMAGE_DETAIL.name,
+              image_path: IMAGE_DETAIL.path,
+            },
           ],
         };
 
