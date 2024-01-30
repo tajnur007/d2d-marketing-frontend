@@ -45,12 +45,15 @@ const Leaderboard: React.FC = () => {
   console.log(leaderboard);
 
   return (
-    <div className='bg-white rounded-2xl w-full lg:w-[27%] h-[84vh]'>
+    <div className='bg-white rounded-2xl w-full lg:w-[27%] h-[calc(100vh-102px)]'>
       <h2 className='font-bold text-[#2b3674] text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap p-5'>
         Leaderboard
       </h2>
-      {(leaderboard?.Data !== null) ? (<Profiles data={leaderboard.Data}></Profiles>) : (<p className='ml-5'>No Data Found</p>)}
-      
+      {leaderboard?.Data !== null ? (
+        <Profiles data={leaderboard.Data}></Profiles>
+      ) : (
+        <p className='ml-5'>No Data Found</p>
+      )}
     </div>
   );
 };
