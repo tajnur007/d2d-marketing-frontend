@@ -9,7 +9,7 @@ export class LeadService {
     this.client = new HttpClient(baseUrl);
   }
 
-   public getExecutives = async (token: string): Promise<any> => {
+  public getExecutives = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -25,16 +25,14 @@ export class LeadService {
   };
 
   public getExecutivesData = async (setExecutivesOption: any, token: string) => {
-      try {
-        const response = await this.getExecutives(token);
-        const executivesOption = this.createSelectData(response.data.Data.Data);
-        setExecutivesOption(executivesOption);
-      } catch (error) {
-        console.error('Error fetching executives:', error);
-      }
-    };
-
-
+    try {
+      const response = await this.getExecutives(token);
+      const executivesOption = this.createSelectData(response.data.Data.Data);
+      setExecutivesOption(executivesOption);
+    } catch (error) {
+      console.error('Error fetching executives:', error);
+    }
+  };
 
   public createSelectData = (items: any): any => {
     const selectOptions: any = [];
@@ -61,9 +59,8 @@ export class LeadService {
     return resp;
   };
 
-  public getLeadsData = async (setLeadsData:any, token: string) => {
+  public getLeadsData = async (setLeadsData: any, token: string) => {
     try {
-
       const response = await this.getLeads(token);
       console.log(response);
       const data = response.data.Data.Data;
@@ -72,5 +69,20 @@ export class LeadService {
       console.error('Error fetching leads:', error);
     }
   };
- 
+
+  public deleteLead = async (lead_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.DeleteLead}?lead_id=${lead_id}`,
+      method: API_METHODS.DELETE,
+      ...config,
+    });
+
+    return resp;
+  };
 }
