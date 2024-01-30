@@ -23,6 +23,8 @@ import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
   const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
+  const [imageName, setImageName] = useState<string>('');
+  const [imagePath, setImagePath] = useState<string>('');
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [location, setLocation] = useState({
@@ -46,6 +48,36 @@ const CreateLeadForm = () => {
     setFormErrors((prev) => {
       return { ...prev, [name]: '' };
     });
+  };
+  const handleImageUpload = async (e: any) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+
+    setFormErrors((prev) => {
+      return { ...prev, [name]: '' };
+    });
+    try {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      setFormData((prev) => {
+        return { ...prev, formData };
+      });
+
+      // Call the UploadLeadImage API with the FormData and token
+      const NewLeadServices = new LeadService();
+      const response = await NewLeadServices.UploadLeadImage(formData, token);
+      console.log(response);
+
+      const { imageName, imagePath } = response.data?.Data?.Data;
+      setImageName(imageName);
+      setImagePath(imagePath);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
 
   useEffect(() => {
@@ -99,8 +131,8 @@ const CreateLeadForm = () => {
 
           image_infos: [
             {
-              image_name: IMAGE_DETAIL.name,
-              image_path: IMAGE_DETAIL.path,
+              image_name: imageName,
+              image_path: imagePath,
             },
           ],
         };
@@ -109,9 +141,10 @@ const CreateLeadForm = () => {
         const token = data?.user?.access_token;
 
         const ApiServices = new ApiService();
-        const resp = await ApiServices.createLead(payloadObj, token);
-
-        console.log(`server response ${resp}`);
+        console.log(payloadObj);
+        alert('submit is clicked.');
+        //const resp = await ApiServices.createLead(payloadObj, token);
+        //console.log(`server response ${resp}`);
       }
     } catch (err) {
       console.log(err);
@@ -227,7 +260,7 @@ const CreateLeadForm = () => {
             <ImageUpload
               placeholder='Upload image'
               name='Image'
-              onChange={handleInputChange}
+              onChange={handleImageUpload}
               className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
             />
           </div>

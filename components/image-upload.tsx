@@ -20,7 +20,7 @@ export const ImageUpload = ({
         )}>
         <GalleryIcon />
         <p className='text-[#B9C1D9] font-medium'>{placeholder}</p>
-        <input {...props} type='file' className='hidden' />
+        <input {...props} type='file' className='hidden' accept='image/*'/>
       </div>
     </label>
   </div>
