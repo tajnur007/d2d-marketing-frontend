@@ -10,7 +10,7 @@ import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 import DeleteConfirmationModal from '../delete-confirmation-modal';
 
-const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
+const LeadDetailsButton = ({ data, leadRefresh, setLeadRefresh = () => {} }: { data: LeadListType , leadRefresh : boolean, setLeadRefresh: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<any>(null);
@@ -73,8 +73,9 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         data={data}
+        leadRefresh={leadRefresh}
+        setLeadRefresh={setLeadRefresh}
       />
-      ;
     </>
   );
 };

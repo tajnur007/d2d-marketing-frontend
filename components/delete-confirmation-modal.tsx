@@ -19,6 +19,8 @@ const DeleteConfirmationModal = ({
   data,
   modalIsOpen,
   setModalIsOpen = () => {},
+  leadRefresh,
+  setLeadRefresh = () => {},
 }: DeleteModalProps) => {
   const { data: session } = useSession();
 
@@ -37,6 +39,7 @@ const DeleteConfirmationModal = ({
       toast.error('Something went wrong.');
     }
     setModalIsOpen(false);
+    setLeadRefresh(!leadRefresh);
   };
 
   return (

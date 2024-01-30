@@ -251,6 +251,7 @@ export const OPTION_MENU = [
     icon: DeleteIcon,
   },
 ];
+
 export const LEADERBOARD_ITEMS: LEADERBOARD = {
   Count: 0,
   Data: [
