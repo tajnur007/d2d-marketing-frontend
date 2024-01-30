@@ -9,6 +9,7 @@ import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
+  IMAGE_DETAIL,
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
@@ -100,7 +101,10 @@ const CreateLeadForm = () => {
           },
 
           image_infos: [
-            { image_name: "60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png", image_path: "http://157.245.204.196:8021/v1/auth/image-by-path?image_path=files/60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png" },
+            {
+              image_name: IMAGE_DETAIL.name,
+              image_path: IMAGE_DETAIL.path,
+            },
           ],
         };
 
