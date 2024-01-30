@@ -99,7 +99,7 @@ const EmployeeListPage = () => {
 
   return (
     <>
-      <div className='border border-gray-100 bg-white rounded-xl w-ful h-[calc(100vh-102px)]l'>
+      <div className='border border-gray-100 bg-white rounded-xl w-ful h-[calc(100vh-102px)]'>
         <div className='py-4 md:py-6 pl-8 h-[96px]'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>

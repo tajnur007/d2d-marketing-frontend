@@ -37,7 +37,7 @@ export interface Person {
 }
 
 export interface statusColor {
-  cool?: string;
+  cold?: string;
   hot?: string;
   warm?: string;
 }
@@ -83,13 +83,12 @@ export interface LATEST_LEADS_DATA_TYPE {
   Data: [LATEST_LEADS_LIST_DATA_TYPE];
 }
 
-
 export interface PointsOfContactType {
   email: string;
   meeting_notes?: string;
   name: string;
   phone: string;
-  reference: string
+  reference: string;
 }
 
 export interface ImageInfoType {
@@ -97,34 +96,32 @@ export interface ImageInfoType {
   image_path?: string;
 }
 
- export interface RemainderType {
-    title: string;
-    lead_id: number;
-    reminder_time: ReactNode;
-    notes: string;
-    status:string;
+export interface RemainderType {
+  title: string;
+  lead_id: number;
+  reminder_time: ReactNode;
+  notes: string;
+  status: string;
 }
 
-
-
-export interface LeadListType{
+export interface LeadListType {
   assignment_status: string;
-  company_id: number; 
+  company_id: number;
   created_at: string;
-  created_by: string; 
-  executive_id: number; 
-  executive_name: string; 
+  created_by: string;
+  executive_id: number;
+  executive_name: string;
   id: number;
   image_info_json: ImageInfoType[];
-  latitude: number; 
-  longitude: number; 
-  manager_id: number
+  latitude: number;
+  longitude: number;
+  manager_id: number;
   manager_name: string;
-  meeting_status: string; 
-  point_of_contact: PointsOfContactType
+  meeting_status: string;
+  point_of_contact: PointsOfContactType;
   previous_user_id: number;
   remainders: any;
-  title: string; 
+  title: string;
 }
 
 export interface EmployeestatusColor {
@@ -258,7 +255,7 @@ export interface CreateLeadStatusItems {
 export interface AssignToUsers {
   value: string;
   label?: string;
-  company_id?:number;
+  company_id?: number;
   email?: string;
   id?: number;
   image_name?: string;
@@ -268,7 +265,6 @@ export interface AssignToUsers {
   name?: string;
   phone?: string;
   user_type?: string;
-
 }
 
 export interface CreateAssignToItems {
@@ -361,7 +357,6 @@ export interface LeadOptionsProps {
   handleViewButton: () => void;
 }
 
-
 export interface LeadsDataType {
   id: number;
   title: string;
@@ -380,6 +375,4 @@ export interface LeadsDataType {
     reminderStatus: string;
   };
   timestamp: string;
-
-  
 }

@@ -56,10 +56,10 @@ function LeadsList() {
   };
 
   return (
-    <div className='border border-gray-100 bg-white rounded-xl] w-ful h-[calc(100vh-102px)l'>
+    <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
-        <div className='flex justify-between items-start content-center'>
-          <div className='flex items-center pt-2'>
+        <div className='flex justify-between  gap-5'>
+          <div className='flex pt-2'>
             <div>
               <p className="[font-family:'Metropolis-Bold',Helvetica] font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]">
                 Leads
@@ -72,22 +72,20 @@ function LeadsList() {
               </p>
             </div>
           </div>
-          <div className='flex justify-around items-center'>
-            <div className='flex m-0 p-0'>
-              <div className='m-0 mr-2 p-0'>
-                <SearchBar
-                  handleKeyDown={handleKeyDown}
-                  value={searchValue}
-                  setValue={setSearchValue}
-                  leadsData={leadsData}
-                />
-              </div>
-              <div>
-                <FilterLeadsButton onFilterData={(data: any) => setFilterData(data)} />
-              </div>
-              <div onClick={handleCreateLeadButtonClick}>
-                <CreateLeadsButton />
-              </div>
+
+          <div className='flex justify-end m-0 p-0 w-full '>
+            <SearchBar
+              handleKeyDown={handleKeyDown}
+              value={searchValue}
+              setValue={setSearchValue}
+              leadsData={leadsData}
+            />
+
+            <div>
+              <FilterLeadsButton onFilterData={(data: any) => setFilterData(data)} />
+            </div>
+            <div onClick={handleCreateLeadButtonClick}>
+              <CreateLeadsButton />
             </div>
           </div>
         </div>

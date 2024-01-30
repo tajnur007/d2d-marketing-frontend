@@ -45,8 +45,8 @@ const SearchBar = ({
   };
 
   return (
-    <div className='mr-2 p-0' ref={newRef}>
-      <div className='relative w-[563px] mb-3'>
+    <div className='mr-4 p-0 w-full' ref={newRef}>
+      <div className='relative w-full'>
         <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
           <SearchIcon />
         </div>
@@ -64,11 +64,11 @@ const SearchBar = ({
         </div>
       </div>
       {isSuggestionCardOpen && (
-        <div className='bg-white shadow-md rounded-[10px] w-[563px] m-0 p-0'>
+        <div className='bg-white shadow-md rounded-[10px] w-full m-0 p-0'>
           {suggestionData.slice(0, 3).map((item, index) => (
             <div key={index}>
               <SuggestionRow item={item} />
-              <div className='mx-auto border-b border-solid border-[#E9F0FF] border-t-0 border-r-0 border-l-0 w-[523px]'></div>
+              <div className='mx-auto border-b border-solid border-[#E9F0FF] border-t-0 border-r-0 border-l-0 w-full'></div>
             </div>
           ))}
         </div>
