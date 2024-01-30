@@ -3,7 +3,7 @@
 import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
-import { EmployeeSearchIcon } from '@/assets/icons';
+import { SearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import EmployeeListRow from '@/components/employee-list-row';
 import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
@@ -29,7 +29,8 @@ const EmployeeListPage = () => {
   const { data } = useSession();
   //@ts-ignore den
   const token: string = data?.user?.access_token;
-  const [employeeInfo, setEmployeeInfo] = useState([
+  const [employeeInfo, setEmployeeInfo] = useState(
+    [
     {
       id: 0,
       name: '',
@@ -66,8 +67,10 @@ const EmployeeListPage = () => {
     if (token) {
       fetchData();
     }
-    employeeInfo.sort((a, b) => a.name.localeCompare(b.name));
+  }, [token]); // Only trigger when token changes
 
+  useEffect(() => {
+    // Update unique character count when employeeInfo changes
     const updatedUniqueCharCount: { [key: string]: number } = {};
 
     for (let i = 0; i < employeeInfo.length; i++) {
@@ -81,9 +84,9 @@ const EmployeeListPage = () => {
     }
 
     setUniqueCharCount(updatedUniqueCharCount);
-  }, [token, employeeInfo]);
+  }, [employeeInfo]); // Only trigger when employeeInfo changes
 
-  const handleSearchChange = (event: any) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
@@ -111,7 +114,7 @@ const EmployeeListPage = () => {
               <form>
                 <div className='relative'>
                   <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
-                    <EmployeeSearchIcon />
+                    <SearchIcon />
                   </div>
                   <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                     <input
