@@ -19,6 +19,7 @@ import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
 import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { toast } from 'react-toastify';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
@@ -144,9 +145,12 @@ const CreateLeadForm = () => {
         console.log(payloadObj);
         alert('submit is clicked.');
         //const resp = await ApiServices.createLead(payloadObj, token);
-        //console.log(`server response ${resp}`);
-      }
+        // if (resp.status === 201) {
+        //   toast.success('New Lead Created Successfully.');}
+          //console.log(`server response ${resp}`);
+        }
     } catch (err) {
+      //toast.error('Failed to create Lead.');
       console.log(err);
     }
   };
