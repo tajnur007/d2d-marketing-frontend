@@ -69,12 +69,12 @@ const CreateLeadForm = () => {
 
       // Call the UploadLeadImage API with the FormData and token
       const NewLeadServices = new LeadService();
-      const response = await NewLeadServices.UploadLeadImage(formData, token);
-      console.log(response);
+      // const response = await NewLeadServices.UploadLeadImage(formData, token);
+      // console.log(response);
 
-      const { imageName, imagePath } = response.data?.Data?.Data;
-      setImageName(imageName);
-      setImagePath(imagePath);
+      // const { imageName, imagePath } = response.data?.Data?.Data;
+      // setImageName(imageName);
+      // setImagePath(imagePath);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
