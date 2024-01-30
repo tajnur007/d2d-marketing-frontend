@@ -360,3 +360,26 @@ export interface CreateEmployeeModalProps {
 export interface LeadOptionsProps {
   handleViewButton: () => void;
 }
+
+
+export interface LeadsDataType {
+  id: number;
+  title: string;
+  date: string;
+  assignedByName: string;
+  assignedByNumber: string;
+  assignedByEmail: string;
+  assignedToName: string;
+  status: string;
+  location: string;
+  meetingNote: string;
+  image: string;
+  reminder: {
+    reminderTitle: string;
+    reminderDate: string;
+    reminderStatus: string;
+  };
+  timestamp: string;
+
+  
+}
