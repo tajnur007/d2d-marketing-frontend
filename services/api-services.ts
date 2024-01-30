@@ -59,7 +59,7 @@ export class ApiService {
 
     return resp;
   };
-  
+
   public dashboardInfo = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -75,7 +75,6 @@ export class ApiService {
 
     return resp;
   };
-
 
   public latestLeads = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
@@ -125,8 +124,6 @@ export class ApiService {
 
     return resp;
   };
-
-
 
   public EmployeeListInfo = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};

@@ -63,6 +63,7 @@ export const API_PATHS = {
   GetLeads: '/lead/list',
   CreateReminder: '/reminder/create',
   EmployeeListInfo:'/user/list',
+  DeleteLead: '/lead/delete',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -250,6 +251,7 @@ export const OPTION_MENU = [
     icon: DeleteIcon,
   },
 ];
+
 export const LEADERBOARD_ITEMS: LEADERBOARD = {
   Count: 0,
   Data: [
