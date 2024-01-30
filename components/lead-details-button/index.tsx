@@ -34,7 +34,7 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
         ref={ref}
         trigger={
           <div className=''>
-            <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
+            <Image className='cursor-pointer h-6 w-6 relative' src={moreImage} alt='' />
           </div>
         }
         position='left center'
@@ -49,6 +49,9 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
           background: '#F8F8F8',
           borderRadius: '0.75rem',
           marginLeft: '10px',
+        }}
+        overlayStyle={{
+          position: 'absolute',
         }}
         arrow={false}>
         {!modalIsOpen && (

@@ -24,7 +24,7 @@ import {
 } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -141,7 +141,7 @@ export const LEAD_STATUS = {
   InProgress: 'In-Progress',
   Completed: 'Completed',
   Hot: 'Hot',
-  Cool: 'Cool',
+  Cold: 'Cold',
   Warm: 'Warm',
 };
 
@@ -185,7 +185,7 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.InProgress,
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
-  LEAD_STATUS.Cool,
+  LEAD_STATUS.Cold,
   LEAD_STATUS.Warm,
 ];
 
