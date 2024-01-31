@@ -29,8 +29,7 @@ const EmployeeListPage = () => {
   const { data } = useSession();
   //@ts-ignore den
   const token: string = data?.user?.access_token;
-  const [employeeInfo, setEmployeeInfo] = useState(
-    [
+  const [employeeInfo, setEmployeeInfo] = useState([
     {
       id: 0,
       name: '',
@@ -100,7 +99,7 @@ const EmployeeListPage = () => {
 
   return (
     <>
-      <div className='border border-gray-100 bg-white rounded-xl h-[84vh] w-full'>
+      <div className='border border-gray-100 bg-white rounded-xl w-ful h-[calc(100vh-102px)]'>
         <div className='py-4 md:py-6 pl-8 h-[96px]'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
