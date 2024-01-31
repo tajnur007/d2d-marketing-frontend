@@ -64,19 +64,23 @@ const LeadDetails = ({
 
   const deleteReminder = async (id: number) => {
     const Service = new LeadService();
-    const res = await Service.deleteLead(id, token);
+    const res = await Service.deleteReminder(id, token);
     console.log(res);
-    toast.success('Successfully deleted!');
-  };
 
+    if (res?.status === 202) {
+      toast.success('Successfully deleted!');
+    } else {
+      toast.error('Failed to delete!');
+    }
+  };
+  const getAllReminders = async () => {
+    const Service = new LeadService();
+    const res = await Service.getAllReminder(token);
+    setReminders(res?.data?.Data?.Data);
+  };
   useEffect(() => {
-    const getAllReminders = async () => {
-      const Service = new LeadService();
-      const res = await Service.getAllReminder(token);
-      setReminders(res?.data?.Data?.Data);
-    };
     getAllReminders();
-  }, [token]);
+  });
 
   useEffect(() => {
     setIsOpen(false);
@@ -200,24 +204,27 @@ const LeadDetails = ({
         <h1 className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
           Reminder
         </h1>
-        <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
-          {reminders?.map((reminder: RemainderType) => {
-            return (
-              <div className='rounded-lg p-4 bg-white' key={reminder?.id}>
-                <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
-                  <span>{reminder?.title}</span>
-                  <div
-                    onClick={() => deleteReminder(reminder?.id)}
-                    className='cursor-pointer'>
-                    <Image src={crossImage} alt='close' />
-                  </div>
-                </p>
-                <p className='text-[#8A8A8A] mb-[10px]'>
-                  {moment(reminder?.reminder_time).format('YYYY/MM/DD h:mma')}
-                </p>
-                <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-                  {reminder?.status}
-                  {/* <Select
+        {reminders?.length === 0 ? (
+          <div className='text-center'>No reminder found</div>
+        ) : (
+          <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
+            {reminders?.map((reminder: RemainderType) => {
+              return (
+                <div className='rounded-lg p-4 bg-white' key={reminder?.id}>
+                  <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
+                    <span>{reminder?.title}</span>
+                    <div
+                      onClick={() => deleteReminder(reminder?.id)}
+                      className='cursor-pointer'>
+                      <Image src={crossImage} alt='close' />
+                    </div>
+                  </p>
+                  <p className='text-[#8A8A8A] mb-[10px]'>
+                    {moment(reminder?.reminder_time).format('YYYY/MM/DD h:mma')}
+                  </p>
+                  <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
+                    {reminder?.status}
+                    {/* <Select
                     className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
                     styles={{
                       control: (baseStyles) => ({
@@ -235,11 +242,12 @@ const LeadDetails = ({
                     ]}
                     onChange={handleChange}
                   /> */}
-                </button>
-              </div>
-            );
-          })}
-        </div>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <div className='flex justify-center items-center'>
