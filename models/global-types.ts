@@ -128,7 +128,7 @@ export interface RemainderType {
   id: number;
   lead_id: number;
   notes: string;
-  reminder_time: string; // This should be a Date object if you want to handle it as a date
+  reminder_time: string;
   status: string;
   title: string;
   user_id: number;

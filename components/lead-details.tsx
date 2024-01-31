@@ -22,6 +22,8 @@ import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
+import { CustomSelect } from './select/custom-select';
+import Select from 'react-select';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
@@ -42,7 +44,8 @@ const LeadDetails = ({
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [closeDrawer, setCloseDrawer] = React.useState(false);
-  const [reminders, setReminders] = React.useState<RemainderType>();
+  const [reminders, setReminders] = React.useState<RemainderType[]>([]);
+  const [selectReminder, setSelectReminder] = React.useState();
   const { data: reminderData } = useSession();
   //@ts-ignore den
   const token: string = reminderData?.user?.access_token;
@@ -54,11 +57,15 @@ const LeadDetails = ({
     setModalIsOpen(true);
   };
 
+  const handleChange = (selectedOption: any) => {
+    setSelectReminder(selectedOption.value);
+  };
+
   useEffect(() => {
     const getAllReminders = async () => {
       const Service = new LeadService();
       const res = await Service.getAllReminder(token);
-      setReminders(res?.data?.Data?.Data[0]);
+      setReminders(res?.data?.Data?.Data);
     };
     getAllReminders();
   }, [token]);
@@ -180,34 +187,48 @@ const LeadDetails = ({
           height='108'
         />
       </div>
-      <div className='h-[275px] overflow-y-auto tiny-scrollbar bg-slate-600'>
-        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
-          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
-            Reminder
-          </div>
-          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
-            {reminders?.title}
-          </div>
-          <div className='text-[#8A8A8A] mb-[10px]'>
-            {moment(reminders?.reminder_time).format('YYYY/MM/DD h:mma')}
-          </div>
-          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-            {reminders?.status}
-          </button>
-        </div>
-        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
-          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
-            Reminder
-          </div>
-          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
-            {reminders?.title}
-          </div>
-          <div className='text-[#8A8A8A] mb-[10px]'>
-            {moment(reminders?.reminder_time).format('YYYY/MM/DD h:mma')}
-          </div>
-          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-            {reminders?.status}
-          </button>
+
+      <div className=' bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
+        <h1 className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
+          Reminder
+        </h1>
+        <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
+          {reminders?.map((reminder: RemainderType) => {
+            return (
+              <div className='rounded-lg p-4 bg-white' key={reminder?.id}>
+                <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
+                  <span>{reminder?.title}</span>
+                  <div onClick={() => console.log('clicked')} className='cursor-pointer'>
+                    <Image src={crossImage} alt='close' />
+                  </div>
+                </p>
+                <p className='text-[#8A8A8A] mb-[10px]'>
+                  {moment(reminder?.reminder_time).format('YYYY/MM/DD h:mma')}
+                </p>
+                <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
+                  {reminder?.status}
+                  {/* <Select
+                    className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+                    styles={{
+                      control: (baseStyles) => ({
+                        ...baseStyles,
+                        borderColor: '2px #F3F3F3 solid',
+                        width: '100%',
+                        height: '56px',
+                        borderRadius: '10px',
+                      }),
+                    }}
+                    options={[
+                      { value: 'hot', label: 'Hot' },
+                      { value: 'cold', label: 'Cold' },
+                      { value: 'warm', label: 'Warm' },
+                    ]}
+                    onChange={handleChange}
+                  /> */}
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
 
