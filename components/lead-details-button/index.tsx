@@ -23,7 +23,6 @@ const LeadDetailsButton = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const ref = useRef<any>(null);
   const { leadDetailsRef } = useContext(LeadsContext);
 
   const toggleDrawer = () => {
@@ -37,10 +36,6 @@ const LeadDetailsButton = ({
 
   const handleDeleteButton = async () => {
     setModalIsOpen(true);
-  };
-
-  const handleClose = () => {
-    ref.current.close();
   };
 
   return (
