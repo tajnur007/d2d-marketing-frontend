@@ -4,7 +4,7 @@ import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
 import LeadDetails from '@/components/lead-details';
 import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
 import Image from 'next/image';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 
@@ -14,10 +14,17 @@ const getStatusColor: statusColor = {
   warm: 'bg-[#FFEFB8]',
 };
 
-const SuggestionRow = ({ item }: { item: LeadListType }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
+const SuggestionRow = ({
+  item,
+  setIsOpen,
+  setItem,
+}: {
+  item: LeadListType;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setItem: Dispatch<SetStateAction<any>>;
+}) => {
   const toggleDrawer = () => {
+    setItem(item);
     setIsOpen(true);
   };
 
@@ -57,9 +64,9 @@ const SuggestionRow = ({ item }: { item: LeadListType }) => {
           </span>
         </div>
       </div>
-      <Drawer open={isOpen} onClose={() => setIsOpen(false)} direction='right' size={450}>
+      {/* <Drawer open={isOpen} direction='right' size={450} enableOverlay={false}>
         <LeadDetails setIsOpen={setIsOpen} data={item} />
-      </Drawer>
+      </Drawer> */}
     </div>
   );
 };
