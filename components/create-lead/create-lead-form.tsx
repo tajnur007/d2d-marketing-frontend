@@ -24,8 +24,8 @@ import { toast } from 'react-toastify';
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
   const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
-  const [imageName, setImageName] = useState<string>('');
-  const [imagePath, setImagePath] = useState<string>('');
+  const [imageName, setImageName] = useState<string | null>(null);
+  const [imagePath, setImagePath] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [location, setLocation] = useState({
@@ -63,19 +63,14 @@ const CreateLeadForm = () => {
     try {
       const file = e.target.files[0];
       const formData = new FormData();
-      formData.append('file', file);
-      setFormData((prev) => {
-        return { ...prev, formData };
-      });
+      formData.append('pic', file);
 
       // Call the UploadLeadImage API with the FormData and token
       const NewLeadServices = new LeadService();
-      // const response = await NewLeadServices.UploadLeadImage(formData, token);
-      // console.log(response);
-
-      // const { imageName, imagePath } = response.data?.Data?.Data;
-      // setImageName(imageName);
-      // setImagePath(imagePath);
+      const response = await NewLeadServices.UploadLeadImage(formData, token);
+      const { image_name, image_path } = response.data.Data[0];
+      setImageName(image_name);
+      setImagePath(image_path);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -142,15 +137,13 @@ const CreateLeadForm = () => {
         const token = data?.user?.access_token;
 
         const ApiServices = new ApiService();
-        console.log(payloadObj);
-        alert('submit is clicked.');
-        //const resp = await ApiServices.createLead(payloadObj, token);
-        // if (resp.status === 201) {
-        //   toast.success('New Lead Created Successfully.');}
-          //console.log(`server response ${resp}`);
-        }
+        const resp = await ApiServices.createLead(payloadObj, token);
+        if (resp.status === 201) {
+          toast.success('New Lead Created Successfully.');}
+        console.log(`server response ${resp}`);
+      }
     } catch (err) {
-      //toast.error('Failed to create Lead.');
+      toast.error('Failed to create Lead.');
       console.log(err);
     }
   };
