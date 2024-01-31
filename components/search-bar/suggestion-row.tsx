@@ -9,7 +9,7 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 
 const getStatusColor: statusColor = {
-  cold: 'bg-blue-200',
+  cool: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
