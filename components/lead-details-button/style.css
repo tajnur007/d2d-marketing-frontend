@@ -1,0 +1,7 @@
+#popup-root > div.popup-overlay.popup-button-overlay {
+  position: relative !important;
+}
+
+#popup-root > :nth-child(0)  {
+  background-color: blueviolet;
+}

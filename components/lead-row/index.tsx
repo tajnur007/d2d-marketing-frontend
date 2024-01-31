@@ -7,12 +7,20 @@ import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 
 const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
 
-function LeadRow({ item , leadRefresh, setLeadRefresh = () => {} }: { item: LeadListType; leadRefresh: boolean; setLeadRefresh: () => void }) {
+function LeadRow({
+  item,
+  leadRefresh,
+  setLeadRefresh = () => {},
+}: {
+  item: LeadListType;
+  leadRefresh: boolean;
+  setLeadRefresh: () => void;
+}) {
   return (
     <div>
       <div
@@ -35,7 +43,7 @@ function LeadRow({ item , leadRefresh, setLeadRefresh = () => {} }: { item: Lead
           <p className='leading-trim font-semibold text-[16px] tracking-tight'>
             {item.point_of_contact.name}
           </p>
-          {item.point_of_contact.phone !== '' && (
+          {item.point_of_contact.phone != '' && (
             <div className='flex items-center mt-[10px]'>
               <div className='mr-1'>
                 <Image src={phoneImage} alt='' />
@@ -63,7 +71,11 @@ function LeadRow({ item , leadRefresh, setLeadRefresh = () => {} }: { item: Lead
           </p>
         </div>
         <div className='w-[2%]'>
-          <LeadDetailsButton data={item} leadRefresh={leadRefresh} setLeadRefresh={setLeadRefresh}/>
+          <LeadDetailsButton
+            data={item}
+            leadRefresh={leadRefresh}
+            setLeadRefresh={setLeadRefresh}
+          />
         </div>
       </div>
     </div>

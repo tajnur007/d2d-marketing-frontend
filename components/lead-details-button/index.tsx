@@ -9,8 +9,17 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 import DeleteConfirmationModal from '../delete-confirmation-modal';
+import './style.css';
 
-const LeadDetailsButton = ({ data, leadRefresh, setLeadRefresh = () => {} }: { data: LeadListType , leadRefresh : boolean, setLeadRefresh: () => void }) => {
+const LeadDetailsButton = ({
+  data,
+  leadRefresh,
+  setLeadRefresh = () => {},
+}: {
+  data: LeadListType;
+  leadRefresh: boolean;
+  setLeadRefresh: () => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<any>(null);
@@ -49,10 +58,12 @@ const LeadDetailsButton = ({ data, leadRefresh, setLeadRefresh = () => {} }: { d
           background: '#F8F8F8',
           borderRadius: '0.75rem',
           marginLeft: '10px',
+          position: 'fixed',
         }}
         overlayStyle={{
-          position: 'absolute',
+          position: 'relative',
         }}
+        className='popup-button'
         arrow={false}>
         {!modalIsOpen && (
           <LeadsOptions
