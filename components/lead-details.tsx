@@ -24,6 +24,7 @@ import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 import { CustomSelect } from './select/custom-select';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
@@ -59,6 +60,13 @@ const LeadDetails = ({
 
   const handleChange = (selectedOption: any) => {
     setSelectReminder(selectedOption.value);
+  };
+
+  const deleteReminder = async (id: number) => {
+    const Service = new LeadService();
+    const res = await Service.deleteLead(id, token);
+    console.log(res);
+    toast.success('Successfully deleted!');
   };
 
   useEffect(() => {
@@ -198,7 +206,9 @@ const LeadDetails = ({
               <div className='rounded-lg p-4 bg-white' key={reminder?.id}>
                 <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
                   <span>{reminder?.title}</span>
-                  <div onClick={() => console.log('clicked')} className='cursor-pointer'>
+                  <div
+                    onClick={() => deleteReminder(reminder?.id)}
+                    className='cursor-pointer'>
                     <Image src={crossImage} alt='close' />
                   </div>
                 </p>
