@@ -18,7 +18,7 @@ const SuggestionRow = ({ item }: { item: LeadListType }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
+    setIsOpen(true);
   };
 
   return (
@@ -57,12 +57,7 @@ const SuggestionRow = ({ item }: { item: LeadListType }) => {
           </span>
         </div>
       </div>
-      <Drawer
-        open={isOpen}
-        onClose={toggleDrawer}
-        direction='right'
-        size={450}
-        overlayOpacity={0}>
+      <Drawer open={isOpen} onClose={() => setIsOpen(false)} direction='right' size={450}>
         <LeadDetails setIsOpen={setIsOpen} data={item} />
       </Drawer>
     </div>
