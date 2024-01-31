@@ -10,15 +10,17 @@ import {
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
   IMAGE_DETAIL,
+  PAGE_ROUTES,
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { ApiService } from '@/services/api-services';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
 import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { toast } from 'react-toastify';
+import { redirect, useRouter } from 'next/navigation';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
@@ -30,23 +32,13 @@ const CreateLeadForm = () => {
     lng: 30.0,
   });
 
+  const router = useRouter();
+
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
 
   const { data } = useSession();
   // @ts-ignore
   const token = data?.user?.access_token;
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => {
-      return { ...prev, [name]: value };
-    });
-
-    setFormErrors((prev) => {
-      return { ...prev, [name]: '' };
-    });
-  };
 
   useEffect(() => {
     if (token) {
@@ -60,6 +52,18 @@ const CreateLeadForm = () => {
       return { ...prev, Status: statusSelected, AssignedTo: assignedToSelected };
     });
   }, [statusSelected, assignedToSelected, formErrors]);
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+
+    setFormErrors((prev) => {
+      return { ...prev, [name]: '' };
+    });
+  };
 
   const submitData = async () => {
     setFormData((prev) => {
@@ -105,13 +109,15 @@ const CreateLeadForm = () => {
           ],
         };
 
-        // @ts-ignore
-        const token = data?.user?.access_token;
+        const LeadServices = new LeadService();
 
-        const ApiServices = new ApiService();
-        const resp = await ApiServices.createLead(payloadObj, token);
-
-        console.log(`server response ${resp}`);
+        if (token) {
+          await LeadServices.createLead(payloadObj, token);
+          toast.success('Create lead successfully.');
+          router.push(PAGE_ROUTES.Dashboard);
+        } else {
+          toast.error('Something went wrong.');
+        }
       }
     } catch (err) {
       console.log(err);
