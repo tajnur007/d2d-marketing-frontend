@@ -67,16 +67,6 @@ const CreateLeadForm = () => {
   };
 
   const submitData = async () => {
-
-    if (statusSelected === '' && assignedToSelected === '') {
-      setIsBothSelectFieldNull(true);
-      toast.info('Please select Status or AssignedTo field.');
-      return;
-    }
-    else {
-      setIsBothSelectFieldNull(false);
-    }
-
     setFormData((prev) => {
       return { ...prev, location };
     });
@@ -92,7 +82,15 @@ const CreateLeadForm = () => {
       }
 
       setFormErrors(newFormErrors);
-      console.log(newFormErrors);
+
+      if (statusSelected === '' && assignedToSelected === '') {
+        setIsBothSelectFieldNull(true);
+        toast.info('Please select Status or AssignedTo field.');
+        return;
+      } else {
+        setIsBothSelectFieldNull(false);
+      }
+
       if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
         //! Payload object
 
@@ -155,7 +153,7 @@ const CreateLeadForm = () => {
             label='AssignedTo'
             setSelected={setAssignedToSelected}
             options={executivesOption}
-            className={` ${isBothSelectFieldNull && '!border-red-500 !shadow'}`}
+            className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
           />
         </div>
       </div>
@@ -232,7 +230,7 @@ const CreateLeadForm = () => {
             label='Status'
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
-            className={` ${isBothSelectFieldNull && 'border-red-500 shadow'}`}
+            className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
           />
 
           <div className='flex flex-col items-start justify-center '>
