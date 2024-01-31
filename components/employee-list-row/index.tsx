@@ -104,7 +104,7 @@ function EmployeeListRow({
             marginLeft: '20px',
           }}
           arrow={false}>
-          <EmployeeOptions handleViewButton={handleViewButton} />
+            <EmployeeOptions handleViewButton={handleViewButton} handleDeleteButton={() => {}} />
         </Popup>
       </div>
     </div>

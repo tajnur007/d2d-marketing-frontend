@@ -17,7 +17,7 @@ function LeadsList() {
   const [keyPress, setKeyPress] = useState<boolean>(false);
   const [filterData, setFilterData] = useState({});
   const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
-  // console.log('Filter Data => ', filterData);
+  const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
 
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
   const { data: sessionData } = useSession();
@@ -36,7 +36,7 @@ function LeadsList() {
       LeadServices.getExecutivesData(setExecutivesOption, token);
       LeadServices.getLeadsData(setLeadsData, token);
     }
-  }, [token, setExecutivesOption]);
+  }, [token, setExecutivesOption, leadRefresh]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
@@ -47,7 +47,7 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress, leadsData, searchValue]);
+  }, [keyPress, leadsData, searchValue, leadRefresh]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
@@ -91,8 +91,8 @@ function LeadsList() {
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
-            ? searchData.map((item, index) => <LeadRow key={index} item={item} />)
-            : leadsData.map((item, index) => <LeadRow key={index} item={item} />)}
+            ? searchData.map((item, index) => <LeadRow key={index} item={item} leadRefresh={leadRefresh} setLeadRefresh={() => setLeadRefresh(!leadRefresh)}/>)
+            : leadsData.map((item, index) => <LeadRow key={index} item={item} leadRefresh={leadRefresh} setLeadRefresh={() => setLeadRefresh(!leadRefresh)}/>)}
         </div>
       </div>
     </div>
