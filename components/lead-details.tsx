@@ -13,15 +13,18 @@ import {
   LeadListType,
   AssignToUsers,
   statusColor,
+  RemainderType,
 } from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import React from 'react';
 import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
+import { LeadService } from '@/services/lead-services';
+import { useSession } from 'next-auth/react';
 
 const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -39,6 +42,10 @@ const LeadDetails = ({
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [closeDrawer, setCloseDrawer] = React.useState(false);
+  const [reminders, setReminders] = React.useState<RemainderType>();
+  const { data: reminderData } = useSession();
+  //@ts-ignore den
+  const token: string = reminderData?.user?.access_token;
 
   const src = data?.image_info_json[0]?.image_name;
 
@@ -48,8 +55,19 @@ const LeadDetails = ({
   };
 
   useEffect(() => {
+    const getAllReminders = async () => {
+      const Service = new LeadService();
+      const res = await Service.getAllReminder(token);
+      setReminders(res?.data?.Data?.Data[0]);
+    };
+    getAllReminders();
+  }, [token]);
+
+  useEffect(() => {
     setIsOpen(false);
   }, [closeDrawer, setIsOpen]);
+
+  // console.log(reminders);
 
   return (
     <div className='p-8  h-full overflow-y-auto no-scrollbar '>
@@ -162,22 +180,21 @@ const LeadDetails = ({
           height='108'
         />
       </div>
-      {data?.remainders && (
-        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
-          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
-            Reminder
-          </div>
-          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
-            {data?.remainders?.title}
-          </div>
-          <div className='text-[#8A8A8A] mb-[10px]'>
-            {data?.remainders?.reminder_time}
-          </div>
-          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-            {data?.remainders?.status}
-          </button>
+      <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
+        <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
+          Reminder
         </div>
-      )}
+        <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
+          {reminders?.title}
+        </div>
+        <div className='text-[#8A8A8A] mb-[10px]'>
+          {moment(reminders?.reminder_time).format('YYYY/MM/DD h:mma')}
+        </div>
+        <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
+          {reminders?.status}
+        </button>
+      </div>
+
       <div className='flex justify-center items-center'>
         <Button
           onClick={handleAddReminderButtonClick}

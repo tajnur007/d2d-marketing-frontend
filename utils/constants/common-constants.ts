@@ -62,9 +62,10 @@ export const API_PATHS = {
   Leaderboard: '/user/leaderboard',
   GetLeads: '/lead/list',
   CreateReminder: '/reminder/create',
-  EmployeeListInfo:'/user/list',
-  UploadLeadImage:'/lead/upload-image',
+  EmployeeListInfo: '/user/list',
+  UploadLeadImage: '/lead/upload-image',
   DeleteLead: '/lead/delete',
+  GetAllReminder: '/reminder/list',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
