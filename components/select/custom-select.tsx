@@ -32,7 +32,6 @@ export const CustomSelect = ({
               borderRadius: '10px',
             }),
           }}
-          defaultValue={options[0]}
           options={options}
           onChange={handleChange}
         />
