@@ -296,7 +296,7 @@ export interface CreateAssignToItems {
 export interface StatusState {
   hot: boolean;
   warm: boolean;
-  cool: boolean;
+  cold: boolean;
 }
 
 export interface CreateEmployeeModalProps {

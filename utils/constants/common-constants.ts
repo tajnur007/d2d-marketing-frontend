@@ -142,7 +142,7 @@ export const LEAD_STATUS = {
   InProgress: 'In-Progress',
   Completed: 'Completed',
   Hot: 'Hot',
-  Cool: 'Cool',
+  Cold: 'Cold',
   Warm: 'Warm',
 };
 
@@ -186,7 +186,7 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.InProgress,
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
-  LEAD_STATUS.Cool,
+  LEAD_STATUS.Cold,
   LEAD_STATUS.Warm,
 ];
 
