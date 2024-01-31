@@ -24,7 +24,7 @@ import { redirect, useRouter } from 'next/navigation';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
-  const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
+  const [assignedToSelected, setAssignedToSelected] = useState('');
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [location, setLocation] = useState({
