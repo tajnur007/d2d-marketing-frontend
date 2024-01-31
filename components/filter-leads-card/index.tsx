@@ -25,7 +25,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   const [status, setStatus] = useState<StatusState>({
     hot: false,
     warm: false,
-    cold: false,
+    cool: false,
   });
 
   //! State for Created by
@@ -45,7 +45,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     setStatus((prevStatus) => ({
       hot: statusName === 'hot' ? !prevStatus.hot : false,
       warm: statusName === 'warm' ? !prevStatus.warm : false,
-      cold: statusName === 'cold' ? !prevStatus.cold : false,
+      cool: statusName === 'cool' ? !prevStatus.cool : false,
     }));
   };
 
@@ -55,7 +55,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
       filterData.assignee === null &&
       filterData.status.hot === false &&
       filterData.status.warm === false &&
-      filterData.status.cold === false &&
+      filterData.status.cool === false &&
       filterData.endDate === null
     ) {
       setFilterCardOpen(false);
@@ -124,10 +124,10 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
               Warm
             </StatusCheckbox>
             <StatusCheckbox
-              id='cold-checkbox'
-              checked={status.cold}
-              onChange={() => handleCheckboxChange('cold')}>
-              Cold
+              id='cool-checkbox'
+              checked={status.cool}
+              onChange={() => handleCheckboxChange('cool')}>
+              Cool
             </StatusCheckbox>
           </div>
         </div>

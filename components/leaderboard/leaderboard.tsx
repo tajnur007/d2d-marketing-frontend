@@ -50,7 +50,7 @@ const Leaderboard: React.FC = () => {
         Leaderboard
       </h2>
       {leaderboard?.Data !== null ? (
-        <Profiles data={leaderboard.Data}></Profiles>
+        <Profiles data={leaderboard.Data} />
       ) : (
         <p className='ml-5'>No Data Found</p>
       )}

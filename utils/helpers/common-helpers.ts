@@ -66,3 +66,14 @@ export const leadFormErrorCheck = (formData: FormItems, field: string) => {
     }
   }
 };
+
+export const generateInitials = (fullName: string): string => {
+  const names = fullName.split(/\s+/).filter(Boolean);
+  let firstName = names.shift() || '';
+  let lastName = names.pop() || '';
+  let middleName = names.join(' ');
+  const initials = `${firstName.charAt(0)}${middleName ? middleName.charAt(0) : ''}${
+    lastName ? lastName.charAt(0) : ''
+  }`;
+  return initials.toUpperCase();
+};
