@@ -24,7 +24,7 @@ import {
 } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -154,7 +154,7 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'hot', label: 'Hot' },
-  { value: 'cool', label: 'Cool' },
+  { value: 'cold', label: 'Cold' },
   { value: 'warm', label: 'Warm' },
 ];
 
