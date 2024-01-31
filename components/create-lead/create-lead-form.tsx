@@ -23,10 +23,11 @@ import { toast } from 'react-toastify';
 import { redirect, useRouter } from 'next/navigation';
 
 const CreateLeadForm = () => {
-  const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
+  const [statusSelected, setStatusSelected] = useState('');
   const [assignedToSelected, setAssignedToSelected] = useState('');
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
+  const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -66,6 +67,16 @@ const CreateLeadForm = () => {
   };
 
   const submitData = async () => {
+
+    if (statusSelected === '' && assignedToSelected === '') {
+      setIsBothSelectFieldNull(true);
+      toast.info('Please select Status or AssignedTo field.');
+      return;
+    }
+    else {
+      setIsBothSelectFieldNull(false);
+    }
+
     setFormData((prev) => {
       return { ...prev, location };
     });
@@ -82,7 +93,7 @@ const CreateLeadForm = () => {
 
       setFormErrors(newFormErrors);
       console.log(newFormErrors);
-      if (Object.keys(newFormErrors).length === 0) {
+      if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
         //! Payload object
 
         const payloadObj = {
@@ -144,6 +155,7 @@ const CreateLeadForm = () => {
             label='AssignedTo'
             setSelected={setAssignedToSelected}
             options={executivesOption}
+            className={` ${isBothSelectFieldNull && '!border-red-500 !shadow'}`}
           />
         </div>
       </div>
@@ -220,6 +232,7 @@ const CreateLeadForm = () => {
             label='Status'
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
+            className={` ${isBothSelectFieldNull && 'border-red-500 shadow'}`}
           />
 
           <div className='flex flex-col items-start justify-center '>
