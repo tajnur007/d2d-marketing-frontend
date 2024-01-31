@@ -88,7 +88,7 @@ export class LeadService {
     return resp;
   };
 
-    public createReminder = async (data: any, token: string): Promise<any> => {
+  public createReminder = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -105,7 +105,7 @@ export class LeadService {
     return resp;
   };
 
-    public createLead = async (data: any, token: string): Promise<any> => {
+  public createLead = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -122,7 +122,7 @@ export class LeadService {
     return resp;
   };
 
-   public deleteLead = async (lead_id: number, token: string): Promise<any> => {
+  public deleteLead = async (lead_id: number, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -138,5 +138,19 @@ export class LeadService {
     return resp;
   };
 
+  public getAllReminder = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
 
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.GetAllReminder,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
 }
