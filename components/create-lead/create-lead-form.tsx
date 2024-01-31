@@ -20,7 +20,7 @@ import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
 import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
 import { toast } from 'react-toastify';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState('');
