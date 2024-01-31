@@ -22,7 +22,7 @@ const ResetPassword = () => {
       };
 
       const UserServices = new AuthService();
-      const resp = await UserServices.resetPassword(payload);
+      const resp = await UserServices.forgetPassword(payload);
 
       console.log(resp);
       if (resp?.status === 201) {
