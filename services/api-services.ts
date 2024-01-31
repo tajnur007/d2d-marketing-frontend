@@ -1,6 +1,6 @@
 import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
-import { HttpClient, Response } from './axios-base-query';
+import { HttpClient } from './axios-base-query';
 
 export class ApiService {
   client;
@@ -135,6 +135,22 @@ export class ApiService {
     const resp = await this.client.request({
       url: API_PATHS.EmployeeListInfo,
       method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
+
+  public deleteUser = async (id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `/user/delete?user_id=${id}`,
+      method: API_METHODS.DELETE,
       ...config,
     });
 

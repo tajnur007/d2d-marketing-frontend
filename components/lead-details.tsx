@@ -21,7 +21,7 @@ import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
 
 const getStatusColor: statusColor = {
-  cold: 'bg-blue-200',
+  cool: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -38,6 +38,7 @@ const LeadDetails = ({
   const [formErrors, setFormErrors] =
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [closeDrawer, setCloseDrawer] = React.useState(false);
 
   const src = data.image_info_json[0].image_name;
 
@@ -46,18 +47,16 @@ const LeadDetails = ({
     setModalIsOpen(true);
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    setIsOpen(false);
+  }, [closeDrawer, setIsOpen]);
 
   return (
     <div className='p-8  h-full overflow-y-auto no-scrollbar '>
-      <div className='flex justify-between items-center'>
-        <div>
-          <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
-        </div>
-        <div>
-          <button onClick={() => setIsOpen(false)} type='button'>
-            <Image src={crossImage} alt='close' />
-          </button>
+      <div className='flex justify-between '>
+        <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
+        <div onClick={() => setCloseDrawer(!closeDrawer)} className='cursor-pointer'>
+          <Image src={crossImage} alt='close' />
         </div>
       </div>
 

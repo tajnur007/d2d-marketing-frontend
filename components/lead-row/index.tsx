@@ -7,7 +7,7 @@ import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 
 const getStatusColor: statusColor = {
-  cold: 'bg-blue-200',
+  cool: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };

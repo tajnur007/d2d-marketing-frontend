@@ -30,7 +30,7 @@ const LatestLeadsList: React.FC = () => {
   }, [token]);
 
   return (
-    <div className='w-full bg-white py-5 rounded-xl h-[66vh]'>
+    <div className='w-full bg-white py-5 rounded-xl h-[calc(85vh-125px)] '>
       <div className='flex justify-between items-center'>
         <div className='flex items-center pl-6'>
           <p className='font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
@@ -53,6 +53,6 @@ const LatestLeadsList: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default LatestLeadsList;

@@ -10,19 +10,23 @@ import {
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
   IMAGE_DETAIL,
+  PAGE_ROUTES,
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { ApiService } from '@/services/api-services';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
 import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { toast } from 'react-toastify';
+import { redirect, useRouter } from 'next/navigation';
 
 const CreateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
   const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
+  const [imageName, setImageName] = useState<string | null>(null);
+  const [imagePath, setImagePath] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [location, setLocation] = useState({
@@ -30,13 +34,14 @@ const CreateLeadForm = () => {
     lng: 30.0,
   });
 
+  const router = useRouter();
+
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
 
   const { data } = useSession();
   // @ts-ignore
   const token = data?.user?.access_token;
-
-  const handleInputChange = (e: any) => {
+  const handleImageUpload = async (e: any) => {
     const { name, value } = e.target;
 
     setFormData((prev) => {
@@ -46,6 +51,20 @@ const CreateLeadForm = () => {
     setFormErrors((prev) => {
       return { ...prev, [name]: '' };
     });
+    try {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('pic', file);
+
+      // Call the UploadLeadImage API with the FormData and token
+      const NewLeadServices = new LeadService();
+      const response = await NewLeadServices.UploadLeadImage(formData, token);
+      const { image_name, image_path } = response.data.Data[0];
+      setImageName(image_name);
+      setImagePath(image_path);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
 
   useEffect(() => {
@@ -60,6 +79,18 @@ const CreateLeadForm = () => {
       return { ...prev, Status: statusSelected, AssignedTo: assignedToSelected };
     });
   }, [statusSelected, assignedToSelected, formErrors]);
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+
+    setFormErrors((prev) => {
+      return { ...prev, [name]: '' };
+    });
+  };
 
   const submitData = async () => {
     setFormData((prev) => {
@@ -99,8 +130,8 @@ const CreateLeadForm = () => {
 
           image_infos: [
             {
-              image_name: IMAGE_DETAIL.name,
-              image_path: IMAGE_DETAIL.path,
+              image_name: imageName,
+              image_path: imagePath,
             },
           ],
         };
@@ -108,12 +139,17 @@ const CreateLeadForm = () => {
         // @ts-ignore
         const token = data?.user?.access_token;
 
-        const ApiServices = new ApiService();
-        const resp = await ApiServices.createLead(payloadObj, token);
-
-        console.log(`server response ${resp}`);
+        const LeadServices = new LeadService();
+         if (token) {
+           await LeadServices.createLead(payloadObj, token);
+           toast.success('Create lead successfully.');
+           router.push(PAGE_ROUTES.Dashboard);
+         } else {
+           toast.error('Something went wrong.');
+         }
       }
     } catch (err) {
+      toast.error('Failed to create Lead.');
       console.log(err);
     }
   };
@@ -227,7 +263,7 @@ const CreateLeadForm = () => {
             <ImageUpload
               placeholder='Upload image'
               name='Image'
-              onChange={handleInputChange}
+              onChange={handleImageUpload}
               className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
             />
           </div>
