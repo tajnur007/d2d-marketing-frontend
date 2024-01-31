@@ -189,7 +189,7 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?: string;
+  Image?:string,
   AssignedTo?: string;
   location: MapLocation;
 }
@@ -405,6 +405,7 @@ export interface LeadsDataType {
   };
   timestamp: string;
 }
+
 export interface EmployeeOptionsProps {
   handleViewButton: () => void;
   handleDeleteButton: () => Promise<void>;

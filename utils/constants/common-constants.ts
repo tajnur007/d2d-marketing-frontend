@@ -63,6 +63,7 @@ export const API_PATHS = {
   GetLeads: '/lead/list',
   CreateReminder: '/reminder/create',
   EmployeeListInfo:'/user/list',
+  UploadLeadImage:'/lead/upload-image',
   DeleteLead: '/lead/delete',
 };
 
