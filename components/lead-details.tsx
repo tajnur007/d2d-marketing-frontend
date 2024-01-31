@@ -31,7 +31,7 @@ const LeadDetails = ({
   data,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  data: LeadListType;
+  data: any;
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
@@ -40,7 +40,7 @@ const LeadDetails = ({
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [closeDrawer, setCloseDrawer] = React.useState(false);
 
-  const src = data.image_info_json[0].image_name;
+  const src = data?.image_info_json[0]?.image_name;
 
   const handleAddReminderButtonClick = () => {
     console.log('Button Clicked.');
@@ -78,7 +78,7 @@ const LeadDetails = ({
           <div
             className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center  
                 ${
-                  getStatusColor[data.meeting_status as keyof statusColor]
+                  getStatusColor[data?.meeting_status as keyof statusColor]
                 } cursor-pointer`}>
             <button className='text-black text-sm font-medium'>
               {data?.meeting_status}
@@ -91,7 +91,7 @@ const LeadDetails = ({
             <Image src={clockImage} alt='' />
           </div>
           <div className='text-gray-400 text-xs whitespace-nowrap text-capitalize inline-block'>
-            {moment(data.created_at).format('ddd DD MMM, YYYY hh:mm A')}
+            {moment(data?.created_at).format('ddd DD MMM, YYYY hh:mm A')}
           </div>
         </div>
         <AssignDropdownSelect />

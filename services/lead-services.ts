@@ -71,7 +71,24 @@ export class LeadService {
     }
   };
 
-  public createReminder = async (data: any, token: string): Promise<any> => {
+  public UploadLeadImage = async (data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.UploadLeadImage,
+      method: API_METHODS.POST,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
+
+    public createReminder = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -83,22 +100,6 @@ export class LeadService {
       method: API_METHODS.POST,
       ...config,
       data,
-    });
-
-    return resp;
-  };
-
-  public deleteLead = async (lead_id: number, token: string): Promise<any> => {
-    const config: AxiosRequestConfig = {};
-
-    if (token) {
-      config.headers = { Authorization: `Bearer ${token}` };
-    }
-
-    const resp = await this.client.request({
-      url: `${API_PATHS.DeleteLead}?lead_id=${lead_id}`,
-      method: API_METHODS.DELETE,
-      ...config,
     });
 
     return resp;
@@ -116,6 +117,22 @@ export class LeadService {
       method: API_METHODS.POST,
       ...config,
       data,
+    });
+
+    return resp;
+  };
+
+   public deleteLead = async (lead_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.DeleteLead}?lead_id=${lead_id}`,
+      method: API_METHODS.DELETE,
+      ...config,
     });
 
     return resp;
