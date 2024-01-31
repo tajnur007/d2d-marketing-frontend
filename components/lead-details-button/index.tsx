@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
-import Popup from 'reactjs-popup';
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
 import { LeadListType } from '@/models/global-types';
@@ -9,28 +8,26 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 import DeleteConfirmationModal from '../delete-confirmation-modal';
-import './style.css';
 
 const LeadDetailsButton = ({
   data,
   leadRefresh,
-  setLeadRefresh = () => {},
+  setLeadRefresh,
 }: {
   data: LeadListType;
   leadRefresh: boolean;
   setLeadRefresh: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [options, setOptions] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const ref = useRef<any>(null);
 
   const toggleDrawer = () => {
     setIsOpen((prevState: any) => !prevState);
   };
 
-  const handleViewButton = () => {
-    setIsOpen(true);
-    ref.current.close();
+  const toggleButtons = () => {
+    setOptions((prevState) => !prevState);
   };
 
   const handleDeleteButton = async () => {
@@ -39,39 +36,21 @@ const LeadDetailsButton = ({
 
   return (
     <>
-      <Popup
-        ref={ref}
-        trigger={
-          <div className=''>
-            <Image className='cursor-pointer h-6 w-6 relative' src={moreImage} alt='' />
-          </div>
-        }
-        position='left center'
-        on='click'
-        closeOnDocumentClick
-        closeOnEscape
-        mouseLeaveDelay={300}
-        mouseEnterDelay={0}
-        contentStyle={{
-          padding: '0px',
-          border: 'none',
-          background: '#F8F8F8',
-          borderRadius: '0.75rem',
-          marginLeft: '10px',
-          position: 'fixed',
-        }}
-        overlayStyle={{
-          position: 'relative',
-        }}
-        className='popup-button'
-        arrow={false}>
-        {!modalIsOpen && (
-          <LeadsOptions
-            handleViewButton={handleViewButton}
-            handleDeleteButton={handleDeleteButton}
-          />
-        )}
-      </Popup>
+      <Image
+        className='cursor-pointer h-6 w-6'
+        src={moreImage}
+        alt=''
+        onClick={toggleButtons}
+      />
+      {options && (
+        <LeadsOptions
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          options={options}
+          setOptions={setOptions}
+          handleDeleteButton={handleDeleteButton}
+        />
+      )}
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}

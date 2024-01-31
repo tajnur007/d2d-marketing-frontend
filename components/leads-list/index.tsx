@@ -91,8 +91,22 @@ function LeadsList() {
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
-            ? searchData.map((item, index) => <LeadRow key={index} item={item} leadRefresh={leadRefresh} setLeadRefresh={() => setLeadRefresh(!leadRefresh)}/>)
-            : leadsData.map((item, index) => <LeadRow key={index} item={item} leadRefresh={leadRefresh} setLeadRefresh={() => setLeadRefresh(!leadRefresh)}/>)}
+            ? searchData.map((item, index) => (
+                <LeadRow
+                  key={index}
+                  item={item}
+                  leadRefresh={leadRefresh}
+                  setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                />
+              ))
+            : leadsData.map((item, index) => (
+                <LeadRow
+                  key={index}
+                  item={item}
+                  leadRefresh={leadRefresh}
+                  setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                />
+              ))}
         </div>
       </div>
     </div>
