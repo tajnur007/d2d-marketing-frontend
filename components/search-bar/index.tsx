@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-
+import Drawer from 'react-modern-drawer';
 import { SearchIcon } from '@/assets/icons';
 import SuggestionRow from '@/components/search-bar/suggestion-row';
 import { LeadListType, SearchBarProps } from '@/models/global-types';
 import { LEADS_DATA } from '@/utils/constants/leadslist-constant';
+import LeadDetails from '../lead-details';
+import { FallingLines } from 'react-loader-spinner';
 
 const SearchBar = ({
   value = '',
@@ -15,6 +17,8 @@ const SearchBar = ({
 }: SearchBarProps) => {
   const [isSuggestionCardOpen, setIsSuggestionCardOpen] = useState<boolean>(false);
   const [suggestionData, setSuggestionData] = useState<LeadListType[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [item, setItem] = useState<LeadListType>();
   const newRef = useRef<any>(null);
 
   const onChange = (e: any) => {
@@ -37,6 +41,7 @@ const SearchBar = ({
   const handleOutsideClick = (e: any) => {
     if (newRef.current && !newRef.current.contains(e.target)) {
       setIsSuggestionCardOpen(false);
+      setIsOpen(false);
     }
   };
 
@@ -45,8 +50,8 @@ const SearchBar = ({
   };
 
   return (
-    <div className='mr-2 p-0' ref={newRef}>
-      <div className='relative w-[563px] mb-3'>
+    <div className='mr-4 p-0 w-full' ref={newRef}>
+      <div className='relative w-full'>
         <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
           <SearchIcon />
         </div>
@@ -64,15 +69,18 @@ const SearchBar = ({
         </div>
       </div>
       {isSuggestionCardOpen && (
-        <div className='bg-white shadow-md rounded-[10px] w-[563px] m-0 p-0'>
+        <div className='bg-white shadow-md rounded-[10px] w-full m-0 p-0'>
           {suggestionData.slice(0, 3).map((item, index) => (
             <div key={index}>
-              <SuggestionRow item={item} />
-              <div className='mx-auto border-b border-solid border-[#E9F0FF] border-t-0 border-r-0 border-l-0 w-[523px]'></div>
+              <SuggestionRow item={item} setIsOpen={setIsOpen} setItem={setItem} />
+              <div className='mx-auto border-b border-solid border-[#E9F0FF] border-t-0 border-r-0 border-l-0 w-full'></div>
             </div>
           ))}
         </div>
       )}
+      <Drawer open={isOpen} direction='right' size={450} enableOverlay={false}>
+        <LeadDetails setIsOpen={setIsOpen} data={item} />
+      </Drawer>
     </div>
   );
 };

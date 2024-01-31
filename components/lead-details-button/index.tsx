@@ -4,17 +4,27 @@ import Popup from 'reactjs-popup';
 import { useState, useRef } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
-import { LeadListType, AssignToUsers } from '@/models/global-types';
+import { LeadListType } from '@/models/global-types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 import { roundToNearestMinutes } from 'date-fns';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useRouter } from 'next/navigation';
+import DeleteConfirmationModal from '../delete-confirmation-modal';
+import './style.css';
 
-const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
+const LeadDetailsButton = ({
+  data,
+  leadRefresh,
+  setLeadRefresh = () => {},
+}: {
+  data: LeadListType;
+  leadRefresh: boolean;
+  setLeadRefresh: () => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [options, setOptions] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<any>(null);
   const router = useRouter();
 
@@ -31,6 +41,9 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
   const handleEditButton = () => {
     router.push(`${PAGE_ROUTES.LeadUpdate}?id=${data.id}`);
   };
+  const handleDeleteButton = async () => {
+    setModalIsOpen(true);
+  };
 
   return (
     <>
@@ -38,7 +51,7 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
         ref={ref}
         trigger={
           <div className=''>
-            <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
+            <Image className='cursor-pointer h-6 w-6 relative' src={moreImage} alt='' />
           </div>
         }
         position='left center'
@@ -53,12 +66,20 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
           background: '#F8F8F8',
           borderRadius: '0.75rem',
           marginLeft: '10px',
+          position: 'fixed',
         }}
+        overlayStyle={{
+          position: 'relative',
+        }}
+        className='popup-button'
         arrow={false}>
-        <LeadsOptions
-          handleViewButton={handleViewButton}
-          handleEditButton={handleEditButton}
-        />
+        {!modalIsOpen && (
+          <LeadsOptions
+            handleViewButton={handleViewButton}
+            handleEditButton={handleEditButton}
+            handleDeleteButton={handleDeleteButton}
+          />
+        )}
       </Popup>
       <Drawer
         open={isOpen}
@@ -68,6 +89,13 @@ const LeadDetailsButton = ({ data }: { data: LeadListType }) => {
         overlayOpacity={0}>
         <LeadDetails setIsOpen={setIsOpen} data={data} />
       </Drawer>
+      <DeleteConfirmationModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        data={data}
+        leadRefresh={leadRefresh}
+        setLeadRefresh={setLeadRefresh}
+      />
     </>
   );
 };

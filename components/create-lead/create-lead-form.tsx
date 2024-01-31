@@ -9,27 +9,77 @@ import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
+  IMAGE_DETAIL,
+  PAGE_ROUTES,
 } from '@/utils/constants/common-constants';
 import { FormItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { ApiService } from '@/services/api-services';
+import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
+import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const CreateLeadForm = () => {
-  const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
-  const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
+  const [statusSelected, setStatusSelected] = useState('');
+  const [assignedToSelected, setAssignedToSelected] = useState('');
+  const [imageName, setImageName] = useState<string | null>(null);
+  const [imagePath, setImagePath] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
+  const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
   });
 
+  const router = useRouter();
+
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
 
   const { data } = useSession();
+  // @ts-ignore
+  const token = data?.user?.access_token;
+  const handleImageUpload = async (e: any) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+
+    setFormErrors((prev) => {
+      return { ...prev, [name]: '' };
+    });
+    try {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('pic', file);
+
+      // Call the UploadLeadImage API with the FormData and token
+      const NewLeadServices = new LeadService();
+      const response = await NewLeadServices.UploadLeadImage(formData, token);
+      const { image_name, image_path } = response.data.Data[0];
+      setImageName(image_name);
+      setImagePath(image_path);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      const LeadServices = new LeadService();
+      LeadServices.getExecutivesData(setExecutivesOption, token);
+    }
+  }, [token, setExecutivesOption]);
+
+  useEffect(() => {
+    setFormData((prev) => {
+      return { ...prev, Status: statusSelected, AssignedTo: assignedToSelected };
+    });
+  }, [statusSelected, assignedToSelected, formErrors]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -43,12 +93,6 @@ const CreateLeadForm = () => {
     });
   };
 
-  useEffect(() => {
-    setFormData((prev) => {
-      return { ...prev, Status: statusSelected, AssignedTo: assignedToSelected };
-    });
-  }, [statusSelected, assignedToSelected, formErrors]);
-
   const submitData = async () => {
     setFormData((prev) => {
       return { ...prev, location };
@@ -58,18 +102,23 @@ const CreateLeadForm = () => {
       const newFormErrors: any = {};
 
       for (let field in formData) {
-        if (
-          formData[field as keyof typeof formData] === '' &&
-          field !== 'Reference' &&
-          field !== 'Email' &&
-          field !== 'Status' &&
-          field !== 'AssignedTo'
-        ) {
-          newFormErrors[field] = `(${field} is required)`;
+        if (leadFormErrorCheck(formData, field)) {
+          console.log(leadFormErrorCheck(formData, field));
+          newFormErrors[field] = leadFormErrorCheck(formData, field);
         }
       }
 
-      if (Object.keys(newFormErrors).length === 0) {
+      setFormErrors(newFormErrors);
+
+      if (statusSelected === '' && assignedToSelected === '') {
+        setIsBothSelectFieldNull(true);
+        toast.info('Please select Status or AssignedTo field.');
+        return;
+      } else {
+        setIsBothSelectFieldNull(false);
+      }
+
+      if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
         //! Payload object
 
         const payloadObj = {
@@ -89,19 +138,27 @@ const CreateLeadForm = () => {
           },
 
           image_infos: [
-            { image_name: `${formData?.Name}_img`, image_path: formData?.Image },
+            {
+              image_name: imageName,
+              image_path: imagePath,
+            },
           ],
         };
 
         // @ts-ignore
         const token = data?.user?.access_token;
 
-        const ApiServices = new ApiService();
-        const resp = await ApiServices.createLead(payloadObj, token);
-
-        console.log(`server response ${resp}`);
+        const LeadServices = new LeadService();
+         if (token) {
+           await LeadServices.createLead(payloadObj, token);
+           toast.success('Create lead successfully.');
+           router.push(PAGE_ROUTES.Dashboard);
+         } else {
+           toast.error('Something went wrong.');
+         }
       }
     } catch (err) {
+      toast.error('Failed to create Lead.');
       console.log(err);
     }
   };
@@ -110,7 +167,7 @@ const CreateLeadForm = () => {
     <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
       <div className='flex items-center justify-between mt-10 gap-5'>
         <Input
-          label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
+          label='Title'
           placeholder='Title here'
           type='text'
           id='title'
@@ -126,6 +183,7 @@ const CreateLeadForm = () => {
             label='AssignedTo'
             setSelected={setAssignedToSelected}
             options={executivesOption}
+            className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
           />
         </div>
       </div>
@@ -137,7 +195,7 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-10 gap-5'>
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Name</p>}
+            label='Name'
             placeholder='Name'
             type='text'
             id='name'
@@ -149,7 +207,7 @@ const CreateLeadForm = () => {
           />
 
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Phone</p>}
+            label='Phone'
             placeholder='Phone number'
             type='text'
             id='phone'
@@ -163,17 +221,19 @@ const CreateLeadForm = () => {
 
         <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Email</p>}
+            label='Email'
             placeholder='Email (Optional)'
             type='email'
             id='email'
             name='Email'
             htmlFor='email'
+            errorMessage={formErrors.Email}
             onChange={handleInputChange}
+            className={` ${formErrors.Email && 'border-red-500 shadow'}`}
           />
 
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Reference</p>}
+            label='Reference'
             placeholder='Reference (Optional)'
             type='text'
             id='reference'
@@ -186,7 +246,7 @@ const CreateLeadForm = () => {
       <div className='flex items-center justify-between mt-5 gap-5'>
         <div className='w-1/2'>
           <TextArea
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Remarks</p>}
+            label='Remarks'
             placeholder='Notes'
             name='Note'
             errorMessage={formErrors.Note}
@@ -200,6 +260,7 @@ const CreateLeadForm = () => {
             label='Status'
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
+            className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
           />
 
           <div className='flex flex-col items-start justify-center '>
@@ -213,7 +274,7 @@ const CreateLeadForm = () => {
             <ImageUpload
               placeholder='Upload image'
               name='Image'
-              onChange={handleInputChange}
+              onChange={handleImageUpload}
               className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
             />
           </div>

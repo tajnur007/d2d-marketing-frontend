@@ -21,7 +21,7 @@ import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
 
 const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -31,33 +31,32 @@ const LeadDetails = ({
   data,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  data: LeadListType;
+  data: any;
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [formErrors, setFormErrors] =
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [closeDrawer, setCloseDrawer] = React.useState(false);
 
-  const src = data.image_info_json[0].image_name;
+  const src = data?.image_info_json[0]?.image_name;
 
   const handleAddReminderButtonClick = () => {
     console.log('Button Clicked.');
     setModalIsOpen(true);
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    setIsOpen(false);
+  }, [closeDrawer, setIsOpen]);
 
   return (
     <div className='p-8  h-full overflow-y-auto no-scrollbar '>
-      <div className='flex justify-between items-center'>
-        <div>
-          <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
-        </div>
-        <div>
-          <button onClick={() => setIsOpen(false)} type='button'>
-            <Image src={crossImage} alt='close' />
-          </button>
+      <div className='flex justify-between '>
+        <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
+        <div onClick={() => setCloseDrawer(!closeDrawer)} className='cursor-pointer'>
+          <Image src={crossImage} alt='close' />
         </div>
       </div>
 
@@ -79,7 +78,7 @@ const LeadDetails = ({
           <div
             className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center  
                 ${
-                  getStatusColor[data.meeting_status as keyof statusColor]
+                  getStatusColor[data?.meeting_status as keyof statusColor]
                 } cursor-pointer`}>
             <button className='text-black text-sm font-medium'>
               {data?.meeting_status}
@@ -92,7 +91,7 @@ const LeadDetails = ({
             <Image src={clockImage} alt='' />
           </div>
           <div className='text-gray-400 text-xs whitespace-nowrap text-capitalize inline-block'>
-            {moment(data.created_at).format('ddd DD MMM, YYYY hh:mm A')}
+            {moment(data?.created_at).format('ddd DD MMM, YYYY hh:mm A')}
           </div>
         </div>
         <AssignDropdownSelect />
@@ -195,6 +194,7 @@ const LeadDetails = ({
         setFormErrors={setFormErrors}
         selected={selected}
         setSelected={setSelected}
+        leadsData={data}
       />
     </div>
   );

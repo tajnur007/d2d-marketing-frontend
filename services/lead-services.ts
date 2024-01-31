@@ -1,3 +1,4 @@
+import { CreateReminderItems } from './../models/global-types';
 import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
 import { HttpClient, Response } from './axios-base-query';
@@ -9,7 +10,7 @@ export class LeadService {
     this.client = new HttpClient(baseUrl);
   }
 
-   public getExecutives = async (token: string): Promise<any> => {
+  public getExecutives = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -25,16 +26,14 @@ export class LeadService {
   };
 
   public getExecutivesData = async (setExecutivesOption: any, token: string) => {
-      try {
-        const response = await this.getExecutives(token);
-        const executivesOption = this.createSelectData(response.data.Data.Data);
-        setExecutivesOption(executivesOption);
-      } catch (error) {
-        console.error('Error fetching executives:', error);
-      }
-    };
-
-
+    try {
+      const response = await this.getExecutives(token);
+      const executivesOption = this.createSelectData(response.data.Data.Data);
+      setExecutivesOption(executivesOption);
+    } catch (error) {
+      console.error('Error fetching executives:', error);
+    }
+  };
 
   public createSelectData = (items: any): any => {
     const selectOptions: any = [];
@@ -61,9 +60,8 @@ export class LeadService {
     return resp;
   };
 
-  public getLeadsData = async (setLeadsData:any, token: string) => {
+  public getLeadsData = async (setLeadsData: any, token: string) => {
     try {
-
       const response = await this.getLeads(token);
       console.log(response);
       const data = response.data.Data.Data;
@@ -73,8 +71,76 @@ export class LeadService {
     }
   };
 
-  
-  //! Get single Lead data
+  public UploadLeadImage = async (data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.UploadLeadImage,
+      method: API_METHODS.POST,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
+
+    public createReminder = async (data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.CreateReminder,
+      method: API_METHODS.POST,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
+
+    public createLead = async (data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.CreateLead,
+      method: API_METHODS.POST,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
+
+  //! Delete Lead data
+
+   public deleteLead = async (lead_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.DeleteLead}?lead_id=${lead_id}`,
+      method: API_METHODS.DELETE,
+      ...config,
+    });
+
+    return resp;
+  };
+
+   //! Get single Lead data
 
   public getUserLead = async (user_id: number, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
@@ -111,22 +177,4 @@ export class LeadService {
     return resp;
   };
 
-  //! Delete Lead data
-
-  public deleteLead = async (lead_id: number, token: string): Promise<any> => {
-    const config: AxiosRequestConfig = {};
-
-    if (token) {
-      config.headers = { Authorization: `Bearer ${token}` };
-    }
-
-    const resp = await this.client.request({
-      url: `${API_PATHS.DeleteLead}?lead_id=${lead_id}`,
-      method: API_METHODS.DELETE,
-      ...config,
-    });
-
-    return resp;
-  };
- 
 }
