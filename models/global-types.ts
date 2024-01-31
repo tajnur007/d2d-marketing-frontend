@@ -382,12 +382,10 @@ export interface CreateEmployeeModalProps {
 }
 
 export interface LeadOptionsProps {
-  isOpen: boolean;
-  setIsOpen: (item: any) => void;
-  options: boolean;
-  setOptions: (item: any) => void;
+  handleViewButton: () => void;
   handleDeleteButton: () => void;
 }
+
 
 export interface LeadsDataType {
   id: number;
