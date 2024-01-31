@@ -37,7 +37,7 @@ export interface Person {
 }
 
 export interface statusColor {
-  cool?: string;
+  cold?: string;
   hot?: string;
   warm?: string;
 }
@@ -296,7 +296,7 @@ export interface CreateAssignToItems {
 export interface StatusState {
   hot: boolean;
   warm: boolean;
-  cool: boolean;
+  cold: boolean;
 }
 
 export interface CreateEmployeeModalProps {
