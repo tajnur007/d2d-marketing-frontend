@@ -13,7 +13,7 @@ const LeadUpdatePage = () => {
         <p onClick={() => router.push(PAGE_ROUTES.Leads)} className='cursor-pointer'>
           <BackArrowIcon />
         </p>
-        <p className='text-[#25254C] text-[20px] font-medium tracking-[.6px]'>Create</p>
+        <p className='text-[#25254C] text-[20px] font-medium tracking-[.6px]'>Update</p>
       </div>
       <UpdateLeadForm />
     </div>

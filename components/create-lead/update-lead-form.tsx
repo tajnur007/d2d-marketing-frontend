@@ -9,53 +9,51 @@ import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
+  SINGLE_LEAD_ITEMS,
 } from '@/utils/constants/common-constants';
-import { FormItems } from '@/models/global-types';
+import { FormItems, SingleLeadItems } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
+import { LeadService } from '@/services/lead-services';
+import { useSearchParams } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const UpdateLeadForm = () => {
-  const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
-  const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
+  const [statusSelected, setStatusSelected] = useState('');
+  const [assignedToSelected, setAssignedToSelected] = useState('');
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
+  const [singleLeadData, setSingleLeadData] = useState<SingleLeadItems>(SINGLE_LEAD_ITEMS);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
   });
 
-  const { data } = useSession();
+  const { data: sessionData } = useSession();
+  // @ts-ignore
+  const token = sessionData?.user?.access_token;
+  const LeadServices = new LeadService();
 
-  const [queryParam, setQueryParam] = useState('');
+  const searchParams: any = useSearchParams();
+  const paramValue = searchParams.get('id');
+
 
   useEffect(() => {
-    // Parse URL search parameters
-    const searchParams = new URLSearchParams(window.location.search);
-
-    // Get the value of the 'param' query parameter
-    const paramValue: any = searchParams.get('id');
-
-    // @ts-ignore
-    const token = data?.user?.access_token;
-    const ApiServices = new ApiService();
-    
     const fetchUserData = async () => {
       try {
         // Make an API request to get user data with the ID equal to paramValue
-        const response = await ApiServices.getUser(paramValue, token);
-        console.log(response);
+        const response = await LeadServices.getUserLead(paramValue, token);
+        setSingleLeadData(response.data.Data);
+      
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchUserData();
-
-    console.log(paramValue);
-    // Update state with the query parameter value
-    setQueryParam(paramValue);
   }, []);
+  console.log('singleLeadData');
+  console.log(singleLeadData);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -71,19 +69,33 @@ const UpdateLeadForm = () => {
     });
   }, [statusSelected, assignedToSelected]);
 
-  const submitData = async () => {
+  const updateData = async () => {
     setFormData((prev) => {
       return { ...prev, location };
     });
+    const payloadObj = {
+      title: formData?.Title,
+      executive_id: 143,
+      executive_name: formData?.AssignedTo,
+      latitude: location?.lat,
+      longitude: location?.lng,
+      meeting_status: formData?.Status,
 
-    try {
-      // @ts-ignore
-      // const token = data?.user?.access_token;
-      // const ApiServices = new ApiService();
-      // const resp = await ApiServices.createLead(payloadObj, token);
-      // console.log(`server response ${resp}`);
-    } catch (err) {
-      console.log(err);
+      point_of_contact: {
+        name: formData?.Name,
+        number: formData?.Phone,
+        email: formData?.Email,
+        meeting_notes: formData?.Note,
+        reference: formData?.Reference,
+      },
+
+      image_infos: [{ image_name: `${formData?.Name}_img`, image_path: formData?.Image }],
+    };
+    if (token) {
+      await LeadServices.updateLead(paramValue, payloadObj, token);
+      toast.success('Lead Update successfully.');
+    } else {
+      toast.error('Something went wrong.');
     }
   };
 
@@ -97,7 +109,9 @@ const UpdateLeadForm = () => {
           id='title'
           name='Title'
           htmlFor='title'
+          className='w-full mb-5'
           onChange={handleInputChange}
+          value={singleLeadData?.title}
         />
 
         <div className='flex flex-col justify-between gap-5 w-full mb-[21px]'>
@@ -105,6 +119,7 @@ const UpdateLeadForm = () => {
             label='AssignedTo'
             setSelected={setAssignedToSelected}
             options={ASSIGN_TO_NEW}
+            defaultValue={singleLeadData?.executive_name}
           />
         </div>
       </div>
@@ -123,6 +138,7 @@ const UpdateLeadForm = () => {
             name='Name'
             htmlFor='name'
             onChange={handleInputChange}
+            value={singleLeadData?.point_of_contact?.name}
           />
 
           <Input
@@ -133,6 +149,7 @@ const UpdateLeadForm = () => {
             name='Phone'
             htmlFor='phone'
             onChange={handleInputChange}
+            value={singleLeadData?.point_of_contact?.phone}
           />
         </div>
 
@@ -145,6 +162,7 @@ const UpdateLeadForm = () => {
             name='Email'
             htmlFor='email'
             onChange={handleInputChange}
+            value={singleLeadData?.point_of_contact?.email}
           />
 
           <Input
@@ -155,6 +173,7 @@ const UpdateLeadForm = () => {
             name='Reference'
             htmlFor='reference'
             onChange={handleInputChange}
+            value={singleLeadData?.point_of_contact?.reference}
           />
         </div>
       </div>
@@ -164,7 +183,9 @@ const UpdateLeadForm = () => {
             label={<p className='text-[#00156A] font-medium text-xs mb-1'>Remarks</p>}
             placeholder='Notes'
             name='Note'
+            className='h-[182px]'
             onChange={handleInputChange}
+            value={singleLeadData?.point_of_contact?.meeting_notes}
           />
         </div>
 
@@ -173,6 +194,7 @@ const UpdateLeadForm = () => {
             label='Status'
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
+            defaultValue={singleLeadData?.meeting_status}
           />
 
           <div className='flex flex-col items-start justify-center '>
@@ -181,13 +203,14 @@ const UpdateLeadForm = () => {
             <ImageUpload
               placeholder='Upload image'
               name='Image'
+              className='h-[92px]'
               onChange={handleInputChange}
             />
           </div>
         </div>
       </div>
       <div className='flex justify-end  mt-5 gap-5 items-end'>
-        <Button onClick={submitData} className='w-[193px] rounded-[10px] h-[60px]'>
+        <Button onClick={updateData} className='w-[193px] rounded-[10px] h-[60px]'>
           Update
         </Button>
       </div>

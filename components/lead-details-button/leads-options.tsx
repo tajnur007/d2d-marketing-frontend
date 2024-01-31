@@ -28,6 +28,7 @@ const LeadsOptions = ({ handleViewButton, handleEditButton }: LeadOptionsProps) 
             Edit
           </div>
         </button>
+
         <button className='flex justify-start items-center pl-4'>
           <div>
             <DeleteIcon />

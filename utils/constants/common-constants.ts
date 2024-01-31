@@ -11,6 +11,7 @@ import {
   SettingFormItems,
   SidebarItem,
   SignUpFormItems,
+  SingleLeadItems,
   statusColor,
 } from '@/models/global-types';
 import {
@@ -61,11 +62,11 @@ export const API_PATHS = {
   ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
-  UserView: '/user/view',
+  LeadView: '/lead/view',
   UpdateLead: '/lead/update',
   DeleteLead: '/lead/delete',
   GetLeads: '/lead/list',
-  EmployeeListInfo:'/user/list',
+  EmployeeListInfo: '/user/list',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -110,6 +111,36 @@ export const FORM_ITEMS: FormItems = {
   Image: '',
   AssignedTo: '',
   location: { lat: 0, lng: 0 },
+};
+
+export const SINGLE_LEAD_ITEMS: SingleLeadItems = {
+  title: '',
+  latitude: 0,
+  longitude: 0,
+  meeting_status: '',
+  assignment_status: '',
+  image_info_json: [
+    {
+      image_name: '',
+      image_path: '',
+    },
+  ],
+  executive_id: 0,
+  executive_name: '',
+  previous_user_id: 0,
+  manager_id: 0,
+  manager_name: '',
+  point_of_contact: {
+    name: '',
+    phone: '',
+    email: '',
+    reference: '',
+    meeting_notes: '',
+  },
+  company_id: 0,
+  created_at: '',
+  created_by: '',
+  reminders: '',
 };
 
 export const SETTING_FORM_ITEMS: SettingFormItems = {

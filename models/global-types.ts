@@ -198,6 +198,26 @@ export interface FormItems {
   location: MapLocation;
 }
 
+export interface SingleLeadItems {
+  id?: number;
+  title?: string;
+  latitude?: number;
+  longitude?: number;
+  meeting_status?: string;
+  assignment_status?: string;
+  image_info_json?: ImageInfoType[];
+  executive_id?: number;
+  executive_name?: string;
+  previous_user_id?: number;
+  manager_id?: number;
+  manager_name?: string;
+  point_of_contact?: PointsOfContactType;
+  company_id?: number;
+  created_at?: string;
+  created_by?: string;
+  reminders?: string;
+}
+
 export interface SettingFormItems {
   Name?: string;
   Phone?: string;
@@ -223,6 +243,7 @@ export interface SelectProps {
   setSelected?: (item: string) => void;
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
+  defaultValue?: string;
 }
 
 export interface AssignSelectProps {

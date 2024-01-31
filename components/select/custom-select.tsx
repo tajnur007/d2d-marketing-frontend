@@ -10,6 +10,7 @@ export const CustomSelect = ({
   className,
   setSelected = () => {},
   options = [],
+  defaultValue,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -32,8 +33,8 @@ export const CustomSelect = ({
               borderRadius: '10px',
             }),
           }}
-          defaultValue={options[0]}
           options={options}
+          defaultValue={defaultValue}
           onChange={handleChange}
         />
       </div>
