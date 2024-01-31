@@ -113,7 +113,7 @@ const CreateLeadForm = () => {
 
         if (token) {
           await LeadServices.createLead(payloadObj, token);
-          toast.success('Remainder created successfully.');
+          toast.success('Create lead successfully.');
           router.push(PAGE_ROUTES.Dashboard);
         } else {
           toast.error('Something went wrong.');
