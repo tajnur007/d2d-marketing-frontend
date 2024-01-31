@@ -1,4 +1,6 @@
+'use client';
 import Image from 'next/image';
+import { useEffect } from 'react';
 import moment from 'moment';
 // import { getStatusColor } from '@/utils/constants/common-constants';
 import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
@@ -21,6 +23,21 @@ function LeadRow({
   leadRefresh: boolean;
   setLeadRefresh: () => void;
 }) {
+  const handleScroll = () => {
+    // Your scroll event handling logic goes here
+    console.log('Page is scrolling!');
+  };
+
+  useEffect(() => {
+    // Add the scroll event listener when the component mounts
+    window.addEventListener('scroll', handleScroll);
+
+    // Remove the scroll event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div>
       <div
