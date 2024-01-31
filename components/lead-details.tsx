@@ -180,19 +180,35 @@ const LeadDetails = ({
           height='108'
         />
       </div>
-      <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
-        <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
-          Reminder
+      <div className='h-[275px] overflow-y-auto tiny-scrollbar bg-slate-600'>
+        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
+          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
+            Reminder
+          </div>
+          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
+            {reminders?.title}
+          </div>
+          <div className='text-[#8A8A8A] mb-[10px]'>
+            {moment(reminders?.reminder_time).format('YYYY/MM/DD h:mma')}
+          </div>
+          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
+            {reminders?.status}
+          </button>
         </div>
-        <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
-          {reminders?.title}
+        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
+          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
+            Reminder
+          </div>
+          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
+            {reminders?.title}
+          </div>
+          <div className='text-[#8A8A8A] mb-[10px]'>
+            {moment(reminders?.reminder_time).format('YYYY/MM/DD h:mma')}
+          </div>
+          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
+            {reminders?.status}
+          </button>
         </div>
-        <div className='text-[#8A8A8A] mb-[10px]'>
-          {moment(reminders?.reminder_time).format('YYYY/MM/DD h:mma')}
-        </div>
-        <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-          {reminders?.status}
-        </button>
       </div>
 
       <div className='flex justify-center items-center'>
