@@ -9,7 +9,7 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 
 const getStatusColor: statusColor = {
-  cold: 'bg-blue-200',
+  cool: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -18,7 +18,7 @@ const SuggestionRow = ({ item }: { item: LeadListType }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
+    setIsOpen(true);
   };
 
   return (
@@ -57,12 +57,7 @@ const SuggestionRow = ({ item }: { item: LeadListType }) => {
           </span>
         </div>
       </div>
-      <Drawer
-        open={isOpen}
-        onClose={toggleDrawer}
-        direction='right'
-        size={450}
-        overlayOpacity={0}>
+      <Drawer open={isOpen} onClose={() => setIsOpen(false)} direction='right' size={450}>
         <LeadDetails setIsOpen={setIsOpen} data={item} />
       </Drawer>
     </div>

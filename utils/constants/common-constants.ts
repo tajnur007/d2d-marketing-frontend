@@ -24,7 +24,7 @@ import {
 } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
-  cold: 'bg-blue-200',
+  cool: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -142,7 +142,7 @@ export const LEAD_STATUS = {
   InProgress: 'In-Progress',
   Completed: 'Completed',
   Hot: 'Hot',
-  Cold: 'Cold',
+  Cool: 'Cool',
   Warm: 'Warm',
 };
 
@@ -154,7 +154,7 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'hot', label: 'Hot' },
-  { value: 'cold', label: 'Cold' },
+  { value: 'cool', label: 'Cool' },
   { value: 'warm', label: 'Warm' },
 ];
 
@@ -186,7 +186,7 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.InProgress,
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
-  LEAD_STATUS.Cold,
+  LEAD_STATUS.Cool,
   LEAD_STATUS.Warm,
 ];
 
@@ -257,10 +257,10 @@ export const LEADERBOARD_ITEMS: LEADERBOARD = {
   Count: 0,
   Data: [
     {
-      id: 0,
+      executive_id: 0,
+      executive_name: '',
+      count_of_leads: 0,
       initials: '',
-      name: '',
-      totalLeads: 0,
     },
   ],
 };

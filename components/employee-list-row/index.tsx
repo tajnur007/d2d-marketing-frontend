@@ -1,9 +1,12 @@
-import Image from 'next/image';
+'use client';
+
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import profileImage from '@/assets/images/profile.png';
-import { EmployeeType, EmployeestatusColor } from '@/models/global-types';
+import { EmployeestatusColor } from '@/models/global-types';
+import { ApiService } from '@/services/api-services';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Popup from 'reactjs-popup';
-import { useRef } from 'react';
 import EmployeeOptions from './EmployeeOptions';
 
 const getStatusColor: EmployeestatusColor = {
@@ -20,10 +23,20 @@ function EmployeeListRow({
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
 }) {
+  const { data } = useSession();
   const firstChar = item.name.charAt(0).toUpperCase();
 
   const handleViewButton = () => {
     console.log('button');
+  };
+
+  const handleDeleteButton = async (userId: number) => {
+    //@ts-ignore
+    const token = data?.user?.access_token;
+    const UserServices = new ApiService();
+    if (token) {
+      await UserServices.deleteUser(userId, token);
+    }
   };
 
   return (
@@ -104,7 +117,10 @@ function EmployeeListRow({
             marginLeft: '20px',
           }}
           arrow={false}>
-            <EmployeeOptions handleViewButton={handleViewButton} handleDeleteButton={() => {}} />
+          <EmployeeOptions
+            handleViewButton={handleViewButton}
+            handleDeleteButton={() => handleDeleteButton(item.id)}
+          />
         </Popup>
       </div>
     </div>
