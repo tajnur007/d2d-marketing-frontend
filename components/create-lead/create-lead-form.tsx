@@ -20,15 +20,16 @@ import { useSession } from 'next-auth/react';
 import { ExecutiveContext } from '@/context/executives-context';
 import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
 import { toast } from 'react-toastify';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const CreateLeadForm = () => {
-  const [statusSelected, setStatusSelected] = useState(CREATE_LEAD_STATUS_NEW[0].value);
-  const [assignedToSelected, setAssignedToSelected] = useState(ASSIGN_TO_NEW[0].value);
+  const [statusSelected, setStatusSelected] = useState('');
+  const [assignedToSelected, setAssignedToSelected] = useState('');
   const [imageName, setImageName] = useState<string | null>(null);
   const [imagePath, setImagePath] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
+  const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -108,8 +109,16 @@ const CreateLeadForm = () => {
       }
 
       setFormErrors(newFormErrors);
-      console.log(newFormErrors);
-      if (Object.keys(newFormErrors).length === 0) {
+
+      if (statusSelected === '' && assignedToSelected === '') {
+        setIsBothSelectFieldNull(true);
+        toast.info('Please select Status or AssignedTo field.');
+        return;
+      } else {
+        setIsBothSelectFieldNull(false);
+      }
+
+      if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
         //! Payload object
 
         const payloadObj = {
@@ -174,6 +183,7 @@ const CreateLeadForm = () => {
             label='AssignedTo'
             setSelected={setAssignedToSelected}
             options={executivesOption}
+            className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
           />
         </div>
       </div>
@@ -250,6 +260,7 @@ const CreateLeadForm = () => {
             label='Status'
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
+            className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
           />
 
           <div className='flex flex-col items-start justify-center '>
