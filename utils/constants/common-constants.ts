@@ -66,6 +66,7 @@ export const API_PATHS = {
   UploadLeadImage: '/lead/upload-image',
   DeleteLead: '/lead/delete',
   GetAllReminder: '/reminder/list',
+  DeleteReminder: '/reminder/delete',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [

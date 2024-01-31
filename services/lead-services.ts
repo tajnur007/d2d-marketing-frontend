@@ -153,4 +153,20 @@ export class LeadService {
 
     return resp;
   };
+
+  public deleteReminder = async (reminder_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.DeleteReminder}?reminder_id=${reminder_id}`,
+      method: API_METHODS.DELETE,
+      ...config,
+    });
+
+    return resp;
+  };
 }
