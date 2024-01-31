@@ -404,6 +404,9 @@ export interface LeadsDataType {
     reminderStatus: string;
   };
   timestamp: string;
+}
 
-
+export interface EmployeeOptionsProps {
+  handleViewButton: () => void;
+  handleDeleteButton: () => Promise<void>;
 }
