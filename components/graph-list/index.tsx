@@ -13,7 +13,7 @@ const GraphList: React.FC = () => {
     total_leads: 0,
     hot_leads: 0,
     warm_leads: 0,
-    cool_leads: 0,
+    cold_leads: 0,
   });
 
   useEffect(() => {

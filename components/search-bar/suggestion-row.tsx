@@ -1,11 +1,9 @@
 'use client';
-import moment from 'moment';
 import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
-import LeadDetails from '@/components/lead-details';
-import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
+import { LeadListType, statusColor } from '@/models/global-types';
+import moment from 'moment';
 import Image from 'next/image';
-import { Dispatch, SetStateAction, useState } from 'react';
-import Drawer from 'react-modern-drawer';
+import { Dispatch, SetStateAction } from 'react';
 import 'react-modern-drawer/dist/index.css';
 
 const getStatusColor: statusColor = {

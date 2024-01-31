@@ -10,7 +10,7 @@ const Profiles = ({ data }: { data: Person[] | null }) => {
         <div
           key={person?.executive_id}
           className='flex items-center gap-5 mb-5'>
-          <div className='bg-[#E5DFFF] p-[13px] rounded-2xl font-semibold text-[#b8a9ff] text-[16px] w-[50px] flex items-center justify-center'>
+          <div className='bg-[#E5DFFF] p-[13px] py-[13px] rounded-2xl font-semibold text-[#b8a9ff] text-[16px] w-[50px] flex items-center justify-center'>
             {generateInitials(person?.executive_name)}
           </div>
           {/* width based on name length */}

@@ -62,8 +62,8 @@ export const API_PATHS = {
   Leaderboard: '/user/leaderboard',
   GetLeads: '/lead/list',
   CreateReminder: '/reminder/create',
-  EmployeeListInfo:'/user/list',
-  UploadLeadImage:'/lead/upload-image',
+  EmployeeListInfo: '/user/list',
+  UploadLeadImage: '/lead/upload-image',
   DeleteLead: '/lead/delete',
 };
 
@@ -142,8 +142,8 @@ export const LEAD_STATUS = {
   InProgress: 'In-Progress',
   Completed: 'Completed',
   Hot: 'Hot',
-  Cold: 'Cold',
-  Warm: 'Warm',
+  cold: 'cold',
+  warm: 'warm',
 };
 
 export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
@@ -186,8 +186,8 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.InProgress,
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
-  LEAD_STATUS.Cold,
-  LEAD_STATUS.Warm,
+  LEAD_STATUS.cold,
+  LEAD_STATUS.warm,
 ];
 
 export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {

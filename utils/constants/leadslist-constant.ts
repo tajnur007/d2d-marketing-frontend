@@ -1,4 +1,4 @@
-import { LeadsDataType, StatusState } from '@/models/global-types';
+import { LeadsDataType } from '@/models/global-types';
 import { LEAD_STATUS } from './common-constants';
 
 export const LEADS_DATA: LeadsDataType[] = [
@@ -30,7 +30,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01755432123',
     assignedByEmail: 'nadia@gmail.com',
     assignedToName: 'Aminul Islam',
-    status: LEAD_STATUS.Warm,
+    status: LEAD_STATUS.warm,
     location: '123/B Creative Street',
     meetingNote: 'Create engaging content for the website.',
     image:
@@ -50,7 +50,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01987654321',
     assignedByEmail: 'farah@gmail.com',
     assignedToName: 'Sadia Rahman',
-    status: LEAD_STATUS.Cold,
+    status: LEAD_STATUS.cold,
     location: '789/C Web Avenue',
     meetingNote: 'Redesign the website for a modern look.',
     image:
@@ -90,7 +90,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01898989898',
     assignedByEmail: 'mehnaz@gmail.com',
     assignedToName: 'Rahim Ali',
-    status: LEAD_STATUS.Warm,
+    status: LEAD_STATUS.warm,
     location: '789/E SEO Avenue',
     meetingNote: 'Optimize website for search engines.',
     image:
@@ -130,7 +130,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01711223344',
     assignedByEmail: 'nabil@gmail.com',
     assignedToName: 'Shahrukh Ahmed',
-    status: LEAD_STATUS.Cold,
+    status: LEAD_STATUS.cold,
     location: '789/H Design Street',
     meetingNote: 'Create visually appealing graphics for marketing materials.',
     image:
@@ -170,7 +170,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01551122334',
     assignedByEmail: 'anika@gmail.com',
     assignedToName: 'Mahir Ahmed',
-    status: LEAD_STATUS.Warm,
+    status: LEAD_STATUS.warm,
     location: '456/J Market Street',
     meetingNote: 'Conduct market research to identify trends and opportunities.',
     image:
@@ -190,7 +190,7 @@ export const LEADS_DATA: LeadsDataType[] = [
     assignedByNumber: '+88-01777889900',
     assignedByEmail: 'khaled@gmail.com',
     assignedToName: 'Samina Akhtar',
-    status: LEAD_STATUS.Cold,
+    status: LEAD_STATUS.cold,
     location: '789/K Video Street',
     meetingNote: 'Create engaging videos for marketing purposes.',
     image:

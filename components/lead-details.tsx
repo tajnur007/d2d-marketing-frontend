@@ -1,23 +1,16 @@
 'use client';
 
-import Image from 'next/image';
-import moment from 'moment';
-import leadImage from '@/assets/images/Marketing-signin.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
-import { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import {
-  CreateReminderItems,
-  LeadListType,
-  AssignToUsers,
-  statusColor,
-} from '@/models/global-types';
+import { CreateReminderItems, statusColor } from '@/models/global-types';
+import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
+import moment from 'moment';
+import Image from 'next/image';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
-import React from 'react';
-import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
 
 const getStatusColor: statusColor = {
