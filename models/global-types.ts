@@ -396,6 +396,7 @@ export interface LeadOptionsProps {
   handleDeleteButton: () => void;
 }
 
+
 export interface LeadsDataType {
   id: number;
   title: string;

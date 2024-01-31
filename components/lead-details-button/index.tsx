@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Popup from 'reactjs-popup';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
 import { LeadListType } from '@/models/global-types';
@@ -9,6 +9,7 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 import DeleteConfirmationModal from '../delete-confirmation-modal';
+import { LeadsContext } from '@/context/leads-context';
 import './style.css';
 
 const LeadDetailsButton = ({
@@ -23,6 +24,7 @@ const LeadDetailsButton = ({
   const [isOpen, setIsOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<any>(null);
+  const { leadDetailsRef } = useContext(LeadsContext);
 
   const toggleDrawer = () => {
     setIsOpen((prevState: any) => !prevState);
@@ -30,17 +32,21 @@ const LeadDetailsButton = ({
 
   const handleViewButton = () => {
     setIsOpen(true);
-    ref.current.close();
+    leadDetailsRef.current.close();
   };
 
   const handleDeleteButton = async () => {
     setModalIsOpen(true);
   };
 
+  const handleClose = () => {
+    ref.current.close();
+  };
+
   return (
     <>
       <Popup
-        ref={ref}
+        ref={leadDetailsRef}
         trigger={
           <div className=''>
             <Image className='cursor-pointer h-6 w-6 relative' src={moreImage} alt='' />

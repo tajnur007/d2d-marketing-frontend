@@ -17,7 +17,7 @@ import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
-import { ExecutiveContext } from '@/context/executives-context';
+import { LeadsContext } from '@/context/leads-context';
 import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
@@ -37,7 +37,7 @@ const CreateLeadForm = () => {
 
   const router = useRouter();
 
-  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
+  const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
 
   const { data } = useSession();
   // @ts-ignore
@@ -149,13 +149,13 @@ const CreateLeadForm = () => {
         const token = data?.user?.access_token;
 
         const LeadServices = new LeadService();
-         if (token) {
-           await LeadServices.createLead(payloadObj, token);
-           toast.success('Create lead successfully.');
-           router.push(PAGE_ROUTES.Dashboard);
-         } else {
-           toast.error('Something went wrong.');
-         }
+        if (token) {
+          await LeadServices.createLead(payloadObj, token);
+          toast.success('Create lead successfully.');
+          router.push(PAGE_ROUTES.Dashboard);
+        } else {
+          toast.error('Something went wrong.');
+        }
       }
     } catch (err) {
       toast.error('Failed to create Lead.');
