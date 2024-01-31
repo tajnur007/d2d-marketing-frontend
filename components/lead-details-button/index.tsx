@@ -9,7 +9,7 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
 import DeleteConfirmationModal from '../delete-confirmation-modal';
-import { ExecutiveContext } from '@/context/executives-context';
+import { LeadsContext } from '@/context/leads-context';
 import './style.css';
 
 const LeadDetailsButton = ({
@@ -24,7 +24,7 @@ const LeadDetailsButton = ({
   const [isOpen, setIsOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<any>(null);
-  const { leadRef } = useContext(ExecutiveContext);
+  const { leadDetailsRef } = useContext(LeadsContext);
 
   const toggleDrawer = () => {
     setIsOpen((prevState: any) => !prevState);
@@ -32,7 +32,7 @@ const LeadDetailsButton = ({
 
   const handleViewButton = () => {
     setIsOpen(true);
-    leadRef.current.close();
+    leadDetailsRef.current.close();
   };
 
   const handleDeleteButton = async () => {
@@ -46,7 +46,7 @@ const LeadDetailsButton = ({
   return (
     <>
       <Popup
-        ref={leadRef}
+        ref={leadDetailsRef}
         trigger={
           <div className=''>
             <Image className='cursor-pointer h-6 w-6 relative' src={moreImage} alt='' />

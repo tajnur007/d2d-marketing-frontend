@@ -9,7 +9,7 @@ import { LeadListType } from '@/models/global-types';
 import { LeadService } from '@/services/lead-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
-import { ExecutiveContext } from '@/context/executives-context';
+import { LeadsContext } from '@/context/leads-context';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -19,7 +19,8 @@ function LeadsList() {
   const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
 
-  const { executivesOption, setExecutivesOption, leadRef } = useContext(ExecutiveContext);
+  const { executivesOption, setExecutivesOption, leadDetailsRef } =
+    useContext(LeadsContext);
   const { data: sessionData } = useSession();
   //@ts-ignore den
   const token: string = sessionData?.user?.access_token;
@@ -56,7 +57,7 @@ function LeadsList() {
   };
 
   const handleScroll = () => {
-    leadRef.current.close();
+    leadDetailsRef.current.close();
   };
 
   return (
