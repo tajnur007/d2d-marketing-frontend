@@ -50,9 +50,9 @@ export class AuthService {
     return resp;
   };
 
-  public resetPassword = async (data: any) => {
+  public resetPassword = async (token:string, company_id: number, data: any) => {
     const resp: Response<any> = await this.client.request({
-      url: API_PATHS.ResetPassword,
+      url: `/user/reset-password?token=${token}&company_id=${company_id}`,
       method: API_METHODS.POST,
       data: data,
     });
