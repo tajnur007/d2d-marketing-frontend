@@ -1,23 +1,37 @@
 'use client';
 
 import { ArrowLeftCircleIcon } from '@/assets/icons';
+import { AuthService } from '@/services/auth-service';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import Copyright from './common/copyright';
 import ForgetPasswordCommon from './common/forget-password-common';
 
-const NewPassword = ({ handleNewPassword }: any) => {
+const NewPassword = ({ resetData, handleNewPassword }: any) => {
   const [newPassword, setNewPassword] = useState('');
   const [retypePassword, setReTypePassword] = useState('');
+  const AuthServices = new AuthService();
 
-  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (newPassword !== retypePassword) {
       alert('Password is not matching!');
     } else {
-      handleNewPassword({ newPassword });
+      try {
+        await AuthServices.resetPassword(
+          resetData.token,
+          resetData.company_id,
+          newPassword
+        );
+        handleNewPassword(false);
+      } catch (err) {
+        console.error('Password reset failed:', err);
+      }
     }
+    console.log('resetData', resetData);
+    console.log('new password', newPassword);
+    
   };
 
   return (
