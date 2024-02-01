@@ -44,7 +44,7 @@ function LeadsList() {
       LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token);
     }
-  }, [token, setExecutivesOption, setCreatedByOptions, leadRefresh]);
+  }, [token, setExecutivesOption, setCreatedByOptions]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
@@ -55,7 +55,7 @@ function LeadsList() {
     } else {
       setSearchData([]);
     }
-  }, [keyPress, leadsData, searchValue, leadRefresh]);
+  }, [keyPress, leadsData, searchValue]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {

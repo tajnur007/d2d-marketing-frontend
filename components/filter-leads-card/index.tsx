@@ -9,6 +9,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { CustomMultiSelect } from '../custom-multi-select';
 import StatusCheckbox from '../status-checkbox';
 import './style.css';
+import { LeadService } from '@/services/lead-services';
+import { useSession } from 'next-auth/react';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
@@ -69,8 +71,41 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     setFilterCardOpen(false);
   };
 
-  console.log(createdByOptions);
-  console.log(executivesOption);
+  const { data } = useSession();
+  const submitFilterData = async () => {
+    try {
+      //! payload
+      const payloadObj = {
+        match: {
+          meeting_status: {
+            any: ['hot', 'warm', 'cold'],
+          },
+          created_by_user_id: {
+            any: [146],
+          },
+          executive_id: {
+            any: [35],
+          },
+        },
+        range: {
+          created_at: {
+            lte: '2024-01-30T12:08:34.195467+06:00',
+            gte: '2024-01-18T12:08:34.195467+06:00',
+          },
+        },
+      };
+
+      // @ts-ignore
+      const token = data?.user?.access_token;
+
+      const LeadServices = new LeadService();
+      if (token) {
+        await LeadServices.createLead(payloadObj, token);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
