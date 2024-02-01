@@ -35,8 +35,8 @@ const GraphList: React.FC = () => {
   return (
     <div className='grid lg:grid-cols-3 sm:grid-cols-1 justify-between gap-[1.1rem] mb-6 lg:h-[15vh]'>
       <GraphCard graphConfig={GRAPH_CONFIG.TotalLeads} data={dashboardInfo.total_leads} />
-      <GraphCard graphConfig={GRAPH_CONFIG.HotDeals} data={dashboardInfo.hot_leads} />
-      <GraphCard graphConfig={GRAPH_CONFIG.WarmDeals} data={dashboardInfo.warm_leads} />
+      <GraphCard graphConfig={GRAPH_CONFIG.HotLeads} data={dashboardInfo.hot_leads} />
+      <GraphCard graphConfig={GRAPH_CONFIG.WarmLeads} data={dashboardInfo.warm_leads} />
     </div>
   );
 };

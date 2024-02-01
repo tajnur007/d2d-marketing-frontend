@@ -11,7 +11,7 @@ const EmployeeOptions = ({
         return (
           <div
             key={label}
-            className='flex justify-start border border-red-500 items-center gap-2 rounded px-2 hover:bg-purple-100 cursor-pointer'
+            className='flex justify-start outline-none items-center gap-2 rounded px-2 hover:bg-purple-100 cursor-pointer'
             onClick={label === 'Delete' ? handleDeleteButton : handleViewButton}>
             <Icon />
             <p className=' text-gray-700 leading-trim font-semibold text-[16px] block py-2 text-sm'>

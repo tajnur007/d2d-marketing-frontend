@@ -8,7 +8,7 @@ const LeadsOptions = ({ handleViewButton, handleEditButton,  handleDeleteButton 
       <div className='py-1'>
         <button
           type='button'
-          className='flex justify-start items-center pl-4 '
+          className='flex justify-start items-center pl-4 outline-none'
           onClick={handleViewButton}>
           <div>
             <EyeIcon />
@@ -30,7 +30,7 @@ const LeadsOptions = ({ handleViewButton, handleEditButton,  handleDeleteButton 
           </div>
         </button>
         <button
-          className='flex justify-start items-center pl-4'
+          className='flex justify-start items-center pl-4 outline-none'
           type='button'
           onClick={handleDeleteButton}>
           <div>

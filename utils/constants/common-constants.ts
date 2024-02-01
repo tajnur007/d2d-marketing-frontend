@@ -70,6 +70,8 @@ export const API_PATHS = {
   EmployeeListInfo: '/user/list',
   CreateReminder: '/reminder/create',
   UploadLeadImage: '/lead/upload-image',
+  GetAllReminder: '/reminder/list',
+  DeleteReminder: '/reminder/delete',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -146,16 +148,19 @@ export const SINGLE_LEAD_ITEMS: SingleLeadItems = {
   previous_user_id: 0,
   reminders: [
     {
+      id: 0,
       title: '',
       lead_id: 0,
+      user_id: 0,
       reminder_time: '',
       notes: '',
       status: '',
+      company_id: 0,
     },
   ],
 };
 
-export const UPDATE_LEAD_PAYLOAD : UpdateLeadPayload = {
+export const UPDATE_LEAD_PAYLOAD: UpdateLeadPayload = {
   title: '',
   executive_id: 0,
   executive_name: '',

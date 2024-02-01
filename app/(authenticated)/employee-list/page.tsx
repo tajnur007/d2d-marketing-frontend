@@ -2,7 +2,7 @@
 
 import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import EmployeeListRow from '@/components/employee-list-row';
@@ -10,17 +10,21 @@ import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
 import { CreateEmployeeItems } from '@/models/global-types';
 import Image from 'next/image';
 import CreateEmployeeModal from '@/components/create-employee-modal';
+import Loader from '@/components/loader';
 
 const EmployeeListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [isExecutive, setIsExecutive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
   const [formErrors, setFormErrors] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
+
+  const employeeActionRef = useRef<any>(null);
 
   const [uniqueCharCount, setUniqueCharCount] = useState<{ [key: string]: number }>({});
 
@@ -56,7 +60,7 @@ const EmployeeListPage = () => {
           phone: item.phone,
           email: item.email,
         }));
-
+        setIsLoading(false);
         setEmployeeInfo(formattedData);
       } catch (error) {
         console.error('Error fetching Users info:', error);
@@ -93,13 +97,17 @@ const EmployeeListPage = () => {
     setModalIsOpen(true);
   };
 
+  const handleScroll = () => {
+    employeeActionRef.current.close();
+  };
+
   const filteredEmployeeList = employeeInfo.filter((employee) =>
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <>
-      <div className='border border-gray-100 bg-white rounded-xl w-ful h-[calc(100vh-102px)]'>
+      <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
         <div className='py-4 md:py-6 pl-8 h-[96px]'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
@@ -143,37 +151,44 @@ const EmployeeListPage = () => {
             </div>
           </div>
         </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div
+            className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[69vh]'
+            onScroll={handleScroll}>
+            <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
+              {filteredEmployeeList?.map((item, index) => {
+                const firstChar = item?.name?.charAt(0).toUpperCase();
+                let isFirstChar = false;
 
-        <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[69vh]'>
-          <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-            {filteredEmployeeList.map((item, index) => {
-              const firstChar = item.name.charAt(0).toUpperCase();
-              let isFirstChar = false;
+                // If the character has not been displayed, add it to the array and set isFirstChar to true
+                if (!displayedChars.includes(firstChar)) {
+                  displayedChars.push(firstChar);
+                  isFirstChar = true;
+                }
 
-              // If the character has not been displayed, add it to the array and set isFirstChar to true
-              if (!displayedChars.includes(firstChar)) {
-                displayedChars.push(firstChar);
-                isFirstChar = true;
-              }
-
-              // Pass isFirstChar prop only when it's true
-              return isFirstChar ? (
-                <EmployeeListRow
-                  key={index}
-                  item={item}
-                  uniqueCharCount={uniqueCharCount}
-                  isFirstChar={isFirstChar}
-                />
-              ) : (
-                <EmployeeListRow
-                  key={index}
-                  item={item}
-                  uniqueCharCount={uniqueCharCount}
-                />
-              );
-            })}
+                // Pass isFirstChar prop only when it's true
+                return isFirstChar ? (
+                  <EmployeeListRow
+                    key={index}
+                    item={item}
+                    uniqueCharCount={uniqueCharCount}
+                    isFirstChar={isFirstChar}
+                    employeeActionRef={employeeActionRef}
+                  />
+                ) : (
+                  <EmployeeListRow
+                    key={index}
+                    item={item}
+                    uniqueCharCount={uniqueCharCount}
+                    employeeActionRef={employeeActionRef}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <CreateEmployeeModal
         modalIsOpen={modalIsOpen}

@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Popup from 'reactjs-popup';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import LeadDetails from '@/components/lead-details';
 import { LeadListType } from '@/models/global-types';
@@ -12,6 +12,7 @@ import { roundToNearestMinutes } from 'date-fns';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useRouter } from 'next/navigation';
 import DeleteConfirmationModal from '../delete-confirmation-modal';
+import { LeadsContext } from '@/context/leads-context';
 import './style.css';
 
 const LeadDetailsButton = ({
@@ -27,6 +28,7 @@ const LeadDetailsButton = ({
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const ref = useRef<any>(null);
   const router = useRouter();
+  const { leadDetailsRef } = useContext(LeadsContext);
 
   const toggleDrawer = () => {
     setIsOpen((prevState: any) => !prevState);
@@ -34,7 +36,7 @@ const LeadDetailsButton = ({
 
   const handleViewButton = () => {
     setIsOpen(true);
-    ref.current.close();
+    leadDetailsRef.current.close();
   };
 
   //! data.id pass in lead update page
@@ -48,7 +50,7 @@ const LeadDetailsButton = ({
   return (
     <>
       <Popup
-        ref={ref}
+        ref={leadDetailsRef}
         trigger={
           <div className=''>
             <Image className='cursor-pointer h-6 w-6 relative' src={moreImage} alt='' />
@@ -87,7 +89,7 @@ const LeadDetailsButton = ({
         direction='right'
         size={450}
         overlayOpacity={0}>
-        <LeadDetails setIsOpen={setIsOpen} data={data} />
+        <LeadDetails setIsOpen={setIsOpen} data={data} isOpen={isOpen} />
       </Drawer>
       <DeleteConfirmationModal
         modalIsOpen={modalIsOpen}

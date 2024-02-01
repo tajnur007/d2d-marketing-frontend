@@ -21,7 +21,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
       try {
         await AuthServices.resetPassword(
           resetData.token,
-          parseInt(resetData.company_id),
+          resetData.company_id,
           newPassword
         );
         handleNewPassword(false);
@@ -29,6 +29,9 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
         console.error('Password reset failed:', err);
       }
     }
+    console.log('resetData', resetData);
+    console.log('new password', newPassword);
+    
   };
 
   return (

@@ -25,11 +25,16 @@ export class LeadService {
     return resp;
   };
 
-  public getExecutivesData = async (setExecutivesOption: any, token: string) => {
+  public getExecutivesData = async (
+    setExecutivesOption: any,
+    token: string,
+    setIsLoading: (item: boolean) => void
+  ) => {
     try {
       const response = await this.getExecutives(token);
       const executivesOption = this.createSelectData(response.data.Data.Data);
       setExecutivesOption(executivesOption);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching executives:', error);
     }
@@ -60,12 +65,17 @@ export class LeadService {
     return resp;
   };
 
-  public getLeadsData = async (setLeadsData: any, token: string) => {
+  public getLeadsData = async (
+    setLeadsData: any,
+    token: string,
+    setIsLoading: (item: boolean) => void
+  ) => {
     try {
       const response = await this.getLeads(token);
-      console.log(response);
+
       const data = response.data.Data.Data;
       setLeadsData(data);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching leads:', error);
     }
@@ -88,7 +98,7 @@ export class LeadService {
     return resp;
   };
 
-    public createReminder = async (data: any, token: string): Promise<any> => {
+  public createReminder = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -105,7 +115,7 @@ export class LeadService {
     return resp;
   };
 
-    public createLead = async (data: any, token: string): Promise<any> => {
+  public createLead = async (data: any, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -122,9 +132,7 @@ export class LeadService {
     return resp;
   };
 
-  //! Delete Lead data
-
-   public deleteLead = async (lead_id: number, token: string): Promise<any> => {
+  public deleteLead = async (lead_id: number, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
@@ -176,5 +184,35 @@ export class LeadService {
 
     return resp;
   };
+  public getAllReminder = async (token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
 
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.GetAllReminder,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
+
+  public deleteReminder = async (reminder_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.DeleteReminder}?reminder_id=${reminder_id}`,
+      method: API_METHODS.DELETE,
+      ...config,
+    });
+
+    return resp;
+  };
 }
