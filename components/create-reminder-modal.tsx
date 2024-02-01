@@ -129,13 +129,13 @@ const CreateReminderModal = ({
   return (
     <Modal
       className={
-        'absolute w-[646px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
+        'absolute w-[546px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       ariaHideApp={false}>
-      <div className='m-[30px]'>
-        <div className='flex mb-[26px] justify-between'>
+      <div>
+        <div className='flex mb-[16px] justify-between'>
           <div className='left-0 font-bold text-[#25254c] text-[24px] tracking-[0] leading-[14px] whitespace-nowrap'>
             <span>Create reminder</span>
           </div>
@@ -146,7 +146,7 @@ const CreateReminderModal = ({
         </div>
 
         <Input
-          label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
+          label='Title'
           placeholder='Title here'
           type='text'
           id='title'
@@ -157,11 +157,9 @@ const CreateReminderModal = ({
           onChange={handleInputChange}
         />
 
-        <div className='mt-[16px]'>
+        <div className='mt-[8px]'>
           <Input
-            label={
-              <p className='text-[#00156A] font-medium text-xs mb-1'>Associated Lead</p>
-            }
+            label='Associated Lead'
             placeholder='Optional'
             type='text'
             id='associatedLead'
@@ -171,7 +169,7 @@ const CreateReminderModal = ({
           />
         </div>
 
-        <div className='w-full mt-[16px] date-picker'>
+        <div className='w-full mt-[4px] date-picker'>
           <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
             {'Date & Time'}
             {formErrors.Date && (
@@ -187,7 +185,7 @@ const CreateReminderModal = ({
           </div>
         </div>
 
-        <div className='mt-[16px]'>
+        <div className='mt-[8px]'>
           <div className='mt-[-1.00px] font-medium text-[#00156a] text-[12px] tracking-[0] leading-[14px] whitespace-nowrap mb-1'>
             Status
           </div>
@@ -208,18 +206,18 @@ const CreateReminderModal = ({
           />
         </div>
 
-        <div className='mt-[16px]'>
+        <div className='mt-[8px]'>
           <TextArea
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Notes</p>}
+            label='Notes'
             placeholder='Notes'
             name='Note'
             onChange={handleInputChange}
             errorMessage={formErrors.Note}
-            className={`h-[124px] ${formErrors.Note && 'border-red-500 shadow'}`}
+            className={`h-[84px] ${formErrors.Note && 'border-red-500 shadow'}`}
           />
         </div>
 
-        <div className='mt-[16px]'>
+        <div className='mt-[8px]'>
           <Button
             onClick={submitData}
             className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>

@@ -224,24 +224,6 @@ const LeadDetails = ({
                   </p>
                   <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
                     {reminder?.status}
-                    {/* <Select
-                    className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
-                    styles={{
-                      control: (baseStyles) => ({
-                        ...baseStyles,
-                        borderColor: '2px #F3F3F3 solid',
-                        width: '100%',
-                        height: '56px',
-                        borderRadius: '10px',
-                      }),
-                    }}
-                    options={[
-                      { value: 'hot', label: 'Hot' },
-                      { value: 'cold', label: 'Cold' },
-                      { value: 'warm', label: 'Warm' },
-                    ]}
-                    onChange={handleChange}
-                  /> */}
                   </button>
                 </div>
               );
