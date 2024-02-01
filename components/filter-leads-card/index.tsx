@@ -28,7 +28,8 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   //! State for Created by
   const [selectedCreatedBy, setCreatedBy] = useState<string | null>(null);
   const [selectedAssignee, setAssignee] = useState<string | null>(null);
-  const { executivesOption, setExecutivesOption, createdByOptions, setCreatedByOptions } = useContext(LeadsContext);
+  const { executivesOption, setExecutivesOption, createdByOptions, setCreatedByOptions } =
+    useContext(LeadsContext);
 
   //* Output
   const filterData = {

@@ -6,7 +6,7 @@ import { AssignToUsers, LeadsDataType } from '@/models/global-types';
 export default function LeedsLayout({ children }: { children: React.ReactNode }) {
   const [executivesOption, setExecutivesOption] = useState<AssignToUsers[]>([]);
   const [createdByOptions, setCreatedByOptions] = useState<LeadsDataType[]>([]);
-   const leadDetailsRef = useRef(null);
+  const leadDetailsRef = useRef(null);
 
   return (
     <LeadsContext.Provider

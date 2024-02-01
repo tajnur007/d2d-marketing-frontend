@@ -19,8 +19,13 @@ function LeadsList() {
   const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
 
-  const { executivesOption, setExecutivesOption, leadDetailsRef, createdByOptions, setCreatedByOptions } =
-    useContext(LeadsContext);
+  const {
+    executivesOption,
+    setExecutivesOption,
+    leadDetailsRef,
+    createdByOptions,
+    setCreatedByOptions,
+  } = useContext(LeadsContext);
 
   const { data: sessionData } = useSession();
   //@ts-ignore den
