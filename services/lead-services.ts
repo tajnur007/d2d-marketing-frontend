@@ -149,7 +149,7 @@ export class LeadService {
       const createdBy = item.created_by;
       if (createdBy && !encounteredValues.has(createdBy)) {
         encounteredValues.add(createdBy);
-        const newItem = { value: item.created_by, label: item.created_by };
+        const newItem = { ...item, value: item.created_by, label: item.created_by };
         uniqueCreatedByValues.push(newItem);
       }
     });

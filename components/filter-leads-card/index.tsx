@@ -18,7 +18,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 }) => {
   //! State for date range
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   //! State for status
   const [status, setStatus] = useState<StatusState>({
@@ -28,8 +28,8 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   });
 
   //! State for Created by
-  const [selectedCreatedBy, setCreatedBy] = useState<string | null>(null);
-  const [selectedAssignee, setAssignee] = useState<string | null>(null);
+  const [selectedCreatedBy, setCreatedBy] = useState<string>('');
+  const [selectedAssignee, setAssignee] = useState<string>('');
   const { executivesOption, setExecutivesOption, createdByOptions, setCreatedByOptions } =
     useContext(LeadsContext);
 
@@ -50,61 +50,69 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     }));
   };
 
-  const ApplyFilter = () => {
-    if (
-      filterData.createdBy === null &&
-      filterData.assignee === null &&
-      filterData.status.hot === false &&
-      filterData.status.warm === false &&
-      filterData.status.cold === false &&
-      filterData.endDate === null
-    ) {
-      setFilterCardOpen(false);
-      return null;
-    } else {
-      onFilterData(filterData);
-      setFilterCardOpen(false);
-    }
-  };
-
-  const CancelFilter = () => {
-    setFilterCardOpen(false);
-  };
-
   const { data } = useSession();
-  const submitFilterData = async () => {
+  const ApplyFilter = async () => {
     try {
+      if (
+        filterData.createdBy === null &&
+        filterData.assignee === null &&
+        filterData.status.hot === false &&
+        filterData.status.warm === false &&
+        filterData.status.cold === false &&
+        filterData.endDate === null
+      ) {
+        setFilterCardOpen(false);
+        return null;
+      } else {
+        onFilterData(filterData);
+        setFilterCardOpen(false);
+      }
+
+      // from selected data, we extract ID to send it to payload
+      const selectedAssigneeId = executivesOption.find(
+        (option: any) => option.label === filterData.assignee[0]
+      )?.id;
+
+      const SelectedCreatedById = createdByOptions.find(
+        (option: any) => option.label === filterData.createdBy[0]
+      )?.created_by_user_id;
+
       //! payload
       const payloadObj = {
         match: {
           meeting_status: {
-            any: ['hot', 'warm', 'cold'],
+            any: [],
           },
           created_by_user_id: {
-            any: [146],
+            any: [SelectedCreatedById],
           },
           executive_id: {
-            any: [35],
+            any: [selectedAssigneeId],
           },
         },
         range: {
           created_at: {
-            lte: '2024-01-30T12:08:34.195467+06:00',
-            gte: '2024-01-18T12:08:34.195467+06:00',
+            lte: endDate?.toISOString(),
+            gte: startDate?.toISOString(),
           },
         },
       };
+      console.log(payloadObj);
 
       // @ts-ignore
       const token = data?.user?.access_token;
 
       const LeadServices = new LeadService();
       if (token) {
-        await LeadServices.createLead(payloadObj, token);
+        //await LeadServices.createLead(payloadObj, token);
       }
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const CancelFilter = () => {
+    setFilterCardOpen(false);
   };
 
   return (
