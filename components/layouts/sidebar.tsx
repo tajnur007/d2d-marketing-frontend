@@ -28,7 +28,9 @@ const Sidebar = () => {
 
   return (
     <div className='w-[88px] bg-white relative z-50'>
-      <div className='absolute w-full flex justify-center top-5'>
+      <div
+        className='absolute w-full flex justify-center top-5 cursor-pointer'
+        onClick={() => handleClick(SIDEBAR_ITEMS[0].position, SIDEBAR_ITEMS[0].path)}>
         <Logo />
       </div>
 
