@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { ApiService } from '@/services/api-services';
 import { LATEST_LEADS_ITEMS } from '@/utils/constants/common-constants';
+import { InfinitySpin } from 'react-loader-spinner';
+import Loader from '../loader';
 
 const LatestLeadsList: React.FC = () => {
   const { data } = useSession();
@@ -12,6 +14,7 @@ const LatestLeadsList: React.FC = () => {
   const token: string = data?.user?.access_token;
 
   const [latestLeads, setLatestLeads] = useState(LATEST_LEADS_ITEMS);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +22,7 @@ const LatestLeadsList: React.FC = () => {
         const DashboardServices = new ApiService();
         const response = await DashboardServices.latestLeads(token);
         setLatestLeads(response.data.Data);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching latest leads:', error);
       }
@@ -45,12 +49,15 @@ const LatestLeadsList: React.FC = () => {
           <ViewAllLeadsButton />
         </div>
       </div>
-
-      <div className='w-full h-[calc(100%-40px)] pl-6 overflow-y-auto tiny-scrollbar overflow-x-hidden whitespace-nowrap font-semibold text-[18px] leading-[normal]'>
-        {latestLeads?.Data?.map((item, index) => (
-          <LatestLeadRow key={index} item={item} />
-        ))}
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className='w-full h-[calc(100%-40px)] pl-6 overflow-y-auto tiny-scrollbar overflow-x-hidden whitespace-nowrap font-semibold text-[18px] leading-[normal]'>
+          {latestLeads?.Data?.map((item, index) => (
+            <LatestLeadRow key={index} item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

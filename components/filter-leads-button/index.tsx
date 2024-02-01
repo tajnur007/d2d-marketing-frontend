@@ -38,10 +38,12 @@ function FilterLeadsButton({ onFilterData }: any) {
         className='filter-drawer-style rounded-[10px] overflow-y-scroll tiny-scrollbar top-[200px] z-50'
         size={0}
         overlayOpacity={0}>
-        <FilterLeadsCard
-          setFilterCardOpen={setFilterCardOpen}
-          onFilterData={(data: any) => setFilterData(data)}
-        />
+        {isFilterCardOpen && (
+          <FilterLeadsCard
+            setFilterCardOpen={setFilterCardOpen}
+            onFilterData={(data: any) => setFilterData(data)}
+          />
+        )}
       </Drawer>
     </div>
   );

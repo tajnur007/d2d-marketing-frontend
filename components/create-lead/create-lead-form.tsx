@@ -3,7 +3,6 @@
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
-import { ExecutiveContext } from '@/context/executives-context';
 import { FormItems } from '@/models/global-types';
 import { LeadService } from '@/services/lead-services';
 import {
@@ -19,6 +18,12 @@ import { toast } from 'react-toastify';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import Dropzone from './multi-image-upload';
+import { LeadsContext } from '@/context/leads-context';
+// import { LeadService } from '@/services/lead-services';
+// import { useSession } from 'next-auth/react';
+// import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+// import { toast } from 'react-toastify';
+// import { useRouter } from 'next/navigation';
 
 const CreateLeadForm: React.FC = () => {
   const [statusSelected, setStatusSelected] = useState('');
@@ -33,14 +38,14 @@ const CreateLeadForm: React.FC = () => {
     setPending(isPending);
   };
 
+  const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
   });
-
   const router = useRouter();
 
-  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
+  const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
 
   const { data } = useSession();
   // @ts-ignore
@@ -49,7 +54,7 @@ const CreateLeadForm: React.FC = () => {
   useEffect(() => {
     if (token) {
       const LeadServices = new LeadService();
-      LeadServices.getExecutivesData(setExecutivesOption, token);
+      LeadServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
     }
   }, [token, setExecutivesOption]);
 
@@ -124,9 +129,12 @@ const CreateLeadForm: React.FC = () => {
 
         const LeadServices = new LeadService();
         if (token) {
-          await LeadServices.createLead(payloadObj, token);
-          toast.success('Create lead successfully.');
-          router.push(PAGE_ROUTES.Dashboard);
+          const res = await LeadServices.createLead(payloadObj, token);
+          if (res.status === 201) {
+            setFormData(FORM_ITEMS);
+            toast.success('Create lead successfully.');
+            router.push(PAGE_ROUTES.Dashboard);
+          }
         } else {
           toast.error('Something went wrong.');
         }
@@ -147,6 +155,7 @@ const CreateLeadForm: React.FC = () => {
           id='title'
           name='Title'
           htmlFor='title'
+          value={formData?.Title}
           errorMessage={formErrors.Title}
           className={`w-full mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
@@ -174,6 +183,7 @@ const CreateLeadForm: React.FC = () => {
             type='text'
             id='name'
             name='Name'
+            value={formData?.Name}
             errorMessage={formErrors.Name}
             htmlFor='name'
             onChange={handleInputChange}
@@ -186,6 +196,7 @@ const CreateLeadForm: React.FC = () => {
             type='text'
             id='phone'
             name='Phone'
+            value={formData?.Phone}
             errorMessage={formErrors.Phone}
             htmlFor='phone'
             onChange={handleInputChange}
@@ -201,6 +212,7 @@ const CreateLeadForm: React.FC = () => {
             id='email'
             name='Email'
             htmlFor='email'
+            value={formData?.Email}
             errorMessage={formErrors.Email}
             onChange={handleInputChange}
             className={` ${formErrors.Email && 'border-red-500 shadow'}`}
@@ -213,6 +225,7 @@ const CreateLeadForm: React.FC = () => {
             id='reference'
             name='Reference'
             htmlFor='reference'
+            value={formData?.Reference}
             onChange={handleInputChange}
           />
         </div>
@@ -223,6 +236,7 @@ const CreateLeadForm: React.FC = () => {
             label='Remarks'
             placeholder='Notes'
             name='Note'
+            value={formData?.Note}
             errorMessage={formErrors.Note}
             className={`h-[182px] ${formErrors.Note && 'border-red-500 shadow'}`}
             onChange={handleInputChange}

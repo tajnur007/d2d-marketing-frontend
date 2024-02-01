@@ -4,13 +4,13 @@ import Select from 'react-select';
 import { Button } from './button';
 import './dropdown-select.css';
 import TransferConfirmationModal from './transfer-confirmation-modal';
-import { ExecutiveContext } from '@/context/executives-context';
+import { LeadsContext } from '@/context/leads-context';
 
 export const AssignDropdownSelect = () => {
   const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selected, setSelected] = useState('');
-  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
+  const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
 
   const handleConfirm = () => {
     setShowConfirmationModal(true);

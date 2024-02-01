@@ -18,10 +18,12 @@ function EmployeeListRow({
   item,
   uniqueCharCount,
   isFirstChar,
+  employeeActionRef,
 }: {
   item: any;
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
+  employeeActionRef: any;
 }) {
   const { data } = useSession();
   const firstChar = item.name.charAt(0).toUpperCase();
@@ -45,7 +47,7 @@ function EmployeeListRow({
         <div className='inline-flex items-center gap-[7px] text-[12px] mt-[20px]'>
           <div className='font-medium text-[#5630FF]'>{firstChar}</div>
 
-          <div className='font-bold text-black px-[8px] py-[8px] bg-[#e5dfff] rounded-[12px]'>
+          <div className='font-bold text-black h-6 min-w-6 px-2 flex items-center justify-center bg-[#e5dfff] rounded-full tracking-wide'>
             {uniqueCharCount[firstChar]}
           </div>
         </div>
@@ -103,6 +105,7 @@ function EmployeeListRow({
               <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
             </div>
           }
+          ref={employeeActionRef}
           position='left center'
           on='click'
           closeOnDocumentClick

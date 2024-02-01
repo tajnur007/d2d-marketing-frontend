@@ -79,7 +79,7 @@ const SearchBar = ({
         </div>
       )}
       <Drawer open={isOpen} direction='right' size={450} enableOverlay={false}>
-        <LeadDetails setIsOpen={setIsOpen} data={item} />
+        <LeadDetails setIsOpen={setIsOpen} data={item} isOpen={isOpen} />
       </Drawer>
     </div>
   );
