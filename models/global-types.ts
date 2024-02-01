@@ -116,13 +116,6 @@ export interface ImageInfoType {
   image_path?: string;
 }
 
-// export interface RemainderType {
-//   title: string;
-//   lead_id: number;
-//   reminder_time: ReactNode;
-//   notes: string;
-//   status: string;
-// }
 export interface RemainderType {
   company_id: number;
   id: number;

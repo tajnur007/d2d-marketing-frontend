@@ -12,7 +12,12 @@ import {
   SINGLE_LEAD_ITEMS,
   UPDATE_LEAD_PAYLOAD,
 } from '@/utils/constants/common-constants';
-import { FormItems, SingleLeadItems, UpdateLeadPayload, UpdateReminderType } from '@/models/global-types';
+import {
+  FormItems,
+  SingleLeadItems,
+  UpdateLeadPayload,
+  UpdateReminderType,
+} from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import { useSession } from 'next-auth/react';
@@ -21,7 +26,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 const UpdateLeadForm = () => {
-
   const [statusSelected, setStatusSelected] = useState('');
   const [assignedToSelected, setAssignedToSelected] = useState('');
   const [singleLeadData, setSingleLeadData] =
@@ -60,7 +64,7 @@ const UpdateLeadForm = () => {
   console.log(singleLeadData);
 
   useEffect(() => {
-    setUpdatePayload(( ) => {
+    setUpdatePayload(() => {
       return {
         title: singleLeadData?.title || '',
         executive_id: singleLeadData?.executive_id || 0,
@@ -77,21 +81,20 @@ const UpdateLeadForm = () => {
         },
         reminder: [
           {
-            title: "ab_update",
+            title: 'ab_update',
             user_id: parseInt(paramValue),
-            reminder_time: "2023-03-20T15:51:05+07:00",
-            notes: "new_update",
-            status: "pending"
-          }
+            reminder_time: '2023-03-20T15:51:05+07:00',
+            notes: 'new_update',
+            status: 'pending',
+          },
         ],
-        image_infos: singleLeadData?.image_info_json || {} as any,
-        
+        image_infos: singleLeadData?.image_info_json || ({} as any),
       };
     });
   }, [singleLeadData]);
 
-  console.log('updatePayload');
-  console.log(updatePayload);
+  // console.log('updatePayload');
+  // console.log(updatePayload);
 
   const handleSelectChange = (e: any) => {
     const { name, value } = e.target;
@@ -126,8 +129,8 @@ const UpdateLeadForm = () => {
 
     if (token) {
       await LeadServices.updateLead(paramValue, updatePayload, token);
-      console.log('updatePayload');
-      console.log(updatePayload);
+      // console.log('updatePayload');
+      // console.log(updatePayload);
       toast.success('Lead Update successfully.');
       router.push(PAGE_ROUTES.Leads);
     } else {
