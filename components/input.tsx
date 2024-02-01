@@ -7,6 +7,7 @@ export const Input = ({
   htmlFor,
   className,
   errorMessage,
+  defaultValue,
   ...props
 }: InputProps) => (
   <div className='flex flex-col w-full'>
@@ -20,6 +21,7 @@ export const Input = ({
         'w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium',
         className
       )}
+      defaultValue={defaultValue}
     />
   </div>
 );

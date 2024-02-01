@@ -194,24 +194,46 @@ export interface FormItems {
   location: MapLocation;
 }
 
+//! Single Lead data
 export interface SingleLeadItems {
-  id?: number;
-  title?: string;
-  latitude?: number;
-  longitude?: number;
-  meeting_status?: string;
   assignment_status?: string;
-  image_info_json?: ImageInfoType[];
-  executive_id?: number;
-  executive_name?: string;
-  previous_user_id?: number;
-  manager_id?: number;
-  manager_name?: string;
-  point_of_contact?: PointsOfContactType;
   company_id?: number;
   created_at?: string;
   created_by?: string;
-  reminders?: string;
+  created_by_user_id?: number;
+  executive_id?: number;
+  executive_name?: string;
+  id?: number;
+  image_info_json?: ImageInfoType[];
+  latitude?: number;
+  longitude?: number;
+  manager_id?: number;
+  manager_name?: string;
+  meeting_status?: string;
+  point_of_contact?: PointsOfContactType;
+  previous_user_id?: number;
+  reminders?: RemainderType[];
+  title?: string;
+}
+
+export interface UpdateReminderType {
+  title: string;
+  user_id: number;
+  reminder_time: string;
+  notes: string;
+  status: string;
+}
+
+export interface UpdateLeadPayload {
+  title: string;
+  executive_id: number;
+  executive_name: string;
+  latitude: number;
+  longitude: number;
+  meeting_status: string;
+  point_of_contact: PointsOfContactType;
+  reminder: UpdateReminderType[];
+  image_infos: ImageInfoType[];
 }
 
 export interface SettingFormItems {
@@ -255,6 +277,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   htmlFor?: string;
   errorMessage?: string;
   getDate?: any;
+  defaultValue?: string;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {

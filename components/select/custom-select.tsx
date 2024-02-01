@@ -34,7 +34,7 @@ export const CustomSelect = ({
             }),
           }}
           options={options}
-          defaultValue={defaultValue}
+          defaultValue={defaultValue ? { value: defaultValue, label: defaultValue.charAt(0).toUpperCase() + defaultValue.slice(1) } : { value: '', label: 'Select' }}
           onChange={handleChange}
         />
       </div>

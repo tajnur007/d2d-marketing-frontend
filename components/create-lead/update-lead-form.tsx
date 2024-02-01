@@ -8,26 +8,32 @@ import { useEffect, useState } from 'react';
 import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
-  FORM_ITEMS,
+  PAGE_ROUTES,
   SINGLE_LEAD_ITEMS,
+  UPDATE_LEAD_PAYLOAD,
 } from '@/utils/constants/common-constants';
-import { FormItems, SingleLeadItems } from '@/models/global-types';
+import { FormItems, SingleLeadItems, UpdateLeadPayload, UpdateReminderType } from '@/models/global-types';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import { useSession } from 'next-auth/react';
 import { LeadService } from '@/services/lead-services';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 const UpdateLeadForm = () => {
+
   const [statusSelected, setStatusSelected] = useState('');
   const [assignedToSelected, setAssignedToSelected] = useState('');
-  const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
-  const [singleLeadData, setSingleLeadData] = useState<SingleLeadItems>(SINGLE_LEAD_ITEMS);
+  const [singleLeadData, setSingleLeadData] =
+    useState<SingleLeadItems>(SINGLE_LEAD_ITEMS);
+  const [updatePayload, setUpdatePayload] =
+    useState<UpdateLeadPayload>(UPDATE_LEAD_PAYLOAD);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
   });
+
+  const router = useRouter();
 
   const { data: sessionData } = useSession();
   // @ts-ignore
@@ -37,14 +43,12 @@ const UpdateLeadForm = () => {
   const searchParams: any = useSearchParams();
   const paramValue = searchParams.get('id');
 
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         // Make an API request to get user data with the ID equal to paramValue
         const response = await LeadServices.getUserLead(paramValue, token);
         setSingleLeadData(response.data.Data);
-      
       } catch (error) {
         console.log(error);
       }
@@ -55,45 +59,77 @@ const UpdateLeadForm = () => {
   console.log('singleLeadData');
   console.log(singleLeadData);
 
-  const handleInputChange = (e: any) => {
+  useEffect(() => {
+    setUpdatePayload(( ) => {
+      return {
+        title: singleLeadData?.title || '',
+        executive_id: singleLeadData?.executive_id || 0,
+        executive_name: singleLeadData?.executive_name || '',
+        latitude: location?.lat || 0,
+        longitude: location?.lng || 0,
+        meeting_status: singleLeadData?.meeting_status || '',
+        point_of_contact: {
+          name: singleLeadData?.point_of_contact?.name || '',
+          phone: singleLeadData?.point_of_contact?.phone || '',
+          email: singleLeadData?.point_of_contact?.email || '',
+          meeting_notes: singleLeadData?.point_of_contact?.meeting_notes || '',
+          reference: singleLeadData?.point_of_contact?.reference || '',
+        },
+        reminder: [
+          {
+            title: "ab_update",
+            user_id: parseInt(paramValue),
+            reminder_time: "2023-03-20T15:51:05+07:00",
+            notes: "new_update",
+            status: "pending"
+          }
+        ],
+        image_infos: singleLeadData?.image_info_json || {} as any,
+        
+      };
+    });
+  }, [singleLeadData]);
+
+  console.log('updatePayload');
+  console.log(updatePayload);
+
+  const handleSelectChange = (e: any) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => {
+    setUpdatePayload((prev) => {
       return { ...prev, [name]: value };
     });
   };
 
+  const handlePointOfContactChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setUpdatePayload((prev) => {
+      return { ...prev, point_of_contact: { ...prev.point_of_contact, [name]: value } };
+    });
+  };
+
   useEffect(() => {
-    setFormData((prev) => {
-      return { ...prev, Status: statusSelected, AssignedTo: assignedToSelected };
+    setUpdatePayload((prev) => {
+      return {
+        ...prev,
+        meeting_status: statusSelected,
+        executive_name: assignedToSelected,
+      };
     });
   }, [statusSelected, assignedToSelected]);
 
   const updateData = async () => {
-    setFormData((prev) => {
+    setUpdatePayload((prev) => {
       return { ...prev, location };
     });
-    const payloadObj = {
-      title: formData?.Title,
-      executive_id: 143,
-      executive_name: formData?.AssignedTo,
-      latitude: location?.lat,
-      longitude: location?.lng,
-      meeting_status: formData?.Status,
 
-      point_of_contact: {
-        name: formData?.Name,
-        number: formData?.Phone,
-        email: formData?.Email,
-        meeting_notes: formData?.Note,
-        reference: formData?.Reference,
-      },
-
-      image_infos: [{ image_name: `${formData?.Name}_img`, image_path: formData?.Image }],
-    };
     if (token) {
-      await LeadServices.updateLead(paramValue, payloadObj, token);
+      await LeadServices.updateLead(paramValue, updatePayload, token);
+      console.log('updatePayload');
+      console.log(updatePayload);
       toast.success('Lead Update successfully.');
+      router.push(PAGE_ROUTES.Leads);
     } else {
       toast.error('Something went wrong.');
     }
@@ -107,11 +143,11 @@ const UpdateLeadForm = () => {
           placeholder='Title here'
           type='text'
           id='title'
-          name='Title'
+          name='title'
           htmlFor='title'
           className='w-full mb-5'
-          onChange={handleInputChange}
-          value={singleLeadData?.title}
+          onChange={handleSelectChange}
+          defaultValue={singleLeadData?.title}
         />
 
         <div className='flex flex-col justify-between gap-5 w-full mb-[21px]'>
@@ -135,10 +171,10 @@ const UpdateLeadForm = () => {
             placeholder='Name'
             type='text'
             id='name'
-            name='Name'
+            name='name'
             htmlFor='name'
-            onChange={handleInputChange}
-            value={singleLeadData?.point_of_contact?.name}
+            onChange={handlePointOfContactChange}
+            defaultValue={singleLeadData?.point_of_contact?.name}
           />
 
           <Input
@@ -146,10 +182,10 @@ const UpdateLeadForm = () => {
             placeholder='Phone number'
             type='text'
             id='phone'
-            name='Phone'
+            name='phone'
             htmlFor='phone'
-            onChange={handleInputChange}
-            value={singleLeadData?.point_of_contact?.phone}
+            onChange={handlePointOfContactChange}
+            defaultValue={singleLeadData?.point_of_contact?.phone}
           />
         </div>
 
@@ -159,10 +195,10 @@ const UpdateLeadForm = () => {
             placeholder='Email (Optional)'
             type='email'
             id='email'
-            name='Email'
+            name='email'
             htmlFor='email'
-            onChange={handleInputChange}
-            value={singleLeadData?.point_of_contact?.email}
+            onChange={handlePointOfContactChange}
+            defaultValue={singleLeadData?.point_of_contact?.email}
           />
 
           <Input
@@ -170,10 +206,10 @@ const UpdateLeadForm = () => {
             placeholder='Reference (Optional)'
             type='text'
             id='reference'
-            name='Reference'
+            name='reference'
             htmlFor='reference'
-            onChange={handleInputChange}
-            value={singleLeadData?.point_of_contact?.reference}
+            onChange={handlePointOfContactChange}
+            defaultValue={singleLeadData?.point_of_contact?.reference}
           />
         </div>
       </div>
@@ -182,10 +218,10 @@ const UpdateLeadForm = () => {
           <TextArea
             label={<p className='text-[#00156A] font-medium text-xs mb-1'>Remarks</p>}
             placeholder='Notes'
-            name='Note'
+            name='meeting_notes'
             className='h-[182px]'
-            onChange={handleInputChange}
-            value={singleLeadData?.point_of_contact?.meeting_notes}
+            onChange={handlePointOfContactChange}
+            defaultValue={singleLeadData?.point_of_contact?.meeting_notes}
           />
         </div>
 
@@ -204,7 +240,7 @@ const UpdateLeadForm = () => {
               placeholder='Upload image'
               name='Image'
               className='h-[92px]'
-              onChange={handleInputChange}
+              onChange={handleSelectChange}
             />
           </div>
         </div>

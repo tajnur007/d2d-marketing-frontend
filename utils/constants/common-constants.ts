@@ -12,6 +12,7 @@ import {
   SidebarItem,
   SignUpFormItems,
   SingleLeadItems,
+  UpdateLeadPayload,
   statusColor,
 } from '@/models/global-types';
 import {
@@ -68,9 +69,7 @@ export const API_PATHS = {
   GetLeads: '/lead/list',
   EmployeeListInfo: '/user/list',
   CreateReminder: '/reminder/create',
-  EmployeeListInfo:'/user/list',
-  UploadLeadImage:'/lead/upload-image',
-  DeleteLead: '/lead/delete',
+  UploadLeadImage: '/lead/upload-image',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -118,22 +117,25 @@ export const FORM_ITEMS: FormItems = {
 };
 
 export const SINGLE_LEAD_ITEMS: SingleLeadItems = {
-  title: '',
-  latitude: 0,
-  longitude: 0,
-  meeting_status: '',
   assignment_status: '',
+  company_id: 0,
+  created_at: '',
+  created_by: '',
+  created_by_user_id: 0,
+  executive_id: 0,
+  executive_name: '',
+  id: 0,
   image_info_json: [
     {
       image_name: '',
       image_path: '',
     },
   ],
-  executive_id: 0,
-  executive_name: '',
-  previous_user_id: 0,
+  latitude: 0,
+  longitude: 0,
   manager_id: 0,
   manager_name: '',
+  meeting_status: '',
   point_of_contact: {
     name: '',
     phone: '',
@@ -141,10 +143,47 @@ export const SINGLE_LEAD_ITEMS: SingleLeadItems = {
     reference: '',
     meeting_notes: '',
   },
-  company_id: 0,
-  created_at: '',
-  created_by: '',
-  reminders: '',
+  previous_user_id: 0,
+  reminders: [
+    {
+      title: '',
+      lead_id: 0,
+      reminder_time: '',
+      notes: '',
+      status: '',
+    },
+  ],
+};
+
+export const UPDATE_LEAD_PAYLOAD : UpdateLeadPayload = {
+  title: '',
+  executive_id: 0,
+  executive_name: '',
+  latitude: 0,
+  longitude: 0,
+  meeting_status: '',
+  point_of_contact: {
+    name: '',
+    phone: '',
+    email: '',
+    reference: '',
+    meeting_notes: '',
+  },
+  reminder: [
+    {
+      title: '',
+      user_id: 0,
+      reminder_time: '',
+      notes: '',
+      status: '',
+    },
+  ],
+  image_infos: [
+    {
+      image_name: '',
+      image_path: '',
+    },
+  ],
 };
 
 export const SETTING_FORM_ITEMS: SettingFormItems = {
