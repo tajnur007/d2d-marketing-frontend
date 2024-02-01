@@ -47,7 +47,7 @@ function EmployeeListRow({
         <div className='inline-flex items-center gap-[7px] text-[12px] mt-[20px]'>
           <div className='font-medium text-[#5630FF]'>{firstChar}</div>
 
-          <div className='font-bold text-black h-6 px-[8px] flex items-center bg-[#e5dfff] rounded-full'>
+          <div className='font-bold text-black h-6 min-w-6 px-2 flex items-center justify-center bg-[#e5dfff] rounded-full tracking-wide'>
             {uniqueCharCount[firstChar]}
           </div>
         </div>
