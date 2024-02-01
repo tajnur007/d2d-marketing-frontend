@@ -1,15 +1,12 @@
 import { Person } from '@/models/global-types';
 import React from 'react';
-import {generateInitials} from '@/utils/helpers/common-helpers'
-
+import { generateInitials } from '@/utils/helpers/common-helpers';
 
 const Profiles = ({ data }: { data: Person[] | null }) => {
   return (
     <div className='h-[calc(100%-70px)] overflow-y-auto tiny-scrollbar px-5'>
       {data?.map((person: Person) => (
-        <div
-          key={person?.executive_id}
-          className='flex items-center gap-5 mb-5'>
+        <div key={person?.executive_id} className='flex items-center gap-5 mb-5'>
           <div className='bg-[#E5DFFF] p-[13px] rounded-2xl font-semibold text-[#b8a9ff] text-[16px] w-[50px] flex items-center justify-center'>
             {generateInitials(person?.executive_name)}
           </div>

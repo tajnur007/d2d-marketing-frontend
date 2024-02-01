@@ -362,6 +362,7 @@ export interface CreateReminderModalProps {
   setFormErrors: (item: any) => void;
   selected: string;
   setSelected: (item: string) => void;
+  setIsCreated: (item: boolean) => void;
   leadsData: any;
 }
 
@@ -395,7 +396,6 @@ export interface LeadOptionsProps {
   handleViewButton: () => void;
   handleDeleteButton: () => void;
 }
-
 
 export interface LeadsDataType {
   id: number;

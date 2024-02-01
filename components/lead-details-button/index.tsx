@@ -79,7 +79,7 @@ const LeadDetailsButton = ({
         direction='right'
         size={450}
         overlayOpacity={0}>
-        <LeadDetails setIsOpen={setIsOpen} data={data} />
+        <LeadDetails setIsOpen={setIsOpen} data={data} isOpen={isOpen} />
       </Drawer>
       <DeleteConfirmationModal
         modalIsOpen={modalIsOpen}

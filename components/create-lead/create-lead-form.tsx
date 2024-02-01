@@ -34,7 +34,6 @@ const CreateLeadForm = () => {
     lat: 22.04,
     lng: 30.0,
   });
-
   const router = useRouter();
 
   const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
@@ -150,9 +149,12 @@ const CreateLeadForm = () => {
 
         const LeadServices = new LeadService();
         if (token) {
-          await LeadServices.createLead(payloadObj, token);
-          toast.success('Create lead successfully.');
-          router.push(PAGE_ROUTES.Dashboard);
+          const res = await LeadServices.createLead(payloadObj, token);
+          if (res.status === 201) {
+            setFormData(FORM_ITEMS);
+            toast.success('Create lead successfully.');
+            router.push(PAGE_ROUTES.Dashboard);
+          }
         } else {
           toast.error('Something went wrong.');
         }
@@ -173,6 +175,7 @@ const CreateLeadForm = () => {
           id='title'
           name='Title'
           htmlFor='title'
+          value={formData?.Title}
           errorMessage={formErrors.Title}
           className={`w-full mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
@@ -200,6 +203,7 @@ const CreateLeadForm = () => {
             type='text'
             id='name'
             name='Name'
+            value={formData?.Name}
             errorMessage={formErrors.Name}
             htmlFor='name'
             onChange={handleInputChange}
@@ -212,6 +216,7 @@ const CreateLeadForm = () => {
             type='text'
             id='phone'
             name='Phone'
+            value={formData?.Phone}
             errorMessage={formErrors.Phone}
             htmlFor='phone'
             onChange={handleInputChange}
@@ -227,6 +232,7 @@ const CreateLeadForm = () => {
             id='email'
             name='Email'
             htmlFor='email'
+            value={formData?.Email}
             errorMessage={formErrors.Email}
             onChange={handleInputChange}
             className={` ${formErrors.Email && 'border-red-500 shadow'}`}
@@ -239,6 +245,7 @@ const CreateLeadForm = () => {
             id='reference'
             name='Reference'
             htmlFor='reference'
+            value={formData?.Reference}
             onChange={handleInputChange}
           />
         </div>
@@ -249,6 +256,7 @@ const CreateLeadForm = () => {
             label='Remarks'
             placeholder='Notes'
             name='Note'
+            value={formData?.Note}
             errorMessage={formErrors.Note}
             className={`h-[182px] ${formErrors.Note && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
