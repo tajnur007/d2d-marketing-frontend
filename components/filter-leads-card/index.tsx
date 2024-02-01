@@ -50,7 +50,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     }));
   };
 
-  const { data } = useSession();
+  const { data: sessionData } = useSession();
   const ApplyFilter = async () => {
     try {
       if (
