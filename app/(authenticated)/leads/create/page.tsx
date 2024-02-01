@@ -8,7 +8,7 @@ const LeadsCreatePage = () => {
   const router = useRouter();
 
   return (
-    <div className='bg-white rounded-[10px] py-8 h-[84vh]'>
+    <div className='bg-white rounded-[10px] py-8 h-[calc(100vh-102px)] '>
       <div className='flex items-center gap-5 mx-6'>
         <p onClick={() => router.push(PAGE_ROUTES.Leads)} className='cursor-pointer'>
           <BackArrowIcon />

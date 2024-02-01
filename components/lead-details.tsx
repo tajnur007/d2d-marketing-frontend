@@ -13,15 +13,21 @@ import {
   LeadListType,
   AssignToUsers,
   statusColor,
+  RemainderType,
 } from '@/models/global-types';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import React from 'react';
 import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
+import { LeadService } from '@/services/lead-services';
+import { useSession } from 'next-auth/react';
+import { CustomSelect } from './select/custom-select';
+import Select from 'react-select';
+import { toast } from 'react-toastify';
 
 const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -31,33 +37,63 @@ const LeadDetails = ({
   data,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  data: LeadListType;
+  data: any;
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [formErrors, setFormErrors] =
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [closeDrawer, setCloseDrawer] = React.useState(false);
+  const [reminders, setReminders] = React.useState<RemainderType[]>([]);
+  const [selectReminder, setSelectReminder] = React.useState();
+  const { data: reminderData } = useSession();
+  //@ts-ignore den
+  const token: string = reminderData?.user?.access_token;
 
-  const src = data.image_info_json[0].image_name;
+  const src = data?.image_info_json[0]?.image_name;
 
   const handleAddReminderButtonClick = () => {
     console.log('Button Clicked.');
     setModalIsOpen(true);
   };
 
-  useEffect(() => {});
+  const handleChange = (selectedOption: any) => {
+    setSelectReminder(selectedOption.value);
+  };
+
+  const deleteReminder = async (id: number) => {
+    const Service = new LeadService();
+    const res = await Service.deleteReminder(id, token);
+    console.log(res);
+
+    if (res?.status === 202) {
+      toast.success('Successfully deleted!');
+    } else {
+      toast.error('Failed to delete!');
+    }
+  };
+  const getAllReminders = async () => {
+    const Service = new LeadService();
+    const res = await Service.getAllReminder(token);
+    setReminders(res?.data?.Data?.Data);
+  };
+  useEffect(() => {
+    getAllReminders();
+  });
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [closeDrawer, setIsOpen]);
+
+  // console.log(reminders);
 
   return (
     <div className='p-8  h-full overflow-y-auto no-scrollbar '>
-      <div className='flex justify-between items-center'>
-        <div>
-          <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
-        </div>
-        <div>
-          <button onClick={() => setIsOpen(false)} type='button'>
-            <Image src={crossImage} alt='close' />
-          </button>
+      <div className='flex justify-between '>
+        <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
+        <div onClick={() => setCloseDrawer(!closeDrawer)} className='cursor-pointer'>
+          <Image src={crossImage} alt='close' />
         </div>
       </div>
 
@@ -79,7 +115,7 @@ const LeadDetails = ({
           <div
             className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center  
                 ${
-                  getStatusColor[data.meeting_status as keyof statusColor]
+                  getStatusColor[data?.meeting_status as keyof statusColor]
                 } cursor-pointer`}>
             <button className='text-black text-sm font-medium'>
               {data?.meeting_status}
@@ -92,7 +128,7 @@ const LeadDetails = ({
             <Image src={clockImage} alt='' />
           </div>
           <div className='text-gray-400 text-xs whitespace-nowrap text-capitalize inline-block'>
-            {moment(data.created_at).format('ddd DD MMM, YYYY hh:mm A')}
+            {moment(data?.created_at).format('ddd DD MMM, YYYY hh:mm A')}
           </div>
         </div>
         <AssignDropdownSelect />
@@ -163,22 +199,57 @@ const LeadDetails = ({
           height='108'
         />
       </div>
-      {data?.remainders && (
-        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
-          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
-            Reminder
+
+      <div className=' bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
+        <h1 className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
+          Reminder
+        </h1>
+        {reminders?.length === 0 ? (
+          <div className='text-center'>No reminder found</div>
+        ) : (
+          <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
+            {reminders?.map((reminder: RemainderType) => {
+              return (
+                <div className='rounded-lg p-4 bg-white' key={reminder?.id}>
+                  <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
+                    <span>{reminder?.title}</span>
+                    <div
+                      onClick={() => deleteReminder(reminder?.id)}
+                      className='cursor-pointer'>
+                      <Image src={crossImage} alt='close' />
+                    </div>
+                  </p>
+                  <p className='text-[#8A8A8A] mb-[10px]'>
+                    {moment(reminder?.reminder_time).format('YYYY/MM/DD h:mma')}
+                  </p>
+                  <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
+                    {reminder?.status}
+                    {/* <Select
+                    className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+                    styles={{
+                      control: (baseStyles) => ({
+                        ...baseStyles,
+                        borderColor: '2px #F3F3F3 solid',
+                        width: '100%',
+                        height: '56px',
+                        borderRadius: '10px',
+                      }),
+                    }}
+                    options={[
+                      { value: 'hot', label: 'Hot' },
+                      { value: 'cold', label: 'Cold' },
+                      { value: 'warm', label: 'Warm' },
+                    ]}
+                    onChange={handleChange}
+                  /> */}
+                  </button>
+                </div>
+              );
+            })}
           </div>
-          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
-            {data?.remainders?.title}
-          </div>
-          <div className='text-[#8A8A8A] mb-[10px]'>
-            {data?.remainders?.reminder_time}
-          </div>
-          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-            {data?.remainders?.status}
-          </button>
-        </div>
-      )}
+        )}
+      </div>
+
       <div className='flex justify-center items-center'>
         <Button
           onClick={handleAddReminderButtonClick}
@@ -195,6 +266,7 @@ const LeadDetails = ({
         setFormErrors={setFormErrors}
         selected={selected}
         setSelected={setSelected}
+        leadsData={data}
       />
     </div>
   );

@@ -24,7 +24,7 @@ import {
 } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -61,7 +61,12 @@ export const API_PATHS = {
   LatestLeads: '/lead/dashboard-info-latest-leads',
   Leaderboard: '/user/leaderboard',
   GetLeads: '/lead/list',
-  EmployeeListInfo: '/user/list'
+  CreateReminder: '/reminder/create',
+  EmployeeListInfo: '/user/list',
+  UploadLeadImage: '/lead/upload-image',
+  DeleteLead: '/lead/delete',
+  GetAllReminder: '/reminder/list',
+  DeleteReminder: '/reminder/delete',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -139,7 +144,7 @@ export const LEAD_STATUS = {
   InProgress: 'In-Progress',
   Completed: 'Completed',
   Hot: 'Hot',
-  Cool: 'Cool',
+  Cold: 'Cold',
   Warm: 'Warm',
 };
 
@@ -151,7 +156,7 @@ export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
   { value: 'hot', label: 'Hot' },
-  { value: 'cool', label: 'Cool' },
+  { value: 'cold', label: 'Cold' },
   { value: 'warm', label: 'Warm' },
 ];
 
@@ -183,7 +188,7 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.InProgress,
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
-  LEAD_STATUS.Cool,
+  LEAD_STATUS.Cold,
   LEAD_STATUS.Warm,
 ];
 
@@ -249,14 +254,20 @@ export const OPTION_MENU = [
     icon: DeleteIcon,
   },
 ];
+
 export const LEADERBOARD_ITEMS: LEADERBOARD = {
   Count: 0,
   Data: [
     {
-      id: 0,
+      executive_id: 0,
+      executive_name: '',
+      count_of_leads: 0,
       initials: '',
-      name: '',
-      totalLeads: 0,
     },
   ],
+};
+
+export const IMAGE_DETAIL = {
+  name: '60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png',
+  path: 'http://157.245.204.196:8021/v1/auth/image-by-path?image_path=files/60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png',
 };

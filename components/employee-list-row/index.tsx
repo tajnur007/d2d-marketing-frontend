@@ -18,10 +18,12 @@ function EmployeeListRow({
   item,
   uniqueCharCount,
   isFirstChar,
+  employeeActionRef,
 }: {
   item: any;
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
+  employeeActionRef: any;
 }) {
   const { data } = useSession();
   const firstChar = item.name.charAt(0).toUpperCase();
@@ -103,6 +105,7 @@ function EmployeeListRow({
               <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
             </div>
           }
+          ref={employeeActionRef}
           position='left center'
           on='click'
           closeOnDocumentClick
