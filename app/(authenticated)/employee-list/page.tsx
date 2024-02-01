@@ -154,8 +154,8 @@ const EmployeeListPage = () => {
           className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[69vh]'
           onScroll={handleScroll}>
           <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-            {filteredEmployeeList.map((item, index) => {
-              const firstChar = item.name.charAt(0).toUpperCase();
+            {filteredEmployeeList?.map((item, index) => {
+              const firstChar = item?.name?.charAt(0).toUpperCase();
               let isFirstChar = false;
 
               // If the character has not been displayed, add it to the array and set isFirstChar to true
