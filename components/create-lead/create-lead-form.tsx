@@ -30,6 +30,7 @@ const CreateLeadForm = () => {
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -70,7 +71,7 @@ const CreateLeadForm = () => {
   useEffect(() => {
     if (token) {
       const LeadServices = new LeadService();
-      LeadServices.getExecutivesData(setExecutivesOption, token);
+      LeadServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
     }
   }, [token, setExecutivesOption]);
 
