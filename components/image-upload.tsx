@@ -1,21 +1,3 @@
-{
-  /* <div className='flex flex-col items-start justify-center '>
-      <p className='text-[#00156A] font-medium text-xs mb-2'>
-        Image
-        {formErrors.Image && (
-          <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
-        )}
-      </p>
-
-      <ImageUpload
-        placeholder='Upload image'
-        name='Image'
-        onChange={handleImageUpload}
-        className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
-      />
-    </div> */
-}
-
 import { GalleryIcon } from '@/assets/icons';
 import { InputProps } from '@/models/global-types';
 import { useState } from 'react';
