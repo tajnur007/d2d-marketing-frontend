@@ -27,6 +27,8 @@ if (Modal.defaultStyles.overlay) {
 const CreateReminderModal = ({
   modalIsOpen,
   setModalIsOpen = () => {},
+  setIsCreated = () => {},
+
   formData,
   setFormData = () => {},
   formErrors,
@@ -94,6 +96,7 @@ const CreateReminderModal = ({
           if (response.status === 201) {
             setFormData(CREATE_REMINDER_ITEMS);
             setModalIsOpen(false);
+            setIsCreated(true);
             toast.success('Remainder created successfully.');
           }
         } else {
@@ -119,8 +122,6 @@ const CreateReminderModal = ({
   };
 
   const getDate = (e: any) => {
-    console.log(e._d);
-
     setFormData((prev: any) => {
       return { ...prev, Date: e._d };
     });

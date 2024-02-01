@@ -35,9 +35,11 @@ const getStatusColor: statusColor = {
 const LeadDetails = ({
   setIsOpen,
   data,
+  isOpen,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   data: any;
+  isOpen: boolean;
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
@@ -47,6 +49,7 @@ const LeadDetails = ({
   const [closeDrawer, setCloseDrawer] = React.useState(false);
   const [reminders, setReminders] = React.useState<RemainderType[]>([]);
   const [selectReminder, setSelectReminder] = React.useState();
+  const [isCreated, setIsCreated] = React.useState(false);
   const { data: reminderData } = useSession();
   //@ts-ignore den
   const token: string = reminderData?.user?.access_token;
@@ -54,42 +57,50 @@ const LeadDetails = ({
   const src = data?.image_info_json[0]?.image_name;
 
   const handleAddReminderButtonClick = () => {
-    console.log('Button Clicked.');
     setModalIsOpen(true);
   };
 
-  const handleChange = (selectedOption: any) => {
-    setSelectReminder(selectedOption.value);
-  };
+  // const handleChange = (selectedOption: any) => {
+  //   setSelectReminder(selectedOption.value);
+  // };
 
   const deleteReminder = async (id: number) => {
     const Service = new LeadService();
     const res = await Service.deleteReminder(id, token);
-    console.log(res);
 
     if (res?.status === 202) {
       toast.success('Successfully deleted!');
+      getAllReminders();
     } else {
       toast.error('Failed to delete!');
     }
   };
+
   const getAllReminders = async () => {
     const Service = new LeadService();
     const res = await Service.getAllReminder(token);
     setReminders(res?.data?.Data?.Data);
   };
+
+  // To get data initially
   useEffect(() => {
-    getAllReminders();
-  });
+    isOpen && getAllReminders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, token]);
+
+  // To get the latest reminder after creating new reminder
+  useEffect(() => {
+    isCreated && getAllReminders();
+    setIsCreated(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCreated]);
 
   useEffect(() => {
     setIsOpen(false);
   }, [closeDrawer, setIsOpen]);
 
-  // console.log(reminders);
-
   return (
-    <div className='p-8  h-full overflow-y-auto no-scrollbar '>
+    <div className='p-8 h-full overflow-y-auto no-scrollbar '>
       <div className='flex justify-between '>
         <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
         <div onClick={() => setCloseDrawer(!closeDrawer)} className='cursor-pointer'>
@@ -249,6 +260,7 @@ const LeadDetails = ({
         selected={selected}
         setSelected={setSelected}
         leadsData={data}
+        setIsCreated={setIsCreated}
       />
     </div>
   );
