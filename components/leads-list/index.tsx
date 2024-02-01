@@ -10,6 +10,7 @@ import { LeadService } from '@/services/lead-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
 import { LeadsContext } from '@/context/leads-context';
+import Loader from '../loader';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -18,6 +19,7 @@ function LeadsList() {
   const [filterData, setFilterData] = useState({});
   const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const {
     executivesOption,
@@ -40,9 +42,9 @@ function LeadsList() {
   useEffect(() => {
     if (token) {
       const LeadServices = new LeadService();
-      LeadServices.getExecutivesData(setExecutivesOption, token);
+      LeadServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
       LeadServices.getCreatedByData(setCreatedByOptions, token);
-      LeadServices.getLeadsData(setLeadsData, token);
+      LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
     }
   }, [token, setExecutivesOption, setCreatedByOptions]);
 
@@ -100,29 +102,33 @@ function LeadsList() {
           </div>
         </div>
       </div>
-      <div
-        className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'
-        onScroll={handleScroll}>
-        <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
-          {searchData.length > 0
-            ? searchData.map((item, index) => (
-                <LeadRow
-                  key={index}
-                  item={item}
-                  leadRefresh={leadRefresh}
-                  setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
-                />
-              ))
-            : leadsData.map((item, index) => (
-                <LeadRow
-                  key={index}
-                  item={item}
-                  leadRefresh={leadRefresh}
-                  setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
-                />
-              ))}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div
+          className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'
+          onScroll={handleScroll}>
+          <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
+            {searchData.length > 0
+              ? searchData.map((item, index) => (
+                  <LeadRow
+                    key={index}
+                    item={item}
+                    leadRefresh={leadRefresh}
+                    setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                  />
+                ))
+              : leadsData.map((item, index) => (
+                  <LeadRow
+                    key={index}
+                    item={item}
+                    leadRefresh={leadRefresh}
+                    setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                  />
+                ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

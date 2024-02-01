@@ -8,6 +8,9 @@ import { LeadListType } from '@/models/global-types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import LeadsOptions from './leads-options';
+import { roundToNearestMinutes } from 'date-fns';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { useRouter } from 'next/navigation';
 import DeleteConfirmationModal from '../delete-confirmation-modal';
 import { LeadsContext } from '@/context/leads-context';
 import './style.css';
@@ -23,6 +26,8 @@ const LeadDetailsButton = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const ref = useRef<any>(null);
+  const router = useRouter();
   const { leadDetailsRef } = useContext(LeadsContext);
 
   const toggleDrawer = () => {
@@ -34,6 +39,10 @@ const LeadDetailsButton = ({
     leadDetailsRef.current.close();
   };
 
+  //! data.id pass in lead update page
+  const handleEditButton = () => {
+    router.push(`${PAGE_ROUTES.LeadUpdate}?id=${data.id}`);
+  };
   const handleDeleteButton = async () => {
     setModalIsOpen(true);
   };
@@ -69,6 +78,7 @@ const LeadDetailsButton = ({
         {!modalIsOpen && (
           <LeadsOptions
             handleViewButton={handleViewButton}
+            handleEditButton={handleEditButton}
             handleDeleteButton={handleDeleteButton}
           />
         )}
@@ -79,7 +89,7 @@ const LeadDetailsButton = ({
         direction='right'
         size={450}
         overlayOpacity={0}>
-        <LeadDetails setIsOpen={setIsOpen} data={data} />
+        <LeadDetails setIsOpen={setIsOpen} data={data} isOpen={isOpen} />
       </Drawer>
       <DeleteConfirmationModal
         modalIsOpen={modalIsOpen}
