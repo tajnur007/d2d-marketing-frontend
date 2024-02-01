@@ -38,9 +38,9 @@ export const GRAPH_CONFIG = {
       { month: 'December', value: 200 },
     ],
   },
-  HotDeals: {
+  HotLeads: {
     id: 2,
-    label: 'Hot Deals',
+    label: 'Hot Leads',
     count: 20,
     color: '#FF7B7B',
     countColor: '#FFC2C2',
@@ -59,9 +59,9 @@ export const GRAPH_CONFIG = {
       { month: 'December', value: 200 },
     ],
   },
-  WarmDeals: {
+  WarmLeads: {
     id: 3,
-    label: 'Warm Deals',
+    label: 'Warm Leads',
     count: 30,
     color: '#07BEAA',
     countColor: '#CBF6F1',
