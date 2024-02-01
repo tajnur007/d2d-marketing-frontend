@@ -2,7 +2,7 @@
 
 import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import EmployeeListRow from '@/components/employee-list-row';
@@ -21,6 +21,8 @@ const EmployeeListPage = () => {
   const [formErrors, setFormErrors] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
+
+  const employeeActionRef = useRef<any>(null);
 
   const [uniqueCharCount, setUniqueCharCount] = useState<{ [key: string]: number }>({});
 
@@ -93,6 +95,10 @@ const EmployeeListPage = () => {
     setModalIsOpen(true);
   };
 
+  const handleScroll = () => {
+    employeeActionRef.current.close();
+  };
+
   const filteredEmployeeList = employeeInfo.filter((employee) =>
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -144,7 +150,9 @@ const EmployeeListPage = () => {
           </div>
         </div>
 
-        <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[69vh]'>
+        <div
+          className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[69vh]'
+          onScroll={handleScroll}>
           <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
             {filteredEmployeeList.map((item, index) => {
               const firstChar = item.name.charAt(0).toUpperCase();
@@ -163,12 +171,14 @@ const EmployeeListPage = () => {
                   item={item}
                   uniqueCharCount={uniqueCharCount}
                   isFirstChar={isFirstChar}
+                  employeeActionRef={employeeActionRef}
                 />
               ) : (
                 <EmployeeListRow
                   key={index}
                   item={item}
                   uniqueCharCount={uniqueCharCount}
+                  employeeActionRef={employeeActionRef}
                 />
               );
             })}

@@ -3,7 +3,7 @@
 import { CalendarIcon } from '@/assets/icons';
 import { FilterLeadsCardProps, StatusState } from '@/models/global-types';
 import { useState, useContext } from 'react';
-import { ExecutiveContext, createdByContext } from '@/context/executives-context';
+import { LeadsContext } from '@/context/leads-context';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomMultiSelect } from '../custom-multi-select';
@@ -28,8 +28,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   //! State for Created by
   const [selectedCreatedBy, setCreatedBy] = useState<string | null>(null);
   const [selectedAssignee, setAssignee] = useState<string | null>(null);
-  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
-  const { createdByOptions, setCreatedByOptions } = useContext(createdByContext);
+  const { executivesOption, setExecutivesOption, createdByOptions, setCreatedByOptions } = useContext(LeadsContext);
 
   //* Output
   const filterData = {

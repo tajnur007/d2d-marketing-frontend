@@ -116,12 +116,22 @@ export interface ImageInfoType {
   image_path?: string;
 }
 
+// export interface RemainderType {
+//   title: string;
+//   lead_id: number;
+//   reminder_time: ReactNode;
+//   notes: string;
+//   status: string;
+// }
 export interface RemainderType {
-  title: string;
+  company_id: number;
+  id: number;
   lead_id: number;
-  reminder_time: ReactNode;
   notes: string;
+  reminder_time: string;
   status: string;
+  title: string;
+  user_id: number;
 }
 
 export interface LeadListType {
@@ -189,7 +199,7 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?:string,
+  Image?: string;
   AssignedTo?: string;
   location: MapLocation;
 }
@@ -385,6 +395,7 @@ export interface LeadOptionsProps {
   handleViewButton: () => void;
   handleDeleteButton: () => void;
 }
+
 
 export interface LeadsDataType {
   value?: string;

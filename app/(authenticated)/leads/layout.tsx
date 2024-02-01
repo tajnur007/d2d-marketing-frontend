@@ -1,20 +1,23 @@
 'use client';
-import { useState } from 'react';
-import { ExecutiveContext, createdByContext } from '@/context/executives-context';
+import { useState, useRef } from 'react';
+import { LeadsContext } from '@/context/leads-context';
 import { AssignToUsers, LeadsDataType } from '@/models/global-types';
 
 export default function LeedsLayout({ children }: { children: React.ReactNode }) {
   const [executivesOption, setExecutivesOption] = useState<AssignToUsers[]>([]);
   const [createdByOptions, setCreatedByOptions] = useState<LeadsDataType[]>([]);
+   const leadDetailsRef = useRef(null);
 
   return (
-    <>
-      <ExecutiveContext.Provider value={{ executivesOption, setExecutivesOption }}>
-        {children}
-      </ExecutiveContext.Provider>
-      <createdByContext.Provider value={{ createdByOptions, setCreatedByOptions }}>
-        {children}
-      </createdByContext.Provider>
-    </>
+    <LeadsContext.Provider
+      value={{
+        executivesOption,
+        setExecutivesOption,
+        leadDetailsRef,
+        createdByOptions,
+        setCreatedByOptions,
+      }}>
+      {children}
+    </LeadsContext.Provider>
   );
 }

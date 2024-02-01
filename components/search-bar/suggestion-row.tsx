@@ -1,15 +1,13 @@
 'use client';
 import moment from 'moment';
 import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
-import LeadDetails from '@/components/lead-details';
-import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
+import { LeadListType, statusColor } from '@/models/global-types';
 import Image from 'next/image';
-import { Dispatch, SetStateAction, useState } from 'react';
-import Drawer from 'react-modern-drawer';
+import { Dispatch, SetStateAction } from 'react';
 import 'react-modern-drawer/dist/index.css';
 
 const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -64,9 +62,6 @@ const SuggestionRow = ({
           </span>
         </div>
       </div>
-      {/* <Drawer open={isOpen} direction='right' size={450} enableOverlay={false}>
-        <LeadDetails setIsOpen={setIsOpen} data={item} />
-      </Drawer> */}
     </div>
   );
 };

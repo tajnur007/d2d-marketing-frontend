@@ -9,7 +9,7 @@ import { LeadListType } from '@/models/global-types';
 import { LeadService } from '@/services/lead-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
-import { ExecutiveContext, createdByContext } from '@/context/executives-context';
+import { LeadsContext } from '@/context/leads-context';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -19,8 +19,8 @@ function LeadsList() {
   const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
 
-  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
-  const { createdByOptions, setCreatedByOptions } = useContext(createdByContext);
+  const { executivesOption, setExecutivesOption, leadDetailsRef, createdByOptions, setCreatedByOptions } =
+    useContext(LeadsContext);
 
   const { data: sessionData } = useSession();
   //@ts-ignore den
@@ -58,6 +58,10 @@ function LeadsList() {
     } else setKeyPress(false);
   };
 
+  const handleScroll = () => {
+    leadDetailsRef.current.close();
+  };
+
   return (
     <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
       <div className='py-4 md:py-6 pl-8 h-[96px]'>
@@ -91,7 +95,9 @@ function LeadsList() {
           </div>
         </div>
       </div>
-      <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
+      <div
+        className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'
+        onScroll={handleScroll}>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
             ? searchData.map((item, index) => (
