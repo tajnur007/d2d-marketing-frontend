@@ -97,14 +97,15 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           },
         },
       };
-      console.log(payloadObj);
+      //console.log(payloadObj);
 
       // @ts-ignore
       const token = data?.user?.access_token;
 
       const LeadServices = new LeadService();
       if (token) {
-        //await LeadServices.createLead(payloadObj, token);
+        await LeadServices.FilteredLeadsData(payloadObj, token);
+        
       }
     } catch (err) {
       console.log(err);

@@ -171,7 +171,7 @@ export class LeadService {
 };
 
 
- 
+
 
 
    //! Get single Lead data
@@ -241,4 +241,20 @@ export class LeadService {
 
     return resp;
   };
+
+  public FilteredLeadsData = async ( data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.FilterLeads,
+      method: API_METHODS.GET,
+      ...config,
+      data,
+    });
+  };
+
 }
