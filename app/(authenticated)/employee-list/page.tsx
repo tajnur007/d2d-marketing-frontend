@@ -10,11 +10,13 @@ import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
 import { CreateEmployeeItems } from '@/models/global-types';
 import Image from 'next/image';
 import CreateEmployeeModal from '@/components/create-employee-modal';
+import Loader from '@/components/loader';
 
 const EmployeeListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [isExecutive, setIsExecutive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
@@ -58,7 +60,7 @@ const EmployeeListPage = () => {
           phone: item.phone,
           email: item.email,
         }));
-
+        setIsLoading(false);
         setEmployeeInfo(formattedData);
       } catch (error) {
         console.error('Error fetching Users info:', error);
@@ -149,41 +151,44 @@ const EmployeeListPage = () => {
             </div>
           </div>
         </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div
+            className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[69vh]'
+            onScroll={handleScroll}>
+            <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
+              {filteredEmployeeList?.map((item, index) => {
+                const firstChar = item?.name?.charAt(0).toUpperCase();
+                let isFirstChar = false;
 
-        <div
-          className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[69vh]'
-          onScroll={handleScroll}>
-          <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-            {filteredEmployeeList?.map((item, index) => {
-              const firstChar = item?.name?.charAt(0).toUpperCase();
-              let isFirstChar = false;
+                // If the character has not been displayed, add it to the array and set isFirstChar to true
+                if (!displayedChars.includes(firstChar)) {
+                  displayedChars.push(firstChar);
+                  isFirstChar = true;
+                }
 
-              // If the character has not been displayed, add it to the array and set isFirstChar to true
-              if (!displayedChars.includes(firstChar)) {
-                displayedChars.push(firstChar);
-                isFirstChar = true;
-              }
-
-              // Pass isFirstChar prop only when it's true
-              return isFirstChar ? (
-                <EmployeeListRow
-                  key={index}
-                  item={item}
-                  uniqueCharCount={uniqueCharCount}
-                  isFirstChar={isFirstChar}
-                  employeeActionRef={employeeActionRef}
-                />
-              ) : (
-                <EmployeeListRow
-                  key={index}
-                  item={item}
-                  uniqueCharCount={uniqueCharCount}
-                  employeeActionRef={employeeActionRef}
-                />
-              );
-            })}
+                // Pass isFirstChar prop only when it's true
+                return isFirstChar ? (
+                  <EmployeeListRow
+                    key={index}
+                    item={item}
+                    uniqueCharCount={uniqueCharCount}
+                    isFirstChar={isFirstChar}
+                    employeeActionRef={employeeActionRef}
+                  />
+                ) : (
+                  <EmployeeListRow
+                    key={index}
+                    item={item}
+                    uniqueCharCount={uniqueCharCount}
+                    employeeActionRef={employeeActionRef}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <CreateEmployeeModal
         modalIsOpen={modalIsOpen}

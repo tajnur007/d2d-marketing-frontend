@@ -25,11 +25,16 @@ export class LeadService {
     return resp;
   };
 
-  public getExecutivesData = async (setExecutivesOption: any, token: string) => {
+  public getExecutivesData = async (
+    setExecutivesOption: any,
+    token: string,
+    setIsLoading: (item: boolean) => void
+  ) => {
     try {
       const response = await this.getExecutives(token);
       const executivesOption = this.createSelectData(response.data.Data.Data);
       setExecutivesOption(executivesOption);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching executives:', error);
     }
@@ -60,12 +65,17 @@ export class LeadService {
     return resp;
   };
 
-  public getLeadsData = async (setLeadsData: any, token: string) => {
+  public getLeadsData = async (
+    setLeadsData: any,
+    token: string,
+    setIsLoading: (item: boolean) => void
+  ) => {
     try {
       const response = await this.getLeads(token);
-      console.log(response);
+
       const data = response.data.Data.Data;
       setLeadsData(data);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching leads:', error);
     }
