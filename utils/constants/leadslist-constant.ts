@@ -227,7 +227,6 @@ export const LEADS_DATA: LeadsDataType[] = [
 export const CREATED_BY_USERS_LIST = LEADS_DATA.map((item) => ({
   value: item.assignedByName,
   label: item.assignedByName,
-  image: item.image,
 }));
 
 export const ASSIGNEE_USERS_LIST = LEADS_DATA.map((item) => ({
@@ -235,3 +234,4 @@ export const ASSIGNEE_USERS_LIST = LEADS_DATA.map((item) => ({
   label: item.assignedToName,
   image: item.image,
 }));
+

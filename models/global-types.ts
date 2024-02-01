@@ -387,6 +387,8 @@ export interface LeadOptionsProps {
 }
 
 export interface LeadsDataType {
+  value?: string;
+  label?: string;
   id: number;
   title: string;
   date: string;
@@ -404,6 +406,7 @@ export interface LeadsDataType {
     reminderStatus: string;
   };
   timestamp: string;
+
 }
 
 export interface EmployeeOptionsProps {

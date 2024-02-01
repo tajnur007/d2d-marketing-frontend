@@ -2,11 +2,8 @@
 
 import { CalendarIcon } from '@/assets/icons';
 import { FilterLeadsCardProps, StatusState } from '@/models/global-types';
-import {
-  ASSIGNEE_USERS_LIST,
-  CREATED_BY_USERS_LIST,
-} from '@/utils/constants/leadslist-constant';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ExecutiveContext, createdByContext } from '@/context/executives-context';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomMultiSelect } from '../custom-multi-select';
@@ -31,6 +28,8 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   //! State for Created by
   const [selectedCreatedBy, setCreatedBy] = useState<string | null>(null);
   const [selectedAssignee, setAssignee] = useState<string | null>(null);
+  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
+  const { createdByOptions, setCreatedByOptions } = useContext(createdByContext);
 
   //* Output
   const filterData = {
@@ -70,6 +69,9 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     setFilterCardOpen(false);
   };
 
+  console.log(createdByOptions);
+  console.log(executivesOption);
+
   return (
     <div>
       <div className=' bg-white  mt-2 pl-[12px] pt-[20px] pr-[20px] pb-[20px]'>
@@ -81,7 +83,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <div>
             <CustomMultiSelect
               setSelected={setCreatedBy}
-              options={CREATED_BY_USERS_LIST}
+              options={createdByOptions}
               onSelectChange={(value: any) => setCreatedBy(value)}
             />
           </div>
@@ -97,7 +99,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <div>
             <CustomMultiSelect
               setSelected={setAssignee}
-              options={ASSIGNEE_USERS_LIST}
+              options={executivesOption}
               onSelectChange={(value: any) => setAssignee(value)}
             />
           </div>
@@ -124,10 +126,10 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
               Warm
             </StatusCheckbox>
             <StatusCheckbox
-              id='cool-checkbox'
+              id='cold-checkbox'
               checked={status.cold}
               onChange={() => handleCheckboxChange('cold')}>
-              Cool
+              Cold
             </StatusCheckbox>
           </div>
         </div>

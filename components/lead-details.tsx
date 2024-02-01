@@ -21,7 +21,7 @@ import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateReminderModal from './create-reminder-modal';
 
 const getStatusColor: statusColor = {
-  cool: 'bg-blue-200',
+  cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
@@ -76,7 +76,7 @@ const LeadDetails = ({
         <div className='flex items-center gap-4 mt-3'>
           <div className='flex-grow break-all'>{data?.title}</div>
           <div
-            className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center  
+            className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center
                 ${
                   getStatusColor[data?.meeting_status as keyof statusColor]
                 } cursor-pointer`}>

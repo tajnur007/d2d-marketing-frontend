@@ -9,7 +9,7 @@ import { LeadListType } from '@/models/global-types';
 import { LeadService } from '@/services/lead-services';
 import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
-import { ExecutiveContext } from '@/context/executives-context';
+import { ExecutiveContext, createdByContext } from '@/context/executives-context';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -20,6 +20,8 @@ function LeadsList() {
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
 
   const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
+  const { createdByOptions, setCreatedByOptions } = useContext(createdByContext);
+
   const { data: sessionData } = useSession();
   //@ts-ignore den
   const token: string = sessionData?.user?.access_token;
@@ -34,9 +36,10 @@ function LeadsList() {
     if (token) {
       const LeadServices = new LeadService();
       LeadServices.getExecutivesData(setExecutivesOption, token);
+      LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token);
     }
-  }, [token, setExecutivesOption, leadRefresh]);
+  }, [token, setExecutivesOption, setCreatedByOptions, leadRefresh]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
@@ -91,8 +94,22 @@ function LeadsList() {
       <div className='overflow-y-auto overflow-x-hidden tiny-scrollbar h-[68vh]'>
         <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
           {searchData.length > 0
-            ? searchData.map((item, index) => <LeadRow key={index} item={item} leadRefresh={leadRefresh} setLeadRefresh={() => setLeadRefresh(!leadRefresh)}/>)
-            : leadsData.map((item, index) => <LeadRow key={index} item={item} leadRefresh={leadRefresh} setLeadRefresh={() => setLeadRefresh(!leadRefresh)}/>)}
+            ? searchData.map((item, index) => (
+                <LeadRow
+                  key={index}
+                  item={item}
+                  leadRefresh={leadRefresh}
+                  setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                />
+              ))
+            : leadsData.map((item, index) => (
+                <LeadRow
+                  key={index}
+                  item={item}
+                  leadRefresh={leadRefresh}
+                  setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                />
+              ))}
         </div>
       </div>
     </div>

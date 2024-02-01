@@ -63,7 +63,7 @@ export class LeadService {
   public getLeadsData = async (setLeadsData: any, token: string) => {
     try {
       const response = await this.getLeads(token);
-      console.log(response);
+      // console.log(response);
       const data = response.data.Data.Data;
       setLeadsData(data);
     } catch (error) {
@@ -137,6 +137,27 @@ export class LeadService {
 
     return resp;
   };
+
+  public getCreatedByData = async (setCreatedByOptions: any, token: string) => {
+  try {
+    const response = await this.getLeads(token);
+    const data = response.data.Data.Data;
+    const uniqueCreatedByValues: any[] = [];
+    const encounteredValues = new Set<string>();
+
+    data.map((item: any) => {
+      const createdBy = item.created_by;
+      if (createdBy && !encounteredValues.has(createdBy)) {
+        encounteredValues.add(createdBy);
+        const newItem = { value: item.created_by, label: item.created_by };
+        uniqueCreatedByValues.push(newItem);
+      }
+    });
+    setCreatedByOptions(uniqueCreatedByValues);
+  } catch (error) {
+    console.error('Error fetching leads:', error);
+  }
+};
 
 
 }
