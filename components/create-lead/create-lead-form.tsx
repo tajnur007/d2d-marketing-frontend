@@ -1,35 +1,37 @@
 'use client';
 
+import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
-import { ImageUpload } from '@/components/image-upload';
-import { Button } from '@/components/button';
-import { useEffect, useState, useContext } from 'react';
+import { ExecutiveContext } from '@/context/executives-context';
+import { FormItems } from '@/models/global-types';
+import { LeadService } from '@/services/lead-services';
 import {
-  ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
-  IMAGE_DETAIL,
   PAGE_ROUTES,
 } from '@/utils/constants/common-constants';
-import { FormItems } from '@/models/global-types';
+import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { LeadService } from '@/services/lead-services';
-import { useSession } from 'next-auth/react';
-import { ExecutiveContext } from '@/context/executives-context';
-import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
+import Dropzone from './multi-image-upload';
 
-const CreateLeadForm = () => {
+const CreateLeadForm: React.FC = () => {
   const [statusSelected, setStatusSelected] = useState('');
   const [assignedToSelected, setAssignedToSelected] = useState('');
+  const [images, setImages] = useState([]);
+  const [imageNameList, setImageNameList] = useState<string[]>([]);
+  const [imagePathList, setImagePathList] = useState<string[]>([]);
   const [imageName, setImageName] = useState<string | null>(null);
   const [imagePath, setImagePath] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
+  
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -42,31 +44,69 @@ const CreateLeadForm = () => {
   const { data } = useSession();
   // @ts-ignore
   const token = data?.user?.access_token;
-  const handleImageUpload = async (e: any) => {
-    const { name, value } = e.target;
 
-    setFormData((prev) => {
-      return { ...prev, [name]: value };
-    });
+  //* Original
+  // const handleImageUpload = async (e: any) => {
+  //   const { name, value } = e.target;
 
-    setFormErrors((prev) => {
-      return { ...prev, [name]: '' };
-    });
+  //   setFormData((prev) => {
+  //     return { ...prev, [name]: value };
+  //   });
+
+  //   setFormErrors((prev) => {
+  //     return { ...prev, [name]: '' };
+  //   });
+  //   try {
+  //     const file = e.target.files[0];
+  //     const formData = new FormData();
+  //     formData.append('pic', file);
+
+  //     // Call the UploadLeadImage API with the FormData and token
+  //     const NewLeadServices = new LeadService();
+  //     const response = await NewLeadServices.UploadLeadImage(formData, token);
+  //     const { image_name, image_path } = response.data.Data[0];
+  //     setImageName(image_name);
+  //     setImagePath(image_path);
+  //   } catch (error) {
+  //     console.error('Error uploading image:', error);
+  //   }
+  // };
+
+  //* Works
+
+  const handleImageChange = async (files: any) => {
+    setImages(files);
     try {
-      const file = e.target.files[0];
       const formData = new FormData();
-      formData.append('pic', file);
-
-      // Call the UploadLeadImage API with the FormData and token
+      console.log('file=>', files)
+      formData.append('pic', files[0]);
       const NewLeadServices = new LeadService();
       const response = await NewLeadServices.UploadLeadImage(formData, token);
-      const { image_name, image_path } = response.data.Data[0];
-      setImageName(image_name);
-      setImagePath(image_path);
+      const imageInfo = response.data.Data.map((item: any) => {
+        console.log('Image info from server: ', item)
+        setImageName(item.image_name);
+        setImagePath(item.image_path);
+      });
+      console.log('imageInfo', imageInfo);
+      console.log('image name from server', imageName);
+      console.log('image path from server', imagePath);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
+
+  // console.log(imageInfo)
+
+  useEffect(() => {
+    const fileNames = images.map((file: any) => file.name);
+    const filePaths = images.map((file: any) => file.path);
+    setImageNameList(fileNames);
+    setImagePathList(filePaths);
+  }, [images, setImageNameList, setImagePathList]);
+
+  console.log('Images:', images);
+  console.log('Image Name List:', imageNameList);
+  console.log('Image Path List:', imagePathList);
 
   useEffect(() => {
     if (token) {
@@ -120,7 +160,6 @@ const CreateLeadForm = () => {
 
       if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
         //! Payload object
-
         const payloadObj = {
           title: formData?.Title,
           executive_id: 143,
@@ -149,13 +188,13 @@ const CreateLeadForm = () => {
         const token = data?.user?.access_token;
 
         const LeadServices = new LeadService();
-         if (token) {
-           await LeadServices.createLead(payloadObj, token);
-           toast.success('Create lead successfully.');
-           router.push(PAGE_ROUTES.Dashboard);
-         } else {
-           toast.error('Something went wrong.');
-         }
+        if (token) {
+          await LeadServices.createLead(payloadObj, token);
+          toast.success('Create lead successfully.');
+          router.push(PAGE_ROUTES.Dashboard);
+        } else {
+          toast.error('Something went wrong.');
+        }
       }
     } catch (err) {
       toast.error('Failed to create Lead.');
@@ -263,7 +302,7 @@ const CreateLeadForm = () => {
             className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
           />
 
-          <div className='flex flex-col items-start justify-center '>
+          {/* <div className='flex flex-col items-start justify-center '>
             <p className='text-[#00156A] font-medium text-xs mb-2'>
               Image
               {formErrors.Image && (
@@ -276,6 +315,16 @@ const CreateLeadForm = () => {
               name='Image'
               onChange={handleImageUpload}
               className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
+            />
+          </div> */}
+          <div className='items-start justify-center '>
+            <p className='text-[rgb(0,21,106)] font-medium text-xs mb-2'>Image</p>
+
+            <Dropzone
+              onImagesChange={handleImageChange}
+              className={`p-16 border-dashed border-2 border-neutral-200 ${
+                formErrors.Image && 'border-red-500 shadow'
+              }`}
             />
           </div>
         </div>

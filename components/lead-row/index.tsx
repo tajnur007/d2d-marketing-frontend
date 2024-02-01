@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import moment from 'moment';
-// import { getStatusColor } from '@/utils/constants/common-constants';
 import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
 import LeadDetailsButton from '../lead-details-button';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
