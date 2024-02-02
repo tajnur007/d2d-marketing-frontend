@@ -116,13 +116,6 @@ export interface ImageInfoType {
   image_path?: string;
 }
 
-// export interface RemainderType {
-//   title: string;
-//   lead_id: number;
-//   reminder_time: ReactNode;
-//   notes: string;
-//   status: string;
-// }
 export interface RemainderType {
   company_id: number;
   id: number;
@@ -199,9 +192,51 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?: string;
+  Image?: [{ image_name: string; image_path: string }];
   AssignedTo?: string;
   location: MapLocation;
+}
+
+//! Single Lead data
+export interface SingleLeadItems {
+  assignment_status?: string;
+  company_id?: number;
+  created_at?: string;
+  created_by?: string;
+  created_by_user_id?: number;
+  executive_id?: number;
+  executive_name?: string;
+  id?: number;
+  image_info_json?: ImageInfoType[];
+  latitude?: number;
+  longitude?: number;
+  manager_id?: number;
+  manager_name?: string;
+  meeting_status?: string;
+  point_of_contact?: PointsOfContactType;
+  previous_user_id?: number;
+  reminders?: RemainderType[];
+  title?: string;
+}
+
+export interface UpdateReminderType {
+  title: string;
+  user_id: number;
+  reminder_time: string;
+  notes: string;
+  status: string;
+}
+
+export interface UpdateLeadPayload {
+  title: string;
+  executive_id: number;
+  executive_name: string;
+  latitude: number;
+  longitude: number;
+  meeting_status: string;
+  point_of_contact: PointsOfContactType;
+  reminder: UpdateReminderType[];
+  image_infos: ImageInfoType[];
 }
 
 export interface SettingFormItems {
@@ -229,6 +264,9 @@ export interface SelectProps {
   setSelected?: (item: string) => void;
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
+  defaultValue?: string;
+  isBothSelectFieldNull?: boolean;
+  setIsBothSelectFieldNull?: (item: boolean) => void;
 }
 
 export interface AssignSelectProps {
@@ -244,6 +282,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   htmlFor?: string;
   errorMessage?: string;
   getDate?: any;
+  defaultValue?: string;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -394,6 +433,7 @@ export interface CreateEmployeeModalProps {
 
 export interface LeadOptionsProps {
   handleViewButton: () => void;
+  handleEditButton: () => void;
   handleDeleteButton: () => void;
 }
 

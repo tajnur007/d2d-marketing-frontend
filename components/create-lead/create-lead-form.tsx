@@ -1,35 +1,44 @@
 'use client';
 
+import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
-import { ImageUpload } from '@/components/image-upload';
-import { Button } from '@/components/button';
-import { useEffect, useState, useContext } from 'react';
+import { FormItems } from '@/models/global-types';
+import { LeadService } from '@/services/lead-services';
 import {
-  ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
-  IMAGE_DETAIL,
   PAGE_ROUTES,
 } from '@/utils/constants/common-constants';
-import { FormItems } from '@/models/global-types';
+import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { LeadService } from '@/services/lead-services';
-import { useSession } from 'next-auth/react';
+import Dropzone from './multi-image-upload';
 import { LeadsContext } from '@/context/leads-context';
-import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
+// import { LeadService } from '@/services/lead-services';
+// import { useSession } from 'next-auth/react';
+// import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+// import { toast } from 'react-toastify';
+// import { useRouter } from 'next/navigation';
 
-const CreateLeadForm = () => {
+const CreateLeadForm: React.FC = () => {
   const [statusSelected, setStatusSelected] = useState('');
   const [assignedToSelected, setAssignedToSelected] = useState('');
-  const [imageName, setImageName] = useState<string | null>(null);
-  const [imagePath, setImagePath] = useState<string | null>(null);
+  const [images, setImages] = useState([]);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
+  const [pending, setPending] = useState<boolean>(false);
+
+  const handlePendingChange = (isPending: boolean) => {
+    setPending(isPending);
+  };
+
+  const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -42,31 +51,6 @@ const CreateLeadForm = () => {
   const { data } = useSession();
   // @ts-ignore
   const token = data?.user?.access_token;
-  const handleImageUpload = async (e: any) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => {
-      return { ...prev, [name]: value };
-    });
-
-    setFormErrors((prev) => {
-      return { ...prev, [name]: '' };
-    });
-    try {
-      const file = e.target.files[0];
-      const formData = new FormData();
-      formData.append('pic', file);
-
-      // Call the UploadLeadImage API with the FormData and token
-      const NewLeadServices = new LeadService();
-      const response = await NewLeadServices.UploadLeadImage(formData, token);
-      const { image_name, image_path } = response.data.Data[0];
-      setImageName(image_name);
-      setImagePath(image_path);
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
-  };
 
   useEffect(() => {
     if (token) {
@@ -112,7 +96,6 @@ const CreateLeadForm = () => {
 
       if (statusSelected === '' && assignedToSelected === '') {
         setIsBothSelectFieldNull(true);
-        toast.info('Please select Status or AssignedTo field.');
         return;
       } else {
         setIsBothSelectFieldNull(false);
@@ -120,7 +103,6 @@ const CreateLeadForm = () => {
 
       if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
         //! Payload object
-
         const payloadObj = {
           title: formData?.Title,
           executive_id: 143,
@@ -137,13 +119,10 @@ const CreateLeadForm = () => {
             reference: formData?.Reference,
           },
 
-          image_infos: [
-            {
-              image_name: imageName,
-              image_path: imagePath,
-            },
-          ],
+          image_infos: [...images],
         };
+
+        console.log('payloadObj', payloadObj);
 
         // @ts-ignore
         const token = data?.user?.access_token;
@@ -188,6 +167,8 @@ const CreateLeadForm = () => {
             setSelected={setAssignedToSelected}
             options={executivesOption}
             className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
         </div>
       </div>
@@ -270,27 +251,20 @@ const CreateLeadForm = () => {
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
             className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
-
-          <div className='flex flex-col items-start justify-center '>
-            <p className='text-[#00156A] font-medium text-xs mb-2'>
-              Image
-              {formErrors.Image && (
-                <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
-              )}
-            </p>
-
-            <ImageUpload
-              placeholder='Upload image'
-              name='Image'
-              onChange={handleImageUpload}
-              className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
-            />
+          <div className='items-start justify-center '>
+            <p className='text-[rgb(0,21,106)] font-medium text-xs mb-2'>Image</p>
+            <Dropzone onChange={setImages} onPendingChange={handlePendingChange} />
           </div>
         </div>
       </div>
       <div className='flex justify-end  mt-5 gap-5 items-end'>
-        <Button onClick={submitData} className='w-[193px] rounded-[10px] h-[60px]'>
+        <Button
+          onClick={submitData}
+          disabled={(images.length === 0 || pending===true)}
+          className={`w-[193px] rounded-[10px] h-[60px]`}>
           Create
         </Button>
       </div>
