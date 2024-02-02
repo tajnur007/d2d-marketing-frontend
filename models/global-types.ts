@@ -360,6 +360,8 @@ export interface CreateEmployeeModalProps {
 export interface FilterLeadsCardProps {
   setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onFilterData: (data: any) => void;
+  filterIcon:boolean;
+  setFilterIcon:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface StatusCheckboxProps {

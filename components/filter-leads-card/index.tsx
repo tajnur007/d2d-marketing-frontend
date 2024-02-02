@@ -15,6 +15,8 @@ import { useSession } from 'next-auth/react';
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
   setFilterCardOpen,
+  filterIcon,
+  setFilterIcon,
 }) => {
   //! State for date range
   const [startDate, setStartDate] = useState(new Date('2024-01-01'));
@@ -62,7 +64,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   const { data } = useSession();
   // @ts-ignore
   const token = data.user.access_token;
-  const ApplyFilter = async () => {
+  const handleApplyFilterButton = async () => {
     try {
       if (
         filterData.createdBy === null &&
@@ -116,17 +118,19 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
       const LeadServices = new LeadService();
       if (token) {
         LeadServices.getFilteredLeadsData(setLeadsData, setIsLoading, payloadObj, token);
+        setFilterIcon(true);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const resetFilter = () => {
+  const handleCancelButton = () => {
     try {
       const LeadServices = new LeadService();
       if (token) {
         LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
+        setFilterIcon(false);
       }
     } catch (err) {
       console.log(err);
@@ -241,15 +245,15 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           </div>
         </div>
 
-        {/* Apply and Reset Buttons */}
+        {/* Apply and Cancel Buttons */}
         <div className='flex justify-between mt-[18px] gap-2 pl-[8px]'>
           <button
-            onClick={resetFilter}
+            onClick={handleCancelButton}
             className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
-            Reset
+            {filterIcon? 'Reset' : 'Cancel'}
           </button>
           <button
-            onClick={ApplyFilter}
+            onClick={handleApplyFilterButton}
             className='bg-[#5630FF] text-white font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
             Apply
           </button>

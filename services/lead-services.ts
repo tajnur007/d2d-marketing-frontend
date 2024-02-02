@@ -259,9 +259,11 @@ export class LeadService {
   };
 
   public getFilteredLeadsData = async ( setLeadsData: any,setIsLoading: (item: boolean) => void, data:any, token:string) : Promise<any>=>{
-        try {
+    try {
+      setIsLoading(true);
       const response = await this.FilteredLeadsData(data,token);
       const filteredLeads = response.data.Data.Data;
+      console.log(filteredLeads);
       setLeadsData(filteredLeads);
       setIsLoading(false);
     } catch (error) {
