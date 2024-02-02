@@ -85,7 +85,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ onChange, onPendingChange }) => {
       if (response.status === 'pending') {
         console.log('Server response is pending');
         onPendingChange(true);
-      } else{
+      } else {
         onPendingChange(false);
       }
     } catch (error) {

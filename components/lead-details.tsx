@@ -19,12 +19,12 @@ import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import React from 'react';
 import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
-import CreateReminderModal from './create-reminder-modal';
+import CreateRemainderModal from './create-remainder-modal';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
-import { CustomSelect } from './select/custom-select';
-import Select from 'react-select';
 import { toast } from 'react-toastify';
+import { EditIcon } from '@/assets/icons';
+import Remainder from './remainder';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
@@ -47,7 +47,7 @@ const LeadDetails = ({
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [closeDrawer, setCloseDrawer] = React.useState(false);
-  const [reminders, setReminders] = React.useState<RemainderType[]>([]);
+  const [reminders, setRemainders] = React.useState<RemainderType[]>([]);
   const [selectReminder, setSelectReminder] = React.useState();
   const [isCreated, setIsCreated] = React.useState(false);
   const { data: reminderData } = useSession();
@@ -64,33 +64,17 @@ const LeadDetails = ({
   //   setSelectReminder(selectedOption.value);
   // };
 
-  const deleteReminder = async (id: number) => {
-    const Service = new LeadService();
-    const res = await Service.deleteReminder(id, token);
-
-    if (res?.status === 202) {
-      toast.success('Successfully deleted!');
-      getAllReminders();
-    } else {
-      toast.error('Failed to delete!');
-    }
-  };
-
-  const getAllReminders = async () => {
-    const Service = new LeadService();
-    const res = await Service.getAllReminder(token);
-    setReminders(res?.data?.Data?.Data);
-  };
-
   // To get data initially
   useEffect(() => {
-    isOpen && getAllReminders();
+    const Service = new LeadService();
+    isOpen && Service.getAllRemindersData(token, setRemainders);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, token]);
 
-  // To get the latest reminder after creating new reminder
+  // To get the latest remainder after creating new remainder
   useEffect(() => {
-    isCreated && getAllReminders();
+    const Service = new LeadService();
+    isCreated && Service.getAllRemindersData(token, setRemainders);
     setIsCreated(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCreated]);
@@ -215,29 +199,17 @@ const LeadDetails = ({
           Reminder
         </h1>
         {reminders?.length === 0 ? (
-          <div className='text-center'>No reminder found</div>
+          <div className='text-center'>No remainder found</div>
         ) : (
           <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
-            {reminders?.map((reminder: RemainderType) => {
-              return (
-                <div className='rounded-lg p-4 bg-white' key={reminder?.id}>
-                  <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
-                    <span>{reminder?.title}</span>
-                    <div
-                      onClick={() => deleteReminder(reminder?.id)}
-                      className='cursor-pointer'>
-                      <Image src={crossImage} alt='close' />
-                    </div>
-                  </p>
-                  <p className='text-[#8A8A8A] mb-[10px]'>
-                    {moment(reminder?.reminder_time).format('YYYY/MM/DD h:mma')}
-                  </p>
-                  <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-                    {reminder?.status}
-                  </button>
-                </div>
-              );
-            })}
+            {reminders?.map((remainder: RemainderType) => (
+              <Remainder
+                key={remainder?.id}
+                remainder={remainder}
+                token={token}
+                setRemainders={setRemainders}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -249,7 +221,7 @@ const LeadDetails = ({
           Add Reminder
         </Button>
       </div>
-      <CreateReminderModal
+      <CreateRemainderModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         formData={formData}

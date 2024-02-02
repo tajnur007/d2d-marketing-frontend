@@ -183,6 +183,13 @@ export class LeadService {
 
     return resp;
   };
+
+  public getAllRemindersData = async (token: string, setRemainders: any) => {
+    const res = await this.getAllReminder(token);
+    console.log(res);
+    setRemainders(res?.data?.Data?.Data);
+  };
+
   public getAllReminder = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -212,6 +219,24 @@ export class LeadService {
       ...config,
     });
 
+    return resp;
+  };
+
+  public updateRemainder = async (reminder_id: number, data:any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+    console.log(data, reminder_id)
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.UpdateRemainder}?reminder_id=${reminder_id}`,
+      method: API_METHODS.PATCH,
+      ...config,
+      data,
+    });
+    console.log(resp)
     return resp;
   };
 }

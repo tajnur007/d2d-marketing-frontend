@@ -24,7 +24,7 @@ if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
 }
 
-const CreateReminderModal = ({
+const CreateRemainderModal = ({
   modalIsOpen,
   setModalIsOpen = () => {},
   setIsCreated = () => {},
@@ -230,4 +230,4 @@ const CreateReminderModal = ({
   );
 };
 
-export default CreateReminderModal;
+export default CreateRemainderModal;

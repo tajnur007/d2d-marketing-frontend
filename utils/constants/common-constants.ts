@@ -72,6 +72,7 @@ export const API_PATHS = {
   UploadLeadImage: '/lead/upload-image',
   GetAllReminder: '/reminder/list',
   DeleteReminder: '/reminder/delete',
+  UpdateRemainder: '/reminder/update',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -232,9 +233,9 @@ export const LEAD_STATUS = {
 };
 
 export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
-  { value: 'Pending', label: 'Pending' },
-  { value: 'In-Progress', label: 'In-Progress' },
-  { value: 'Completed', label: 'Completed' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'in-Progress', label: 'In-Progress' },
+  { value: 'completed', label: 'Completed' },
 ];
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [

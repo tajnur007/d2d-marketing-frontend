@@ -461,3 +461,17 @@ export interface EmployeeOptionsProps {
   handleViewButton: () => void;
   handleDeleteButton: () => Promise<void>;
 }
+
+export interface RemainderProps {
+  remainder: RemainderType;
+  token: string;
+  setRemainders: (item: any) => void;
+}
+
+export interface UpdateRemainderModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  selectRemainder:  string;
+  setSelectRemainder: (item: string) => void;
+  remainder: RemainderType;
+}

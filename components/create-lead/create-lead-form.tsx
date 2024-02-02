@@ -43,7 +43,7 @@ const CreateLeadForm: React.FC = () => {
     lat: 22.04,
     lng: 30.0,
   });
-  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
   const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
@@ -263,7 +263,7 @@ const CreateLeadForm: React.FC = () => {
       <div className='flex justify-end  mt-5 gap-5 items-end'>
         <Button
           onClick={submitData}
-          disabled={(images.length === 0 || pending===true)}
+          disabled={images.length === 0 || pending === true}
           className={`w-[193px] rounded-[10px] h-[60px]`}>
           Create
         </Button>
