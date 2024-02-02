@@ -17,7 +17,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   setFilterCardOpen,
 }) => {
   //! State for date range
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date('2024-01-01'));
   const [endDate, setEndDate] = useState<Date | null>(null);
 
   //! State for status
@@ -30,8 +30,14 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   //! State for Created by
   const [selectedCreatedBy, setCreatedBy] = useState<string>('');
   const [selectedAssignee, setAssignee] = useState<string>('');
-  const { executivesOption, setExecutivesOption, createdByOptions, setCreatedByOptions } =
-    useContext(LeadsContext);
+  const {
+    executivesOption,
+    setExecutivesOption,
+    createdByOptions,
+    setCreatedByOptions,
+    leadsData,
+    setLeadsData,
+  } = useContext(LeadsContext);
 
   //* Output
   const filterData = {
@@ -81,31 +87,30 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
       const payloadObj = {
         match: {
           meeting_status: {
-            any: [],
+            any: [status]
           },
           created_by_user_id: {
-            any: [SelectedCreatedById],
+            any: [SelectedCreatedById]
           },
           executive_id: {
-            any: [selectedAssigneeId],
+            any: [selectedAssigneeId]
           },
-        },
         range: {
           created_at: {
             lte: endDate?.toISOString(),
             gte: startDate?.toISOString(),
-          },
-        },
+          }
+        }
+      },
       };
-      //console.log(payloadObj);
+      console.log(payloadObj);
 
       // @ts-ignore
       const token = data?.user?.access_token;
-
       const LeadServices = new LeadService();
       if (token) {
-        await LeadServices.FilteredLeadsData(payloadObj, token);
-        
+        const resp = await LeadServices.FilteredLeadsData(payloadObj, token);
+        console.log(resp);
       }
     } catch (err) {
       console.log(err);

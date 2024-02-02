@@ -255,6 +255,23 @@ export class LeadService {
       ...config,
       data,
     });
+    //console.log(resp);
+    return resp;
+  };
+
+  public getFiltedLeadsData = async (
+    data: any,
+    setLeadsData: any,
+    token: string,
+  ) => {
+    try {
+      const response = await this.FilteredLeadsData(data,token);
+      //console.log(response);
+      const filteredData = response.data.Data.Data;
+      setLeadsData(filteredData);
+    } catch (error) {
+      console.error('Error fetching Filtered leads:', error);
+    }
   };
 
 }
