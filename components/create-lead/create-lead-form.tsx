@@ -90,7 +90,6 @@ const CreateLeadForm: React.FC = () => {
 
       if (statusSelected === '' && assignedToSelected === '') {
         setIsBothSelectFieldNull(true);
-        toast.info('Please select Status or AssignedTo field.');
         return;
       } else {
         setIsBothSelectFieldNull(false);
@@ -162,6 +161,8 @@ const CreateLeadForm: React.FC = () => {
             setSelected={setAssignedToSelected}
             options={executivesOption}
             className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
         </div>
       </div>
@@ -244,6 +245,8 @@ const CreateLeadForm: React.FC = () => {
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
             className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
           <div className='items-start justify-center '>
             <p className='text-[rgb(0,21,106)] font-medium text-xs mb-2'>Image</p>
