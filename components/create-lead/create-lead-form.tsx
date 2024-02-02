@@ -112,7 +112,6 @@ const CreateLeadForm = () => {
 
       if (statusSelected === '' && assignedToSelected === '') {
         setIsBothSelectFieldNull(true);
-        toast.info('Please select Status or AssignedTo field.');
         return;
       } else {
         setIsBothSelectFieldNull(false);
@@ -188,6 +187,8 @@ const CreateLeadForm = () => {
             setSelected={setAssignedToSelected}
             options={executivesOption}
             className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
         </div>
       </div>
@@ -270,7 +271,10 @@ const CreateLeadForm = () => {
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
             className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
+
 
           <div className='flex flex-col items-start justify-center '>
             <p className='text-[#00156A] font-medium text-xs mb-2'>
