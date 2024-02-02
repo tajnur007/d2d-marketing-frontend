@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { GalleryIcon } from '@/assets/icons';
 import { InputProps } from '@/models/global-types';
+import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export const ImageUpload = ({

@@ -1,7 +1,6 @@
-import { CreateReminderItems } from './../models/global-types';
 import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
-import { HttpClient, Response } from './axios-base-query';
+import { HttpClient } from './axios-base-query';
 
 export class LeadService {
   client;
@@ -174,7 +173,7 @@ export class LeadService {
 
 
 
-   //! Get single Lead data
+  //! Get single Lead data
 
   public getUserLead = async (user_id: number, token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};

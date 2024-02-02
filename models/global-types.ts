@@ -192,7 +192,7 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?: string;
+  Image?: [{ image_name: string; image_path: string }];
   AssignedTo?: string;
   location: MapLocation;
 }
@@ -265,6 +265,8 @@ export interface SelectProps {
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
   defaultValue?: string;
+  isBothSelectFieldNull?: boolean;
+  setIsBothSelectFieldNull?: (item: boolean) => void;
 }
 
 export interface AssignSelectProps {
