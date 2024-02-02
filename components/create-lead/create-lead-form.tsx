@@ -34,6 +34,7 @@ const CreateLeadForm = () => {
     lat: 22.04,
     lng: 30.0,
   });
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
@@ -70,7 +71,7 @@ const CreateLeadForm = () => {
   useEffect(() => {
     if (token) {
       const LeadServices = new LeadService();
-      LeadServices.getExecutivesData(setExecutivesOption, token);
+      LeadServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
     }
   }, [token, setExecutivesOption]);
 
