@@ -17,7 +17,7 @@ function LeadsList() {
   const [searchData, setSearchData] = useState<LeadListType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
   const [filterData, setFilterData] = useState({});
-  const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
+  // const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,6 +27,8 @@ function LeadsList() {
     leadDetailsRef,
     createdByOptions,
     setCreatedByOptions,
+    leadsData,
+    setLeadsData,
   } = useContext(LeadsContext);
 
   const { data: sessionData } = useSession();
@@ -46,11 +48,11 @@ function LeadsList() {
       LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
     }
-  }, [token, setExecutivesOption, setCreatedByOptions]);
+  }, [token, setExecutivesOption, setCreatedByOptions,setLeadsData]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
-      const newFilteredData = leadsData.filter((data) => {
+      const newFilteredData = leadsData.filter((data:LeadListType) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
       setSearchData(newFilteredData);
@@ -118,7 +120,7 @@ function LeadsList() {
                     setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
                   />
                 ))
-              : leadsData.map((item, index) => (
+              : leadsData.map((item:LeadListType, index:number) => (
                   <LeadRow
                     key={index}
                     item={item}
