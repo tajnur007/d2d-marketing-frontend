@@ -1,10 +1,10 @@
 'use client';
 
+import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
-import { ImageUpload } from '@/components/image-upload';
-import { Button } from '@/components/button';
-import { useEffect, useState } from 'react';
+import { SingleLeadItems, UpdateLeadPayload } from '@/models/global-types';
+import { LeadService } from '@/services/lead-services';
 import {
   ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
@@ -12,18 +12,13 @@ import {
   SINGLE_LEAD_ITEMS,
   UPDATE_LEAD_PAYLOAD,
 } from '@/utils/constants/common-constants';
-import {
-  FormItems,
-  SingleLeadItems,
-  UpdateLeadPayload,
-  UpdateReminderType,
-} from '@/models/global-types';
+import { useSession } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { useSession } from 'next-auth/react';
-import { LeadService } from '@/services/lead-services';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { toast } from 'react-toastify';
+import Dropzone from './multi-image-upload';
 
 const UpdateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState('');
@@ -36,6 +31,13 @@ const UpdateLeadForm = () => {
     lat: 22.04,
     lng: 30.0,
   });
+
+  const [images, setImages] = useState([]);
+  const [pending, setPending] = useState<boolean>(false);
+
+  const handlePendingChange = (isPending: boolean) => {
+    setPending(isPending);
+  };
 
   const router = useRouter();
 
@@ -54,14 +56,12 @@ const UpdateLeadForm = () => {
         const response = await LeadServices.getUserLead(paramValue, token);
         setSingleLeadData(response.data.Data);
       } catch (error) {
-        console.log(error);
+        console.error('Error fetching user lead:', error);
       }
     };
 
     fetchUserData();
   }, []);
-  console.log('singleLeadData');
-  console.log(singleLeadData);
 
   useEffect(() => {
     setUpdatePayload(() => {
@@ -88,13 +88,10 @@ const UpdateLeadForm = () => {
             status: 'pending',
           },
         ],
-        image_infos: singleLeadData?.image_info_json || ({} as any),
+        image_infos: images,
       };
     });
-  }, [singleLeadData]);
-
-  // console.log('updatePayload');
-  // console.log(updatePayload);
+  }, [singleLeadData, images]);
 
   const handleSelectChange = (e: any) => {
     const { name, value } = e.target;
@@ -127,14 +124,18 @@ const UpdateLeadForm = () => {
       return { ...prev, location };
     });
 
-    if (token) {
-      await LeadServices.updateLead(paramValue, updatePayload, token);
-      // console.log('updatePayload');
-      // console.log(updatePayload);
-      toast.success('Lead Update successfully.');
-      router.push(PAGE_ROUTES.Leads);
-    } else {
-      toast.error('Something went wrong.');
+    try {
+      if (token) {
+        await LeadServices.updateLead(paramValue, updatePayload, token);
+        toast.success('Lead updated successfully.');
+        router.push(PAGE_ROUTES.Leads);
+      } else {
+        toast.error('Something went wrong.');
+        throw new Error('Token is missing.');
+      }
+    } catch (error) {
+      console.error('Error updating lead:', error);
+      toast.error('Failed to update lead. Please try again.');
     }
   };
 
@@ -235,21 +236,17 @@ const UpdateLeadForm = () => {
             options={CREATE_LEAD_STATUS_NEW}
             defaultValue={singleLeadData?.meeting_status}
           />
-
-          <div className='flex flex-col items-start justify-center '>
-            <p className='text-[#00156A] font-medium text-xs mb-2'>Image</p>
-
-            <ImageUpload
-              placeholder='Upload image'
-              name='Image'
-              className='h-[92px]'
-              onChange={handleSelectChange}
-            />
+          <div className='items-start justify-center '>
+            <p className='text-[hsl(228,100%,21%)] font-medium text-xs mb-2'>Image</p>
+            <Dropzone onChange={setImages} onPendingChange={handlePendingChange} />
           </div>
         </div>
       </div>
       <div className='flex justify-end  mt-5 gap-5 items-end'>
-        <Button onClick={updateData} className='w-[193px] rounded-[10px] h-[60px]'>
+        <Button
+          onClick={updateData}
+          disabled={images.length === 0 || pending === true}
+          className='w-[193px] rounded-[10px] h-[60px]'>
           Update
         </Button>
       </div>
