@@ -72,7 +72,7 @@ export const API_PATHS = {
   UploadLeadImage: '/lead/upload-image',
   GetAllReminder: '/reminder/list',
   DeleteReminder: '/reminder/delete',
-  FilterLeads: '/lead/filter'
+  FilterLeads: '/lead/filter',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [

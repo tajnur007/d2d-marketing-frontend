@@ -56,7 +56,9 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     }));
   };
 
-  const { data: sessionData } = useSession();
+  const { data } = useSession();
+  // @ts-ignore
+  const token = data.user.access_token;
   const ApplyFilter = async () => {
     try {
       if (
@@ -74,7 +76,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
         setFilterCardOpen(false);
       }
 
-      // from selected data, we extract ID to send it to payload
+      // from selected data, we extract ID and status to send it to payload
       const selectedAssigneeId = executivesOption.find(
         (option: any) => option.label === filterData.assignee[0]
       )?.id;
@@ -83,34 +85,34 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
         (option: any) => option.label === filterData.createdBy[0]
       )?.created_by_user_id;
 
+      const statusData =
+        status.cold === true ? 'cold' : status.hot === true ? 'hot' : 'warm';
+
       //! payload
       const payloadObj = {
         match: {
           meeting_status: {
-            any: [status]
+            any: [statusData],
           },
           created_by_user_id: {
-            any: [SelectedCreatedById]
+            any: [SelectedCreatedById],
           },
           executive_id: {
-            any: [selectedAssigneeId]
+            any: [selectedAssigneeId],
           },
+        },
         range: {
           created_at: {
             lte: endDate?.toISOString(),
             gte: startDate?.toISOString(),
-          }
-        }
-      },
+          },
+        },
       };
-      console.log(payloadObj);
+      //console.log(payloadObj);
 
-      // @ts-ignore
-      const token = data?.user?.access_token;
       const LeadServices = new LeadService();
       if (token) {
-        const resp = await LeadServices.FilteredLeadsData(payloadObj, token);
-        console.log(resp);
+        LeadServices.getFilteredLeadsData(setLeadsData, payloadObj, token);
       }
     } catch (err) {
       console.log(err);
@@ -228,12 +230,12 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           </div>
         </div>
 
-        {/* Apply and Cancel Buttons */}
+        {/* Apply and Reset Buttons */}
         <div className='flex justify-between mt-[18px] gap-2 pl-[8px]'>
           <button
             onClick={CancelFilter}
             className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
-            Cancel
+            Reset
           </button>
           <button
             onClick={ApplyFilter}

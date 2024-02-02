@@ -255,23 +255,19 @@ export class LeadService {
       ...config,
       data,
     });
-    //console.log(resp);
     return resp;
   };
 
-  public getFiltedLeadsData = async (
-    data: any,
-    setLeadsData: any,
-    token: string,
-  ) => {
-    try {
+  public getFilteredLeadsData = async ( setLeadsData: any, data:any, token:string) : Promise<any>=>{
+        try {
       const response = await this.FilteredLeadsData(data,token);
-      //console.log(response);
-      const filteredData = response.data.Data.Data;
-      setLeadsData(filteredData);
+      const filteredLeads = response.data.Data.Data;
+      console.log("response:", filteredLeads);
+      setLeadsData(filteredLeads);
     } catch (error) {
-      console.error('Error fetching Filtered leads:', error);
+      console.error('Error fetching leads:', error);
     }
   };
+
 
 }
