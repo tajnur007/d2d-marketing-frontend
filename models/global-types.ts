@@ -192,7 +192,7 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?: string;
+  Image?: [{ image_name: string; image_path: string }];
   AssignedTo?: string;
   location: MapLocation;
 }
