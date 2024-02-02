@@ -275,7 +275,6 @@ const CreateLeadForm = () => {
             setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
 
-
           <div className='flex flex-col items-start justify-center '>
             <p className='text-[#00156A] font-medium text-xs mb-2'>
               Image

@@ -23,8 +23,11 @@ export const CustomSelect = ({
   };
   return (
     <div className='flex flex-col' ref={ref}>
-      <label className='text-[#00156A] text-xs mb-2 font-medium'>{label}
-      {isBothSelectFieldNull && <span className='text-red-500 ml-1'>{`(${label} is required)`}</span>}
+      <label className='text-[#00156A] text-xs mb-2 font-medium'>
+        {label}
+        {isBothSelectFieldNull && (
+          <span className='text-red-500 ml-1'>{`(${label} is required)`}</span>
+        )}
       </label>
       <div className='relative font-medium '>
         <Select
