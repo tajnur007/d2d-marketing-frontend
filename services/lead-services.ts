@@ -262,7 +262,6 @@ export class LeadService {
         try {
       const response = await this.FilteredLeadsData(data,token);
       const filteredLeads = response.data.Data.Data;
-      console.log("response:", filteredLeads);
       setLeadsData(filteredLeads);
       setIsLoading(false);
     } catch (error) {

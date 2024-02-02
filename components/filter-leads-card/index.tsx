@@ -115,14 +115,22 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
       const LeadServices = new LeadService();
       if (token) {
-        LeadServices.getFilteredLeadsData(setLeadsData,setIsLoading, payloadObj, token);
+        LeadServices.getFilteredLeadsData(setLeadsData, setIsLoading, payloadObj, token);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const CancelFilter = () => {
+  const resetFilter = () => {
+    try {
+      const LeadServices = new LeadService();
+      if (token) {
+        LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
+      }
+    } catch (err) {
+      console.log(err);
+    }
     setFilterCardOpen(false);
   };
 
@@ -236,7 +244,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
         {/* Apply and Reset Buttons */}
         <div className='flex justify-between mt-[18px] gap-2 pl-[8px]'>
           <button
-            onClick={CancelFilter}
+            onClick={resetFilter}
             className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
             Reset
           </button>
