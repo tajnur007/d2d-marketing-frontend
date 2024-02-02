@@ -17,9 +17,7 @@ function LeadsList() {
   const [searchData, setSearchData] = useState<LeadListType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
   const [filterData, setFilterData] = useState({});
-  // const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   const {
     executivesOption,
@@ -29,6 +27,8 @@ function LeadsList() {
     setCreatedByOptions,
     leadsData,
     setLeadsData,
+    isLoading,
+    setIsLoading,
   } = useContext(LeadsContext);
 
   const { data: sessionData } = useSession();
@@ -48,7 +48,7 @@ function LeadsList() {
       LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
     }
-  }, [token, setExecutivesOption, setCreatedByOptions,setLeadsData]);
+  }, [token, setExecutivesOption, setCreatedByOptions,setLeadsData,setIsLoading]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {

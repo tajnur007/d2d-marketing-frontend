@@ -33,10 +33,13 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   const {
     executivesOption,
     setExecutivesOption,
+    leadDetailsRef,
     createdByOptions,
     setCreatedByOptions,
     leadsData,
     setLeadsData,
+    isLoading,
+    setIsLoading,
   } = useContext(LeadsContext);
 
   //* Output
@@ -112,7 +115,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
       const LeadServices = new LeadService();
       if (token) {
-        LeadServices.getFilteredLeadsData(setLeadsData, payloadObj, token);
+        LeadServices.getFilteredLeadsData(setLeadsData,setIsLoading, payloadObj, token);
       }
     } catch (err) {
       console.log(err);

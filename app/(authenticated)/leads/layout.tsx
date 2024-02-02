@@ -8,6 +8,7 @@ export default function LeedsLayout({ children }: { children: React.ReactNode })
   const [createdByOptions, setCreatedByOptions] = useState<LeadsDataType[]>([]);
   const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const leadDetailsRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <LeadsContext.Provider
@@ -19,6 +20,8 @@ export default function LeedsLayout({ children }: { children: React.ReactNode })
         setCreatedByOptions,
         leadsData,
         setLeadsData,
+        isLoading,
+        setIsLoading,
       }}>
       {children}
     </LeadsContext.Provider>

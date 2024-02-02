@@ -258,12 +258,13 @@ export class LeadService {
     return resp;
   };
 
-  public getFilteredLeadsData = async ( setLeadsData: any, data:any, token:string) : Promise<any>=>{
+  public getFilteredLeadsData = async ( setLeadsData: any,setIsLoading: (item: boolean) => void, data:any, token:string) : Promise<any>=>{
         try {
       const response = await this.FilteredLeadsData(data,token);
       const filteredLeads = response.data.Data.Data;
       console.log("response:", filteredLeads);
       setLeadsData(filteredLeads);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching leads:', error);
     }
