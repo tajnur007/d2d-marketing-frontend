@@ -15,33 +15,13 @@ import { toast } from 'react-toastify';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import CreateReminderModal from './create-reminder-modal';
-import axios from 'axios';
+import { validateImageUrl } from '@/utils/helpers/common-helpers';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
-
-//! URL VALIDATION FUNCTION START
-  const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
-    try {
-      const response = await axios.get(imageUrl);
-      if (response.status === 200) {
-        return true; // URL is valid
-      } else {
-        return false; // URL is not valid
-      }
-    } catch (error: any) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        return false; // URL is not valid and returns "Not Found" status
-      } else {
-        console.error('Error validating URL:', error.message);
-        throw new Error('An error occurred while validating the URL');
-      }
-    }
-  };
-//! URL VALIDATION FUNCTION END
 
 const LeadDetails = ({
   setIsOpen,
