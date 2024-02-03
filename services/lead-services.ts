@@ -1,7 +1,6 @@
-import { CreateReminderItems } from './../models/global-types';
 import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
-import { HttpClient, Response } from './axios-base-query';
+import { HttpClient } from './axios-base-query';
 
 export class LeadService {
   client;
@@ -25,11 +24,16 @@ export class LeadService {
     return resp;
   };
 
-  public getExecutivesData = async (setExecutivesOption: any, token: string) => {
+  public getExecutivesData = async (
+    setExecutivesOption: any,
+    token: string,
+    setIsLoading: (item: boolean) => void
+  ) => {
     try {
       const response = await this.getExecutives(token);
       const executivesOption = this.createSelectData(response.data.Data.Data);
       setExecutivesOption(executivesOption);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching executives:', error);
     }
@@ -60,12 +64,18 @@ export class LeadService {
     return resp;
   };
 
-  public getLeadsData = async (setLeadsData: any, token: string) => {
+  public getLeadsData = async (
+    setLeadsData: any,
+    token: string,
+    setIsLoading: (item: boolean) => void
+  ) => {
     try {
       const response = await this.getLeads(token);
-      console.log(response);
+      // console.log(response);
+
       const data = response.data.Data.Data;
       setLeadsData(data);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching leads:', error);
     }
@@ -138,6 +148,67 @@ export class LeadService {
     return resp;
   };
 
+  public getCreatedByData = async (setCreatedByOptions: any, token: string) => {
+  try {
+    const response = await this.getLeads(token);
+    const data = response.data.Data.Data;
+    const uniqueCreatedByValues: any[] = [];
+    const encounteredValues = new Set<string>();
+
+    data.map((item: any) => {
+      const createdBy = item.created_by;
+      if (createdBy && !encounteredValues.has(createdBy)) {
+        encounteredValues.add(createdBy);
+        const newItem = { ...item, value: item.created_by, label: item.created_by };
+        uniqueCreatedByValues.push(newItem);
+      }
+    });
+    setCreatedByOptions(uniqueCreatedByValues);
+  } catch (error) {
+    console.error('Error fetching leads:', error);
+  }
+};
+
+
+
+
+
+  //! Get single Lead data
+
+  public getUserLead = async (user_id: number, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.LeadView}?lead_id=${user_id}`,
+      method: API_METHODS.GET,
+      ...config,
+    });
+
+    return resp;
+  };
+
+  //! Update Lead data
+
+  public updateLead = async (lead_id: number, data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.UpdateLead}?lead_id=${lead_id}`,
+      method: API_METHODS.PATCH,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
   public getAllReminder = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -169,4 +240,35 @@ export class LeadService {
 
     return resp;
   };
+
+  public FilteredLeadsData = async ( data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.FilterLeads,
+      method: API_METHODS.GET,
+      ...config,
+      data,
+    });
+    return resp;
+  };
+
+  public getFilteredLeadsData = async ( setLeadsData: any,setIsLoading: (item: boolean) => void, data:any, token:string) : Promise<any>=>{
+    try {
+      setIsLoading(true);
+      const response = await this.FilteredLeadsData(data,token);
+      const filteredLeads = response.data.Data.Data;
+      console.log(filteredLeads);
+      setLeadsData(filteredLeads);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching leads:', error);
+    }
+  };
+
+
 }

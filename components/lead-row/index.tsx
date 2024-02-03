@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 import moment from 'moment';
-// import { getStatusColor } from '@/utils/constants/common-constants';
 import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
 import LeadDetailsButton from '../lead-details-button';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
@@ -58,15 +57,15 @@ function LeadRow({
         </div>
         <div className='w-[25%]'>
           <p className='leading-trim font-semibold text-[16px] tracking-tight'>
-            {item.point_of_contact.name}
+            {item.point_of_contact?.name}
           </p>
-          {item.point_of_contact.phone != '' && (
+          {item.point_of_contact?.phone != "" && (
             <div className='flex items-center mt-[10px]'>
               <div className='mr-1'>
                 <Image src={phoneImage} alt='' />
               </div>
               <div className='text-[#5630FF] text-[12px] leading-[14px] tracking-[0] whitespace-nowrap text-capitalize inline-block'>
-                {item.point_of_contact.phone}
+                {item.point_of_contact?.phone}
               </div>
             </div>
           )}
