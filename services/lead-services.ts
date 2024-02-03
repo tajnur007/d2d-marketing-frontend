@@ -71,6 +71,7 @@ export class LeadService {
   ) => {
     try {
       const response = await this.getLeads(token);
+      // console.log(response);
 
       const data = response.data.Data.Data;
       setLeadsData(data);
@@ -147,6 +148,31 @@ export class LeadService {
     return resp;
   };
 
+  public getCreatedByData = async (setCreatedByOptions: any, token: string) => {
+  try {
+    const response = await this.getLeads(token);
+    const data = response.data.Data.Data;
+    const uniqueCreatedByValues: any[] = [];
+    const encounteredValues = new Set<string>();
+
+    data.map((item: any) => {
+      const createdBy = item.created_by;
+      if (createdBy && !encounteredValues.has(createdBy)) {
+        encounteredValues.add(createdBy);
+        const newItem = { ...item, value: item.created_by, label: item.created_by };
+        uniqueCreatedByValues.push(newItem);
+      }
+    });
+    setCreatedByOptions(uniqueCreatedByValues);
+  } catch (error) {
+    console.error('Error fetching leads:', error);
+  }
+};
+
+
+
+
+
   //! Get single Lead data
 
   public getUserLead = async (user_id: number, token: string): Promise<any> => {
@@ -214,4 +240,35 @@ export class LeadService {
 
     return resp;
   };
+
+  public FilteredLeadsData = async ( data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: API_PATHS.FilterLeads,
+      method: API_METHODS.GET,
+      ...config,
+      data,
+    });
+    return resp;
+  };
+
+  public getFilteredLeadsData = async ( setLeadsData: any,setIsLoading: (item: boolean) => void, data:any, token:string) : Promise<any>=>{
+    try {
+      setIsLoading(true);
+      const response = await this.FilteredLeadsData(data,token);
+      const filteredLeads = response.data.Data.Data;
+      console.log(filteredLeads);
+      setLeadsData(filteredLeads);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching leads:', error);
+    }
+  };
+
+
 }
