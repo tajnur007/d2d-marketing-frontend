@@ -112,7 +112,7 @@ export interface PointsOfContactType {
 }
 
 export interface ImageInfoType {
-  image_name: string;
+  image_name?: string;
   image_path?: string;
 }
 
