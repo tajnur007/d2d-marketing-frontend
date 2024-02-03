@@ -114,7 +114,7 @@ const LeadDetails = ({
         <div className='flex items-center gap-4 mt-3'>
           <div className='flex-grow break-all'>{data?.title}</div>
           <div
-            className={`flex justify-between gap-2 px-3 py-2 rounded-xl items-center  
+            className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center
                 ${
                   getStatusColor[data?.meeting_status as keyof statusColor]
                 } cursor-pointer`}>
