@@ -228,7 +228,6 @@ export class LeadService {
     if (token) {
       config.headers = { Authorization: `Bearer ${token}` };
     }
-    console.log(data, reminder_id)
 
     const resp = await this.client.request({
       url: `${API_PATHS.UpdateRemainder}?reminder_id=${reminder_id}`,

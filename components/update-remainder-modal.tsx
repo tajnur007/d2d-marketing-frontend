@@ -41,12 +41,8 @@ const UpdateRemainderModal = ({
       };
 
       if (token) {
-        const LeadServices = new LeadService();
-        const response = await LeadServices.updateRemainder(
-          remainder.id,
-          payloadObj,
-          token
-        );
+        const Services = new LeadService();
+        const response = await Services.updateRemainder(remainder.id, payloadObj, token);
         if (response.status === 201) {
           setModalIsOpen(false);
           toast.success('Remainder updated successfully.');
