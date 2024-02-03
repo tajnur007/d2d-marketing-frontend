@@ -17,12 +17,20 @@ function LeadsList() {
   const [searchData, setSearchData] = useState<LeadListType[]>([]);
   const [keyPress, setKeyPress] = useState<boolean>(false);
   const [filterData, setFilterData] = useState({});
-  const [leadsData, setLeadsData] = useState<LeadListType[]>([]);
   const [leadRefresh, setLeadRefresh] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const { executivesOption, setExecutivesOption, leadDetailsRef } =
-    useContext(LeadsContext);
+  const {
+    executivesOption,
+    setExecutivesOption,
+    leadDetailsRef,
+    createdByOptions,
+    setCreatedByOptions,
+    leadsData,
+    setLeadsData,
+    isLoading,
+    setIsLoading,
+  } = useContext(LeadsContext);
+
   const { data: sessionData } = useSession();
   //@ts-ignore den
   const token: string = sessionData?.user?.access_token;
@@ -37,20 +45,21 @@ function LeadsList() {
     if (token) {
       const LeadServices = new LeadService();
       LeadServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
+      LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
     }
-  }, [token, setExecutivesOption, leadRefresh]);
+  }, [token, setExecutivesOption, setCreatedByOptions,setLeadsData,setIsLoading]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
-      const newFilteredData = leadsData.filter((data) => {
+      const newFilteredData = leadsData.filter((data:LeadListType) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
       setSearchData(newFilteredData);
     } else {
       setSearchData([]);
     }
-  }, [keyPress, leadsData, searchValue, leadRefresh]);
+  }, [keyPress, leadsData, searchValue]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
@@ -111,7 +120,7 @@ function LeadsList() {
                     setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
                   />
                 ))
-              : leadsData.map((item, index) => (
+              : leadsData.map((item:LeadListType, index:number) => (
                   <LeadRow
                     key={index}
                     item={item}

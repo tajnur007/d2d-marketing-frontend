@@ -1,29 +1,20 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import Image from 'next/image';
-import moment from 'moment';
-import leadImage from '@/assets/images/Marketing-signin.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
-import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
-import { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import {
-  CreateReminderItems,
-  LeadListType,
-  AssignToUsers,
-  statusColor,
-  RemainderType,
-} from '@/models/global-types';
+import { CreateReminderItems, RemainderType, statusColor } from '@/models/global-types';
+import { LeadService } from '@/services/lead-services';
+import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
+import moment from 'moment';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
-import React from 'react';
-import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import CreateRemainderModal from './create-remainder-modal';
-import { LeadService } from '@/services/lead-services';
-import { useSession } from 'next-auth/react';
-import { toast } from 'react-toastify';
-import { EditIcon } from '@/assets/icons';
 import Remainder from './remainder';
 
 const getStatusColor: statusColor = {
@@ -108,7 +99,7 @@ const LeadDetails = ({
         <div className='flex items-center gap-4 mt-3'>
           <div className='flex-grow break-all'>{data?.title}</div>
           <div
-            className={`flex justify-between gap-2 px-3 py-2 rounded-xl items-center  
+            className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center
                 ${
                   getStatusColor[data?.meeting_status as keyof statusColor]
                 } cursor-pointer`}>
@@ -184,14 +175,20 @@ const LeadDetails = ({
           Image
         </h4>
 
-        <Image
-          src={src}
-          loader={() => src}
-          alt='image'
-          className='w-[108px] h-[108px]'
-          width='108'
-          height='108'
-        />
+        <div className='flex flex-wrap gap-2 mx-auto my-5'>
+          {data?.image_info_json?.length > 0 ? (
+            data?.image_info_json.map((image: any) => (
+              <img
+                key={image?.image_name}
+                src={image?.image_path}
+                alt='image'
+                className='w-[108px] h-[108px]'
+              />
+            ))
+          ) : (
+            <img src={src} alt='image' className='w-[108px] h-[108px] hidden' />
+          )}
+        </div>
       </div>
 
       <div className=' bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>

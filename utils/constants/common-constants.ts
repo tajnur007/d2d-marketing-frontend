@@ -73,6 +73,7 @@ export const API_PATHS = {
   GetAllReminder: '/reminder/list',
   DeleteReminder: '/reminder/delete',
   UpdateRemainder: '/reminder/update',
+  FilterLeads: '/lead/filter',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [

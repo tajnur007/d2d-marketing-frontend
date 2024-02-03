@@ -19,11 +19,6 @@ import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import Dropzone from './multi-image-upload';
 import { LeadsContext } from '@/context/leads-context';
-// import { LeadService } from '@/services/lead-services';
-// import { useSession } from 'next-auth/react';
-// import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
-// import { toast } from 'react-toastify';
-// import { useRouter } from 'next/navigation';
 
 const CreateLeadForm: React.FC = () => {
   const [statusSelected, setStatusSelected] = useState('');
