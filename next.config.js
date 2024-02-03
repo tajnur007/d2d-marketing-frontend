@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['picsum.photos', 'img.freepik.com'],
+    domains: ['157.245.204.196', 'picsum.photos', 'img.freepik.com'],
   },
   async rewrites() {
     return [

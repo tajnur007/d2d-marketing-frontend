@@ -15,12 +15,33 @@ import { toast } from 'react-toastify';
 import { AssignDropdownSelect } from './assign-dropdown-select';
 import { Button } from './button';
 import CreateReminderModal from './create-reminder-modal';
+import axios from 'axios';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
   hot: 'bg-[#FFD9D9]',
   warm: 'bg-[#FFEFB8]',
 };
+
+//! URL VALIDATION FUNCTION START
+  const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
+    try {
+      const response = await axios.get(imageUrl);
+      if (response.status === 200) {
+        return true; // URL is valid
+      } else {
+        return false; // URL is not valid
+      }
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return false; // URL is not valid and returns "Not Found" status
+      } else {
+        console.error('Error validating URL:', error.message);
+        throw new Error('An error occurred while validating the URL');
+      }
+    }
+  };
+//! URL VALIDATION FUNCTION END
 
 const LeadDetails = ({
   setIsOpen,
@@ -44,7 +65,7 @@ const LeadDetails = ({
   //@ts-ignore den
   const token: string = reminderData?.user?.access_token;
 
-  const src = data?.image_info_json[0]?.image_name;
+  const [validImages, setValidImages] = useState<any[]>([]);
 
   const handleAddReminderButtonClick = () => {
     setModalIsOpen(true);
@@ -88,6 +109,26 @@ const LeadDetails = ({
   useEffect(() => {
     setIsOpen(false);
   }, [closeDrawer, setIsOpen]);
+
+  //! IMAGE URL VALIDATION
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const validatedImages = await Promise.all(
+          data?.image_info_json?.map(async (image: any) => {
+            const isValid = await validateImageUrl(image?.image_path);
+            return isValid ? image : null;
+          }) ?? []
+        );
+        setValidImages(validatedImages.filter((image) => image !== null));
+      } catch (error) {
+        console.error('Error fetching and validating images:', error);
+      }
+    };
+    fetchData();
+  }, [data]);
+
+  validImages.map((image) => console.log('Image Path:', image.image_path));
 
   return (
     <div className='p-8 h-full overflow-y-auto no-scrollbar '>
@@ -189,20 +230,18 @@ const LeadDetails = ({
         <h4 className='text-[#00156A] font-medium text-[12px] leading-[14px] mt-5'>
           Image
         </h4>
-
         <div className='flex flex-wrap gap-2 mx-auto my-5'>
-          {data?.image_info_json?.length > 0 ? (
-            data?.image_info_json.map((image: any) => (
-              <img
-                key={image?.image_name}
-                src={image?.image_path}
+          {validImages.map((image) => (
+            <div key={image?.image_name}>
+              <Image
+                src={`${image?.image_path}`}
                 alt='image'
-                className='w-[108px] h-[108px]'
+                width={100}
+                height={100}
+                className={`w-[108px] h-[108px]`}
               />
-            ))
-          ) : (
-            <img src={src} alt='image' className='w-[108px] h-[108px] hidden' />
-          )}
+            </div>
+          ))}
         </div>
       </div>
 
