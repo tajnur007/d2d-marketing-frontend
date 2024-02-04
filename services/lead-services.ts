@@ -209,6 +209,13 @@ export class LeadService {
 
     return resp;
   };
+
+  public getAllRemindersData = async (token: string, setRemainders: any) => {
+    const res = await this.getAllReminder(token);
+    console.log(res);
+    setRemainders(res?.data?.Data?.Data);
+  };
+
   public getAllReminder = async (token: string): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
@@ -241,13 +248,26 @@ export class LeadService {
     return resp;
   };
 
-  public FilteredLeadsData = async ( data: any, token: string): Promise<any> => {
-    const config: AxiosRequestConfig = {};
-
+  public updateRemainder = async (reminder_id: number, data:any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {}
     if (token) {
       config.headers = { Authorization: `Bearer ${token}` };
     }
+    const resp = await this.client.request({
+      url: `${API_PATHS.UpdateRemainder}?reminder_id=${reminder_id}`,
+      method: API_METHODS.PATCH,
+      ...config,
+      data,
+    });
+    return resp;
+  };
 
+  public FilteredLeadsData = async ( data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+    
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
     const resp = await this.client.request({
       url: API_PATHS.FilterLeads,
       method: API_METHODS.GET,

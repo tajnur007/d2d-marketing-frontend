@@ -8,6 +8,7 @@ import {
   FormItems,
   LATEST_LEADS_DATA_TYPE,
   LEADERBOARD,
+  UpdateRemainderType,
   SettingFormItems,
   SidebarItem,
   SignUpFormItems,
@@ -72,6 +73,7 @@ export const API_PATHS = {
   UploadLeadImage: '/lead/upload-image',
   GetAllReminder: '/reminder/list',
   DeleteReminder: '/reminder/delete',
+  UpdateRemainder: '/reminder/update',
   FilterLeads: '/lead/filter',
 };
 
@@ -234,8 +236,8 @@ export const LEAD_STATUS = {
 
 export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
   { value: 'Pending', label: 'Pending' },
-  { value: 'In-Progress', label: 'In-Progress' },
   { value: 'Completed', label: 'Completed' },
+  { value: 'Canceled', label: 'Canceled' },
 ];
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
@@ -349,6 +351,13 @@ export const LEADERBOARD_ITEMS: LEADERBOARD = {
       initials: '',
     },
   ],
+};
+
+export const UPDATE_REMINDER_ITEMS: UpdateRemainderType = {
+  title: '',
+  notes: '',
+  status: '',
+  reminder_time: '',
 };
 
 export const IMAGE_DETAIL = {
