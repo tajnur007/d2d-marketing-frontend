@@ -6,13 +6,27 @@ import moment from 'moment';
 import { toast } from 'react-toastify';
 import { LeadService } from '@/services/lead-services';
 import UpdateRemainderModal from './update-remainder-modal';
-import { RemainderProps } from '@/models/global-types';
+import {
+  RemainderProps,
+  RemainderType,
+  UpdateRemainderType,
+} from '@/models/global-types';
 import { EditIcon } from '@/assets/icons';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
+import { UPDATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 
-const Remainder = ({ remainder, token, setRemainders }: RemainderProps) => {
+const Remainder = ({
+  remainder,
+  token,
+  setRemainders,
+  isUpdated,
+  setIsUpdated,
+}: RemainderProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectRemainder, setSelectRemainder] = useState(remainder.status);
+  const [selected, setSelected] = useState('');
+  const [formData, setFormData] = useState<RemainderType>(remainder);
+  const [formErrors, setFormErrors] =
+    useState<UpdateRemainderType>(UPDATE_REMINDER_ITEMS);
 
   const deleteRemainder = async (id: number) => {
     const Service = new LeadService();
@@ -46,9 +60,13 @@ const Remainder = ({ remainder, token, setRemainders }: RemainderProps) => {
       <UpdateRemainderModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
-        selectRemainder={selectRemainder}
-        setSelectRemainder={setSelectRemainder}
-        remainder={remainder}
+        formData={formData}
+        setFormData={setFormData}
+        formErrors={formErrors}
+        setFormErrors={setFormErrors}
+        selected={selected}
+        setSelected={setSelected}
+        setIsUpdated={setIsUpdated}
       />
     </div>
   );

@@ -119,13 +119,21 @@ export interface ImageInfoType {
 export interface RemainderType {
   company_id: number;
   id: number;
-  lead_id: number;
+  lead_id?: number;
+  notes?: string;
+  reminder_time?: string;
+  status?: string;
+  title?: string;
+  user_id?: number;
+}
+
+export interface UpdateRemainderType {
   notes: string;
   reminder_time: string;
   status: string;
   title: string;
-  user_id: number;
 }
+
 
 export interface LeadListType {
   assignment_status: string;
@@ -471,12 +479,18 @@ export interface RemainderProps {
   remainder: RemainderType;
   token: string;
   setRemainders: (item: any) => void;
+  isUpdated: boolean;
+  setIsUpdated: (item: boolean) => void;
 }
 
 export interface UpdateRemainderModalProps {
   modalIsOpen: boolean;
   setModalIsOpen: (item: boolean) => void;
-  selectRemainder:  string;
-  setSelectRemainder: (item: string) => void;
-  remainder: RemainderType;
+  formData: RemainderType;
+  setFormData: (item: any) => void;
+  formErrors: UpdateRemainderType;
+  setFormErrors: (item: any) => void;
+  selected: string;
+  setSelected: (item: string) => void;
+  setIsUpdated: (item: boolean) => void;
 }

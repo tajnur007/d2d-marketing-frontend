@@ -4,6 +4,8 @@ import Select from 'react-select';
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import moment from 'moment';
+import { Input } from './input';
 import { UpdateRemainderModalProps } from '@/models/global-types';
 import {
   CREATE_REMINDER_STATUS,
@@ -25,30 +27,82 @@ if (Modal.defaultStyles.overlay) {
 
 const UpdateRemainderModal = ({
   modalIsOpen,
-  setModalIsOpen,
-  selectRemainder,
-  setSelectRemainder,
-  remainder,
+  setModalIsOpen = () => {},
+  formData,
+  setFormData = () => {},
+  formErrors,
+  setFormErrors = () => {},
+  selected,
+  setSelected = () => {},
+  setIsUpdated = () => {},
 }: UpdateRemainderModalProps) => {
   const { data } = useSession();
   //@ts-ignore
   const token = data?.user?.access_token;
 
+  const inputProps = {
+    placeholder: moment(formData.reminder_time).format('ddd DD MMM, YYYY hh:mm A'),
+    className: `w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase text-[#B9C1D9] date-picker-placeholder ${
+      formErrors.notes && 'border-red-500'
+    }`,
+  };
+
+  useEffect(() => {
+    setFormData((prev: any) => {
+      return { ...prev, Status: selected };
+    });
+  }, [selected, formErrors, setFormData]);
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setFormData((prev: any) => {
+      return { ...prev, [name]: value };
+    });
+
+    setFormErrors((prev: any) => {
+      return { ...prev, [name]: '' };
+    });
+  };
+
   const submitData = async () => {
     try {
-      const payloadObj = {
-        status: selectRemainder,
-      };
+      const newFormErrors: any = {};
 
-      if (token) {
-        const Services = new LeadService();
-        const response = await Services.updateRemainder(remainder.id, payloadObj, token);
-        if (response.status === 201) {
-          setModalIsOpen(false);
-          toast.success('Remainder updated successfully.');
+      for (let field in formData) {
+        if (formData[field as keyof typeof formData] === '') {
+          newFormErrors[field] = `(${field} is required)`;
         }
-      } else {
-        toast.error('failed to create remainder.');
+      }
+
+      setFormErrors(newFormErrors);
+
+      if (Object.keys(newFormErrors).length === 0) {
+        const payloadObj = {
+          title: formData.title,
+          lead_id: formData.lead_id,
+          user_id: formData.user_id,
+          company_id: formData.company_id,
+          reminder_time: formData.reminder_time,
+          notes: formData.notes,
+          status: selected,
+        };
+
+        if (token) {
+          const LeadServices = new LeadService();
+          const response = await LeadServices.updateRemainder(
+            formData.id,
+            payloadObj,
+            token
+          );
+          if (response.status === 202) {
+            setModalIsOpen(false);
+            setIsUpdated(true);
+            toast.success('Remainder updated successfully.');
+          }
+        } else {
+          toast.error('failed to update remainder.');
+        }
       }
     } catch (error) {
       toast.error('Something went wrong.');
@@ -59,13 +113,19 @@ const UpdateRemainderModal = ({
   const handleSelectChange = (selectedOption: any) => {
     CREATE_REMINDER_STATUS.map((option) => {
       if (option.value === selectedOption.value) {
-        setSelectRemainder(option.value);
+        setSelected(option.value);
       }
     });
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
+  };
+
+  const getDate = (e: any) => {
+    setFormData((prev: any) => {
+      return { ...prev, Date: e._d };
+    });
   };
 
   return (
@@ -87,22 +147,33 @@ const UpdateRemainderModal = ({
           </button>
         </div>
 
-        <div className='mt-[8px]'>
-          <div className='mt-[-1.00px] font-medium text-[#00156a] text-[12px] tracking-[0] leading-[14px] whitespace-nowrap mb-1'>
-            Title
-          </div>
-          <div className='text-black text-[14px] tracking-[0] leading-[18px] whitespace-nowrap mb-1'>
-            {remainder.title}
-          </div>
-        </div>
-        <div className='mt-[8px]'>
-          <div className='mt-[-1.00px] font-medium text-[#00156a] text-[12px] tracking-[0] leading-[14px] whitespace-nowrap mb-1'>
-            Date & Time
-          </div>
-        </div>
-        <div className='mt-[8px]'>
-          <div className='mt-[-1.00px] font-medium text-[#00156a] text-[12px] tracking-[0] leading-[14px] whitespace-nowrap mb-1'>
-            Notes
+        <Input
+          label='Title'
+          placeholder={formData.title}
+          type='text'
+          id='title'
+          name='title'
+          htmlFor='title'
+          errorMessage={formErrors.title}
+          className={`${formErrors.title && 'border-red-500 shadow'}`}
+          onChange={handleInputChange}
+        />
+
+        <div className='w-full mt-[4px] date-picker'>
+          <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
+            {'Date & Time'}
+            {formErrors.reminder_time && (
+              <span className='text-red-500 relative ml-1'>
+                {formErrors.reminder_time}
+              </span>
+            )}
+          </label>
+
+          <div className='relative'>
+            <Datetime onChange={getDate} inputProps={inputProps} />
+            <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
+              <ClockIcon />
+            </div>
           </div>
         </div>
 
@@ -114,6 +185,7 @@ const UpdateRemainderModal = ({
           <Select
             options={CREATE_REMINDER_STATUS}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+            defaultValue={CREATE_REMINDER_STATUS[0]}
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
@@ -124,6 +196,17 @@ const UpdateRemainderModal = ({
               }),
             }}
             onChange={handleSelectChange}
+          />
+        </div>
+
+        <div className='mt-[8px]'>
+          <TextArea
+            label='Notes'
+            placeholder={formData.notes}
+            name='notes'
+            onChange={handleInputChange}
+            errorMessage={formErrors.notes}
+            className={`h-[84px] ${formErrors.notes && 'border-red-500 shadow'}`}
           />
         </div>
 

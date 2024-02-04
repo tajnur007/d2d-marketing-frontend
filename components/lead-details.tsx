@@ -41,6 +41,7 @@ const LeadDetails = ({
   const [reminders, setRemainders] = React.useState<RemainderType[]>([]);
   const [selectReminder, setSelectReminder] = React.useState();
   const [isCreated, setIsCreated] = React.useState(false);
+  const [isUpdated, setIsUpdated] = React.useState(false);
   const { data: reminderData } = useSession();
   //@ts-ignore den
   const token: string = reminderData?.user?.access_token;
@@ -67,8 +68,9 @@ const LeadDetails = ({
     const Service = new LeadService();
     isCreated && Service.getAllRemindersData(token, setRemainders);
     setIsCreated(false);
+    setIsUpdated(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCreated]);
+  }, [isCreated, setIsUpdated]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -205,6 +207,8 @@ const LeadDetails = ({
                 remainder={remainder}
                 token={token}
                 setRemainders={setRemainders}
+                isUpdated={isUpdated}
+                setIsUpdated={setIsUpdated}
               />
             ))}
           </div>
