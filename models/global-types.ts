@@ -466,3 +466,9 @@ export interface EmployeeOptionsProps {
   handleViewButton: () => void;
   handleDeleteButton: () => Promise<void>;
 }
+
+export interface EmployeeOptionsProps {
+  handleViewButton: () => void;
+  handleDeleteButton: () => Promise<void>;
+}
+

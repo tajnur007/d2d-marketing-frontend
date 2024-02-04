@@ -1,9 +1,9 @@
-import { ToastContainer } from 'react-toastify';
-import type { Metadata } from 'next';
+import { NextAuthProvider } from '@/providers/next-auth-provider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from 'next';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
-import { NextAuthProvider } from '@/providers/next-auth-provider';
 
 export const metadata: Metadata = {
   title: 'D2D Marketing',
