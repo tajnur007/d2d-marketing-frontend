@@ -1,22 +1,19 @@
 'use client';
 
-import Select from 'react-select';
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import Select from 'react-select';
 import { toast } from 'react-toastify';
-import moment from 'moment';
-import { Input } from './input';
-import { UpdateRemainderModalProps } from '@/models/global-types';
-import {
-  CREATE_REMINDER_STATUS,
-  CREATE_REMINDER_ITEMS,
-} from '@/utils/constants/common-constants';
-import { TextArea } from './text-area';
-import { Button } from './button';
-import './dropdown-select.css';
-import React from 'react';
 import Modal from 'react-modal';
 import Datetime from 'react-datetime';
+import moment from 'moment';
+
+import { Input } from './input';
+import { TextArea } from './text-area';
+import { Button } from './button';
+import { UpdateRemainderModalProps } from '@/models/global-types';
+import { CREATE_REMINDER_STATUS } from '@/utils/constants/common-constants';
+import './dropdown-select.css';
 import 'react-datetime/css/react-datetime.css';
 import { ClockIcon, ExIcon } from '@/assets/icons';
 import { LeadService } from '@/services/lead-services';

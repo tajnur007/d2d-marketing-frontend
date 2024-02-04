@@ -4,16 +4,17 @@ import { useState } from 'react';
 import Image from 'next/image';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-import { LeadService } from '@/services/lead-services';
+
 import UpdateRemainderModal from './update-remainder-modal';
+import { LeadService } from '@/services/lead-services';
 import {
   RemainderProps,
   RemainderType,
   UpdateRemainderType,
 } from '@/models/global-types';
+import { UPDATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import { EditIcon } from '@/assets/icons';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
-import { UPDATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 
 const Remainder = ({
   remainder,

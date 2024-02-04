@@ -1,21 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import clockImage from '@/assets/images/leadslist-icons/clock.png';
-import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
-import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import moment from 'moment';
+
+import Remainder from './remainder';
+import CreateRemainderModal from './create-remainder-modal';
+import { Button } from './button';
+import { AssignDropdownSelect } from './assign-dropdown-select';
 import { CreateReminderItems, RemainderType, statusColor } from '@/models/global-types';
 import { LeadService } from '@/services/lead-services';
 import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
-import moment from 'moment';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { AssignDropdownSelect } from './assign-dropdown-select';
-import { Button } from './button';
-import CreateRemainderModal from './create-remainder-modal';
-import Remainder from './remainder';
+import clockImage from '@/assets/images/leadslist-icons/clock.png';
+import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
+import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
