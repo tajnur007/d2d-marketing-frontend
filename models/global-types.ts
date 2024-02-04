@@ -494,3 +494,8 @@ export interface UpdateRemainderModalProps {
   setSelected: (item: string) => void;
   setIsUpdated: (item: boolean) => void;
 }
+export interface EmployeeOptionsProps {
+  handleViewButton: () => void;
+  handleDeleteButton: () => Promise<void>;
+}
+

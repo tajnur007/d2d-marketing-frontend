@@ -1,4 +1,5 @@
 import { FormItems, LeadsDataType } from '@/models/global-types';
+import axios from 'axios';
 
 export function ensureTrailingSlash(str: string = '/') {
   return str.endsWith('/') ? str : `${str}/`;
@@ -77,3 +78,21 @@ export const generateInitials = (fullName: string): string => {
   }`;
   return initials.toUpperCase();
 };
+
+export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
+    try {
+      const response = await axios.get(imageUrl);
+      if (response.status === 200) {
+        return true; // URL is valid
+      } else {
+        return false; // URL is not valid
+      }
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return false; // URL is not valid and returns "Not Found" status
+      } else {
+        console.error('Error validating URL:', error.message);
+        throw new Error('An error occurred while validating the URL');
+      }
+    }
+  };

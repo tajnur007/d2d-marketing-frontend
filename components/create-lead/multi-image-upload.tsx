@@ -45,8 +45,8 @@ const Dropzone: React.FC<DropzoneProps> = ({ onChange, onPendingChange }) => {
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, [files]);
 
-  const removeFile = (name: any) => {
-    setFiles((files) => files.filter((file) => file.name !== name));
+  const removeFile = (previewToRemove: string) => {
+    setFiles((files) => files.filter((file) => file.preview !== previewToRemove));
   };
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ onChange, onPendingChange }) => {
                 <button
                   type='button'
                   className='w-5 h-5 border border-secondary-400 bg-red-100 rounded-full flex justify-center items-center absolute -top-2 -right-2 hover:bg-red-600 transition-colors'
-                  onClick={() => removeFile(file.name)}>
+                  onClick={() => removeFile(file.preview)}>
                   <XMarkIcon className='w-4 h-4 font-bold fill-red-600 hover:fill-white transition-colors' />
                 </button>
               </li>
