@@ -146,12 +146,13 @@ const UpdateRemainderModal = ({
 
         <Input
           label='Title'
-          placeholder={formData.title}
+          placeholder='Title here'
           type='text'
           id='title'
           name='title'
           htmlFor='title'
           errorMessage={formErrors.title}
+          defaultValue={formData.title}
           className={`${formErrors.title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
@@ -167,7 +168,11 @@ const UpdateRemainderModal = ({
           </label>
 
           <div className='relative'>
-            <Datetime onChange={getDate} inputProps={inputProps} />
+            <Datetime
+              onChange={getDate}
+              initialValue={formData.reminder_time}
+              inputProps={inputProps}
+            />
             <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
               <ClockIcon />
             </div>
@@ -182,7 +187,9 @@ const UpdateRemainderModal = ({
           <Select
             options={CREATE_REMINDER_STATUS}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
-            defaultValue={CREATE_REMINDER_STATUS[0]}
+            defaultValue={CREATE_REMINDER_STATUS.filter(
+              (item) => item.value === formData.status
+            )}
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
@@ -199,8 +206,9 @@ const UpdateRemainderModal = ({
         <div className='mt-[8px]'>
           <TextArea
             label='Notes'
-            placeholder={formData.notes}
+            placeholder='Notes Here'
             name='notes'
+            defaultValue={formData.notes}
             onChange={handleInputChange}
             errorMessage={formErrors.notes}
             className={`h-[84px] ${formErrors.notes && 'border-red-500 shadow'}`}
