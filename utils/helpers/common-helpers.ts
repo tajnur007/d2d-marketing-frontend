@@ -116,6 +116,10 @@ export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
       return isValidEmail(emailValue) ? null : `(${field} is invalid)`;
     }
 
+    if (field === 'ConfirmPassword' && formData.Password !== formData.ConfirmPassword) {
+    return '(Passwords do not match)';
+  }
+
     return null; // Safe field is valid
   }
 

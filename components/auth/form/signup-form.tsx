@@ -57,11 +57,7 @@ const SignupForm = () => {
 
       setFormErrors(newFormErrors);
 
-      // If there are no form errors and passwords match, proceed with form submission
-      if (
-        Object.keys(newFormErrors).length === 0 &&
-        formData.Password === formData.ConfirmPassword
-      ) {
+      if (Object.keys(newFormErrors).length === 0) {
         const payload = {
           company_name: formData.OrganizationName,
           user_info: {
@@ -70,27 +66,22 @@ const SignupForm = () => {
             password: formData.Password,
           },
         };
-
-        console.log(payload);
+        //console.log(payload);
 
         // Call your API to sign up the user
         const response = await AuthServices.signup(payload);
+        //console.log('Response: ', response);
 
-        console.log('Response: ', response);
         if (response.Message === 'created successfully') {
           setSelectedEmail(payload.user_info.email as string);
           setShowModal(true);
-        }
-      } else {
-        // Display a toast message if passwords do not match
-        if (formData.Password !== formData.ConfirmPassword) {
-          toast.error('Passwords do not match');
         }
       }
     } catch (error) {
       // Handle errors
       const axiosError = error as AxiosError;
       console.error('Error submitting form:', axiosError);
+      toast.error('Error submitting form.');
 
       if (axiosError.request) {
         // The request was made but no response was received
@@ -98,6 +89,7 @@ const SignupForm = () => {
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error setting up the request:', axiosError.message);
+        toast.error('Error setting up the request, Try Again.');
       }
     }
   };
