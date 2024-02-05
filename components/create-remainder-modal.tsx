@@ -195,12 +195,16 @@ const CreateRemainderModal = ({
             options={CREATE_REMINDER_STATUS}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
             styles={{
-              control: (baseStyles) => ({
+              control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
                 borderColor: '2px #F3F3F3 solid',
                 width: '100%',
                 height: '56px',
                 borderRadius: '10px',
+                boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
+                transition: 'all 500ms',
+                border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
               }),
             }}
             onChange={handleSelectChange}
