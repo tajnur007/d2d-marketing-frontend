@@ -72,7 +72,7 @@ const ResetPassword = () => {
                   type='email'
                   name='email'
                   value={email}
-                  className='block w-full rounded-md border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
+                  className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
                   placeholder='Example@email.com'
                   autoComplete='off'
                   required

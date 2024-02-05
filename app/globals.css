@@ -53,6 +53,16 @@ input[type='date']::-webkit-calendar-picker-indicator {
   scrollbar-width: none; /* Firefox */
 }
 
+.rdtOpen input {
+  border-radius: 10px;
+  border-color: #a855f7;
+}
+
+.rdtOpen input:focus-within {
+  box-shadow: 0 0 0 3px #e9d5ff;
+  transition: all 500ms;
+}
+
 .date-picker-placeholder::placeholder {
   color: #b9c1d9 !important;
   font-size: 14px !important;

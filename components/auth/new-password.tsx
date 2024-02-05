@@ -31,7 +31,6 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
     }
     console.log('resetData', resetData);
     console.log('new password', newPassword);
-    
   };
 
   return (
@@ -65,7 +64,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
                 type='password'
                 name='newPassword'
                 value={newPassword}
-                className='block w-[388px] h-[48px] rounded-[10px] border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
+                className='w-[388px] rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
                 placeholder='New password'
                 autoComplete='off'
                 required
@@ -81,7 +80,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
                 type='password'
                 name='retypePassword'
                 value={retypePassword}
-                className='block w-[388px] h-[48px] rounded-[10px] border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
+                className='w-[388px] rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
                 placeholder='Re-type password'
                 autoComplete='off'
                 required
