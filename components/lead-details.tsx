@@ -71,7 +71,7 @@ const LeadDetails = ({
     setIsCreated(false);
     setIsUpdated(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCreated, setIsUpdated]);
+  }, [isCreated, isUpdated]);
 
   useEffect(() => {
     setIsOpen(false);
