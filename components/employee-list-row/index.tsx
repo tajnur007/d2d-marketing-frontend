@@ -8,6 +8,8 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Popup from 'reactjs-popup';
 import EmployeeOptions from './EmployeeOptions';
+import UpdateEmployeeModal from '../update-employee-modal';
+import { useState } from 'react';
 
 const getStatusColor: EmployeestatusColor = {
   Active: 'bg-[#D2FBE7]',
@@ -19,12 +21,19 @@ function EmployeeListRow({
   uniqueCharCount,
   isFirstChar,
   employeeActionRef,
+  isRefreshData,
+  setISRefreshData = () => {},
 }: {
   item: any;
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
   employeeActionRef: any;
+  isRefreshData: boolean;
+  setISRefreshData: any;
 }) {
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [isExecutive, setIsExecutive] = useState<boolean>(false);
+
   const { data } = useSession();
   const firstChar = item.name.charAt(0).toUpperCase();
 
@@ -39,6 +48,11 @@ function EmployeeListRow({
     if (token) {
       await UserServices.deleteUser(userId, token);
     }
+  };
+
+  const handleEditButton = (userId: number) => {
+    console.log('Edit', userId);
+    setModalIsOpen(true);
   };
 
   return (
@@ -99,6 +113,7 @@ function EmployeeListRow({
             {item?.employeeStatus || 'Active'}
           </span>
         </div>
+
         <Popup
           trigger={
             <div className='menu-item'>
@@ -120,12 +135,25 @@ function EmployeeListRow({
             marginLeft: '20px',
           }}
           arrow={false}>
-          <EmployeeOptions
-            handleViewButton={handleViewButton}
-            handleDeleteButton={() => handleDeleteButton(item.id)}
-          />
+          {!modalIsOpen && (
+            <EmployeeOptions
+              handleViewButton={handleViewButton}
+              handleDeleteButton={() => handleDeleteButton(item.id)}
+              handleEditButton={() => handleEditButton(item.id)}
+            />
+          )}
         </Popup>
       </div>
+
+      <UpdateEmployeeModal
+        modalIsOpen={modalIsOpen}
+        isExecutive={isExecutive}
+        setModalIsOpen={setModalIsOpen}
+        setIsExecutive={setIsExecutive}
+        employeeinfo={item}
+        isRefreshData={isRefreshData}
+        setIsRefreshData={setISRefreshData}
+      />
     </div>
   );
 }

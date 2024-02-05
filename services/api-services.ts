@@ -156,4 +156,25 @@ export class ApiService {
 
     return resp;
   };
+
+  public updateEmployeeInfo = async (
+    user_id: number,
+    data: any,
+    token: string
+  ): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.UpdateEmployeeInfo}?user_id=${user_id}`,
+      method: API_METHODS.PATCH,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
 }
