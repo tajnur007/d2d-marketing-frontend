@@ -51,7 +51,7 @@ function EmployeeListRow({
   };
 
   const handleEditButton = (userId: number) => {
-    console.log('Edit', userId);
+    // After clicking the edit button, the modal will open
     setModalIsOpen(true);
   };
 
@@ -145,12 +145,12 @@ function EmployeeListRow({
         </Popup>
       </div>
 
-      <UpdateEmployeeModal
+      <UpdateEmployeeModal // This is the modal for updating employee details
         modalIsOpen={modalIsOpen}
-        isExecutive={isExecutive}
+        isExecutive={isExecutive} // This is the state for the executive
         setModalIsOpen={setModalIsOpen}
         setIsExecutive={setIsExecutive}
-        employeeinfo={item}
+        employeeinfo={item} // This is the employee details
         isRefreshData={isRefreshData}
         setIsRefreshData={setISRefreshData}
       />

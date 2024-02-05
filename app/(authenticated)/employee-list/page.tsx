@@ -71,7 +71,9 @@ const EmployeeListPage = () => {
     if (token) {
       fetchData();
     }
-  }, [token, isRefreshData]); // Only trigger when token changes
+  }, [token, isRefreshData]); // Only trigger when token or isRefreshData changes
+
+  // isRefreshData is used to refresh the data when a employee is updated
 
   useEffect(() => {
     // Update unique character count when employeeInfo changes

@@ -24,7 +24,6 @@ if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
 }
 
-
 const UpdateEmployeeModal = ({
   modalIsOpen,
   isExecutive,
@@ -36,7 +35,7 @@ const UpdateEmployeeModal = ({
 }: UpdateEmployeeModalProps) => {
   const [selected, setSelected] = useState<string>(employeeinfo?.user_type);
   const [managers, setManagers] = useState<ManagerType[]>();
-  const [manager, setManager] = useState<string>(MANAGERS[0]?.value);
+  const [manager, setManager] = useState<string>(employeeinfo?.manager_name);
   const [updatePayload, setUpdatePayload] = useState<UpdateEmployeePayload>(
     UPDATE_EMPLOYEE_PAYLOAD
   );
@@ -103,6 +102,8 @@ const UpdateEmployeeModal = ({
     setModalIsOpen(false);
   };
 
+  // Update selected value when the dropdown changes
+
   const handleSelectChange = (selectedOption: any) => {
     setSelected(selectedOption.value);
   };
@@ -110,6 +111,8 @@ const UpdateEmployeeModal = ({
   const handleManagerChange = (selectedOption: any) => {
     setManager(selectedOption.value);
   };
+
+  // Update the payload when the input changes
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -134,7 +137,9 @@ const UpdateEmployeeModal = ({
 
       if (resp?.status === 202) {
         toast.success('Successfully Updated employee info!');
+        // Refresh the data after updating the employee info
         setIsRefreshData(!isRefreshData);
+        // Close the modal after updating the employee info
         setModalIsOpen(false);
       }
     } catch (err) {
@@ -231,7 +236,11 @@ const UpdateEmployeeModal = ({
                 }}
                 onChange={handleManagerChange}
                 defaultInputValue={employeeinfo?.manager_name ?? ''}
-                placeholder='Select Manager'
+                placeholder={
+                  employeeinfo?.manager_name
+                    ? employeeinfo.manager_name
+                    : 'Select Manager'
+                }
               />
             </>
           )}
