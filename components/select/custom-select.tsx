@@ -30,39 +30,20 @@ export const CustomSelect = ({
         )}
       </label>
       <div className='relative font-medium '>
-        {/* <Select
-          className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
-          styles={{
-            control: (baseStyles) => ({
-              ...baseStyles,
-              border: isBothSelectFieldNull ? '1px red solid' : '1px #F3F3F3 solid',
-              '&:hover': {
-                border: isBothSelectFieldNull ? '1px red solid' : '1px solid #F3F3F3',
-              },
-              width: '100%',
-              height: '56px',
-            }),
-          }}
-          options={options}
-          defaultValue={
-            defaultValue
-              ? {
-                  value: defaultValue,
-                  label: defaultValue.charAt(0).toUpperCase() + defaultValue.slice(1),
-                }
-              : { value: '', label: 'Select' }
-          }
-          onChange={handleChange}
-        /> */}
         <Select
           className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
           styles={{
             control: (baseStyles, { isFocused }) => ({
               ...baseStyles,
-              border: isBothSelectFieldNull ? '1px red solid' : '1px #F3F3F3 solid',
+              border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
               '&:hover': {
-                border: isBothSelectFieldNull ? '1px red solid' : '1px solid #F3F3F3',
+                border: isBothSelectFieldNull
+                  ? '1px solid #F3F3F3'
+                  : isFocused
+                  ? '1px solid #a855f7'
+                  : '1px solid #F3F3F3',
               },
+
               width: '100%',
               height: '56px',
               boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
