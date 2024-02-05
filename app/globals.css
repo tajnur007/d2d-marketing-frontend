@@ -75,6 +75,14 @@ input[type='date']::-webkit-calendar-picker-indicator {
   position: absolute;
   z-index: 102;
 }
+.custom-datepicker {
+  border: none; /* Remove default border */
+  outline: none; /* Remove default outline */
+  /* Add any other custom styles you want to apply */
+}
+input[type='checkbox']:checked {
+  accent-color: #a855f7;
+}
 
 .ReactModalPortal > div > div > div {
   animation: zoom-in 0.5s ease;
