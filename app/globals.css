@@ -12,34 +12,39 @@
   font-family: Metropolis, Arial, Helvetica, sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b63e5;
+}
+
 /* Tiny scrollbar styles */
 .tiny-scrollbar::-webkit-scrollbar {
-  width: 6px; /* Adjust the width as needed */
-}
-
-.tiny-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #4f46e5;
-  border-radius: 8px;
-}
-
-.tiny-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #6b63e5;
+  width: 6px;
 }
 
 .tiny-scrollbar::-webkit-scrollbar-track {
-  background-color: none;
-  border-radius: 8px;
+  background: transparent;
 }
 
-/* Firefox scrollbar styles */
-.tiny-scrollbar {
-  scrollbar-color: #4f46e5 #f1f1f1;
-  scrollbar-width: thin;
+.tiny-scrollbar::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 6px;
 }
 
-/* Optional: hover style for Firefox */
-.tiny-scrollbar:hover {
-  scrollbar-color: #6b63e5 #f1f1f1;
+.tiny-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6b63e5;
 }
 
 /*Hide default calendar icon*/
