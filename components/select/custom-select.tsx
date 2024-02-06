@@ -23,7 +23,7 @@ export const CustomSelect = ({
   };
   return (
     <div className='flex flex-col' ref={ref}>
-      <label className='text-[#00156A] text-xs mb-2 font-medium'>
+      <label className='text-[#00156A] text-xs mb-1 font-medium'>
         {label}
         {isBothSelectFieldNull && (
           <span className='text-red-500 ml-1'>{`(${label} is required)`}</span>
@@ -33,15 +33,21 @@ export const CustomSelect = ({
         <Select
           className='custom-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
           styles={{
-            control: (baseStyles) => ({
+            control: (baseStyles, { isFocused }) => ({
               ...baseStyles,
-              border: isBothSelectFieldNull ? '2px red solid' : '2px #F3F3F3 solid',
+              border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
               '&:hover': {
-                border: isBothSelectFieldNull ? '2px solid red' : '2px solid #F3F3F3',
+                border: isBothSelectFieldNull
+                  ? '1px solid #F3F3F3'
+                  : isFocused
+                  ? '1px solid #a855f7'
+                  : '1px solid #F3F3F3',
               },
+
               width: '100%',
               height: '56px',
-              borderRadius: '10px',
+              boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
+              transition: 'all 500ms',
             }),
           }}
           options={options}

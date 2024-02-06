@@ -48,11 +48,11 @@ function LeadsList() {
       LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
     }
-  }, [token, setExecutivesOption, setCreatedByOptions,setLeadsData,setIsLoading]);
+  }, [token, setExecutivesOption, setCreatedByOptions, setLeadsData, setIsLoading]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
-      const newFilteredData = leadsData.filter((data:LeadListType) => {
+      const newFilteredData = leadsData.filter((data: LeadListType) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
       setSearchData(newFilteredData);
@@ -120,7 +120,7 @@ function LeadsList() {
                     setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
                   />
                 ))
-              : leadsData.map((item:LeadListType, index:number) => (
+              : leadsData.map((item: LeadListType, index: number) => (
                   <LeadRow
                     key={index}
                     item={item}

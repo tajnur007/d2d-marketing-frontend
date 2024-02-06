@@ -210,7 +210,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <div className='bg-white w-full mt-2 text-center'>
             <div className='flex space-x-2 items-center'>
               <div className='relative w-[159px] h-[44px]'>
-                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start'>
+                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                   <DatePicker
                     selected={startDate}
                     onChange={(date: any) => setStartDate(date)}
@@ -218,6 +218,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
                     startDate={startDate}
                     endDate={endDate}
                     dateFormat='MMM d, yyyy'
+                    className='custom-datepicker'
                   />
                 </div>
                 <span className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'>
@@ -226,7 +227,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
               </div>
               <span className='text-[#667085]'>–</span>
               <div className='relative w-[159px] h-[44px]'>
-                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start'>
+                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                   <DatePicker
                     selected={endDate}
                     onChange={(date: any) => setEndDate(date)}
@@ -235,6 +236,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
                     endDate={endDate}
                     minDate={startDate}
                     dateFormat='MMM d, yyyy'
+                    className='custom-datepicker'
                   />
                 </div>
                 <span className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'>
@@ -250,7 +252,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <button
             onClick={handleCancelButton}
             className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
-            {filterIcon? 'Reset' : 'Cancel'}
+            {filterIcon ? 'Reset' : 'Cancel'}
           </button>
           <button
             onClick={handleApplyFilterButton}
