@@ -9,9 +9,12 @@ import { SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
 import { AxiosError } from 'axios';
 import { ChangeEvent, useState } from 'react';
 import CheckYourEmailModal from '@/components/check-mail-modal';
+import { signUpFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { toast } from 'react-toastify';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
+  const [formErrors, setFormErrors] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -20,7 +23,6 @@ const SignupForm = () => {
   const [selectedEmail, setSelectedEmail] = useState('jack365@gmail.com');
 
   const AuthServices = new AuthService();
-
 
   const handlePasswordVisibilityToggle = () => {
     setShowPassword(!showPassword);
@@ -32,45 +34,63 @@ const SignupForm = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    console.log(value);
+    //console.log(value);
 
     setFormData((prev) => {
       return { ...prev, [name]: value };
     });
+    setFormErrors((prev) => {
+      return { ...prev, [name]: '' };
+    });
   };
-
   const handleSubmit = async () => {
     try {
-      const payload = {
-        company_name: formData.OrganizationName,
-        user_info: {
-          name: formData.FullName,
-          email: formData.Email,
-          password: formData.Password,
-        },
-      };
+      const newFormErrors: any = {};
 
-      console.log(payload);
+      // Check for errors in form fields
+      for (let field in formData) {
+        const error = signUpFormErrorCheck(formData, field);
+        if (error) {
+          newFormErrors[field] = error;
+        }
+      }
 
-      
-      const response = await AuthServices.signup(payload);
+      setFormErrors(newFormErrors);
 
-      console.log('Response: ', response);
-      if (response.Message === 'created successfully') {
-        setSelectedEmail(payload.user_info.email as string);
-        setShowModal(true);
+      if (Object.keys(newFormErrors).length === 0) {
+        const payload = {
+          company_name: formData.OrganizationName,
+          user_info: {
+            name: formData.FullName,
+            email: formData.Email,
+            password: formData.Password,
+          },
+        };
+        //console.log(payload);
+
+        // Call your API to sign up the user
+        const response = await AuthServices.signup(payload);
+        //console.log('Response: ', response);
+
+        if (response.Message === 'created successfully') {
+          setSelectedEmail(payload.user_info.email as string);
+          setShowModal(true);
+        }
       }
     } catch (error) {
+      // Handle errors
       const axiosError = error as AxiosError;
       console.error('Error submitting form:', axiosError);
+      //toast.error('Error Submitting Form.');
 
       if (axiosError.request) {
         // The request was made but no response was received
         console.log('Request details:', axiosError.request);
+        toast.error('Another company with the same name has been registered.');
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error setting up the request:', axiosError.message);
+        toast.error('Error setting up the request, Try Again.');
       }
     }
   };
@@ -92,19 +112,23 @@ const SignupForm = () => {
               type='text'
               id='fullName'
               name='FullName'
+              value={formData?.FullName}
+              errorMessage={formErrors.FullName}
               htmlFor='FullName'
               onChange={handleInputChange}
-              className='mb-3'
+              className={`mb-3 ${formErrors.FullName && 'border-red-500 shadow'}`}
             />
             <Input
               label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>}
               placeholder='Email'
-              type='text'
+              type='email'
               id='email'
               name='Email'
               htmlFor='email'
               onChange={handleInputChange}
-              className='mb-3'
+              value={formData?.Email}
+              errorMessage={formErrors.Email}
+              className={`mb-3 ${formErrors.Email && 'border-red-500 shadow'}`}
             />
             <Input
               label={
@@ -118,7 +142,9 @@ const SignupForm = () => {
               name='OrganizationName'
               htmlFor='organizationname'
               onChange={handleInputChange}
-              className='mb-3'
+              value={formData?.OrganizationName}
+              errorMessage={formErrors.OrganizationName}
+              className={`mb-3 ${formErrors.OrganizationName && 'border-red-500 shadow'}`}
             />
             <div className='relative mb-3'>
               <Input
@@ -131,9 +157,14 @@ const SignupForm = () => {
                 name='Password'
                 htmlFor='password'
                 onChange={handleInputChange}
+                value={formData?.Password}
+                errorMessage={formErrors.Password}
+                className={`${formErrors.Password && 'border-red-500 shadow'}`}
               />
               <p
-                className='absolute top-[40px] right-6 cursor-pointer'
+                className={`absolute right-6 cursor-pointer ${
+                  formErrors.Password ? 'top-[55px]' : 'top-[40px]'
+                }`}
                 onClick={handlePasswordVisibilityToggle}>
                 <PasswordRevealIcon />
               </p>
@@ -151,9 +182,14 @@ const SignupForm = () => {
                 name='ConfirmPassword'
                 htmlFor='confirmpassword'
                 onChange={handleInputChange}
+                value={formData?.ConfirmPassword}
+                errorMessage={formErrors.ConfirmPassword}
+                className={` ${formErrors.ConfirmPassword && 'border-red-500 shadow'}`}
               />
               <p
-                className='absolute top-[40px] right-6 cursor-pointer'
+                className={`absolute right-6 cursor-pointer ${
+                  formErrors.ConfirmPassword ? 'top-[55px]' : 'top-[40px]'
+                }`}
                 onClick={handleConfirmPasswordVisibilityToggle}>
                 <PasswordRevealIcon />
               </p>

@@ -1,4 +1,4 @@
-import { FormItems, LeadsDataType } from '@/models/global-types';
+import { FormItems, LeadsDataType, SignUpFormItems } from '@/models/global-types';
 import axios from 'axios';
 
 export function ensureTrailingSlash(str: string = '/') {
@@ -96,3 +96,38 @@ export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
       }
     }
   };
+
+  export const signUpFormErrorCheck = (formData: SignUpFormItems, field: string) => {
+  const safeFields = {
+    FullName: 'FullName',
+    Email: 'Email',
+    OrganizationName: 'OrganizationName',
+    Password: 'Password',
+    ConfirmPassword: 'ConfirmPassword',
+  };
+
+  if (safeFields[field as keyof typeof safeFields]) {
+    if (formData[field as keyof typeof formData] === '') {
+      return `(${field} is required)`;
+    }
+
+    if (field === 'Email') {
+      const emailValue = formData[field as keyof typeof formData];
+      return isValidEmail(emailValue) ? null : `(${field} is invalid)`;
+    }
+
+    if (field === 'ConfirmPassword' && formData.Password !== formData.ConfirmPassword) {
+    return '(Passwords do not match)';
+  }
+
+    return null; // Safe field is valid
+  }
+
+  // Handle non-safe fields
+  if (formData[field as keyof typeof formData] === '') {
+    return `(${field} is required)`;
+  }
+
+  return null; // Non-safe field is valid
+};
+
