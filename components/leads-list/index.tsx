@@ -108,7 +108,6 @@ function LeadsList() {
         <Loader />
       ) : (
         <div
-          className='h-[68vh]'
           onScroll={handleScroll}>
           <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
             {searchData.length > 0
