@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState, ChangeEvent } from 'react';
-import { PasswordRevealIcon } from '@/assets/icons';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import Link from 'next/link';
+
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { PasswordRevealIcon } from '@/assets/icons';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 
@@ -20,25 +22,35 @@ const SigninForm = ({
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async () => {
-    try {
-      setLoading(true);
-
-      const res = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (res?.ok) {
-        router.push(PAGE_ROUTES?.Dashboard);
-      } else {
-        setLoading(false);
+  const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (email.length === 0 || password.length === 0) {
+      if (email == '') {
+        toast.error('email cannot be empty.');
+      } else if (password.length === 0) {
+        toast.error('password cannot be empty.');
       }
-    } catch (err) {
-      console.error('Login failed:', err);
-      setLoading(false);
-      router.push(PAGE_ROUTES?.Signin);
+    } else {
+      try {
+        setLoading(true);
+
+        const res = await signIn('credentials', {
+          email,
+          password,
+          redirect: false,
+        });
+
+        if (res?.ok) {
+          router.push(PAGE_ROUTES?.Dashboard);
+        } else {
+          toast.error('Please enter a valid email and password.');
+          setLoading(false);
+        }
+      } catch (err: any) {
+        console.error('Login failed:', err);
+        setLoading(false);
+        router.push(PAGE_ROUTES?.Signin);
+      }
     }
   };
 
@@ -68,56 +80,60 @@ const SigninForm = ({
           </p>
         </div>
         <div>
-          <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>}
-            placeholder='Email'
-            type='text'
-            id='email'
-            name='Email'
-            htmlFor='email'
-            onChange={handleEmailChange}
-          />
-          <div className='relative'>
+          <form onSubmit={onFormSubmit}>
             <Input
-              label={
-                <p className='text-[#00156A] font-medium text-xs mb-[2px] my-3'>
-                  Password
-                </p>
-              }
-              placeholder='Password'
-              type={showPassword ? 'text' : 'password'}
-              id='password'
-              name='Password'
-              htmlFor='password'
-              onChange={handlePasswordChange}
+              label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>}
+              placeholder='Email'
+              type='email'
+              id='email'
+              name='Email'
+              htmlFor='email'
+              onChange={handleEmailChange}
             />
-            <p
-              className='absolute top-[52px] right-6 cursor-pointer'
-              onClick={handlePasswordVisibilityToggle}>
-              <PasswordRevealIcon />
-            </p>
-          </div>
-          <div className='my-10 flex items-center justify-between'>
-            <label className='relative items-center cursor-pointer flex '>
-              <input
-                type='checkbox'
-                checked={rememberMe}
-                onChange={handleRememberMeChange}
-                className='sr-only peer'
+            <div className='relative'>
+              <Input
+                label={
+                  <p className='text-[#00156A] font-medium text-xs mb-[2px] my-3'>
+                    Password
+                  </p>
+                }
+                placeholder='Password'
+                type={showPassword ? 'text' : 'password'}
+                id='password'
+                name='Password'
+                htmlFor='password'
+                onChange={handlePasswordChange}
               />
-              <div className="w-9 h-5 bg-[#ECECEC] rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-600"></div>
-              <span className='ms-2 font-normal text-[#1A1A1A] text-sm'>Remember me</span>
-            </label>
+              <p
+                className='absolute top-[52px] right-6 cursor-pointer'
+                onClick={handlePasswordVisibilityToggle}>
+                <PasswordRevealIcon />
+              </p>
+            </div>
+            <div className='my-10 flex items-center justify-between'>
+              <label className='relative items-center cursor-pointer flex '>
+                <input
+                  type='checkbox'
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
+                  className='sr-only peer'
+                />
+                <div className="w-9 h-5 bg-[#ECECEC] rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-600"></div>
+                <span className='ms-2 font-normal text-[#1A1A1A] text-sm'>
+                  Remember me
+                </span>
+              </label>
 
-            <Link
-              href={PAGE_ROUTES.Forgetpassword}
-              className=' text-[#D93F21] text-sm font-normal '>
-              Recover Password
-            </Link>
-          </div>
-          <Button onClick={handleLogin} className='rounded-[10px] h-[55px]'>
-            Log In
-          </Button>
+              <Link
+                href={PAGE_ROUTES.Forgetpassword}
+                className=' text-[#D93F21] text-sm font-normal '>
+                Recover Password
+              </Link>
+            </div>
+            <Button type='submit' className='rounded-[10px] h-[55px]'>
+              Log In
+            </Button>
+          </form>
         </div>
       </div>
     </div>
