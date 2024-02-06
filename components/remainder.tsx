@@ -4,9 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-
 import UpdateRemainderModal from './update-remainder-modal';
-import { LeadService } from '@/services/lead-services';
 import {
   RemainderProps,
   RemainderType,
@@ -15,6 +13,7 @@ import {
 import { UPDATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import { EditIcon } from '@/assets/icons';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
+import { ReminderService } from '@/services/reminder-services';
 
 const Remainder = ({
   remainder,
@@ -30,7 +29,7 @@ const Remainder = ({
     useState<UpdateRemainderType>(UPDATE_REMINDER_ITEMS);
 
   const deleteRemainder = async (id: number) => {
-    const Service = new LeadService();
+    const Service = new ReminderService();
     const res = await Service.deleteReminder(id, token);
 
     if (res?.status === 202) {

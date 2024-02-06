@@ -3,7 +3,7 @@ import { leaderBoard } from './database';
 import Profiles from '@/components/leaderboard/profiles';
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { ApiService } from '@/services/api-services';
+import { DashboardService } from '@/services/dashboard-services';
 import { LEADERBOARD_ITEMS } from '@/utils/constants/common-constants';
 import Loader from '../loader';
 
@@ -31,7 +31,7 @@ const Leaderboard: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const DashboardServices = new ApiService();
+        const DashboardServices = new DashboardService();
         const response = await DashboardServices.leaderboard(token);
         setLeaderboard(response.data.Data);
         setIsLoading(false);

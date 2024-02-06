@@ -1,5 +1,5 @@
 'use client';
-import { ApiService } from '@/services/api-services';
+import { DashboardService } from '@/services/dashboard-services';
 import { GRAPH_CONFIG } from '@/utils/constants/graph-constants';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
@@ -19,7 +19,7 @@ const GraphList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const DashboardServices = new ApiService();
+        const DashboardServices = new DashboardService();
         const response = await DashboardServices.dashboardInfo(token);
         setDashboardInfo(response.data.Data);
       } catch (error) {

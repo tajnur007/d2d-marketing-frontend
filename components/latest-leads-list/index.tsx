@@ -3,7 +3,7 @@ import LatestLeadRow from '@/components/latest-lead-row';
 import ViewAllLeadsButton from '../view-all-leads-button';
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { ApiService } from '@/services/api-services';
+import { LeadService } from '@/services/lead-services';
 import { LATEST_LEADS_ITEMS } from '@/utils/constants/common-constants';
 import { InfinitySpin } from 'react-loader-spinner';
 import Loader from '../loader';
@@ -19,8 +19,8 @@ const LatestLeadsList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const DashboardServices = new ApiService();
-        const response = await DashboardServices.latestLeads(token);
+        const LeadServices = new LeadService();
+        const response = await LeadServices.latestLeads(token);
         setLatestLeads(response.data.Data);
         setIsLoading(false);
       } catch (error) {

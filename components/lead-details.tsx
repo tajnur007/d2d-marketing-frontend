@@ -5,18 +5,17 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import moment from 'moment';
-
 import Remainder from './remainder';
 import CreateRemainderModal from './create-remainder-modal';
 import { Button } from './button';
 import { AssignDropdownSelect } from './assign-dropdown-select';
-import { LeadService } from '@/services/lead-services';
 import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 import { CreateReminderItems, RemainderType, statusColor } from '@/models/global-types';
 import { validateImageUrl } from '@/utils/helpers/common-helpers';
+import { ReminderService } from '@/services/reminder-services';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
@@ -59,14 +58,14 @@ const LeadDetails = ({
 
   // To get data initially
   useEffect(() => {
-    const Service = new LeadService();
+    const Service = new ReminderService();
     isOpen && Service.getAllRemindersData(token, setRemainders);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, token]);
 
   // To get the latest remainder after creating new remainder
   useEffect(() => {
-    const Service = new LeadService();
+    const Service = new ReminderService();
     isCreated && Service.getAllRemindersData(token, setRemainders);
     setIsCreated(false);
     setIsUpdated(false);

@@ -17,7 +17,7 @@ import {
 } from '@/utils/constants/common-constants';
 import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
-import { ApiService } from '@/services/api-services';
+import { UserService } from '@/services/user-services';
 import { toast } from 'react-toastify';
 
 if (Modal.defaultStyles.overlay) {
@@ -46,7 +46,7 @@ const UpdateEmployeeModal = ({
     const getData = async () => {
       //@ts-ignore
       const token = data?.user?.access_token;
-      const Services = new ApiService();
+      const Services = new UserService();
       if (token) {
         const resp = await Services.getManagerList(token);
         const data = resp?.data?.Data?.Data?.map((item: ManagerType) => {
@@ -127,7 +127,7 @@ const UpdateEmployeeModal = ({
       //@ts-ignore
       const token = data?.user?.access_token;
 
-      const UserServices = new ApiService();
+      const UserServices = new UserService();
       // console.log('updatePayload', updatePayload);
       const resp = await UserServices.updateEmployeeInfo(
         employeeinfo.id,

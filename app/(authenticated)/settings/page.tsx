@@ -8,7 +8,7 @@ import profileImage from '@/assets/images/profilePic.png';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { EditIcon } from '@/assets/icons';
-import { ApiService } from '@/services/api-services';
+import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
 
 const SettingsPage = () => {
@@ -29,7 +29,7 @@ const SettingsPage = () => {
       const token = data?.user?.access_token;
 
       if (token) {
-        const Service = new ApiService();
+        const Service = new UserService();
         const resp = await Service.getUserInfo(token);
         setUserInfo(resp?.data?.Data);
       }
