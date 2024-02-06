@@ -134,7 +134,6 @@ export interface UpdateRemainderType {
   title: string;
 }
 
-
 export interface LeadListType {
   assignment_status: string;
   company_id: number;
@@ -367,11 +366,31 @@ export interface CreateEmployeeModalProps {
   setFormErrors: (item: any) => void;
 }
 
+export interface UpdateEmployeeModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  isExecutive: boolean;
+  setIsExecutive: (item: boolean) => void;
+  employeeinfo: any;
+  isRefreshData: boolean;
+  setIsRefreshData: (item: boolean) => void;
+}
+
+export interface UpdateEmployeePayload {
+  name: string;
+  user_type: string;
+  phone: string;
+  manager_id: number;
+  manager_name: string;
+  image_name: string;
+  image_path: string;
+}
+
 export interface FilterLeadsCardProps {
   setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onFilterData: (data: any) => void;
-  filterIcon:boolean;
-  setFilterIcon:React.Dispatch<React.SetStateAction<boolean>>;
+  filterIcon: boolean;
+  setFilterIcon: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface StatusCheckboxProps {
@@ -467,12 +486,12 @@ export interface LeadsDataType {
     reminderStatus: string;
   };
   timestamp: string;
-
 }
 
 export interface EmployeeOptionsProps {
   handleViewButton: () => void;
   handleDeleteButton: () => Promise<void>;
+  handleEditButton: () => void;
 }
 
 export interface RemainderProps {
@@ -498,4 +517,3 @@ export interface EmployeeOptionsProps {
   handleViewButton: () => void;
   handleDeleteButton: () => Promise<void>;
 }
-

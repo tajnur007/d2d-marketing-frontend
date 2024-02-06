@@ -17,6 +17,7 @@ const EmployeeListPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [isExecutive, setIsExecutive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshData, setIsRefreshData] = useState<boolean>(false);
   const [formData, setFormData] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
@@ -70,7 +71,9 @@ const EmployeeListPage = () => {
     if (token) {
       fetchData();
     }
-  }, [token]); // Only trigger when token changes
+  }, [token, isRefreshData]); // Only trigger when token or isRefreshData changes
+
+  // isRefreshData is used to refresh the data when a employee is updated
 
   useEffect(() => {
     // Update unique character count when employeeInfo changes
@@ -176,6 +179,8 @@ const EmployeeListPage = () => {
                     uniqueCharCount={uniqueCharCount}
                     isFirstChar={isFirstChar}
                     employeeActionRef={employeeActionRef}
+                    isRefreshData={isRefreshData}
+                    setISRefreshData={setIsRefreshData}
                   />
                 ) : (
                   <EmployeeListRow
@@ -183,6 +188,8 @@ const EmployeeListPage = () => {
                     item={item}
                     uniqueCharCount={uniqueCharCount}
                     employeeActionRef={employeeActionRef}
+                    isRefreshData={isRefreshData}
+                    setISRefreshData={setIsRefreshData}
                   />
                 );
               })}

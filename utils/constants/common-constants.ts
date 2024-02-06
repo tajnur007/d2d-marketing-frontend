@@ -15,6 +15,7 @@ import {
   SingleLeadItems,
   UpdateLeadPayload,
   statusColor,
+  UpdateEmployeePayload,
 } from '@/models/global-types';
 import {
   BookIcon,
@@ -75,6 +76,7 @@ export const API_PATHS = {
   DeleteReminder: '/reminder/delete',
   UpdateRemainder: '/reminder/update',
   FilterLeads: '/lead/filter',
+  UpdateEmployeeInfo: '/user/update',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -197,6 +199,16 @@ export const UPDATE_LEAD_PAYLOAD: UpdateLeadPayload = {
       image_path: '',
     },
   ],
+};
+
+export const UPDATE_EMPLOYEE_PAYLOAD: UpdateEmployeePayload = {
+  name: '',
+  user_type: '',
+  phone: '',
+  manager_id: 0,
+  manager_name: '',
+  image_name: '',
+  image_path: '',
 };
 
 export const SETTING_FORM_ITEMS: SettingFormItems = {
