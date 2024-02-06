@@ -81,11 +81,12 @@ const SignupForm = () => {
       // Handle errors
       const axiosError = error as AxiosError;
       console.error('Error submitting form:', axiosError);
-      toast.error('Error submitting form.');
+      //toast.error('Error Submitting Form.');
 
       if (axiosError.request) {
         // The request was made but no response was received
         console.log('Request details:', axiosError.request);
+        toast.error('Another company with the same name has been registered.');
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error setting up the request:', axiosError.message);
@@ -158,10 +159,12 @@ const SignupForm = () => {
                 onChange={handleInputChange}
                 value={formData?.Password}
                 errorMessage={formErrors.Password}
-                className={` ${formErrors.Password && 'border-red-500 shadow'}`}
+                className={`${formErrors.Password && 'border-red-500 shadow'}`}
               />
               <p
-                className='absolute top-[40px] right-6 cursor-pointer'
+                className={`absolute right-6 cursor-pointer ${
+                  formErrors.Password ? 'top-[55px]' : 'top-[40px]'
+                }`}
                 onClick={handlePasswordVisibilityToggle}>
                 <PasswordRevealIcon />
               </p>
@@ -184,7 +187,9 @@ const SignupForm = () => {
                 className={` ${formErrors.ConfirmPassword && 'border-red-500 shadow'}`}
               />
               <p
-                className='absolute top-[40px] right-6 cursor-pointer'
+                className={`absolute right-6 cursor-pointer ${
+                  formErrors.ConfirmPassword ? 'top-[55px]' : 'top-[40px]'
+                }`}
                 onClick={handleConfirmPasswordVisibilityToggle}>
                 <PasswordRevealIcon />
               </p>
