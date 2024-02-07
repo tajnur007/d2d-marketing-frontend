@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiService } from '@/services/api-services';
+import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from '@/assets/icons';
@@ -47,7 +47,7 @@ const EmployeeListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const UserListServices = new ApiService();
+        const UserListServices = new UserService();
         const response = await UserListServices.EmployeeListInfo(token);
 
         // Extract the Data array from the response
