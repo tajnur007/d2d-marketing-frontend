@@ -74,7 +74,9 @@ function LeadsList() {
   };
 
   return (
-    <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar '  onScroll={handleScroll}>
+    <div
+      className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] pb-6'
+      onScroll={handleScroll}>
       <div className='py-4 md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
         <div className='flex justify-between gap-5'>
           <div className='flex pt-2'>
@@ -109,9 +111,8 @@ function LeadsList() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div
-          className='h-[68vh] pb-6'>
-          <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
+        <div className='h-[calc(100%-105px)] overflow-y-auto overflow-x-hidden tiny-scrollbar'>
+          <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
             {searchData.length > 0
               ? searchData.map((item, index) => (
                   <LeadRow
