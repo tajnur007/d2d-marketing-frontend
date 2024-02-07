@@ -107,7 +107,7 @@ const SigninForm = ({
               <p
                 className='absolute top-[52px] right-6 cursor-pointer'
                 onClick={handlePasswordVisibilityToggle}>
-                {showPassword ? <PasswordHideIcon /> : <PasswordRevealIcon />}
+                {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon /> }
               </p>
             </div>
             <div className='my-10 flex items-center justify-between'>
