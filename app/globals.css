@@ -12,6 +12,13 @@
   font-family: Metropolis, Arial, Helvetica, sans-serif;
 }
 
+/* Hide default eye icon */
+
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

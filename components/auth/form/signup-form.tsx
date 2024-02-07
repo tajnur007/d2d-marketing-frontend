@@ -1,6 +1,6 @@
 'use client';
 
-import { PasswordRevealIcon } from '@/assets/icons';
+import { PasswordHideIcon, PasswordRevealIcon } from '@/assets/icons';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { SignUpFormItems } from '@/models/global-types';
@@ -17,7 +17,6 @@ const SignupForm = () => {
   const [formErrors, setFormErrors] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState('jack365@gmail.com');
@@ -26,10 +25,6 @@ const SignupForm = () => {
 
   const handlePasswordVisibilityToggle = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleConfirmPasswordVisibilityToggle = () => {
-    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -166,7 +161,7 @@ const SignupForm = () => {
                   formErrors.Password ? 'top-[55px]' : 'top-[40px]'
                 }`}
                 onClick={handlePasswordVisibilityToggle}>
-                <PasswordRevealIcon />
+                {showPassword ? <PasswordHideIcon /> : <PasswordRevealIcon />}
               </p>
             </div>
             <div className='relative'>
@@ -177,7 +172,7 @@ const SignupForm = () => {
                   </p>
                 }
                 placeholder='Confirm Password'
-                type={showConfirmPassword ? 'text' : 'password'}
+                type={showPassword ? 'text' : 'password'}
                 id='confirmpassword'
                 name='ConfirmPassword'
                 htmlFor='confirmpassword'
@@ -190,8 +185,8 @@ const SignupForm = () => {
                 className={`absolute right-6 cursor-pointer ${
                   formErrors.ConfirmPassword ? 'top-[55px]' : 'top-[40px]'
                 }`}
-                onClick={handleConfirmPasswordVisibilityToggle}>
-                <PasswordRevealIcon />
+                onClick={handlePasswordVisibilityToggle}>
+                {showPassword ? <PasswordHideIcon /> : <PasswordRevealIcon />}
               </p>
             </div>
             <Button
