@@ -12,14 +12,9 @@ import { PasswordHideIcon, PasswordRevealIcon } from '@/assets/icons';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 
-const SigninForm = ({
-  loading,
-  setLoading,
-}: {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const SigninForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
@@ -135,15 +130,15 @@ const SigninForm = ({
                 Recover Password
               </Link>
             </div>
-            {loading ? (
-              <div className='h-full w-full flex items-center justify-center'>
-                <InfinitySpin width='200' color='#4f46e5' />
-              </div>
-            ) : (
-              <Button type='submit' className='rounded-[10px] h-[55px]'>
-                Log In
-              </Button>
-            )}
+            <Button type='submit' className='rounded-[10px] h-[55px]'>
+              {loading ? (
+                <div className='h-full w-full flex items-center justify-center'>
+                  <InfinitySpin width='150' color='#ffffff' />
+                </div>
+              ) : (
+                'Log In'
+              )}
+            </Button>
           </form>
         </div>
       </div>
