@@ -35,7 +35,7 @@ const LatestLeadsList: React.FC = () => {
 
  return (
    <div className='w-full bg-white rounded-xl h-[calc(85vh-125px)] pb-6'>
-     <div className='sticky top-0 bg-white z-10 p-6 '>
+     <div className='sticky top-0 bg-white z-10 p-6 rounded-xl'>
        <div className='flex justify-between items-center'>
          <div className='flex items-center'>
            <p className='font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>

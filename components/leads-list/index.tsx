@@ -77,7 +77,7 @@ function LeadsList() {
     <div
       className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] pb-6'
       onScroll={handleScroll}>
-      <div className='py-4 md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
+      <div className='py-4 md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
         <div className='flex justify-between gap-5'>
           <div className='flex pt-2'>
             <div>

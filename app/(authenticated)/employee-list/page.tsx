@@ -111,7 +111,7 @@ const EmployeeListPage = () => {
   return (
     <>
       <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
-        <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
+        <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
               <p className='font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
