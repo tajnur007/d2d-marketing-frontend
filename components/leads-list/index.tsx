@@ -11,6 +11,7 @@ import FilterLeadsButton from '../filter-leads-button';
 import CreateLeadsButton from '../create-leads-button';
 import { LeadsContext } from '@/context/leads-context';
 import Loader from '../loader';
+import { UserService } from '@/services/user-services';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -44,7 +45,8 @@ function LeadsList() {
   useEffect(() => {
     if (token) {
       const LeadServices = new LeadService();
-      LeadServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
+      const UserServices = new UserService();
+      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
       LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
     }
@@ -72,7 +74,7 @@ function LeadsList() {
   };
 
   return (
-    <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar '>
+    <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar '  onScroll={handleScroll}>
       <div className='py-4 md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
         <div className='flex justify-between gap-5'>
           <div className='flex pt-2'>
@@ -108,7 +110,7 @@ function LeadsList() {
         <Loader />
       ) : (
         <div
-          onScroll={handleScroll}>
+          className='h-[68vh] pb-6'>
           <div className="w-full px-8 whitespace-nowrap [font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal]">
             {searchData.length > 0
               ? searchData.map((item, index) => (

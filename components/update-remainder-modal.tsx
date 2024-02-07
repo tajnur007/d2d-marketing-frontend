@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import moment from 'moment';
-
 import { Input } from './input';
 import { TextArea } from './text-area';
 import { Button } from './button';
@@ -16,7 +15,7 @@ import { CREATE_REMINDER_STATUS } from '@/utils/constants/common-constants';
 import './dropdown-select.css';
 import 'react-datetime/css/react-datetime.css';
 import { ClockIcon, ExIcon } from '@/assets/icons';
-import { LeadService } from '@/services/lead-services';
+import { ReminderService } from '@/services/reminder-services';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -86,8 +85,8 @@ const UpdateRemainderModal = ({
         };
 
         if (token) {
-          const LeadServices = new LeadService();
-          const response = await LeadServices.updateRemainder(
+          const ReminderServices = new ReminderService();
+          const response = await ReminderServices.updateRemainder(
             formData.id,
             payloadObj,
             token

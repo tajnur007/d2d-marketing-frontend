@@ -4,6 +4,7 @@ import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
 import { FormItems } from '@/models/global-types';
+import { UserService } from '@/services/user-services';
 import { LeadService } from '@/services/lead-services';
 import {
   CREATE_LEAD_STATUS_NEW,
@@ -49,8 +50,8 @@ const CreateLeadForm: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      const LeadServices = new LeadService();
-      LeadServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
+      const UserServices = new UserService();
+      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
     }
   }, [token, setExecutivesOption]);
 
