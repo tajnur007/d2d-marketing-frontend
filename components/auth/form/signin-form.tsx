@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { InfinitySpin } from 'react-loader-spinner';
 
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { PasswordRevealIcon } from '@/assets/icons';
@@ -12,8 +13,10 @@ import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 
 const SigninForm = ({
+  loading,
   setLoading,
 }: {
+  loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const router = useRouter();
@@ -88,6 +91,7 @@ const SigninForm = ({
               id='email'
               name='Email'
               htmlFor='email'
+              disabled={loading}
               onChange={handleEmailChange}
             />
             <div className='relative'>
@@ -102,6 +106,7 @@ const SigninForm = ({
                 id='password'
                 name='Password'
                 htmlFor='password'
+                disabled={loading}
                 onChange={handlePasswordChange}
               />
               <p
@@ -130,9 +135,15 @@ const SigninForm = ({
                 Recover Password
               </Link>
             </div>
-            <Button type='submit' className='rounded-[10px] h-[55px]'>
-              Log In
-            </Button>
+            {loading ? (
+              <div className='h-full w-full flex items-center justify-center'>
+                <InfinitySpin width='200' color='#4f46e5' />
+              </div>
+            ) : (
+              <Button type='submit' className='rounded-[10px] h-[55px]'>
+                Log In
+              </Button>
+            )}
           </form>
         </div>
       </div>

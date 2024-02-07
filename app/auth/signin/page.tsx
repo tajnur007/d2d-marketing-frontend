@@ -6,7 +6,6 @@ import NoAccount from '@/components/auth/common/no-account';
 import SigninForm from '@/components/auth/form/signin-form';
 import { AUTH_LEFT_TEXT, PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useEffect, useState } from 'react';
-import { InfinitySpin } from 'react-loader-spinner';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
@@ -20,17 +19,13 @@ const SignInPage = () => {
     }
   }, [session?.data]);
 
-  if (loading) {
-    return (
-      <div className='h-screen w-full flex items-center justify-center'>
-        <InfinitySpin width='200' color='#4f46e5' />
-      </div>
-    );
-  }
   return (
-    <AuthLayout text={AUTH_LEFT_TEXT} image={marketingSignIn}>
+    <AuthLayout
+      text={AUTH_LEFT_TEXT}
+      image={marketingSignIn}
+      className={`${loading && 'bg-[#0000004d]'}`}>
       <NoAccount signupPage={true} />
-      <SigninForm setLoading={setLoading} />
+      <SigninForm loading={loading} setLoading={setLoading} />
     </AuthLayout>
   );
 };

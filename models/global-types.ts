@@ -315,6 +315,7 @@ export interface AuthLayoutProps {
   text: string;
   image: StaticImageData;
   children?: ReactNode;
+  className?: string;
 }
 
 export interface CreateReminderStatusItems {
