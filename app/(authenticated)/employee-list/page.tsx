@@ -1,16 +1,20 @@
 'use client';
 
-import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from '@/assets/icons';
 import plusImage from '@/assets/images/leadslist-icons/add-circle.png';
 import EmployeeListRow from '@/components/employee-list-row';
-import { CREATE_EMPLOYEE_FORM_ITEMS } from '@/utils/constants/common-constants';
+import {
+  CREATE_EMPLOYEE_FORM_ITEMS,
+  PAGE_ROUTES,
+} from '@/utils/constants/common-constants';
 import { CreateEmployeeItems } from '@/models/global-types';
 import Image from 'next/image';
 import CreateEmployeeModal from '@/components/create-employee-modal';
 import Loader from '@/components/loader';
+import { useRouter } from 'next/navigation';
+import { UserService } from '@/services/user-services';
 
 const EmployeeListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -18,13 +22,13 @@ const EmployeeListPage = () => {
   const [isExecutive, setIsExecutive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshData, setIsRefreshData] = useState<boolean>(false);
+  const [userType, setUserType] = useState('');
   const [formData, setFormData] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
   const [formErrors, setFormErrors] = useState<CreateEmployeeItems>(
     CREATE_EMPLOYEE_FORM_ITEMS
   );
-
   const employeeActionRef = useRef<any>(null);
 
   const [uniqueCharCount, setUniqueCharCount] = useState<{ [key: string]: number }>({});
@@ -32,6 +36,8 @@ const EmployeeListPage = () => {
   let displayedChars: string[] = [];
 
   const { data } = useSession();
+  const router = useRouter();
+
   //@ts-ignore den
   const token: string = data?.user?.access_token;
   const [employeeInfo, setEmployeeInfo] = useState([
@@ -43,6 +49,23 @@ const EmployeeListPage = () => {
       email: '',
     },
   ]);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      //@ts-ignore
+      const token = data?.user?.access_token;
+
+      if (token) {
+        const Service = new UserService();
+        const resp = await Service.getUserInfo(token);
+        if (resp?.data?.Data?.user_type === 'executive') {
+          router.push('/dashboard');
+        }
+        setUserType(resp?.data?.Data?.user_type);
+      }
+    };
+    getUserInfo();
+  }, [data, router]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +94,7 @@ const EmployeeListPage = () => {
     if (token) {
       fetchData();
     }
-  }, [token, isRefreshData]); // Only trigger when token or isRefreshData changes
+  }, [token, isRefreshData, router]); // Only trigger when token or isRefreshData changes
 
   // isRefreshData is used to refresh the data when a employee is updated
 
@@ -108,9 +131,10 @@ const EmployeeListPage = () => {
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <>
-      <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar ' onScroll={handleScroll}>
+  if (userType && userType !== 'executive') {
+    return (
+      <>
+        <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar '>
           <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
             <div className='flex justify-between items-center'>
               <div className='flex items-center'>
@@ -151,60 +175,61 @@ const EmployeeListPage = () => {
                 </div>
               </div>
             </div>
-        </div>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <div className='h-[69vh] mb-6'>
-            <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-              {filteredEmployeeList?.map((item, index) => {
-                const firstChar = item?.name?.charAt(0).toUpperCase();
-                let isFirstChar = false;
-
-                // If the character has not been displayed, add it to the array and set isFirstChar to true
-                if (!displayedChars.includes(firstChar)) {
-                  displayedChars.push(firstChar);
-                  isFirstChar = true;
-                }
-
-                // Pass isFirstChar prop only when it's true
-                return isFirstChar ? (
-                  <EmployeeListRow
-                    key={index}
-                    item={item}
-                    uniqueCharCount={uniqueCharCount}
-                    isFirstChar={isFirstChar}
-                    employeeActionRef={employeeActionRef}
-                    isRefreshData={isRefreshData}
-                    setISRefreshData={setIsRefreshData}
-                  />
-                ) : (
-                  <EmployeeListRow
-                    key={index}
-                    item={item}
-                    uniqueCharCount={uniqueCharCount}
-                    employeeActionRef={employeeActionRef}
-                    isRefreshData={isRefreshData}
-                    setISRefreshData={setIsRefreshData}
-                  />
-                );
-              })}
-            </div>
           </div>
-        )}
-      </div>
-      <CreateEmployeeModal
-        modalIsOpen={modalIsOpen}
-        isExecutive={isExecutive}
-        setModalIsOpen={setModalIsOpen}
-        setIsExecutive={setIsExecutive}
-        formData={formData}
-        setFormData={setFormData}
-        formErrors={formErrors}
-        setFormErrors={setFormErrors}
-      />
-    </>
-  );
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <div className='h-[69vh]' onScroll={handleScroll}>
+              <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
+                {filteredEmployeeList?.map((item, index) => {
+                  const firstChar = item?.name?.charAt(0).toUpperCase();
+                  let isFirstChar = false;
+
+                  // If the character has not been displayed, add it to the array and set isFirstChar to true
+                  if (!displayedChars.includes(firstChar)) {
+                    displayedChars.push(firstChar);
+                    isFirstChar = true;
+                  }
+
+                  // Pass isFirstChar prop only when it's true
+                  return isFirstChar ? (
+                    <EmployeeListRow
+                      key={index}
+                      item={item}
+                      uniqueCharCount={uniqueCharCount}
+                      isFirstChar={isFirstChar}
+                      employeeActionRef={employeeActionRef}
+                      isRefreshData={isRefreshData}
+                      setISRefreshData={setIsRefreshData}
+                    />
+                  ) : (
+                    <EmployeeListRow
+                      key={index}
+                      item={item}
+                      uniqueCharCount={uniqueCharCount}
+                      employeeActionRef={employeeActionRef}
+                      isRefreshData={isRefreshData}
+                      setISRefreshData={setIsRefreshData}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+        <CreateEmployeeModal
+          modalIsOpen={modalIsOpen}
+          isExecutive={isExecutive}
+          setModalIsOpen={setModalIsOpen}
+          setIsExecutive={setIsExecutive}
+          formData={formData}
+          setFormData={setFormData}
+          formErrors={formErrors}
+          setFormErrors={setFormErrors}
+        />
+      </>
+    );
+  }
 };
 
 export default EmployeeListPage;
