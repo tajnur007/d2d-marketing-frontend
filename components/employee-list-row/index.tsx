@@ -3,13 +3,13 @@
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import profileImage from '@/assets/images/profile.png';
 import { EmployeestatusColor } from '@/models/global-types';
-import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Popup from 'reactjs-popup';
 import EmployeeOptions from './EmployeeOptions';
 import UpdateEmployeeModal from '../update-employee-modal';
 import { useState } from 'react';
+import { UserService } from '@/services/user-services';
 
 const getStatusColor: EmployeestatusColor = {
   Active: 'bg-[#D2FBE7]',
@@ -44,7 +44,7 @@ function EmployeeListRow({
   const handleDeleteButton = async (userId: number) => {
     //@ts-ignore
     const token = data?.user?.access_token;
-    const UserServices = new ApiService();
+    const UserServices = new UserService();
     if (token) {
       await UserServices.deleteUser(userId, token);
     }

@@ -18,7 +18,7 @@ import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { ClockIcon, ExIcon } from '@/assets/icons';
-import { LeadService } from '@/services/lead-services';
+import { ReminderService } from '@/services/reminder-services';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -91,8 +91,8 @@ const CreateRemainderModal = ({
         };
 
         if (token) {
-          const LeadServices = new LeadService();
-          const response = await LeadServices.createReminder(payloadObj, token);
+          const ReminderServices = new ReminderService();
+          const response = await ReminderServices.createReminder(payloadObj, token);
           if (response.status === 201) {
             setFormData(CREATE_REMINDER_ITEMS);
             setModalIsOpen(false);

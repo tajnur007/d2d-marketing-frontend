@@ -3,7 +3,7 @@ import { leaderBoard } from './database';
 import Profiles from '@/components/leaderboard/profiles';
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { ApiService } from '@/services/api-services';
+import { DashboardService } from '@/services/dashboard-services';
 import { LEADERBOARD_ITEMS } from '@/utils/constants/common-constants';
 import Loader from '../loader';
 
@@ -31,7 +31,7 @@ const Leaderboard: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const DashboardServices = new ApiService();
+        const DashboardServices = new DashboardService();
         const response = await DashboardServices.leaderboard(token);
         setLeaderboard(response.data.Data);
         setIsLoading(false);
@@ -46,10 +46,12 @@ const Leaderboard: React.FC = () => {
   }, [token]);
 
   return (
-    <div className='bg-white rounded-2xl w-full h-[calc(100vh-102px)] lg:w-[27%]'>
-      <h2 className='font-bold text-[#2b3674] text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap p-5'>
-        Leaderboard
-      </h2>
+    <div className='bg-white rounded-2xl w-full h-[calc(100vh-102px)] lg:w-[27%] overflow-y-auto tiny-scrollbar'>
+      <div className='sticky top-0 bg-white z-10'>
+        <h2 className='font-bold text-[#2b3674] text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap p-5'>
+          Leaderboard
+        </h2>
+      </div> 
       {isLoading ? (
         <Loader />
       ) : leaderboard?.Data ? (

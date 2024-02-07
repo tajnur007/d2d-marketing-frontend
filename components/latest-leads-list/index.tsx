@@ -3,7 +3,7 @@ import LatestLeadRow from '@/components/latest-lead-row';
 import ViewAllLeadsButton from '../view-all-leads-button';
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { ApiService } from '@/services/api-services';
+import { LeadService } from '@/services/lead-services';
 import { LATEST_LEADS_ITEMS } from '@/utils/constants/common-constants';
 import { InfinitySpin } from 'react-loader-spinner';
 import Loader from '../loader';
@@ -19,8 +19,8 @@ const LatestLeadsList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const DashboardServices = new ApiService();
-        const response = await DashboardServices.latestLeads(token);
+        const LeadServices = new LeadService();
+        const response = await LeadServices.latestLeads(token);
         setLatestLeads(response.data.Data);
         setIsLoading(false);
       } catch (error) {
@@ -36,7 +36,6 @@ const LatestLeadsList: React.FC = () => {
  return(
   <div className='w-full bg-white rounded-xl h-[calc(85vh-125px)] overflow-y-auto tiny-scrollbar'>
     <div className='sticky top-0 bg-white z-10 p-6 '>
-       <div className='before-scrollbar'></div>
       <div className='flex justify-between items-center'>
         <div className='flex items-center'>
           <p className='font-bold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
@@ -54,7 +53,7 @@ const LatestLeadsList: React.FC = () => {
     {isLoading ? (
       <Loader />
     ) : (
-      <div className='w-full h-[calc(100%-40px)] pl-6 whitespace-nowrap font-semibold text-[18px] leading-[normal]'>
+         <div className='w-full h-[calc(100%-40px)] pl-6 pb-6 whitespace-nowrap font-semibold text-[18px] leading-[normal]'>
         {latestLeads?.Data?.map((item, index) => (
           <LatestLeadRow key={index} item={item} />
         ))}

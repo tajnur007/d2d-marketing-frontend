@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { InfinitySpin } from 'react-loader-spinner';
 
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import { PasswordRevealIcon } from '@/assets/icons';
+import { PasswordHideIcon, PasswordRevealIcon } from '@/assets/icons';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 
@@ -112,7 +112,7 @@ const SigninForm = ({
               <p
                 className='absolute top-[52px] right-6 cursor-pointer'
                 onClick={handlePasswordVisibilityToggle}>
-                <PasswordRevealIcon />
+                {showPassword ? <PasswordHideIcon /> : <PasswordRevealIcon />}
               </p>
             </div>
             <div className='my-10 flex items-center justify-between'>

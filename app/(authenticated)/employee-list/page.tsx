@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiService } from '@/services/api-services';
+import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from '@/assets/icons';
@@ -47,7 +47,7 @@ const EmployeeListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const UserListServices = new ApiService();
+        const UserListServices = new UserService();
         const response = await UserListServices.EmployeeListInfo(token);
 
         // Extract the Data array from the response
@@ -110,7 +110,7 @@ const EmployeeListPage = () => {
 
   return (
     <>
-      <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar '>
+      <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar ' onScroll={handleScroll}>
           <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
             <div className='flex justify-between items-center'>
               <div className='flex items-center'>
@@ -155,9 +155,7 @@ const EmployeeListPage = () => {
         {isLoading ? (
           <Loader />
         ) : (
-          <div
-            className='h-[69vh]'
-            onScroll={handleScroll}>
+          <div className='h-[69vh] mb-6'>
             <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
               {filteredEmployeeList?.map((item, index) => {
                 const firstChar = item?.name?.charAt(0).toUpperCase();
