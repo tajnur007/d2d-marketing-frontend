@@ -1,14 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import { toast } from 'react-toastify';
 import { ArrowLeftCircleIcon } from '@/assets/icons';
-import { useState, FormEvent } from 'react';
-import ForgetPasswordCommon from './common/forget-password-common';
-import Copyright from './common/copyright';
-import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import EmailSent from './email-sent';
 import { AuthService } from '@/services/auth-service';
+import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import Link from 'next/link';
+import { FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
+import Copyright from './common/copyright';
+import ForgetPasswordCommon from './common/forget-password-common';
+import EmailSent from './email-sent';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
@@ -65,7 +65,9 @@ const ResetPassword = () => {
         <div className='mt-10'>
           <form onSubmit={onFormSubmit}>
             <div>
-              <label>Email</label>
+              <label className='font-semibold text-[#0B1420] text-[16px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
+                Email
+              </label>
               <div className='mt-4 mb-4'>
                 <input
                   id='email'
