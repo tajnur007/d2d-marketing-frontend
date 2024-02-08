@@ -34,10 +34,10 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
   };
 
   return (
-    <section className='w-full flex items-center justify-center my-20'>
-      <div className='max-w-[49%] mx-auto'>
+    <section className='w-full flex items-center justify-center mb-10'>
+      <div className='max-w-[49%] mx-auto px-6 py-6'>
         <div>
-          <div className=' my-5 text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
+          <div className='mt-10 my-6 text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
             <div className='mr-2'>
               <Link href={PAGE_ROUTES.Signin}>
                 <ArrowLeftCircleIcon />
@@ -45,10 +45,10 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
             </div>
             <div>Back to Login</div>
           </div>
-          <div className='mt-10 text-[36px] font-bold leading-[36px] tracking-[0.36px] text-[#0B1420] whitespace-nowrap'>
+          <div className='mt-10 text-4xl font-bold leading-[36px] tracking-[0.36px] text-[#0B1420] whitespace-nowrap'>
             New password 👋
           </div>
-          <div className='my-[19px] font-extralight text-[#313957] text-[16px] tracking-[0.16px] leading-[25.6px] whitespace-nowrap'>
+          <div className='xl:my-[19px] font-extralight text-[#313957] text-[16px] tracking-[0.16px] leading-[25.6px] whitespace-nowrap'>
             Type your new password
           </div>
         </div>
@@ -64,7 +64,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
                 type='password'
                 name='newPassword'
                 value={newPassword}
-                className='w-[388px] rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
+                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
                 placeholder='New password'
                 autoComplete='off'
                 required
@@ -80,7 +80,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
                 type='password'
                 name='retypePassword'
                 value={retypePassword}
-                className='w-[388px] rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
+                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
                 placeholder='Re-type password'
                 autoComplete='off'
                 required
