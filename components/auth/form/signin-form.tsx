@@ -71,12 +71,15 @@ const SigninForm = () => {
   return (
     <div className='w-full flex items-center justify-center my-20'>
       <div className='w-[49%]'>
-        <div className='mb-7 border-gray-[#DBDBDB] border-b text-center'>
-          <h1 className='text-black text-4xl font-semibold'>Welcome Back</h1>
-          <p className='mt-3 text-black text-lg font-normal mb-5'>
+        <div className='xl:mb-7 lg:mb-6 mb-5 border-gray-[#DBDBDB] border-b text-center'>
+          <h1 className='text-black xl:text-4xl lg:text-3xl text-2xl font-semibold'>
+            Welcome Back
+          </h1>
+          <p className='mt-3 text-black xl:text-xl lg:text-lg text-[15px] font-normal mb-5'>
             Login into your account
           </p>
         </div>
+
         <div>
           <form onSubmit={onFormSubmit}>
             <Input
