@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { createAuthData } from '../actions';
 
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { UserService } from '@/services/user-services';
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -31,7 +32,14 @@ export const authOptions: NextAuthOptions = {
 
           const AuthServices = new AuthService();
           const response = await AuthServices.login(loginData);
-          createAuthData(response);
+
+          const token = response?.access_token;
+          if (token) {
+            const Service = new UserService();
+            const resp = await Service.getUserInfo(token);
+            response.user_type = resp?.data?.Data?.user_type;
+            createAuthData(response);
+          }
 
           return response;
         } catch (error: any) {
