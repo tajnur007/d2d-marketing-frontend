@@ -98,7 +98,7 @@ const SignupForm = () => {
   return (
     <>
       <div className='w-full flex items-center justify-center flex-col mt-10 mb-20'>
-        <div className='w-[49%]'>
+        <div className='2xl:w-[50%] xl:w-[60%] lg:w-[65%] md:w-[70%] sm:w-[80%] w-[90%]'>
           <div className='mb-7 border-gray-[#DBDBDB] border-b text-center'>
             <h1 className='text-black text-2xl font-semibold'>Get Started With D2D</h1>
             <p className='mt-3 text-[#7E7E7E] text-[15px] font-normal mb-5'>
