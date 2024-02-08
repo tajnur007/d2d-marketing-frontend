@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiService } from '@/services/api-services';
+import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from '@/assets/icons';
@@ -47,7 +47,7 @@ const EmployeeListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const UserListServices = new ApiService();
+        const UserListServices = new UserService();
         const response = await UserListServices.EmployeeListInfo(token);
 
         // Extract the Data array from the response
@@ -110,53 +110,53 @@ const EmployeeListPage = () => {
 
   return (
     <>
-      <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar '>
-          <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
-            <div className='flex justify-between items-center'>
-              <div className='flex items-center'>
-                <p className='font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
-                  Employee List
-                </p>
-              </div>
-              <div className='flex flex-row'>
-                <form>
-                  <div className='relative'>
-                    <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
-                      <SearchIcon />
+      <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
+        <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
+          <div className='flex justify-between items-center'>
+            <div className='flex items-center'>
+              <p className='font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
+                Employee List
+              </p>
+            </div>
+            <div className='flex flex-row'>
+              <form>
+                <div className='relative'>
+                  <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
+                    <SearchIcon />
+                  </div>
+                  <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
+                    <input
+                      type='search'
+                      id='default-search'
+                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium ml-3'
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                    />
+                  </div>
+                </div>
+              </form>
+              <div onClick={handleNewEmployeeButtonClick}>
+                <button
+                  type='button'
+                  className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
+                  <div className='flex justify-between items-center'>
+                    <div className='mr-2'>
+                      <Image src={plusImage} alt='' />
                     </div>
-                    <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
-                      <input
-                        type='search'
-                        id='default-search'
-                        className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium ml-3'
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                      />
+                    <div className='font-medium text-[14px] leading-[normal] tracking-[0] whitespace-nowrap'>
+                      New Employee
                     </div>
                   </div>
-                </form>
-                <div onClick={handleNewEmployeeButtonClick}>
-                  <button
-                    type='button'
-                    className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
-                    <div className='flex justify-between items-center'>
-                      <div className='mr-2'>
-                        <Image src={plusImage} alt='' />
-                      </div>
-                      <div className='font-medium text-[14px] leading-[normal] tracking-[0] whitespace-nowrap'>
-                        New Employee
-                      </div>
-                    </div>
-                  </button>
-                </div>
+                </button>
               </div>
             </div>
+          </div>
         </div>
         {isLoading ? (
           <Loader />
         ) : (
           <div
-            className='h-[69vh]'
+            className='h-[calc(100%-125px)] mb-6 overflow-y-auto overflow-x-hidden tiny-scrollbar'
             onScroll={handleScroll}>
             <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
               {filteredEmployeeList?.map((item, index) => {
