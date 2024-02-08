@@ -128,11 +128,11 @@ const Dropzone: React.FC<DropzoneProps> = ({ onChange, onPendingChange }) => {
           {isDragActive ? (
             <p>Drop the images here ...</p>
           ) : (
-            <div className='flex flex-col justify-center items-center border-dashed border-2 border-neutral-200 p-2 rounded-lg overflow-hidden w-[120px] h-[120px]'>
+            <div className='flex flex-col justify-center items-center border-dashed border-2 border-neutral-200 p-2 rounded-lg overflow-hidden w-[100px] h-[100px] 2xl:w-[120px] 2xl:h-[120px]'>
               <div>
-                <CameraIcon className='w-[60px] h-[60px] font-bold fill-gray-300 transition-colors' />
+                <CameraIcon className='w-[40px] 2xl:w-[60px] h-[40px] 2xl:h-[60px] font-bold fill-gray-300 transition-colors' />
               </div>
-              <div className='font-bold text-gray-300'>
+              <div className='font-bold text-gray-300 text-sm 2xl:text-[16px]'>
                 {imageInfo.length === 0 ? 'No Image' : 'Add More'}
               </div>
             </div>

@@ -220,7 +220,7 @@ const SettingsPage = () => {
                   {!showPasswordFields && (
                     <Button
                       onClick={handlePasswordButtonClick}
-                      className='text-[#FFFFFF] text-sm rounded-lg p-3 bg-[#5630FF]'>
+                      className='text-[#FFFFFF] text-sm rounded-lg px-5 h-[40px] 2xl:h-[48px] bg-[#5630FF]'>
                       Change Password
                     </Button>
                   )}
@@ -295,15 +295,15 @@ const SettingsPage = () => {
                   />
                 </div>
               )}
-              <div className='relative mr-7 flex justify-end'>
+              <div className='flex justify-end items-center gap-4 mr-7 mt-5'>
                 <Button
                   onClick={handleCancel}
-                  className='text-[#69708C] w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#EBEBEB] mb-4 hover:text-white'>
+                  className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[40px] 2xl:h-[48px] text-sm 2xl:text-md rounded-lg  bg-[#EBEBEB]  hover:text-white'>
                   Cancel
                 </Button>
                 <Button
                   type='submit'
-                  className='text-white w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#4318FF] mb-4'>
+                  className='text-white w-[110px] px-5 2xl:w-32 h-[40px] 2xl:h-[48px] text-sm 2xl:text-md rounded-lg  bg-[#4318FF] '>
                   Save
                 </Button>
               </div>
