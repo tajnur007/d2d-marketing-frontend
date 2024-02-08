@@ -213,16 +213,16 @@ export const PasswordRevealIcon = () => {
       <path
         d='M15.5799 11.9999C15.5799 13.9799 13.9799 15.5799 11.9999 15.5799C10.0199 15.5799 8.41992 13.9799 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C13.9799 8.41992 15.5799 10.0199 15.5799 11.9999Z'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M11.9999 20.27C15.5299 20.27 18.8199 18.19 21.1099 14.59C22.0099 13.18 22.0099 10.81 21.1099 9.39997C18.8199 5.79997 15.5299 3.71997 11.9999 3.71997C8.46984 3.71997 5.17984 5.79997 2.88984 9.39997C1.98984 10.81 1.98984 13.18 2.88984 14.59C5.17984 18.19 8.46984 20.27 11.9999 20.27Z'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );
@@ -239,44 +239,44 @@ export const PasswordHideIcon = () => {
       <path
         d='M14.5299 9.46992L9.46992 14.5299C8.81992 13.8799 8.41992 12.9899 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C12.9899 8.41992 13.8799 8.81992 14.5299 9.46992Z'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M17.8199 5.76998C16.0699 4.44998 14.0699 3.72998 11.9999 3.72998C8.46984 3.72998 5.17984 5.80998 2.88984 9.40998C1.98984 10.82 1.98984 13.19 2.88984 14.6C3.67984 15.84 4.59984 16.91 5.59984 17.77'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M8.41992 19.53C9.55992 20.01 10.7699 20.27 11.9999 20.27C15.5299 20.27 18.8199 18.19 21.1099 14.59C22.0099 13.18 22.0099 10.81 21.1099 9.39993C20.7799 8.87993 20.4199 8.38993 20.0499 7.92993'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M15.5095 12.7C15.2495 14.11 14.0995 15.26 12.6895 15.52'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M9.47 14.53L2 22'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M21.9993 2L14.5293 9.47'
         stroke='black'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );
@@ -750,7 +750,7 @@ export const UserIcon = () => {
         r='3'
         fill='white'
         stroke='#222222'
-        stroke-linecap='round'
+        strokeLinecap='round'
       />
       <path
         d='M18 18.7059C17.6461 17.6427 16.8662 16.7033 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.13375 16.7033 6.35391 17.6427 6 18.7059'
@@ -916,21 +916,21 @@ export const DeleteLeadModalImage = () => {
       height='148'
       viewBox='0 0 24 24'
       fill='none'>
-      <path d='M10 15L10 12' stroke='#222222' stroke-width='1.2' stroke-linecap='round' />
-      <path d='M14 15L14 12' stroke='#222222' stroke-width='1.2' stroke-linecap='round' />
+      <path d='M10 15L10 12' stroke='#222222' strokeWidth='1.2' strokeLinecap='round' />
+      <path d='M14 15L14 12' stroke='#222222' strokeWidth='1.2' strokeLinecap='round' />
       <path
         d='M3 7H21V7C20.0681 7 19.6022 7 19.2346 7.15224C18.7446 7.35523 18.3552 7.74458 18.1522 8.23463C18 8.60218 18 9.06812 18 10V16C18 17.8856 18 18.8284 17.4142 19.4142C16.8284 20 15.8856 20 14 20H10C8.11438 20 7.17157 20 6.58579 19.4142C6 18.8284 6 17.8856 6 16V10C6 9.06812 6 8.60218 5.84776 8.23463C5.64477 7.74458 5.25542 7.35523 4.76537 7.15224C4.39782 7 3.93188 7 3 7V7Z'
         fill='#7E869E'
         fill-opacity='0.25'
         stroke='#222222'
-        stroke-width='1.2'
-        stroke-linecap='round'
+        strokeWidth='1.2'
+        strokeLinecap='round'
       />
       <path
         d='M10.0681 3.37059C10.1821 3.26427 10.4332 3.17033 10.7825 3.10332C11.1318 3.03632 11.5597 3 12 3C12.4403 3 12.8682 3.03632 13.2175 3.10332C13.5668 3.17033 13.8179 3.26427 13.9319 3.37059'
         stroke='#222222'
-        stroke-width='1.2'
-        stroke-linecap='round'
+        strokeWidth='1.2'
+        strokeLinecap='round'
       />
     </svg>
   );

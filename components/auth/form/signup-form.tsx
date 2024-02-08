@@ -161,7 +161,7 @@ const SignupForm = () => {
                   formErrors.Password ? 'top-[55px]' : 'top-[40px]'
                 }`}
                 onClick={handlePasswordVisibilityToggle}>
-                {showPassword ? <PasswordHideIcon /> : <PasswordRevealIcon />}
+                {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
               </p>
             </div>
             <div className='relative'>
@@ -186,7 +186,7 @@ const SignupForm = () => {
                   formErrors.ConfirmPassword ? 'top-[55px]' : 'top-[40px]'
                 }`}
                 onClick={handlePasswordVisibilityToggle}>
-                {showPassword ? <PasswordHideIcon /> : <PasswordRevealIcon />}
+                {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
               </p>
             </div>
             <Button
