@@ -34,10 +34,10 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
   };
 
   return (
-    <section>
-      <div className='max-w-[600px] mx-auto px-6 py-12'>
+    <section className='w-full flex items-center justify-center my-20'>
+      <div className='max-w-[49%] mx-auto'>
         <div>
-          <div className='mt-10 my-6 text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
+          <div className=' my-5 text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
             <div className='mr-2'>
               <Link href={PAGE_ROUTES.Signin}>
                 <ArrowLeftCircleIcon />
