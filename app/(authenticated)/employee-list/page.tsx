@@ -110,10 +110,8 @@ const EmployeeListPage = () => {
 
   return (
     <>
-      <div
-        className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] overflow-y-auto overflow-x-hidden tiny-scrollbar '
-        onScroll={handleScroll}>
-        <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6'>
+      <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
+        <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
               <p className='font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
@@ -157,7 +155,9 @@ const EmployeeListPage = () => {
         {isLoading ? (
           <Loader />
         ) : (
-          <div className='h-[69vh] mb-6'>
+          <div
+            className='h-[calc(100%-125px)] mb-6 overflow-y-auto overflow-x-hidden tiny-scrollbar'
+            onScroll={handleScroll}>
             <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
               {filteredEmployeeList?.map((item, index) => {
                 const firstChar = item?.name?.charAt(0).toUpperCase();
