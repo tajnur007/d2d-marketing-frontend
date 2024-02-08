@@ -1,5 +1,6 @@
 import { AuthLayoutProps } from '@/models/global-types';
 import LeftSide from './left-side';
+import { twMerge } from 'tailwind-merge';
 
 const AuthLayout = ({ text, image, children }: AuthLayoutProps) => {
   return (

@@ -11,10 +11,17 @@ import { signOut } from 'next-auth/react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-const Sidebar = () => {
+const Sidebar = ({ userRole }: { userRole: string | undefined }) => {
   const router = useRouter();
-  const currentPage = usePathname().split('/')[1];
-  const currPosition = SIDEBAR_ITEMS.find((item) => '/' + currentPage === item?.path);
+  const currentPage = usePathname();
+
+  let sidebarItems = [...SIDEBAR_ITEMS];
+  if (userRole === 'executive') {
+    sidebarItems = sidebarItems.filter((item) => item.iconName !== 'Employee List');
+    sidebarItems[2].position = 100;
+  }
+
+  const currPosition = sidebarItems.find((item) => currentPage === item?.path);
   const [selected, setSelected] = useState(currPosition?.position);
 
   const handleClick = (position: number, path: string) => {
@@ -23,19 +30,20 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    setSelected(currPosition?.position);
-  }, [currPosition]);
+    let position = currPosition?.position;
+    setSelected(position);
+  }, [currPosition, currentPage, userRole]);
 
   return (
     <div className='w-[88px] bg-white relative z-50'>
       <div
         className='absolute w-full flex justify-center top-5 cursor-pointer'
-        onClick={() => handleClick(SIDEBAR_ITEMS[0].position, SIDEBAR_ITEMS[0].path)}>
+        onClick={() => handleClick(sidebarItems[0].position, sidebarItems[0].path)}>
         <Logo />
       </div>
 
       <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col h-[147px] justify-between items-center w-full'>
-        {SIDEBAR_ITEMS.map(({ id, position, path, icon: Icon, iconName }) => (
+        {sidebarItems.map(({ id, position, path, icon: Icon, iconName }) => (
           <div
             key={id}
             onClick={() => handleClick(position, path)}
@@ -52,6 +60,7 @@ const Sidebar = () => {
             }
           </div>
         ))}
+
         <div
           className={`absolute left-0 transition-all duration-500 ${
             selected === 0
