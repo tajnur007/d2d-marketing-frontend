@@ -9,23 +9,23 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
-  const session = useSession();
-  const path = usePathname();
   const [loading, setloading] = useState(true);
+  const path = usePathname();
+  const session = useSession();
   const userRole = session?.data?.user?.user_type;
 
   useEffect(() => {
-    if (session?.status === 'authenticated') {
+    if (session?.status !== 'loading') {
       setloading(false);
     }
-    if (!session?.data && !loading) {
+    if (!session?.data && session?.status === 'unauthenticated') {
       redirect(PAGE_ROUTES.Signin);
     }
     if (path === '/employee-list' && userRole === 'executive') {
       redirect(PAGE_ROUTES.Dashboard);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path, session?.data, session?.status, userRole]);
+  }, [path, session, userRole]);
 
   if (session?.data && !loading) {
     return (
