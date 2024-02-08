@@ -35,10 +35,14 @@ export const CustomSelect = ({
           styles={{
             control: (baseStyles, { isFocused }) => ({
               ...baseStyles,
-              border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+              border: isBothSelectFieldNull
+                ? '1px solid red'
+                : isFocused
+                ? '1px solid #a855f7'
+                : '1px solid #F3F3F3',
               '&:hover': {
                 border: isBothSelectFieldNull
-                  ? '1px solid #F3F3F3'
+                  ? '1px solid red'
                   : isFocused
                   ? '1px solid #a855f7'
                   : '1px solid #F3F3F3',
