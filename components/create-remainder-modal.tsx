@@ -178,28 +178,28 @@ const CreateRemainderModal = ({
             )}
           </label>
 
-          <div className='relative'>
+          <div className='relative h-[48px] 2xl:h-14'>
             <Datetime onChange={getDate} inputProps={inputProps} />
-            <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
+            <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none '>
               <ClockIcon />
             </div>
           </div>
         </div>
 
         <div className='mt-[8px]'>
-          <div className='mt-[-1.00px] font-medium text-[#00156a] text-[12px] tracking-[0] leading-[14px] whitespace-nowrap mb-1'>
+          <div className='font-medium text-[#00156a] text-xs 2xl:text-sm mb-1'>
             Status
           </div>
 
           <Select
             options={CREATE_REMINDER_STATUS}
-            className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+            className='h-[48px] 2xl:h-14 create-reminder-select font-medium text-black text-sm 2xl:text-[16px]'
             styles={{
               control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
                 borderColor: '2px #F3F3F3 solid',
                 width: '100%',
-                height: '56px',
+                height: '100%',
                 borderRadius: '10px',
                 boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
                 transition: 'all 500ms',

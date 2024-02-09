@@ -135,45 +135,39 @@ const SettingsPage = () => {
           {changePasswordClicked ? (
             <div className='bg-white gap-[10px] ml-6 mr-8 mb-4 mt-2'>
               <Input
-                label={
-                  <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
-                    Current Password
-                  </p>
-                }
+                label='Current Password'
                 placeholder='Current Password'
                 type='password'
                 id='currentPassword'
                 name='CurrentPassword'
                 onChange={handleInputChange}
-                className={` ${formErrors.CurrentPassword && 'border-red-500 shadow'}`}
+                className={`mb-3 2xl:mb-5 ${
+                  formErrors.CurrentPassword && 'border-red-500 shadow'
+                }`}
               />
 
               <Input
-                label={
-                  <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
-                    New Password
-                  </p>
-                }
+                label='New Password'
                 placeholder='New Password'
                 type='password'
                 id='newPassword'
                 name='NewPassword'
                 onChange={handleInputChange}
-                className={` ${formErrors.NewPassword && 'border-red-500 shadow'}`}
+                className={`mb-3 2xl:mb-5 ${
+                  formErrors.NewPassword && 'border-red-500 shadow'
+                }`}
               />
 
               <Input
-                label={
-                  <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
-                    Confirm Password
-                  </p>
-                }
+                label='Confirm Password'
                 placeholder='Confirm Password'
                 type='password'
                 id='confirmPassword'
                 name='ConfirmPassword'
                 onChange={handleConfirmPasswordChange}
-                className={` ${formErrors.ConfirmPassword && 'border-red-500 shadow'}`}
+                className={`mb-3 2xl:mb-5 ${
+                  formErrors.ConfirmPassword && 'border-red-500 shadow'
+                }`}
               />
 
               {confirmPassword !== formData.NewPassword && (
@@ -196,7 +190,7 @@ const SettingsPage = () => {
             </div>
           ) : (
             <div>
-              <div className='flex mt-2 ml-6'>
+              <div className='flex mt-2 ml-6 mb-5'>
                 <div className='flex items-center w-20 mt-[8px]'>
                   <Image
                     src={profileImageSrc || profileImage}
@@ -220,7 +214,7 @@ const SettingsPage = () => {
                   {!showPasswordFields && (
                     <Button
                       onClick={handlePasswordButtonClick}
-                      className='text-[#FFFFFF] text-sm rounded-lg p-3 bg-[#5630FF]'>
+                      className='text-[#FFFFFF] text-sm 2xl:text-base rounded-lg px-5 h-[45px] 2xl:h-[52px] bg-[#5630FF]'>
                       Change Password
                     </Button>
                   )}
@@ -230,11 +224,7 @@ const SettingsPage = () => {
               {!changePasswordClicked && (
                 <div className='gap-[10px] ml-6 mr-8 mb-2 mt-2'>
                   <Input
-                    label={
-                      <p className='text-[#00156A] font-medium text-xs mt-6 mb-1'>
-                        Full Name
-                      </p>
-                    }
+                    label='Full Name'
                     placeholder='Full Name'
                     type='text'
                     id='fullName'
@@ -243,14 +233,12 @@ const SettingsPage = () => {
                     errorMessage={formErrors.Name}
                     htmlFor='name'
                     onChange={handleInputChange}
-                    className={` ${formErrors.Name && 'border-red-500 shadow'}`}
+                    className={`mb-3 2xl:mb-5 ${
+                      formErrors.Name && 'border-red-500 shadow'
+                    }`}
                   />
                   <Input
-                    label={
-                      <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
-                        Email
-                      </p>
-                    }
+                    label='Email'
                     placeholder='Email'
                     type='text'
                     id='email'
@@ -260,15 +248,13 @@ const SettingsPage = () => {
                     value={userInfo?.email}
                     errorMessage={formErrors.Email}
                     onChange={handleInputChange}
-                    className={` ${formErrors.Email && 'border-red-500 shadow'}`}
+                    className={`mb-3 2xl:mb-5 ${
+                      formErrors.Email && 'border-red-500 shadow'
+                    }`}
                   />
 
                   <Input
-                    label={
-                      <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
-                        Phone Number
-                      </p>
-                    }
+                    label='Phone Number'
                     placeholder='Phone Number'
                     type='text'
                     id='phone'
@@ -277,33 +263,32 @@ const SettingsPage = () => {
                     errorMessage={formErrors.Phone}
                     htmlFor='phone'
                     onChange={handleInputChange}
-                    className={` ${formErrors.Phone && 'border-red-500 shadow'}`}
+                    className={`mb-3 2xl:mb-5 ${
+                      formErrors.Phone && 'border-red-500 shadow'
+                    }`}
                   />
 
                   <Input
-                    label={
-                      <p className='text-[#00156A] font-medium text-xs mt-2 mb-1'>
-                        Role (View Only)
-                      </p>
-                    }
+                    label='Role (View Only)'
                     placeholder='Assignee'
                     type='text'
                     id='role'
                     name='Role'
                     value={userInfo?.user_type}
                     readOnly
+                    className='mb-3 2xl:mb-5'
                   />
                 </div>
               )}
-              <div className='relative mr-7 flex justify-end'>
+              <div className='flex justify-end items-center gap-4 mr-7 mt-5'>
                 <Button
                   onClick={handleCancel}
-                  className='text-[#69708C] w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#EBEBEB] mb-4 hover:text-white'>
+                  className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB]  hover:text-white'>
                   Cancel
                 </Button>
                 <Button
                   type='submit'
-                  className='text-white w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#4318FF] mb-4'>
+                  className='text-white w-[110px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#4318FF] '>
                   Save
                 </Button>
               </div>
