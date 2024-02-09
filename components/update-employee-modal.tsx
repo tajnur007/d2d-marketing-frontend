@@ -151,6 +151,11 @@ const UpdateEmployeeModal = ({
   return (
     <div>
       <Modal
+        style={{
+          content: {
+            outline: 'none', // Remove browser focus border
+          },
+        }}
         className={
           'absolute w-[646px] h-auto -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
         }
