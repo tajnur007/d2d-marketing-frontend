@@ -15,6 +15,7 @@ import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
 import { UserService } from '@/services/user-services';
 import { toast } from 'react-toastify';
+import MiniLoader from './mini-loader';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -29,10 +30,12 @@ const CreateEmployeeModal = ({
   setFormData = () => {},
   formErrors,
   setFormErrors = () => {},
+  setIsRefreshData = () => {},
 }: CreateEmployeeModalProps) => {
   const [selected, setSelected] = useState<string>(EMPLOYEE_ROLE[0]?.value);
   const [managers, setManagers] = useState<ManagerType[]>();
   const [manager, setManager] = useState<string>(MANAGERS[0]?.value);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { data } = useSession();
 
@@ -41,7 +44,7 @@ const CreateEmployeeModal = ({
       //@ts-ignore
       const token = data?.user?.access_token;
       const Services = new UserService();
-      if (token) {
+      if (token && modalIsOpen) {
         const resp = await Services.getManagerList(token);
         const data = resp?.data?.Data?.Data?.map((item: ManagerType) => {
           return { value: item?.name, label: item?.name };
@@ -50,7 +53,7 @@ const CreateEmployeeModal = ({
       }
     };
     getData();
-  }, [data]);
+  }, [data, modalIsOpen]);
 
   useEffect(() => {
     const selectedManager = selected === 'executive' ? manager : '';
@@ -101,6 +104,7 @@ const CreateEmployeeModal = ({
   };
 
   const submitData = async () => {
+    setIsLoading(true);
     try {
       const newFormErrors: any = {};
 
@@ -121,16 +125,19 @@ const CreateEmployeeModal = ({
         console.log(resp);
 
         if (resp?.status === 201) {
-          toast.success('Successfully created employee!');
+          toast.success(resp?.data?.Message);
           setIsExecutive(false);
           setSelected(EMPLOYEE_ROLE[0]?.value);
           setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
+          setModalIsOpen(false);
+          setIsRefreshData(true);
         }
       }
-    } catch (err) {
-      toast.error('Failed to create employee!');
+    } catch (err: any) {
+      toast.error(err.response.data.message);
       console.log(err);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -158,6 +165,7 @@ const CreateEmployeeModal = ({
             id='name'
             name='name'
             htmlFor='name'
+            disabled={isLoading}
             value={formData?.name}
             errorMessage={formErrors.name}
             className={`w-full mb-3 2xl:mb-5 ${
@@ -172,6 +180,7 @@ const CreateEmployeeModal = ({
             id='phone'
             name='phone'
             htmlFor='phone'
+            disabled={isLoading}
             value={formData?.phone}
             errorMessage={formErrors.phone}
             className={`w-full mb-3 2xl:mb-5 ${
@@ -186,6 +195,7 @@ const CreateEmployeeModal = ({
             id='email'
             name='email'
             htmlFor='email'
+            disabled={isLoading}
             value={formData?.email}
             errorMessage={formErrors.email}
             className={`w-full mb-3 2xl:mb-5 ${
@@ -241,8 +251,11 @@ const CreateEmployeeModal = ({
               />
             </>
           )}
-          <Button onClick={submitData} className='w-full rounded-[10px] h-[60px] '>
-            Create
+          <Button
+            onClick={submitData}
+            disabled={isLoading}
+            className='w-full rounded-[10px] h-[60px] '>
+            {isLoading ? <MiniLoader /> : 'Create'}
           </Button>
         </div>
       </Modal>

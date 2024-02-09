@@ -97,6 +97,7 @@ const EmployeeListPage = () => {
   };
 
   const handleNewEmployeeButtonClick = () => {
+    setIsRefreshData(false);
     setModalIsOpen(true);
   };
 
@@ -104,7 +105,7 @@ const EmployeeListPage = () => {
     employeeActionRef.current.close();
   };
 
-  const filteredEmployeeList = employeeInfo.filter((employee) =>
+  const filteredEmployeeList = employeeInfo?.filter((employee) =>
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -201,6 +202,7 @@ const EmployeeListPage = () => {
         setModalIsOpen={setModalIsOpen}
         setIsExecutive={setIsExecutive}
         formData={formData}
+        setIsRefreshData={setIsRefreshData}
         setFormData={setFormData}
         formErrors={formErrors}
         setFormErrors={setFormErrors}

@@ -364,6 +364,7 @@ export interface CreateEmployeeModalProps {
   setFormData: (item: any) => void;
   formErrors: CreateEmployeeItems;
   setFormErrors: (item: any) => void;
+  setIsRefreshData: (item: any) => void;
 }
 
 export interface UpdateEmployeeModalProps {
