@@ -66,7 +66,7 @@ const LeadDetails = ({
   // To get the latest remainder after creating new remainder
   useEffect(() => {
     const Service = new ReminderService();
-    isCreated && Service.getAllRemindersData(token, setRemainders);
+    Service.getAllRemindersData(token, setRemainders);
     setIsCreated(false);
     setIsUpdated(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps

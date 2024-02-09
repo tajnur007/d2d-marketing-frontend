@@ -63,17 +63,21 @@ const UpdateRemainderModal = ({
 
   const submitData = async () => {
     try {
+      console.log('button clicked');
       const newFormErrors: any = {};
 
       for (let field in formData) {
-        if (formData[field as keyof typeof formData] === '') {
+        if (field === 'Status') continue;
+        else if (formData[field as keyof typeof formData] === '') {
           newFormErrors[field] = `(${field} is required)`;
         }
       }
 
       setFormErrors(newFormErrors);
+      console.log(newFormErrors);
 
-      if (Object.keys(newFormErrors).length === 0) {
+      if (Object.keys(formErrors).length === 0) {
+        console.log('button clicked 1');
         const payloadObj = {
           title: formData?.title,
           lead_id: formData?.lead_id,
@@ -169,7 +173,9 @@ const UpdateRemainderModal = ({
           <div className='relative'>
             <Datetime
               onChange={getDate}
-              initialValue={formData?.reminder_time}
+              initialValue={moment(formData?.reminder_time).format(
+                'ddd DD MMM, YYYY hh:mm A'
+              )}
               inputProps={inputProps}
             />
             <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
