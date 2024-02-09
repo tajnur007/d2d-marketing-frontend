@@ -22,9 +22,9 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
     if (!session?.data && session?.status === 'unauthenticated') {
       redirect(PAGE_ROUTES.Signin);
     }
-    // if (path.includes('/employee-list') && userRole === 'executive') {
-    //   redirect(PAGE_ROUTES.Dashboard);
-    // } //! For Testing
+    if (path.includes('/employee-list') && userRole === 'executive') {
+      redirect(PAGE_ROUTES.Dashboard);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path, session, userRole]);
