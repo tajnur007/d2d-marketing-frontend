@@ -152,7 +152,7 @@ const CreateEmployeeModal = ({
             </button>
           </div>
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Name</p>}
+            label='Name'
             placeholder='Name'
             type='text'
             id='name'
@@ -160,13 +160,13 @@ const CreateEmployeeModal = ({
             htmlFor='name'
             value={formData?.name}
             errorMessage={formErrors.name}
-            className={`w-full mb-5 ${formErrors.name && 'border-red-500 shadow'}`}
+            className={`w-full mb-3 2xl:mb-5 ${
+              formErrors.name && 'border-red-500 shadow'
+            }`}
             onChange={handleInputChange}
           />
           <Input
-            label={
-              <p className='text-[#00156A] font-medium text-xs mb-1'>Phone Number</p>
-            }
+            label='Phone Number'
             placeholder='Phone Number'
             type='text'
             id='phone'
@@ -174,11 +174,13 @@ const CreateEmployeeModal = ({
             htmlFor='phone'
             value={formData?.phone}
             errorMessage={formErrors.phone}
-            className={`w-full mb-5 ${formErrors.phone && 'border-red-500 shadow'}`}
+            className={`w-full mb-3 2xl:mb-5 ${
+              formErrors.phone && 'border-red-500 shadow'
+            }`}
             onChange={handleInputChange}
           />
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Email</p>}
+            label='Email'
             placeholder='Email'
             type='text'
             id='email'
@@ -186,20 +188,24 @@ const CreateEmployeeModal = ({
             htmlFor='email'
             value={formData?.email}
             errorMessage={formErrors.email}
-            className={`w-full mb-5 ${formErrors.email && 'border-red-500 shadow'}`}
+            className={`w-full mb-3 2xl:mb-5 ${
+              formErrors.email && 'border-red-500 shadow'
+            }`}
             onChange={handleInputChange}
           />
-          <label className='text-[#00156A] text-xs mb-1 font-medium'>Role</label>
+          <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
+            Role
+          </label>
           <Select
             options={EMPLOYEE_ROLE}
             defaultValue={EMPLOYEE_ROLE[0]}
-            className='create-reminder-select mb-5 font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+            className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
             styles={{
               control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
                 borderColor: '2px #F3F3F3 solid',
                 width: '100%',
-                height: '56px',
+                height: '100%',
                 borderRadius: '10px',
                 boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
                 transition: 'all 500ms',
@@ -211,19 +217,19 @@ const CreateEmployeeModal = ({
           />
           {isExecutive && (
             <>
-              <label className='text-[#00156A] text-xs mb-1 font-medium'>
+              <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
                 Select Manager
               </label>
               <Select
                 options={managers}
                 defaultValue={managers && managers[0]}
-                className='create-reminder-select mb-5 font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+                className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
                 styles={{
                   control: (baseStyles, { isFocused }) => ({
                     ...baseStyles,
                     borderColor: '2px #F3F3F3 solid',
                     width: '100%',
-                    height: '56px',
+                    height: '100%',
                     borderRadius: '10px',
                     boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
                     transition: 'all 500ms',

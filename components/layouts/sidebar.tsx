@@ -35,7 +35,7 @@ const Sidebar = ({ userRole }: { userRole: string | undefined }) => {
   }, [currPosition, currentPage, userRole]);
 
   return (
-    <div className='w-[88px] bg-white relative z-50'>
+    <div className='w-[70px] 2xl:w-[88px] bg-white relative z-50'>
       <div
         className='absolute w-full flex justify-center top-5 cursor-pointer'
         onClick={() => handleClick(sidebarItems[0].position, sidebarItems[0].path)}>
@@ -50,11 +50,11 @@ const Sidebar = ({ userRole }: { userRole: string | undefined }) => {
             data-tooltip-id='my-tooltip'
             data-tooltip-content={iconName}
             data-tooltip-place='right'
-            className={`flex items-center cursor-pointer transition-all duration-500 ${
+            className={`w-full flex justify-center items-center cursor-pointer transition-all duration-500 ${
               selected === position ? 'text-[#5630FF]' : 'text-[#69708C]'
             }`}>
             {
-              <div className='flex items-center px-8 py-3 hover:bg-purple-200 hover:duration-300 group'>
+              <div className='flex justify-center  items-center w-full py-3 hover:bg-purple-200 hover:duration-300 group'>
                 <Icon />
               </div>
             }
