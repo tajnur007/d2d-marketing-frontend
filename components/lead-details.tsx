@@ -76,26 +76,6 @@ const LeadDetails = ({
     setIsOpen(false);
   }, [closeDrawer, setIsOpen]);
 
-  //! IMAGE URL VALIDATION
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const validatedImages = await Promise.all(
-          data?.image_info_json?.map(async (image: any) => {
-            const isValid = await validateImageUrl(image?.image_path);
-            return isValid ? image : null;
-          }) ?? []
-        );
-        setValidImages(validatedImages.filter((image) => image !== null));
-      } catch (error) {
-        console.error('Error fetching and validating images:', error);
-      }
-    };
-    fetchData();
-  }, [data]);
-
-  validImages.map((image) => console.log('Image Path:', image.image_path));
-
   return (
     <div className='p-8 h-full overflow-y-auto no-scrollbar '>
       <div className='flex justify-between '>
@@ -197,7 +177,7 @@ const LeadDetails = ({
           Image
         </h4>
         <div className='flex flex-wrap gap-2 mx-auto my-5'>
-          {validImages.map((image) => (
+          {data?.image_info_json.map((image: any) => (
             <div key={image?.image_name}>
               <Image
                 src={`${image?.image_path}`}
