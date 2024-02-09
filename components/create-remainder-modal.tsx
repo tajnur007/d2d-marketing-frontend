@@ -118,6 +118,7 @@ const CreateRemainderModal = ({
   };
 
   const closeModal = () => {
+    setFormData(CREATE_REMINDER_ITEMS);
     setModalIsOpen(false);
   };
 
