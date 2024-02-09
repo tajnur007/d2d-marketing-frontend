@@ -4,7 +4,7 @@ import { InfinitySpin } from 'react-loader-spinner';
 const MiniLoader = () => {
   return (
     <div className='h-full w-full flex justify-center items-center'>
-      <InfinitySpin width='120' color='#ffffff' />
+      <InfinitySpin width='90' color='#ffffff' />
     </div>
   );
 };
