@@ -34,10 +34,10 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
   };
 
   return (
-    <section className='w-full lg:w-[60%] flex items-center justify-center mb-10 lg:mb-5'>
-      <div className=' mx-auto px-6 lg:px-2 py-6'>
+    <section className='w-full flex items-center justify-center mb-10 lg:mb-5'>
+      <div className='w-[50%] my-10'>
         <div>
-          <div className='mt-10 my-6 text-[16px] md:text-[14px] md:my-0 flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
+          <div className='mt-10 my-6 md:my-2 text-[14px] md:text-[14px] lg:text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
             <Link href={PAGE_ROUTES.Signin}>
               <div className='mr-2'>
                 <ArrowLeftCircleIcon />
@@ -45,7 +45,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
             </Link>
             <div>Back to Login</div>
           </div>
-          <div className='mt-10 lg:mt-5 md:mt-5 lg:text-3xl text-4xl md:text-2xl font-bold leading-[36px] tracking-[0.36px] text-[#0B1420] whitespace-nowrap'>
+          <div className='mt-10 lg:mt-5 md:mt-4 lg:text-3xl text-2xl xl:text-4xl font-bold leading-[36px] tracking-[0.36px] text-[#0B1420] whitespace-nowrap'>
             New password 👋
           </div>
           <div className='my-5 md:my-2 md:mb-2 lg:mb-6 font-normal text-[#313957] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[25.6px] whitespace-nowrap'>
@@ -58,7 +58,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
             <label className='font-medium text-[#0B1420] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
               New password
             </label>
-            <div className='mt-[4px] mb-[20px] md:mt-1'>
+            <div className='mt-[4px] mb-[20px] md:mb-[12px]'>
               <input
                 id='newPassword'
                 type='password'
@@ -74,7 +74,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
             <label className='font-medium text-[#0B1420] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
               Re-type password
             </label>
-            <div className='mt-[8px] mb-[20px] md:mt-1'>
+            <div className='mt-[8px] mb-[20px] md:mb-[12px]'>
               <input
                 id='retypePassword'
                 type='password'
