@@ -16,9 +16,9 @@ const LeftSide = ({ pageImage, text }: AuthCommonProps) => {
         </div>
         <div className='w-full p-10'>
           <div className='text-base'>
-            <h5 className='2xl:text-3xl'>Door 2 door marketing 🙂</h5>
+            <h5 className='2xl:text-3xl xl:text-2xl lg:text-xl'>Door 2 door marketing 🙂</h5>
           </div>
-          <div className='pt-6 lg:pt-2 2xl:text-xl text-[14px] text-[#FFFFFF80] tracking-[0] leading-[20px]'>
+          <div className='pt-6 lg:pt-2 2xl:text-xl xl:text-lg lg:text-md text-[14px] text-[#FFFFFF80] tracking-[0] leading-[20px]'>
             {text}
           </div>
         </div>
