@@ -67,6 +67,7 @@ const Remainder = ({
         selected={selected}
         setSelected={setSelected}
         setIsUpdated={setIsUpdated}
+        remainder={remainder}
       />
     </div>
   );

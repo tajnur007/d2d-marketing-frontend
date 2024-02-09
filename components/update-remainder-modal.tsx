@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
@@ -31,10 +31,12 @@ const UpdateRemainderModal = ({
   selected,
   setSelected = () => {},
   setIsUpdated = () => {},
+  remainder,
 }: UpdateRemainderModalProps) => {
   const { data } = useSession();
   //@ts-ignore
   const token = data?.user?.access_token;
+  const [change, setChange] = useState(true);
 
   const inputProps = {
     placeholder: moment(formData?.reminder_time).format('ddd DD MMM, YYYY hh:mm A'),
@@ -53,11 +55,11 @@ const UpdateRemainderModal = ({
     setFormErrors((prev: any) => {
       return { ...prev, [name]: '' };
     });
+    setChange(false);
   };
 
   const submitData = async () => {
     try {
-      console.log('button clicked', formData);
       const newFormErrors: any = {};
 
       for (let field in formData) {
@@ -67,10 +69,8 @@ const UpdateRemainderModal = ({
       }
 
       setFormErrors(newFormErrors);
-      console.log(formErrors);
 
       if (Object.keys(newFormErrors).length === 0) {
-        console.log('button clicked 1');
         const payloadObj = {
           title: formData?.title,
           lead_id: formData?.lead_id,
@@ -80,6 +80,7 @@ const UpdateRemainderModal = ({
           notes: formData?.notes,
           status: selected == '' ? formData?.status : selected,
         };
+        console.log(remainder, payloadObj);
 
         if (token) {
           const ReminderServices = new ReminderService();
@@ -104,7 +105,8 @@ const UpdateRemainderModal = ({
   };
 
   const handleSelectChange = (selectedOption: any) => {
-    CREATE_REMINDER_STATUS.map((option) => {
+    setChange(false);
+    CREATE_REMINDER_STATUS?.map((option) => {
       if (option?.value === selectedOption?.value) {
         setSelected(option.value);
       }
@@ -112,6 +114,7 @@ const UpdateRemainderModal = ({
   };
 
   const closeModal = () => {
+    setChange(false);
     setModalIsOpen(false);
   };
 
@@ -216,6 +219,7 @@ const UpdateRemainderModal = ({
         <div className='mt-[8px]'>
           <Button
             onClick={submitData}
+            disabled={change}
             className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
             Update
           </Button>
