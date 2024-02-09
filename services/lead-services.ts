@@ -205,4 +205,22 @@ export class LeadService {
 
     return resp;
   };
+
+  //* Service to transfer leads
+  public transferLead = async (lead_id: number, data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.UpdateLead}?lead_id=${lead_id}`,
+      method: API_METHODS.PATCH,
+      ...config,
+      data,
+    });
+
+    return resp;
+  };
 }

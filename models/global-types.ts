@@ -226,6 +226,11 @@ export interface SingleLeadItems {
   title?: string;
 }
 
+export interface TransferLeadPayload {
+  executive_id: number;
+  executive_name: string;
+}
+
 export interface UpdateReminderType {
   title: string;
   user_id: number;
