@@ -251,7 +251,9 @@ const CreateLeadForm: React.FC = () => {
             setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
           <div className='items-start justify-center '>
-            <p className='text-[rgb(0,21,106)] font-medium text-xs mb-2'>Image</p>
+            <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
+              Image
+            </p>
             <Dropzone onChange={setImages} onPendingChange={handlePendingChange} />
           </div>
         </div>

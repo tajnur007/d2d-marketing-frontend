@@ -71,6 +71,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 .rdt input {
   border-width: 1px;
+  height: 100%;
 }
 .rdtOpen input:focus-within {
   box-shadow: 0 0 0 3px #e9d5ff;

@@ -50,7 +50,7 @@ function LeadsList() {
       LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
     }
-  }, [token, setExecutivesOption, setCreatedByOptions, setLeadsData, setIsLoading]);
+  }, [token, setExecutivesOption, setCreatedByOptions, setLeadsData, setIsLoading, leadRefresh]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
