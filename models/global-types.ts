@@ -438,8 +438,8 @@ export interface DeleteModalProps {
   modalIsOpen: boolean;
   setModalIsOpen: (item: boolean) => void;
   data: LeadListType;
-  leadRefresh: boolean;
-  setLeadRefresh: (item: boolean) => void;
+  isRefreshData: boolean;
+  setIsRefreshData: (item: boolean) => void;
 }
 
 export interface CreateEmployeeItems {

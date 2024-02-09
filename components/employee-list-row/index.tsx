@@ -10,6 +10,8 @@ import EmployeeOptions from './EmployeeOptions';
 import UpdateEmployeeModal from '../update-employee-modal';
 import { useState } from 'react';
 import { UserService } from '@/services/user-services';
+import DeleteConfirmationModal from '../delete-confirmation-modal';
+import DeleteEmployeeConfirmationModal from '../delete-employee-confirmation-modal';
 
 const getStatusColor: EmployeestatusColor = {
   Active: 'bg-[#D2FBE7]',
@@ -31,7 +33,8 @@ function EmployeeListRow({
   isRefreshData: boolean;
   setISRefreshData: any;
 }) {
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [editModalIsOpen, setEditModalIsOpen] = useState<boolean>(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState<boolean>(false);
   const [isExecutive, setIsExecutive] = useState<boolean>(false);
 
   const { data } = useSession();
@@ -42,17 +45,12 @@ function EmployeeListRow({
   };
 
   const handleDeleteButton = async (userId: number) => {
-    //@ts-ignore
-    const token = data?.user?.access_token;
-    const UserServices = new UserService();
-    if (token) {
-      await UserServices.deleteUser(userId, token);
-    }
+    setDeleteModalIsOpen(true);
   };
 
   const handleEditButton = (userId: number) => {
     // After clicking the edit button, the modal will open
-    setModalIsOpen(true);
+    setEditModalIsOpen(true);
   };
 
   return (
@@ -135,7 +133,7 @@ function EmployeeListRow({
             marginLeft: '20px',
           }}
           arrow={false}>
-          {!modalIsOpen && (
+          {(!deleteModalIsOpen || !editModalIsOpen) && (
             <EmployeeOptions
               handleViewButton={handleViewButton}
               handleDeleteButton={() => handleDeleteButton(item.id)}
@@ -146,11 +144,19 @@ function EmployeeListRow({
       </div>
 
       <UpdateEmployeeModal // This is the modal for updating employee details
-        modalIsOpen={modalIsOpen}
+        modalIsOpen={editModalIsOpen}
         isExecutive={isExecutive} // This is the state for the executive
-        setModalIsOpen={setModalIsOpen}
+        setModalIsOpen={setEditModalIsOpen}
         setIsExecutive={setIsExecutive}
         employeeinfo={item} // This is the employee details
+        isRefreshData={isRefreshData}
+        setIsRefreshData={setISRefreshData}
+      />
+
+      <DeleteEmployeeConfirmationModal
+        modalIsOpen={deleteModalIsOpen}
+        setModalIsOpen={setDeleteModalIsOpen}
+        data={item}
         isRefreshData={isRefreshData}
         setIsRefreshData={setISRefreshData}
       />
