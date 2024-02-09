@@ -152,7 +152,7 @@ const CreateEmployeeModal = ({
             </button>
           </div>
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Name</p>}
+            label='Name'
             placeholder='Name'
             type='text'
             id='name'
@@ -160,15 +160,13 @@ const CreateEmployeeModal = ({
             htmlFor='name'
             value={formData?.name}
             errorMessage={formErrors.name}
-            className={`w-full mb-4 2xl:mb-5 ${
+            className={`w-full mb-3 2xl:mb-5 ${
               formErrors.name && 'border-red-500 shadow'
             }`}
             onChange={handleInputChange}
           />
           <Input
-            label={
-              <p className='text-[#00156A] font-medium text-xs mb-1'>Phone Number</p>
-            }
+            label='Phone Number'
             placeholder='Phone Number'
             type='text'
             id='phone'
@@ -176,13 +174,13 @@ const CreateEmployeeModal = ({
             htmlFor='phone'
             value={formData?.phone}
             errorMessage={formErrors.phone}
-            className={`w-full mb-4 2xl:mb-5 ${
+            className={`w-full mb-3 2xl:mb-5 ${
               formErrors.phone && 'border-red-500 shadow'
             }`}
             onChange={handleInputChange}
           />
           <Input
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Email</p>}
+            label='Email'
             placeholder='Email'
             type='text'
             id='email'
@@ -190,7 +188,7 @@ const CreateEmployeeModal = ({
             htmlFor='email'
             value={formData?.email}
             errorMessage={formErrors.email}
-            className={`w-full mb-4 2xl:mb-5 ${
+            className={`w-full mb-3 2xl:mb-5 ${
               formErrors.email && 'border-red-500 shadow'
             }`}
             onChange={handleInputChange}
@@ -201,7 +199,7 @@ const CreateEmployeeModal = ({
           <Select
             options={EMPLOYEE_ROLE}
             defaultValue={EMPLOYEE_ROLE[0]}
-            className='h-[48px] 2xl:h-14 create-reminder-select mb-5 font-medium text-black text-sm 2xl:text-[16px]'
+            className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
             styles={{
               control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
@@ -225,7 +223,7 @@ const CreateEmployeeModal = ({
               <Select
                 options={managers}
                 defaultValue={managers && managers[0]}
-                className='h-[48px] 2xl:h-14 create-reminder-select mb-4 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
+                className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
                 styles={{
                   control: (baseStyles, { isFocused }) => ({
                     ...baseStyles,
