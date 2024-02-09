@@ -489,9 +489,9 @@ export interface LeadsDataType {
 }
 
 export interface EmployeeOptionsProps {
-  handleViewButton: () => void;
-  handleDeleteButton: () => Promise<void>;
-  handleEditButton: () => void;
+  handleViewButton?: () => void;
+  handleDeleteButton?: () => Promise<void>;
+  handleEditButton?: () => void;
 }
 
 export interface RemainderProps {
@@ -512,8 +512,4 @@ export interface UpdateRemainderModalProps {
   selected: string;
   setSelected: (item: string) => void;
   setIsUpdated: (item: boolean) => void;
-}
-export interface EmployeeOptionsProps {
-  handleViewButton: () => void;
-  handleDeleteButton: () => Promise<void>;
 }
