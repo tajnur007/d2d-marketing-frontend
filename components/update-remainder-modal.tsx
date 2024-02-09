@@ -37,7 +37,7 @@ const UpdateRemainderModal = ({
   const token = data?.user?.access_token;
 
   const inputProps = {
-    placeholder: moment(formData.reminder_time).format('ddd DD MMM, YYYY hh:mm A'),
+    placeholder: moment(formData?.reminder_time).format('ddd DD MMM, YYYY hh:mm A'),
     className: `w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase text-[#B9C1D9] date-picker-placeholder ${
       formErrors.notes && 'border-red-500'
     }`,
@@ -75,19 +75,19 @@ const UpdateRemainderModal = ({
 
       if (Object.keys(newFormErrors).length === 0) {
         const payloadObj = {
-          title: formData.title,
-          lead_id: formData.lead_id,
-          user_id: formData.user_id,
-          company_id: formData.company_id,
-          reminder_time: formData.reminder_time,
-          notes: formData.notes,
+          title: formData?.title,
+          lead_id: formData?.lead_id,
+          user_id: formData?.user_id,
+          company_id: formData?.company_id,
+          reminder_time: formData?.reminder_time,
+          notes: formData?.notes,
           status: selected,
         };
 
         if (token) {
           const ReminderServices = new ReminderService();
           const response = await ReminderServices.updateRemainder(
-            formData.id,
+            formData?.id,
             payloadObj,
             token
           );
@@ -108,8 +108,8 @@ const UpdateRemainderModal = ({
 
   const handleSelectChange = (selectedOption: any) => {
     CREATE_REMINDER_STATUS.map((option) => {
-      if (option.value === selectedOption.value) {
-        setSelected(option.value);
+      if (option?.value === selectedOption?.value) {
+        setSelected(option?.value);
       }
     });
   };
@@ -150,18 +150,18 @@ const UpdateRemainderModal = ({
           id='title'
           name='title'
           htmlFor='title'
-          errorMessage={formErrors.title}
-          defaultValue={formData.title}
-          className={`${formErrors.title && 'border-red-500 shadow'}`}
+          errorMessage={formErrors?.title}
+          defaultValue={formData?.title}
+          className={`${formErrors?.title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
 
         <div className='w-full mt-[4px] date-picker'>
           <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
             {'Date & Time'}
-            {formErrors.reminder_time && (
+            {formErrors?.reminder_time && (
               <span className='text-red-500 relative ml-1'>
-                {formErrors.reminder_time}
+                {formErrors?.reminder_time}
               </span>
             )}
           </label>
@@ -169,7 +169,7 @@ const UpdateRemainderModal = ({
           <div className='relative'>
             <Datetime
               onChange={getDate}
-              initialValue={formData.reminder_time}
+              initialValue={formData?.reminder_time}
               inputProps={inputProps}
             />
             <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
@@ -187,7 +187,7 @@ const UpdateRemainderModal = ({
             options={CREATE_REMINDER_STATUS}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
             defaultValue={CREATE_REMINDER_STATUS.filter(
-              (item) => item.value === formData.status
+              (item) => item?.value === formData?.status
             )}
             styles={{
               control: (baseStyles) => ({
@@ -207,10 +207,10 @@ const UpdateRemainderModal = ({
             label='Notes'
             placeholder='Notes Here'
             name='notes'
-            defaultValue={formData.notes}
+            defaultValue={formData?.notes}
             onChange={handleInputChange}
-            errorMessage={formErrors.notes}
-            className={`h-[84px] ${formErrors.notes && 'border-red-500 shadow'}`}
+            errorMessage={formErrors?.notes}
+            className={`h-[84px] ${formErrors?.notes && 'border-red-500 shadow'}`}
           />
         </div>
 
