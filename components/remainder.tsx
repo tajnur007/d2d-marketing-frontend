@@ -14,6 +14,7 @@ import { UPDATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import { EditIcon } from '@/assets/icons';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import { ReminderService } from '@/services/reminder-services';
+import ConfirmationModal from './confirmation-modal';
 
 const Remainder = ({
   remainder,
@@ -23,21 +24,15 @@ const Remainder = ({
   setIsUpdated,
 }: RemainderProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<RemainderType>(remainder);
   const [formErrors, setFormErrors] =
     useState<UpdateRemainderType>(UPDATE_REMINDER_ITEMS);
 
   const deleteRemainder = async (id: number) => {
-    const Service = new ReminderService();
-    const res = await Service.deleteReminder(id, token);
-
-    if (res?.status === 202) {
-      toast.success('Successfully deleted!');
-      Service.getAllRemindersData(token, setRemainders);
-    } else {
-      toast.error('Failed to delete!');
-    }
+    setIsModalOpen(true);
   };
 
   return (
@@ -57,6 +52,14 @@ const Remainder = ({
       <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
         {remainder?.status}
       </button>
+      <ConfirmationModal
+        modalIsOpen={isModalOpen}
+        setModalIsOpen={setIsModalOpen}
+        setRemainders={setRemainders}
+        data={remainder}
+        token={token}
+      />
+
       <UpdateRemainderModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
