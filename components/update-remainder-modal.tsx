@@ -43,12 +43,6 @@ const UpdateRemainderModal = ({
     }`,
   };
 
-  useEffect(() => {
-    setFormData((prev: any) => {
-      return { ...prev, Status: selected };
-    });
-  }, [selected, formErrors, setFormData]);
-
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
 
@@ -63,20 +57,19 @@ const UpdateRemainderModal = ({
 
   const submitData = async () => {
     try {
-      console.log('button clicked');
+      console.log('button clicked', formData);
       const newFormErrors: any = {};
 
       for (let field in formData) {
-        if (field === 'Status') continue;
-        else if (formData[field as keyof typeof formData] === '') {
+        if (formData[field as keyof typeof formData] === '') {
           newFormErrors[field] = `(${field} is required)`;
         }
       }
 
       setFormErrors(newFormErrors);
-      console.log(newFormErrors);
+      console.log(formErrors);
 
-      if (Object.keys(formErrors).length === 0) {
+      if (Object.keys(newFormErrors).length === 0) {
         console.log('button clicked 1');
         const payloadObj = {
           title: formData?.title,
@@ -85,7 +78,7 @@ const UpdateRemainderModal = ({
           company_id: formData?.company_id,
           reminder_time: formData?.reminder_time,
           notes: formData?.notes,
-          status: selected,
+          status: selected == '' ? formData?.status : selected,
         };
 
         if (token) {
