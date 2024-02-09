@@ -111,24 +111,24 @@ const EmployeeListPage = () => {
   return (
     <>
       <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
-        <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
+        <div className='md:py-6 pl-4 md:pl-8 h-[96px] sticky top-0 bg-white z-10 p-4 md:p-6 rounded-xl'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
-              <p className='font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
+              <p className='font-semibold text-[16px] md:text-[18px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
                 Employee List
               </p>
             </div>
-            <div className='flex flex-row'>
+            <div className='flex flex-row items-center'>
               <form>
                 <div className='relative'>
-                  <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
+                  <div className='absolute inset-y-0 start-0 flex items-center ps-2 md:ps-3'>
                     <SearchIcon />
                   </div>
-                  <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
+                  <div className='w-full md:w-[563px] h-[48px] m-0 pl-2 md:pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                     <input
                       type='search'
                       id='default-search'
-                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium ml-3'
+                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] md:text-[16px] font-medium'
                       value={searchTerm}
                       onChange={handleSearchChange}
                     />
@@ -138,12 +138,12 @@ const EmployeeListPage = () => {
               <div onClick={handleNewEmployeeButtonClick}>
                 <button
                   type='button'
-                  className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
+                  className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-[14px] md:text-sm p-2 md:p-3 text-center mx-2 md:mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
                   <div className='flex justify-between items-center'>
                     <div className='mr-2'>
-                      <Image src={plusImage} alt='' />
+                      <Image src={plusImage} alt='' width={20} height={20} />
                     </div>
-                    <div className='font-medium text-[14px] leading-[normal] tracking-[0] whitespace-nowrap'>
+                    <div className='font-medium text-[14px] md:text-[16px] leading-[normal] tracking-[0] whitespace-nowrap'>
                       New Employee
                     </div>
                   </div>
@@ -156,9 +156,9 @@ const EmployeeListPage = () => {
           <Loader />
         ) : (
           <div
-            className='h-[calc(100%-125px)] mb-6 overflow-y-auto overflow-x-hidden tiny-scrollbar'
+            className='h-[calc(100vh-125px)] mb-6 overflow-y-auto overflow-x-hidden tiny-scrollbar'
             onScroll={handleScroll}>
-            <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
+            <div className='w-full px-4 md:px-8 whitespace-nowrap font-medium text-[14px] md:text-[16px] leading-[normal]'>
               {filteredEmployeeList?.map((item, index) => {
                 const firstChar = item?.name?.charAt(0).toUpperCase();
                 let isFirstChar = false;
