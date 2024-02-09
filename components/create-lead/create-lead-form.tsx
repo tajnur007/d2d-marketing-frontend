@@ -129,7 +129,7 @@ const CreateLeadForm: React.FC = () => {
           if (res.status === 201) {
             setFormData(FORM_ITEMS);
             toast.success('Create lead successfully.');
-            router.push(PAGE_ROUTES.Dashboard);
+            router.push(PAGE_ROUTES.Leads);
           }
         } else {
           toast.error('Something went wrong.');
@@ -261,7 +261,7 @@ const CreateLeadForm: React.FC = () => {
       <div className='flex justify-end  mt-5 gap-5 items-end'>
         <Button
           onClick={submitData}
-          disabled={images.length === 0 || pending === true}
+          disabled={pending === true}
           className={`w-[193px] rounded-[10px] h-[60px]`}>
           Create
         </Button>
