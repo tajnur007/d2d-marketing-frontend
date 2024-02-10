@@ -12,7 +12,7 @@ import EmailSent from './email-sent';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
-  const [emailSubmitted, setEmailSubmitted] = useState(true); //! true For Testing
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
