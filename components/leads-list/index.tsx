@@ -47,10 +47,17 @@ function LeadsList() {
       const LeadServices = new LeadService();
       const UserServices = new UserService();
       UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
-      LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
+      LeadServices.getCreatedByData(setCreatedByOptions, token);
     }
-  }, [token, setExecutivesOption, setCreatedByOptions, setLeadsData, setIsLoading, leadRefresh]);
+  }, [
+    token,
+    setExecutivesOption,
+    setCreatedByOptions,
+    setLeadsData,
+    setIsLoading,
+    leadRefresh,
+  ]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
