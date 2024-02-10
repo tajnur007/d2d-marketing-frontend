@@ -184,15 +184,15 @@ export const UPDATE_LEAD_PAYLOAD: UpdateLeadPayload = {
     reference: '',
     meeting_notes: '',
   },
-  reminder: [
-    {
-      title: '',
-      user_id: 0,
-      reminder_time: '',
-      notes: '',
-      status: '',
-    },
-  ],
+  // reminder: [
+  //   {
+  //     title: '',
+  //     user_id: 0,
+  //     reminder_time: '',
+  //     notes: '',
+  //     status: '',
+  //   },
+  // ],
   image_infos: [
     {
       image_name: '',
