@@ -38,30 +38,23 @@ function LeadsList() {
 
   const router = useRouter();
 
-  const handleCreateLeadButtonClick = () => {
-    router.push(PAGE_ROUTES.LeadCreate);
-  };
-
   useEffect(() => {
     if (token) {
       const LeadServices = new LeadService();
       const UserServices = new UserService();
       UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
-      LeadServices.getCreatedByData(setCreatedByOptions, token);
+      LeadServices.getCreatedByData(setCreatedByOptions, token, leadsData);
     }
-  }, [
-    token,
-    setExecutivesOption,
-    setCreatedByOptions,
-    setLeadsData,
-    setIsLoading,
-    leadRefresh,
-  ]);
+  }, [token]);
+
+  const handleCreateLeadButtonClick = () => {
+    router.push(PAGE_ROUTES.LeadCreate);
+  };
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
-      const newFilteredData = leadsData.Data?.filter((data: LeadListType) => {
+      const newFilteredData = leadsData?.Data?.filter((data: LeadListType) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
       setSearchData(newFilteredData);
