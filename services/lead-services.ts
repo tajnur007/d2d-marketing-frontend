@@ -98,7 +98,7 @@ export class LeadService {
   };
 
   //* Service to get data of whom who created the lead
-  public getCreatedByData = async (setCreatedByOptions: any, token: string, leadsData: any) => {
+  public getCreatedByData = async (setCreatedByOptions: any, leadsData: any) => {
     try {
       //const response = await this.getLeads(token);
       const data = leadsData?.Data;
