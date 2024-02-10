@@ -190,7 +190,7 @@ const SettingsPage = () => {
             </div>
           ) : (
             <div>
-                <div className='flex mt-2 ml-6 mb-5 flex-col md:flex-row'>
+                <div className='flex mt-2 ml-6 mb-5 md:flex-row'>
                   <div className='flex items-center w-20 mt-[8px] md:mt-0'>
                   <Image
                     src={profileImageSrc || profileImage}
