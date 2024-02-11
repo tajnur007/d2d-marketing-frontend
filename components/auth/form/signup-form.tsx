@@ -179,7 +179,7 @@ const SignupForm = () => {
                 />
                 <p
                   className={`absolute right-6 cursor-pointer ${
-                    formErrors.Password ? 'top-[55px]' : 'top-[40px]'
+                    formErrors.Password ? 'top-[50px]' : 'top-[34px]'
                   }`}
                   onClick={handlePasswordVisibilityToggle}>
                   {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
@@ -205,7 +205,7 @@ const SignupForm = () => {
                 />
                 <p
                   className={`absolute right-6 cursor-pointer ${
-                    formErrors.ConfirmPassword ? 'top-[55px]' : 'top-[40px]'
+                    formErrors.ConfirmPassword ? 'top-[50px]' : 'top-[34px]'
                   }`}
                   onClick={handlePasswordVisibilityToggle}>
                   {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
