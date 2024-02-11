@@ -495,9 +495,9 @@ export interface EmployeeOptionsProps {
 }
 
 export interface RemainderProps {
-  remainder: RemainderType;
+  reminder: RemainderType;
   token: string;
-  setRemainders: (item: any) => void;
+  setReminders: (item: any) => void;
   isUpdated: boolean;
   setIsUpdated: (item: boolean) => void;
 }

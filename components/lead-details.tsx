@@ -5,7 +5,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import moment from 'moment';
-import Remainder from './remainder';
+import Reminder from './remainder';
 import CreateRemainderModal from './create-remainder-modal';
 import { Button } from './button';
 import { AssignDropdownSelect } from './assign-dropdown-select';
@@ -219,12 +219,12 @@ const LeadDetails = ({
           <div className='text-center'>No remainder found</div>
         ) : (
           <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
-            {reminders?.map((remainder: RemainderType) => (
-              <Remainder
-                key={remainder?.id}
-                remainder={remainder}
+            {reminders?.map((reminder: RemainderType) => (
+              <Reminder
+                key={reminder?.id}
+                reminder={reminder}
                 token={token}
-                setRemainders={setRemainders}
+                setReminders={setRemainders}
                 isUpdated={isUpdated}
                 setIsUpdated={setIsUpdated}
               />
