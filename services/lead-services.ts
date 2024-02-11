@@ -105,11 +105,11 @@ export class LeadService {
       const uniqueCreatedByValues: any[] = [];
       const encounteredValues = new Set<string>();
 
-      data.map((item: any) => {
+      data?.map((item: any) => {
         const createdBy = item.created_by;
         if (createdBy && !encounteredValues.has(createdBy)) {
           encounteredValues.add(createdBy);
-          const newItem = { ...item, value: item.created_by, label: item.created_by };
+          const newItem = { ...item, value: item?.created_by, label: item?.created_by };
           uniqueCreatedByValues.push(newItem);
         }
       });

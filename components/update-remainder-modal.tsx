@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
@@ -61,7 +61,6 @@ const UpdateRemainderModal = ({
   const submitData = async () => {
     try {
       const newFormErrors: any = {};
-
       for (let field in formData) {
         if (formData[field as keyof typeof formData] === '') {
           newFormErrors[field] = `(${field} is required)`;
@@ -72,17 +71,31 @@ const UpdateRemainderModal = ({
 
       if (Object.keys(newFormErrors).length === 0) {
         const payloadObj = {
+          id: formData.id,
           title: formData?.title,
           lead_id: formData?.lead_id,
           user_id: formData?.user_id,
           company_id: formData?.company_id,
-          reminder_time: formData?.reminder_time,
+          reminder_time: formData?.Date ? formData?.Date : formData?.reminder_time,
           notes: formData?.notes,
           status: selected == '' ? formData?.status : selected,
         };
-        console.log(remainder, payloadObj);
+        console.log('remainder: ', remainder);
+        console.log('payload:', payloadObj);
 
-        if (token) {
+        let changed = false;
+
+        for (let field in payloadObj) {
+          if (
+            payloadObj[field as keyof typeof payloadObj] !==
+            remainder[field as keyof typeof remainder]
+          ) {
+            console.log(payloadObj[field as keyof typeof payloadObj]);
+            changed = true;
+          }
+        }
+
+        if (token && changed) {
           const ReminderServices = new ReminderService();
           const response = await ReminderServices.updateRemainder(
             formData?.id,
@@ -114,6 +127,8 @@ const UpdateRemainderModal = ({
   };
 
   const closeModal = () => {
+    setSelected(remainder.status);
+    setFormData(remainder);
     setChange(false);
     setModalIsOpen(false);
   };
