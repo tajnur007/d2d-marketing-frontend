@@ -391,6 +391,7 @@ export interface FilterLeadsCardProps {
   onFilterData: (data: any) => void;
   filterIcon: boolean;
   setFilterIcon: React.Dispatch<React.SetStateAction<boolean>>;
+  closeTooltip: () => void;
 }
 
 export interface StatusCheckboxProps {
