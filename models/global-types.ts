@@ -125,6 +125,7 @@ export interface RemainderType {
   status?: string;
   title?: string;
   user_id?: number;
+  Date?: any;
 }
 
 export interface UpdateRemainderType {
@@ -517,7 +518,7 @@ export interface UpdateRemainderModalProps {
   formErrors: UpdateRemainderType;
   setFormErrors: (item: any) => void;
   selected: string;
-  setSelected: (item: string) => void;
+  setSelected: (item: any) => void;
   setIsUpdated: (item: boolean) => void;
   remainder: RemainderType;
 }

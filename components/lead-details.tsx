@@ -45,8 +45,6 @@ const LeadDetails = ({
   //@ts-ignore den
   const token: string = reminderData?.user?.access_token;
 
-  const [validImages, setValidImages] = useState<any[]>([]);
-
   const handleAddReminderButtonClick = () => {
     setModalIsOpen(true);
   };
