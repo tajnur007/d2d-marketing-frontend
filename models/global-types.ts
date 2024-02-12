@@ -202,6 +202,7 @@ export interface FormItems {
   Status?: string;
   Image?: [{ image_name: string; image_path: string }];
   AssignedTo?: string;
+  ExecutiveId?: number;
   location: MapLocation;
 }
 
@@ -248,7 +249,6 @@ export interface UpdateLeadPayload {
   longitude: number;
   meeting_status: string;
   point_of_contact: PointsOfContactType;
-  reminder: UpdateReminderType[];
   image_infos: ImageInfoType[];
 }
 

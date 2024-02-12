@@ -21,6 +21,7 @@ export const CustomSelect = ({
     setSelected(selectedOption.value);
     setIsBothSelectFieldNull(false);
   };
+  
   return (
     <div className='flex flex-col' ref={ref}>
       <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
@@ -55,14 +56,8 @@ export const CustomSelect = ({
             }),
           }}
           options={options}
-          defaultValue={
-            defaultValue
-              ? {
-                  value: defaultValue,
-                  label: defaultValue.charAt(0).toUpperCase() + defaultValue.slice(1),
-                }
-              : { value: '', label: 'Select' }
-          }
+          // defaultValue={options.find((option) => option.value === defaultValue)?.label}
+          placeholder={options.find((option) => option.value === defaultValue)?.label}
           onChange={handleChange}
         />
       </div>
