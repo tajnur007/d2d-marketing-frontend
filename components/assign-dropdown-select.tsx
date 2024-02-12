@@ -1,32 +1,67 @@
 'use client';
-import { useState, useContext } from 'react';
+import { LeadsContext } from '@/context/leads-context';
+import { TransferLeadPayload } from '@/models/global-types';
+import { TRANSFER_LEAD_PAYLOAD } from '@/utils/constants/common-constants';
+import { useContext, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { Button } from './button';
 import './dropdown-select.css';
 import TransferConfirmationModal from './transfer-confirmation-modal';
-import { LeadsContext } from '@/context/leads-context';
+import { toast } from 'react-toastify';
+import { LeadService } from '@/services/lead-services';
+import { useSession } from 'next-auth/react';
 
-export const AssignDropdownSelect = () => {
+export const AssignDropdownSelect = ({ leadData }: any) => {
   const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [selected, setSelected] = useState('');
+  const [selectedId, setSelectedId] = useState(0);
+  const [selectedName, setSelectedName] = useState('');
   const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
+  const [transferPayload, setTransferPayload] =
+    useState<TransferLeadPayload>(TRANSFER_LEAD_PAYLOAD);
+
+    const { data: sessionData } = useSession();
+    // @ts-ignore
+    const token = sessionData?.user?.access_token;
+    const LeadServices = new LeadService();
 
   const handleConfirm = () => {
     setShowConfirmationModal(true);
   };
 
-  const handleTransfer = () => {
-    // Perform transfer action with the selected value
-    console.log('Transfer confirmed for:', selected);
-    setShowConfirmationModal(false);
+  useEffect(() => {
+    setTransferPayload(() => {
+      return {
+        executive_id: selectedId || 0,
+        executive_name: selectedName || '',
+      };
+    });
+  }, [selectedId, selectedName]);
+
+  const handleTransfer = async() => {
+    try {
+      if (token) {
+        await LeadServices.transferLead(leadData.id, transferPayload, token);
+        toast.success(`Successfully lead transferred to ${selectedName}!`);
+        setShowConfirmationModal(false);
+      } else {
+        toast.error('Something went wrong.');
+        setShowConfirmationModal(true);
+        throw new Error('Token is missing.');
+      }
+    } catch (error) {
+      console.error('Error transferring lead:', error);
+      toast.error('Failed to transfer lead. Please try again.');
+      setShowConfirmationModal(true);
+    }
   };
 
   const handleChange = (selectedOption: any) => {
     {
       executivesOption.map((option: any) => {
         if (option.value === selectedOption.value) {
-          setSelected(option.value);
+          setSelectedName(option.value);
+          setSelectedId(option.id);
           setTransferButton(true);
         }
       });
@@ -56,7 +91,7 @@ export const AssignDropdownSelect = () => {
       <TransferConfirmationModal
         showConfirmationModal={showConfirmationModal}
         setShowConfirmationModal={setShowConfirmationModal}
-        selected={selected}
+        selected={selectedName}
         handleTransfer={handleTransfer}
       />
     </>

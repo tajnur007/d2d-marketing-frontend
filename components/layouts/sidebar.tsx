@@ -13,7 +13,7 @@ import 'reactjs-popup/dist/index.css';
 
 const Sidebar = ({ userRole }: { userRole: string | undefined }) => {
   const router = useRouter();
-  const currentPage = usePathname();
+  const currentPage = usePathname().split('/')[1];
 
   let sidebarItems = [...SIDEBAR_ITEMS];
   if (userRole === 'executive') {
@@ -21,7 +21,7 @@ const Sidebar = ({ userRole }: { userRole: string | undefined }) => {
     sidebarItems[2].position = 100;
   }
 
-  const currPosition = sidebarItems.find((item) => currentPage === item?.path);
+  const currPosition = sidebarItems.find((item) => '/' + currentPage === item?.path);
   const [selected, setSelected] = useState(currPosition?.position);
 
   const handleClick = (position: number, path: string) => {

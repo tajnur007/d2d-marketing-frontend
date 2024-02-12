@@ -47,7 +47,7 @@ const UpdateEmployeeModal = ({
       //@ts-ignore
       const token = data?.user?.access_token;
       const Services = new UserService();
-      if (token) {
+      if (token && modalIsOpen) {
         const resp = await Services.getManagerList(token);
         const data = resp?.data?.Data?.Data?.map((item: ManagerType) => {
           return { value: item?.name, label: item?.name };
@@ -56,7 +56,7 @@ const UpdateEmployeeModal = ({
       }
     };
     getData();
-  }, [data]);
+  }, [data, modalIsOpen]);
 
   useEffect(() => {
     if (employeeinfo.user_type === 'executive') {
@@ -151,6 +151,11 @@ const UpdateEmployeeModal = ({
   return (
     <div>
       <Modal
+        style={{
+          content: {
+            outline: 'none', // Remove browser focus border
+          },
+        }}
         className={
           'absolute w-[646px] h-auto -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
         }

@@ -178,7 +178,7 @@ const UpdateRemainderModal = ({
         <div className='w-full mt-[4px] date-picker'>
           <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
             {'Date & Time'}
-            {formErrors.reminder_time && (
+            {formErrors?.reminder_time && (
               <span className='text-red-500 relative ml-1'>
                 {formErrors?.reminder_time}
               </span>
