@@ -14,11 +14,13 @@ import {
 } from '@/utils/constants/common-constants';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import Dropzone from './multi-image-upload';
+import { LeadsContext } from '@/context/leads-context';
+import { UserService } from '@/services/user-services';
 
 const UpdateLeadForm = () => {
   const [statusSelected, setStatusSelected] = useState('');
@@ -31,29 +33,32 @@ const UpdateLeadForm = () => {
     lat: 22.04,
     lng: 30.0,
   });
-
   const [images, setImages] = useState([]);
   const [pending, setPending] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
 
-  const handlePendingChange = (isPending: boolean) => {
-    setPending(isPending);
-  };
-
-  const router = useRouter();
-
-  const { data: sessionData } = useSession();
+  const { data } = useSession();
   // @ts-ignore
-  const token = sessionData?.user?.access_token;
+  const token = data?.user?.access_token;
+  const router = useRouter();
   const LeadServices = new LeadService();
 
   const searchParams: any = useSearchParams();
-  const paramValue = searchParams.get('id');
+  const userId = searchParams.get('id');
+
+  useEffect(() => {
+    if (token) {
+      const UserServices = new UserService();
+      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
+    }
+  }, [token, setExecutivesOption]);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Make an API request to get user data with the ID equal to paramValue
-        const response = await LeadServices.getUserLead(paramValue, token);
+        // Make an API request to get user data with the ID equal to userId
+        const response = await LeadServices.getUserLead(userId, token);
         setSingleLeadData(response.data.Data);
       } catch (error) {
         console.error('Error fetching user lead:', error);
@@ -79,19 +84,14 @@ const UpdateLeadForm = () => {
           meeting_notes: singleLeadData?.point_of_contact?.meeting_notes || '',
           reference: singleLeadData?.point_of_contact?.reference || '',
         },
-        reminder: [
-          {
-            title: 'ab_update',
-            user_id: parseInt(paramValue),
-            reminder_time: '2023-03-20T15:51:05+07:00',
-            notes: 'new_update',
-            status: 'pending',
-          },
-        ],
         image_infos: images,
       };
     });
   }, [singleLeadData, images]);
+
+  const handlePendingChange = (isPending: boolean) => {
+    setPending(isPending);
+  };
 
   const handleSelectChange = (e: any) => {
     const { name, value } = e.target;
@@ -126,7 +126,7 @@ const UpdateLeadForm = () => {
 
     try {
       if (token) {
-        await LeadServices.updateLead(paramValue, updatePayload, token);
+        await LeadServices.updateLead(userId, updatePayload, token);
         toast.success('Lead updated successfully.');
         router.push(PAGE_ROUTES.Leads);
       } else {
@@ -158,7 +158,7 @@ const UpdateLeadForm = () => {
           <CustomSelect
             label='AssignedTo'
             setSelected={setAssignedToSelected}
-            options={ASSIGN_TO_NEW}
+            options={executivesOption}
             defaultValue={singleLeadData?.executive_name}
           />
         </div>
@@ -245,7 +245,7 @@ const UpdateLeadForm = () => {
       <div className='flex justify-end  mt-5 gap-5 items-end'>
         <Button
           onClick={updateData}
-          disabled={images.length === 0 || pending === true}
+          disabled={pending === true}
           className='w-[193px] rounded-[10px] h-[60px]'>
           Update
         </Button>

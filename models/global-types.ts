@@ -249,7 +249,6 @@ export interface UpdateLeadPayload {
   longitude: number;
   meeting_status: string;
   point_of_contact: PointsOfContactType;
-  reminder: UpdateReminderType[];
   image_infos: ImageInfoType[];
 }
 
