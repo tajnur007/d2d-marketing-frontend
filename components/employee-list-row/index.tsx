@@ -137,7 +137,6 @@ function EmployeeListRow({
           arrow={false}>
           {!modalIsOpen && (
             <EmployeeOptions
-              handleViewButton={handleViewButton}
               handleDeleteButton={() => handleDeleteButton(item.id)}
               handleEditButton={() => handleEditButton(item.id)}
             />

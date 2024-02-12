@@ -94,7 +94,7 @@ const LeadDetails = ({
     fetchData();
   }, [data]);
 
-  validImages.map((image) => console.log('Image Path:', image.image_path));
+  validImages.map((image) => console.log('Image Path:', image?.image_path));
 
   return (
     <div className='p-8 h-full overflow-y-auto no-scrollbar '>
