@@ -14,49 +14,62 @@ import { UPDATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import { EditIcon } from '@/assets/icons';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import { ReminderService } from '@/services/reminder-services';
+import ConfirmationModal from './confirmation-modal';
 
-const Remainder = ({
-  remainder,
+const Reminder = ({
+  reminder,
   token,
-  setRemainders,
+  setReminders,
   isUpdated,
   setIsUpdated,
 }: RemainderProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selected, setSelected] = useState('');
-  const [formData, setFormData] = useState<RemainderType>(remainder);
+  const [formData, setFormData] = useState<RemainderType>(reminder);
   const [formErrors, setFormErrors] =
     useState<UpdateRemainderType>(UPDATE_REMINDER_ITEMS);
 
-  const deleteRemainder = async (id: number) => {
-    const Service = new ReminderService();
-    const res = await Service.deleteReminder(id, token);
+  const deleteRemainder = async () => {
+    try {
+      const Service = new ReminderService();
+      const res = await Service.deleteReminder(reminder?.id, token);
 
-    if (res?.status === 202) {
-      toast.success('Successfully deleted!');
-      Service.getAllRemindersData(token, setRemainders);
-    } else {
-      toast.error('Failed to delete!');
+      if (res?.status === 202) {
+        toast.success(res.data.Message);
+        Service.getAllRemindersData(token, setReminders);
+      }
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err.response.data.message);
     }
+    setModalIsOpen(false);
   };
 
   return (
     <div className='rounded-lg p-4 bg-white'>
       <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
-        <span>{remainder?.title}</span>
-        <div onClick={() => deleteRemainder(remainder?.id)} className='cursor-pointer'>
+        <span>{reminder?.title}</span>
+        <div onClick={() => setIsModalOpen(true)} className='cursor-pointer'>
           <Image src={crossImage} alt='close' />
         </div>
       </p>
       <p className='text-[#8A8A8A] mb-[10px] flex justify-between items-center'>
-        {moment(remainder?.reminder_time).format('YYYY/MM/DD h:mma')}
+        {moment(reminder?.reminder_time).format('YYYY/MM/DD h:mma')}
         <div onClick={() => setModalIsOpen(true)}>
           <EditIcon />
         </div>
       </p>
       <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-        {remainder?.status}
+        {reminder?.status}
       </button>
+      <ConfirmationModal
+        modalIsOpen={isModalOpen}
+        setModalIsOpen={setIsModalOpen}
+        deleteItem={deleteRemainder}
+      />
+
       <UpdateRemainderModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
@@ -73,4 +86,4 @@ const Remainder = ({
   );
 };
 
-export default Remainder;
+export default Reminder;
