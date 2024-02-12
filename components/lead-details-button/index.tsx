@@ -36,12 +36,12 @@ const LeadDetailsButton = ({
 
   const handleViewButton = () => {
     setIsOpen(true);
-    leadDetailsRef.current.close();
+    leadDetailsRef?.current.close();
   };
 
   //! data.id pass in lead update page
   const handleEditButton = () => {
-    router.push(`${PAGE_ROUTES.LeadUpdate}?id=${data.id}`);
+    router.push(`${PAGE_ROUTES?.LeadUpdate}?id=${data?.id}`);
   };
   const handleDeleteButton = async () => {
     setModalIsOpen(true);
@@ -95,8 +95,8 @@ const LeadDetailsButton = ({
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         data={data}
-        leadRefresh={leadRefresh}
-        setLeadRefresh={setLeadRefresh}
+        isRefreshData={leadRefresh}
+        setIsRefreshData={setLeadRefresh}
       />
     </>
   );

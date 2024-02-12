@@ -83,11 +83,11 @@ const CreateRemainderModal = ({
 
       if (Object.keys(newFormErrors).length === 0) {
         const payloadObj = {
-          title: formData.Title,
-          lead_id: leadsData.id,
-          reminder_time: formData.Date,
-          notes: formData.Note,
-          status: formData.Status,
+          title: formData?.Title,
+          lead_id: leadsData?.id,
+          reminder_time: formData?.Date,
+          notes: formData?.Note,
+          status: formData?.Status,
         };
 
         if (token) {
@@ -111,13 +111,14 @@ const CreateRemainderModal = ({
 
   const handleSelectChange = (selectedOption: any) => {
     CREATE_REMINDER_STATUS.map((option) => {
-      if (option.value === selectedOption.value) {
-        setSelected(option.value);
+      if (option?.value === selectedOption?.value) {
+        setSelected(option?.value);
       }
     });
   };
 
   const closeModal = () => {
+    setFormData(CREATE_REMINDER_ITEMS);
     setModalIsOpen(false);
   };
 
@@ -153,8 +154,8 @@ const CreateRemainderModal = ({
           id='title'
           name='Title'
           htmlFor='title'
-          errorMessage={formErrors.Title}
-          className={`${formErrors.Title && 'border-red-500 shadow'}`}
+          errorMessage={formErrors?.Title}
+          className={`${formErrors?.Title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
 
@@ -174,7 +175,7 @@ const CreateRemainderModal = ({
           <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
             {'Date & Time'}
             {formErrors.Date && (
-              <span className='text-red-500 relative ml-1'>{formErrors.Date}</span>
+              <span className='text-red-500 relative ml-1'>{formErrors?.Date}</span>
             )}
           </label>
 
@@ -217,8 +218,8 @@ const CreateRemainderModal = ({
             placeholder='Notes'
             name='Note'
             onChange={handleInputChange}
-            errorMessage={formErrors.Note}
-            className={`h-[84px] ${formErrors.Note && 'border-red-500 shadow'}`}
+            errorMessage={formErrors?.Note}
+            className={`h-[84px] ${formErrors?.Note && 'border-red-500 shadow'}`}
           />
         </div>
 

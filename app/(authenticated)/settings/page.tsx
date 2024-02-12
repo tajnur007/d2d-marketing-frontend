@@ -190,8 +190,8 @@ const SettingsPage = () => {
             </div>
           ) : (
             <div>
-              <div className='flex mt-2 ml-6 mb-5'>
-                <div className='flex items-center w-20 mt-[8px]'>
+                <div className='flex mt-2 ml-6 mb-5 md:flex-row'>
+                  <div className='flex items-center w-20 mt-[8px] md:mt-0'>
                   <Image
                     src={profileImageSrc || profileImage}
                     alt='Profile Picture'
@@ -200,7 +200,7 @@ const SettingsPage = () => {
                     className='rounded-full w-20 h-20 flex-shrink-0'
                   />
                 </div>
-                <div className='mt-9 ml-4 cursor-pointer' onClick={handleEditIconClick}>
+                  <div className='mt-9 md:mt-9 ml-4 cursor-pointer' onClick={handleEditIconClick}>
                   <EditIcon />
                 </div>
                 <input

@@ -36,14 +36,16 @@ const ResetPasswordPage = () => {
     }
   }, [searchParams]);
 
-  console.log("resetData", resetData);
-  
+  console.log('resetData', resetData);
 
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>
       <NoAccount signupPage={false} />
       {newPassword ? (
-        <NewPassword resetData={resetData} handleNewPassword={() => setNewPassword(false)} />
+        <NewPassword
+          resetData={resetData}
+          handleNewPassword={() => setNewPassword(false)}
+        />
       ) : (
         <PasswordChanged />
       )}

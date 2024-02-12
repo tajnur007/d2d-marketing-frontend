@@ -5,7 +5,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import moment from 'moment';
-import Remainder from './remainder';
+import Reminder from './remainder';
 import CreateRemainderModal from './create-remainder-modal';
 import { Button } from './button';
 import { AssignDropdownSelect } from './assign-dropdown-select';
@@ -46,8 +46,6 @@ const LeadDetails = ({
   //@ts-ignore den
   const token: string = reminderData?.user?.access_token;
 
-  const [validImages, setValidImages] = useState<any[]>([]);
-
   const handleAddReminderButtonClick = () => {
     setModalIsOpen(true);
   };
@@ -66,7 +64,7 @@ const LeadDetails = ({
   // To get the latest remainder after creating new remainder
   useEffect(() => {
     const Service = new ReminderService();
-    isCreated && Service.getAllRemindersData(token, setRemainders);
+    (isCreated || isUpdated) && Service.getAllRemindersData(token, setRemainders);
     setIsCreated(false);
     setIsUpdated(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,26 +73,6 @@ const LeadDetails = ({
   useEffect(() => {
     setIsOpen(false);
   }, [closeDrawer, setIsOpen]);
-
-  //! IMAGE URL VALIDATION
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const validatedImages = await Promise.all(
-          data?.image_info_json?.map(async (image: any) => {
-            const isValid = await validateImageUrl(image?.image_path);
-            return isValid ? image : null;
-          }) ?? []
-        );
-        setValidImages(validatedImages.filter((image) => image !== null));
-      } catch (error) {
-        console.error('Error fetching and validating images:', error);
-      }
-    };
-    fetchData();
-  }, [data]);
-
-  validImages.map((image) => console.log('Image Path:', image.image_path));
 
   return (
     <div className='p-8 h-full overflow-y-auto no-scrollbar '>
@@ -138,7 +116,7 @@ const LeadDetails = ({
             {moment(data?.created_at).format('ddd DD MMM, YYYY hh:mm A')}
           </div>
         </div>
-        <AssignDropdownSelect />
+        <AssignDropdownSelect leadData={data} />
       </div>
 
       <div className='poc border-[#EDEBF4] bg-[#F8F8F8] p-4 rounded-lg mt-4 whitespace-normal'>
@@ -197,7 +175,7 @@ const LeadDetails = ({
           Image
         </h4>
         <div className='flex flex-wrap gap-2 mx-auto my-5'>
-          {validImages.map((image) => (
+          {data?.image_info_json.map((image: any) => (
             <div key={image?.image_name}>
               <Image
                 src={`${image?.image_path}`}
@@ -219,12 +197,12 @@ const LeadDetails = ({
           <div className='text-center'>No remainder found</div>
         ) : (
           <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
-            {reminders?.map((remainder: RemainderType) => (
-              <Remainder
-                key={remainder?.id}
-                remainder={remainder}
+            {reminders?.map((reminder: RemainderType) => (
+              <Reminder
+                key={reminder?.id}
+                reminder={reminder}
                 token={token}
-                setRemainders={setRemainders}
+                setReminders={setRemainders}
                 isUpdated={isUpdated}
                 setIsUpdated={setIsUpdated}
               />
