@@ -108,7 +108,7 @@ const SigninForm = () => {
                 onChange={handlePasswordChange}
               />
               <p
-                className='absolute top-[52px] right-6 cursor-pointer'
+                className='absolute top-[46px] right-6 cursor-pointer'
                 onClick={handlePasswordVisibilityToggle}>
                 {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
               </p>
