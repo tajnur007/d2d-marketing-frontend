@@ -97,6 +97,7 @@ const EmployeeListPage = () => {
   };
 
   const handleNewEmployeeButtonClick = () => {
+    setIsRefreshData(false);
     setModalIsOpen(true);
   };
 
@@ -104,7 +105,7 @@ const EmployeeListPage = () => {
     employeeActionRef.current.close();
   };
 
-  const filteredEmployeeList = employeeInfo.filter((employee) =>
+  const filteredEmployeeList = employeeInfo?.filter((employee) =>
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -120,15 +121,15 @@ const EmployeeListPage = () => {
             </div>
             <div className='flex flex-row'>
               <form>
-                <div className='relative'>
-                  <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
+                <div className='relative ml-6'>
+                  <div className='absolute inset-y-0 start-0 flex items-center ps-2 md:ps-3'>
                     <SearchIcon />
                   </div>
-                  <div className='w-[563px] h-[48px] m-0 pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
+                  <div className='w-[72%] md:w-[350px] lg:w-[563px] h-[48px] m-0 pl-2 md:pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                     <input
                       type='search'
                       id='default-search'
-                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] font-medium ml-3'
+                      className='w-full h-full rounded-[14px] outline-none p-[12px] placeholder-[#2B3674] text-[14px] md:text-[16px] font-medium'
                       value={searchTerm}
                       onChange={handleSearchChange}
                     />
@@ -141,9 +142,9 @@ const EmployeeListPage = () => {
                   className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
                   <div className='flex justify-between items-center'>
                     <div className='mr-2'>
-                      <Image src={plusImage} alt='' />
+                      <Image src={plusImage} alt=''/>
                     </div>
-                    <div className='font-medium text-[14px] leading-[normal] tracking-[0] whitespace-nowrap'>
+                    <div className='font-medium text-[14px] md:text-[16px] leading-[normal] tracking-[0] whitespace-nowrap'>
                       New Employee
                     </div>
                   </div>
@@ -156,9 +157,9 @@ const EmployeeListPage = () => {
           <Loader />
         ) : (
           <div
-            className='h-[calc(100%-125px)] mb-6 overflow-y-auto overflow-x-hidden tiny-scrollbar'
+            className='h-[calc(100%-125px)] mb-6 overflow-y-auto overflow-x-hidden tiny-scrollbar ml-4'
             onScroll={handleScroll}>
-            <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
+            <div className='w-full px-8 md:px-4 whitespace-nowrap font-medium text-[16px] md:text-[12px] leading-[normal]'>
               {filteredEmployeeList?.map((item, index) => {
                 const firstChar = item?.name?.charAt(0).toUpperCase();
                 let isFirstChar = false;
@@ -201,6 +202,7 @@ const EmployeeListPage = () => {
         setModalIsOpen={setModalIsOpen}
         setIsExecutive={setIsExecutive}
         formData={formData}
+        setIsRefreshData={setIsRefreshData}
         setFormData={setFormData}
         formErrors={formErrors}
         setFormErrors={setFormErrors}

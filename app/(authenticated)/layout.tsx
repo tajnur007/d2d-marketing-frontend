@@ -25,6 +25,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
     if (path.includes('/employee-list') && userRole === 'executive') {
       redirect(PAGE_ROUTES.Dashboard);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path, session, userRole]);
 

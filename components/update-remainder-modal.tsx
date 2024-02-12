@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
@@ -31,23 +31,19 @@ const UpdateRemainderModal = ({
   selected,
   setSelected = () => {},
   setIsUpdated = () => {},
+  remainder,
 }: UpdateRemainderModalProps) => {
   const { data } = useSession();
   //@ts-ignore
   const token = data?.user?.access_token;
+  const [change, setChange] = useState(true);
 
   const inputProps = {
-    placeholder: moment(formData.reminder_time).format('ddd DD MMM, YYYY hh:mm A'),
+    placeholder: moment(formData?.reminder_time).format('ddd DD MMM, YYYY hh:mm A'),
     className: `w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase text-[#B9C1D9] date-picker-placeholder ${
       formErrors.notes && 'border-red-500'
     }`,
   };
-
-  useEffect(() => {
-    setFormData((prev: any) => {
-      return { ...prev, Status: selected };
-    });
-  }, [selected, formErrors, setFormData]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -59,62 +55,85 @@ const UpdateRemainderModal = ({
     setFormErrors((prev: any) => {
       return { ...prev, [name]: '' };
     });
+    setChange(false);
   };
 
-  const submitData = async () => {
-    try {
-      const newFormErrors: any = {};
+  const updateData = async () => {
+    const newFormErrors: any = {};
+    for (let field in formData) {
+      if (formData[field as keyof typeof formData] === '') {
+        newFormErrors[field] = `(${field} is required)`;
+      }
+    }
 
-      for (let field in formData) {
-        if (formData[field as keyof typeof formData] === '') {
-          newFormErrors[field] = `(${field} is required)`;
+    setFormErrors(newFormErrors);
+
+    if (Object.keys(newFormErrors).length === 0) {
+      const payloadObj = {
+        id: formData.id,
+        title: formData?.title,
+        lead_id: formData?.lead_id,
+        user_id: formData?.user_id,
+        company_id: formData?.company_id,
+        reminder_time: formData?.Date ? formData?.Date : formData?.reminder_time,
+        notes: formData?.notes,
+        status: selected == '' ? formData?.status : selected,
+      };
+      console.log('remainder: ', remainder);
+      console.log('payload:', payloadObj);
+
+      let updated = false;
+
+      for (let field in payloadObj) {
+        if (
+          payloadObj[field as keyof typeof payloadObj] !==
+          remainder[field as keyof typeof remainder]
+        ) {
+          console.log(payloadObj[field as keyof typeof payloadObj]);
+          updated = true;
         }
       }
 
-      setFormErrors(newFormErrors);
-
-      if (Object.keys(newFormErrors).length === 0) {
-        const payloadObj = {
-          title: formData.title,
-          lead_id: formData.lead_id,
-          user_id: formData.user_id,
-          company_id: formData.company_id,
-          reminder_time: formData.reminder_time,
-          notes: formData.notes,
-          status: selected,
-        };
-
-        if (token) {
-          const ReminderServices = new ReminderService();
-          const response = await ReminderServices.updateRemainder(
-            formData.id,
-            payloadObj,
-            token
-          );
-          if (response.status === 202) {
-            setModalIsOpen(false);
-            setIsUpdated(true);
-            toast.success('Remainder updated successfully.');
+      if (!updated) {
+        toast.error('No field is updated.');
+      } else {
+        try {
+          if (token) {
+            const ReminderServices = new ReminderService();
+            const response = await ReminderServices.updateRemainder(
+              formData?.id,
+              payloadObj,
+              token
+            );
+            if (response.status === 202) {
+              setModalIsOpen(false);
+              setIsUpdated(true);
+              toast.success('Remainder updated successfully.');
+            }
+          } else {
+            toast.error('failed to update remainder.');
           }
-        } else {
-          toast.error('failed to update remainder.');
+        } catch (error) {
+          toast.error('Something went wrong.');
+          console.log('Error in update-remainder-modal: ', error);
         }
       }
-    } catch (error) {
-      toast.error('Something went wrong.');
-      console.log('Error in update-remainder-modal: ', error);
     }
   };
 
   const handleSelectChange = (selectedOption: any) => {
-    CREATE_REMINDER_STATUS.map((option) => {
-      if (option.value === selectedOption.value) {
+    setChange(false);
+    CREATE_REMINDER_STATUS?.map((option) => {
+      if (option?.value === selectedOption?.value) {
         setSelected(option.value);
       }
     });
   };
 
   const closeModal = () => {
+    setSelected(remainder.status);
+    setFormData(remainder);
+    setChange(false);
     setModalIsOpen(false);
   };
 
@@ -150,18 +169,18 @@ const UpdateRemainderModal = ({
           id='title'
           name='title'
           htmlFor='title'
-          errorMessage={formErrors.title}
-          defaultValue={formData.title}
-          className={`${formErrors.title && 'border-red-500 shadow'}`}
+          errorMessage={formErrors?.title}
+          defaultValue={formData?.title}
+          className={`${formErrors?.title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
 
         <div className='w-full mt-[4px] date-picker'>
           <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
             {'Date & Time'}
-            {formErrors.reminder_time && (
+            {formErrors?.reminder_time && (
               <span className='text-red-500 relative ml-1'>
-                {formErrors.reminder_time}
+                {formErrors?.reminder_time}
               </span>
             )}
           </label>
@@ -169,7 +188,9 @@ const UpdateRemainderModal = ({
           <div className='relative'>
             <Datetime
               onChange={getDate}
-              initialValue={formData.reminder_time}
+              initialValue={moment(formData?.reminder_time).format(
+                'ddd DD MMM, YYYY hh:mm A'
+              )}
               inputProps={inputProps}
             />
             <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
@@ -186,8 +207,8 @@ const UpdateRemainderModal = ({
           <Select
             options={CREATE_REMINDER_STATUS}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
-            defaultValue={CREATE_REMINDER_STATUS.filter(
-              (item) => item.value === formData.status
+            defaultValue={CREATE_REMINDER_STATUS?.filter(
+              (item) => item?.value === formData?.status
             )}
             styles={{
               control: (baseStyles) => ({
@@ -207,16 +228,17 @@ const UpdateRemainderModal = ({
             label='Notes'
             placeholder='Notes Here'
             name='notes'
-            defaultValue={formData.notes}
+            defaultValue={formData?.notes}
             onChange={handleInputChange}
-            errorMessage={formErrors.notes}
-            className={`h-[84px] ${formErrors.notes && 'border-red-500 shadow'}`}
+            errorMessage={formErrors?.notes}
+            className={`h-[84px] ${formErrors?.notes && 'border-red-500 shadow'}`}
           />
         </div>
 
         <div className='mt-[8px]'>
           <Button
-            onClick={submitData}
+            onClick={updateData}
+            disabled={change}
             className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
             Update
           </Button>

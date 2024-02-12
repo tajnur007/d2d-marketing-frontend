@@ -47,7 +47,7 @@ const UpdateEmployeeModal = ({
       //@ts-ignore
       const token = data?.user?.access_token;
       const Services = new UserService();
-      if (token) {
+      if (token && modalIsOpen) {
         const resp = await Services.getManagerList(token);
         const data = resp?.data?.Data?.Data?.map((item: ManagerType) => {
           return { value: item?.name, label: item?.name };
@@ -56,7 +56,7 @@ const UpdateEmployeeModal = ({
       }
     };
     getData();
-  }, [data]);
+  }, [data, modalIsOpen]);
 
   useEffect(() => {
     if (employeeinfo.user_type === 'executive') {

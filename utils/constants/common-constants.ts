@@ -16,6 +16,7 @@ import {
   UpdateLeadPayload,
   statusColor,
   UpdateEmployeePayload,
+  TransferLeadPayload,
 } from '@/models/global-types';
 import {
   BookIcon,
@@ -199,6 +200,11 @@ export const UPDATE_LEAD_PAYLOAD: UpdateLeadPayload = {
       image_path: '',
     },
   ],
+};
+
+export const TRANSFER_LEAD_PAYLOAD: TransferLeadPayload = {
+  executive_id: 0,
+  executive_name: '',
 };
 
 export const UPDATE_EMPLOYEE_PAYLOAD: UpdateEmployeePayload = {
