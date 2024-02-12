@@ -44,7 +44,7 @@ function LeadsList() {
       const UserServices = new UserService();
       UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
-      LeadServices.getCreatedByData(setCreatedByOptions, leadsData);
+      LeadServices.getCreatedByData(setCreatedByOptions, token);
     }
   }, [token]);
 

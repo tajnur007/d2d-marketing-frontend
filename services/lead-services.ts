@@ -98,10 +98,11 @@ export class LeadService {
   };
 
   //* Service to get data of whom who created the lead
-  public getCreatedByData = async (setCreatedByOptions: any, leadsData: any) => {
+  public getCreatedByData = async (setCreatedByOptions: any, token: string) => {
     try {
-      //const response = await this.getLeads(token);
-      const data = leadsData?.Data;
+      const response = await this.getLeads(token);
+      console.log(response);
+      const data =  response?.data?.Data.Data;
       const uniqueCreatedByValues: any[] = [];
       const encounteredValues = new Set<string>();
 
@@ -180,7 +181,7 @@ export class LeadService {
     try {
       setIsLoading(true);
       const response = await this.FilteredLeadsData(data, token);
-      const filteredLeads = response.data.Data.Data;
+      const filteredLeads = response?.data?.Data;
       console.log(filteredLeads);
       setLeadsData(filteredLeads);
       setIsLoading(false);
