@@ -30,7 +30,6 @@ export class ReminderService {
   //* Service to get all reminders data
   public getAllRemindersData = async (token: string, setRemainders: any) => {
     const res = await this.getAllReminder(token);
-    console.log(res);
     setRemainders(res?.data?.Data?.Data);
   };
 

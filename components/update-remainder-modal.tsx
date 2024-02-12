@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
@@ -31,10 +31,12 @@ const UpdateRemainderModal = ({
   selected,
   setSelected = () => {},
   setIsUpdated = () => {},
+  remainder,
 }: UpdateRemainderModalProps) => {
   const { data } = useSession();
   //@ts-ignore
   const token = data?.user?.access_token;
+  const [change, setChange] = useState(true);
 
   const inputProps = {
     placeholder: moment(formData?.reminder_time).format('ddd DD MMM, YYYY hh:mm A'),
@@ -42,12 +44,6 @@ const UpdateRemainderModal = ({
       formErrors.notes && 'border-red-500'
     }`,
   };
-
-  useEffect(() => {
-    setFormData((prev: any) => {
-      return { ...prev, Status: selected };
-    });
-  }, [selected, formErrors, setFormData]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -59,6 +55,7 @@ const UpdateRemainderModal = ({
     setFormErrors((prev: any) => {
       return { ...prev, [name]: '' };
     });
+    setChange(false);
   };
 
   const submitData = async () => {
@@ -81,8 +78,9 @@ const UpdateRemainderModal = ({
           company_id: formData?.company_id,
           reminder_time: formData?.reminder_time,
           notes: formData?.notes,
-          status: selected,
+          status: selected == '' ? formData?.status : selected,
         };
+        console.log(remainder, payloadObj);
 
         if (token) {
           const ReminderServices = new ReminderService();
@@ -107,14 +105,16 @@ const UpdateRemainderModal = ({
   };
 
   const handleSelectChange = (selectedOption: any) => {
-    CREATE_REMINDER_STATUS.map((option) => {
+    setChange(false);
+    CREATE_REMINDER_STATUS?.map((option) => {
       if (option?.value === selectedOption?.value) {
-        setSelected(option?.value);
+        setSelected(option.value);
       }
     });
   };
 
   const closeModal = () => {
+    setChange(false);
     setModalIsOpen(false);
   };
 
@@ -169,7 +169,9 @@ const UpdateRemainderModal = ({
           <div className='relative'>
             <Datetime
               onChange={getDate}
-              initialValue={formData?.reminder_time}
+              initialValue={moment(formData?.reminder_time).format(
+                'ddd DD MMM, YYYY hh:mm A'
+              )}
               inputProps={inputProps}
             />
             <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
@@ -186,7 +188,7 @@ const UpdateRemainderModal = ({
           <Select
             options={CREATE_REMINDER_STATUS}
             className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
-            defaultValue={CREATE_REMINDER_STATUS.filter(
+            defaultValue={CREATE_REMINDER_STATUS?.filter(
               (item) => item?.value === formData?.status
             )}
             styles={{
@@ -217,6 +219,7 @@ const UpdateRemainderModal = ({
         <div className='mt-[8px]'>
           <Button
             onClick={submitData}
+            disabled={change}
             className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
             Update
           </Button>

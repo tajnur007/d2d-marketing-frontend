@@ -519,4 +519,5 @@ export interface UpdateRemainderModalProps {
   selected: string;
   setSelected: (item: string) => void;
   setIsUpdated: (item: boolean) => void;
+  remainder: RemainderType;
 }

@@ -36,7 +36,7 @@ export class LeadService {
       const response = await this.getLeads(token);
       // console.log(response);
 
-      const data = response.data.Data.Data;
+      const data = response.data.Data;
       setLeadsData(data);
       setIsLoading(false);
     } catch (error) {

@@ -47,14 +47,21 @@ function LeadsList() {
       const LeadServices = new LeadService();
       const UserServices = new UserService();
       UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
-      LeadServices.getCreatedByData(setCreatedByOptions, token);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
+      LeadServices.getCreatedByData(setCreatedByOptions, token);
     }
-  }, [token, setExecutivesOption, setCreatedByOptions, setLeadsData, setIsLoading, leadRefresh]);
+  }, [
+    token,
+    setExecutivesOption,
+    setCreatedByOptions,
+    setLeadsData,
+    setIsLoading,
+    leadRefresh,
+  ]);
 
   useEffect(() => {
     if (keyPress && searchValue !== '') {
-      const newFilteredData = leadsData.filter((data: LeadListType) => {
+      const newFilteredData = leadsData.Data?.filter((data: LeadListType) => {
         return data.title.toLowerCase().includes(searchValue.toLowerCase());
       });
       setSearchData(newFilteredData);
@@ -86,7 +93,7 @@ function LeadsList() {
 
             <div className='flex items-center justify-center h-6 bg-[#D2FBE7] rounded-[17px] ms-2 p-2'>
               <p className='text-black font-semibold text-[16px]'>
-                {searchData?.length > 0 ? searchData?.length : leadsData?.length}
+                {searchData?.length > 0 ? searchData?.length : leadsData?.Count}
               </p>
             </div>
           </div>
@@ -122,7 +129,7 @@ function LeadsList() {
                     setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
                   />
                 ))
-              : leadsData?.map((item: LeadListType, index: number) => (
+              : leadsData.Data?.map((item: LeadListType, index: number) => (
                   <LeadRow
                     key={index}
                     item={item}

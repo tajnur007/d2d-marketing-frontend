@@ -80,6 +80,7 @@ const Reminder = ({
         selected={selected}
         setSelected={setSelected}
         setIsUpdated={setIsUpdated}
+        remainder={reminder}
       />
     </div>
   );
