@@ -98,10 +98,18 @@ const CreateLeadForm: React.FC = () => {
       }
 
       if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
+        executivesOption.map((option: any) => {
+          if (option.name === assignedToSelected) {
+            setFormData((prev) => {
+              return { ...prev, AssignedTo: option.name, ExecutiveId: option.id };
+            });
+          }
+        });
+
         //! Payload object
         const payloadObj = {
           title: formData?.Title,
-          // executive_id: 143,
+          executive_id: formData?.ExecutiveId,
           executive_name: formData?.AssignedTo,
           latitude: location?.lat,
           longitude: location?.lng,
@@ -117,8 +125,6 @@ const CreateLeadForm: React.FC = () => {
 
           image_infos: [...images],
         };
-
-        // console.log('payloadObj', payloadObj);
 
         // @ts-ignore
         const token = data?.user?.access_token;
