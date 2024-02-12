@@ -138,7 +138,7 @@ const LeadDetails = ({
             {moment(data?.created_at).format('ddd DD MMM, YYYY hh:mm A')}
           </div>
         </div>
-        <AssignDropdownSelect />
+        <AssignDropdownSelect leadData={data} />
       </div>
 
       <div className='poc border-[#EDEBF4] bg-[#F8F8F8] p-4 rounded-lg mt-4 whitespace-normal'>
