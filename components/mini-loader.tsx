@@ -1,10 +1,10 @@
 import React from 'react';
 import { InfinitySpin } from 'react-loader-spinner';
 
-const MiniLoader = () => {
+const MiniLoader = ({ size = '100', color = '#ffffff' }) => {
   return (
-    <div className='h-full w-full flex justify-center items-center'>
-      <InfinitySpin width='90' color='#ffffff' />
+    <div className='h-full w-full flex justify-center items-center ml-[-20px]'>
+      <InfinitySpin width={size} color={color} />
     </div>
   );
 };

@@ -25,7 +25,7 @@ const Reminder = ({
 }: RemainderProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<RemainderType>(reminder);
   const [formErrors, setFormErrors] =
@@ -33,6 +33,7 @@ const Reminder = ({
 
   const deleteRemainder = async () => {
     try {
+      setIsLoading(true);
       const Service = new ReminderService();
       const res = await Service.deleteReminder(reminder?.id, token);
 
@@ -44,6 +45,7 @@ const Reminder = ({
       console.log(err);
       toast.error(err.response.data.message);
     }
+    setIsLoading(true);
     setModalIsOpen(false);
   };
 
@@ -68,6 +70,7 @@ const Reminder = ({
         modalIsOpen={isModalOpen}
         setModalIsOpen={setIsModalOpen}
         deleteItem={deleteRemainder}
+        isLoading={isLoading}
       />
 
       <UpdateRemainderModal
