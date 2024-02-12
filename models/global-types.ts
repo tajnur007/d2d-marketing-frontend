@@ -278,8 +278,7 @@ export interface SelectProps {
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
   defaultValue?: string;
-  isBothSelectFieldNull?: boolean;
-  setIsBothSelectFieldNull?: (item: boolean) => void;
+  errorMessage?: string;
 }
 
 export interface AssignSelectProps {

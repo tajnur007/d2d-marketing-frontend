@@ -27,7 +27,6 @@ const CreateLeadForm: React.FC = () => {
   const [images, setImages] = useState([]);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
-  const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
   const [pending, setPending] = useState<boolean>(false);
 
   const handlePendingChange = (isPending: boolean) => {
@@ -59,7 +58,18 @@ const CreateLeadForm: React.FC = () => {
     setFormData((prev) => {
       return { ...prev, Status: statusSelected, AssignedTo: assignedToSelected };
     });
-  }, [statusSelected, assignedToSelected, formErrors]);
+
+    if (statusSelected) {
+      setFormErrors((prev) => {
+        return { ...prev, Status: '' };
+      });
+    }
+    if (assignedToSelected) {
+      setFormErrors((prev) => {
+        return { ...prev, AssignedTo: '' };
+      });
+    }
+  }, [statusSelected, assignedToSelected]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -72,7 +82,7 @@ const CreateLeadForm: React.FC = () => {
       return { ...prev, [name]: '' };
     });
   };
-
+  console.log(images, formData);
   const submitData = async () => {
     setFormData((prev) => {
       return { ...prev, location };
@@ -83,21 +93,13 @@ const CreateLeadForm: React.FC = () => {
 
       for (let field in formData) {
         if (leadFormErrorCheck(formData, field)) {
-          console.log(leadFormErrorCheck(formData, field));
           newFormErrors[field] = leadFormErrorCheck(formData, field);
         }
       }
 
       setFormErrors(newFormErrors);
 
-      if (statusSelected === '' && assignedToSelected === '') {
-        setIsBothSelectFieldNull(true);
-        return;
-      } else {
-        setIsBothSelectFieldNull(false);
-      }
-
-      if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
+      if (Object.keys(newFormErrors).length === 0) {
         executivesOption.map((option: any) => {
           if (option.name === assignedToSelected) {
             setFormData((prev) => {
@@ -168,9 +170,8 @@ const CreateLeadForm: React.FC = () => {
             label='AssignedTo'
             setSelected={setAssignedToSelected}
             options={executivesOption}
-            className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
-            isBothSelectFieldNull={isBothSelectFieldNull}
-            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
+            errorMessage={formErrors.AssignedTo}
+            className={` ${formErrors.AssignedTo && '!border-red-500 !shadow'}`}
           />
         </div>
       </div>
@@ -252,9 +253,8 @@ const CreateLeadForm: React.FC = () => {
             label='Status'
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
-            className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
-            isBothSelectFieldNull={isBothSelectFieldNull}
-            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
+            errorMessage={formErrors.Status}
+            className={` ${formErrors.Status && 'border-red-500 shadow'}`}
           />
           <div className='items-start justify-center '>
             <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
