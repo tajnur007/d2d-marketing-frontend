@@ -95,8 +95,8 @@ const LeadDetailsButton = ({
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         data={data}
-        leadRefresh={leadRefresh}
-        setLeadRefresh={setLeadRefresh}
+        isRefreshData={leadRefresh}
+        setIsRefreshData={setLeadRefresh}
       />
     </>
   );

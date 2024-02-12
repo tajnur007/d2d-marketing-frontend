@@ -1,21 +1,20 @@
 'use client';
 
+import { DeleteLeadModalImage, ExIcon } from '@/assets/icons';
 import { DeleteModalProps } from '@/models/global-types';
+import { UserService } from '@/services/user-services';
+import { useSession } from 'next-auth/react';
+import 'react-datetime/css/react-datetime.css';
+import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 import { Button } from './button';
 import './dropdown-select.css';
-import React from 'react';
-import Modal from 'react-modal';
-import 'react-datetime/css/react-datetime.css';
-import { DeleteLeadModalImage, ExIcon } from '@/assets/icons';
-import { useSession } from 'next-auth/react';
-import { LeadService } from '@/services/lead-services';
-import { toast } from 'react-toastify';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
 }
 
-const DeleteConfirmationModal = ({
+const DeleteEmployeeConfirmationModal = ({
   data,
   modalIsOpen,
   setModalIsOpen = () => {},
@@ -29,17 +28,22 @@ const DeleteConfirmationModal = ({
   };
 
   const handleConfirmButton = async () => {
-    //@ts-ignore
-    const token = session?.user?.access_token;
-    const LeadServices = new LeadService();
-    if (token) {
-      await LeadServices.deleteLead(data.id, token);
-      toast.success('Lead Delete successfully.');
-    } else {
-      toast.error('Something went wrong.');
+    try {
+      //@ts-ignore
+      const token = session?.user?.access_token;
+      const UserServices = new UserService();
+      const resp = await UserServices.deleteUser(data.id, token);
+      if (resp?.status === 202) {
+        toast.success('Employee deleted successfully!');
+        setIsRefreshData(!isRefreshData);
+        setModalIsOpen(false);
+      } else {
+        toast.error('Something went wrong.');
+      }
+    } catch (err) {
+      toast.error('Failed to delete employee!');
+      console.log(err);
     }
-    setModalIsOpen(false);
-    setIsRefreshData(!isRefreshData);
   };
 
   return (
@@ -57,7 +61,7 @@ const DeleteConfirmationModal = ({
         <div className='flex justify-center items-center flex-col'>
           <DeleteLeadModalImage />
           <p className='mt-[10px] font-semibold text-[#131212] text-[20px] text-center leading-[31.2px]'>
-            Are you sure you want to Delete?
+            Are you sure, you want to delete the employee?
           </p>
         </div>
 
@@ -79,4 +83,4 @@ const DeleteConfirmationModal = ({
   );
 };
 
-export default DeleteConfirmationModal;
+export default DeleteEmployeeConfirmationModal;
