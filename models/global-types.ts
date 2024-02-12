@@ -391,6 +391,7 @@ export interface FilterLeadsCardProps {
   onFilterData: (data: any) => void;
   filterIcon: boolean;
   setFilterIcon: React.Dispatch<React.SetStateAction<boolean>>;
+  closeTooltip: () => void;
 }
 
 export interface StatusCheckboxProps {
@@ -495,9 +496,9 @@ export interface EmployeeOptionsProps {
 }
 
 export interface RemainderProps {
-  remainder: RemainderType;
+  reminder: RemainderType;
   token: string;
-  setRemainders: (item: any) => void;
+  setReminders: (item: any) => void;
   isUpdated: boolean;
   setIsUpdated: (item: boolean) => void;
 }
