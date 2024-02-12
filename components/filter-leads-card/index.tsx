@@ -14,9 +14,9 @@ import { useSession } from 'next-auth/react';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
-  setFilterCardOpen,
   filterIcon,
   setFilterIcon,
+  closeTooltip,
 }) => {
   //! State for date range
   const [startDate, setStartDate] = useState(new Date('2024-01-01'));
@@ -74,13 +74,11 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
         filterData.status.cold === false &&
         filterData.endDate === null
       ) {
-        setFilterCardOpen(false);
         return null;
       } else {
         onFilterData(filterData);
-        setFilterCardOpen(false);
       }
-
+      closeTooltip();
       // from selected data, we extract ID and status to send it to payload
       const selectedAssigneeId = executivesOption.find(
         (option: any) => option.label === filterData.assignee[0]
@@ -135,46 +133,40 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     } catch (err) {
       console.log(err);
     }
-    setFilterCardOpen(false);
+    closeTooltip();
   };
 
   return (
     <div>
-      <div className=' bg-white  mt-2 pl-[12px] pt-[20px] pr-[20px] pb-[20px]'>
+      <div className='bg-white shadow-md rounded-xl w-[360px] pl-[12px] pt-[20px] pr-[20px] pb-[20px]'>
         {/* Created by */}
-        <div>
+        <div className='border-b border-[#E9F0FF]'>
           <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1 pl-[8px]'>
             Created by
           </label>
-          <div>
-            <CustomMultiSelect
-              setSelected={setCreatedBy}
-              options={createdByOptions}
-              onSelectChange={(value: any) => setCreatedBy(value)}
-            />
-          </div>
+
+          <CustomMultiSelect
+            setSelected={setCreatedBy}
+            options={createdByOptions}
+            onSelectChange={(value: any) => setCreatedBy(value)}
+          />
         </div>
 
-        <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF] ml-[7px]'></div>
-
         {/* Assignee */}
-        <div className='mt-[10px]'>
+        <div className='mt-[10px] border-b border-[#E9F0FF]'>
           <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1 pl-[8px]'>
             Assignee
           </label>
-          <div>
-            <CustomMultiSelect
-              setSelected={setAssignee}
-              options={executivesOption}
-              onSelectChange={(value: any) => setAssignee(value)}
-            />
-          </div>
+
+          <CustomMultiSelect
+            setSelected={setAssignee}
+            options={executivesOption}
+            onSelectChange={(value: any) => setAssignee(value)}
+          />
         </div>
 
-        <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF] ml-[7px]'></div>
-
         {/* Status */}
-        <div className='mt-[10px]'>
+        <div className='mt-[10px] border-b border-[#E9F0FF]'>
           <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1 pl-[8px]'>
             Status
           </label>
@@ -199,8 +191,6 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
             </StatusCheckbox>
           </div>
         </div>
-
-        <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF] ml-[7px]'></div>
 
         {/* Date Range */}
         <div className='my-[10px] pl-[8px]'>

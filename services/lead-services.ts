@@ -36,7 +36,7 @@ export class LeadService {
       const response = await this.getLeads(token);
       // console.log(response);
 
-      const data = response.data.Data.Data;
+      const data = response.data.Data;
       setLeadsData(data);
       setIsLoading(false);
     } catch (error) {
@@ -201,6 +201,24 @@ export class LeadService {
       url: API_PATHS.LatestLeads,
       method: API_METHODS.GET,
       ...config,
+    });
+
+    return resp;
+  };
+
+  //* Service to transfer leads
+  public transferLead = async (lead_id: number, data: any, token: string): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const resp = await this.client.request({
+      url: `${API_PATHS.UpdateLead}?lead_id=${lead_id}`,
+      method: API_METHODS.PATCH,
+      ...config,
+      data,
     });
 
     return resp;

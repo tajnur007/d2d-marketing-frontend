@@ -14,6 +14,7 @@ import { UPDATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import { EditIcon } from '@/assets/icons';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
 import { ReminderService } from '@/services/reminder-services';
+import ConfirmationModal from './confirmation-modal';
 
 const Reminder = ({
   reminder,
@@ -23,28 +24,34 @@ const Reminder = ({
   setIsUpdated,
 }: RemainderProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<RemainderType>(reminder);
   const [formErrors, setFormErrors] =
     useState<UpdateRemainderType>(UPDATE_REMINDER_ITEMS);
 
-  const deleteRemainder = async (id: number) => {
-    const Service = new ReminderService();
-    const res = await Service.deleteReminder(id, token);
+  const deleteRemainder = async () => {
+    try {
+      const Service = new ReminderService();
+      const res = await Service.deleteReminder(reminder?.id, token);
 
-    if (res?.status === 202) {
-      toast.success('Successfully deleted!');
-      Service.getAllRemindersData(token, setReminders);
-    } else {
-      toast.error('Failed to delete!');
+      if (res?.status === 202) {
+        toast.success(res.data.Message);
+        Service.getAllRemindersData(token, setReminders);
+      }
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err.response.data.message);
     }
+    setModalIsOpen(false);
   };
 
   return (
     <div className='rounded-lg p-4 bg-white'>
       <p className='font-semibold text-base mb-[10px] text-black leading-[14px] flex justify-between items-center'>
         <span>{reminder?.title}</span>
-        <div onClick={() => deleteRemainder(reminder?.id)} className='cursor-pointer'>
+        <div onClick={() => setIsModalOpen(true)} className='cursor-pointer'>
           <Image src={crossImage} alt='close' />
         </div>
       </p>
@@ -57,6 +64,12 @@ const Reminder = ({
       <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
         {reminder?.status}
       </button>
+      <ConfirmationModal
+        modalIsOpen={isModalOpen}
+        setModalIsOpen={setIsModalOpen}
+        deleteItem={deleteRemainder}
+      />
+
       <UpdateRemainderModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
@@ -67,6 +80,7 @@ const Reminder = ({
         selected={selected}
         setSelected={setSelected}
         setIsUpdated={setIsUpdated}
+        remainder={reminder}
       />
     </div>
   );

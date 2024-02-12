@@ -226,6 +226,11 @@ export interface SingleLeadItems {
   title?: string;
 }
 
+export interface TransferLeadPayload {
+  executive_id: number;
+  executive_name: string;
+}
+
 export interface UpdateReminderType {
   title: string;
   user_id: number;
@@ -364,6 +369,7 @@ export interface CreateEmployeeModalProps {
   setFormData: (item: any) => void;
   formErrors: CreateEmployeeItems;
   setFormErrors: (item: any) => void;
+  setIsRefreshData: (item: any) => void;
 }
 
 export interface UpdateEmployeeModalProps {
@@ -391,6 +397,7 @@ export interface FilterLeadsCardProps {
   onFilterData: (data: any) => void;
   filterIcon: boolean;
   setFilterIcon: React.Dispatch<React.SetStateAction<boolean>>;
+  closeTooltip: () => void;
 }
 
 export interface StatusCheckboxProps {
@@ -438,8 +445,8 @@ export interface DeleteModalProps {
   modalIsOpen: boolean;
   setModalIsOpen: (item: boolean) => void;
   data: LeadListType;
-  leadRefresh: boolean;
-  setLeadRefresh: (item: boolean) => void;
+  isRefreshData: boolean;
+  setIsRefreshData: (item: boolean) => void;
 }
 
 export interface CreateEmployeeItems {
@@ -489,9 +496,9 @@ export interface LeadsDataType {
 }
 
 export interface EmployeeOptionsProps {
-  handleViewButton: () => void;
-  handleDeleteButton: () => Promise<void>;
-  handleEditButton: () => void;
+  handleViewButton?: () => void;
+  handleDeleteButton?: () => Promise<void>;
+  handleEditButton?: () => void;
 }
 
 export interface RemainderProps {
@@ -512,8 +519,5 @@ export interface UpdateRemainderModalProps {
   selected: string;
   setSelected: (item: string) => void;
   setIsUpdated: (item: boolean) => void;
-}
-export interface EmployeeOptionsProps {
-  handleViewButton: () => void;
-  handleDeleteButton: () => Promise<void>;
+  remainder: RemainderType;
 }
