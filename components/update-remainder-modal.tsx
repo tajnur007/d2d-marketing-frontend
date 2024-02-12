@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
@@ -58,49 +58,66 @@ const UpdateRemainderModal = ({
     setChange(false);
   };
 
-  const submitData = async () => {
-    try {
-      const newFormErrors: any = {};
+  const updateData = async () => {
+    const newFormErrors: any = {};
+    for (let field in formData) {
+      if (formData[field as keyof typeof formData] === '') {
+        newFormErrors[field] = `(${field} is required)`;
+      }
+    }
 
-      for (let field in formData) {
-        if (formData[field as keyof typeof formData] === '') {
-          newFormErrors[field] = `(${field} is required)`;
+    setFormErrors(newFormErrors);
+
+    if (Object.keys(newFormErrors).length === 0) {
+      const payloadObj = {
+        id: formData.id,
+        title: formData?.title,
+        lead_id: formData?.lead_id,
+        user_id: formData?.user_id,
+        company_id: formData?.company_id,
+        reminder_time: formData?.Date ? formData?.Date : formData?.reminder_time,
+        notes: formData?.notes,
+        status: selected == '' ? formData?.status : selected,
+      };
+      console.log('remainder: ', remainder);
+      console.log('payload:', payloadObj);
+
+      let updated = false;
+
+      for (let field in payloadObj) {
+        if (
+          payloadObj[field as keyof typeof payloadObj] !==
+          remainder[field as keyof typeof remainder]
+        ) {
+          console.log(payloadObj[field as keyof typeof payloadObj]);
+          updated = true;
         }
       }
 
-      setFormErrors(newFormErrors);
-
-      if (Object.keys(newFormErrors).length === 0) {
-        const payloadObj = {
-          title: formData?.title,
-          lead_id: formData?.lead_id,
-          user_id: formData?.user_id,
-          company_id: formData?.company_id,
-          reminder_time: formData?.reminder_time,
-          notes: formData?.notes,
-          status: selected == '' ? formData?.status : selected,
-        };
-        console.log(remainder, payloadObj);
-
-        if (token) {
-          const ReminderServices = new ReminderService();
-          const response = await ReminderServices.updateRemainder(
-            formData?.id,
-            payloadObj,
-            token
-          );
-          if (response.status === 202) {
-            setModalIsOpen(false);
-            setIsUpdated(true);
-            toast.success('Remainder updated successfully.');
+      if (!updated) {
+        toast.error('No field is updated.');
+      } else {
+        try {
+          if (token) {
+            const ReminderServices = new ReminderService();
+            const response = await ReminderServices.updateRemainder(
+              formData?.id,
+              payloadObj,
+              token
+            );
+            if (response.status === 202) {
+              setModalIsOpen(false);
+              setIsUpdated(true);
+              toast.success('Remainder updated successfully.');
+            }
+          } else {
+            toast.error('failed to update remainder.');
           }
-        } else {
-          toast.error('failed to update remainder.');
+        } catch (error) {
+          toast.error('Something went wrong.');
+          console.log('Error in update-remainder-modal: ', error);
         }
       }
-    } catch (error) {
-      toast.error('Something went wrong.');
-      console.log('Error in update-remainder-modal: ', error);
     }
   };
 
@@ -114,6 +131,8 @@ const UpdateRemainderModal = ({
   };
 
   const closeModal = () => {
+    setSelected(remainder.status);
+    setFormData(remainder);
     setChange(false);
     setModalIsOpen(false);
   };
@@ -218,7 +237,7 @@ const UpdateRemainderModal = ({
 
         <div className='mt-[8px]'>
           <Button
-            onClick={submitData}
+            onClick={updateData}
             disabled={change}
             className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
             Update
