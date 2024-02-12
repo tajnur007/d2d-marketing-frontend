@@ -67,7 +67,6 @@ const UpdateLeadForm = () => {
 
     fetchUserData();
   }, []);
-  // console.log(singleLeadData.executive_name);
 
   useEffect(() => {
     setUpdatePayload(() => {
@@ -85,16 +84,6 @@ const UpdateLeadForm = () => {
           meeting_notes: singleLeadData?.point_of_contact?.meeting_notes || '',
           reference: singleLeadData?.point_of_contact?.reference || '',
         },
-        //! There is no option to update reminders in the UI so it is commented out for now but can be used in the future if needed to update reminders as well.
-        // reminder: [
-        //   {
-        //     title: 'ab_update',
-        //     user_id: parseInt(userId),
-        //     reminder_time: '2023-03-20T15:51:05+07:00',
-        //     notes: 'new_update',
-        //     status: 'pending',
-        //   },
-        // ],
         image_infos: images,
       };
     });
@@ -256,7 +245,7 @@ const UpdateLeadForm = () => {
       <div className='flex justify-end  mt-5 gap-5 items-end'>
         <Button
           onClick={updateData}
-          // disabled={images.length === 0 || pending === true}
+          disabled={pending === true}
           className='w-[193px] rounded-[10px] h-[60px]'>
           Update
         </Button>
