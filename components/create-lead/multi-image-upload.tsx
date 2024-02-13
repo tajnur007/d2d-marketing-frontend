@@ -66,6 +66,7 @@ const Dropzone: React.FC<DropzoneProps> = ({
       handleImageChange(files);
       setPrevFiles(files); // Update prevFiles with the current files
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files, prevFiles]);
 
   // Utility function to check if two arrays of files are equal

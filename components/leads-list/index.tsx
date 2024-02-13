@@ -46,6 +46,7 @@ function LeadsList() {
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
       LeadServices.getCreatedByData(setCreatedByOptions, leadsData);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const handleCreateLeadButtonClick = () => {
