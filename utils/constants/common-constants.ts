@@ -76,7 +76,7 @@ export const API_PATHS = {
   GetAllReminder: '/reminder/list',
   DeleteReminder: '/reminder/delete',
   UpdateRemainder: '/reminder/update',
-  FilterLeads: '/lead/filter',
+  FilterLeads: '/lead/filter?search=lead',
   UpdateEmployeeInfo: '/user/update',
 };
 

@@ -181,7 +181,11 @@ export interface ManagerType {
   image_path?: string;
   image_name?: string;
 }
-
+export interface ManagerOption {
+  manager_id?: number;
+  value?: string;
+  label?: string;
+}
 interface MapLocation {
   lat: number;
   lng: number;
@@ -274,7 +278,7 @@ export interface SelectProps {
   label?: React.ReactNode;
   className?: string;
   selected?: string;
-  setSelected?: (item: string) => void;
+  setSelected?: (item: any) => void;
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
   defaultValue?: string;
