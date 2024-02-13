@@ -17,6 +17,7 @@ import {
   statusColor,
   UpdateEmployeePayload,
   TransferLeadPayload,
+  ChangePasswordItems,
 } from '@/models/global-types';
 import {
   BookIcon,
@@ -78,6 +79,7 @@ export const API_PATHS = {
   UpdateRemainder: '/reminder/update',
   FilterLeads: '/lead/filter?search=lead',
   UpdateEmployeeInfo: '/user/update',
+  ChangePassword: '/user/change-password',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -208,6 +210,9 @@ export const SETTING_FORM_ITEMS: SettingFormItems = {
   Phone: '',
   Email: '',
   Image: '',
+};
+
+export const CHANGE_PASSWORD_FORM_ITEMS: ChangePasswordItems = {
   CurrentPassword: '',
   NewPassword: '',
   ConfirmPassword: '',

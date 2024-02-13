@@ -1,4 +1,4 @@
-import { FormItems, LeadsDataType, SignUpFormItems } from '@/models/global-types';
+import { ChangePasswordItems, FormItems, LeadsDataType, SignUpFormItems } from '@/models/global-types';
 import axios from 'axios';
 
 export function ensureTrailingSlash(str: string = '/') {
