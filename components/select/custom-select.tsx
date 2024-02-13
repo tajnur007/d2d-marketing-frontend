@@ -12,8 +12,9 @@ export const CustomSelect = ({
   options = [],
   defaultValue,
   errorMessage,
+  isLoading,
+  selected,
 }: SelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   const handleChange = (selectedOption: any) => {
@@ -40,14 +41,9 @@ export const CustomSelect = ({
                   : isFocused
                   ? '1px solid #a855f7'
                   : '1px solid #F3F3F3',
-              // '&:hover': {
-              //   border:
-              //     errorMessage && !isFocused
-              //       ? '1px solid red'
-              //       : isFocused
-              //       ? '1px solid #a855f7'
-              //       : '1px solid #F3F3F3',
-              // },
+              '&:hover': {
+                border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+              },
               borderRadius: '10px',
               width: '100%',
               height: '100%',
@@ -56,9 +52,14 @@ export const CustomSelect = ({
             }),
           }}
           options={options}
-          // defaultValue={options.find((option) => option.value === defaultValue)?.label}
+          value={
+            selected === ''
+              ? null
+              : options.find((option) => option.value === defaultValue)
+          }
           placeholder={options.find((option) => option.value === defaultValue)?.label}
           onChange={handleChange}
+          isDisabled={isLoading}
         />
       </div>
     </div>

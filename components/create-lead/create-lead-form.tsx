@@ -20,6 +20,7 @@ import { CustomSelect } from '../select/custom-select';
 import Map from './map';
 import Dropzone from './multi-image-upload';
 import { LeadsContext } from '@/context/leads-context';
+import MiniLoader from '../mini-loader';
 
 const CreateLeadForm: React.FC = () => {
   const [statusSelected, setStatusSelected] = useState('');
@@ -28,6 +29,7 @@ const CreateLeadForm: React.FC = () => {
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [pending, setPending] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const handlePendingChange = (isPending: boolean) => {
     setPending(isPending);
@@ -78,6 +80,7 @@ const CreateLeadForm: React.FC = () => {
         return { ...prev, AssignedTo: '' };
       });
     }
+    setIsSuccess(false);
   }, [statusSelected, assignedToSelected]);
 
   const handleInputChange = (e: any) => {
@@ -92,7 +95,7 @@ const CreateLeadForm: React.FC = () => {
     });
   };
 
-  console.log(formErrors, formData, images.length);
+  // console.log(formErrors, formData, images.length);
 
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     setPending(true);
@@ -152,6 +155,7 @@ const CreateLeadForm: React.FC = () => {
             setStatusSelected('');
             setAssignedToSelected('');
             setImages([]);
+            setIsSuccess(true);
             toast.success('Create lead successfully.');
             router.push(PAGE_ROUTES.Leads);
           }
@@ -177,6 +181,7 @@ const CreateLeadForm: React.FC = () => {
             id='title'
             name='Title'
             htmlFor='title'
+            disabled={pending}
             value={formData?.Title}
             errorMessage={formErrors.Title}
             className={`w-full mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
@@ -189,7 +194,9 @@ const CreateLeadForm: React.FC = () => {
               setSelected={setAssignedToSelected}
               options={executivesOption}
               errorMessage={formErrors.AssignedTo}
-              className={` ${formErrors.AssignedTo && '!border-red-500 !shadow'}`}
+              className={`${formErrors.AssignedTo && '!border-red-500 !shadow'}`}
+              isLoading={pending}
+              selected={isSuccess ? '' : assignedToSelected}
             />
           </div>
         </div>
@@ -206,11 +213,12 @@ const CreateLeadForm: React.FC = () => {
               type='text'
               id='name'
               name='Name'
+              disabled={pending}
               value={formData?.Name}
               errorMessage={formErrors.Name}
               htmlFor='name'
               onChange={handleInputChange}
-              className={` ${formErrors.Name && 'border-red-500 shadow'}`}
+              className={`${formErrors.Name && 'border-red-500 shadow'}`}
             />
 
             <Input
@@ -219,11 +227,12 @@ const CreateLeadForm: React.FC = () => {
               type='text'
               id='phone'
               name='Phone'
+              disabled={pending}
               value={formData?.Phone}
               errorMessage={formErrors.Phone}
               htmlFor='phone'
               onChange={handleInputChange}
-              className={` ${formErrors.Phone && 'border-red-500 shadow'}`}
+              className={`${formErrors.Phone && 'border-red-500 shadow'}`}
             />
           </div>
 
@@ -235,10 +244,11 @@ const CreateLeadForm: React.FC = () => {
               id='email'
               name='Email'
               htmlFor='email'
+              disabled={pending}
               value={formData?.Email}
               errorMessage={formErrors.Email}
               onChange={handleInputChange}
-              className={` ${formErrors.Email && 'border-red-500 shadow'}`}
+              className={`${formErrors.Email && 'border-red-500 shadow'}`}
             />
 
             <Input
@@ -248,6 +258,7 @@ const CreateLeadForm: React.FC = () => {
               id='reference'
               name='Reference'
               htmlFor='reference'
+              disabled={pending}
               value={formData?.Reference}
               onChange={handleInputChange}
             />
@@ -259,6 +270,7 @@ const CreateLeadForm: React.FC = () => {
               label='Remarks'
               placeholder='Notes'
               name='Note'
+              disabled={pending}
               value={formData?.Note}
               errorMessage={formErrors.Note}
               className={`h-[182px] ${formErrors.Note && 'border-red-500 shadow'}`}
@@ -272,7 +284,9 @@ const CreateLeadForm: React.FC = () => {
               setSelected={setStatusSelected}
               options={CREATE_LEAD_STATUS_NEW}
               errorMessage={formErrors.Status}
-              className={` ${formErrors.Status && 'border-red-500 shadow'}`}
+              className={`${formErrors.Status && 'border-red-500 shadow'}`}
+              isLoading={pending}
+              selected={isSuccess ? '' : statusSelected}
             />
             <div className='items-start justify-center '>
               <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
@@ -285,6 +299,7 @@ const CreateLeadForm: React.FC = () => {
                 onChange={setImages}
                 onPendingChange={handlePendingChange}
                 errorMessage={formErrors?.Images}
+                isSuccess={isSuccess}
               />
             </div>
           </div>
@@ -294,7 +309,7 @@ const CreateLeadForm: React.FC = () => {
             type='submit'
             disabled={pending}
             className={`w-[193px] rounded-[10px] h-[60px]`}>
-            Create
+            {pending ? <MiniLoader /> : ' Create'}
           </Button>
         </div>
       </form>

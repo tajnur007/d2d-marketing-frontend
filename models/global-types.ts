@@ -279,6 +279,8 @@ export interface SelectProps {
   onSelectChange?: any;
   defaultValue?: string;
   errorMessage?: string;
+  value?: string;
+  isLoading?: boolean;
 }
 
 export interface AssignSelectProps {

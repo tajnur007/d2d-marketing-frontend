@@ -13,12 +13,14 @@ interface DropzoneProps {
   onChange: any;
   onPendingChange: (pending: boolean) => void;
   errorMessage: any;
+  isSuccess: boolean;
 }
 
 const Dropzone: React.FC<DropzoneProps> = ({
   onChange,
   onPendingChange,
   errorMessage,
+  isSuccess,
 }) => {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
 
@@ -53,6 +55,10 @@ const Dropzone: React.FC<DropzoneProps> = ({
   const removeFile = (previewToRemove: string) => {
     setFiles((files) => files.filter((file) => file.preview !== previewToRemove));
   };
+
+  useEffect(() => {
+    isSuccess && setFiles([]);
+  }, [isSuccess]);
 
   useEffect(() => {
     // Check if files have changed since the last upload
@@ -140,9 +146,9 @@ const Dropzone: React.FC<DropzoneProps> = ({
               <div>
                 <CameraIcon className='w-[40px] 2xl:w-[60px] h-[40px] 2xl:h-[60px] font-bold fill-gray-300 transition-colors' />
               </div>
-              <div className='font-bold text-gray-300 text-sm 2xl:text-[16px]'>
+              <p className='font-bold text-gray-300 text-sm 2xl:text-[16px]'>
                 {imageInfo.length === 0 ? 'No Image' : 'Add More'}
-              </div>
+              </p>
             </div>
           )}
         </div>
