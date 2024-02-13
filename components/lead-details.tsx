@@ -5,7 +5,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import moment from 'moment';
-import Reminder from './remainder';
+import Reminder from './reminder';
 import CreateRemainderModal from './create-remainder-modal';
 import { Button } from './button';
 import { AssignDropdownSelect } from './assign-dropdown-select';
@@ -38,8 +38,7 @@ const LeadDetails = ({
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [closeDrawer, setCloseDrawer] = React.useState(false);
-  const [reminders, setRemainders] = React.useState<RemainderType[]>([]);
-  const [selectReminder, setSelectReminder] = React.useState();
+  const [reminders, setReminders] = React.useState<RemainderType[]>([]);
   const [isCreated, setIsCreated] = React.useState(false);
   const [isUpdated, setIsUpdated] = React.useState(false);
   const { data: reminderData } = useSession();
@@ -57,14 +56,14 @@ const LeadDetails = ({
   // To get data initially
   useEffect(() => {
     const Service = new ReminderService();
-    isOpen && Service.getAllRemindersData(token, setRemainders);
+    isOpen && Service.getAllRemindersData(token, setReminders);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, token]);
 
   // To get the latest remainder after creating new remainder
   useEffect(() => {
     const Service = new ReminderService();
-    (isCreated || isUpdated) && Service.getAllRemindersData(token, setRemainders);
+    (isCreated || isUpdated) && Service.getAllRemindersData(token, setReminders);
     setIsCreated(false);
     setIsUpdated(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +74,7 @@ const LeadDetails = ({
   }, [closeDrawer, setIsOpen]);
 
   return (
-    <div className='p-8 h-full overflow-y-auto no-scrollbar '>
+    <div className='p-8 h-full overflow-y-auto no-scrollbar'>
       <div className='flex justify-between '>
         <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
         <div onClick={() => setCloseDrawer(!closeDrawer)} className='cursor-pointer'>
@@ -193,20 +192,22 @@ const LeadDetails = ({
         <h1 className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
           Reminder
         </h1>
-        {reminders?.length === 0 ? (
-          <div className='text-center'>No remainder found</div>
+        {reminders?.filter((item) => item?.lead_id === data?.id)?.length === 0 ? (
+          <div className='text-center'>No reminder</div>
         ) : (
           <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
-            {reminders?.map((reminder: RemainderType) => (
-              <Reminder
-                key={reminder?.id}
-                reminder={reminder}
-                token={token}
-                setReminders={setRemainders}
-                isUpdated={isUpdated}
-                setIsUpdated={setIsUpdated}
-              />
-            ))}
+            {reminders
+              ?.filter((item) => item?.lead_id === data?.id)
+              ?.map((reminder: RemainderType) => (
+                <Reminder
+                  key={reminder?.id}
+                  reminder={reminder}
+                  token={token}
+                  setReminders={setReminders}
+                  isUpdated={isUpdated}
+                  setIsUpdated={setIsUpdated}
+                />
+              ))}
           </div>
         )}
       </div>

@@ -31,13 +31,13 @@ function FilterLeadsButton({ onFilterData }: any) {
           <button
             onClick={toggleFilterCard}
             type='button'
-            className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 relative'>
+            className='text-white bg-[#5630ff] md:h-[36px] lg:h-[100%] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm md:p-2 lg:p-3 text-center transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 relative'>
             <div className='flex justify-between items-center'>
-              <div className='mr-2'>
+              <div className='md:mr-1 lg:mr-2'>
                 {filterIcon ? <AfterFilterLeadsIcon /> : <FilterLeadsIcon />}
               </div>
 
-              <div className='font-medium text-[14px] leading-[normal] tracking-[0] whitespace-nowrap'>
+              <div className='font-medium md:text-[12px] lg:text-[14px] leading-[normal] tracking-[0] whitespace-nowrap'>
                 Filter
               </div>
             </div>

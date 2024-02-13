@@ -1,7 +1,7 @@
 'use client';
 
 import Select from 'react-select';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { Input } from './input';
@@ -19,6 +19,7 @@ import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { ClockIcon, ExIcon } from '@/assets/icons';
 import { ReminderService } from '@/services/reminder-services';
+import MiniLoader from './mini-loader';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -28,7 +29,6 @@ const CreateRemainderModal = ({
   modalIsOpen,
   setModalIsOpen = () => {},
   setIsCreated = () => {},
-
   formData,
   setFormData = () => {},
   formErrors,
@@ -38,6 +38,7 @@ const CreateRemainderModal = ({
   leadsData,
 }: CreateReminderModalProps) => {
   const { data } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
   //@ts-ignore
   const token = data?.user?.access_token;
 
@@ -68,6 +69,7 @@ const CreateRemainderModal = ({
 
   const submitData = async () => {
     try {
+      setIsLoading(true);
       const newFormErrors: any = {};
 
       for (let field in formData) {
@@ -107,6 +109,7 @@ const CreateRemainderModal = ({
       toast.error('Something went wrong.');
       console.log('Error in create-remainder-modal: ', error);
     }
+    setIsLoading(false);
   };
 
   const handleSelectChange = (selectedOption: any) => {
@@ -142,9 +145,9 @@ const CreateRemainderModal = ({
             <span>Create reminder</span>
           </div>
 
-          <button onClick={closeModal} className='pr-[15px]'>
+          <span onClick={closeModal} className='cursor-pointer'>
             <ExIcon />
-          </button>
+          </span>
         </div>
 
         <Input
@@ -154,6 +157,7 @@ const CreateRemainderModal = ({
           id='title'
           name='Title'
           htmlFor='title'
+          disabled={isLoading}
           errorMessage={formErrors?.Title}
           className={`${formErrors?.Title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
@@ -167,6 +171,7 @@ const CreateRemainderModal = ({
             id='associatedLead'
             name='AssociatedLead'
             htmlFor='associatedLead'
+            disabled={isLoading}
             onChange={handleInputChange}
           />
         </div>
@@ -217,6 +222,7 @@ const CreateRemainderModal = ({
             label='Notes'
             placeholder='Notes'
             name='Note'
+            disabled={isLoading}
             onChange={handleInputChange}
             errorMessage={formErrors?.Note}
             className={`h-[84px] ${formErrors?.Note && 'border-red-500 shadow'}`}
@@ -227,7 +233,7 @@ const CreateRemainderModal = ({
           <Button
             onClick={submitData}
             className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
-            Create
+            {isLoading ? <MiniLoader /> : ' Create'}
           </Button>
         </div>
       </div>

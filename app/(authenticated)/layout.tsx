@@ -8,12 +8,19 @@ import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Loader from '@/components/loader';
+import jwt from 'jsonwebtoken';
 
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   const [loading, setloading] = useState(true);
   const path = usePathname();
   const session = useSession();
-  const userRole = session?.data?.user?.user_type;
+  let userRole = '';
+
+  if (session?.data?.user) {
+    ///@ts-ignore
+    const { role } = jwt.decode(session?.data?.user?.access_token);
+    userRole = role;
+  }
 
   useEffect(() => {
     if (session?.status !== 'loading') {
@@ -25,7 +32,6 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
     if (path.includes('/employee-list') && userRole === 'executive') {
       redirect(PAGE_ROUTES.Dashboard);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path, session, userRole]);
 

@@ -278,7 +278,7 @@ export interface SelectProps {
   label?: React.ReactNode;
   className?: string;
   selected?: string;
-  setSelected?: (item: string) => void;
+  setSelected?: (item: any) => void;
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
   defaultValue?: string;
