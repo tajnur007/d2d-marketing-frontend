@@ -239,8 +239,8 @@ export const LEAD_STATUS = {
   InProgress: 'In-Progress',
   Completed: 'Completed',
   Hot: 'Hot',
-  cold: 'cold',
-  warm: 'warm',
+  Cold: 'Cold',
+  Warm: 'Warm',
 };
 
 export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
@@ -283,8 +283,8 @@ export const CREATE_LEAD_STATUS: string[] = [
   LEAD_STATUS.InProgress,
   LEAD_STATUS.Completed,
   LEAD_STATUS.Hot,
-  LEAD_STATUS.cold,
-  LEAD_STATUS.warm,
+  LEAD_STATUS.Cold,
+  LEAD_STATUS.Warm,
 ];
 
 export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
