@@ -257,6 +257,9 @@ export interface SettingFormItems {
   Phone?: string;
   Email?: string;
   Image?: string;
+}
+
+export interface ChangePasswordItems {
   CurrentPassword?: string;
   NewPassword?: string;
   ConfirmPassword?: string;
@@ -267,6 +270,12 @@ export interface SignUpFormItems {
   Email?: string;
   OrganizationName?: string;
   Password?: string;
+  ConfirmPassword?: string;
+}
+
+export interface ChangePasswordItems {
+  OldPassword?: string;
+  NewPassword?: string;
   ConfirmPassword?: string;
 }
 
