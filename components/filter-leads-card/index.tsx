@@ -1,5 +1,6 @@
 'use-client';
 
+import moment from 'moment';
 import { CalendarIcon } from '@/assets/icons';
 import { FilterLeadsCardProps, StatusState } from '@/models/global-types';
 import { useState, useContext } from 'react';
@@ -30,8 +31,8 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   });
 
   //! State for Created by
-  const [selectedCreatedBy, setCreatedBy] = useState<string>('');
-  const [selectedAssignee, setAssignee] = useState<string>('');
+  const [selectedCreatedBy, setCreatedBy] = useState([]);
+  const [selectedAssignee, setAssignee] = useState([]);
   const {
     executivesOption,
     setExecutivesOption,
@@ -55,9 +56,9 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
   const handleCheckboxChange = (statusName: keyof StatusState) => {
     setStatus((prevStatus) => ({
-      hot: statusName === 'hot' ? !prevStatus.hot : false,
-      warm: statusName === 'warm' ? !prevStatus.warm : false,
-      cold: statusName === 'cold' ? !prevStatus.cold : false,
+      hot: statusName === 'hot' ? !prevStatus.hot : prevStatus.hot,
+      warm: statusName === 'warm' ? !prevStatus.warm : prevStatus.warm,
+      cold: statusName === 'cold' ? !prevStatus.cold : prevStatus.cold,
     }));
   };
 
@@ -66,6 +67,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   const token = data.user.access_token;
   const handleApplyFilterButton = async () => {
     try {
+      console.log(executivesOption);
       if (
         filterData.createdBy === null &&
         filterData.assignee === null &&
@@ -80,34 +82,38 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
       }
       closeTooltip();
       // from selected data, we extract ID and status to send it to payload
-      const selectedAssigneeId = executivesOption.find(
-        (option: any) => option.label === filterData.assignee[0]
-      )?.id;
+      const selectedAssigneeId = selectedAssignee.map((item) => {
+        const id = executivesOption.find((option: any) => option.label === item)?.id;
+        return id;
+      });
 
-      const SelectedCreatedById = createdByOptions.find(
-        (option: any) => option.label === filterData.createdBy[0]
-      )?.created_by_user_id;
+      console.log(selectedCreatedBy);
 
-      const statusData =
-        status.cold === true ? 'cold' : status.hot === true ? 'hot' : 'warm';
+      const SelectedCreatedById = selectedCreatedBy.map((item) => {
+        const id = createdByOptions.find((option: any) => option.label === item)?.id;
+        return id;
+      });
 
+      const statusData = Object.keys(status).filter(
+        (key) => status[key as keyof typeof status]
+      );
       //! payload
       const payloadObj = {
         match: {
           meeting_status: {
-            any: [statusData],
+            any: statusData,
           },
           created_by_user_id: {
-            any: [SelectedCreatedById],
+            any: SelectedCreatedById,
           },
           executive_id: {
-            any: [selectedAssigneeId],
+            any: selectedAssigneeId,
           },
         },
         range: {
           created_at: {
-            lte: endDate?.toISOString(),
-            gte: startDate?.toISOString(),
+            lte: moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
+            gte: moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
           },
         },
       };

@@ -1,6 +1,7 @@
 import { API_METHODS, API_PATHS } from '@/utils/constants/common-constants';
 import { AxiosRequestConfig } from 'axios';
 import { HttpClient } from './axios-base-query';
+import { UserService } from './user-services';
 
 export class LeadService {
   client;
@@ -100,21 +101,17 @@ export class LeadService {
   //* Service to get data of whom who created the lead
   public getCreatedByData = async (setCreatedByOptions: any, token: string) => {
     try {
-      const response = await this.getLeads(token);
+      const Service = new UserService();
+      const response = await Service.EmployeeListInfo(token);
       console.log(response);
       const data =  response?.data?.Data.Data;
-      const uniqueCreatedByValues: any[] = [];
-      const encounteredValues = new Set<string>();
-
+      const createdByValues: any[] = [];
+      
       data?.map((item: any) => {
-        const createdBy = item.created_by;
-        if (createdBy && !encounteredValues.has(createdBy)) {
-          encounteredValues.add(createdBy);
-          const newItem = { ...item, value: item?.created_by, label: item?.created_by };
-          uniqueCreatedByValues.push(newItem);
-        }
+          const newItem = { ...item, value: item?.name, label: item?.name };
+          createdByValues.push(newItem);
       });
-      setCreatedByOptions(uniqueCreatedByValues);
+      setCreatedByOptions(createdByValues);
     } catch (error) {
       console.error('Error fetching leads:', error);
     }
@@ -164,7 +161,7 @@ export class LeadService {
     }
     const resp = await this.client.request({
       url: API_PATHS.FilterLeads,
-      method: API_METHODS.GET,
+      method: API_METHODS.POST,
       ...config,
       data,
     });
@@ -180,6 +177,7 @@ export class LeadService {
   ): Promise<any> => {
     try {
       setIsLoading(true);
+      console.log(data)
       const response = await this.FilteredLeadsData(data, token);
       const filteredLeads = response?.data?.Data;
       console.log(filteredLeads);
