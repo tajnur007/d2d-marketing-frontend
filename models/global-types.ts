@@ -181,11 +181,6 @@ export interface ManagerType {
   image_path?: string;
   image_name?: string;
 }
-export interface ManagerOption {
-  manager_id?: number;
-  value?: string;
-  label?: string;
-}
 
 interface MapLocation {
   lat: number;
