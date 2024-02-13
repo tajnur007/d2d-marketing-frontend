@@ -190,8 +190,8 @@ const SettingsPage = () => {
             </div>
           ) : (
             <div>
-                <div className='flex mt-2 ml-6 mb-5 md:flex-row'>
-                  <div className='flex items-center w-20 mt-[8px] md:mt-0'>
+              <div className='flex mt-2 ml-6 mb-5 md:flex-row'>
+                <div className='flex items-center w-20 mt-[8px] md:mt-0'>
                   <Image
                     src={profileImageSrc || profileImage}
                     alt='Profile Picture'
@@ -200,7 +200,9 @@ const SettingsPage = () => {
                     className='rounded-full w-20 h-20 flex-shrink-0'
                   />
                 </div>
-                  <div className='mt-9 md:mt-9 ml-4 cursor-pointer' onClick={handleEditIconClick}>
+                <div
+                  className='mt-9 md:mt-9 ml-4 cursor-pointer'
+                  onClick={handleEditIconClick}>
                   <EditIcon />
                 </div>
                 <input
@@ -283,7 +285,7 @@ const SettingsPage = () => {
               <div className='flex justify-end items-center gap-4 mr-7 mt-5'>
                 <Button
                   onClick={handleCancel}
-                  className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB]  hover:text-white'>
+                  className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB]  hover:text-white '>
                   Cancel
                 </Button>
                 <Button

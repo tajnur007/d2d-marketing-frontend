@@ -32,6 +32,8 @@ const EmployeeListPage = () => {
   let displayedChars: string[] = [];
 
   const { data } = useSession();
+  const userRole = data?.user?.user_type || '';
+
   //@ts-ignore den
   const token: string = data?.user?.access_token;
   const [employeeInfo, setEmployeeInfo] = useState([
@@ -122,10 +124,10 @@ const EmployeeListPage = () => {
             <div className='flex flex-row'>
               <form>
                 <div className='relative ml-6'>
-                  <div className='absolute inset-y-0 start-0 flex items-center ps-2 md:ps-3'>
+                  <div className='absolute inset-y-0 start-0 flex items-center px-3'>
                     <SearchIcon />
                   </div>
-                  <div className='w-[72%] md:w-[350px] lg:w-[563px] h-[48px] m-0 pl-2 md:pl-4 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
+                  <div className='w-[72%] md:w-[350px] lg:w-[563px] h-[48px] m-0 pl-6 p-0 bg-white rounded-[14px] border-[#F3F3F3] border justify-start items-center gap-[5px] inline-flex focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                     <input
                       type='search'
                       id='default-search'
@@ -136,20 +138,22 @@ const EmployeeListPage = () => {
                   </div>
                 </div>
               </form>
-              <div onClick={handleNewEmployeeButtonClick}>
-                <button
-                  type='button'
-                  className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
-                  <div className='flex justify-between items-center'>
-                    <div className='mr-2'>
-                      <Image src={plusImage} alt=''/>
+              {userRole === 'admin' && (
+                <div onClick={handleNewEmployeeButtonClick}>
+                  <button
+                    type='button'
+                    className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
+                    <div className='flex justify-between items-center'>
+                      <div className='mr-2'>
+                        <Image src={plusImage} alt='' />
+                      </div>
+                      <div className='font-medium text-[14px] md:text-[16px] leading-[normal] tracking-[0] whitespace-nowrap'>
+                        New Employee
+                      </div>
                     </div>
-                    <div className='font-medium text-[14px] md:text-[16px] leading-[normal] tracking-[0] whitespace-nowrap'>
-                      New Employee
-                    </div>
-                  </div>
-                </button>
-              </div>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -171,7 +175,7 @@ const EmployeeListPage = () => {
                 }
 
                 // Pass isFirstChar prop only when it's true
-                return isFirstChar ? (
+                return (
                   <EmployeeListRow
                     key={index}
                     item={item}
@@ -180,15 +184,7 @@ const EmployeeListPage = () => {
                     employeeActionRef={employeeActionRef}
                     isRefreshData={isRefreshData}
                     setISRefreshData={setIsRefreshData}
-                  />
-                ) : (
-                  <EmployeeListRow
-                    key={index}
-                    item={item}
-                    uniqueCharCount={uniqueCharCount}
-                    employeeActionRef={employeeActionRef}
-                    isRefreshData={isRefreshData}
-                    setISRefreshData={setIsRefreshData}
+                    userRole={userRole}
                   />
                 );
               })}
