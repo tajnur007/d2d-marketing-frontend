@@ -12,8 +12,8 @@ interface FileWithPreview extends File {
 interface DropzoneProps {
   onChange: any;
   onPendingChange: (pending: boolean) => void;
-  errorMessage: any;
-  isSuccess: boolean;
+  errorMessage?: any;
+  isSuccess?: boolean;
 }
 
 const Dropzone: React.FC<DropzoneProps> = ({
