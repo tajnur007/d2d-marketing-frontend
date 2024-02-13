@@ -23,6 +23,16 @@ export class AuthService {
     return resp.data;
   };
 
+  //* Service for email verification
+  public verifyEmail = async (token: string, company_id: string) => {
+    const resp: Response<any> = await this.client.request({
+      url: `/user/email-verify?token=${token}&company_id=${company_id}`,
+      method: API_METHODS.GET
+    });
+
+    return resp.data;
+  };
+
   //* Service for login
   public login = async (data: any) => {
     const resp: Response<any> = await this.client.request({
