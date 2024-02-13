@@ -18,7 +18,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
 
   if (session?.data?.user) {
     ///@ts-ignore
-    var { role } = jwt.decode(session?.data?.user?.access_token);
+    const { role } = jwt.decode(session?.data?.user?.access_token);
     userRole = role;
   }
 
