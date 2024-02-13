@@ -49,14 +49,14 @@ const DeleteEmployeeConfirmationModal = ({
   return (
     <Modal
       className={
-        'absolute w-[404px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
+        'absolute w-[404px] h-auto  outline-none  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
       isOpen={modalIsOpen}
       onRequestClose={closeModal}>
       <div className='m-[30px]'>
-        <button onClick={closeModal} className='pl-[250px] mb-[10px]'>
+        <span onClick={closeModal} className='cursor-pointer flex justify-end'>
           <ExIcon />
-        </button>
+        </span>
 
         <div className='flex justify-center items-center flex-col'>
           <DeleteLeadModalImage />

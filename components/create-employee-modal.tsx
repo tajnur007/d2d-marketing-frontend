@@ -127,8 +127,6 @@ const CreateEmployeeModal = ({
         };
       }
 
-      console.log(formData);
-
       for (let field in formData) {
         if (field !== 'manager_name' && formData[field as keyof typeof formData] === '') {
           newFormErrors[field] = `(${field} is required)`;
@@ -139,7 +137,6 @@ const CreateEmployeeModal = ({
       if (Object.keys(newFormErrors).length === 0) {
         //@ts-ignore
         const token = data?.user?.access_token;
-        console.log(formData);
 
         const UserServices = new UserService();
         const resp = await UserServices.createUser(formData, token);
@@ -173,117 +170,115 @@ const CreateEmployeeModal = ({
         ariaHideApp={false}>
         <div>
           <form onSubmit={submitData}>
-            <>
-              <div className='flex justify-between mb-7'>
-                <p className='text-indigo-950 text-2xl font-bold leading-[14px]'>
-                  Create employee
-                </p>
-                <span onClick={closeModal} className='cursor-pointer'>
-                  <ExIcon />
-                </span>
-              </div>
-              <Input
-                label='Name'
-                placeholder='Name'
-                type='text'
-                id='name'
-                name='name'
-                htmlFor='name'
-                disabled={isLoading}
-                value={formData?.name}
-                errorMessage={formErrors.name}
-                className={`w-full mb-3 2xl:mb-5 ${
-                  formErrors.name && 'border-red-500 shadow'
-                }`}
-                onChange={handleInputChange}
-              />
-              <Input
-                label='Phone Number'
-                placeholder='Phone Number'
-                type='text'
-                id='phone'
-                name='phone'
-                htmlFor='phone'
-                disabled={isLoading}
-                value={formData?.phone}
-                errorMessage={formErrors.phone}
-                className={`w-full mb-3 2xl:mb-5 ${
-                  formErrors.phone && 'border-red-500 shadow'
-                }`}
-                onChange={handleInputChange}
-              />
-              <Input
-                label='Email'
-                placeholder='Email'
-                type='text'
-                id='email'
-                name='email'
-                htmlFor='email'
-                disabled={isLoading}
-                value={formData?.email}
-                errorMessage={formErrors.email}
-                className={`w-full mb-3 2xl:mb-5 ${
-                  formErrors.email && 'border-red-500 shadow'
-                }`}
-                onChange={handleInputChange}
-              />
-              <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
-                Role
-              </label>
-              <Select
-                isDisabled={isLoading}
-                options={EMPLOYEE_ROLE}
-                defaultValue={EMPLOYEE_ROLE[0]}
-                className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
-                styles={{
-                  control: (baseStyles, { isFocused }) => ({
-                    ...baseStyles,
-                    borderColor: '2px #F3F3F3 solid',
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '10px',
-                    boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
-                    transition: 'all 500ms',
-                    border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
-                    '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
-                  }),
-                }}
-                onChange={handleSelectChange}
-              />
-              {isExecutive && (
-                <>
-                  <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
-                    Select Manager
-                  </label>
-                  <Select
-                    options={managers}
-                    isDisabled={isLoading}
-                    defaultValue={managers && managers[0]}
-                    className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
-                    styles={{
-                      control: (baseStyles, { isFocused }) => ({
-                        ...baseStyles,
-                        borderColor: '2px #F3F3F3 solid',
-                        width: '100%',
-                        height: '100%',
-                        borderRadius: '10px',
-                        boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
-                        transition: 'all 500ms',
-                        border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
-                        '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
-                      }),
-                    }}
-                    onChange={handleManagerChange}
-                  />
-                </>
-              )}
-              <Button
-                type='submit'
-                disabled={isLoading}
-                className='w-full rounded-[10px] h-[60px] '>
-                {isLoading ? <MiniLoader /> : 'Create'}
-              </Button>
-            </>
+            <div className='flex justify-between mb-7'>
+              <p className='text-indigo-950 text-2xl font-bold leading-[14px]'>
+                Create employee
+              </p>
+              <span onClick={closeModal} className='cursor-pointer'>
+                <ExIcon />
+              </span>
+            </div>
+            <Input
+              label='Name'
+              placeholder='Name'
+              type='text'
+              id='name'
+              name='name'
+              htmlFor='name'
+              disabled={isLoading}
+              value={formData?.name}
+              errorMessage={formErrors.name}
+              className={`w-full mb-3 2xl:mb-5 ${
+                formErrors.name && 'border-red-500 shadow'
+              }`}
+              onChange={handleInputChange}
+            />
+            <Input
+              label='Phone Number'
+              placeholder='Phone Number'
+              type='text'
+              id='phone'
+              name='phone'
+              htmlFor='phone'
+              disabled={isLoading}
+              value={formData?.phone}
+              errorMessage={formErrors.phone}
+              className={`w-full mb-3 2xl:mb-5 ${
+                formErrors.phone && 'border-red-500 shadow'
+              }`}
+              onChange={handleInputChange}
+            />
+            <Input
+              label='Email'
+              placeholder='Email'
+              type='text'
+              id='email'
+              name='email'
+              htmlFor='email'
+              disabled={isLoading}
+              value={formData?.email}
+              errorMessage={formErrors.email}
+              className={`w-full mb-3 2xl:mb-5 ${
+                formErrors.email && 'border-red-500 shadow'
+              }`}
+              onChange={handleInputChange}
+            />
+            <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
+              Role
+            </label>
+            <Select
+              isDisabled={isLoading}
+              options={EMPLOYEE_ROLE}
+              defaultValue={EMPLOYEE_ROLE[0]}
+              className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
+              styles={{
+                control: (baseStyles, { isFocused }) => ({
+                  ...baseStyles,
+                  borderColor: '2px #F3F3F3 solid',
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '10px',
+                  boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
+                  transition: 'all 500ms',
+                  border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                  '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                }),
+              }}
+              onChange={handleSelectChange}
+            />
+            {isExecutive && (
+              <>
+                <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
+                  Select Manager
+                </label>
+                <Select
+                  options={managers}
+                  isDisabled={isLoading}
+                  defaultValue={managers && managers[0]}
+                  className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
+                  styles={{
+                    control: (baseStyles, { isFocused }) => ({
+                      ...baseStyles,
+                      borderColor: '2px #F3F3F3 solid',
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '10px',
+                      boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
+                      transition: 'all 500ms',
+                      border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                      '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                    }),
+                  }}
+                  onChange={handleManagerChange}
+                />
+              </>
+            )}
+            <Button
+              type='submit'
+              disabled={isLoading}
+              className='w-full rounded-[10px] h-[60px] '>
+              {isLoading ? <MiniLoader /> : 'Create'}
+            </Button>
           </form>
         </div>
       </Modal>
