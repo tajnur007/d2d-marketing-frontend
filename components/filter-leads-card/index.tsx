@@ -12,6 +12,7 @@ import StatusCheckbox from '../status-checkbox';
 import './style.css';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
@@ -66,66 +67,67 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   // @ts-ignore
   const token = data.user.access_token;
   const handleApplyFilterButton = async () => {
-    try {
-      console.log(executivesOption);
-      if (
-        filterData.createdBy === null &&
-        filterData.assignee === null &&
-        filterData.status.hot === false &&
-        filterData.status.warm === false &&
-        filterData.status.cold === false &&
-        filterData.endDate === null
-      ) {
-        return null;
-      } else {
-        onFilterData(filterData);
+    if (
+      filterData.createdBy === null ||
+      filterData.assignee === null ||
+      filterData.endDate === null
+    ) {
+      toast.error('some field needs filling');
+    } else {
+      onFilterData(filterData);
+      try {
+        closeTooltip();
+        // from selected data, we extract ID and status to send it to payload
+        const selectedAssigneeId = selectedAssignee.map((item) => {
+          const id = executivesOption.find((option: any) => option.label === item)?.id;
+          return id;
+        });
+
+        console.log(selectedCreatedBy);
+
+        const SelectedCreatedById = selectedCreatedBy.map((item) => {
+          const id = createdByOptions.find((option: any) => option.label === item)?.id;
+          return id;
+        });
+
+        const statusData = Object.keys(status).filter(
+          (key) => status[key as keyof typeof status]
+        );
+        //! payload
+        const payloadObj = {
+          match: {
+            meeting_status: {
+              any: statusData,
+            },
+            created_by_user_id: {
+              any: SelectedCreatedById,
+            },
+            executive_id: {
+              any: selectedAssigneeId,
+            },
+          },
+          range: {
+            created_at: {
+              lte: moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
+              gte: moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
+            },
+          },
+        };
+        //console.log(payloadObj);
+
+        const LeadServices = new LeadService();
+        if (token) {
+          LeadServices.getFilteredLeadsData(
+            setLeadsData,
+            setIsLoading,
+            payloadObj,
+            token
+          );
+          setFilterIcon(true);
+        }
+      } catch (err) {
+        console.log(err);
       }
-      closeTooltip();
-      // from selected data, we extract ID and status to send it to payload
-      const selectedAssigneeId = selectedAssignee.map((item) => {
-        const id = executivesOption.find((option: any) => option.label === item)?.id;
-        return id;
-      });
-
-      console.log(selectedCreatedBy);
-
-      const SelectedCreatedById = selectedCreatedBy.map((item) => {
-        const id = createdByOptions.find((option: any) => option.label === item)?.id;
-        return id;
-      });
-
-      const statusData = Object.keys(status).filter(
-        (key) => status[key as keyof typeof status]
-      );
-      //! payload
-      const payloadObj = {
-        match: {
-          meeting_status: {
-            any: statusData,
-          },
-          created_by_user_id: {
-            any: SelectedCreatedById,
-          },
-          executive_id: {
-            any: selectedAssigneeId,
-          },
-        },
-        range: {
-          created_at: {
-            lte: moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
-            gte: moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
-          },
-        },
-      };
-      //console.log(payloadObj);
-
-      const LeadServices = new LeadService();
-      if (token) {
-        LeadServices.getFilteredLeadsData(setLeadsData, setIsLoading, payloadObj, token);
-        setFilterIcon(true);
-      }
-    } catch (err) {
-      console.log(err);
     }
   };
 
