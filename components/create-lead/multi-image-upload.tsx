@@ -14,6 +14,7 @@ interface DropzoneProps {
   onPendingChange: (pending: boolean) => void;
   errorMessage?: any;
   isSuccess?: boolean;
+  singleLeadData?: any;
 }
 
 const Dropzone: React.FC<DropzoneProps> = ({
@@ -21,11 +22,10 @@ const Dropzone: React.FC<DropzoneProps> = ({
   onPendingChange,
   errorMessage,
   isSuccess,
+  singleLeadData,
 }) => {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
-
   const [prevFiles, setPrevFiles] = useState<FileWithPreview[]>([]);
-
   const [imageInfo, setImageInfo] = useState<FileWithPreview[]>([]);
 
   const { data } = useSession();
@@ -43,7 +43,6 @@ const Dropzone: React.FC<DropzoneProps> = ({
     accept: {
       'image/*': [],
     },
-    maxSize: 1024 * 1024,
     onDrop,
   });
 
@@ -51,6 +50,17 @@ const Dropzone: React.FC<DropzoneProps> = ({
     // Revoke the data uris to avoid memory leaks
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, [files]);
+
+  useEffect(() => {
+    if (singleLeadData?.image_info_json) {
+      setFiles(() => {
+        return singleLeadData?.image_info_json?.map((imgInfo: any) => ({
+          name: imgInfo?.image_name || '',
+          preview: imgInfo?.image_path || '',
+        }));
+      });
+    }
+  }, [singleLeadData]);
 
   const removeFile = (previewToRemove: string) => {
     setFiles((files) => files.filter((file) => file.preview !== previewToRemove));
@@ -66,7 +76,7 @@ const Dropzone: React.FC<DropzoneProps> = ({
       handleImageChange(files);
       setPrevFiles(files); // Update prevFiles with the current files
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files, prevFiles]);
 
   // Utility function to check if two arrays of files are equal
@@ -86,20 +96,22 @@ const Dropzone: React.FC<DropzoneProps> = ({
     try {
       onPendingChange(true);
       const formData = new FormData();
-      files.forEach((file) => formData.append('pic', file));
+      const currentFiles = files.filter((file) => file.type);
+      currentFiles.forEach((file) => formData.append('pic', file));
+
+      let preImageInfo: any[] = files.filter((file) => !file.type);
+      preImageInfo = preImageInfo.map((value) => ({
+        image_name: value.name,
+        image_path: value.preview,
+      }));
+
       const NewLeadServices = new LeadService();
       const response = await NewLeadServices.UploadLeadImage(formData, token);
-      const imageInfo = response.data.Data.map((item: any) => {
-        return item; // Return each image info object
-      });
-      onChange(imageInfo); // Call onChange with the array of image info objects
+      const imageInfo = response.data.Data.map((item: any) => item);
+
+      onChange([...preImageInfo, ...imageInfo]); // Call onChange with the array of image info objects
       setImageInfo(imageInfo);
-      if (response.status === 'pending') {
-        console.log('Server response is pending');
-        onPendingChange(true);
-      } else {
-        onPendingChange(false);
-      }
+      onPendingChange(response.status === 'pending' ? true : false);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -148,7 +160,7 @@ const Dropzone: React.FC<DropzoneProps> = ({
                 <CameraIcon className='w-[40px] 2xl:w-[60px] h-[40px] 2xl:h-[60px] font-bold fill-gray-300 transition-colors' />
               </div>
               <p className='font-bold text-gray-300 text-sm 2xl:text-[16px]'>
-                {imageInfo.length === 0 ? 'No Image' : 'Add More'}
+                {imageInfo.length === 0 ? 'No Image' : 'Add More'} {files.length}
               </p>
             </div>
           )}

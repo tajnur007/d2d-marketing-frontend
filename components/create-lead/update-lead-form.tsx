@@ -66,7 +66,7 @@ const UpdateLeadForm = () => {
     };
 
     fetchUserData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const UpdateLeadForm = () => {
         image_infos: images,
       };
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleLeadData, images]);
 
   const handlePendingChange = (isPending: boolean) => {
@@ -239,8 +239,12 @@ const UpdateLeadForm = () => {
             defaultValue={singleLeadData?.meeting_status}
           />
           <div className='items-start justify-center '>
-            <p className='text-[hsl(228,100%,21%)] font-medium text-xs mb-2'>Image</p>
-            <Dropzone onChange={setImages} onPendingChange={handlePendingChange} />
+            <p className='text-[#00156A] font-medium text-xs mb-2'>Image</p>
+            <Dropzone
+              singleLeadData={singleLeadData}
+              onChange={setImages}
+              onPendingChange={handlePendingChange}
+            />
           </div>
         </div>
       </div>
