@@ -53,7 +53,6 @@ const CreateEmployeeModal = ({
         const data = resp?.data?.Data?.Data?.map((item: ManagerType) => {
           return { value: item?.name, label: item?.name, manager_id: item.id };
         });
-        console.log(resp);
         data && setManager(data[0]);
         data && setManagers([...data]);
       }
@@ -62,9 +61,6 @@ const CreateEmployeeModal = ({
   }, [data, modalIsOpen]);
 
   useEffect(() => {
-    // const selectedManager = selected === 'executive' ? manager : '';
-    // const selectedManagerId = MANAGERS.find((item) => item.id === selectedManager);
-    // console.log(selectedManager);
     setFormData((prev: any) => {
       return {
         ...prev,
