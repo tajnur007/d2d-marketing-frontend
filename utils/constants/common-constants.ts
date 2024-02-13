@@ -293,7 +293,7 @@ export const CREATE_EMPLOYEE_FORM_ITEMS: CreateEmployeeItems = {
   email: '',
   user_type: '',
   manager_name: '',
-  manager_id: 1,
+  manager_id: 0,
 };
 
 export const AUTH_LEFT_TEXT =
