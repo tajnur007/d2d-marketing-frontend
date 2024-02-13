@@ -18,6 +18,7 @@ const ConfirmationModal = ({
   setModalIsOpen = () => {},
   deleteItem,
   isLoading,
+  text = 'Do you really want to delete?',
 }: any) => {
   const closeModal = () => {
     setModalIsOpen(false);
@@ -42,7 +43,7 @@ const ConfirmationModal = ({
           <p className=' font-semibold text-[#131212] text-[20px] text-center leading-[31.2px] '>
             Are you sure?
           </p>
-          <p>text</p>
+          <p className='text-gray-500'>{text}</p>
         </div>
         {isLoading ? (
           <MiniLoader color='#4f46e5' />
@@ -50,13 +51,11 @@ const ConfirmationModal = ({
           <div className='flex justify-between gap-[12px]'>
             <Button
               onClick={closeModal}
-              className='w-[135px] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-[18px]  leading-[14.5px] ease-in-out bg-[#EBEBEB] text-[#69707C]'>
+              className='w-[135px] bg-[#EBEBEB] text-[#69707C] hover:bg-gray-200'>
               Cancel
             </Button>
 
-            <Button
-              onClick={() => deleteItem()}
-              className='w-[135px] rounded-[10px] text-[18px] ease-in-out'>
+            <Button onClick={() => deleteItem()} className='w-[135px]'>
               Confirm
             </Button>
           </div>

@@ -285,7 +285,7 @@ const SettingsPage = () => {
               <div className='flex justify-end items-center gap-4 mr-7 mt-5'>
                 <Button
                   onClick={handleCancel}
-                  className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB]  hover:text-white '>
+                  className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB] hover:bg-gray-200'>
                   Cancel
                 </Button>
                 <Button

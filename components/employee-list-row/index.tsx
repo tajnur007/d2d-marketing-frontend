@@ -8,7 +8,10 @@ import Popup from 'reactjs-popup';
 import EmployeeOptions from './EmployeeOptions';
 import UpdateEmployeeModal from '../update-employee-modal';
 import { useState } from 'react';
-import DeleteEmployeeConfirmationModal from '../delete-employee-confirmation-modal';
+import ConfirmationModal from '../confirmation-modal';
+import { UserService } from '@/services/user-services';
+import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 const getStatusColor: EmployeestatusColor = {
   Active: 'bg-[#D2FBE7]',
@@ -36,15 +39,46 @@ function EmployeeListRow({
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState<boolean>(false);
   const [isExecutive, setIsExecutive] = useState<boolean>(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const firstChar = item.name.charAt(0).toUpperCase();
 
   const handleDeleteButton = async () => {
     setDeleteModalIsOpen(true);
+    if (employeeActionRef.current) {
+      employeeActionRef.current.close();
+    }
   };
+  const { data: session } = useSession();
 
   const handleEditButton = () => {
     // After clicking the edit button, the modal will open
     setEditModalIsOpen(true);
+    if (employeeActionRef.current) {
+      employeeActionRef.current.close();
+    }
+  };
+
+  const deleteEmployer = async () => {
+    setDeleteModalIsOpen(true);
+    setIsLoading(true);
+    try {
+      //@ts-ignore
+      const token = session?.user?.access_token;
+      const UserServices = new UserService();
+      const resp = await UserServices.deleteUser(item.id, token);
+      if (resp?.status === 202) {
+        setISRefreshData(!isRefreshData);
+        toast.success('Employee deleted successfully!');
+      } else {
+        toast.error('Something went wrong.');
+      }
+    } catch (err) {
+      toast.error('Failed to delete employee!');
+      console.log(err);
+    }
+    setIsLoading(false);
+    setDeleteModalIsOpen(false);
   };
 
   return (
@@ -152,12 +186,11 @@ function EmployeeListRow({
         setIsRefreshData={setISRefreshData}
       />
 
-      <DeleteEmployeeConfirmationModal
+      <ConfirmationModal
         modalIsOpen={deleteModalIsOpen}
         setModalIsOpen={setDeleteModalIsOpen}
-        data={item}
-        isRefreshData={isRefreshData}
-        setIsRefreshData={setISRefreshData}
+        deleteItem={deleteEmployer}
+        isLoading={isLoading}
       />
     </div>
   );
