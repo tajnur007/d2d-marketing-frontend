@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { LeadService } from '@/services/lead-services';
 import { LATEST_LEADS_ITEMS } from '@/utils/constants/common-constants';
-import { InfinitySpin } from 'react-loader-spinner';
 import Loader from '../loader';
 
 const LatestLeadsList: React.FC = () => {
@@ -51,7 +50,7 @@ const LatestLeadsList: React.FC = () => {
         </div>
       </div>
       {isLoading ? (
-        <Loader />
+        <Loader size='100' />
       ) : (
         <div className='w-full h-[calc(100%-88px)] overflow-y-auto tiny-scrollbar pl-6 whitespace-nowrap font-semibold xl:text-[18px] text-[16px] leading-[normal]'>
           {latestLeads?.Data?.map((item, index) => (

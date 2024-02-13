@@ -1,10 +1,10 @@
 import React from 'react';
-import { InfinitySpin } from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 
-const Loader = () => {
+const Loader = ({ size = '150', color = '#4f46e5' }) => {
   return (
     <div className='h-[80%] flex justify-center items-center'>
-      <InfinitySpin width='200' color='#4f46e5' />
+      <Triangle width={size} color={color} />
     </div>
   );
 };
