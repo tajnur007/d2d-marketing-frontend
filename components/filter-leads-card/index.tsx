@@ -1,5 +1,6 @@
 'use-client';
 
+import moment from 'moment';
 import { CalendarIcon } from '@/assets/icons';
 import { FilterLeadsCardProps, StatusState } from '@/models/global-types';
 import { useState, useContext } from 'react';
@@ -11,6 +12,7 @@ import StatusCheckbox from '../status-checkbox';
 import './style.css';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
@@ -30,8 +32,8 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   });
 
   //! State for Created by
-  const [selectedCreatedBy, setCreatedBy] = useState<string>('');
-  const [selectedAssignee, setAssignee] = useState<string>('');
+  const [selectedCreatedBy, setCreatedBy] = useState([]);
+  const [selectedAssignee, setAssignee] = useState([]);
   const {
     executivesOption,
     setExecutivesOption,
@@ -55,9 +57,9 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
   const handleCheckboxChange = (statusName: keyof StatusState) => {
     setStatus((prevStatus) => ({
-      hot: statusName === 'hot' ? !prevStatus.hot : false,
-      warm: statusName === 'warm' ? !prevStatus.warm : false,
-      cold: statusName === 'cold' ? !prevStatus.cold : false,
+      hot: statusName === 'hot' ? !prevStatus.hot : prevStatus.hot,
+      warm: statusName === 'warm' ? !prevStatus.warm : prevStatus.warm,
+      cold: statusName === 'cold' ? !prevStatus.cold : prevStatus.cold,
     }));
   };
 
@@ -65,61 +67,67 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   // @ts-ignore
   const token = data.user.access_token;
   const handleApplyFilterButton = async () => {
-    try {
-      if (
-        filterData.createdBy === null &&
-        filterData.assignee === null &&
-        filterData.status.hot === false &&
-        filterData.status.warm === false &&
-        filterData.status.cold === false &&
-        filterData.endDate === null
-      ) {
-        return null;
-      } else {
-        onFilterData(filterData);
+    if (
+      filterData.createdBy === null ||
+      filterData.assignee === null ||
+      filterData.endDate === null
+    ) {
+      toast.error('some field needs filling');
+    } else {
+      onFilterData(filterData);
+      try {
+        closeTooltip();
+        // from selected data, we extract ID and status to send it to payload
+        const selectedAssigneeId = selectedAssignee.map((item) => {
+          const id = executivesOption.find((option: any) => option.label === item)?.id;
+          return id;
+        });
+
+        console.log(selectedCreatedBy);
+
+        const SelectedCreatedById = selectedCreatedBy.map((item) => {
+          const id = createdByOptions.find((option: any) => option.label === item)?.id;
+          return id;
+        });
+
+        const statusData = Object.keys(status).filter(
+          (key) => status[key as keyof typeof status]
+        );
+        //! payload
+        const payloadObj = {
+          match: {
+            meeting_status: {
+              any: statusData,
+            },
+            created_by_user_id: {
+              any: SelectedCreatedById,
+            },
+            executive_id: {
+              any: selectedAssigneeId,
+            },
+          },
+          range: {
+            created_at: {
+              lte: moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
+              gte: moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ'),
+            },
+          },
+        };
+        //console.log(payloadObj);
+
+        const LeadServices = new LeadService();
+        if (token) {
+          LeadServices.getFilteredLeadsData(
+            setLeadsData,
+            setIsLoading,
+            payloadObj,
+            token
+          );
+          setFilterIcon(true);
+        }
+      } catch (err) {
+        console.log(err);
       }
-      closeTooltip();
-      // from selected data, we extract ID and status to send it to payload
-      const selectedAssigneeId = executivesOption.find(
-        (option: any) => option.label === filterData.assignee[0]
-      )?.id;
-
-      const SelectedCreatedById = createdByOptions.find(
-        (option: any) => option.label === filterData.createdBy[0]
-      )?.created_by_user_id;
-
-      const statusData =
-        status.cold === true ? 'cold' : status.hot === true ? 'hot' : 'warm';
-
-      //! payload
-      const payloadObj = {
-        match: {
-          meeting_status: {
-            any: [statusData],
-          },
-          created_by_user_id: {
-            any: [SelectedCreatedById],
-          },
-          executive_id: {
-            any: [selectedAssigneeId],
-          },
-        },
-        range: {
-          created_at: {
-            lte: endDate?.toISOString(),
-            gte: startDate?.toISOString(),
-          },
-        },
-      };
-      //console.log(payloadObj);
-
-      const LeadServices = new LeadService();
-      if (token) {
-        LeadServices.getFilteredLeadsData(setLeadsData, setIsLoading, payloadObj, token);
-        setFilterIcon(true);
-      }
-    } catch (err) {
-      console.log(err);
     }
   };
 

@@ -49,7 +49,7 @@ const CreateEmployeeModal = ({
         const data = resp?.data?.Data?.Data?.map((item: ManagerType) => {
           return { value: item?.name, label: item?.name };
         });
-        setManagers([...data]);
+        setManagers(data);
       }
     };
     getData();
