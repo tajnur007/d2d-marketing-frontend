@@ -11,22 +11,21 @@ export const CustomSelect = ({
   setSelected = () => {},
   options = [],
   defaultValue,
-  isBothSelectFieldNull,
-  setIsBothSelectFieldNull = () => {},
+  errorMessage,
+  isLoading,
+  selected,
 }: SelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   const handleChange = (selectedOption: any) => {
     setSelected(selectedOption.value);
-    setIsBothSelectFieldNull(false);
   };
-  
+
   return (
     <div className='flex flex-col' ref={ref}>
       <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
         {label}
-        {isBothSelectFieldNull && (
+        {errorMessage && (
           <span className='text-red-500 ml-1'>{`(${label} is required)`}</span>
         )}
       </label>
@@ -36,17 +35,14 @@ export const CustomSelect = ({
           styles={{
             control: (baseStyles, { isFocused }) => ({
               ...baseStyles,
-              border: isBothSelectFieldNull
-                ? '1px solid red'
-                : isFocused
-                ? '1px solid #a855f7'
-                : '1px solid #F3F3F3',
-              '&:hover': {
-                border: isBothSelectFieldNull
+              border:
+                errorMessage && !isFocused
                   ? '1px solid red'
                   : isFocused
                   ? '1px solid #a855f7'
                   : '1px solid #F3F3F3',
+              '&:hover': {
+                border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
               },
               borderRadius: '10px',
               width: '100%',
@@ -56,9 +52,14 @@ export const CustomSelect = ({
             }),
           }}
           options={options}
-          // defaultValue={options.find((option) => option.value === defaultValue)?.label}
+          value={
+            selected === ''
+              ? null
+              : options.find((option) => option.value === defaultValue)
+          }
           placeholder={options.find((option) => option.value === defaultValue)?.label}
           onChange={handleChange}
+          isDisabled={isLoading}
         />
       </div>
     </div>
