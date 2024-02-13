@@ -234,4 +234,3 @@ export const ASSIGNEE_USERS_LIST = LEADS_DATA.map((item) => ({
   label: item.assignedToName,
   image: item.image,
 }));
-

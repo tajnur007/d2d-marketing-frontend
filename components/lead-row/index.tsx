@@ -2,10 +2,10 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 import moment from 'moment';
-import { LeadListType, statusColor, AssignToUsers } from '@/models/global-types';
-import LeadDetailsButton from '../lead-details-button';
 import phoneImage from '@/assets/images/leadslist-icons/call.png';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
+import { LeadListType, statusColor } from '@/models/global-types';
+import LeadDetailsButton from '../lead-details-button';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
