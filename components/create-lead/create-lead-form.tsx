@@ -173,7 +173,7 @@ const CreateLeadForm: React.FC = () => {
   return (
     <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
       <form onSubmit={onFormSubmit}>
-        <div className='flex items-center justify-between mt-10 gap-5'>
+        <div className='flex items-center justify-between md:mt-5 lg:mt-10 gap-5'>
           <Input
             label='Title'
             placeholder='Title here'
@@ -205,7 +205,7 @@ const CreateLeadForm: React.FC = () => {
           <Map setLocation={setLocation} location={location} />
         </div>
 
-        <div className='flex items-center justify-between mt-10 gap-5'>
+        <div className='flex items-center justify-between md:mt-5 lg:mt-10 gap-5'>
           <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
             <Input
               label='Name'
@@ -273,7 +273,10 @@ const CreateLeadForm: React.FC = () => {
               disabled={pending}
               value={formData?.Note}
               errorMessage={formErrors.Note}
-              className={`h-[182px] ${formErrors.Note && 'border-red-500 shadow'}`}
+              className={`md:h-[210px] lg:h-[220px] 2xl:h-[250px] ${
+                //lg:h-[182px]
+                formErrors.Note && 'border-red-500 shadow'
+              }`}
               onChange={handleInputChange}
             />
           </div>
@@ -288,7 +291,7 @@ const CreateLeadForm: React.FC = () => {
               isLoading={pending}
               selected={isSuccess ? '' : statusSelected}
             />
-            <div className='items-start justify-center '>
+            <div className='items-start justify-center'>
               <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
                 Image
                 {formErrors.Images && (
@@ -308,7 +311,7 @@ const CreateLeadForm: React.FC = () => {
           <Button
             type='submit'
             disabled={pending}
-            className={`w-[193px] rounded-[10px] h-[60px]`}>
+            className={`md:w-[150px] lg:w-[193px] rounded-[10px] md:h-[35px] lg:h-[60px]`}>
             {pending ? <MiniLoader /> : ' Create'}
           </Button>
         </div>
