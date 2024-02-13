@@ -1,15 +1,14 @@
 'use client';
 
+import { DeleteLeadModalImage, ExIcon } from '@/assets/icons';
 import { DeleteModalProps } from '@/models/global-types';
+import { LeadService } from '@/services/lead-services';
+import { useSession } from 'next-auth/react';
+import 'react-datetime/css/react-datetime.css';
+import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 import { Button } from './button';
 import './dropdown-select.css';
-import React from 'react';
-import Modal from 'react-modal';
-import 'react-datetime/css/react-datetime.css';
-import { DeleteLeadModalImage, ExIcon } from '@/assets/icons';
-import { useSession } from 'next-auth/react';
-import { LeadService } from '@/services/lead-services';
-import { toast } from 'react-toastify';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -45,7 +44,7 @@ const DeleteConfirmationModal = ({
   return (
     <Modal
       className={
-        'absolute w-[404px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
+        'absolute w-[404px] lg:h-auto -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
       isOpen={modalIsOpen}
       onRequestClose={closeModal}>
@@ -56,21 +55,21 @@ const DeleteConfirmationModal = ({
 
         <div className='flex justify-center items-center flex-col'>
           <DeleteLeadModalImage />
-          <p className='mt-[10px] font-semibold text-[#131212] text-[20px] text-center leading-[31.2px]'>
+          <p className='md:mt-[5px] lg:mt-[10px] font-semibold text-[#131212] md:text-[16px] lg:text-[20px] text-center lg:leading-[31.2px]'>
             Are you sure you want to Delete?
           </p>
         </div>
 
-        <div className='mt-[16px] flex gap-[12px]'>
+        <div className='md:mt-[8px] lg:mt-[16px] flex gap-[12px] justify-center'>
           <Button
             onClick={closeModal}
-            className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
+            className='md:w-[70px] lg:w-[135px] md:py-[12px] lg:py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white md:text-[14px] lg:text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
             Cancel
           </Button>
 
           <Button
             onClick={handleConfirmButton}
-            className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
+            className='md:w-[70px] lg:w-[135px] md:py-[12px] lg:py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white md:text-[14px] lg:text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
             Confirm
           </Button>
         </div>

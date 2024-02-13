@@ -75,7 +75,7 @@ const LeadDetails = ({
   }, [closeDrawer, setIsOpen]);
 
   return (
-    <div className='p-8 h-full overflow-y-auto no-scrollbar '>
+    <div className='p-8 h-full overflow-y-auto no-scrollbar'>
       <div className='flex justify-between '>
         <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
         <div onClick={() => setCloseDrawer(!closeDrawer)} className='cursor-pointer'>
