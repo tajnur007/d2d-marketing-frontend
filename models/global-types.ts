@@ -200,7 +200,7 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?: [{ image_name: string; image_path: string }];
+  Images?: { [key: string]: string }[] | string;
   AssignedTo?: string;
   ExecutiveId?: number;
   location: MapLocation;
@@ -283,12 +283,13 @@ export interface SelectProps {
   label?: React.ReactNode;
   className?: string;
   selected?: string;
-  setSelected?: (item: string) => void;
+  setSelected?: (item: any) => void;
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
   defaultValue?: string;
-  isBothSelectFieldNull?: boolean;
-  setIsBothSelectFieldNull?: (item: boolean) => void;
+  errorMessage?: string;
+  value?: string;
+  isLoading?: boolean;
 }
 
 export interface AssignSelectProps {

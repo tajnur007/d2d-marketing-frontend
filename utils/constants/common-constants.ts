@@ -66,7 +66,7 @@ export const API_PATHS = {
   GetExecutives: '/user/executive-list',
   ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
-  Leaderboard: '/user/leaderboard',
+  Leaderboard: '/lead/leaderboard',
   LeadView: '/lead/view',
   UpdateLead: '/lead/update',
   DeleteLead: '/lead/delete',
@@ -77,7 +77,7 @@ export const API_PATHS = {
   GetAllReminder: '/reminder/list',
   DeleteReminder: '/reminder/delete',
   UpdateRemainder: '/reminder/update',
-  FilterLeads: '/lead/filter',
+  FilterLeads: '/lead/filter?search=lead',
   UpdateEmployeeInfo: '/user/update',
   ChangePassword: '/user/change-password',
 };
@@ -121,12 +121,7 @@ export const FORM_ITEMS: FormItems = {
   Reference: '',
   Note: '',
   Status: '',
-  Image: [
-    {
-      image_name: '',
-      image_path: '',
-    },
-  ],
+  Images: [],
   AssignedTo: '',
   location: { lat: 0, lng: 0 },
 };

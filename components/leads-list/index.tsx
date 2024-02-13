@@ -44,8 +44,9 @@ function LeadsList() {
       const UserServices = new UserService();
       UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
-      LeadServices.getCreatedByData(setCreatedByOptions, leadsData);
+      LeadServices.getCreatedByData(setCreatedByOptions, token);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const handleCreateLeadButtonClick = () => {
@@ -75,23 +76,25 @@ function LeadsList() {
 
   return (
     <div
-      className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] pb-6'
+      className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] md:pb-4 lg:pb-6'
       onScroll={handleScroll}>
       <div className='py-4 md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
         <div className='flex justify-between gap-5'>
           <div className='flex pt-2'>
             <div>
-              <p className='font-semibold text-[16px] text-[#2B3674]'>Leads</p>
+              <p className='font-semibold md:text-[14px] lg:text-[16px] text-[#2B3674]'>
+                Leads
+              </p>
             </div>
 
-            <div className='flex items-center justify-center h-6 bg-[#D2FBE7] rounded-[17px] ms-2 p-2'>
-              <p className='text-black font-semibold text-[16px]'>
+            <div className='flex items-center justify-center lg:h-6 md:h-3 bg-[#D2FBE7] rounded-[17px] ms-2 p-2'>
+              <p className='text-black font-semibold md:text-[14px] lg:text-[16px]'>
                 {searchData?.length > 0 ? searchData?.length : leadsData?.Count}
               </p>
             </div>
           </div>
 
-          <div className='flex justify-end m-0 p-0 w-[72%]'>
+          <div className='flex justify-end m-0 p-0 md:w-full lg:w-[72%]'>
             <SearchBar
               handleKeyDown={handleKeyDown}
               value={searchValue}

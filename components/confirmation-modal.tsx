@@ -7,6 +7,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import 'react-datetime/css/react-datetime.css';
 import { DeleteLeadModalImage, ExIcon } from '@/assets/icons';
+import MiniLoader from './mini-loader';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -16,6 +17,7 @@ const ConfirmationModal = ({
   modalIsOpen,
   setModalIsOpen = () => {},
   deleteItem,
+  isLoading,
 }: any) => {
   const closeModal = () => {
     setModalIsOpen(false);
@@ -41,20 +43,23 @@ const ConfirmationModal = ({
             Are you sure?
           </p>
         </div>
+        {isLoading ? (
+          <MiniLoader color='#4f46e5' />
+        ) : (
+          <div className=' flex justify-between gap-[12px]'>
+            <Button
+              onClick={closeModal}
+              className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
+              Cancel
+            </Button>
 
-        <div className=' flex justify-between gap-[12px]'>
-          <Button
-            onClick={closeModal}
-            className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
-            Cancel
-          </Button>
-
-          <Button
-            onClick={() => deleteItem()}
-            className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200 bg-red-600 hover:bg-red-500'>
-            Confirm
-          </Button>
-        </div>
+            <Button
+              onClick={() => deleteItem()}
+              className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200 bg-red-600 hover:bg-red-500'>
+              Confirm
+            </Button>
+          </div>
+        )}
       </div>
     </Modal>
   );

@@ -43,8 +43,6 @@ export const leadFormErrorCheck = (formData: FormItems, field: string) => {
   const safeFields = {
     Email: 'Email',
     Reference: 'Reference',
-    Status: 'Status',
-    AssignedTo: 'AssignedTo',
   };
 
   if (safeFields[field as keyof typeof safeFields]) {
@@ -62,6 +60,8 @@ export const leadFormErrorCheck = (formData: FormItems, field: string) => {
     if (field === 'Phone') {
       const phoneValue = formData[field as keyof typeof formData];
       return validatePhone(phoneValue) ? false : `(${field} is invalid)`;
+    } else if (field === 'Images') {
+      return formData[field]?.length !== 0 ? false : `(${field} is required)`;
     } else {
       return false;
     }
@@ -80,24 +80,24 @@ export const generateInitials = (fullName: string): string => {
 };
 
 export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
-    try {
-      const response = await axios.get(imageUrl);
-      if (response.status === 200) {
-        return true; // URL is valid
-      } else {
-        return false; // URL is not valid
-      }
-    } catch (error: any) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        return false; // URL is not valid and returns "Not Found" status
-      } else {
-        console.error('Error validating URL:', error.message);
-        throw new Error('An error occurred while validating the URL');
-      }
+  try {
+    const response = await axios.get(imageUrl);
+    if (response.status === 200) {
+      return true; // URL is valid
+    } else {
+      return false; // URL is not valid
     }
-  };
+  } catch (error: any) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return false; // URL is not valid and returns "Not Found" status
+    } else {
+      console.error('Error validating URL:', error.message);
+      throw new Error('An error occurred while validating the URL');
+    }
+  }
+};
 
-  export const signUpFormErrorCheck = (formData: SignUpFormItems, field: string) => {
+export const signUpFormErrorCheck = (formData: SignUpFormItems, field: string) => {
   const safeFields = {
     FullName: 'FullName',
     Email: 'Email',
@@ -117,33 +117,6 @@ export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
     }
 
     if (field === 'ConfirmPassword' && formData.Password !== formData.ConfirmPassword) {
-    return '(Passwords do not match)';
-  }
-
-    return null; // Safe field is valid
-  }
-
-  // Handle non-safe fields
-  if (formData[field as keyof typeof formData] === '') {
-    return `(${field} is required)`;
-  }
-
-  return null; // Non-safe field is valid
-};
-
-export const changePasswordFormErrorCheck = (formData: ChangePasswordItems, field: string) => {
-  const safeFields = {
-    OldPassword: 'OldPassword',
-    NewPassword: 'NewPassword',
-    ConfirmPassword: 'ConfirmPassword',
-  };
-
-  if (safeFields[field as keyof typeof safeFields]) {
-    if (formData[field as keyof typeof formData] === '') {
-      return `(${field} is required)`;
-    }
-
-    if (field === 'ConfirmPassword' && formData.NewPassword !== formData.ConfirmPassword) {
       return '(Passwords do not match)';
     }
 
@@ -156,4 +129,4 @@ export const changePasswordFormErrorCheck = (formData: ChangePasswordItems, fiel
   }
 
   return null; // Non-safe field is valid
-}
+};
