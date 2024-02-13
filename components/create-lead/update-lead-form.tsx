@@ -66,6 +66,7 @@ const UpdateLeadForm = () => {
     };
 
     fetchUserData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -87,6 +88,7 @@ const UpdateLeadForm = () => {
         image_infos: images,
       };
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleLeadData, images]);
 
   const handlePendingChange = (isPending: boolean) => {

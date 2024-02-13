@@ -1,7 +1,7 @@
 'use client';
-import moment from 'moment';
 import ClockIcon from '@/assets/images/leadslist-icons/search-clock.png';
 import { LeadListType, statusColor } from '@/models/global-types';
+import moment from 'moment';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import 'react-modern-drawer/dist/index.css';

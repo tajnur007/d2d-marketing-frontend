@@ -65,7 +65,7 @@ export const API_PATHS = {
   GetExecutives: '/user/executive-list',
   ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
-  Leaderboard: '/user/leaderboard',
+  Leaderboard: '/lead/leaderboard',
   LeadView: '/lead/view',
   UpdateLead: '/lead/update',
   DeleteLead: '/lead/delete',
@@ -119,12 +119,7 @@ export const FORM_ITEMS: FormItems = {
   Reference: '',
   Note: '',
   Status: '',
-  Image: [
-    {
-      image_name: '',
-      image_path: '',
-    },
-  ],
+  Images: [],
   AssignedTo: '',
   location: { lat: 0, lng: 0 },
 };

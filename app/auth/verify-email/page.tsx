@@ -75,6 +75,7 @@ const VerifyEmailPage = () => {
     if (verifyData.token && verifyData.company_id) {
       emailVerification(verifyData.token, verifyData.company_id);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [verifyData]);
 
 
