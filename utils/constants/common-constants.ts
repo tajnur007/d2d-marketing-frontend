@@ -65,7 +65,7 @@ export const API_PATHS = {
   GetExecutives: '/user/executive-list',
   ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
-  Leaderboard: '/user/leaderboard',
+  Leaderboard: '/lead/leaderboard',
   LeadView: '/lead/view',
   UpdateLead: '/lead/update',
   DeleteLead: '/lead/delete',
