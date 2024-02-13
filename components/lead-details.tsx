@@ -1,17 +1,21 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import moment from 'moment';
+import Reminder from './remainder';
+import CreateRemainderModal from './create-remainder-modal';
+import { Button } from './button';
+import { AssignDropdownSelect } from './assign-dropdown-select';
+import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
 import clockImage from '@/assets/images/leadslist-icons/clock.png';
 import crossImage from '@/assets/images/leadslist-icons/close-circle.png';
-import downImage from '@/assets/images/leadslist-icons/down-arrow.png';
 import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
-import { CreateReminderItems, statusColor } from '@/models/global-types';
-import { CREATE_REMINDER_ITEMS } from '@/utils/constants/common-constants';
-import moment from 'moment';
-import Image from 'next/image';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { AssignDropdownSelect } from './assign-dropdown-select';
-import { Button } from './button';
-import CreateReminderModal from './create-reminder-modal';
+import { CreateReminderItems, RemainderType, statusColor } from '@/models/global-types';
+import { validateImageUrl } from '@/utils/helpers/common-helpers';
+import { ReminderService } from '@/services/reminder-services';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
@@ -22,9 +26,11 @@ const getStatusColor: statusColor = {
 const LeadDetails = ({
   setIsOpen,
   data,
+  isOpen,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   data: any;
+  isOpen: boolean;
 }) => {
   const [selected, setSelected] = useState('');
   const [formData, setFormData] = useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
@@ -32,20 +38,44 @@ const LeadDetails = ({
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [closeDrawer, setCloseDrawer] = React.useState(false);
-
-  const src = data?.image_info_json[0]?.image_name;
+  const [reminders, setRemainders] = React.useState<RemainderType[]>([]);
+  const [selectReminder, setSelectReminder] = React.useState();
+  const [isCreated, setIsCreated] = React.useState(false);
+  const [isUpdated, setIsUpdated] = React.useState(false);
+  const { data: reminderData } = useSession();
+  //@ts-ignore den
+  const token: string = reminderData?.user?.access_token;
 
   const handleAddReminderButtonClick = () => {
-    console.log('Button Clicked.');
     setModalIsOpen(true);
   };
+
+  // const handleChange = (selectedOption: any) => {
+  //   setSelectReminder(selectedOption.value);
+  // };
+
+  // To get data initially
+  useEffect(() => {
+    const Service = new ReminderService();
+    isOpen && Service.getAllRemindersData(token, setRemainders);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, token]);
+
+  // To get the latest remainder after creating new remainder
+  useEffect(() => {
+    const Service = new ReminderService();
+    (isCreated || isUpdated) && Service.getAllRemindersData(token, setRemainders);
+    setIsCreated(false);
+    setIsUpdated(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCreated, isUpdated]);
 
   useEffect(() => {
     setIsOpen(false);
   }, [closeDrawer, setIsOpen]);
 
   return (
-    <div className='p-8  h-full overflow-y-auto no-scrollbar '>
+    <div className='p-8 h-full overflow-y-auto no-scrollbar '>
       <div className='flex justify-between '>
         <h2 className='text-[20px] font-semibold mb-4 text-[#25254C]'>Details</h2>
         <div onClick={() => setCloseDrawer(!closeDrawer)} className='cursor-pointer'>
@@ -69,14 +99,13 @@ const LeadDetails = ({
         <div className='flex items-center gap-4 mt-3'>
           <div className='flex-grow break-all'>{data?.title}</div>
           <div
-            className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center  
+            className={`flex justify-between gap-2 px-2 py-[10px] rounded-xl items-center
                 ${
                   getStatusColor[data?.meeting_status as keyof statusColor]
                 } cursor-pointer`}>
             <button className='text-black text-sm font-medium'>
               {data?.meeting_status}
             </button>
-            <Image src={downImage} alt='close' />
           </div>
         </div>
         <div className='flex items-center'>
@@ -87,7 +116,7 @@ const LeadDetails = ({
             {moment(data?.created_at).format('ddd DD MMM, YYYY hh:mm A')}
           </div>
         </div>
-        <AssignDropdownSelect />
+        <AssignDropdownSelect leadData={data} />
       </div>
 
       <div className='poc border-[#EDEBF4] bg-[#F8F8F8] p-4 rounded-lg mt-4 whitespace-normal'>
@@ -145,32 +174,43 @@ const LeadDetails = ({
         <h4 className='text-[#00156A] font-medium text-[12px] leading-[14px] mt-5'>
           Image
         </h4>
-
-        <Image
-          src={src}
-          loader={() => src}
-          alt='image'
-          className='w-[108px] h-[108px]'
-          width='108'
-          height='108'
-        />
-      </div>
-      {data?.remainders && (
-        <div className='reminder bg-[#F8F6FF] p-4 rounded-lg mt-4 whitespace-normal'>
-          <div className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
-            Reminder
-          </div>
-          <div className='font-semibold text-base mb-[10px] text-black leading-[14px]'>
-            {data?.remainders?.title}
-          </div>
-          <div className='text-[#8A8A8A] mb-[10px]'>
-            {data?.remainders?.reminder_time}
-          </div>
-          <button className='bg-[#B8FFDD] font-medium  text-black text-[10px] py-[5px] px-2 rounded-full'>
-            {data?.remainders?.status}
-          </button>
+        <div className='flex flex-wrap gap-2 mx-auto my-5'>
+          {data?.image_info_json.map((image: any) => (
+            <div key={image?.image_name}>
+              <Image
+                src={`${image?.image_path}`}
+                alt='image'
+                width={100}
+                height={100}
+                className={`w-[108px] h-[108px]`}
+              />
+            </div>
+          ))}
         </div>
-      )}
+      </div>
+
+      <div className=' bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
+        <h1 className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
+          Reminder
+        </h1>
+        {reminders?.length === 0 ? (
+          <div className='text-center'>No remainder found</div>
+        ) : (
+          <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>
+            {reminders?.map((reminder: RemainderType) => (
+              <Reminder
+                key={reminder?.id}
+                reminder={reminder}
+                token={token}
+                setReminders={setRemainders}
+                isUpdated={isUpdated}
+                setIsUpdated={setIsUpdated}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className='flex justify-center items-center'>
         <Button
           onClick={handleAddReminderButtonClick}
@@ -178,7 +218,7 @@ const LeadDetails = ({
           Add Reminder
         </Button>
       </div>
-      <CreateReminderModal
+      <CreateRemainderModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         formData={formData}
@@ -188,6 +228,7 @@ const LeadDetails = ({
         selected={selected}
         setSelected={setSelected}
         leadsData={data}
+        setIsCreated={setIsCreated}
       />
     </div>
   );

@@ -62,9 +62,6 @@ const SuggestionRow = ({
           </span>
         </div>
       </div>
-      {/* <Drawer open={isOpen} direction='right' size={450} enableOverlay={false}>
-        <LeadDetails setIsOpen={setIsOpen} data={item} />
-      </Drawer> */}
     </div>
   );
 };

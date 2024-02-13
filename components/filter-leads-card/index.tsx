@@ -2,24 +2,25 @@
 
 import { CalendarIcon } from '@/assets/icons';
 import { FilterLeadsCardProps, StatusState } from '@/models/global-types';
-import {
-  ASSIGNEE_USERS_LIST,
-  CREATED_BY_USERS_LIST,
-} from '@/utils/constants/leadslist-constant';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { LeadsContext } from '@/context/leads-context';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomMultiSelect } from '../custom-multi-select';
 import StatusCheckbox from '../status-checkbox';
 import './style.css';
+import { LeadService } from '@/services/lead-services';
+import { useSession } from 'next-auth/react';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
-  setFilterCardOpen,
+  filterIcon,
+  setFilterIcon,
+  closeTooltip,
 }) => {
   //! State for date range
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(new Date('2024-01-01'));
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   //! State for status
   const [status, setStatus] = useState<StatusState>({
@@ -29,8 +30,19 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   });
 
   //! State for Created by
-  const [selectedCreatedBy, setCreatedBy] = useState<string | null>(null);
-  const [selectedAssignee, setAssignee] = useState<string | null>(null);
+  const [selectedCreatedBy, setCreatedBy] = useState<string>('');
+  const [selectedAssignee, setAssignee] = useState<string>('');
+  const {
+    executivesOption,
+    setExecutivesOption,
+    leadDetailsRef,
+    createdByOptions,
+    setCreatedByOptions,
+    leadsData,
+    setLeadsData,
+    isLoading,
+    setIsLoading,
+  } = useContext(LeadsContext);
 
   //* Output
   const filterData = {
@@ -49,64 +61,112 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
     }));
   };
 
-  const ApplyFilter = () => {
-    if (
-      filterData.createdBy === null &&
-      filterData.assignee === null &&
-      filterData.status.hot === false &&
-      filterData.status.warm === false &&
-      filterData.status.cold === false &&
-      filterData.endDate === null
-    ) {
-      setFilterCardOpen(false);
-      return null;
-    } else {
-      onFilterData(filterData);
-      setFilterCardOpen(false);
+  const { data } = useSession();
+  // @ts-ignore
+  const token = data.user.access_token;
+  const handleApplyFilterButton = async () => {
+    try {
+      if (
+        filterData.createdBy === null &&
+        filterData.assignee === null &&
+        filterData.status.hot === false &&
+        filterData.status.warm === false &&
+        filterData.status.cold === false &&
+        filterData.endDate === null
+      ) {
+        return null;
+      } else {
+        onFilterData(filterData);
+      }
+      closeTooltip();
+      // from selected data, we extract ID and status to send it to payload
+      const selectedAssigneeId = executivesOption.find(
+        (option: any) => option.label === filterData.assignee[0]
+      )?.id;
+
+      const SelectedCreatedById = createdByOptions.find(
+        (option: any) => option.label === filterData.createdBy[0]
+      )?.created_by_user_id;
+
+      const statusData =
+        status.cold === true ? 'cold' : status.hot === true ? 'hot' : 'warm';
+
+      //! payload
+      const payloadObj = {
+        match: {
+          meeting_status: {
+            any: [statusData],
+          },
+          created_by_user_id: {
+            any: [SelectedCreatedById],
+          },
+          executive_id: {
+            any: [selectedAssigneeId],
+          },
+        },
+        range: {
+          created_at: {
+            lte: endDate?.toISOString(),
+            gte: startDate?.toISOString(),
+          },
+        },
+      };
+      //console.log(payloadObj);
+
+      const LeadServices = new LeadService();
+      if (token) {
+        LeadServices.getFilteredLeadsData(setLeadsData, setIsLoading, payloadObj, token);
+        setFilterIcon(true);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  const CancelFilter = () => {
-    setFilterCardOpen(false);
+  const handleCancelButton = () => {
+    try {
+      const LeadServices = new LeadService();
+      if (token) {
+        LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
+        setFilterIcon(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    closeTooltip();
   };
 
   return (
     <div>
-      <div className=' bg-white  mt-2 pl-[12px] pt-[20px] pr-[20px] pb-[20px]'>
+      <div className='bg-white shadow-md rounded-xl w-[360px] pl-[12px] pt-[20px] pr-[20px] pb-[20px]'>
         {/* Created by */}
-        <div>
+        <div className='border-b border-[#E9F0FF]'>
           <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1 pl-[8px]'>
             Created by
           </label>
-          <div>
-            <CustomMultiSelect
-              setSelected={setCreatedBy}
-              options={CREATED_BY_USERS_LIST}
-              onSelectChange={(value: any) => setCreatedBy(value)}
-            />
-          </div>
+
+          <CustomMultiSelect
+            setSelected={setCreatedBy}
+            options={createdByOptions}
+            onSelectChange={(value: any) => setCreatedBy(value)}
+          />
         </div>
 
-        <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF] ml-[7px]'></div>
-
         {/* Assignee */}
-        <div className='mt-[10px]'>
+        <div className='mt-[10px] border-b border-[#E9F0FF]'>
           <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1 pl-[8px]'>
             Assignee
           </label>
-          <div>
-            <CustomMultiSelect
-              setSelected={setAssignee}
-              options={ASSIGNEE_USERS_LIST}
-              onSelectChange={(value: any) => setAssignee(value)}
-            />
-          </div>
+
+          <CustomMultiSelect
+            setSelected={setAssignee}
+            options={executivesOption}
+            onSelectChange={(value: any) => setAssignee(value)}
+          />
         </div>
 
-        <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF] ml-[7px]'></div>
-
         {/* Status */}
-        <div className='mt-[10px]'>
+        <div className='mt-[10px] border-b border-[#E9F0FF]'>
           <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1 pl-[8px]'>
             Status
           </label>
@@ -132,8 +192,6 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           </div>
         </div>
 
-        <div className='border-t my-[10px] w-[349px] h-[1px] border-[#E9F0FF] ml-[7px]'></div>
-
         {/* Date Range */}
         <div className='my-[10px] pl-[8px]'>
           <label className='font-semibold text-base leading-[28px] text-[#00156A] mb-1'>
@@ -142,7 +200,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           <div className='bg-white w-full mt-2 text-center'>
             <div className='flex space-x-2 items-center'>
               <div className='relative w-[159px] h-[44px]'>
-                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start'>
+                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                   <DatePicker
                     selected={startDate}
                     onChange={(date: any) => setStartDate(date)}
@@ -150,6 +208,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
                     startDate={startDate}
                     endDate={endDate}
                     dateFormat='MMM d, yyyy'
+                    className='custom-datepicker'
                   />
                 </div>
                 <span className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'>
@@ -158,7 +217,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
               </div>
               <span className='text-[#667085]'>–</span>
               <div className='relative w-[159px] h-[44px]'>
-                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start'>
+                <div className='py-2 px-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 date-style flex justify-start focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'>
                   <DatePicker
                     selected={endDate}
                     onChange={(date: any) => setEndDate(date)}
@@ -167,6 +226,7 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
                     endDate={endDate}
                     minDate={startDate}
                     dateFormat='MMM d, yyyy'
+                    className='custom-datepicker'
                   />
                 </div>
                 <span className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'>
@@ -180,12 +240,12 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
         {/* Apply and Cancel Buttons */}
         <div className='flex justify-between mt-[18px] gap-2 pl-[8px]'>
           <button
-            onClick={CancelFilter}
+            onClick={handleCancelButton}
             className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
-            Cancel
+            {filterIcon ? 'Reset' : 'Cancel'}
           </button>
           <button
-            onClick={ApplyFilter}
+            onClick={handleApplyFilterButton}
             className='bg-[#5630FF] text-white font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
             Apply
           </button>

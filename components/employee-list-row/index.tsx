@@ -3,11 +3,15 @@
 import moreImage from '@/assets/images/leadslist-icons/more_vert.png';
 import profileImage from '@/assets/images/profile.png';
 import { EmployeestatusColor } from '@/models/global-types';
-import { ApiService } from '@/services/api-services';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Popup from 'reactjs-popup';
 import EmployeeOptions from './EmployeeOptions';
+import UpdateEmployeeModal from '../update-employee-modal';
+import { useState } from 'react';
+import { UserService } from '@/services/user-services';
+import DeleteConfirmationModal from '../delete-confirmation-modal';
+import DeleteEmployeeConfirmationModal from '../delete-employee-confirmation-modal';
 
 const getStatusColor: EmployeestatusColor = {
   Active: 'bg-[#D2FBE7]',
@@ -18,11 +22,21 @@ function EmployeeListRow({
   item,
   uniqueCharCount,
   isFirstChar,
+  employeeActionRef,
+  isRefreshData,
+  setISRefreshData = () => {},
 }: {
   item: any;
   uniqueCharCount: { [key: string]: number };
   isFirstChar?: boolean;
+  employeeActionRef: any;
+  isRefreshData: boolean;
+  setISRefreshData: any;
 }) {
+  const [editModalIsOpen, setEditModalIsOpen] = useState<boolean>(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState<boolean>(false);
+  const [isExecutive, setIsExecutive] = useState<boolean>(false);
+
   const { data } = useSession();
   const firstChar = item.name.charAt(0).toUpperCase();
 
@@ -31,12 +45,12 @@ function EmployeeListRow({
   };
 
   const handleDeleteButton = async (userId: number) => {
-    //@ts-ignore
-    const token = data?.user?.access_token;
-    const UserServices = new ApiService();
-    if (token) {
-      await UserServices.deleteUser(userId, token);
-    }
+    setDeleteModalIsOpen(true);
+  };
+
+  const handleEditButton = (userId: number) => {
+    // After clicking the edit button, the modal will open
+    setEditModalIsOpen(true);
   };
 
   return (
@@ -45,7 +59,7 @@ function EmployeeListRow({
         <div className='inline-flex items-center gap-[7px] text-[12px] mt-[20px]'>
           <div className='font-medium text-[#5630FF]'>{firstChar}</div>
 
-          <div className='font-bold text-black px-[8px] py-[8px] bg-[#e5dfff] rounded-[12px]'>
+          <div className='font-bold text-black h-6 min-w-6 px-2 flex items-center justify-center bg-[#e5dfff] rounded-full tracking-wide'>
             {uniqueCharCount[firstChar]}
           </div>
         </div>
@@ -97,12 +111,14 @@ function EmployeeListRow({
             {item?.employeeStatus || 'Active'}
           </span>
         </div>
+
         <Popup
           trigger={
             <div className='menu-item'>
               <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
             </div>
           }
+          ref={employeeActionRef}
           position='left center'
           on='click'
           closeOnDocumentClick
@@ -117,12 +133,32 @@ function EmployeeListRow({
             marginLeft: '20px',
           }}
           arrow={false}>
-          <EmployeeOptions
-            handleViewButton={handleViewButton}
-            handleDeleteButton={() => handleDeleteButton(item.id)}
-          />
+          {(!deleteModalIsOpen || !editModalIsOpen) && (
+            <EmployeeOptions
+              handleDeleteButton={() => handleDeleteButton(item.id)}
+              handleEditButton={() => handleEditButton(item.id)}
+            />
+          )}
         </Popup>
       </div>
+
+      <UpdateEmployeeModal // This is the modal for updating employee details
+        modalIsOpen={editModalIsOpen}
+        isExecutive={isExecutive} // This is the state for the executive
+        setModalIsOpen={setEditModalIsOpen}
+        setIsExecutive={setIsExecutive}
+        employeeinfo={item} // This is the employee details
+        isRefreshData={isRefreshData}
+        setIsRefreshData={setISRefreshData}
+      />
+
+      <DeleteEmployeeConfirmationModal
+        modalIsOpen={deleteModalIsOpen}
+        setModalIsOpen={setDeleteModalIsOpen}
+        data={item}
+        isRefreshData={isRefreshData}
+        setIsRefreshData={setISRefreshData}
+      />
     </div>
   );
 }

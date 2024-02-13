@@ -112,16 +112,27 @@ export interface PointsOfContactType {
 }
 
 export interface ImageInfoType {
-  image_name: string;
+  image_name?: string;
   image_path?: string;
 }
 
 export interface RemainderType {
-  title: string;
-  lead_id: number;
-  reminder_time: ReactNode;
+  company_id: number;
+  id: number;
+  lead_id?: number;
+  notes?: string;
+  reminder_time?: string;
+  status?: string;
+  title?: string;
+  user_id?: number;
+  Date?: any;
+}
+
+export interface UpdateRemainderType {
   notes: string;
+  reminder_time: string;
   status: string;
+  title: string;
 }
 
 export interface LeadListType {
@@ -189,9 +200,56 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?: string;
+  Image?: [{ image_name: string; image_path: string }];
   AssignedTo?: string;
+  ExecutiveId?: number;
   location: MapLocation;
+}
+
+//! Single Lead data
+export interface SingleLeadItems {
+  assignment_status?: string;
+  company_id?: number;
+  created_at?: string;
+  created_by?: string;
+  created_by_user_id?: number;
+  executive_id?: number;
+  executive_name?: string;
+  id?: number;
+  image_info_json?: ImageInfoType[];
+  latitude?: number;
+  longitude?: number;
+  manager_id?: number;
+  manager_name?: string;
+  meeting_status?: string;
+  point_of_contact?: PointsOfContactType;
+  previous_user_id?: number;
+  reminders?: RemainderType[];
+  title?: string;
+}
+
+export interface TransferLeadPayload {
+  executive_id: number;
+  executive_name: string;
+}
+
+export interface UpdateReminderType {
+  title: string;
+  user_id: number;
+  reminder_time: string;
+  notes: string;
+  status: string;
+}
+
+export interface UpdateLeadPayload {
+  title: string;
+  executive_id: number;
+  executive_name: string;
+  latitude: number;
+  longitude: number;
+  meeting_status: string;
+  point_of_contact: PointsOfContactType;
+  image_infos: ImageInfoType[];
 }
 
 export interface SettingFormItems {
@@ -219,6 +277,9 @@ export interface SelectProps {
   setSelected?: (item: string) => void;
   options?: CreateLeadStatusItems[];
   onSelectChange?: any;
+  defaultValue?: string;
+  isBothSelectFieldNull?: boolean;
+  setIsBothSelectFieldNull?: (item: boolean) => void;
 }
 
 export interface AssignSelectProps {
@@ -234,6 +295,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   htmlFor?: string;
   errorMessage?: string;
   getDate?: any;
+  defaultValue?: string;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -308,11 +370,35 @@ export interface CreateEmployeeModalProps {
   setFormData: (item: any) => void;
   formErrors: CreateEmployeeItems;
   setFormErrors: (item: any) => void;
+  setIsRefreshData: (item: any) => void;
+}
+
+export interface UpdateEmployeeModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  isExecutive: boolean;
+  setIsExecutive: (item: boolean) => void;
+  employeeinfo: any;
+  isRefreshData: boolean;
+  setIsRefreshData: (item: boolean) => void;
+}
+
+export interface UpdateEmployeePayload {
+  name: string;
+  user_type: string;
+  phone: string;
+  manager_id: number;
+  manager_name: string;
+  image_name: string;
+  image_path: string;
 }
 
 export interface FilterLeadsCardProps {
   setFilterCardOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onFilterData: (data: any) => void;
+  filterIcon: boolean;
+  setFilterIcon: React.Dispatch<React.SetStateAction<boolean>>;
+  closeTooltip: () => void;
 }
 
 export interface StatusCheckboxProps {
@@ -352,6 +438,7 @@ export interface CreateReminderModalProps {
   setFormErrors: (item: any) => void;
   selected: string;
   setSelected: (item: string) => void;
+  setIsCreated: (item: boolean) => void;
   leadsData: any;
 }
 
@@ -359,8 +446,8 @@ export interface DeleteModalProps {
   modalIsOpen: boolean;
   setModalIsOpen: (item: boolean) => void;
   data: LeadListType;
-  leadRefresh: boolean;
-  setLeadRefresh: (item: boolean) => void;
+  isRefreshData: boolean;
+  setIsRefreshData: (item: boolean) => void;
 }
 
 export interface CreateEmployeeItems {
@@ -383,10 +470,13 @@ export interface CreateEmployeeModalProps {
 
 export interface LeadOptionsProps {
   handleViewButton: () => void;
+  handleEditButton: () => void;
   handleDeleteButton: () => void;
 }
 
 export interface LeadsDataType {
+  value?: string;
+  label?: string;
   id: number;
   title: string;
   date: string;
@@ -407,6 +497,28 @@ export interface LeadsDataType {
 }
 
 export interface EmployeeOptionsProps {
-  handleViewButton: () => void;
-  handleDeleteButton: () => Promise<void>;
+  handleViewButton?: () => void;
+  handleDeleteButton?: () => Promise<void>;
+  handleEditButton?: () => void;
+}
+
+export interface RemainderProps {
+  reminder: RemainderType;
+  token: string;
+  setReminders: (item: any) => void;
+  isUpdated: boolean;
+  setIsUpdated: (item: boolean) => void;
+}
+
+export interface UpdateRemainderModalProps {
+  modalIsOpen: boolean;
+  setModalIsOpen: (item: boolean) => void;
+  formData: RemainderType;
+  setFormData: (item: any) => void;
+  formErrors: UpdateRemainderType;
+  setFormErrors: (item: any) => void;
+  selected: string;
+  setSelected: (item: any) => void;
+  setIsUpdated: (item: boolean) => void;
+  remainder: RemainderType;
 }

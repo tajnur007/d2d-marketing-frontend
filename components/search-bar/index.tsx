@@ -50,7 +50,7 @@ const SearchBar = ({
   };
 
   return (
-    <div className='mr-4 p-0 w-full' ref={newRef}>
+    <div className='mr-5 p-0 w-full max-w-[563px]' ref={newRef}>
       <div className='relative w-full'>
         <div className='absolute inset-y-0 start-0 flex items-center ps-3'>
           <SearchIcon />
@@ -79,7 +79,7 @@ const SearchBar = ({
         </div>
       )}
       <Drawer open={isOpen} direction='right' size={450} enableOverlay={false}>
-        <LeadDetails setIsOpen={setIsOpen} data={item} />
+        <LeadDetails setIsOpen={setIsOpen} data={item} isOpen={isOpen} />
       </Drawer>
     </div>
   );

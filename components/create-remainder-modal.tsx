@@ -18,15 +18,17 @@ import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { ClockIcon, ExIcon } from '@/assets/icons';
-import { LeadService } from '@/services/lead-services';
+import { ReminderService } from '@/services/reminder-services';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
 }
 
-const CreateReminderModal = ({
+const CreateRemainderModal = ({
   modalIsOpen,
   setModalIsOpen = () => {},
+  setIsCreated = () => {},
+
   formData,
   setFormData = () => {},
   formErrors,
@@ -81,19 +83,20 @@ const CreateReminderModal = ({
 
       if (Object.keys(newFormErrors).length === 0) {
         const payloadObj = {
-          title: formData.Title,
-          lead_id: leadsData.id,
-          reminder_time: formData.Date,
-          notes: formData.Note,
-          status: formData.Status,
+          title: formData?.Title,
+          lead_id: leadsData?.id,
+          reminder_time: formData?.Date,
+          notes: formData?.Note,
+          status: formData?.Status,
         };
 
         if (token) {
-          const LeadServices = new LeadService();
-          const response = await LeadServices.createReminder(payloadObj, token);
+          const ReminderServices = new ReminderService();
+          const response = await ReminderServices.createReminder(payloadObj, token);
           if (response.status === 201) {
             setFormData(CREATE_REMINDER_ITEMS);
             setModalIsOpen(false);
+            setIsCreated(true);
             toast.success('Remainder created successfully.');
           }
         } else {
@@ -108,19 +111,18 @@ const CreateReminderModal = ({
 
   const handleSelectChange = (selectedOption: any) => {
     CREATE_REMINDER_STATUS.map((option) => {
-      if (option.value === selectedOption.value) {
-        setSelected(option.value);
+      if (option?.value === selectedOption?.value) {
+        setSelected(option?.value);
       }
     });
   };
 
   const closeModal = () => {
+    setFormData(CREATE_REMINDER_ITEMS);
     setModalIsOpen(false);
   };
 
   const getDate = (e: any) => {
-    console.log(e._d);
-
     setFormData((prev: any) => {
       return { ...prev, Date: e._d };
     });
@@ -129,13 +131,13 @@ const CreateReminderModal = ({
   return (
     <Modal
       className={
-        'absolute w-[646px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
+        'absolute w-[546px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       ariaHideApp={false}>
-      <div className='m-[30px]'>
-        <div className='flex mb-[26px] justify-between'>
+      <div>
+        <div className='flex mb-[16px] justify-between'>
           <div className='left-0 font-bold text-[#25254c] text-[24px] tracking-[0] leading-[14px] whitespace-nowrap'>
             <span>Create reminder</span>
           </div>
@@ -146,22 +148,20 @@ const CreateReminderModal = ({
         </div>
 
         <Input
-          label={<p className='text-[#00156A] font-medium text-xs mb-1'>Title</p>}
+          label='Title'
           placeholder='Title here'
           type='text'
           id='title'
           name='Title'
           htmlFor='title'
-          errorMessage={formErrors.Title}
-          className={`${formErrors.Title && 'border-red-500 shadow'}`}
+          errorMessage={formErrors?.Title}
+          className={`${formErrors?.Title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
 
-        <div className='mt-[16px]'>
+        <div className='mt-[8px]'>
           <Input
-            label={
-              <p className='text-[#00156A] font-medium text-xs mb-1'>Associated Lead</p>
-            }
+            label='Associated Lead'
             placeholder='Optional'
             type='text'
             id='associatedLead'
@@ -171,55 +171,59 @@ const CreateReminderModal = ({
           />
         </div>
 
-        <div className='w-full mt-[16px] date-picker'>
+        <div className='w-full mt-[4px] date-picker'>
           <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
             {'Date & Time'}
             {formErrors.Date && (
-              <span className='text-red-500 relative ml-1'>{formErrors.Date}</span>
+              <span className='text-red-500 relative ml-1'>{formErrors?.Date}</span>
             )}
           </label>
 
-          <div className='relative'>
+          <div className='relative h-[48px] 2xl:h-14'>
             <Datetime onChange={getDate} inputProps={inputProps} />
-            <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none'>
+            <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none '>
               <ClockIcon />
             </div>
           </div>
         </div>
 
-        <div className='mt-[16px]'>
-          <div className='mt-[-1.00px] font-medium text-[#00156a] text-[12px] tracking-[0] leading-[14px] whitespace-nowrap mb-1'>
+        <div className='mt-[8px]'>
+          <div className='font-medium text-[#00156a] text-xs 2xl:text-sm mb-1'>
             Status
           </div>
 
           <Select
             options={CREATE_REMINDER_STATUS}
-            className='create-reminder-select font-medium text-black text-[14px] tracking-[-0.28px] leading-[normal]'
+            className='h-[48px] 2xl:h-14 create-reminder-select font-medium text-black text-sm 2xl:text-[16px]'
             styles={{
-              control: (baseStyles) => ({
+              control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
                 borderColor: '2px #F3F3F3 solid',
                 width: '100%',
-                height: '56px',
+                height: '100%',
                 borderRadius: '10px',
+                boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
+                transition: 'all 500ms',
+                border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
               }),
             }}
             onChange={handleSelectChange}
           />
         </div>
 
-        <div className='mt-[16px]'>
+        <div className='mt-[8px]'>
           <TextArea
-            label={<p className='text-[#00156A] font-medium text-xs mb-1'>Notes</p>}
+            label='Notes'
             placeholder='Notes'
             name='Note'
             onChange={handleInputChange}
-            errorMessage={formErrors.Note}
-            className={`h-[124px] ${formErrors.Note && 'border-red-500 shadow'}`}
+            errorMessage={formErrors?.Note}
+            className={`h-[84px] ${formErrors?.Note && 'border-red-500 shadow'}`}
           />
         </div>
 
-        <div className='mt-[16px]'>
+        <div className='mt-[8px]'>
           <Button
             onClick={submitData}
             className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
@@ -231,4 +235,4 @@ const CreateReminderModal = ({
   );
 };
 
-export default CreateReminderModal;
+export default CreateRemainderModal;

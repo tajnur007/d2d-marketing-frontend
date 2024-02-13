@@ -12,6 +12,7 @@ export class AuthService {
     this.client = new HttpClient(baseUrl);
   }
 
+  //* Service for registration
   public signup = async (data: any) => {
     const resp: Response<any> = await this.client.request({
       url: API_PATHS.Signup,
@@ -22,6 +23,17 @@ export class AuthService {
     return resp.data;
   };
 
+  //* Service for email verification
+  public verifyEmail = async (token: string, company_id: string) => {
+    const resp: Response<any> = await this.client.request({
+      url: `/user/email-verify?token=${token}&company_id=${company_id}`,
+      method: API_METHODS.GET
+    });
+
+    return resp.data;
+  };
+
+  //* Service for login
   public login = async (data: any) => {
     const resp: Response<any> = await this.client.request({
       url: 'auth/login',
@@ -32,6 +44,7 @@ export class AuthService {
     return resp.data;
   };
 
+  //* Service for logout
   public logout = async (token: string): Promise<any> => {
     console.log(token);
     const config: AxiosRequestConfig = {};
@@ -50,6 +63,7 @@ export class AuthService {
     return resp;
   };
 
+  //* Service for forget password
   public forgetPassword = async (data: any) => {
     const resp: Response<any> = await this.client.request({
       url: '/user/forget-password',
@@ -60,6 +74,7 @@ export class AuthService {
     return resp;
   };
 
+  //* Service for reset password
   public resetPassword = async (token: string, company_id: number, data: any) => {
     const resp: Response<any> = await this.client.request({
       url: `/user/reset-password?token=${token}&company_id=${company_id}`,

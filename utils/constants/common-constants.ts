@@ -8,10 +8,15 @@ import {
   FormItems,
   LATEST_LEADS_DATA_TYPE,
   LEADERBOARD,
+  UpdateRemainderType,
   SettingFormItems,
   SidebarItem,
   SignUpFormItems,
+  SingleLeadItems,
+  UpdateLeadPayload,
   statusColor,
+  UpdateEmployeePayload,
+  TransferLeadPayload,
 } from '@/models/global-types';
 import {
   BookIcon,
@@ -39,6 +44,7 @@ export const PAGE_ROUTES = {
   EmailSent: '/auth/forget-password/email-sent',
   LeadCreate: '/leads/create',
   EmployeeList: '/employee-list',
+  LeadUpdate: '/leads/edit',
 };
 
 export const API_METHODS = {
@@ -59,12 +65,19 @@ export const API_PATHS = {
   GetExecutives: '/user/executive-list',
   ResetPassword: '/user/forget-password',
   LatestLeads: '/lead/dashboard-info-latest-leads',
-  Leaderboard: '/user/leaderboard',
-  GetLeads: '/lead/list',
-  CreateReminder: '/reminder/create',
-  EmployeeListInfo: '/user/list',
-  UploadLeadImage: '/lead/upload-image',
+  Leaderboard: '/lead/leaderboard',
+  LeadView: '/lead/view',
+  UpdateLead: '/lead/update',
   DeleteLead: '/lead/delete',
+  GetLeads: '/lead/list',
+  EmployeeListInfo: '/user/list',
+  CreateReminder: '/reminder/create',
+  UploadLeadImage: '/lead/upload-image',
+  GetAllReminder: '/reminder/list',
+  DeleteReminder: '/reminder/delete',
+  UpdateRemainder: '/reminder/update',
+  FilterLeads: '/lead/filter',
+  UpdateEmployeeInfo: '/user/update',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -106,9 +119,93 @@ export const FORM_ITEMS: FormItems = {
   Reference: '',
   Note: '',
   Status: '',
-  Image: '',
+  Image: [
+    {
+      image_name: '',
+      image_path: '',
+    },
+  ],
   AssignedTo: '',
   location: { lat: 0, lng: 0 },
+};
+
+export const SINGLE_LEAD_ITEMS: SingleLeadItems = {
+  assignment_status: '',
+  company_id: 0,
+  created_at: '',
+  created_by: '',
+  created_by_user_id: 0,
+  executive_id: 0,
+  executive_name: '',
+  id: 0,
+  image_info_json: [
+    {
+      image_name: '',
+      image_path: '',
+    },
+  ],
+  latitude: 0,
+  longitude: 0,
+  manager_id: 0,
+  manager_name: '',
+  meeting_status: '',
+  point_of_contact: {
+    name: '',
+    phone: '',
+    email: '',
+    reference: '',
+    meeting_notes: '',
+  },
+  previous_user_id: 0,
+  reminders: [
+    {
+      id: 0,
+      title: '',
+      lead_id: 0,
+      user_id: 0,
+      reminder_time: '',
+      notes: '',
+      status: '',
+      company_id: 0,
+    },
+  ],
+};
+
+export const UPDATE_LEAD_PAYLOAD: UpdateLeadPayload = {
+  title: '',
+  executive_id: 0,
+  executive_name: '',
+  latitude: 0,
+  longitude: 0,
+  meeting_status: '',
+  point_of_contact: {
+    name: '',
+    phone: '',
+    email: '',
+    reference: '',
+    meeting_notes: '',
+  },
+  image_infos: [
+    {
+      image_name: '',
+      image_path: '',
+    },
+  ],
+};
+
+export const TRANSFER_LEAD_PAYLOAD: TransferLeadPayload = {
+  executive_id: 0,
+  executive_name: '',
+};
+
+export const UPDATE_EMPLOYEE_PAYLOAD: UpdateEmployeePayload = {
+  name: '',
+  user_type: '',
+  phone: '',
+  manager_id: 0,
+  manager_name: '',
+  image_name: '',
+  image_path: '',
 };
 
 export const SETTING_FORM_ITEMS: SettingFormItems = {
@@ -148,8 +245,8 @@ export const LEAD_STATUS = {
 
 export const CREATE_REMINDER_STATUS: CreateReminderStatusItems[] = [
   { value: 'Pending', label: 'Pending' },
-  { value: 'In-Progress', label: 'In-Progress' },
   { value: 'Completed', label: 'Completed' },
+  { value: 'Canceled', label: 'Canceled' },
 ];
 
 export const CREATE_LEAD_STATUS_NEW: CreateLeadStatusItems[] = [
@@ -263,6 +360,13 @@ export const LEADERBOARD_ITEMS: LEADERBOARD = {
       initials: '',
     },
   ],
+};
+
+export const UPDATE_REMINDER_ITEMS: UpdateRemainderType = {
+  title: '',
+  notes: '',
+  status: '',
+  reminder_time: '',
 };
 
 export const IMAGE_DETAIL = {

@@ -31,57 +31,56 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
     }
     console.log('resetData', resetData);
     console.log('new password', newPassword);
-    
   };
 
   return (
-    <section>
-      <div className='max-w-[600px] mx-auto px-6 py-12'>
+    <section className='w-full flex items-center justify-center mb-10 lg:mb-5'>
+      <div className='w-[50%] my-10'>
         <div>
-          <div className='mt-10 my-6 text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
-            <div className='mr-2'>
-              <Link href={PAGE_ROUTES.Signin}>
+          <div className='mt-10 my-6 md:my-2 text-[14px] md:text-[14px] lg:text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
+            <Link href={PAGE_ROUTES.Signin}>
+              <div className='mr-2'>
                 <ArrowLeftCircleIcon />
-              </Link>
-            </div>
+              </div>
+            </Link>
             <div>Back to Login</div>
           </div>
-          <div className='mt-10 text-[36px] font-bold leading-[36px] tracking-[0.36px] text-[#0B1420] whitespace-nowrap'>
+          <div className='mt-10 lg:mt-5 md:mt-4 lg:text-3xl text-2xl xl:text-4xl font-bold leading-[36px] tracking-[0.36px] text-[#0B1420] whitespace-nowrap'>
             New password 👋
           </div>
-          <div className='my-[19px] font-extralight text-[#313957] text-[16px] tracking-[0.16px] leading-[25.6px] whitespace-nowrap'>
+          <div className='my-5 md:my-2 md:mb-2 lg:mb-6 font-normal text-[#313957] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[25.6px] whitespace-nowrap'>
             Type your new password
           </div>
         </div>
 
         <form onSubmit={onFormSubmit}>
           <div>
-            <label className='font-semibold text-[#0B1420] text-[16px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
+            <label className='font-medium text-[#0B1420] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
               New password
             </label>
-            <div className='mt-[8px] mb-[20px]'>
+            <div className='mt-[4px] mb-[20px] md:mb-[12px]'>
               <input
                 id='newPassword'
                 type='password'
                 name='newPassword'
                 value={newPassword}
-                className='block w-[388px] h-[48px] rounded-[10px] border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
+                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] md:text-[10px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
                 placeholder='New password'
                 autoComplete='off'
                 required
                 onChange={(event) => setNewPassword(event.target.value)}
               />
             </div>
-            <label className='font-semibold text-[#0B1420] text-[16px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
+            <label className='font-medium text-[#0B1420] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
               Re-type password
             </label>
-            <div className='mt-[8px] mb-[20px]'>
+            <div className='mt-[8px] mb-[20px] md:mb-[12px]'>
               <input
                 id='retypePassword'
                 type='password'
                 name='retypePassword'
                 value={retypePassword}
-                className='block w-[388px] h-[48px] rounded-[10px] border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 pl-2'
+                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] md:text-[10px]  font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
                 placeholder='Re-type password'
                 autoComplete='off'
                 required

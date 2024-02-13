@@ -1,35 +1,40 @@
 'use client';
 
+import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
-import { ImageUpload } from '@/components/image-upload';
-import { Button } from '@/components/button';
-import { useEffect, useState, useContext } from 'react';
+import { FormItems } from '@/models/global-types';
+import { UserService } from '@/services/user-services';
+import { LeadService } from '@/services/lead-services';
 import {
-  ASSIGN_TO_NEW,
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
-  IMAGE_DETAIL,
   PAGE_ROUTES,
 } from '@/utils/constants/common-constants';
-import { FormItems } from '@/models/global-types';
+import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
-import { LeadService } from '@/services/lead-services';
-import { useSession } from 'next-auth/react';
-import { ExecutiveContext } from '@/context/executives-context';
-import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
+import Dropzone from './multi-image-upload';
+import { LeadsContext } from '@/context/leads-context';
 
-const CreateLeadForm = () => {
+const CreateLeadForm: React.FC = () => {
   const [statusSelected, setStatusSelected] = useState('');
   const [assignedToSelected, setAssignedToSelected] = useState('');
-  const [imageName, setImageName] = useState<string | null>(null);
-  const [imagePath, setImagePath] = useState<string | null>(null);
+  const [images, setImages] = useState([]);
   const [formData, setFormData] = useState<FormItems>(FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [isBothSelectFieldNull, setIsBothSelectFieldNull] = useState(false);
+  const [pending, setPending] = useState<boolean>(false);
+
+  const handlePendingChange = (isPending: boolean) => {
+    setPending(isPending);
+  };
+
+  const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -37,41 +42,16 @@ const CreateLeadForm = () => {
 
   const router = useRouter();
 
-  const { executivesOption, setExecutivesOption } = useContext(ExecutiveContext);
+  const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
 
   const { data } = useSession();
   // @ts-ignore
   const token = data?.user?.access_token;
-  const handleImageUpload = async (e: any) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => {
-      return { ...prev, [name]: value };
-    });
-
-    setFormErrors((prev) => {
-      return { ...prev, [name]: '' };
-    });
-    try {
-      const file = e.target.files[0];
-      const formData = new FormData();
-      formData.append('pic', file);
-
-      // Call the UploadLeadImage API with the FormData and token
-      const NewLeadServices = new LeadService();
-      const response = await NewLeadServices.UploadLeadImage(formData, token);
-      const { image_name, image_path } = response.data.Data[0];
-      setImageName(image_name);
-      setImagePath(image_path);
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
-  };
 
   useEffect(() => {
     if (token) {
-      const LeadServices = new LeadService();
-      LeadServices.getExecutivesData(setExecutivesOption, token);
+      const UserServices = new UserService();
+      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
     }
   }, [token, setExecutivesOption]);
 
@@ -112,18 +92,24 @@ const CreateLeadForm = () => {
 
       if (statusSelected === '' && assignedToSelected === '') {
         setIsBothSelectFieldNull(true);
-        toast.info('Please select Status or AssignedTo field.');
         return;
       } else {
         setIsBothSelectFieldNull(false);
       }
 
       if (Object.keys(newFormErrors).length === 0 && isBothSelectFieldNull === false) {
-        //! Payload object
+        executivesOption.map((option: any) => {
+          if (option.name === assignedToSelected) {
+            setFormData((prev) => {
+              return { ...prev, AssignedTo: option.name, ExecutiveId: option.id };
+            });
+          }
+        });
 
+        //! Payload object
         const payloadObj = {
           title: formData?.Title,
-          executive_id: 143,
+          executive_id: formData?.ExecutiveId,
           executive_name: formData?.AssignedTo,
           latitude: location?.lat,
           longitude: location?.lng,
@@ -131,31 +117,29 @@ const CreateLeadForm = () => {
 
           point_of_contact: {
             name: formData?.Name,
-            number: formData?.Phone,
+            phone: formData?.Phone,
             email: formData?.Email,
             meeting_notes: formData?.Note,
             reference: formData?.Reference,
           },
 
-          image_infos: [
-            {
-              image_name: imageName,
-              image_path: imagePath,
-            },
-          ],
+          image_infos: [...images],
         };
 
         // @ts-ignore
         const token = data?.user?.access_token;
 
         const LeadServices = new LeadService();
-         if (token) {
-           await LeadServices.createLead(payloadObj, token);
-           toast.success('Create lead successfully.');
-           router.push(PAGE_ROUTES.Dashboard);
-         } else {
-           toast.error('Something went wrong.');
-         }
+        if (token) {
+          const res = await LeadServices.createLead(payloadObj, token);
+          if (res.status === 201) {
+            setFormData(FORM_ITEMS);
+            toast.success('Create lead successfully.');
+            router.push(PAGE_ROUTES.Leads);
+          }
+        } else {
+          toast.error('Something went wrong.');
+        }
       }
     } catch (err) {
       toast.error('Failed to create Lead.');
@@ -173,6 +157,7 @@ const CreateLeadForm = () => {
           id='title'
           name='Title'
           htmlFor='title'
+          value={formData?.Title}
           errorMessage={formErrors.Title}
           className={`w-full mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
@@ -184,6 +169,8 @@ const CreateLeadForm = () => {
             setSelected={setAssignedToSelected}
             options={executivesOption}
             className={` ${!isBothSelectFieldNull && '!border-red-500 !shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
         </div>
       </div>
@@ -200,6 +187,7 @@ const CreateLeadForm = () => {
             type='text'
             id='name'
             name='Name'
+            value={formData?.Name}
             errorMessage={formErrors.Name}
             htmlFor='name'
             onChange={handleInputChange}
@@ -212,6 +200,7 @@ const CreateLeadForm = () => {
             type='text'
             id='phone'
             name='Phone'
+            value={formData?.Phone}
             errorMessage={formErrors.Phone}
             htmlFor='phone'
             onChange={handleInputChange}
@@ -227,6 +216,7 @@ const CreateLeadForm = () => {
             id='email'
             name='Email'
             htmlFor='email'
+            value={formData?.Email}
             errorMessage={formErrors.Email}
             onChange={handleInputChange}
             className={` ${formErrors.Email && 'border-red-500 shadow'}`}
@@ -239,6 +229,7 @@ const CreateLeadForm = () => {
             id='reference'
             name='Reference'
             htmlFor='reference'
+            value={formData?.Reference}
             onChange={handleInputChange}
           />
         </div>
@@ -249,6 +240,7 @@ const CreateLeadForm = () => {
             label='Remarks'
             placeholder='Notes'
             name='Note'
+            value={formData?.Note}
             errorMessage={formErrors.Note}
             className={`h-[182px] ${formErrors.Note && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
@@ -261,27 +253,22 @@ const CreateLeadForm = () => {
             setSelected={setStatusSelected}
             options={CREATE_LEAD_STATUS_NEW}
             className={` ${!isBothSelectFieldNull && 'border-red-500 shadow'}`}
+            isBothSelectFieldNull={isBothSelectFieldNull}
+            setIsBothSelectFieldNull={setIsBothSelectFieldNull}
           />
-
-          <div className='flex flex-col items-start justify-center '>
-            <p className='text-[#00156A] font-medium text-xs mb-2'>
+          <div className='items-start justify-center '>
+            <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
               Image
-              {formErrors.Image && (
-                <span className='text-red-500 text-xs ml-1'>{formErrors.Image}</span>
-              )}
             </p>
-
-            <ImageUpload
-              placeholder='Upload image'
-              name='Image'
-              onChange={handleImageUpload}
-              className={`h-[92px] ${formErrors.Image && 'border-red-500 shadow'}`}
-            />
+            <Dropzone onChange={setImages} onPendingChange={handlePendingChange} />
           </div>
         </div>
       </div>
       <div className='flex justify-end  mt-5 gap-5 items-end'>
-        <Button onClick={submitData} className='w-[193px] rounded-[10px] h-[60px]'>
+        <Button
+          onClick={submitData}
+          disabled={pending === true}
+          className={`w-[193px] rounded-[10px] h-[60px]`}>
           Create
         </Button>
       </div>

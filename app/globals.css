@@ -12,34 +12,46 @@
   font-family: Metropolis, Arial, Helvetica, sans-serif;
 }
 
+/* Hide default eye icon */
+
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b63e5;
+}
+
 /* Tiny scrollbar styles */
 .tiny-scrollbar::-webkit-scrollbar {
-  width: 6px; /* Adjust the width as needed */
-}
-
-.tiny-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #4f46e5;
-  border-radius: 8px;
-}
-
-.tiny-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #6b63e5;
+  width: 6px;
 }
 
 .tiny-scrollbar::-webkit-scrollbar-track {
-  background-color: none;
-  border-radius: 8px;
+  background: transparent;
 }
 
-/* Firefox scrollbar styles */
-.tiny-scrollbar {
-  scrollbar-color: #4f46e5 #f1f1f1;
-  scrollbar-width: thin;
+.tiny-scrollbar::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 6px;
 }
 
-/* Optional: hover style for Firefox */
-.tiny-scrollbar:hover {
-  scrollbar-color: #6b63e5 #f1f1f1;
+.tiny-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6b63e5;
 }
 
 /*Hide default calendar icon*/
@@ -53,6 +65,20 @@ input[type='date']::-webkit-calendar-picker-indicator {
   scrollbar-width: none; /* Firefox */
 }
 
+.rdtOpen input {
+  border-radius: 10px;
+  border-color: #a855f7;
+}
+.rdt input {
+  border-width: 1px;
+  height: 100%;
+}
+.rdtOpen input:focus-within {
+  box-shadow: 0 0 0 3px #e9d5ff;
+  transition: all 500ms;
+  border-width: 1px;
+}
+
 .date-picker-placeholder::placeholder {
   color: #b9c1d9 !important;
   font-size: 14px !important;
@@ -61,6 +87,10 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .ReactModalPortal {
   position: absolute;
   z-index: 102;
+}
+.custom-datepicker {
+  border: none;
+  outline: none;
 }
 
 .ReactModalPortal > div > div > div {
