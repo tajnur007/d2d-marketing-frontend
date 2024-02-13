@@ -48,6 +48,15 @@ const CreateLeadForm: React.FC = () => {
   const token = data?.user?.access_token;
 
   useEffect(() => {
+    setFormData((prev) => {
+      return { ...prev, Images: [...images] };
+    });
+    setFormErrors((prev) => {
+      return { ...prev, Images: '' };
+    });
+  }, [images]);
+
+  useEffect(() => {
     if (token) {
       const UserServices = new UserService();
       UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
@@ -82,7 +91,7 @@ const CreateLeadForm: React.FC = () => {
       return { ...prev, [name]: '' };
     });
   };
-  console.log(images, formData);
+  console.log(formErrors, formData, images.length);
   const submitData = async () => {
     setFormData((prev) => {
       return { ...prev, location };
@@ -259,8 +268,15 @@ const CreateLeadForm: React.FC = () => {
           <div className='items-start justify-center '>
             <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
               Image
+              {formErrors.Images && (
+                <span className='text-red-500 ml-1'>(Image is required)</span>
+              )}
             </p>
-            <Dropzone onChange={setImages} onPendingChange={handlePendingChange} />
+            <Dropzone
+              onChange={setImages}
+              onPendingChange={handlePendingChange}
+              errorMessage={formErrors?.Images}
+            />
           </div>
         </div>
       </div>

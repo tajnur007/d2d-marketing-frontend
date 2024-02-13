@@ -200,7 +200,7 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Image?: [{ image_name: string; image_path: string }];
+  Images?: { [key: string]: string }[] | string;
   AssignedTo?: string;
   ExecutiveId?: number;
   location: MapLocation;

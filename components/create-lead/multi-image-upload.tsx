@@ -12,9 +12,14 @@ interface FileWithPreview extends File {
 interface DropzoneProps {
   onChange: any;
   onPendingChange: (pending: boolean) => void;
+  errorMessage: any;
 }
 
-const Dropzone: React.FC<DropzoneProps> = ({ onChange, onPendingChange }) => {
+const Dropzone: React.FC<DropzoneProps> = ({
+  onChange,
+  onPendingChange,
+  errorMessage,
+}) => {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
 
   const [prevFiles, setPrevFiles] = useState<FileWithPreview[]>([]);
@@ -95,7 +100,10 @@ const Dropzone: React.FC<DropzoneProps> = ({ onChange, onPendingChange }) => {
 
   return (
     <form>
-      <div className='flex flex-wrap gap-2 justify-right items-center border-dashed border-2 border-neutral-200 p-5 rounded-lg w-full'>
+      <div
+        className={`flex flex-wrap gap-2 justify-right items-center border-dashed border-2 ${
+          errorMessage ? 'border-red-500 ' : 'border-neutral-200 '
+        } p-5 rounded-lg w-full`}>
         <div>
           <ul className='flex flex-wrap gap-2'>
             {files.map((file) => (
