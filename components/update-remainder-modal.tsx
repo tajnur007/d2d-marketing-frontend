@@ -11,7 +11,7 @@ import { Input } from './input';
 import { TextArea } from './text-area';
 import { Button } from './button';
 import { UpdateRemainderModalProps } from '@/models/global-types';
-import { CREATE_REMINDER_STATUS } from '@/utils/constants/common-constants';
+import { CREATE_REMINDER_STATUS, customStyles } from '@/utils/constants/common-constants';
 import './dropdown-select.css';
 import 'react-datetime/css/react-datetime.css';
 import { ClockIcon, ExIcon } from '@/assets/icons';
@@ -145,6 +145,7 @@ const UpdateRemainderModal = ({
 
   return (
     <Modal
+      style={customStyles}
       className={
         'absolute w-[546px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }

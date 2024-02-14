@@ -307,3 +307,9 @@ export const IMAGE_DETAIL = {
   name: '60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png',
   path: 'http://157.245.204.196:8021/v1/auth/image-by-path?image_path=files/60511ab5-b11d-441c-bd8c-c2c163b3bfbe_D2D.drawio (1)_lead_353787.png',
 };
+
+export const customStyles = {
+  content: {
+    outline: 'none', // Remove browser focus border
+  },
+};

@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 import 'react-datetime/css/react-datetime.css';
 import { DeleteLeadModalImage, ExIcon } from '@/assets/icons';
 import MiniLoader from './mini-loader';
+import { customStyles } from '@/utils/constants/common-constants';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -25,6 +26,7 @@ const ConfirmationModal = ({
 
   return (
     <Modal
+      style={customStyles}
       className={
         'absolute w-[350px] h-auto outline-none -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
