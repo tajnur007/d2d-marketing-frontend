@@ -128,7 +128,9 @@ const CreateEmployeeModal = ({
 
       for (let field in formData) {
         if (field !== 'manager_name' && formData[field as keyof typeof formData] === '') {
-          newFormErrors[field] = `(${field} is required)`;
+          newFormErrors[field] = `(${
+            field.charAt(0).toUpperCase() + field.slice(1)
+          } is required)`;
         }
       }
 
@@ -245,9 +247,6 @@ const CreateEmployeeModal = ({
               <div className='mb-3 2xl:mb-5'>
                 <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
                   Select Manager
-                  <span className='text-red-500 ml-1'>{`${
-                    manager?.value === '' ? '(select Manager is required)' : ''
-                  }`}</span>
                 </label>
                 <Select
                   options={managers}

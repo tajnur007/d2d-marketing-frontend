@@ -205,7 +205,7 @@ const CreateRemainderModal = ({
             <div className='font-medium text-[#00156a] text-xs 2xl:text-sm mb-1'>
               Status
               <span className='text-red-500 ml-1'>{`${
-                formErrors?.Status ? '(status is required)' : ''
+                formErrors?.Status ? '(Status is required)' : ''
               }`}</span>
             </div>
 
