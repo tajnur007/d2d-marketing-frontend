@@ -42,7 +42,12 @@ export const CustomSelect = ({
                   ? '1px solid #a855f7'
                   : '1px solid #F3F3F3',
               '&:hover': {
-                border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                border:
+                  errorMessage && !isFocused
+                    ? '1px solid red'
+                    : isFocused
+                    ? '1px solid #a855f7'
+                    : '1px solid #F3F3F3',
               },
               borderRadius: '10px',
               width: '100%',

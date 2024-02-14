@@ -43,17 +43,12 @@ const CreateRemainderModal = ({
   const token = data?.user?.access_token;
 
   const inputProps = {
+    disabled: isLoading,
     placeholder: 'DD:MM:YY TT:TT',
     className: `w-full rounded-[10px] border-2 border-[#F3F3F3] outline-none border-solid py-4 px-3 appearence-none font-medium text-[14px] uppercase text-[#B9C1D9] date-picker-placeholder ${
-      formErrors.Note && 'border-red-500'
+      formErrors.Date && 'border-red-500'
     }`,
   };
-
-  useEffect(() => {
-    setFormData((prev: any) => {
-      return { ...prev, Status: selected };
-    });
-  }, [selected, formErrors, setFormData]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -80,7 +75,7 @@ const CreateRemainderModal = ({
           newFormErrors[field] = `(${field} is required)`;
         }
       }
-
+      console.log(formData, newFormErrors);
       setFormErrors(newFormErrors);
 
       if (Object.keys(newFormErrors).length === 0) {
@@ -113,15 +108,21 @@ const CreateRemainderModal = ({
   };
 
   const handleSelectChange = (selectedOption: any) => {
-    CREATE_REMINDER_STATUS.map((option) => {
-      if (option?.value === selectedOption?.value) {
-        setSelected(option?.value);
-      }
+    setSelected(selectedOption?.value);
+    setFormData((prev: any) => {
+      return { ...prev, Status: selectedOption?.value };
     });
+
+    if (selectedOption?.value) {
+      setFormErrors((prev: any) => {
+        return { ...prev, Status: '' };
+      });
+    }
   };
 
   const closeModal = () => {
     setFormData(CREATE_REMINDER_ITEMS);
+    setFormErrors(CREATE_REMINDER_ITEMS);
     setModalIsOpen(false);
   };
 
@@ -129,12 +130,17 @@ const CreateRemainderModal = ({
     setFormData((prev: any) => {
       return { ...prev, Date: e._d };
     });
+    if (e._d) {
+      setFormErrors((prev: any) => {
+        return { ...prev, Date: '' };
+      });
+    }
   };
 
   return (
     <Modal
       className={
-        'absolute w-[546px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
+        'absolute w-[546px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto] outline-none'
       }
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
@@ -195,22 +201,37 @@ const CreateRemainderModal = ({
         <div className='mt-[8px]'>
           <div className='font-medium text-[#00156a] text-xs 2xl:text-sm mb-1'>
             Status
+            <span className='text-red-500 ml-1'>{`${
+              formErrors?.Status ? '(status is required)' : ''
+            }`}</span>
           </div>
 
           <Select
+            isDisabled={isLoading}
             options={CREATE_REMINDER_STATUS}
             className='h-[48px] 2xl:h-14 create-reminder-select font-medium text-black text-sm 2xl:text-[16px]'
             styles={{
               control: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
-                borderColor: '2px #F3F3F3 solid',
+                border:
+                  formErrors?.Status && !isFocused
+                    ? '1px solid red'
+                    : isFocused
+                    ? '1px solid #a855f7'
+                    : '1px solid #F3F3F3',
+                '&:hover': {
+                  border:
+                    formErrors?.Status && !isFocused
+                      ? '1px solid red'
+                      : isFocused
+                      ? '1px solid #a855f7'
+                      : '1px solid #F3F3F3',
+                },
+                borderRadius: '10px',
                 width: '100%',
                 height: '100%',
-                borderRadius: '10px',
                 boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
                 transition: 'all 500ms',
-                border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
-                '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
               }),
             }}
             onChange={handleSelectChange}
@@ -229,13 +250,11 @@ const CreateRemainderModal = ({
           />
         </div>
 
-        <div className='mt-[8px]'>
-          <Button
-            onClick={submitData}
-            className='h-[60px] rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
-            {isLoading ? <MiniLoader /> : ' Create'}
-          </Button>
-        </div>
+        <Button
+          onClick={submitData}
+          className='h-[60px] text-white transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 mt-[10px]'>
+          {isLoading ? <MiniLoader /> : ' Create'}
+        </Button>
       </div>
     </Modal>
   );

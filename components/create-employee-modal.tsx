@@ -89,6 +89,7 @@ const CreateEmployeeModal = ({
     setIsSuccess(false);
     setSelected(EMPLOYEE_ROLE[0]?.value);
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
+    setFormErrors(CREATE_EMPLOYEE_FORM_ITEMS);
   };
 
   const handleSelectChange = (selectedOption: any) => {
@@ -249,16 +250,14 @@ const CreateEmployeeModal = ({
               <div className='mb-3 2xl:mb-5'>
                 <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
                   Select Manager
-                  {`${manager?.value === '' && '(Select Manager is required)'}`}
+                  <span className='text-red-500 ml-1'>{`${
+                    manager?.value === '' ? '(select Manager is required)' : ''
+                  }`}</span>
                 </label>
                 <Select
                   options={managers}
                   isDisabled={isLoading}
-                  value={
-                    manager?.value === ''
-                      ? null
-                      : managers?.find((option: any) => option.value === manager?.value)
-                  }
+                  value={manager}
                   // defaultValue={managers && managers[0]}
                   className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
                   styles={{
@@ -271,7 +270,12 @@ const CreateEmployeeModal = ({
                           ? '1px solid #a855f7'
                           : '1px solid #F3F3F3',
                       '&:hover': {
-                        border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                        border:
+                          manager?.value === '' && !isFocused
+                            ? '1px solid red'
+                            : isFocused
+                            ? '1px solid #a855f7'
+                            : '1px solid #F3F3F3',
                       },
                       width: '100%',
                       height: '100%',
@@ -296,7 +300,7 @@ const CreateEmployeeModal = ({
             <Button
               type='submit'
               disabled={isLoading}
-              className='w-full rounded-[10px] h-[60px] '>
+              className='w-full h-[60px] transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
               {isLoading ? <MiniLoader /> : 'Create'}
             </Button>
           </form>
