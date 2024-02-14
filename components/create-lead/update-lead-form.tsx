@@ -193,7 +193,7 @@ const UpdateLeadForm: React.FC = () => {
             setAssignedToSelected('');
             setImages([]);
             setIsSuccess(true);
-            toast.success('Create lead successfully.');
+            toast.success('Lead updated successfully.');
             router.push(PAGE_ROUTES.Leads);
           }
         } else {
@@ -201,7 +201,7 @@ const UpdateLeadForm: React.FC = () => {
         }
       }
     } catch (err) {
-      toast.error('Failed to create Lead.');
+      toast.error('Failed to update lead. Please try again.');
       console.log(err);
     }
     setPending(false);
@@ -342,7 +342,7 @@ const UpdateLeadForm: React.FC = () => {
             type='submit'
             disabled={pending}
             className={`w-[193px] rounded-[10px] h-[60px]`}>
-            {pending ? <MiniLoader /> : ' Create'}
+            {pending ? <MiniLoader /> : ' Update'}
           </Button>
         </div>
       </form>
