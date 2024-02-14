@@ -35,7 +35,6 @@ const UpdateLeadForm = () => {
   });
   const [images, setImages] = useState([]);
   const [pending, setPending] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
   const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
 
   const { data } = useSession();
@@ -50,7 +49,7 @@ const UpdateLeadForm = () => {
   useEffect(() => {
     if (token) {
       const UserServices = new UserService();
-      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
+      UserServices.getExecutivesData(setExecutivesOption, token);
     }
   }, [token, setExecutivesOption]);
 
@@ -66,7 +65,7 @@ const UpdateLeadForm = () => {
     };
 
     fetchUserData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -88,7 +87,7 @@ const UpdateLeadForm = () => {
         image_infos: images,
       };
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleLeadData, images]);
 
   const handlePendingChange = (isPending: boolean) => {

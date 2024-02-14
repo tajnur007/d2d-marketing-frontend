@@ -1,7 +1,7 @@
 'use client';
 
 import Select from 'react-select';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { Input } from './input';
@@ -91,18 +91,18 @@ const CreateRemainderModal = ({
         if (token) {
           const ReminderServices = new ReminderService();
           const response = await ReminderServices.createReminder(payloadObj, token);
+
           if (response.status === 201) {
             setIsCreated(true);
-            toast.success('Remainder created successfully.');
+            toast.success(response.data.Message);
             closeModal();
           }
         } else {
           toast.error('failed to create remainder.');
         }
       }
-    } catch (error) {
-      toast.error('Something went wrong.');
-      console.log('Error in create-remainder-modal: ', error);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
     }
     setIsLoading(false);
   };

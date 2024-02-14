@@ -1,6 +1,5 @@
 'use client';
 
-import { DeleteModalProps } from '@/models/global-types';
 import { Button } from './button';
 import './dropdown-select.css';
 import React from 'react';

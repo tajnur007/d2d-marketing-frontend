@@ -36,16 +36,11 @@ export class UserService {
   };
 
   //* Service to get executives data
-  public getExecutivesData = async (
-    setExecutivesOption: any,
-    token: string,
-    setIsLoading: (item: boolean) => void
-  ) => {
+  public getExecutivesData = async (setExecutivesOption: any, token: string) => {
     try {
       const response = await this.getExecutives(token);
       const executivesOption = this.createSelectData(response.data.Data.Data);
       setExecutivesOption(executivesOption);
-      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching executives:', error);
     }

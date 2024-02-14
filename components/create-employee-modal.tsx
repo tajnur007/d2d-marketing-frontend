@@ -19,7 +19,6 @@ import { useSession } from 'next-auth/react';
 import { UserService } from '@/services/user-services';
 import { toast } from 'react-toastify';
 import MiniLoader from './mini-loader';
-import { CustomSelect } from './select/custom-select';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -254,7 +253,6 @@ const CreateEmployeeModal = ({
                   options={managers}
                   isDisabled={isLoading}
                   value={manager}
-                  // defaultValue={managers && managers[0]}
                   className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
                   styles={{
                     control: (baseStyles, { isFocused }) => ({
@@ -282,15 +280,6 @@ const CreateEmployeeModal = ({
                   }}
                   onChange={handleManagerChange}
                 />
-                {/* <CustomSelect
-                  label='Select Manager'
-                  // setSelected={setStatusSelected}
-                  options={managers}
-                  errorMessage={managers?.values}
-                  className={`${managers?.values && 'border-red-500 shadow'}`}
-                  isLoading={isLoading}
-                  selected={isSuccess ? '' : manager?.value}
-                /> */}
               </div>
             )}
             <Button

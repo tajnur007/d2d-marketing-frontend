@@ -31,7 +31,6 @@ const CreateLeadForm: React.FC = () => {
   const [pending, setPending] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -61,7 +60,7 @@ const CreateLeadForm: React.FC = () => {
   useEffect(() => {
     if (token) {
       const UserServices = new UserService();
-      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
+      UserServices.getExecutivesData(setExecutivesOption, token);
     }
   }, [token, setExecutivesOption]);
 
@@ -96,8 +95,8 @@ const CreateLeadForm: React.FC = () => {
   };
 
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    setPending(true);
     event.preventDefault();
+    setPending(true);
     setFormData((prev) => {
       return { ...prev, location };
     });
@@ -154,16 +153,15 @@ const CreateLeadForm: React.FC = () => {
             setAssignedToSelected('');
             setImages([]);
             setIsSuccess(true);
-            toast.success('Create lead successfully.');
+            toast.success(res.data.Message);
             router.push(PAGE_ROUTES.Leads);
           }
         } else {
           toast.error('Something went wrong.');
         }
       }
-    } catch (err) {
-      toast.error('Failed to create Lead.');
-      console.log(err);
+    } catch (err: any) {
+      toast.error(err.response.data.message);
     }
     setPending(false);
   };
