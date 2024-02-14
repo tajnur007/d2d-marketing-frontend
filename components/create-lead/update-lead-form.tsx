@@ -35,6 +35,7 @@ const UpdateLeadForm = () => {
   });
   const [images, setImages] = useState([]);
   const [pending, setPending] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
 
   const { data } = useSession();
@@ -49,7 +50,7 @@ const UpdateLeadForm = () => {
   useEffect(() => {
     if (token) {
       const UserServices = new UserService();
-      UserServices.getExecutivesData(setExecutivesOption, token);
+      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
     }
   }, [token, setExecutivesOption]);
 

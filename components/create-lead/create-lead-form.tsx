@@ -30,6 +30,7 @@ const CreateLeadForm: React.FC = () => {
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [pending, setPending] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [location, setLocation] = useState({
     lat: 22.04,
@@ -60,7 +61,7 @@ const CreateLeadForm: React.FC = () => {
   useEffect(() => {
     if (token) {
       const UserServices = new UserService();
-      UserServices.getExecutivesData(setExecutivesOption, token);
+      UserServices.getExecutivesData(setExecutivesOption, token, setIsLoading);
     }
   }, [token, setExecutivesOption]);
 
