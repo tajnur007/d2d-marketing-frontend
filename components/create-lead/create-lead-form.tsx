@@ -53,9 +53,6 @@ const CreateLeadForm: React.FC = () => {
     setFormData((prev) => {
       return { ...prev, Images: [...images] };
     });
-    setFormErrors((prev) => {
-      return { ...prev, Images: '' };
-    });
   }, [images]);
 
   useEffect(() => {
