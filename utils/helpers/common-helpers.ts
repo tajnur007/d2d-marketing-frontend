@@ -43,6 +43,7 @@ export const leadFormErrorCheck = (formData: FormItems, field: string) => {
   const safeFields = {
     Email: 'Email',
     Reference: 'Reference',
+    Images: 'Images',
   };
 
   if (safeFields[field as keyof typeof safeFields]) {

@@ -12,8 +12,6 @@ import {
   SettingFormItems,
   SidebarItem,
   SignUpFormItems,
-  SingleLeadItems,
-  UpdateLeadPayload,
   statusColor,
   UpdateEmployeePayload,
   TransferLeadPayload,
@@ -124,70 +122,6 @@ export const FORM_ITEMS: FormItems = {
   Images: [],
   AssignedTo: '',
   location: { lat: 0, lng: 0 },
-};
-
-export const SINGLE_LEAD_ITEMS: SingleLeadItems = {
-  assignment_status: '',
-  company_id: 0,
-  created_at: '',
-  created_by: '',
-  created_by_user_id: 0,
-  executive_id: 0,
-  executive_name: '',
-  id: 0,
-  image_info_json: [
-    {
-      image_name: '',
-      image_path: '',
-    },
-  ],
-  latitude: 0,
-  longitude: 0,
-  manager_id: 0,
-  manager_name: '',
-  meeting_status: '',
-  point_of_contact: {
-    name: '',
-    phone: '',
-    email: '',
-    reference: '',
-    meeting_notes: '',
-  },
-  previous_user_id: 0,
-  reminders: [
-    {
-      id: 0,
-      title: '',
-      lead_id: 0,
-      user_id: 0,
-      reminder_time: '',
-      notes: '',
-      status: '',
-      company_id: 0,
-    },
-  ],
-};
-
-export const UPDATE_LEAD_PAYLOAD: UpdateLeadPayload = {
-  title: '',
-  executive_id: 0,
-  executive_name: '',
-  latitude: 0,
-  longitude: 0,
-  meeting_status: '',
-  point_of_contact: {
-    name: '',
-    phone: '',
-    email: '',
-    reference: '',
-    meeting_notes: '',
-  },
-  image_infos: [
-    {
-      image_name: '',
-      image_path: '',
-    },
-  ],
 };
 
 export const TRANSFER_LEAD_PAYLOAD: TransferLeadPayload = {
