@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState, FormEvent } from 'react';
 import { AxiosError } from 'axios';
-import { InfinitySpin } from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { AuthService } from '@/services/auth-service';
@@ -216,7 +216,7 @@ const SignupForm = () => {
                 className='rounded-[10px] h-[57px] mt-6 mb-[30px] text-black text-[14.85px] bg-[#FBBD1D] hover:bg-[#f3c655]'>
                 {loading ? (
                   <div className='h-full w-full flex items-center justify-center'>
-                    <InfinitySpin width='150' color='#ffffff' />
+                    <Oval width='30' color='#ffffff' />
                   </div>
                 ) : (
                   'Create Account'

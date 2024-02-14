@@ -53,7 +53,7 @@ const Leaderboard: React.FC = () => {
         </h2>
       </div>
       {isLoading ? (
-        <Loader />
+        <Loader size='100' />
       ) : leaderboard?.Data ? (
         <Profiles data={leaderboard.Data} />
       ) : (

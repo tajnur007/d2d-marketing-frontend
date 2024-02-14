@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { InfinitySpin } from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { PasswordHideIcon, PasswordRevealIcon } from '@/assets/icons';
@@ -136,7 +136,7 @@ const SigninForm = () => {
             <Button type='submit' className='rounded-[10px] h-[55px]'>
               {loading ? (
                 <div className='h-full w-full flex items-center justify-center'>
-                  <InfinitySpin width='150' color='#ffffff' />
+                  <Oval width='30' color='#ffffff' />
                 </div>
               ) : (
                 'Log In'

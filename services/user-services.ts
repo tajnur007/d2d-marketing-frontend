@@ -155,4 +155,31 @@ export class UserService {
 
     return resp;
   };
+
+  //* Service to change password
+  public changePassword = async (
+    oldPassword: any,
+    newPassword: any,
+    token: string
+  ): Promise<any> => {
+    const config: AxiosRequestConfig = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const payload = {
+      old_password: oldPassword,
+      new_password: newPassword,
+    };
+
+    const resp = await this.client.request({
+      url: API_PATHS.ChangePassword,
+      method: API_METHODS.POST,
+      ...config,
+      data: payload,
+    });
+
+    return resp;
+  };
 }
