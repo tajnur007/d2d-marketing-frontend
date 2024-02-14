@@ -3,18 +3,19 @@
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { TextArea } from '@/components/text-area';
-import { FormItems } from '@/models/global-types';
+import { FormItems, SingleLeadItems } from '@/models/global-types';
 import { UserService } from '@/services/user-services';
 import { LeadService } from '@/services/lead-services';
 import {
   CREATE_LEAD_STATUS_NEW,
   FORM_ITEMS,
   PAGE_ROUTES,
+  SINGLE_LEAD_ITEMS,
 } from '@/utils/constants/common-constants';
 import { leadFormErrorCheck } from '@/utils/helpers/common-helpers';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import { FormEvent, use, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { CustomSelect } from '../select/custom-select';
 import Map from './map';
@@ -30,6 +31,8 @@ const UpdateLeadForm: React.FC = () => {
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [pending, setPending] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [singleLeadData, setSingleLeadData] =
+    useState<SingleLeadItems>(SINGLE_LEAD_ITEMS);
 
   const handlePendingChange = (isPending: boolean) => {
     setPending(isPending);
@@ -59,41 +62,39 @@ const UpdateLeadForm: React.FC = () => {
       try {
         //! Make an API request to get user data with the ID equal to userId
         const response = await LeadServices.getUserLead(userId, token);
-        console.log('response', response.data.Data);
-
-        const singlepayload = {
-          Title: response.data.Data?.title,
-          Name: response.data.Data?.point_of_contact?.name,
-          Phone: response.data.Data?.point_of_contact?.phone,
-          Email: response.data.Data?.point_of_contact?.email,
-          Reference: response.data.Data?.point_of_contact?.reference,
-          Note: response.data.Data?.point_of_contact?.meeting_notes,
-          Status: response.data.Data?.meeting_status,
-          Images: response.data.Data?.image_info_json,
-          AssignedTo: response.data.Data?.executive_name,
-          location: {
-            lat: response.data.Data?.latitude,
-            lng: response.data.Data?.longitude,
-          },
-        };
-        //! Set the form data for auto filling the form
-        setFormData(singlepayload);
+        setSingleLeadData(response.data.Data);
         setStatusSelected(response.data.Data?.meeting_status);
         setAssignedToSelected(response.data.Data?.executive_name);
       } catch (error) {
         toast.error('Error fetching user lead.');
       }
     };
-
     fetchUserData();
   }, []);
-  
+
+  useEffect(() => {
+    const singlepayload = {
+      Title: singleLeadData?.title,
+      Name: singleLeadData?.point_of_contact?.name,
+      Phone: singleLeadData?.point_of_contact?.phone,
+      Email: singleLeadData?.point_of_contact?.email,
+      Reference: singleLeadData?.point_of_contact?.reference,
+      Note: singleLeadData?.point_of_contact?.meeting_notes,
+      Status: singleLeadData?.meeting_status,
+      Images: images,
+      AssignedTo: singleLeadData?.executive_name,
+      location: {
+        lat: location?.lat,
+        lng: location?.lng,
+      },
+    };
+    //! Set the form data for auto filling the form
+    setFormData(singlepayload);
+  }, [singleLeadData, images]);
+
   useEffect(() => {
     setFormData((prev) => {
       return { ...prev, Images: [...images] };
-    });
-    setFormErrors((prev) => {
-      return { ...prev, Images: '' };
     });
   }, [images]);
 
@@ -326,13 +327,11 @@ const UpdateLeadForm: React.FC = () => {
               selected={isSuccess ? '' : statusSelected}
             />
             <div className='items-start justify-center '>
-              <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
-                Image
-              </p>
+              <p className='text-[#00156A] font-medium text-xs mb-2'>Image</p>
               <Dropzone
                 onChange={setImages}
                 onPendingChange={handlePendingChange}
-                isSuccess={isSuccess}
+                singleLeadData={singleLeadData}
               />
             </div>
           </div>
