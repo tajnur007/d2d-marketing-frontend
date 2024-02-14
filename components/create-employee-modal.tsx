@@ -19,6 +19,7 @@ import { useSession } from 'next-auth/react';
 import { UserService } from '@/services/user-services';
 import { toast } from 'react-toastify';
 import MiniLoader from './mini-loader';
+import { CustomSelect } from './select/custom-select';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -39,6 +40,7 @@ const CreateEmployeeModal = ({
   const [managers, setManagers] = useState<ManagerType[]>();
   const [manager, setManager] = useState<ManagerOption>();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const { data } = useSession();
 
@@ -84,6 +86,7 @@ const CreateEmployeeModal = ({
   const closeModal = () => {
     setModalIsOpen(false);
     setIsExecutive(false);
+    setIsSuccess(false);
     setSelected(EMPLOYEE_ROLE[0]?.value);
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
   };
@@ -93,6 +96,7 @@ const CreateEmployeeModal = ({
   };
 
   const handleManagerChange = (selectedOption: any) => {
+    setIsSuccess(false);
     setManager(selectedOption);
   };
 
@@ -127,6 +131,7 @@ const CreateEmployeeModal = ({
           newFormErrors[field] = `(${field} is required)`;
         }
       }
+
       setFormErrors(newFormErrors);
 
       if (Object.keys(newFormErrors).length === 0) {
@@ -138,10 +143,12 @@ const CreateEmployeeModal = ({
 
         if (resp?.status === 201) {
           toast.success(resp?.data?.Message);
-          setIsExecutive(false);
-          setSelected(EMPLOYEE_ROLE[0]?.value);
-          setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
-          setModalIsOpen(false);
+          setIsSuccess(true);
+          // setIsExecutive(false);
+          // setSelected(EMPLOYEE_ROLE[0]?.value);
+          // setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
+          // setModalIsOpen(false);
+          closeModal();
           setIsRefreshData(true);
         }
       }
@@ -239,31 +246,52 @@ const CreateEmployeeModal = ({
               onChange={handleSelectChange}
             />
             {isExecutive && (
-              <>
+              <div className='mb-3 2xl:mb-5'>
                 <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
                   Select Manager
+                  {`${manager?.value === '' && '(Select Manager is required)'}`}
                 </label>
                 <Select
                   options={managers}
                   isDisabled={isLoading}
-                  defaultValue={managers && managers[0]}
+                  value={
+                    manager?.value === ''
+                      ? null
+                      : managers?.find((option: any) => option.value === manager?.value)
+                  }
+                  // defaultValue={managers && managers[0]}
                   className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
                   styles={{
                     control: (baseStyles, { isFocused }) => ({
                       ...baseStyles,
-                      borderColor: '2px #F3F3F3 solid',
+                      border:
+                        manager?.value === '' && !isFocused
+                          ? '1px solid red'
+                          : isFocused
+                          ? '1px solid #a855f7'
+                          : '1px solid #F3F3F3',
+                      '&:hover': {
+                        border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
+                      },
                       width: '100%',
                       height: '100%',
                       borderRadius: '10px',
                       boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
                       transition: 'all 500ms',
-                      border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
-                      '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
                     }),
                   }}
                   onChange={handleManagerChange}
                 />
-              </>
+                {/* <CustomSelect
+                  label='Select Manager'
+                  // setSelected={setStatusSelected}
+                  options={managers}
+                  errorMessage={managers?.values}
+                  className={`${managers?.values && 'border-red-500 shadow'}`}
+                  isLoading={isLoading}
+                  selected={isSuccess ? '' : manager?.value}
+                /> */}
+              </div>
             )}
             <Button
               type='submit'

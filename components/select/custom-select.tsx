@@ -55,9 +55,8 @@ export const CustomSelect = ({
           value={
             selected === ''
               ? null
-              : options.find((option) => option.value === defaultValue)
+              : options.find((option: any) => option.value === selected)
           }
-          placeholder={options.find((option) => option.value === defaultValue)?.label}
           onChange={handleChange}
           isDisabled={isLoading}
         />

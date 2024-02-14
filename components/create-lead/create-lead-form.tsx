@@ -95,8 +95,6 @@ const CreateLeadForm: React.FC = () => {
     });
   };
 
-  // console.log(formErrors, formData, images.length);
-
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     setPending(true);
     event.preventDefault();
@@ -288,6 +286,7 @@ const CreateLeadForm: React.FC = () => {
               isLoading={pending}
               selected={isSuccess ? '' : statusSelected}
             />
+
             <div className='items-start justify-center '>
               <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
                 Image

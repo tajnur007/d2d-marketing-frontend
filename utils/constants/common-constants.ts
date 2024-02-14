@@ -119,7 +119,7 @@ export const FORM_ITEMS: FormItems = {
   Reference: '',
   Note: '',
   Status: '',
-  Images: [],
+  Images: '',
   AssignedTo: '',
   location: { lat: 0, lng: 0 },
 };

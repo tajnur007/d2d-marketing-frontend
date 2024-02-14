@@ -279,7 +279,7 @@ export interface SelectProps {
   className?: string;
   selected?: string;
   setSelected?: (item: any) => void;
-  options?: CreateLeadStatusItems[];
+  options?: any;
   onSelectChange?: any;
   defaultValue?: string;
   errorMessage?: string;
