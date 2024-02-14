@@ -31,10 +31,6 @@ const CreateLeadForm: React.FC = () => {
   const [pending, setPending] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const handlePendingChange = (isPending: boolean) => {
-    setPending(isPending);
-  };
-
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     lat: 22.04,
@@ -48,6 +44,10 @@ const CreateLeadForm: React.FC = () => {
   const { data } = useSession();
   // @ts-ignore
   const token = data?.user?.access_token;
+
+  const handlePendingChange = (isPending: boolean) => {
+    setPending(isPending);
+  };
 
   useEffect(() => {
     setFormData((prev) => {
@@ -290,14 +290,10 @@ const CreateLeadForm: React.FC = () => {
             <div className='items-start justify-center '>
               <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
                 Image
-                {formErrors.Images && (
-                  <span className='text-red-500 ml-1'>(Image is required)</span>
-                )}
               </p>
               <Dropzone
                 onChange={setImages}
                 onPendingChange={handlePendingChange}
-                errorMessage={formErrors?.Images}
                 isSuccess={isSuccess}
               />
             </div>

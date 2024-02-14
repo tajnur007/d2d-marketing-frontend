@@ -66,7 +66,7 @@ const Dropzone: React.FC<DropzoneProps> = ({
       handleImageChange(files);
       setPrevFiles(files); // Update prevFiles with the current files
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files, prevFiles]);
 
   // Utility function to check if two arrays of files are equal
@@ -108,9 +108,7 @@ const Dropzone: React.FC<DropzoneProps> = ({
   return (
     <form>
       <div
-        className={`flex flex-wrap gap-2 justify-right items-center border-dashed border-2 ${
-          errorMessage ? 'border-red-500 ' : 'border-neutral-200 '
-        } p-5 rounded-lg w-full`}>
+        className={`flex flex-wrap gap-2 justify-right items-center border-dashed border-2 p-5 rounded-lg w-full`}>
         <div>
           <ul className='flex flex-wrap gap-2'>
             {files.map((file) => (

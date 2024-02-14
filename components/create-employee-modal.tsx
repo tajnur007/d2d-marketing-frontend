@@ -145,10 +145,6 @@ const CreateEmployeeModal = ({
         if (resp?.status === 201) {
           toast.success(resp?.data?.Message);
           setIsSuccess(true);
-          // setIsExecutive(false);
-          // setSelected(EMPLOYEE_ROLE[0]?.value);
-          // setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
-          // setModalIsOpen(false);
           closeModal();
           setIsRefreshData(true);
         }

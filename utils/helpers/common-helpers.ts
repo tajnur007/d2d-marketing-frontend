@@ -43,6 +43,7 @@ export const leadFormErrorCheck = (formData: FormItems, field: string) => {
   const safeFields = {
     Email: 'Email',
     Reference: 'Reference',
+    Images: 'Images',
   };
 
   if (safeFields[field as keyof typeof safeFields]) {
@@ -60,8 +61,6 @@ export const leadFormErrorCheck = (formData: FormItems, field: string) => {
     if (field === 'Phone') {
       const phoneValue = formData[field as keyof typeof formData];
       return validatePhone(phoneValue) ? false : `(${field} is invalid)`;
-    } else if (field === 'Images') {
-      return formData[field]?.length !== 0 ? false : `(${field} is required)`;
     } else {
       return false;
     }

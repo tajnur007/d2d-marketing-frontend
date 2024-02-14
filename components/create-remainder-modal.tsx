@@ -1,7 +1,7 @@
 'use client';
 
 import Select from 'react-select';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { Input } from './input';
@@ -62,7 +62,8 @@ const CreateRemainderModal = ({
     });
   };
 
-  const submitData = async () => {
+  const submitData = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       setIsLoading(true);
       const newFormErrors: any = {};
@@ -75,7 +76,7 @@ const CreateRemainderModal = ({
           newFormErrors[field] = `(${field} is required)`;
         }
       }
-      console.log(formData, newFormErrors);
+
       setFormErrors(newFormErrors);
 
       if (Object.keys(newFormErrors).length === 0) {
@@ -91,10 +92,9 @@ const CreateRemainderModal = ({
           const ReminderServices = new ReminderService();
           const response = await ReminderServices.createReminder(payloadObj, token);
           if (response.status === 201) {
-            setFormData(CREATE_REMINDER_ITEMS);
-            setModalIsOpen(false);
             setIsCreated(true);
             toast.success('Remainder created successfully.');
+            closeModal();
           }
         } else {
           toast.error('failed to create remainder.');
@@ -146,115 +146,119 @@ const CreateRemainderModal = ({
       onRequestClose={closeModal}
       ariaHideApp={false}>
       <div>
-        <div className='flex mb-[16px] justify-between'>
-          <div className='left-0 font-bold text-[#25254c] text-[24px] tracking-[0] leading-[14px] whitespace-nowrap'>
-            <span>Create reminder</span>
+        <form onSubmit={submitData}>
+          <div className='flex mb-[16px] justify-between'>
+            <div className='left-0 font-bold text-[#25254c] text-[24px] tracking-[0] leading-[14px] whitespace-nowrap'>
+              <span>Create reminder</span>
+            </div>
+
+            <span onClick={closeModal} className='cursor-pointer'>
+              <ExIcon />
+            </span>
           </div>
 
-          <span onClick={closeModal} className='cursor-pointer'>
-            <ExIcon />
-          </span>
-        </div>
-
-        <Input
-          label='Title'
-          placeholder='Title here'
-          type='text'
-          id='title'
-          name='Title'
-          htmlFor='title'
-          disabled={isLoading}
-          errorMessage={formErrors?.Title}
-          className={`${formErrors?.Title && 'border-red-500 shadow'}`}
-          onChange={handleInputChange}
-        />
-
-        <div className='mt-[8px]'>
           <Input
-            label='Associated Lead'
-            placeholder='Optional'
+            label='Title'
+            placeholder='Title here'
             type='text'
-            id='associatedLead'
-            name='AssociatedLead'
-            htmlFor='associatedLead'
+            id='title'
+            name='Title'
+            htmlFor='title'
             disabled={isLoading}
+            errorMessage={formErrors?.Title}
+            className={`${formErrors?.Title && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
-        </div>
 
-        <div className='w-full mt-[4px] date-picker'>
-          <label htmlFor={'dateTime'} className='text-[#00156A] text-xs mb-1 font-medium'>
-            {'Date & Time'}
-            {formErrors.Date && (
-              <span className='text-red-500 relative ml-1'>{formErrors?.Date}</span>
-            )}
-          </label>
+          <div className='mt-[8px]'>
+            <Input
+              label='Associated Lead'
+              placeholder='Optional'
+              type='text'
+              id='associatedLead'
+              name='AssociatedLead'
+              htmlFor='associatedLead'
+              disabled={isLoading}
+              onChange={handleInputChange}
+            />
+          </div>
 
-          <div className='relative h-[48px] 2xl:h-14'>
-            <Datetime onChange={getDate} inputProps={inputProps} />
-            <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none '>
-              <ClockIcon />
+          <div className='w-full mt-[4px] date-picker'>
+            <label
+              htmlFor={'dateTime'}
+              className='text-[#00156A] text-xs mb-1 font-medium'>
+              {'Date & Time'}
+              {formErrors.Date && (
+                <span className='text-red-500 relative ml-1'>{formErrors?.Date}</span>
+              )}
+            </label>
+
+            <div className='relative h-[48px] 2xl:h-14'>
+              <Datetime onChange={getDate} inputProps={inputProps} />
+              <div className='absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none '>
+                <ClockIcon />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className='mt-[8px]'>
-          <div className='font-medium text-[#00156a] text-xs 2xl:text-sm mb-1'>
-            Status
-            <span className='text-red-500 ml-1'>{`${
-              formErrors?.Status ? '(status is required)' : ''
-            }`}</span>
-          </div>
+          <div className='mt-[8px]'>
+            <div className='font-medium text-[#00156a] text-xs 2xl:text-sm mb-1'>
+              Status
+              <span className='text-red-500 ml-1'>{`${
+                formErrors?.Status ? '(status is required)' : ''
+              }`}</span>
+            </div>
 
-          <Select
-            isDisabled={isLoading}
-            options={CREATE_REMINDER_STATUS}
-            className='h-[48px] 2xl:h-14 create-reminder-select font-medium text-black text-sm 2xl:text-[16px]'
-            styles={{
-              control: (baseStyles, { isFocused }) => ({
-                ...baseStyles,
-                border:
-                  formErrors?.Status && !isFocused
-                    ? '1px solid red'
-                    : isFocused
-                    ? '1px solid #a855f7'
-                    : '1px solid #F3F3F3',
-                '&:hover': {
+            <Select
+              isDisabled={isLoading}
+              options={CREATE_REMINDER_STATUS}
+              className='h-[48px] 2xl:h-14 create-reminder-select font-medium text-black text-sm 2xl:text-[16px]'
+              styles={{
+                control: (baseStyles, { isFocused }) => ({
+                  ...baseStyles,
                   border:
                     formErrors?.Status && !isFocused
                       ? '1px solid red'
                       : isFocused
                       ? '1px solid #a855f7'
                       : '1px solid #F3F3F3',
-                },
-                borderRadius: '10px',
-                width: '100%',
-                height: '100%',
-                boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
-                transition: 'all 500ms',
-              }),
-            }}
-            onChange={handleSelectChange}
-          />
-        </div>
+                  '&:hover': {
+                    border:
+                      formErrors?.Status && !isFocused
+                        ? '1px solid red'
+                        : isFocused
+                        ? '1px solid #a855f7'
+                        : '1px solid #F3F3F3',
+                  },
+                  borderRadius: '10px',
+                  width: '100%',
+                  height: '100%',
+                  boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
+                  transition: 'all 500ms',
+                }),
+              }}
+              onChange={handleSelectChange}
+            />
+          </div>
 
-        <div className='mt-[8px]'>
-          <TextArea
-            label='Notes'
-            placeholder='Notes'
-            name='Note'
-            disabled={isLoading}
-            onChange={handleInputChange}
-            errorMessage={formErrors?.Note}
-            className={`h-[84px] ${formErrors?.Note && 'border-red-500 shadow'}`}
-          />
-        </div>
+          <div className='mt-[8px]'>
+            <TextArea
+              label='Notes'
+              placeholder='Notes'
+              name='Note'
+              disabled={isLoading}
+              onChange={handleInputChange}
+              errorMessage={formErrors?.Note}
+              className={`h-[84px] ${formErrors?.Note && 'border-red-500 shadow'}`}
+            />
+          </div>
 
-        <Button
-          onClick={submitData}
-          className='h-[60px] text-white transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 mt-[10px]'>
-          {isLoading ? <MiniLoader /> : ' Create'}
-        </Button>
+          <Button
+            type='submit'
+            className='h-[60px] text-white transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 mt-[10px]'>
+            {isLoading ? <MiniLoader /> : ' Create'}
+          </Button>
+        </form>
       </div>
     </Modal>
   );
