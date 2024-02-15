@@ -285,7 +285,7 @@ const CreateEmployeeModal = ({
               type='submit'
               disabled={isLoading}
               className='w-full h-[60px] transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
-              {isLoading ? <MiniLoader /> : 'Create'}
+              {isLoading ? <MiniLoader size='20' /> : 'Create'}
             </Button>
           </form>
         </div>

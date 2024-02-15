@@ -44,21 +44,24 @@ const ConfirmationModal = ({
           </p>
           <p className='text-gray-500'>{text}</p>
         </div>
-        {isLoading ? (
-          <MiniLoader color='#4f46e5' />
-        ) : (
-          <div className='flex justify-between gap-[12px]'>
-            <Button
-              onClick={closeModal}
-              className='w-[135px] bg-[#EBEBEB] text-[#69707C] hover:bg-gray-200'>
-              Cancel
-            </Button>
 
-            <Button onClick={() => deleteItem()} className='w-[135px]'>
-              Confirm
-            </Button>
-          </div>
-        )}
+        <div className='flex justify-between gap-[12px] h-[52px]'>
+          {isLoading ? (
+            <MiniLoader color='#4f46e5' />
+          ) : (
+            <>
+              <Button
+                onClick={closeModal}
+                className='w-[135px] bg-[#EBEBEB] text-[#69707C] hover:bg-gray-200'>
+                Cancel
+              </Button>
+
+              <Button onClick={() => deleteItem()} className='w-[135px]'>
+                Confirm
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </Modal>
   );

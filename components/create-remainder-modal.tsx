@@ -255,6 +255,7 @@ const CreateRemainderModal = ({
 
           <Button
             type='submit'
+            disabled={isLoading}
             className='h-[60px] text-white transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 mt-[10px]'>
             {isLoading ? <MiniLoader /> : ' Create'}
           </Button>
