@@ -32,7 +32,13 @@ export const authOptions: NextAuthOptions = {
 
           const AuthServices = new AuthService();
           const response = await AuthServices.login(loginData);
-          createAuthData(response);
+          const token = response?.access_token;
+          if (token) {
+            const Service = new UserService();
+            const resp = await Service.getUserInfo(token);
+            response.user_type = resp?.data?.Data?.user_type;
+            createAuthData(response);
+          }
 
           return response;
         } catch (error: any) {

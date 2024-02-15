@@ -16,6 +16,7 @@ import flagImage from '@/assets/images/leadslist-icons/triangle-flag.png';
 import { CreateReminderItems, RemainderType, statusColor } from '@/models/global-types';
 import { validateImageUrl } from '@/utils/helpers/common-helpers';
 import { ReminderService } from '@/services/reminder-services';
+import MiniLoader from './mini-loader';
 
 const getStatusColor: statusColor = {
   cold: 'bg-blue-200',
@@ -38,7 +39,7 @@ const LeadDetails = ({
     useState<CreateReminderItems>(CREATE_REMINDER_ITEMS);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [closeDrawer, setCloseDrawer] = React.useState(false);
-  const [reminders, setReminders] = React.useState<RemainderType[]>([]);
+  const [reminders, setReminders] = React.useState<RemainderType[]>();
   const [isCreated, setIsCreated] = React.useState(false);
   const [isUpdated, setIsUpdated] = React.useState(false);
   const { data: reminderData } = useSession();
@@ -192,7 +193,10 @@ const LeadDetails = ({
         <h1 className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
           Reminder
         </h1>
-        {reminders?.filter((item) => item?.lead_id === data?.id)?.length === 0 ? (
+
+        {!reminders ? (
+          <MiniLoader />
+        ) : reminders?.filter((item) => item?.lead_id === data?.id)?.length === 0 ? (
           <div className='text-center'>No reminder</div>
         ) : (
           <div className='max-h-[236px] overflow-y-auto tiny-scrollbar flex flex-col gap-4'>

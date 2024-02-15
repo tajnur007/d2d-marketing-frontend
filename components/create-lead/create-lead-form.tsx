@@ -30,12 +30,8 @@ const CreateLeadForm: React.FC = () => {
   const [formErrors, setFormErrors] = useState<FormItems>(FORM_ITEMS);
   const [pending, setPending] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-
-  const handlePendingChange = (isPending: boolean) => {
-    setPending(isPending);
-  };
-
   const [isLoading, setIsLoading] = useState(false);
+
   const [location, setLocation] = useState({
     lat: 22.04,
     lng: 30.0,
@@ -48,6 +44,10 @@ const CreateLeadForm: React.FC = () => {
   const { data } = useSession();
   // @ts-ignore
   const token = data?.user?.access_token;
+
+  const handlePendingChange = (isPending: boolean) => {
+    setPending(isPending);
+  };
 
   useEffect(() => {
     setFormData((prev) => {
@@ -92,11 +92,9 @@ const CreateLeadForm: React.FC = () => {
     });
   };
 
-  // console.log(formErrors, formData, images.length);
-
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    setPending(true);
     event.preventDefault();
+    setPending(true);
     setFormData((prev) => {
       return { ...prev, location };
     });
@@ -153,16 +151,15 @@ const CreateLeadForm: React.FC = () => {
             setAssignedToSelected('');
             setImages([]);
             setIsSuccess(true);
-            toast.success('Create lead successfully.');
+            toast.success(res.data.Message);
             router.push(PAGE_ROUTES.Leads);
           }
         } else {
           toast.error('Something went wrong.');
         }
       }
-    } catch (err) {
-      toast.error('Failed to create Lead.');
-      console.log(err);
+    } catch (err: any) {
+      toast.error(err.response.data.message);
     }
     setPending(false);
   };
@@ -288,17 +285,14 @@ const CreateLeadForm: React.FC = () => {
               isLoading={pending}
               selected={isSuccess ? '' : statusSelected}
             />
-            <div className='items-start justify-center'>
+
+            <div className='items-start justify-center '>
               <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
                 Image
-                {formErrors.Images && (
-                  <span className='text-red-500 ml-1'>(Image is required)</span>
-                )}
               </p>
               <Dropzone
                 onChange={setImages}
                 onPendingChange={handlePendingChange}
-                errorMessage={formErrors?.Images}
                 isSuccess={isSuccess}
               />
             </div>

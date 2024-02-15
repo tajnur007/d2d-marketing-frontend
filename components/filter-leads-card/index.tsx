@@ -13,6 +13,7 @@ import './style.css';
 import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import { Button } from '../button';
 
 const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
   onFilterData,
@@ -247,16 +248,16 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
 
         {/* Apply and Cancel Buttons */}
         <div className='flex justify-between mt-[18px] gap-2 pl-[8px]'>
-          <button
+          <Button
             onClick={handleCancelButton}
-            className='bg-[#EBEBEB] text-black font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
+            className='bg-[#EBEBEB] hover:bg-gray-200 text-[#69708C] px-4 py-2 focus:outline-none w-[170px] h-[45px] rounded-xl text-sm  transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
             {filterIcon ? 'Reset' : 'Cancel'}
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={handleApplyFilterButton}
-            className='bg-[#5630FF] text-white font-semibold px-4 py-2 focus:outline-none w-[170px] h-[40px] rounded-xl text-sm leading-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
+            className='bg-[#5630FF] text-white font-semibold px-4 py-2 focus:outline-none w-[170px] h-[45px] rounded-xl text-sm  transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
             Apply
-          </button>
+          </Button>
         </div>
       </div>
     </div>

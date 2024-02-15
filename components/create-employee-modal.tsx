@@ -40,6 +40,7 @@ const CreateEmployeeModal = ({
   const [managers, setManagers] = useState<ManagerType[]>();
   const [manager, setManager] = useState<ManagerOption>();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const { data } = useSession();
 
@@ -85,8 +86,10 @@ const CreateEmployeeModal = ({
   const closeModal = () => {
     setModalIsOpen(false);
     setIsExecutive(false);
+    setIsSuccess(false);
     setSelected(EMPLOYEE_ROLE[0]?.value);
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
+    setFormErrors(CREATE_EMPLOYEE_FORM_ITEMS);
   };
 
   const handleSelectChange = (selectedOption: any) => {
@@ -94,6 +97,7 @@ const CreateEmployeeModal = ({
   };
 
   const handleManagerChange = (selectedOption: any) => {
+    setIsSuccess(false);
     setManager(selectedOption);
   };
 
@@ -125,9 +129,12 @@ const CreateEmployeeModal = ({
 
       for (let field in formData) {
         if (field !== 'manager_name' && formData[field as keyof typeof formData] === '') {
-          newFormErrors[field] = `(${field} is required)`;
+          newFormErrors[field] = `(${
+            field.charAt(0).toUpperCase() + field.slice(1)
+          } is required)`;
         }
       }
+
       setFormErrors(newFormErrors);
 
       if (Object.keys(newFormErrors).length === 0) {
@@ -139,10 +146,8 @@ const CreateEmployeeModal = ({
 
         if (resp?.status === 201) {
           toast.success(resp?.data?.Message);
-          setIsExecutive(false);
-          setSelected(EMPLOYEE_ROLE[0]?.value);
-          setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
-          setModalIsOpen(false);
+          setIsSuccess(true);
+          closeModal();
           setIsRefreshData(true);
         }
       }
@@ -241,36 +246,47 @@ const CreateEmployeeModal = ({
               onChange={handleSelectChange}
             />
             {isExecutive && (
-              <>
+              <div className='mb-3 2xl:mb-5'>
                 <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>
                   Select Manager
                 </label>
                 <Select
                   options={managers}
                   isDisabled={isLoading}
-                  defaultValue={managers && managers[0]}
+                  value={manager}
                   className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
                   styles={{
                     control: (baseStyles, { isFocused }) => ({
                       ...baseStyles,
-                      borderColor: '2px #F3F3F3 solid',
+                      border:
+                        manager?.value === '' && !isFocused
+                          ? '1px solid red'
+                          : isFocused
+                          ? '1px solid #a855f7'
+                          : '1px solid #F3F3F3',
+                      '&:hover': {
+                        border:
+                          manager?.value === '' && !isFocused
+                            ? '1px solid red'
+                            : isFocused
+                            ? '1px solid #a855f7'
+                            : '1px solid #F3F3F3',
+                      },
                       width: '100%',
                       height: '100%',
                       borderRadius: '10px',
                       boxShadow: isFocused ? '0 0 0 3px #e9d5ff' : 'none',
                       transition: 'all 500ms',
-                      border: isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
-                      '&:hover': isFocused ? '1px solid #a855f7' : '1px solid #F3F3F3',
                     }),
                   }}
                   onChange={handleManagerChange}
                 />
-              </>
+              </div>
             )}
             <Button
               type='submit'
               disabled={isLoading}
-              className='w-full rounded-[10px] h-[60px] '>
+              className='w-full h-[60px] transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
               {isLoading ? <MiniLoader /> : 'Create'}
             </Button>
           </form>

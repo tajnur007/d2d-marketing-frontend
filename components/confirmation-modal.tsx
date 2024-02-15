@@ -1,6 +1,5 @@
 'use client';
 
-import { DeleteModalProps } from '@/models/global-types';
 import { Button } from './button';
 import './dropdown-select.css';
 import React from 'react';
@@ -19,6 +18,7 @@ const ConfirmationModal = ({
   setModalIsOpen = () => {},
   deleteItem,
   isLoading,
+  text = 'Do you really want to delete?',
 }: any) => {
   const closeModal = () => {
     setModalIsOpen(false);
@@ -33,35 +33,37 @@ const ConfirmationModal = ({
       isOpen={modalIsOpen}
       onRequestClose={closeModal}>
       <div className='max-w-[350px]'>
-        <div className='flex justify-end'>
+        <div className='flex justify-end '>
           <span onClick={closeModal} className='cursor-pointer'>
             <ExIcon />
           </span>
         </div>
 
-        <div className='flex justify-center items-center flex-col'>
+        <div className='flex justify-center items-center flex-col mb-10'>
           <DeleteLeadModalImage />
-          <p className='my-5 font-semibold text-[#131212] text-[20px] text-center leading-[31.2px]'>
+          <p className=' font-semibold text-[#131212] text-[20px] text-center leading-[31.2px] '>
             Are you sure?
           </p>
+          <p className='text-gray-500'>{text}</p>
         </div>
-        {isLoading ? (
-          <MiniLoader color='#4f46e5' />
-        ) : (
-          <div className=' flex justify-between gap-[12px]'>
-            <Button
-              onClick={closeModal}
-              className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
-              Cancel
-            </Button>
 
-            <Button
-              onClick={() => deleteItem()}
-              className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200 bg-red-600 hover:bg-red-500'>
-              Confirm
-            </Button>
-          </div>
-        )}
+        <div className='flex justify-between gap-[12px] h-[52px]'>
+          {isLoading ? (
+            <MiniLoader color='#4f46e5' />
+          ) : (
+            <>
+              <Button
+                onClick={closeModal}
+                className='w-[135px] bg-[#EBEBEB] text-[#69707C] hover:bg-gray-200'>
+                Cancel
+              </Button>
+
+              <Button onClick={() => deleteItem()} className='w-[135px]'>
+                Confirm
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </Modal>
   );

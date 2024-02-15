@@ -103,13 +103,13 @@ export class LeadService {
     try {
       const Service = new UserService();
       const response = await Service.EmployeeListInfo(token);
-      console.log(response);
-      const data =  response?.data?.Data.Data;
+
+      const data = response?.data?.Data.Data;
       const createdByValues: any[] = [];
-      
+
       data?.map((item: any) => {
-          const newItem = { ...item, value: item?.name, label: item?.name };
-          createdByValues.push(newItem);
+        const newItem = { ...item, value: item?.name, label: item?.name };
+        createdByValues.push(newItem);
       });
       setCreatedByOptions(createdByValues);
     } catch (error) {
@@ -177,7 +177,7 @@ export class LeadService {
   ): Promise<any> => {
     try {
       setIsLoading(true);
-      console.log(data)
+      console.log(data);
       const response = await this.FilteredLeadsData(data, token);
       const filteredLeads = response?.data?.Data;
       console.log(filteredLeads);
@@ -206,7 +206,11 @@ export class LeadService {
   };
 
   //* Service to transfer leads
-  public transferLead = async (lead_id: number, data: any, token: string): Promise<any> => {
+  public transferLead = async (
+    lead_id: number,
+    data: any,
+    token: string
+  ): Promise<any> => {
     const config: AxiosRequestConfig = {};
 
     if (token) {
