@@ -14,6 +14,7 @@ import {
   EMPLOYEE_ROLE,
   MANAGERS,
   UPDATE_EMPLOYEE_PAYLOAD,
+  customStyles,
 } from '@/utils/constants/common-constants';
 import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
@@ -152,11 +153,7 @@ const UpdateEmployeeModal = ({
   return (
     <div>
       <Modal
-        style={{
-          content: {
-            outline: 'none', // Remove browser focus border
-          },
-        }}
+        style={customStyles}
         className={
           'absolute w-[646px] h-auto -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
         }

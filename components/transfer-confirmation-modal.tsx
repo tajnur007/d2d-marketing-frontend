@@ -3,6 +3,7 @@ import modalImage from '@/assets/images/assign-modal.png';
 import Image from 'next/image';
 import Modal from 'react-modal';
 import { Button } from './button';
+import { customStyles } from '@/utils/constants/common-constants';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -25,12 +26,16 @@ const TransferConfirmationModal = ({
 
   return (
     <Modal
+      style={customStyles}
       className={
         'absolute   -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
       isOpen={showConfirmationModal}
       onRequestClose={closeModal}>
-      <div className='m-[30px] w-[404px] h-[377px] '>
+      <div
+        className={`m-[30px] w-[404px] h-${
+          selected.length > 15 ? '[450px]' : '[377px]'
+        } `}>
         <button onClick={() => setShowConfirmationModal(false)} className='pl-[325px]'>
           <ExIcon />
         </button>

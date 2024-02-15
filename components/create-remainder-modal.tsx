@@ -9,6 +9,7 @@ import { CreateReminderModalProps } from '@/models/global-types';
 import {
   CREATE_REMINDER_STATUS,
   CREATE_REMINDER_ITEMS,
+  customStyles,
 } from '@/utils/constants/common-constants';
 import { TextArea } from './text-area';
 import { Button } from './button';
@@ -139,6 +140,7 @@ const CreateRemainderModal = ({
 
   return (
     <Modal
+      style={customStyles}
       className={
         'absolute w-[546px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto] outline-none'
       }
