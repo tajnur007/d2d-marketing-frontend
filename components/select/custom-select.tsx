@@ -31,7 +31,7 @@ export const CustomSelect = ({
       </label>
       <div className='relative font-medium '>
         <Select
-          className='h-[48px] 2xl:h-14 font-medium text-black text-sm 2xl:text-[16px] tracking-[-0.28px] leading-[normal]'
+          className='md:h-[34px] lg:h-[48px] 2xl:h-14 font-medium text-black text-sm md:text-[12px] 2xl:text-[16px] tracking-[-0.28px] leading-[normal]'
           styles={{
             control: (baseStyles, { isFocused }) => ({
               ...baseStyles,
