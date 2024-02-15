@@ -204,10 +204,10 @@ export interface FormItems {
   Reference?: string;
   Note?: string;
   Status?: string;
-  Images?: { [key: string]: string }[] | string;
+  Images?: ImageInfoType[];
   AssignedTo?: string;
   ExecutiveId?: number;
-  location: MapLocation;
+  location?: MapLocation;
 }
 
 //! Single Lead data

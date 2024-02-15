@@ -13,6 +13,7 @@ import { ExIcon } from '@/assets/icons';
 import {
   CREATE_EMPLOYEE_FORM_ITEMS,
   EMPLOYEE_ROLE,
+  customStyles,
 } from '@/utils/constants/common-constants';
 import './dropdown-select.css';
 import { useSession } from 'next-auth/react';
@@ -154,6 +155,7 @@ const CreateEmployeeModal = ({
   return (
     <div>
       <Modal
+        style={customStyles}
         className={
           'absolute w-[520px] 2xl:w-[600px] h-auto -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto] outline-none'
         }

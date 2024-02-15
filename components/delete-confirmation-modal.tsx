@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import { Button } from './button';
 import './dropdown-select.css';
+import { customStyles } from '@/utils/constants/common-constants';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -43,6 +44,7 @@ const DeleteConfirmationModal = ({
 
   return (
     <Modal
+      style={customStyles}
       className={
         'absolute w-[404px] lg:h-auto -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
@@ -63,7 +65,7 @@ const DeleteConfirmationModal = ({
         <div className='md:mt-[8px] lg:mt-[16px] flex gap-[12px] justify-center'>
           <Button
             onClick={closeModal}
-            className='md:w-[70px] lg:w-[135px] md:py-[12px] lg:py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white md:text-[14px] lg:text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
+            className='md:w-[70px] lg:w-[135px] md:py-[12px] lg:py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-[#858585] md:text-[14px] lg:text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200 bg-white border border-[#DFDFDF] hover:bg-[white]'>
             Cancel
           </Button>
 

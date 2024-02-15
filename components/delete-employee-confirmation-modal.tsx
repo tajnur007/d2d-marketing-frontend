@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import { Button } from './button';
 import './dropdown-select.css';
+import { customStyles } from '@/utils/constants/common-constants';
 
 if (Modal.defaultStyles.overlay) {
   Modal.defaultStyles.overlay.backgroundColor = '#00000054';
@@ -48,6 +49,7 @@ const DeleteEmployeeConfirmationModal = ({
 
   return (
     <Modal
+      style={customStyles}
       className={
         'absolute w-[404px] h-auto  -translate-x-2/4 -translate-y-2/4 left-[50%] right-[auto] top-[50%] bottom-[auto]'
       }
@@ -68,7 +70,7 @@ const DeleteEmployeeConfirmationModal = ({
         <div className='mt-[16px] flex gap-[12px]'>
           <Button
             onClick={closeModal}
-            className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-white text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200'>
+            className='w-[135px] px-[51] py-[18px] flex justify-center items-center rounded-[10px] !font-semibold text-[#858585] text-[18px] tracking-[0] leading-[14.5px] ease-in-out transform hover:-translate-y-0.5 hover:scale-200 bg-white border border-[#DFDFDF] hover:bg-[white]'>
             Cancel
           </Button>
 

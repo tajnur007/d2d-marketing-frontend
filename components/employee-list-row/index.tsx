@@ -111,35 +111,35 @@ function EmployeeListRow({
             {item?.employeeStatus || 'Active'}
           </span>
         </div>
-
-        <Popup
-          trigger={
-            <div className='menu-item'>
-              <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
-            </div>
-          }
-          ref={employeeActionRef}
-          position='left center'
-          on='click'
-          closeOnDocumentClick
-          closeOnEscape
-          mouseLeaveDelay={300}
-          mouseEnterDelay={0}
-          contentStyle={{
-            padding: '0px',
-            border: 'none',
-            background: '#F8F8F8',
-            borderRadius: '4px',
-            marginLeft: '20px',
-          }}
-          arrow={false}>
-          {(!deleteModalIsOpen || !editModalIsOpen) && (
+        
+        {!deleteModalIsOpen && !editModalIsOpen && (
+          <Popup
+            trigger={
+              <div className='menu-item'>
+                <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
+              </div>
+            }
+            ref={employeeActionRef}
+            position='left center'
+            on='click'
+            closeOnDocumentClick
+            closeOnEscape
+            mouseLeaveDelay={300}
+            mouseEnterDelay={0}
+            contentStyle={{
+              padding: '0px',
+              border: 'none',
+              background: '#F8F8F8',
+              borderRadius: '4px',
+              marginLeft: '20px',
+            }}
+            arrow={false}>
             <EmployeeOptions
               handleDeleteButton={() => handleDeleteButton(item.id)}
               handleEditButton={() => handleEditButton(item.id)}
             />
-          )}
-        </Popup>
+          </Popup>
+        )}
       </div>
 
       <UpdateEmployeeModal // This is the modal for updating employee details
