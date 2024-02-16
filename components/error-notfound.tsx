@@ -30,7 +30,7 @@ const ErrorAndNotFound = ({ pageName, title, peragraph }: TPageProps) => {
               Go Back
             </button>
             <Link
-              href='/'
+              href='/dashboard'
               className='flex items-center bg-primary hover:bg-primary/90 text-white rounded-[10px] md:text-[14px] lg:text-lg py-3 px-5 w-fit duration-150'>
               Take me home
             </Link>
