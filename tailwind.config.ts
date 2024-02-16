@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         'primary-bg': 'rgb(86, 48, 255)',
+        primary: '#5630FF',
       },
     },
   },
