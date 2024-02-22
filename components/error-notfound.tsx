@@ -20,7 +20,7 @@ const ErrorAndNotFound = ({ pageName, title, peragraph }: TPageProps) => {
         <div className='order-2 lg:order-1'>
           <p className='text-primary text-2xl font-bold mb-6'>{pageName}</p>
           <h1 className='text-7xl font-extrabold mb-8 text-[#2B3674]'>{title}</h1>
-          <p className='text-[#475467] text-xl mb-14'>{peragraph}</p>
+          <p className='max-w-[480px] text-[#475467] text-xl mb-14'>{peragraph}</p>
 
           <div className='flex gap-3'>
             <button
