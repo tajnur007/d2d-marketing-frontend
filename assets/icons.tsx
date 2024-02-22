@@ -202,13 +202,14 @@ export const MoonSolidIcon = () => {
   );
 };
 
-export const PasswordRevealIcon = () => {
+export const PasswordRevealIcon = ({className}: any) => {
   return (
     <svg
       width='24'
       height='24'
       viewBox='0 0 24 24'
       fill='none'
+      className={className}
       xmlns='http://www.w3.org/2000/svg'>
       <path
         d='M15.5799 11.9999C15.5799 13.9799 13.9799 15.5799 11.9999 15.5799C10.0199 15.5799 8.41992 13.9799 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C13.9799 8.41992 15.5799 10.0199 15.5799 11.9999Z'
@@ -228,13 +229,14 @@ export const PasswordRevealIcon = () => {
   );
 };
 
-export const PasswordHideIcon = () => {
+export const PasswordHideIcon = ({className}: any) => {
   return (
     <svg
       width='24'
       height='24'
       viewBox='0 0 24 24'
       fill='none'
+      className={className}
       xmlns='http://www.w3.org/2000/svg'>
       <path
         d='M14.5299 9.46992L9.46992 14.5299C8.81992 13.8799 8.41992 12.9899 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C12.9899 8.41992 13.8799 8.81992 14.5299 9.46992Z'

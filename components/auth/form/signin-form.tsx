@@ -69,7 +69,7 @@ const SigninForm = () => {
   };
 
   return (
-    <div className='w-full flex items-center justify-center my-20'>
+    <div className='w-full h-screen flex items-center justify-center my-12 xl:my-16 2xl:my-20'>
       <div className='w-[49%]'>
         <div className='xl:mb-7 lg:mb-6 mb-5 border-gray-[#DBDBDB] border-b text-center'>
           <h1 className='text-black xl:text-4xl lg:text-3xl text-2xl font-semibold'>
@@ -108,12 +108,12 @@ const SigninForm = () => {
                 onChange={handlePasswordChange}
               />
               <p
-                className='absolute top-[46px] right-6 cursor-pointer'
+                className='absolute top-[42px] lg:top-[46px] 2xl:top-[50px] right-2 lg:right-6 cursor-pointer'
                 onClick={handlePasswordVisibilityToggle}>
-                {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
+                {showPassword ? <PasswordRevealIcon className='h-4 lg:h-6' /> : <PasswordHideIcon className='h-4 lg:h-6' />}
               </p>
             </div>
-            <div className='my-10 flex items-center justify-between'>
+            <div className='my-6 xl:my-8 2xl:my-10 flex items-center justify-between'>
               <label className='relative items-center cursor-pointer flex '>
                 <input
                   type='checkbox'
@@ -129,11 +129,11 @@ const SigninForm = () => {
 
               <Link
                 href={PAGE_ROUTES.Forgetpassword}
-                className=' text-[#D93F21] text-sm font-normal '>
+                className=' text-[#3B5998] text-sm font-normal '>
                 Recover Password
               </Link>
             </div>
-            <Button type='submit' className='rounded-[10px] h-[55px]'>
+            <Button type='submit' className='rounded-[10px] md:h-[35px] lg:h-[48px] 2xl:h-14'>
               {loading ? (
                 <div className='h-full w-full flex items-center justify-center'>
                   <Oval width='30' color='#ffffff' />
