@@ -44,9 +44,7 @@ const LatestLeadsList: React.FC = () => {
               {latestLeads?.Count}
             </p>
           </div>
-          <div>
-            <ViewAllLeadsButton />
-          </div>
+          <div>{latestLeads?.Count === 0 ? '' : <ViewAllLeadsButton />}</div>
         </div>
       </div>
       {isLoading ? (
