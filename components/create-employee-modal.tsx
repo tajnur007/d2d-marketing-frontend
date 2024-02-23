@@ -36,7 +36,7 @@ const CreateEmployeeModal = ({
   setFormErrors = () => {},
   setIsRefreshData = () => {},
 }: CreateEmployeeModalProps) => {
-  const [selected, setSelected] = useState<string>(EMPLOYEE_ROLE[0]?.value);
+  const [selected, setSelected] = useState<string>(EMPLOYEE_ROLE[1]?.value);
   const [managers, setManagers] = useState<ManagerType[]>();
   const [manager, setManager] = useState<ManagerOption>();
   const [isLoading, setIsLoading] = useState(false);
@@ -75,7 +75,7 @@ const CreateEmployeeModal = ({
       return { ...prev, manager_name: '', manager_id: 0 };
     });
 
-    if (selected === 'executive') {
+    if (selected === EMPLOYEE_ROLE[1].value) {
       setIsExecutive(true);
     } else {
       setIsExecutive(false);
@@ -87,7 +87,7 @@ const CreateEmployeeModal = ({
     setModalIsOpen(false);
     setIsExecutive(false);
     setIsSuccess(false);
-    setSelected(EMPLOYEE_ROLE[0]?.value);
+    setSelected(EMPLOYEE_ROLE[1]?.value);
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
     setFormErrors(CREATE_EMPLOYEE_FORM_ITEMS);
   };
