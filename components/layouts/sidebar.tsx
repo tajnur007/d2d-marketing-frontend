@@ -1,7 +1,7 @@
 'use client';
 
-import { Logo, LogoutIcon } from '@/assets/icons';
-import { SIDEBAR_ITEMS } from '@/utils/constants/common-constants';
+import { Logo, LogoutIcon, SettingIcon } from '@/assets/icons';
+import { SIDEBAR_ITEMS, PAGE_ROUTES } from '@/utils/constants/common-constants';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -10,6 +10,7 @@ import { Tooltip } from 'react-tooltip';
 import { signOut } from 'next-auth/react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import Link from 'next/link';
 
 const Sidebar = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    let position = currPosition?.position;
+    let position = currPosition?.position || 0;
     setSelected(position);
   }, [currPosition]);
 
@@ -80,8 +81,14 @@ const Sidebar = () => {
             padding: '8px',
             width: '110px',
           }}>
+          <Link
+            href={PAGE_ROUTES.Settings}
+            className='flex items-center gap-2 font-semibold text-[14px] outline-none hover:text-[#d93f21] mb-4'>
+            <SettingIcon /> <p>Settings</p>
+          </Link>
+
           <div
-            className='flex items-center gap-1 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#d93f21]'
+            className='flex items-center gap-2 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#d93f21]'
             onClick={() => signOut()}>
             <LogoutIcon /> <p>Log out</p>
           </div>
