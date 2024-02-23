@@ -26,11 +26,8 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
         );
         handleNewPassword(false);
       } catch (err) {
-        console.error('Password reset failed:', err);
       }
     }
-    console.log('resetData', resetData);
-    console.log('new password', newPassword);
   };
 
   return (

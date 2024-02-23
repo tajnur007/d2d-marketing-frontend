@@ -23,7 +23,6 @@ const GraphList: React.FC = () => {
         const response = await DashboardServices.dashboardInfo(token);
         setDashboardInfo(response.data.Data);
       } catch (error) {
-        console.error('Error fetching dashboard info:', error);
       }
     };
 

@@ -42,7 +42,6 @@ const Reminder = ({
         Service.getAllRemindersData(token, setReminders);
       }
     } catch (err: any) {
-      console.log(err);
       toast.error(err.response.data.message);
     }
     setIsLoading(true);

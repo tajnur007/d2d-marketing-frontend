@@ -24,7 +24,6 @@ function LeadRow({
 }) {
   const handleScroll = () => {
     // Your scroll event handling logic goes here
-    console.log('Page is scrolling!');
   };
 
   useEffect(() => {

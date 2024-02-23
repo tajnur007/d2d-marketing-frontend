@@ -36,7 +36,6 @@ const Leaderboard: React.FC = () => {
         setLeaderboard(response.data.Data);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching leaderboard data:', error);
       }
     };
 

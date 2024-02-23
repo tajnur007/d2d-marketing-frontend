@@ -45,7 +45,6 @@ const SigninForm = () => {
           setLoading(false);
         }
       } catch (err: any) {
-        console.error('Login failed:', err);
         setLoading(false);
         router.push(PAGE_ROUTES?.Signin);
       }

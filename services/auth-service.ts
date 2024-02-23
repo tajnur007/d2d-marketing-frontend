@@ -46,7 +46,6 @@ export class AuthService {
 
   //* Service for logout
   public logout = async (token: string): Promise<any> => {
-    console.log(token);
     const config: AxiosRequestConfig = {};
 
     if (token) {

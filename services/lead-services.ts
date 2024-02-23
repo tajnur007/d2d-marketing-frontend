@@ -35,13 +35,11 @@ export class LeadService {
   ) => {
     try {
       const response = await this.getLeads(token);
-      // console.log(response);
 
       const data = response.data.Data;
       setLeadsData(data);
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching leads:', error);
     }
   };
 
@@ -113,7 +111,6 @@ export class LeadService {
       });
       setCreatedByOptions(createdByValues);
     } catch (error) {
-      console.error('Error fetching leads:', error);
     }
   };
 
@@ -177,14 +174,11 @@ export class LeadService {
   ): Promise<any> => {
     try {
       setIsLoading(true);
-      console.log(data);
       const response = await this.FilteredLeadsData(data, token);
       const filteredLeads = response?.data?.Data;
-      console.log(filteredLeads);
       setLeadsData(filteredLeads);
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching leads:', error);
     }
   };
 

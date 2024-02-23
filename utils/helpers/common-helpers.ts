@@ -90,7 +90,6 @@ export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
     if (axios.isAxiosError(error) && error.response?.status === 404) {
       return false; // URL is not valid and returns "Not Found" status
     } else {
-      console.error('Error validating URL:', error.message);
       throw new Error('An error occurred while validating the URL');
     }
   }

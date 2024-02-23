@@ -203,7 +203,6 @@ const UpdateLeadForm: React.FC = () => {
       }
     } catch (err) {
       toast.error('Failed to update lead. Please try again.');
-      console.log(err);
     }
     setPending(false);
   };

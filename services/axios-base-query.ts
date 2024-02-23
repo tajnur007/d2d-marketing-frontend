@@ -62,7 +62,6 @@ export class HttpClient {
         .request(config)
         .then((resp) => resolve(resp))
         .catch((resp: Response<any>) => {
-          // console.error('request', resp);
           reject(resp);
         });
     });

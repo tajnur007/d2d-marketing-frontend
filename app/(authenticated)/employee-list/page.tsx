@@ -66,7 +66,6 @@ const EmployeeListPage = () => {
         setIsLoading(false);
         setEmployeeInfo(formattedData);
       } catch (error) {
-        console.error('Error fetching Users info:', error);
       }
     };
 

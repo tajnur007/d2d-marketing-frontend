@@ -113,7 +113,6 @@ const Dropzone: React.FC<DropzoneProps> = ({
       setImageInfo(imageInfo);
       onPendingChange(response.status === 'pending' ? true : false);
     } catch (error) {
-      console.error('Error uploading image:', error);
     }
   };
 

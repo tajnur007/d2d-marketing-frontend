@@ -130,7 +130,6 @@ const UpdateEmployeeModal = ({
       const token = data?.user?.access_token;
 
       const UserServices = new UserService();
-      // console.log('updatePayload', updatePayload);
       const resp = await UserServices.updateEmployeeInfo(
         employeeinfo.id,
         updatePayload,
@@ -146,7 +145,6 @@ const UpdateEmployeeModal = ({
       }
     } catch (err) {
       toast.error('Failed to update employee info!');
-      console.log(err);
     }
   };
 

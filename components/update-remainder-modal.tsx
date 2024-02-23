@@ -79,8 +79,6 @@ const UpdateRemainderModal = ({
         notes: formData?.notes,
         status: selected == '' ? formData?.status : selected,
       };
-      console.log('remainder: ', remainder);
-      console.log('payload:', payloadObj);
 
       let updated = false;
 
@@ -89,7 +87,6 @@ const UpdateRemainderModal = ({
           payloadObj[field as keyof typeof payloadObj] !==
           remainder[field as keyof typeof remainder]
         ) {
-          console.log(payloadObj[field as keyof typeof payloadObj]);
           updated = true;
         }
       }
@@ -115,7 +112,6 @@ const UpdateRemainderModal = ({
           }
         } catch (error) {
           toast.error('Something went wrong.');
-          console.log('Error in update-remainder-modal: ', error);
         }
       }
     }

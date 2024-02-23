@@ -21,12 +21,6 @@ const VerifyEmailPage = () => {
     const token = searchParams.get('token');
     const company_id = searchParams.get('company_id');
     if (token && company_id) {
-      console.log(
-        'Verification request with token:',
-        token,
-        'and company_id:',
-        company_id
-      );
       setVerifyData({
         token: token,
         company_id: company_id,
@@ -38,7 +32,6 @@ const VerifyEmailPage = () => {
     AuthServices.verifyEmail(token, company_id)
       .then((response) => {
         const message = response.Message;
-        console.log('message', message);
         if (message === 'User verified successfully') {
           setIsVerified(true);
           setVerificationMessageSuccess(message);
@@ -50,7 +43,6 @@ const VerifyEmailPage = () => {
         }
       })
       .catch((err) => {
-        console.error('Email verification failed:', err);
         const message = err.response.data.message;
         if (message === 'Verification has already been completed') {
           setIsVerified(true);

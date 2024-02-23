@@ -23,20 +23,12 @@ const ResetPasswordPage = () => {
 
     if (token && company_id) {
       // Make reset password request using token and company_id
-      console.log(
-        'Reset password request with token:',
-        token,
-        'and company_id:',
-        company_id
-      );
       setResetData({
         token: token,
         company_id: company_id,
       });
     }
   }, [searchParams]);
-
-  console.log('resetData', resetData);
 
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>

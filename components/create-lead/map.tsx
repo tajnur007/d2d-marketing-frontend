@@ -16,12 +16,7 @@ const Map = ({ setLocation, location }: LocationProps) => {
             lng: position.coords.longitude,
           });
         },
-        (error) => {
-          console.error('Error getting location:', error.message);
-        }
       );
-    } else {
-      console.error('Geolocation is not supported by your browser.');
     }
   }, [setLocation]);
 
@@ -61,9 +56,8 @@ const Map = ({ setLocation, location }: LocationProps) => {
           width: '100%',
           height: '342px',
           borderRadius: '16px',
-        }}
-        onLoad={() => console.log('Map Component Loaded...')}>
-        <MarkerF position={mapCenter} onLoad={() => console.log('Marker Loaded')} />
+        }}>
+        <MarkerF position={mapCenter} />
       </GoogleMap>
 
       <PlacesAutocomplete

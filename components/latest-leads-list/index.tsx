@@ -23,7 +23,6 @@ const LatestLeadsList: React.FC = () => {
         setLatestLeads(response?.data?.Data);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching latest leads:', error);
       }
     };
 

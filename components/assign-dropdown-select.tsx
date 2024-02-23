@@ -50,7 +50,6 @@ export const AssignDropdownSelect = ({ leadData }: any) => {
         throw new Error('Token is missing.');
       }
     } catch (error) {
-      console.error('Error transferring lead:', error);
       toast.error('Failed to transfer lead. Please try again.');
       setShowConfirmationModal(true);
     }

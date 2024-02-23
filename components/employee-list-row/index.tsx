@@ -75,7 +75,6 @@ function EmployeeListRow({
       }
     } catch (err) {
       toast.error('Failed to delete employee!');
-      console.log(err);
     }
     setIsLoading(false);
     setDeleteModalIsOpen(false);

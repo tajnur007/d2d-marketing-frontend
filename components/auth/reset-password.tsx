@@ -16,7 +16,6 @@ const ResetPassword = () => {
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      console.log(email);
       const payload = {
         email,
       };
@@ -24,14 +23,12 @@ const ResetPassword = () => {
       const UserServices = new AuthService();
       const resp = await UserServices.forgetPassword(payload);
 
-      console.log(resp);
       if (resp?.status === 201) {
         setEmail('');
         setEmailSubmitted(true);
       }
     } catch (err) {
       toast.error('Please use a valid email.');
-      console.log('Error in forget password page: ', err);
     }
   };
 

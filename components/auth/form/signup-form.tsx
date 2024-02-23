@@ -32,7 +32,6 @@ const SignupForm = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    //console.log(value);
 
     setFormData((prev) => {
       return { ...prev, [name]: value };
@@ -67,11 +66,8 @@ const SignupForm = () => {
           },
         };
 
-        //console.log(payload);
-
         // Call your API to sign up the user
         const response = await AuthServices.signup(payload);
-        //console.log('Response: ', response);
 
         if (response.Message === 'created successfully') {
           setSelectedEmail(payload.user_info.email as string);
@@ -82,16 +78,12 @@ const SignupForm = () => {
         // Handle errors
         const axiosError = error as AxiosError;
         setLoading(false);
-        console.error('Error submitting form:', axiosError);
-        //toast.error('Error Submitting Form.');
 
         if (axiosError.request) {
           // The request was made but no response was received
-          console.log('Request details:', axiosError.request);
           toast.error('Another company with the same name has been registered.');
         } else {
           // Something happened in setting up the request that triggered an Error
-          console.log('Error setting up the request:', axiosError.message);
           toast.error('Error setting up the request, Try Again.');
         }
       }

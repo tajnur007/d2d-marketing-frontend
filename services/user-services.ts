@@ -47,7 +47,6 @@ export class UserService {
       setExecutivesOption(executivesOption);
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching executives:', error);
     }
   };
 

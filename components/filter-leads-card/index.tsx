@@ -84,8 +84,6 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           return id;
         });
 
-        console.log(selectedCreatedBy);
-
         const SelectedCreatedById = selectedCreatedBy.map((item) => {
           const id = createdByOptions.find((option: any) => option.label === item)?.id;
           return id;
@@ -114,7 +112,6 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
             },
           },
         };
-        //console.log(payloadObj);
 
         const LeadServices = new LeadService();
         if (token) {
@@ -127,7 +124,6 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
           setFilterIcon(true);
         }
       } catch (err) {
-        console.log(err);
       }
     }
   };
@@ -140,7 +136,6 @@ const FilterLeadsCard: React.FC<FilterLeadsCardProps> = ({
         setFilterIcon(false);
       }
     } catch (err) {
-      console.log(err);
     }
     closeTooltip();
   };
