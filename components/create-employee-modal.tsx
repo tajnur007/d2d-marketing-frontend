@@ -36,7 +36,7 @@ const CreateEmployeeModal = ({
   setFormErrors = () => {},
   setIsRefreshData = () => {},
 }: CreateEmployeeModalProps) => {
-  const [selected, setSelected] = useState<string>(EMPLOYEE_ROLE[0]?.value);
+  const [selected, setSelected] = useState<string>(EMPLOYEE_ROLE[1]?.value);
   const [managers, setManagers] = useState<ManagerType[]>();
   const [manager, setManager] = useState<ManagerOption>();
   const [isLoading, setIsLoading] = useState(false);
@@ -75,7 +75,7 @@ const CreateEmployeeModal = ({
       return { ...prev, manager_name: '', manager_id: 0 };
     });
 
-    if (selected === 'executive') {
+    if (selected === EMPLOYEE_ROLE[1].value) {
       setIsExecutive(true);
     } else {
       setIsExecutive(false);
@@ -85,9 +85,9 @@ const CreateEmployeeModal = ({
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setIsExecutive(false);
+    setIsExecutive(true);
     setIsSuccess(false);
-    setSelected(EMPLOYEE_ROLE[0]?.value);
+    setSelected(EMPLOYEE_ROLE[1]?.value);
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
     setFormErrors(CREATE_EMPLOYEE_FORM_ITEMS);
   };
@@ -228,7 +228,7 @@ const CreateEmployeeModal = ({
             <Select
               isDisabled={isLoading}
               options={EMPLOYEE_ROLE}
-              defaultValue={EMPLOYEE_ROLE[0]}
+              defaultValue={EMPLOYEE_ROLE[1]}
               className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
               styles={{
                 control: (baseStyles, { isFocused }) => ({
