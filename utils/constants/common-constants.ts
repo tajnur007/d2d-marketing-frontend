@@ -26,7 +26,6 @@ import {
   EmployeeListIcon,
   EyeIcon,
   HomeIcon,
-  SettingIcon,
 } from '../../assets/icons';
 
 export const getStatusColor: statusColor = {
@@ -103,13 +102,6 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     path: PAGE_ROUTES.EmployeeList,
     icon: EmployeeListIcon,
     position: 100,
-  },
-  {
-    id: 4,
-    iconName: 'Settings',
-    path: PAGE_ROUTES.Settings,
-    icon: SettingIcon,
-    position: 150,
   },
 ];
 
