@@ -44,7 +44,7 @@ const ResetPassword = () => {
     <section>
       <div className='md:max-w-[400px] lg:max-w-[600px] mx-auto lg:px-6 lg:py-9 md:py-2 md:px-3'>
         <div>
-          <div className='md:mt-2 lg:mt-10 xl:mt-12 2xl:mt-14 md:my-3 lg:my-6 xl:my-9 2xl:my-12 md:text-[12px] lg:text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
+          <div className='my-2 md:my-4 lg:my-6 xl:my-8 2xl:my-10 md:text-[12px] lg:text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
             <div className='mr-2'>
               <Link href={PAGE_ROUTES.Signin}>
                 <ArrowLeftCircleIcon />
@@ -52,7 +52,7 @@ const ResetPassword = () => {
             </div>
             <div>Back to Login</div>
           </div>
-          <div className='md:mt-2 lg:mt-10 md:text-[18px] lg:text-[36px] font-bold leading-9 tracking-tight text-gray-900'>
+          <div className='md:text-[18px] lg:text-[25px] xl:text-[30px]  2xl:text-[36px] font-bold leading-9 tracking-tight text-gray-900'>
             Reset password 👋
           </div>
           <div className='md:my-2 lg:my-5 md:text-[12px] lg:text-[16px]'>
@@ -62,13 +62,13 @@ const ResetPassword = () => {
           </div>
         </div>
 
-        <div className='lg:mt-10 md:mt-3'>
+        <div className='mt-2 md:mt-4 lg:mt-6 xl:mt-8 2xl:mt-10'>
           <form onSubmit={onFormSubmit}>
             <div>
               <label className='font-semibold text-[#0B1420] md:text-[12px] lg:text-[16px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
                 Email
               </label>
-              <div className='md:mt-2 lg:mt-4 md:mb-2 lg:mb-4'>
+              <div className='my-2 2xl:mt-4 lg:mb-4'>
                 <input
                   id='email'
                   type='email'
@@ -85,7 +85,7 @@ const ResetPassword = () => {
             <ForgetPasswordCommon
               buttonInfo={{
                 className:
-                  'w-full bg-[#4318FF] rounded-lg text-white md:p-2 lg:p-4 font-normal md:my-2 lg:my-4 md:text-[12px] lg:text-[16px]',
+                  'w-full bg-[#4318FF] rounded-lg text-white p-2 lg:p-3 2xl:p-4 font-normal my-2 2xl:my-4 md:text-[12px] lg:text-[16px]',
                 text: 'Submit',
                 type: 'submit',
               }}

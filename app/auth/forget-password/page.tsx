@@ -10,7 +10,9 @@ const ForgetPasswordPage = () => {
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>
       <NoAccount signupPage={false} />
-      <ResetPassword />
+      <div className='w-full h-screen flex items-center justify-center'>
+        <ResetPassword />
+      </div>
     </AuthLayout>
   );
 };
