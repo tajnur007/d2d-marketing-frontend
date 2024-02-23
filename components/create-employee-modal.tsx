@@ -228,7 +228,7 @@ const CreateEmployeeModal = ({
             <Select
               isDisabled={isLoading}
               options={EMPLOYEE_ROLE}
-              defaultValue={EMPLOYEE_ROLE[0]}
+              defaultValue={EMPLOYEE_ROLE[1]}
               className='h-[48px] 2xl:h-14 create-reminder-select mb-3 2xl:mb-5 font-medium text-black text-sm 2xl:text-[16px]'
               styles={{
                 control: (baseStyles, { isFocused }) => ({
