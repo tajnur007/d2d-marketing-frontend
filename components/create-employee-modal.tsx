@@ -85,7 +85,7 @@ const CreateEmployeeModal = ({
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setIsExecutive(false);
+    setIsExecutive(true);
     setIsSuccess(false);
     setSelected(EMPLOYEE_ROLE[1]?.value);
     setFormData(CREATE_EMPLOYEE_FORM_ITEMS);
