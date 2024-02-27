@@ -269,12 +269,12 @@ export interface ChangePasswordItems {
   ConfirmPassword?: string;
 }
 
-export interface SignUpFormItems {
-  FullName?: string;
-  Email?: string;
-  OrganizationName?: string;
-  Password?: string;
-  ConfirmPassword?: string;
+export interface SignUpFormItems<T> {
+  FullName?: T;
+  Email?: T;
+  OrganizationName?: T;
+  Password?: T;
+  ConfirmPassword?: T;
 }
 
 export interface ChangePasswordItems {
@@ -307,7 +307,7 @@ export interface AssignSelectProps {
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
   htmlFor?: string;
-  errorMessage?: string;
+  isError?: boolean;
   getDate?: any;
   defaultValue?: string;
 }

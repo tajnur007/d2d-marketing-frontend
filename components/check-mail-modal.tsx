@@ -45,9 +45,8 @@ const CheckYourEmailModal = ({
 
             <div className='relative w-[360px] font-normal text-transparent text-[14px] text-center tracking-[0] leading-[20px] py-8'>
               <span className='text-[#131212]'>
-                If you can’t find the email check your spam folder or{' '}
+                If you can&apos;t find the email check your spam folder
               </span>
-              <span className='font-semibold text-[#5630ff] '>Click to resend</span>
             </div>
             <button onClick={closeModal} className='flex mx-auto items-center space-x-2'>
               <ArrowLeftIcon />

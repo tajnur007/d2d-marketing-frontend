@@ -87,7 +87,6 @@ const SigninForm = () => {
               type='email'
               id='email'
               name='Email'
-              htmlFor='email'
               disabled={loading}
               onChange={handleEmailChange}
             />
@@ -102,14 +101,13 @@ const SigninForm = () => {
                 type={showPassword ? 'text' : 'password'}
                 id='password'
                 name='Password'
-                htmlFor='password'
                 disabled={loading}
                 onChange={handlePasswordChange}
               />
               <p
                 className='absolute top-[42px] lg:top-[46px] 2xl:top-[50px] right-2 lg:right-6 cursor-pointer'
                 onClick={handlePasswordVisibilityToggle}>
-                {showPassword ? <PasswordRevealIcon className='h-4 lg:h-6' /> : <PasswordHideIcon className='h-4 lg:h-6' />}
+                {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
               </p>
             </div>
             <div className='my-6 xl:my-8 2xl:my-10 flex items-center justify-between'>

@@ -11,18 +11,21 @@ import { PasswordHideIcon, PasswordRevealIcon } from '@/assets/icons';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { SignUpFormItems } from '@/models/global-types';
-import { SignUpFORM_ITEMS } from '@/utils/constants/common-constants';
+import { SIGNUP_FORM_ERRORS, SIGNUP_FORM_ITEMS } from '@/utils/constants/common-constants';
 import { signUpFormErrorCheck } from '@/utils/helpers/common-helpers';
+import Link from 'next/link';
+import TermsOfUseModal from '@/components/terms-of-use-modal';
 
 const SignupForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [formData, setFormData] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
-  const [formErrors, setFormErrors] = useState<SignUpFormItems>(SignUpFORM_ITEMS);
-
   const [showPassword, setShowPassword] = useState(false);
-
+  const [isAgreeTerms, setIsAgreeTerms] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState('jack365@gmail.com');
+  const [showTermsModal, setShowTermsModal] = useState(false);
+
+  const [selectedEmail, setSelectedEmail] = useState('');
+  const [formData, setFormData] = useState<SignUpFormItems<string>>(SIGNUP_FORM_ITEMS);
+  const [formErrors, setFormErrors] = useState<SignUpFormItems<boolean>>(SIGNUP_FORM_ERRORS);
 
   const AuthServices = new AuthService();
 
@@ -37,7 +40,7 @@ const SignupForm = () => {
       return { ...prev, [name]: value };
     });
     setFormErrors((prev) => {
-      return { ...prev, [name]: '' };
+      return { ...prev, [name]: false };
     });
   };
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -103,21 +106,20 @@ const SignupForm = () => {
           <div>
             <form onSubmit={onFormSubmit}>
               <Input
+                required
                 label={
                   <p className='text-[#00156A] font-medium text-xs mb-[2px]'>Name</p>
                 }
                 placeholder='FullName'
-                type='text'
                 id='fullName'
                 name='FullName'
                 value={formData?.FullName}
-                errorMessage={formErrors.FullName}
-                htmlFor='FullName'
+                isError={formErrors.FullName}
                 disabled={loading}
                 onChange={handleInputChange}
-                className={`mb-3 ${formErrors.FullName && 'border-red-500 shadow'}`}
               />
               <Input
+                required
                 label={
                   <p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>
                 }
@@ -125,34 +127,29 @@ const SignupForm = () => {
                 type='email'
                 id='email'
                 name='Email'
-                htmlFor='email'
                 disabled={loading}
                 onChange={handleInputChange}
                 value={formData?.Email}
-                errorMessage={formErrors.Email}
-                className={`mb-3 ${formErrors.Email && 'border-red-500 shadow'}`}
+                isError={formErrors.Email}
               />
               <Input
+                required
                 label={
                   <p className='text-[#00156A] font-medium text-xs mb-[2px]'>
                     Organization Name
                   </p>
                 }
                 placeholder='Organization Name'
-                type='text'
                 id='organizationname'
                 name='OrganizationName'
-                htmlFor='organizationname'
                 disabled={loading}
                 onChange={handleInputChange}
                 value={formData?.OrganizationName}
-                errorMessage={formErrors.OrganizationName}
-                className={`mb-3 ${
-                  formErrors.OrganizationName && 'border-red-500 shadow'
-                }`}
+                isError={formErrors.OrganizationName}
               />
               <div className='relative mb-3'>
                 <Input
+                  required
                   label={
                     <p className='text-[#00156A] font-medium text-xs mb-[2px]'>
                       Password
@@ -162,23 +159,20 @@ const SignupForm = () => {
                   type={showPassword ? 'text' : 'password'}
                   id='password'
                   name='Password'
-                  htmlFor='password'
                   disabled={loading}
                   onChange={handleInputChange}
                   value={formData?.Password}
-                  errorMessage={formErrors.Password}
-                  className={`${formErrors.Password && 'border-red-500 shadow'}`}
+                  isError={formErrors.Password}
                 />
                 <p
-                  className={`absolute right-6 cursor-pointer ${
-                    formErrors.Password ? 'top-[50px]' : 'top-[34px]'
-                  }`}
+                  className='absolute top-[32px] lg:top-[34px] 2xl:top-[38px] right-2 lg:right-6 cursor-pointer'
                   onClick={handlePasswordVisibilityToggle}>
                   {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
                 </p>
               </div>
               <div className='relative'>
                 <Input
+                  required
                   label={
                     <p className='text-[#00156A] font-medium text-xs mb-[2px]'>
                       Confirm Password
@@ -188,24 +182,21 @@ const SignupForm = () => {
                   type={showPassword ? 'text' : 'password'}
                   id='confirmpassword'
                   name='ConfirmPassword'
-                  htmlFor='confirmpassword'
                   disabled={loading}
                   onChange={handleInputChange}
                   value={formData?.ConfirmPassword}
-                  errorMessage={formErrors.ConfirmPassword}
-                  className={` ${formErrors.ConfirmPassword && 'border-red-500 shadow'}`}
+                  isError={formErrors.ConfirmPassword}
                 />
                 <p
-                  className={`absolute right-6 cursor-pointer ${
-                    formErrors.ConfirmPassword ? 'top-[50px]' : 'top-[34px]'
-                  }`}
+                  className='absolute top-[32px] lg:top-[34px] 2xl:top-[38px] right-2 lg:right-6 cursor-pointer'
                   onClick={handlePasswordVisibilityToggle}>
                   {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
                 </p>
               </div>
               <Button
                 type='submit'
-                className='rounded-[10px] h-[57px] mt-6 mb-[30px] text-black text-[14.85px] bg-[#FBBD1D] hover:bg-[#f3c655]'>
+                disabled={!isAgreeTerms}
+                className='rounded-[10px] md:h-[35px] lg:h-[48px] 2xl:h-14 mt-5'>
                 {loading ? (
                   <div className='h-full w-full flex items-center justify-center'>
                     <Oval width='30' color='#ffffff' />
@@ -216,11 +207,36 @@ const SignupForm = () => {
               </Button>
             </form>
           </div>
+        <div className='mt-5 text-[12px] text-[#5A5A5A] text-left flex justify-start align-middle'>
+          <input
+            id='terms'
+            type='checkbox'
+            checked={isAgreeTerms}
+            onChange={() => setIsAgreeTerms(preValue => !preValue)}
+          />
+          <label htmlFor='terms' className='ml-2'>I agree to the</label>
+          <span
+            className='ml-1 font-semibold text-[#5630FF] cursor-pointer'
+            onClick={() => setShowTermsModal(true)}>
+            Terms of Use
+          </span>
         </div>
-        <p className='text-[14px] text-[#5A5A5A] font-normal text-center mx-20'>
-          By continuing you indicate that you read and agreed to the Terms of Use
+        <p className='text-[#313957] mt-[30px] text-center'>
+          Already have an account?
+          <Link
+            href='/auth/signin'
+            className='ml-1 font-semibold text-[#5630FF] cursor-pointer'>
+            Log In
+          </Link>
         </p>
+        </div>
       </div>
+
+      <TermsOfUseModal
+        showModal={showTermsModal}
+        setShowModal={setShowTermsModal}
+      />
+
       <CheckYourEmailModal
         showModal={showModal}
         setShowModal={setShowModal}

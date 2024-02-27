@@ -218,12 +218,20 @@ export const CREATE_REMINDER_ITEMS: CreateReminderItems = {
   Date: '',
 };
 
-export const SignUpFORM_ITEMS: SignUpFormItems = {
+export const SIGNUP_FORM_ITEMS: SignUpFormItems<string> = {
   FullName: '',
   Email: '',
   OrganizationName: '',
   Password: '',
   ConfirmPassword: '',
+};
+
+export const SIGNUP_FORM_ERRORS: SignUpFormItems<boolean> = {
+  FullName: false,
+  Email: false,
+  OrganizationName: false,
+  Password: false,
+  ConfirmPassword: false,
 };
 
 export const LEAD_STATUS = {

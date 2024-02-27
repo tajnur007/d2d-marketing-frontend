@@ -95,7 +95,7 @@ export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
   }
 };
 
-export const signUpFormErrorCheck = (formData: SignUpFormItems, field: string) => {
+export const signUpFormErrorCheck = (formData: SignUpFormItems<string>, field: string) => {
   const safeFields = {
     FullName: 'FullName',
     Email: 'Email',
@@ -106,19 +106,19 @@ export const signUpFormErrorCheck = (formData: SignUpFormItems, field: string) =
 
   if (safeFields[field as keyof typeof safeFields]) {
     if (formData[field as keyof typeof formData] === '') {
-      return `(${field} is required)`;
+      return true;
     }
 
     if (field === 'Email') {
       const emailValue = formData[field as keyof typeof formData];
-      return isValidEmail(emailValue) ? null : `(${field} is invalid)`;
+      return isValidEmail(emailValue) ? false : true;
     }
 
     if (field === 'ConfirmPassword' && formData.Password !== formData.ConfirmPassword) {
-      return '(Passwords do not match)';
+      return true;
     }
 
-    return null; // Safe field is valid
+    return false; // Safe field is valid
   }
 
   // Handle non-safe fields
