@@ -27,8 +27,8 @@ const ResetPassword = () => {
         setEmail('');
         setEmailSubmitted(true);
       }
-    } catch (err) {
-      toast.error('Please use a valid email.');
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message);
     }
   };
 
@@ -39,7 +39,7 @@ const ResetPassword = () => {
 
   return (
     <section>
-      <div className='md:max-w-[400px] lg:max-w-[600px] mx-auto lg:px-6 lg:py-9 md:py-2 md:px-3'>
+      <div className='md:max-w-[400px] lg:max-w-[600px] mx-auto p-2'>
         <div>
           <div className='my-2 md:my-4 lg:my-6 xl:my-8 2xl:my-10 md:text-[12px] lg:text-[16px] flex items-center text-gray-500 tracking-[0] leading-[16px] whitespace-nowrap'>
             <div className='mr-2'>
@@ -49,7 +49,7 @@ const ResetPassword = () => {
             </div>
             <div>Back to Login</div>
           </div>
-          <div className='md:text-[18px] lg:text-[25px] xl:text-[30px]  2xl:text-[36px] font-bold leading-9 tracking-tight text-gray-900'>
+          <div className='mt-6 lg:mt-8 2xl:mt-10 text-[24px] lg:text-[30px] 2xl:text-[36px] font-bold leading-9 tracking-tight text-gray-900'>
             Reset password 👋
           </div>
           <div className='md:my-2 lg:my-5 md:text-[12px] lg:text-[16px]'>
