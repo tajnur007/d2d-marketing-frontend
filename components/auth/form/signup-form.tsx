@@ -12,7 +12,7 @@ import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { SignUpFormItems } from '@/models/global-types';
 import { SIGNUP_FORM_ERRORS, SIGNUP_FORM_ITEMS } from '@/utils/constants/common-constants';
-import { signUpFormErrorCheck } from '@/utils/helpers/common-helpers';
+import { deepCopy, signUpFormErrorCheck } from '@/utils/helpers/common-helpers';
 import Link from 'next/link';
 import TermsOfUseModal from '@/components/terms-of-use-modal';
 
@@ -24,8 +24,8 @@ const SignupForm = () => {
   const [showTermsModal, setShowTermsModal] = useState(false);
 
   const [selectedEmail, setSelectedEmail] = useState('');
-  const [formData, setFormData] = useState<SignUpFormItems<string>>(SIGNUP_FORM_ITEMS);
-  const [formErrors, setFormErrors] = useState<SignUpFormItems<boolean>>(SIGNUP_FORM_ERRORS);
+  const [formData, setFormData] = useState<SignUpFormItems<string>>(deepCopy(SIGNUP_FORM_ITEMS));
+  const [formErrors, setFormErrors] = useState<SignUpFormItems<boolean>>(deepCopy(SIGNUP_FORM_ERRORS));
 
   const AuthServices = new AuthService();
 
@@ -60,6 +60,7 @@ const SignupForm = () => {
     if (Object.keys(newFormErrors).length === 0) {
       try {
         setLoading(true);
+
         const payload = {
           company_name: formData.OrganizationName,
           user_info: {
@@ -69,26 +70,18 @@ const SignupForm = () => {
           },
         };
 
-        // Call your API to sign up the user
         const response = await AuthServices.signup(payload);
 
         if (response.Message === 'created successfully') {
           setSelectedEmail(payload.user_info.email as string);
           setShowModal(true);
           setLoading(false);
+          setFormData(deepCopy(SIGNUP_FORM_ITEMS));
+          setFormErrors(deepCopy(SIGNUP_FORM_ERRORS));
         }
-      } catch (error) {
-        // Handle errors
-        const axiosError = error as AxiosError;
+      } catch (error: any) {
         setLoading(false);
-
-        if (axiosError.request) {
-          // The request was made but no response was received
-          toast.error('Another company with the same name has been registered.');
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          toast.error('Error setting up the request, Try Again.');
-        }
+        toast.error(error?.response?.data?.message || 'Error while creating an account!');
       }
     }
   };
@@ -139,7 +132,7 @@ const SignupForm = () => {
                 value={formData?.OrganizationName}
                 isError={formErrors.OrganizationName}
               />
-              <div className='relative mb-3'>
+              <div className='relative'>
                 <Input
                   required
                   label='Password'

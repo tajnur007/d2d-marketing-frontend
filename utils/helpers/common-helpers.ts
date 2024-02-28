@@ -5,6 +5,10 @@ export function ensureTrailingSlash(str: string = '/') {
   return str.endsWith('/') ? str : `${str}/`;
 }
 
+export function deepCopy(value: any) {
+  return JSON.parse(JSON.stringify(value));
+}
+
 // Define a function to get the appropriate color based on status
 
 export function getLatestLeads(data: LeadsDataType[]): LeadsDataType[] {

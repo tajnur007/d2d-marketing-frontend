@@ -94,16 +94,6 @@ const ResetPassword = () => {
                 onChange={(event) => setEmail(event.target.value.trim())}
                 isError={isError}
               />
-              {/* <input
-                id='email'
-                type='email'
-                name='email'
-                value={email}
-                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid lg:py-4 md:py-2 md:px-2 lg:px-3 placeholder-[#B9C1D9] md:text-[12px] lg:text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
-                placeholder='Example@email.com'
-                required
-                onChange={(event) => setEmail(event.target.value.trim())}
-              /> */}
             </div>
             <ForgetPasswordCommon
               buttonInfo={{
