@@ -15,26 +15,27 @@ import { Button } from '@/components/button';
 const SigninForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [isError, setIsError] = useState({ email: false, password: false });
 
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (email.length === 0 || password.length === 0) {
-      if (email == '') {
-        toast.error('email cannot be empty.');
-      } else if (password.length === 0) {
-        toast.error('password cannot be empty.');
-      }
+
+    if (credentials.email.length === 0 || credentials.password.length === 0) {
+      setIsError({
+        email: credentials.email.length ? false : true,
+        password: credentials.password.length ? false : true,
+      });
     } else {
+      setIsError({ email: false, password: false });
+
       try {
         setLoading(true);
 
         const res = await signIn('credentials', {
-          email,
-          password,
+          ...credentials,
           redirect: false,
         });
 
@@ -51,12 +52,12 @@ const SigninForm = () => {
     }
   };
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+  const handleInputValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCredentials(preValue => ({
+      ...preValue,
+      [name]: value.trim(),
+    }));
   };
 
   const handlePasswordVisibilityToggle = () => {
@@ -86,9 +87,10 @@ const SigninForm = () => {
               placeholder='Email here'
               type='email'
               id='email'
-              name='Email'
+              name='email'
               disabled={loading}
-              onChange={handleEmailChange}
+              isError={isError.email}
+              onChange={handleInputValueChange}
             />
             <div className='relative'>
               <Input
@@ -96,12 +98,13 @@ const SigninForm = () => {
                 placeholder='Password'
                 type={showPassword ? 'text' : 'password'}
                 id='password'
-                name='Password'
+                name='password'
                 disabled={loading}
-                onChange={handlePasswordChange}
+                isError={isError.password}
+                onChange={handleInputValueChange}
               />
               <p
-                className='absolute top-[42px] lg:top-[46px] 2xl:top-[50px] right-2 lg:right-6 cursor-pointer'
+                className='absolute top-[32px] lg:top-[34px] 2xl:top-[38px] right-2 lg:right-6 cursor-pointer'
                 onClick={handlePasswordVisibilityToggle}>
                 {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
               </p>
