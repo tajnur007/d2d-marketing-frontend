@@ -305,7 +305,7 @@ export interface AssignSelectProps {
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
+  label?: string | React.ReactNode;
   htmlFor?: string;
   isError?: boolean;
   getDate?: any;

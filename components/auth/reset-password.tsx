@@ -3,6 +3,7 @@
 import { ArrowLeftCircleIcon } from '@/assets/icons';
 import { AuthService } from '@/services/auth-service';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
+import { Input } from '@/components/input';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -12,23 +13,42 @@ import EmailSent from './email-sent';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
+  const [isError, setIsError] = useState(false);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+
+  const checkError = (): boolean => {
+    if (
+      !email.length ||
+      !email.includes('@') ||
+      email[0] === '@' ||
+      email[email.length - 1] === '@'
+    ) {
+      setIsError(true);
+      return true;
+    }
+
+    setIsError(false);
+    return false;
+  }
+
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    try {
-      event.preventDefault();
-      const payload = {
-        email,
-      };
+    event.preventDefault();
 
-      const UserServices = new AuthService();
-      const resp = await UserServices.forgetPassword(payload);
+    if (!checkError()) {
+      try {
+        event.preventDefault();
+        const payload = { email };
 
-      if (resp?.status === 201) {
-        setEmail('');
-        setEmailSubmitted(true);
+        const UserServices = new AuthService();
+        const resp = await UserServices.forgetPassword(payload);
+
+        if (resp?.status === 201) {
+          setEmail('');
+          setEmailSubmitted(true);
+        }
+      } catch (err: any) {
+        toast.error(err?.response?.data?.message);
       }
-    } catch (err: any) {
-      toast.error(err?.response?.data?.message);
     }
   };
 
@@ -61,23 +81,29 @@ const ResetPassword = () => {
 
         <div className='mt-2 md:mt-4 lg:mt-6 xl:mt-8 2xl:mt-10'>
           <form onSubmit={onFormSubmit}>
-            <div>
-              <label className='font-semibold text-[#0B1420] md:text-[12px] lg:text-[16px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
-                Email
-              </label>
-              <div className='my-2 2xl:mt-4 lg:mb-4'>
-                <input
-                  id='email'
-                  type='email'
-                  name='email'
-                  value={email}
-                  className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid lg:py-4 md:py-2 md:px-2 lg:px-3 placeholder-[#B9C1D9] md:text-[12px] lg:text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
-                  placeholder='Example@email.com'
-                  autoComplete='off'
-                  required
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </div>
+            <div className='my-2 2xl:mt-4 lg:mb-4'>
+              <Input
+                label={(
+                <span className='font-semibold text-[#0B1420] text-[12px] 2xl:text-[16px]'>Email</span>
+                )}
+                id='email'
+                name='email'
+                autoComplete='off'
+                placeholder='Example@email.com'
+                value={email}
+                onChange={(event) => setEmail(event.target.value.trim())}
+                isError={isError}
+              />
+              {/* <input
+                id='email'
+                type='email'
+                name='email'
+                value={email}
+                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid lg:py-4 md:py-2 md:px-2 lg:px-3 placeholder-[#B9C1D9] md:text-[12px] lg:text-[14px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
+                placeholder='Example@email.com'
+                required
+                onChange={(event) => setEmail(event.target.value.trim())}
+              /> */}
             </div>
             <ForgetPasswordCommon
               buttonInfo={{
