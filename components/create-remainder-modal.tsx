@@ -162,13 +162,9 @@ const CreateRemainderModal = ({
           <Input
             label='Title'
             placeholder='Title here'
-            type='text'
             id='title'
             name='Title'
-            htmlFor='title'
             disabled={isLoading}
-            errorMessage={formErrors?.Title}
-            className={`${formErrors?.Title && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
 
@@ -176,10 +172,8 @@ const CreateRemainderModal = ({
             <Input
               label='Associated Lead'
               placeholder='Optional'
-              type='text'
               id='associatedLead'
               name='AssociatedLead'
-              htmlFor='associatedLead'
               disabled={isLoading}
               onChange={handleInputChange}
             />

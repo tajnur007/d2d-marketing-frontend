@@ -82,8 +82,8 @@ const SigninForm = () => {
         <div>
           <form onSubmit={onFormSubmit}>
             <Input
-              label={<p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>}
-              placeholder='Email'
+              label='Email'
+              placeholder='Email here'
               type='email'
               id='email'
               name='Email'
@@ -92,11 +92,7 @@ const SigninForm = () => {
             />
             <div className='relative'>
               <Input
-                label={
-                  <p className='text-[#00156A] font-medium text-xs mb-[2px] my-3'>
-                    Password
-                  </p>
-                }
+                label='Password'
                 placeholder='Password'
                 type={showPassword ? 'text' : 'password'}
                 id='password'

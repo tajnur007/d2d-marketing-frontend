@@ -214,14 +214,10 @@ const UpdateLeadForm: React.FC = () => {
           <Input
             label='Title'
             placeholder='Title here'
-            type='text'
             id='title'
             name='Title'
-            htmlFor='title'
             disabled={pending}
             value={formData?.Title}
-            errorMessage={formErrors.Title}
-            className={`w-full mb-5 ${formErrors.Title && 'border-red-500 shadow'}`}
             onChange={handleInputChange}
           />
 
@@ -247,29 +243,21 @@ const UpdateLeadForm: React.FC = () => {
             <Input
               label='Name'
               placeholder='Name'
-              type='text'
               id='name'
               name='Name'
               disabled={pending}
               value={formData?.Name}
-              errorMessage={formErrors.Name}
-              htmlFor='name'
               onChange={handleInputChange}
-              className={`${formErrors.Name && 'border-red-500 shadow'}`}
             />
 
             <Input
               label='Phone'
               placeholder='Phone number'
-              type='text'
               id='phone'
               name='Phone'
               disabled={pending}
               value={formData?.Phone}
-              errorMessage={formErrors.Phone}
-              htmlFor='phone'
               onChange={handleInputChange}
-              className={`${formErrors.Phone && 'border-red-500 shadow'}`}
             />
           </div>
 
@@ -280,21 +268,16 @@ const UpdateLeadForm: React.FC = () => {
               type='email'
               id='email'
               name='Email'
-              htmlFor='email'
               disabled={pending}
               value={formData?.Email}
-              errorMessage={formErrors.Email}
               onChange={handleInputChange}
-              className={`${formErrors.Email && 'border-red-500 shadow'}`}
             />
 
             <Input
               label='Reference'
               placeholder='Reference (Optional)'
-              type='text'
               id='reference'
               name='Reference'
-              htmlFor='reference'
               disabled={pending}
               value={formData?.Reference}
               onChange={handleInputChange}

@@ -132,10 +132,6 @@ const ResetPasswordPage = ({
               id='currentPassword'
               name='CurrentPassword'
               onChange={handleInputChange}
-              errorMessage={formErrors.CurrentPassword}
-              className={`mb-3 2xl:mb-5 ${
-                formErrors.CurrentPassword && 'border-red-500 shadow'
-              }`}
             />
 
             <Input
@@ -145,10 +141,6 @@ const ResetPasswordPage = ({
               id='newPassword'
               name='NewPassword'
               onChange={handleInputChange}
-              errorMessage={formErrors.NewPassword}
-              className={`mb-3 2xl:mb-5 ${
-                formErrors.NewPassword && 'border-red-500 shadow'
-              }`}
             />
 
             <Input
@@ -158,10 +150,6 @@ const ResetPasswordPage = ({
               id='confirmPassword'
               name='ConfirmPassword'
               onChange={handleConfirmPasswordChange}
-              errorMessage={formErrors.ConfirmPassword}
-              className={`mb-3 2xl:mb-5 ${
-                formErrors.ConfirmPassword && 'border-red-500 shadow'
-              }`}
             />
 
             <div className='relative mb-8 mt-4 flex justify-end'>

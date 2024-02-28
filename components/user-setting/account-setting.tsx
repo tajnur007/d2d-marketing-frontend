@@ -139,51 +139,37 @@ const AccountSettingsPage = ({
               <Input
                 label='Full Name'
                 placeholder='Full Name'
-                type='text'
                 id='fullName'
                 name='Name'
                 defaultValue={userInfo?.name}
-                errorMessage={formErrors.Name}
-                htmlFor='name'
                 onChange={handleInputChange}
-                className={`mb-3 2xl:mb-5 ${formErrors.Name && 'border-red-500 shadow'}`}
               />
               <Input
                 label='Email'
                 placeholder='Email'
-                type='text'
                 id='email'
                 name='Email'
-                htmlFor='email'
                 readOnly
                 value={userInfo?.email}
-                errorMessage={formErrors.Email}
                 onChange={handleInputChange}
-                className={`mb-3 2xl:mb-5 ${formErrors.Email && 'border-red-500 shadow'}`}
               />
 
               <Input
                 label='Phone Number'
                 placeholder='Phone Number'
-                type='text'
                 id='phone'
                 name='Phone'
                 value={userInfo?.phone}
-                errorMessage={formErrors.Phone}
-                htmlFor='phone'
                 onChange={handleInputChange}
-                className={`mb-3 2xl:mb-5 ${formErrors.Phone && 'border-red-500 shadow'}`}
               />
 
               <Input
                 label='Role (View Only)'
                 placeholder='Assignee'
-                type='text'
                 id='role'
                 name='Role'
                 value={userInfo?.user_type}
                 readOnly
-                className='mb-3 2xl:mb-5'
               />
             </div>
 

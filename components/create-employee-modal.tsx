@@ -180,46 +180,28 @@ const CreateEmployeeModal = ({
             <Input
               label='Name'
               placeholder='Name'
-              type='text'
               id='name'
               name='name'
-              htmlFor='name'
               disabled={isLoading}
               value={formData?.name}
-              errorMessage={formErrors.name}
-              className={`w-full mb-3 2xl:mb-5 ${
-                formErrors.name && 'border-red-500 shadow'
-              }`}
               onChange={handleInputChange}
             />
             <Input
               label='Phone Number'
               placeholder='Phone Number'
-              type='text'
               id='phone'
               name='phone'
-              htmlFor='phone'
               disabled={isLoading}
               value={formData?.phone}
-              errorMessage={formErrors.phone}
-              className={`w-full mb-3 2xl:mb-5 ${
-                formErrors.phone && 'border-red-500 shadow'
-              }`}
               onChange={handleInputChange}
             />
             <Input
               label='Email'
               placeholder='Email'
-              type='text'
               id='email'
               name='email'
-              htmlFor='email'
               disabled={isLoading}
               value={formData?.email}
-              errorMessage={formErrors.email}
-              className={`w-full mb-3 2xl:mb-5 ${
-                formErrors.email && 'border-red-500 shadow'
-              }`}
               onChange={handleInputChange}
             />
             <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>

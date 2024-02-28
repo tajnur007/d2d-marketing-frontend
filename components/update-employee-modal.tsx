@@ -172,25 +172,19 @@ const UpdateEmployeeModal = ({
           <Input
             label='Name'
             placeholder='Name'
-            type='text'
             id='name'
             name='name'
-            htmlFor='name'
             onChange={handleInputChange}
             defaultValue={employeeinfo?.name}
-            className='w-full mb-3 2xl:mb-5'
           />
 
           <Input
             label='Phone Number'
             placeholder='Phone Number'
-            type='text'
             id='phone'
             name='phone'
-            htmlFor='phone'
             onChange={handleInputChange}
             defaultValue={employeeinfo?.phone}
-            className='w-full mb-3 2xl:mb-5'
           />
 
           <label className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium'>

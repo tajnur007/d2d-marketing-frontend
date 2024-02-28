@@ -162,13 +162,9 @@ const UpdateRemainderModal = ({
         <Input
           label='Title'
           placeholder='Title here'
-          type='text'
           id='title'
           name='title'
-          htmlFor='title'
-          errorMessage={formErrors?.title}
           defaultValue={formData?.title}
-          className={`${formErrors?.title && 'border-red-500 shadow'}`}
           onChange={handleInputChange}
         />
 

@@ -107,9 +107,7 @@ const SignupForm = () => {
             <form onSubmit={onFormSubmit}>
               <Input
                 required
-                label={
-                  <p className='text-[#00156A] font-medium text-xs mb-[2px]'>Name</p>
-                }
+                label='Name'
                 placeholder='FullName'
                 id='fullName'
                 name='FullName'
@@ -120,9 +118,7 @@ const SignupForm = () => {
               />
               <Input
                 required
-                label={
-                  <p className='text-[#00156A] font-medium text-xs mb-[2px]'>Email</p>
-                }
+                label='Email'
                 placeholder='Email'
                 type='email'
                 id='email'
@@ -134,11 +130,7 @@ const SignupForm = () => {
               />
               <Input
                 required
-                label={
-                  <p className='text-[#00156A] font-medium text-xs mb-[2px]'>
-                    Organization Name
-                  </p>
-                }
+                label='Organization Name'
                 placeholder='Organization Name'
                 id='organizationname'
                 name='OrganizationName'
@@ -150,11 +142,7 @@ const SignupForm = () => {
               <div className='relative mb-3'>
                 <Input
                   required
-                  label={
-                    <p className='text-[#00156A] font-medium text-xs mb-[2px]'>
-                      Password
-                    </p>
-                  }
+                  label='Password'
                   placeholder='Password'
                   type={showPassword ? 'text' : 'password'}
                   id='password'
@@ -173,11 +161,7 @@ const SignupForm = () => {
               <div className='relative'>
                 <Input
                   required
-                  label={
-                    <p className='text-[#00156A] font-medium text-xs mb-[2px]'>
-                      Confirm Password
-                    </p>
-                  }
+                  label='Confirm Password'
                   placeholder='Confirm Password'
                   type={showPassword ? 'text' : 'password'}
                   id='confirmpassword'

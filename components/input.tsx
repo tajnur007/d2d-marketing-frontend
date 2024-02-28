@@ -13,7 +13,7 @@ export const Input = ({
   <div className='flex flex-col w-full'>
     <label
       htmlFor={id}
-      className='text-[#00156A] text-xs 2xl:text-sm mb-1 font-medium flex'>
+      className='text-[#00156A] text-xs 2xl:text-sm mb-2 font-medium flex'>
       {label} {required && <span className='text-red-400 ml-1'>&#40;Required&#41;</span>}
     </label>
     <input
