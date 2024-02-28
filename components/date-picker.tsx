@@ -5,7 +5,7 @@ import { InputProps } from '@/models/global-types';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 
-export const DatePicker = ({ label, htmlFor, errorMessage, getDate }: InputProps) => {
+export const DatePicker = ({ label, htmlFor, getDate }: InputProps) => {
   let inputProps = {
     placeholder: 'DD:MM:YY TT:TT',
     className:
@@ -16,7 +16,6 @@ export const DatePicker = ({ label, htmlFor, errorMessage, getDate }: InputProps
     <div className='w-full'>
       <label htmlFor={htmlFor} className='text-[#00156A] text-xs mb-1 font-medium'>
         {label}
-        {errorMessage && <span className='text-red-500 ml-1'>{errorMessage}</span>}
       </label>
       <div className='relative'>
         <Datetime inputProps={inputProps} onChange={getDate} />

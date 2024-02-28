@@ -70,6 +70,7 @@ const UpdateLeadForm: React.FC = () => {
       }
     };
     fetchUserData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -90,6 +91,7 @@ const UpdateLeadForm: React.FC = () => {
     };
     //! Set the form data for auto filling the form
     setFormData(singlepayload);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleLeadData, images]);
 
   useEffect(() => {
