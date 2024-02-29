@@ -7,7 +7,6 @@ import PasswordChanged from '@/components/auth/password-changed';
 import AuthLayout from '@/components/layouts/auth-layout';
 import { AUTH_LEFT_TEXT } from '@/utils/constants/common-constants';
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 const ResetPasswordPage = () => {
@@ -33,14 +32,16 @@ const ResetPasswordPage = () => {
   return (
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>
       <NoAccount signupPage={false} />
-      {newPassword ? (
-        <NewPassword
-          resetData={resetData}
-          handleNewPassword={() => setNewPassword(false)}
-        />
-      ) : (
-        <PasswordChanged />
-      )}
+      <div className='w-full h-screen flex items-center justify-center'>
+        {newPassword ? (
+          <NewPassword
+            resetData={resetData}
+            handleNewPassword={() => setNewPassword(false)}
+          />
+        ) : (
+          <PasswordChanged />
+        )}
+      </div>
     </AuthLayout>
   );
 };
