@@ -6,9 +6,10 @@ import { AuthService } from '@/services/auth-service';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Triangle } from 'react-loader-spinner';
 
 const VerifyEmailPage = () => {
-  const [isVerified, setIsVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState<null | boolean>(null);
   const [verificationMessageSuccess, setVerificationMessageSuccess] = useState('');
   const [verificationMessageFail, setVerificationMessageFail] = useState('');
   const [verifyData, setVerifyData] = useState({ token: '', company_id: '' });
@@ -67,9 +68,16 @@ const VerifyEmailPage = () => {
     if (verifyData.token && verifyData.company_id) {
       emailVerification(verifyData.token, verifyData.company_id);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [verifyData]);
 
+  if (isVerified === null || isVerified === undefined) {
+    return (
+      <div className='min-h-screen flex justify-center items-center'>
+        <Triangle width='150' color='#4f46e5' />
+      </div>
+    );
+  }
 
   return (
     <div className='flex justify-center items-center absolute w-[455px] -translate-x-2/4 -translate-y-2/4 left-[50%] top-[50%] rounded border border-gray-200 bg-white shadow-sm'>
@@ -82,9 +90,7 @@ const VerifyEmailPage = () => {
 
             <div className='text-center'>
               <div className='text-[30px] font-semibold'>Email verified</div>
-              <p className='text-[16px] font-normal'>
-                {verificationMessageSuccess}
-              </p>
+              <p className='text-[16px] font-normal'>{verificationMessageSuccess}</p>
             </div>
           </>
         ) : (
@@ -95,9 +101,7 @@ const VerifyEmailPage = () => {
 
             <div className='text-center'>
               <div className='text-[30px] font-semibold'>Email not verified</div>
-              <p className='text-[16px] font-normal'>
-                {verificationMessageFail}
-              </p>
+              <p className='text-[16px] font-normal'>{verificationMessageFail}</p>
             </div>
           </>
         )}
