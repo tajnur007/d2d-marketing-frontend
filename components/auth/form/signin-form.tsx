@@ -54,7 +54,7 @@ const SigninForm = () => {
 
   const handleInputValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setCredentials(preValue => ({
+    setCredentials((preValue) => ({
       ...preValue,
       [name]: value.trim(),
     }));
@@ -104,7 +104,7 @@ const SigninForm = () => {
                 onChange={handleInputValueChange}
               />
               <p
-                className='absolute top-[32px] lg:top-[34px] 2xl:top-[38px] right-2 lg:right-6 cursor-pointer'
+                className='absolute top-8 lg:top-9 2xl:top-[42px] right-2 lg:right-6 cursor-pointer'
                 onClick={handlePasswordVisibilityToggle}>
                 {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
               </p>
@@ -129,7 +129,9 @@ const SigninForm = () => {
                 Recover Password
               </Link>
             </div>
-            <Button type='submit' className='rounded-[10px] md:h-[35px] lg:h-[48px] 2xl:h-14'>
+            <Button
+              type='submit'
+              className='rounded-[10px] md:h-[35px] lg:h-[48px] 2xl:h-14'>
               {loading ? (
                 <div className='h-full w-full flex items-center justify-center'>
                   <Oval width='30' color='#ffffff' />

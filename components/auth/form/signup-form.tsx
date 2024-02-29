@@ -11,7 +11,10 @@ import { PasswordHideIcon, PasswordRevealIcon } from '@/assets/icons';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { SignUpFormItems } from '@/models/global-types';
-import { SIGNUP_FORM_ERRORS, SIGNUP_FORM_ITEMS } from '@/utils/constants/common-constants';
+import {
+  SIGNUP_FORM_ERRORS,
+  SIGNUP_FORM_ITEMS,
+} from '@/utils/constants/common-constants';
 import { deepCopy, signUpFormErrorCheck } from '@/utils/helpers/common-helpers';
 import Link from 'next/link';
 import TermsOfUseModal from '@/components/terms-of-use-modal';
@@ -24,8 +27,12 @@ const SignupForm = () => {
   const [showTermsModal, setShowTermsModal] = useState(false);
 
   const [selectedEmail, setSelectedEmail] = useState('');
-  const [formData, setFormData] = useState<SignUpFormItems<string>>(deepCopy(SIGNUP_FORM_ITEMS));
-  const [formErrors, setFormErrors] = useState<SignUpFormItems<boolean>>(deepCopy(SIGNUP_FORM_ERRORS));
+  const [formData, setFormData] = useState<SignUpFormItems<string>>(
+    deepCopy(SIGNUP_FORM_ITEMS)
+  );
+  const [formErrors, setFormErrors] = useState<SignUpFormItems<boolean>>(
+    deepCopy(SIGNUP_FORM_ERRORS)
+  );
 
   const AuthServices = new AuthService();
 
@@ -146,7 +153,7 @@ const SignupForm = () => {
                   isError={formErrors.Password}
                 />
                 <p
-                  className='absolute top-[32px] lg:top-[34px] 2xl:top-[38px] right-2 lg:right-6 cursor-pointer'
+                  className='absolute top-8 lg:top-9 2xl:top-[42px] right-2 lg:right-6 cursor-pointer'
                   onClick={handlePasswordVisibilityToggle}>
                   {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
                 </p>
@@ -165,7 +172,7 @@ const SignupForm = () => {
                   isError={formErrors.ConfirmPassword}
                 />
                 <p
-                  className='absolute top-[32px] lg:top-[34px] 2xl:top-[38px] right-2 lg:right-6 cursor-pointer'
+                  className='absolute top-8 lg:top-9 2xl:top-[42px] right-2 lg:right-6 cursor-pointer'
                   onClick={handlePasswordVisibilityToggle}>
                   {showPassword ? <PasswordRevealIcon /> : <PasswordHideIcon />}
                 </p>
@@ -184,35 +191,34 @@ const SignupForm = () => {
               </Button>
             </form>
           </div>
-        <div className='mt-5 text-[12px] text-[#5A5A5A] text-left flex justify-start align-middle'>
-          <input
-            id='terms'
-            type='checkbox'
-            checked={isAgreeTerms}
-            onChange={() => setIsAgreeTerms(preValue => !preValue)}
-          />
-          <label htmlFor='terms' className='ml-2'>I agree to the</label>
-          <span
-            className='ml-1 font-semibold text-[#5630FF] cursor-pointer'
-            onClick={() => setShowTermsModal(true)}>
-            Terms of Use
-          </span>
-        </div>
-        <p className='text-[#313957] mt-[30px] text-center'>
-          Already have an account?
-          <Link
-            href='/auth/signin'
-            className='ml-1 font-semibold text-[#5630FF] cursor-pointer'>
-            Log In
-          </Link>
-        </p>
+          <div className='mt-5 text-[12px] text-[#5A5A5A] text-left flex justify-start align-middle'>
+            <input
+              id='terms'
+              type='checkbox'
+              checked={isAgreeTerms}
+              onChange={() => setIsAgreeTerms((preValue) => !preValue)}
+            />
+            <label htmlFor='terms' className='ml-2'>
+              I agree to the
+            </label>
+            <span
+              className='ml-1 font-semibold text-[#5630FF] cursor-pointer'
+              onClick={() => setShowTermsModal(true)}>
+              Terms of Use
+            </span>
+          </div>
+          <p className='text-[#313957] mt-[30px] text-center'>
+            Already have an account?
+            <Link
+              href='/auth/signin'
+              className='ml-1 font-semibold text-[#5630FF] cursor-pointer'>
+              Log In
+            </Link>
+          </p>
         </div>
       </div>
 
-      <TermsOfUseModal
-        showModal={showTermsModal}
-        setShowModal={setShowTermsModal}
-      />
+      <TermsOfUseModal showModal={showTermsModal} setShowModal={setShowTermsModal} />
 
       <CheckYourEmailModal
         showModal={showModal}
