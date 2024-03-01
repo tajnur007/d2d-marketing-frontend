@@ -11,10 +11,12 @@ import ForgetPasswordCommon from './common/forget-password-common';
 const NewPassword = ({ resetData, handleNewPassword }: any) => {
   const [newPassword, setNewPassword] = useState('');
   const [retypePassword, setReTypePassword] = useState('');
+
   const AuthServices = new AuthService();
 
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (newPassword !== retypePassword) {
       alert('Password is not matching!');
     } else {
@@ -25,8 +27,7 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
           newPassword
         );
         handleNewPassword(false);
-      } catch (err) {
-      }
+      } catch (err) {}
     }
   };
 

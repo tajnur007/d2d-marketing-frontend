@@ -10,7 +10,7 @@ import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 const ResetPasswordPage = () => {
-  const [newPassword, setNewPassword] = useState<boolean>(true);
+  const [newPassword, setNewPassword] = useState<boolean>();
   const [resetData, setResetData] = useState({ token: '', company_id: '' });
   const searchParams = useSearchParams();
 
@@ -21,11 +21,10 @@ const ResetPasswordPage = () => {
     const company_id = searchParams.get('company_id');
 
     if (token && company_id) {
-      // Make reset password request using token and company_id
-      setResetData({
-        token: token,
-        company_id: company_id,
-      });
+      setNewPassword(true);
+      setResetData({ token, company_id });
+    } else {
+      setNewPassword(false);
     }
   }, [searchParams]);
 
@@ -33,13 +32,15 @@ const ResetPasswordPage = () => {
     <AuthLayout text={AUTH_LEFT_TEXT} image={marketingForgetPassword}>
       <NoAccount signupPage={false} />
       <div className='w-full h-screen flex items-center justify-center'>
-        {newPassword ? (
+        {newPassword === undefined ? (
+          <span>Loading...</span>
+        ) : newPassword ? (
           <NewPassword
             resetData={resetData}
             handleNewPassword={() => setNewPassword(false)}
           />
         ) : (
-          <PasswordChanged />
+          <PasswordChanged resetData={resetData} />
         )}
       </div>
     </AuthLayout>
