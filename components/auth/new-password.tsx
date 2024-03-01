@@ -7,27 +7,34 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import Copyright from './common/copyright';
 import ForgetPasswordCommon from './common/forget-password-common';
+import { Input } from '@/components/input';
+import { toast } from 'react-toastify';
 
 const NewPassword = ({ resetData, handleNewPassword }: any) => {
+  const [isSumittingData, setIsSumittingData] = useState(false);
+  const [isPasswordsMatched, setIsPasswordsMatched] = useState(true);
   const [newPassword, setNewPassword] = useState('');
   const [retypePassword, setReTypePassword] = useState('');
 
   const AuthServices = new AuthService();
 
-  const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (newPassword !== retypePassword) {
-      alert('Password is not matching!');
+      setIsPasswordsMatched(false);
     } else {
-      try {
-        await AuthServices.resetPassword(
-          resetData.token,
-          resetData.company_id,
-          newPassword
-        );
-        handleNewPassword(false);
-      } catch (err) {}
+      setIsPasswordsMatched(true);
+      setIsSumittingData(true);
+
+      AuthServices.resetPassword(resetData.token, resetData.company_id, newPassword)
+        .then((resp) => {
+          handleNewPassword(false);
+        })
+        .catch((error: any) => {
+          toast.error(error?.response?.data?.message || 'Password not changed!');
+        })
+        .finally(() => setIsSumittingData(false));
     }
   };
 
@@ -53,39 +60,32 @@ const NewPassword = ({ resetData, handleNewPassword }: any) => {
 
         <form onSubmit={onFormSubmit}>
           <div>
-            <label className='font-medium text-[#0B1420] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
-              New password
-            </label>
-            <div className='mt-[4px] mb-[20px] md:mb-[12px]'>
-              <input
-                id='newPassword'
-                type='password'
-                name='newPassword'
-                value={newPassword}
-                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] md:text-[10px] font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
-                placeholder='New password'
-                autoComplete='off'
-                required
-                onChange={(event) => setNewPassword(event.target.value)}
-              />
-            </div>
-            <label className='font-medium text-[#0B1420] xl:text-[16px] lg:text-[16px] md:text-[12px] tracking-[0.16px] leading-[16px] whitespace-nowrap'>
-              Re-type password
-            </label>
-            <div className='mt-[8px] mb-[20px] md:mb-[12px]'>
-              <input
-                id='retypePassword'
-                type='password'
-                name='retypePassword'
-                value={retypePassword}
-                className='w-full rounded-[10px] border border-[#F3F3F3] outline-none border-solid py-4 px-3 placeholder-[#B9C1D9] text-[14px] md:text-[10px]  font-medium focus-within:border-purple-500 focus-within:ring focus-within:ring-purple-200 transition-all duration-500'
-                placeholder='Re-type password'
-                autoComplete='off'
-                required
-                onChange={(event) => setReTypePassword(event.target.value)}
-              />
-            </div>
+            <Input
+              id='newPassword'
+              type='password'
+              label='New password'
+              placeholder='New password'
+              name='newPassword'
+              disabled={isSumittingData}
+              isError={!isPasswordsMatched}
+              onChange={(event: any) => setNewPassword(event.target.value)}
+            />
+            <Input
+              id='retypePassword'
+              type='password'
+              label='Re-type password'
+              placeholder='Re-type password'
+              name='retypePassword'
+              disabled={isSumittingData}
+              isError={!isPasswordsMatched}
+              onChange={(event: any) => setReTypePassword(event.target.value)}
+            />
           </div>
+
+          {!isPasswordsMatched && (
+            <p className='text-red-400 mb-3'>Password does not matched!</p>
+          )}
+
           <ForgetPasswordCommon
             buttonInfo={{
               className:

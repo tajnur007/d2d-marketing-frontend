@@ -27,7 +27,7 @@ export class AuthService {
   public verifyEmail = async (token: string, company_id: string) => {
     const resp: Response<any> = await this.client.request({
       url: `/user/email-verify?token=${token}&company_id=${company_id}`,
-      method: API_METHODS.GET
+      method: API_METHODS.GET,
     });
 
     return resp.data;
@@ -74,11 +74,11 @@ export class AuthService {
   };
 
   //* Service for reset password
-  public resetPassword = async (token: string, company_id: number, data: any) => {
+  public resetPassword = async (token: string, company_id: number, newPassword: any) => {
     const resp: Response<any> = await this.client.request({
       url: `/user/reset-password?token=${token}&company_id=${company_id}`,
       method: API_METHODS.POST,
-      data: data,
+      data: { password: newPassword },
     });
 
     return resp;
