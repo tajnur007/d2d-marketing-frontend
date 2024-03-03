@@ -5,6 +5,7 @@ import Sidebar from '../../components/layouts/sidebar';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/next-auth/auth';
+import UserDataProvider from '@/providers/user-data-provider';
 
 export default async function AuthenticatedLayout({
   children,
@@ -18,12 +19,14 @@ export default async function AuthenticatedLayout({
   }
 
   return (
-    <div className='flex h-screen bg-[#F7F7FB] overflow-hidden'>
-      <Sidebar />
-      <div className='flex-1 overflow-y-auto'>
-        <Navbar />
-        <Main>{children}</Main>
+    <UserDataProvider>
+      <div className='flex h-screen bg-[#F7F7FB] overflow-hidden'>
+        <Sidebar />
+        <div className='flex-1 overflow-y-auto'>
+          <Navbar />
+          <Main>{children}</Main>
+        </div>
       </div>
-    </div>
+    </UserDataProvider>
   );
 }

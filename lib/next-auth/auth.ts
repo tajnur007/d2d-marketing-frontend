@@ -31,12 +31,18 @@ export const authOptions: NextAuthOptions = {
           const loginData = { email, password };
 
           const AuthServices = new AuthService();
-          const response = await AuthServices.login(loginData);
+          let response = await AuthServices.login(loginData);
           const token = response?.access_token;
+
           if (token) {
-            const Service = new UserService();
-            const resp = await Service.getUserInfo(token);
-            response.user_type = resp?.data?.Data?.user_type;
+            const UserServices = new UserService();
+            const resp = await UserServices.getUserInfo(token);
+
+            response = {
+              ...response,
+              ...resp?.data?.Data,
+            };
+
             createAuthData(response);
           }
 

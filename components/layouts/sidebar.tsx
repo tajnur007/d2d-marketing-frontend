@@ -4,16 +4,18 @@ import { Logo, LogoutIcon, SettingIcon } from '@/assets/icons';
 import { SIDEBAR_ITEMS, PAGE_ROUTES } from '@/utils/constants/common-constants';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import profileImage from '@/assets/images/profile.png';
 import { Tooltip } from 'react-tooltip';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Link from 'next/link';
+import { UserContext } from '@/providers/user-data-provider';
 
 const Sidebar = () => {
   const router = useRouter();
+  const { userData } = useContext(UserContext);
   const currentPage = usePathname().split('/')[1];
 
   const currPosition = SIDEBAR_ITEMS.find((item) => '/' + currentPage === item?.path);
@@ -27,6 +29,7 @@ const Sidebar = () => {
   useEffect(() => {
     let position = currPosition?.position || 0;
     setSelected(position);
+    console.log(userData);
   }, [currPosition]);
 
   return (
