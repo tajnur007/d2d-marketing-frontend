@@ -87,21 +87,21 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     iconName: 'Dashboard',
     path: PAGE_ROUTES.Dashboard,
     icon: HomeIcon,
-    position: 0,
+    position: 12,
   },
   {
     id: 2,
     iconName: 'Leads',
     path: PAGE_ROUTES.Leads,
     icon: BookIcon,
-    position: 50,
+    position: 86,
   },
   {
     id: 3,
     iconName: 'Employee List',
     path: PAGE_ROUTES.EmployeeList,
     icon: EmployeeListIcon,
-    position: 100,
+    position: 160,
   },
 ];
 
