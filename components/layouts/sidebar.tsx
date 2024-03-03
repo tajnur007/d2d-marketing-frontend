@@ -67,32 +67,6 @@ const Sidebar = () => {
         />
       </div>
       <Tooltip id='my-tooltip' />
-
-      <div className='absolute w-full flex justify-center bottom-5'>
-        <Popup
-          trigger={<Image src={profileImage} alt='' height={46} width={46} />}
-          position='top left'
-          on='hover'
-          closeOnDocumentClick
-          mouseLeaveDelay={100}
-          mouseEnterDelay={10}
-          contentStyle={{
-            padding: '8px',
-            width: '110px',
-          }}>
-          <Link
-            href={PAGE_ROUTES.Settings}
-            className='flex items-center gap-2 font-semibold text-[14px] outline-none hover:text-[#d93f21] mb-4'>
-            <SettingIcon /> <p>Settings</p>
-          </Link>
-
-          <div
-            className='flex items-center gap-2 font-semibold text-[14px] cursor-pointer transition-colors hover:text-[#d93f21]'
-            onClick={() => signOut()}>
-            <LogoutIcon /> <p>Log out</p>
-          </div>
-        </Popup>
-      </div>
     </div>
   );
 };

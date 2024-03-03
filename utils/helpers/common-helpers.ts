@@ -1,4 +1,9 @@
-import { ChangePasswordItems, FormItems, LeadsDataType, SignUpFormItems } from '@/models/global-types';
+import {
+  ChangePasswordItems,
+  FormItems,
+  LeadsDataType,
+  SignUpFormItems,
+} from '@/models/global-types';
 import axios from 'axios';
 
 export function ensureTrailingSlash(str: string = '/') {
@@ -99,7 +104,10 @@ export const validateImageUrl = async (imageUrl: string): Promise<boolean> => {
   }
 };
 
-export const signUpFormErrorCheck = (formData: SignUpFormItems<string>, field: string) => {
+export const signUpFormErrorCheck = (
+  formData: SignUpFormItems<string>,
+  field: string
+) => {
   const safeFields = {
     FullName: 'FullName',
     Email: 'Email',
@@ -131,4 +139,16 @@ export const signUpFormErrorCheck = (formData: SignUpFormItems<string>, field: s
   }
 
   return null; // Non-safe field is valid
+};
+
+export const greetingMessage = (): string => {
+  const hours = new Date().getHours();
+  let time = '';
+
+  if (hours >= 5 && hours < 12) time = 'morning';
+  else if (hours >= 12 && hours < 17) time = 'afternoon';
+  else if (hours >= 17 && hours < 21) time = 'evening';
+  else time = 'night';
+
+  return `Good ${time}`;
 };
