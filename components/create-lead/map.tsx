@@ -44,7 +44,7 @@ const Map = ({ setLocation, location }: LocationProps) => {
   }
 
   return (
-    <>
+    <div className='relative'>
       <GoogleMap
         options={mapOptions}
         zoom={14}
@@ -70,7 +70,7 @@ const Map = ({ setLocation, location }: LocationProps) => {
           });
         }}
       />
-    </>
+    </div>
   );
 };
 

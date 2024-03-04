@@ -167,7 +167,7 @@ const CreateLeadForm: React.FC = () => {
   return (
     <div className='mt-2 p-6 overflow-y-auto h-[calc(100%-30px)] tiny-scrollbar'>
       <form onSubmit={onFormSubmit}>
-        <div className='flex items-center justify-between md:mt-5 lg:mt-10 gap-5'>
+        <div className='flex items-center justify-between gap-5'>
           <Input
             label='Title'
             placeholder='Title here'
@@ -191,74 +191,53 @@ const CreateLeadForm: React.FC = () => {
           </div>
         </div>
 
-        <div className='rounded-2xl relative h-[342px] w-full'>
-          <Map setLocation={setLocation} location={location} />
+        <div className='flex items-center justify-between mt-2 gap-5'>
+          <Input
+            label='Name'
+            placeholder='Name'
+            id='name'
+            name='Name'
+            disabled={pending}
+            value={formData?.Name}
+            onChange={handleInputChange}
+          />
+
+          <Input
+            label='Phone'
+            placeholder='Phone number'
+            id='phone'
+            name='Phone'
+            disabled={pending}
+            value={formData?.Phone}
+            onChange={handleInputChange}
+          />
         </div>
 
-        <div className='flex items-center justify-between md:mt-5 lg:mt-10 gap-5'>
-          <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
-            <Input
-              label='Name'
-              placeholder='Name'
-              id='name'
-              name='Name'
-              disabled={pending}
-              value={formData?.Name}
-              onChange={handleInputChange}
-            />
+        <div className='flex items-center justify-between mt-2 gap-5'>
+          <Input
+            label='Email'
+            placeholder='Email (Optional)'
+            type='email'
+            id='email'
+            name='Email'
+            disabled={pending}
+            value={formData?.Email}
+            onChange={handleInputChange}
+          />
 
-            <Input
-              label='Phone'
-              placeholder='Phone number'
-              id='phone'
-              name='Phone'
-              disabled={pending}
-              value={formData?.Phone}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className='flex flex-col md:flex-row items-center justify-between w-full md:w-1/2 gap-5'>
-            <Input
-              label='Email'
-              placeholder='Email (Optional)'
-              type='email'
-              id='email'
-              name='Email'
-              disabled={pending}
-              value={formData?.Email}
-              onChange={handleInputChange}
-            />
-
-            <Input
-              label='Reference'
-              placeholder='Reference (Optional)'
-              id='reference'
-              name='Reference'
-              disabled={pending}
-              value={formData?.Reference}
-              onChange={handleInputChange}
-            />
-          </div>
+          <Input
+            label='Reference'
+            placeholder='Reference (Optional)'
+            id='reference'
+            name='Reference'
+            disabled={pending}
+            value={formData?.Reference}
+            onChange={handleInputChange}
+          />
         </div>
-        <div className='flex items-center justify-between mt-5 gap-5'>
+
+        <div className='flex items-center justify-between mt-2 gap-5'>
           <div className='w-1/2'>
-            <TextArea
-              label='Remarks'
-              placeholder='Notes'
-              name='Note'
-              disabled={pending}
-              value={formData?.Note}
-              errorMessage={formErrors.Note}
-              className={`md:h-[210px] lg:h-[220px] 2xl:h-[250px] ${
-                //lg:h-[182px]
-                formErrors.Note && 'border-red-500 shadow'
-              }`}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className='flex flex-col justify-between gap-2 w-1/2'>
             <CustomSelect
               label='Status'
               setSelected={setStatusSelected}
@@ -268,8 +247,22 @@ const CreateLeadForm: React.FC = () => {
               isLoading={pending}
               selected={isSuccess ? '' : statusSelected}
             />
-
-            <div className='items-start justify-center '>
+            <div className='mt-5'>
+              <Map setLocation={setLocation} location={location} />
+            </div>
+          </div>
+          <div className='w-1/2'>
+            <TextArea
+              label='Remarks'
+              placeholder='Notes'
+              name='Note'
+              disabled={pending}
+              value={formData?.Note}
+              errorMessage={formErrors.Note}
+              className={`h-[200px] ${formErrors.Note && 'border-red-500 shadow'}`}
+              onChange={handleInputChange}
+            />
+            <div className='items-start justify-center mt-5'>
               <p className='text-[rgb(0,21,106)] font-medium text-xs 2xl:text-sm mb-2'>
                 Image
               </p>
@@ -281,6 +274,7 @@ const CreateLeadForm: React.FC = () => {
             </div>
           </div>
         </div>
+
         <div className='flex justify-end  mt-5 gap-5 items-end'>
           <Button
             type='submit'
