@@ -11,7 +11,7 @@ const UserDataProvider = ({ children }: { children?: ReactNode }) => {
 
   useEffect(() => {
     if (session?.data?.user) {
-      setUserData({ ...session?.data?.user });
+      setUserData(session.data.user);
     }
   }, [session]);
 

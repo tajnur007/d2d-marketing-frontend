@@ -1,18 +1,21 @@
 'use client';
 
-import { MoonSolidIcon, NotificationIcon, UserIcon } from '@/assets/icons';
+import { UserIcon } from '@/assets/icons';
 import { usePathname } from 'next/navigation';
 import profileImage from '@/assets/images/profile.png';
 import Popup from 'reactjs-popup';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/utils/constants/common-constants';
-import { LogoutIcon, SettingIcon } from '@/assets/icons';
+import { LogoutIcon } from '@/assets/icons';
 import { signOut } from 'next-auth/react';
 import { greetingMessage } from '@/utils/helpers/common-helpers';
+import { UserContext } from '@/providers/user-data-provider';
+import { useContext } from 'react';
 
 const Navbar = () => {
   const currentPage = usePathname();
+  const userData = useContext(UserContext);
 
   const capitalizeEachWord = (str: string): string => {
     return str
@@ -30,7 +33,9 @@ const Navbar = () => {
       <h2 className='text-[#b9a9ff] text-2xl'>{formattedPage}</h2>
 
       <div className='flex justify-center items-center'>
-        <span className='text-[#00156A] font-semibold mr-3'>{greetingMessage()}</span>
+        <span className='text-[#00156A] font-semibold mr-3'>
+          {greetingMessage(userData)}
+        </span>
         <Popup
           trigger={<Image src={profileImage} alt='' height={30} width={30} />}
           position='bottom right'

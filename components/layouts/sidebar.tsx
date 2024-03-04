@@ -11,11 +11,9 @@ import { signOut, useSession } from 'next-auth/react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Link from 'next/link';
-import { UserContext } from '@/providers/user-data-provider';
 
 const Sidebar = () => {
   const router = useRouter();
-  const { userData } = useContext(UserContext);
   const currentPage = usePathname().split('/')[1];
 
   const currPosition = SIDEBAR_ITEMS.find((item) => '/' + currentPage === item?.path);
@@ -29,7 +27,6 @@ const Sidebar = () => {
   useEffect(() => {
     let position = currPosition?.position || 0;
     setSelected(position);
-    console.log(userData);
   }, [currPosition]);
 
   return (

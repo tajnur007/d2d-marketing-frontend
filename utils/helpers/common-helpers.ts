@@ -141,7 +141,7 @@ export const signUpFormErrorCheck = (
   return null; // Non-safe field is valid
 };
 
-export const greetingMessage = (): string => {
+export const greetingMessage = (userData: any): string => {
   const hours = new Date().getHours();
   let time = '';
 
@@ -150,5 +150,7 @@ export const greetingMessage = (): string => {
   else if (hours >= 17 && hours < 21) time = 'evening';
   else time = 'night';
 
-  return `Good ${time}`;
+  const userGretting = userData?.name ? `Hello ${userData.name}. ` : '';
+
+  return userGretting + `Good ${time}`;
 };
