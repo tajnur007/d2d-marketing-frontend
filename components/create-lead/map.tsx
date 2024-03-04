@@ -9,21 +9,19 @@ import { LocationProps } from '@/models/global-types';
 const Map = ({ setLocation, location }: LocationProps) => {
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-      );
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
     }
   }, [setLocation]);
 
   const libraries = useMemo(() => ['places'], []);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: '',
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY ?? '',
     libraries: libraries as any,
   });
 
