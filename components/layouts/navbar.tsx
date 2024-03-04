@@ -15,7 +15,7 @@ import { useContext } from 'react';
 
 const Navbar = () => {
   const currentPage = usePathname();
-  const userData = useContext(UserContext);
+  const userData: any = useContext(UserContext);
 
   const capitalizeEachWord = (str: string): string => {
     return str
@@ -37,7 +37,15 @@ const Navbar = () => {
           {greetingMessage(userData)}
         </span>
         <Popup
-          trigger={<Image src={profileImage} alt='' height={30} width={30} />}
+          trigger={
+            <Image
+              className='border border-1 border-black rounded-full'
+              src={profileImage}
+              alt='user-image'
+              height={30}
+              width={30}
+            />
+          }
           position='bottom right'
           on='hover'
           closeOnDocumentClick
