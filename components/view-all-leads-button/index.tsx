@@ -16,7 +16,7 @@ function ViewAllLeadsButton() {
     <button
       type='button'
       onClick={handleCreateLeadButtonClick}
-      className='text-#5630FF font-medium text-[16px] p-3 text-center mx-5'>
+      className='text-#5630FF font-medium text-[16px] p-3 text-center ml-5'>
       <div className='flex justify-between items-center'>
         <div className="[font-family:'Metropolis-Bold',Helvetica] font-medium text-[14px] leading-[normal] whitespace-nowrap text-capitalize text-[#5630FF]">
           View All
