@@ -92,7 +92,7 @@ const LeadDetails = ({
           </div>
           <div>{data?.latitude}</div>
         </div>
-        <button className='text-[#5630FF]'>Change</button>
+        {/* <button className='text-[#5630FF]'>Change</button> */}
       </div>
 
       <div className='desc'>
@@ -121,7 +121,7 @@ const LeadDetails = ({
 
       <div className='poc border-[#EDEBF4] bg-[#F8F8F8] p-4 rounded-lg mt-4 whitespace-normal'>
         <h4 className='text-[#5630FF] font-medium mb-2 text-[12px] leading-[14px]'>
-          Points of Contact
+          Points of Contacts
         </h4>
 
         <div className='rounded-lg bg-white mb-4 p-4'>
@@ -133,63 +133,73 @@ const LeadDetails = ({
           </div>
         </div>
 
-        <div className='rounded-lg bg-white mb-4 p-4'>
-          <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
-            Phone
-          </div>
-          <div className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.point_of_contact?.phone}
-          </div>
-        </div>
-
-        <div className='rounded-lg bg-white mb-4 p-4'>
-          <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
-            Email
-          </div>
-          <div className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.point_of_contact?.email}
-          </div>
-        </div>
-
-        <div className='rounded-lg bg-white mb-4 p-4'>
-          <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
-            Reference
-          </div>
-          <div className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.point_of_contact?.reference}
-          </div>
-        </div>
-
-        <div className='rounded-lg bg-white p-4'>
-          <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
-            Meeting notes
-          </div>
-          <p className='font-semibold leading-[14px] text-black text-[16px]'>
-            {data?.point_of_contact?.meeting_notes}
-          </p>
-        </div>
-      </div>
-
-      <div className=''>
-        <h4 className='text-[#00156A] font-medium text-[12px] leading-[14px] mt-5'>
-          Image
-        </h4>
-        <div className='flex flex-wrap gap-2 mx-auto my-5'>
-          {data?.image_info_json.map((image: any) => (
-            <div key={image?.image_name}>
-              <Image
-                src={`${image?.image_path}`}
-                alt='image'
-                width={100}
-                height={100}
-                className={`w-[108px] h-[108px]`}
-              />
+        {data?.point_of_contact?.phone && (
+          <div className='rounded-lg bg-white mb-4 p-4'>
+            <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
+              Phone
             </div>
-          ))}
-        </div>
+            <div className='font-semibold leading-[14px] text-black text-[16px]'>
+              {data?.point_of_contact?.phone}
+            </div>
+          </div>
+        )}
+
+        {data?.point_of_contact?.email && (
+          <div className='rounded-lg bg-white mb-4 p-4'>
+            <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
+              Email
+            </div>
+            <div className='font-semibold leading-[14px] text-black text-[16px]'>
+              {data?.point_of_contact?.email}
+            </div>
+          </div>
+        )}
+
+        {data?.point_of_contact?.reference && (
+          <div className='rounded-lg bg-white mb-4 p-4'>
+            <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
+              Reference
+            </div>
+            <div className='font-semibold leading-[14px] text-black text-[16px]'>
+              {data?.point_of_contact?.reference}
+            </div>
+          </div>
+        )}
+
+        {data?.point_of_contact?.meeting_notes && (
+          <div className='rounded-lg bg-white p-4'>
+            <div className='text-[#5630FF] mb-2 text-[12px] font-medium leading-[14px]'>
+              Meeting notes
+            </div>
+            <p className='font-semibold leading-[14px] text-black text-[16px]'>
+              {data?.point_of_contact?.meeting_notes}
+            </p>
+          </div>
+        )}
       </div>
 
-      <div className=' bg-[#F8F6FF] p-4 rounded-lg whitespace-normal'>
+      {!!data?.image_info_json?.length && (
+        <div>
+          <h4 className='text-[#00156A] font-medium text-[12px] leading-[14px] mt-5'>
+            Image
+          </h4>
+          <div className='flex flex-wrap gap-2 mx-auto mt-5'>
+            {data?.image_info_json?.map((image: any) => (
+              <div key={image?.image_name}>
+                <Image
+                  src={`${image?.image_path}`}
+                  alt='image'
+                  width={100}
+                  height={100}
+                  className={`w-[108px] h-[108px]`}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className=' bg-[#F8F6FF] p-4 rounded-lg whitespace-normal mt-5'>
         <h1 className='text-[#5630FF] font-medium leading-[14px] mb-[10px] text-[12px]'>
           Reminder
         </h1>

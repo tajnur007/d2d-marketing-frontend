@@ -12,18 +12,17 @@ import { LeadService } from '@/services/lead-services';
 import { useSession } from 'next-auth/react';
 
 export const AssignDropdownSelect = ({ leadData }: any) => {
-  const [transferButton, setTransferButton] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
   const [selectedName, setSelectedName] = useState('');
-  const { executivesOption, setExecutivesOption } = useContext(LeadsContext);
+  const { executivesOption } = useContext(LeadsContext);
   const [transferPayload, setTransferPayload] =
     useState<TransferLeadPayload>(TRANSFER_LEAD_PAYLOAD);
 
-    const { data: sessionData } = useSession();
-    // @ts-ignore
-    const token = sessionData?.user?.access_token;
-    const LeadServices = new LeadService();
+  const { data: sessionData } = useSession();
+  // @ts-ignore
+  const token = sessionData?.user?.access_token;
+  const LeadServices = new LeadService();
 
   const handleConfirm = () => {
     setShowConfirmationModal(true);
@@ -38,7 +37,14 @@ export const AssignDropdownSelect = ({ leadData }: any) => {
     });
   }, [selectedId, selectedName]);
 
-  const handleTransfer = async() => {
+  useEffect(() => {
+    if (leadData) {
+      setSelectedId(leadData.executive_id);
+      setSelectedName(leadData.executive_name);
+    }
+  }, [leadData]);
+
+  const handleTransfer = async () => {
     try {
       if (token) {
         await LeadServices.transferLead(leadData.id, transferPayload, token);
@@ -61,7 +67,6 @@ export const AssignDropdownSelect = ({ leadData }: any) => {
         if (option.value === selectedOption.value) {
           setSelectedName(option.value);
           setSelectedId(option.id);
-          setTransferButton(true);
         }
       });
     }
@@ -75,10 +80,11 @@ export const AssignDropdownSelect = ({ leadData }: any) => {
             options={executivesOption}
             className='customselect font-medium text-[14px] tracking-[-0.28px] leading-[normal]'
             onChange={handleChange}
+            value={executivesOption?.filter((option: any) => option.id === selectedId)}
           />
         </div>
         <div>
-          {transferButton && (
+          {selectedId !== leadData?.executive_id && (
             <Button
               onClick={handleConfirm}
               className='bg-[#5630FF] text-[14px] text-white rounded-[11px] w-[80px] px-[8px] py-[10px] ml-2 justify-center items-center content-center gap-[10px] transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200 font-medium tracking-[-0.28px] leading-[normal] whitespace-nowrap'>
