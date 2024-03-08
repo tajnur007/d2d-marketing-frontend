@@ -98,7 +98,7 @@ function EmployeeListRow({
         key={item.id}
         className='h-20 flex gap-5 justify-between items-center text-sm leading-none text-gray-800 mb-1'>
         <div className='flex items-center justify-between w-full'>
-          <div className='flex items-center gap-5 w-[20%]'>
+          <div className='flex items-center gap-5 w-[25%]'>
             <div className='flex items-center mt-[8px] '>
               <Image
                 src={profileImage}
@@ -118,30 +118,28 @@ function EmployeeListRow({
             </div>
           </div>
 
-          <div className='w-[20%]'>
+          <div className='w-[20%] flex justify-center items-center'>
             <div className='flex flex-row leading-[20px] font-medium text-[12px] tracking-[-0.24px] whitespace-nowrap'>
-              <p className='text-[#444444] mr-1'>Phone:</p>
               <div className='text-[#828DAD]'>
                 {item.phone ? item.phone : 'Not found'}
               </div>
             </div>
           </div>
 
-          <div className='w-[20%]'>
+          <div className='w-[30%] flex justify-center items-center'>
             <div className='flex flex-row leading-[20px] font-medium text-[12px] text-transparent tracking-[-0.24px] whitespace-nowrap'>
-              <p className='text-[#444444] mr-1'>Email:</p>
               <div className='text-[#828DAD]'>{item.email}</div>
             </div>
           </div>
 
-          <div className='w-[15%]'>
+          <div className='w-[15%] flex justify-center items-center'>
             <span
               className={`text-[10px] w-fit font-medium tracking-[0] leading-[normal] text-[#00156A] h-[19px] mt-[-1px] bg-[#D2FBE7] px-[10px] py-[6px] rounded-[12px]`}>
               {item?.employeeStatus || 'Active'}
             </span>
           </div>
         </div>
-        <div className='w-10'>
+        <div className='w-[10%] flex justify-center items-center'>
           {userRole === 'admin' && userRole !== item.user_type && (
             <Popup
               trigger={

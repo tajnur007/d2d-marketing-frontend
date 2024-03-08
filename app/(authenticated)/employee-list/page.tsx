@@ -65,8 +65,7 @@ const EmployeeListPage = () => {
         }));
         setIsLoading(false);
         setEmployeeInfo(formattedData);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     if (token) {
@@ -113,7 +112,7 @@ const EmployeeListPage = () => {
   return (
     <>
       <div className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)]'>
-        <div className='md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
+        <div className='md:py-6 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
               <p className='font-semibold text-[16px] tracking-[-0.32px] leading-[normal] whitespace-nowrap text-capitalize text-[#2B3674]'>
@@ -141,7 +140,7 @@ const EmployeeListPage = () => {
                 <div onClick={handleNewEmployeeButtonClick}>
                   <button
                     type='button'
-                    className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center mx-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
+                    className='text-white bg-[#5630ff] hover:shadow-blue-500/15 hover:dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-[14px] text-sm p-3 text-center ml-5 transition duration-500 ease-in-out transform hover:-translate-y-1.5 hover:scale-200'>
                     <div className='flex justify-between items-center'>
                       <div className='mr-2'>
                         <Image src={plusImage} alt='' />
@@ -160,8 +159,26 @@ const EmployeeListPage = () => {
           <Loader />
         ) : (
           <div
-            className='h-[calc(100%-125px)] mb-6 overflow-y-auto overflow-x-hidden tiny-scrollbar ml-4'
+            className='h-[calc(100%-125px)] mb-4 overflow-y-auto overflow-x-hidden tiny-scrollbar mx-4'
             onScroll={handleScroll}>
+            <div className='flex gap-2 pr'>
+              <div className='flex justify-center items-center w-[25%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                Name & Designation
+              </div>
+              <div className='flex justify-center items-center w-[20%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                Contact Number
+              </div>
+              <div className='flex justify-center items-center w-[30%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                Email ID
+              </div>
+              <div className='flex justify-center items-center w-[15%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                Status
+              </div>
+              <div className='flex justify-center items-center w-[10%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                Action
+              </div>
+            </div>
+
             <div className='w-full px-8 md:px-4 whitespace-nowrap font-medium text-[16px] md:text-[12px] leading-[normal]'>
               {filteredEmployeeList?.map((item, index) => {
                 const firstChar = item?.name?.charAt(0).toUpperCase();
