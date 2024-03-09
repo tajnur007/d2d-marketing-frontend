@@ -6,7 +6,6 @@ import { ChangePasswordItems } from '@/models/global-types';
 import { CHANGE_PASSWORD_FORM_ITEMS } from '@/utils/constants/common-constants';
 
 import { Input } from '@/components/input';
-import { Button } from '@/components/button';
 
 import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
@@ -152,18 +151,17 @@ const ResetPasswordPage = ({
               onChange={handleConfirmPasswordChange}
             />
 
-            <div className='relative mb-8 mt-4 flex justify-end'>
-              <Button
-                type='button'
-                onClick={handleCancel}
-                className='text-[#69708C] w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#EBEBEB] mb-4 hover:text-white'>
+            <div className='relative flex justify-end items-center gap-2 2xl:gap-3 mt-5'>
+              <button
+                className='text-[#69708C] w-[121px] 2xl:w-32 h-9 2xl:h-12 text-sm 2xl:text-base rounded-lg bg-[#EBEBEB]'
+                onClick={handleCancel}>
                 Cancel
-              </Button>
-              <Button
+              </button>
+              <button
                 type='submit'
-                className='text-white w-40 h-25 text-lg rounded-lg m-2 p-3 bg-[#4318FF] mb-4'>
+                className='text-white w-[110px] 2xl:w-32 h-9 2xl:h-12 text-sm 2xl:text-base rounded-lg  bg-[#4318FF]'>
                 Save
-              </Button>
+              </button>
             </div>
           </div>
         </form>
