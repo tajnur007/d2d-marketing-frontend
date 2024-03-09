@@ -310,6 +310,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
   getDate?: any;
   defaultValue?: string;
+  requiredText?: string;
 }
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {

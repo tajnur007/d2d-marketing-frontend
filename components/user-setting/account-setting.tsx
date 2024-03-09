@@ -6,7 +6,6 @@ import { SettingFormItems } from '@/models/global-types';
 import { SETTING_FORM_ITEMS } from '@/utils/constants/common-constants';
 import profileImage from '@/assets/images/profilePic.png';
 import { Input } from '@/components/input';
-import { Button } from '@/components/button';
 import { EditIcon } from '@/assets/icons';
 import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
@@ -16,6 +15,7 @@ const AccountSettingsPage = ({
 }: {
   setChangePasswordClicked?: any;
 }) => {
+  const [isEditProfile, setIsEditProfile] = useState<boolean>(false);
   const [formData, setFormData] = useState<SettingFormItems>(SETTING_FORM_ITEMS);
   const [formErrors, setFormErrors] = useState<SettingFormItems>(SETTING_FORM_ITEMS);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -37,6 +37,17 @@ const AccountSettingsPage = ({
     };
     getUserInfo();
   }, [data]);
+
+  useEffect(() => {
+    if (userInfo?.email) {
+      setFormData({
+        Name: userInfo?.name,
+        Phone: userInfo?.phone,
+        Email: userInfo?.email,
+        Image: userInfo?.image_path,
+      });
+    }
+  }, [userInfo]);
 
   const handleEditIconClick = () => {
     if (fileInputRef.current) {
@@ -61,13 +72,15 @@ const AccountSettingsPage = ({
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => {
-      return { ...prev, [name]: value };
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-    setFormErrors((prev) => {
-      return { ...prev, [name]: '' };
-    });
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: '',
+    }));
   };
 
   const handlePasswordButtonClick = () => {
@@ -86,6 +99,16 @@ const AccountSettingsPage = ({
     }
 
     setFormErrors(newFormErrors);
+  };
+
+  const cancelEditProfile = () => {
+    setIsEditProfile(false);
+    setFormData({
+      Name: userInfo?.name,
+      Phone: userInfo?.phone,
+      Email: userInfo?.email,
+      Image: userInfo?.image_path,
+    });
   };
 
   return (
@@ -116,8 +139,10 @@ const AccountSettingsPage = ({
               />
             </div>
           </div>
-          <div className='flex'>
-            <button className='text-[#191D31] text-sm 2xl:text-base rounded-lg px-4 2xl:px-5 h-9 2xl:h-12 bg-transparent border border-[#d8d7d7] text-nowrap mr-2 2xl:mr-3'>
+          <div className='flex gap-2 2xl:gap-3'>
+            <button
+              className='text-[#191D31] text-sm 2xl:text-base rounded-lg px-4 2xl:px-5 h-9 2xl:h-12 bg-transparent border border-[#d8d7d7] text-nowrap'
+              onClick={() => setIsEditProfile(true)}>
               Edit Profile
             </button>
             <button
@@ -132,10 +157,11 @@ const AccountSettingsPage = ({
           <div className='gap-4 2xl:gap-5 mt-2'>
             <Input
               label='Full Name'
-              placeholder='Full Name'
               id='fullName'
               name='Name'
-              defaultValue={userInfo?.name}
+              placeholder='Full Name'
+              readOnly={!isEditProfile}
+              value={formData.Name}
               onChange={handleInputChange}
             />
             <Input
@@ -143,40 +169,47 @@ const AccountSettingsPage = ({
               id='email'
               name='Email'
               readOnly
+              required
+              requiredText='This field is not editable'
               value={userInfo?.email}
               onChange={handleInputChange}
             />
 
             <Input
               label='Phone Number'
-              placeholder='Phone Number'
               id='phone'
               name='Phone'
-              value={userInfo?.phone}
+              placeholder='Phone Number'
+              readOnly={!isEditProfile}
+              value={formData.Phone}
               onChange={handleInputChange}
             />
 
             <Input
-              label='Role (View Only)'
+              label='Role'
               id='role'
               name='Role'
-              value={userInfo?.user_type}
               readOnly
+              required
+              requiredText='This field is not editable'
+              value={userInfo?.user_type}
             />
           </div>
 
-          <div className='flex justify-end items-center gap-4 mr-7 mt-5'>
-            <Button
-              type='button'
-              className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB]  hover:text-white'>
-              Cancel
-            </Button>
-            <Button
-              type='submit'
-              className='text-white w-[110px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#4318FF] '>
-              Save
-            </Button>
-          </div>
+          {isEditProfile && (
+            <div className='flex justify-end items-center gap-2 2xl:gap-3 mt-5'>
+              <button
+                className='text-[#69708C] w-[121px] 2xl:w-32 h-9 2xl:h-12 text-sm 2xl:text-base rounded-lg bg-[#EBEBEB]'
+                onClick={cancelEditProfile}>
+                Cancel
+              </button>
+              <button
+                type='submit'
+                className='text-white w-[110px] 2xl:w-32 h-9 2xl:h-12 text-sm 2xl:text-base rounded-lg  bg-[#4318FF]'>
+                Save
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </section>
