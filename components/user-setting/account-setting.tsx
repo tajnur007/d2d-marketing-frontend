@@ -90,7 +90,7 @@ const AccountSettingsPage = ({
 
   return (
     <section>
-      <div className='w-full h-[calc(100vh-102px)] p-6 rounded-[10px] bg-white border-2 border-black'>
+      <div className='w-full h-[calc(100vh-90px)] p-6 rounded-[10px] bg-white'>
         <div className='text-[#00156A] font-bold'>Account Settings</div>
         <div className='mt-3 text-[#00156A] text-xs font-medium'>
           Change Profile Picture

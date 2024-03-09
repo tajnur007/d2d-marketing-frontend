@@ -35,8 +35,7 @@ const Leaderboard: React.FC = () => {
         const response = await DashboardServices.leaderboard(token);
         setLeaderboard(response.data.Data);
         setIsLoading(false);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     if (token) {
@@ -45,7 +44,7 @@ const Leaderboard: React.FC = () => {
   }, [token]);
 
   return (
-    <div className='bg-white rounded-xl w-full h-[calc(100vh-102px)] lg:w-[27%]'>
+    <div className='bg-white rounded-xl w-full h-[calc(100vh-90px)] lg:w-[27%]'>
       <div className='sticky top-0 bg-white z-10 rounded-xl'>
         <h2 className='font-bold text-[#2b3674] xl:text-[16px] text-[14px] tracking-[-0.32px] leading-[normal] whitespace-nowrap p-5'>
           Leaderboard

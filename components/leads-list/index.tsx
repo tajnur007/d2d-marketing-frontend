@@ -46,7 +46,7 @@ function LeadsList() {
       LeadServices.getLeadsData(setLeadsData, token, setIsLoading);
       LeadServices.getCreatedByData(setCreatedByOptions, token);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const handleCreateLeadButtonClick = () => {
@@ -76,7 +76,7 @@ function LeadsList() {
 
   return (
     <div
-      className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-102px)] md:pb-4 lg:pb-6'
+      className='border border-gray-100 bg-white rounded-xl w-full h-[calc(100vh-90px)] md:pb-4 lg:pb-6'
       onScroll={handleScroll}>
       <div className='py-4 md:py-6 pl-8 h-[96px] sticky top-0 bg-white z-10 p-6 rounded-xl'>
         <div className='flex justify-between gap-5'>

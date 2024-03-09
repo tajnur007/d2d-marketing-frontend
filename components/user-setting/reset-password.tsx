@@ -112,7 +112,7 @@ const ResetPasswordPage = ({
 
   return (
     <section>
-      <div className='w-full h-[calc(100vh-102px)] mt-0 rounded-[10px] bg-white'>
+      <div className='w-full h-[calc(100vh-90px)] mt-0 rounded-[10px] bg-white'>
         <div className='ml-6'>
           <div>
             <div className='text-[#00156A] font-bold text-base tracking-[-0.32px] pt-7'>
