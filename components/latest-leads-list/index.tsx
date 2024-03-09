@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react';
 import { LeadService } from '@/services/lead-services';
 import { LATEST_LEADS_ITEMS } from '@/utils/constants/common-constants';
 import Loader from '../loader';
+import Image from 'next/image';
+import noDataImage from '@/assets/images/no-data-image.png';
 
 const LatestLeadsList: React.FC = () => {
   const { data } = useSession();
@@ -22,8 +24,7 @@ const LatestLeadsList: React.FC = () => {
         const response = await LeadServices.latestLeads(token);
         setLatestLeads(response?.data?.Data);
         setIsLoading(false);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     if (token) {
@@ -43,7 +44,7 @@ const LatestLeadsList: React.FC = () => {
               {latestLeads?.Count}
             </p>
           </div>
-          <div>{latestLeads?.Count === 0 ? '' : <ViewAllLeadsButton />}</div>
+          {latestLeads?.Count !== 0 && <ViewAllLeadsButton />}
         </div>
       </div>
       {isLoading ? (
@@ -53,6 +54,15 @@ const LatestLeadsList: React.FC = () => {
           {latestLeads?.Data?.map((item, index) => (
             <LatestLeadRow key={index} item={item} />
           ))}
+          {latestLeads?.Count === 0 && (
+            <div className='h-full flex justify-center items-center'>
+              <Image
+                src={noDataImage}
+                alt='no-data-image'
+                className='w-[400px] 2xl:w-[500px]'
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

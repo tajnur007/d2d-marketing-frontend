@@ -12,6 +12,8 @@ import CreateLeadsButton from '../create-leads-button';
 import { LeadsContext } from '@/context/leads-context';
 import Loader from '../loader';
 import { UserService } from '@/services/user-services';
+import Image from 'next/image';
+import noDataImage from '@/assets/images/no-data-image.png';
 
 function LeadsList() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -111,29 +113,40 @@ function LeadsList() {
           </div>
         </div>
       </div>
+
       {isLoading ? (
         <Loader />
       ) : (
         <div className='h-[calc(100%-105px)] overflow-y-auto overflow-x-hidden tiny-scrollbar'>
-          <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
-            {searchData?.length > 0
-              ? searchData?.map((item, index) => (
-                  <LeadRow
-                    key={index}
-                    item={item}
-                    leadRefresh={leadRefresh}
-                    setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
-                  />
-                ))
-              : leadsData.Data?.map((item: LeadListType, index: number) => (
-                  <LeadRow
-                    key={index}
-                    item={item}
-                    leadRefresh={leadRefresh}
-                    setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
-                  />
-                ))}
-          </div>
+          {!!leadsData?.Data?.length ? (
+            <div className='w-full px-8 whitespace-nowrap font-medium text-[14px] leading-[normal]'>
+              {searchData?.length > 0
+                ? searchData?.map((item, index) => (
+                    <LeadRow
+                      key={index}
+                      item={item}
+                      leadRefresh={leadRefresh}
+                      setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                    />
+                  ))
+                : leadsData.Data?.map((item: LeadListType, index: number) => (
+                    <LeadRow
+                      key={index}
+                      item={item}
+                      leadRefresh={leadRefresh}
+                      setLeadRefresh={() => setLeadRefresh(!leadRefresh)}
+                    />
+                  ))}
+            </div>
+          ) : (
+            <div className='h-full flex justify-center items-center'>
+              <Image
+                src={noDataImage}
+                alt='no-data-image'
+                className='w-[400px] 2xl:w-[500px]'
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -11,6 +11,7 @@ import { CreateEmployeeItems } from '@/models/global-types';
 import Image from 'next/image';
 import CreateEmployeeModal from '@/components/create-employee-modal';
 import Loader from '@/components/loader';
+import noDataImage from '@/assets/images/no-data-image.png';
 
 const EmployeeListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -161,50 +162,64 @@ const EmployeeListPage = () => {
           <div
             className='h-[calc(100%-125px)] mb-4 overflow-y-auto overflow-x-hidden tiny-scrollbar mx-4'
             onScroll={handleScroll}>
-            <div className='flex gap-2 pr'>
-              <div className='flex justify-center items-center w-[25%] h-10 bg-[#F2F0FF] text-sm font-medium'>
-                Name & Designation
+            {!!filteredEmployeeList?.length && (
+              <div className='flex gap-2 pr'>
+                <div className='flex justify-center items-center w-[25%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                  Name & Designation
+                </div>
+                <div className='flex justify-center items-center w-[20%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                  Contact Number
+                </div>
+                <div className='flex justify-center items-center w-[30%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                  Email ID
+                </div>
+                <div className='flex justify-center items-center w-[15%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                  Status
+                </div>
+                <div className='flex justify-center items-center w-[10%] h-10 bg-[#F2F0FF] text-sm font-medium'>
+                  Action
+                </div>
               </div>
-              <div className='flex justify-center items-center w-[20%] h-10 bg-[#F2F0FF] text-sm font-medium'>
-                Contact Number
-              </div>
-              <div className='flex justify-center items-center w-[30%] h-10 bg-[#F2F0FF] text-sm font-medium'>
-                Email ID
-              </div>
-              <div className='flex justify-center items-center w-[15%] h-10 bg-[#F2F0FF] text-sm font-medium'>
-                Status
-              </div>
-              <div className='flex justify-center items-center w-[10%] h-10 bg-[#F2F0FF] text-sm font-medium'>
-                Action
-              </div>
-            </div>
+            )}
 
-            <div className='w-full px-8 md:px-4 whitespace-nowrap font-medium text-[16px] md:text-[12px] leading-[normal]'>
-              {filteredEmployeeList?.map((item, index) => {
-                const firstChar = item?.name?.charAt(0).toUpperCase();
-                let isFirstChar = false;
+            {!!filteredEmployeeList?.length && (
+              <div className='w-full px-8 md:px-4 whitespace-nowrap font-medium text-[16px] md:text-[12px] leading-[normal]'>
+                {filteredEmployeeList?.map((item, index) => {
+                  const firstChar = item?.name?.charAt(0).toUpperCase();
+                  let isFirstChar = false;
 
-                // If the character has not been displayed, add it to the array and set isFirstChar to true
-                if (!displayedChars.includes(firstChar)) {
-                  displayedChars.push(firstChar);
-                  isFirstChar = true;
-                }
+                  // If the character has not been displayed, add it to the array and set isFirstChar to true
+                  if (!displayedChars.includes(firstChar)) {
+                    displayedChars.push(firstChar);
+                    isFirstChar = true;
+                  }
 
-                // Pass isFirstChar prop only when it's true
-                return (
-                  <EmployeeListRow
-                    key={index}
-                    item={item}
-                    uniqueCharCount={uniqueCharCount}
-                    isFirstChar={isFirstChar}
-                    employeeActionRef={employeeActionRef}
-                    isRefreshData={isRefreshData}
-                    setISRefreshData={setIsRefreshData}
-                    userRole={userRole}
-                  />
-                );
-              })}
-            </div>
+                  // Pass isFirstChar prop only when it's true
+                  return (
+                    <EmployeeListRow
+                      key={index}
+                      item={item}
+                      uniqueCharCount={uniqueCharCount}
+                      isFirstChar={isFirstChar}
+                      employeeActionRef={employeeActionRef}
+                      isRefreshData={isRefreshData}
+                      setISRefreshData={setIsRefreshData}
+                      userRole={userRole}
+                    />
+                  );
+                })}
+              </div>
+            )}
+
+            {!filteredEmployeeList?.length && (
+              <div className='h-full flex justify-center items-center'>
+                <Image
+                  src={noDataImage}
+                  alt='no-data-image'
+                  className='w-[400px] 2xl:w-[500px]'
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

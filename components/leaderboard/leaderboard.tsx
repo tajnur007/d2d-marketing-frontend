@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react';
 import { DashboardService } from '@/services/dashboard-services';
 import { LEADERBOARD_ITEMS } from '@/utils/constants/common-constants';
 import Loader from '../loader';
+import Image from 'next/image';
+import noDataImage from '@/assets/images/no-data-image.png';
 
 leaderBoard.sort((a, b) => {
   const nameA = a.name.toLowerCase();
@@ -45,17 +47,21 @@ const Leaderboard: React.FC = () => {
 
   return (
     <div className='bg-white rounded-xl w-full h-[calc(100vh-90px)] lg:w-[27%]'>
-      <div className='sticky top-0 bg-white z-10 rounded-xl'>
-        <h2 className='font-bold text-[#2b3674] xl:text-[16px] text-[14px] tracking-[-0.32px] leading-[normal] whitespace-nowrap p-5'>
-          Leaderboard
-        </h2>
-      </div>
+      <h2 className='font-bold text-[#2b3674] xl:text-[16px] text-[14px] leading-[normal] whitespace-nowrap p-5'>
+        Leaderboard
+      </h2>
       {isLoading ? (
         <Loader size='100' />
-      ) : leaderboard?.Data ? (
+      ) : !!leaderboard?.Data?.length ? (
         <Profiles data={leaderboard.Data} />
       ) : (
-        <p className='ml-5'>No Data Found</p>
+        <div className='h-[calc(100vh-160px)] flex justify-center items-center'>
+          <Image
+            src={noDataImage}
+            alt='no-data-image'
+            className='w-[200px] 2xl:w-[250px]'
+          />
+        </div>
       )}
     </div>
   );
