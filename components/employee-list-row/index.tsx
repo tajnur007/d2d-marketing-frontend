@@ -7,11 +7,12 @@ import Image from 'next/image';
 import Popup from 'reactjs-popup';
 import EmployeeOptions from './EmployeeOptions';
 import UpdateEmployeeModal from '../update-employee-modal';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import ConfirmationModal from '../confirmation-modal';
 import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import { DeleteIcon, EditIcon } from '@/assets/icons';
 
 const getStatusColor: EmployeestatusColor = {
   Active: 'bg-[#D2FBE7]',
@@ -141,34 +142,14 @@ function EmployeeListRow({
         </div>
         <div className='w-[10%] flex justify-center items-center'>
           {userRole === 'admin' && userRole !== item.user_type && (
-            <Popup
-              trigger={
-                <div className='menu-item'>
-                  <Image className='cursor-pointer h-6 w-6' src={moreImage} alt='' />
-                </div>
-              }
-              ref={employeeActionRef}
-              position='left center'
-              on='click'
-              closeOnDocumentClick
-              closeOnEscape
-              mouseLeaveDelay={300}
-              mouseEnterDelay={0}
-              contentStyle={{
-                padding: '0px',
-                border: 'none',
-                background: '#F8F8F8',
-                borderRadius: '4px',
-                marginLeft: '20px',
-              }}
-              arrow={false}>
-              {(!deleteModalIsOpen || !editModalIsOpen) && (
-                <EmployeeOptions
-                  handleDeleteButton={() => handleDeleteButton()}
-                  handleEditButton={() => handleEditButton()}
-                />
-              )}
-            </Popup>
+            <Fragment>
+              <div onClick={handleEditButton} className='cursor-pointer'>
+                <EditIcon />
+              </div>
+              <div onClick={handleDeleteButton} className='cursor-pointer ml-[10px]'>
+                <DeleteIcon />
+              </div>
+            </Fragment>
           )}
         </div>
       </div>
