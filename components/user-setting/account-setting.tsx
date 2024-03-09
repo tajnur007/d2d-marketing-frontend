@@ -90,103 +90,94 @@ const AccountSettingsPage = ({
 
   return (
     <section>
-      <div className='w-full h-[calc(100vh-102px)] mt-0 rounded-[10px] bg-white'>
-        <div className='ml-6'>
-          <div>
-            <div className='text-[#00156A] font-bold text-base tracking-[-0.32px] pt-7'>
-              Account Settings
-            </div>
-            <div className='mt-5 text-[#00156A] text-xs font-medium'>
-              Change Profile Picture
-            </div>
-          </div>
+      <div className='w-full h-[calc(100vh-102px)] p-6 rounded-[10px] bg-white border-2 border-black'>
+        <div className='text-[#00156A] font-bold'>Account Settings</div>
+        <div className='mt-3 text-[#00156A] text-xs font-medium'>
+          Change Profile Picture
         </div>
 
-        <div>
-          <div className='flex mt-2 ml-6 mb-5 md:flex-row'>
-            <div className='flex items-center w-20 mt-[8px] md:mt-0'>
-              <Image
-                src={profileImageSrc || profileImage}
-                alt='Profile Picture'
-                width={20}
-                height={20}
-                className='rounded-full w-20 h-20 flex-shrink-0'
-              />
-            </div>
-            <div
-              className='mt-9 md:mt-9 ml-4 cursor-pointer'
-              onClick={handleEditIconClick}>
-              <EditIcon />
-            </div>
-            <input
-              type='file'
-              accept='image/*'
-              style={{ display: 'none' }}
-              ref={fileInputRef}
-              onChange={handleFileChange}
+        <div className='flex items-center justify-between mt-2 mb-5'>
+          <div className='flex items-center'>
+            <Image
+              src={profileImageSrc || profileImage}
+              alt='Profile Picture'
+              width={20}
+              height={20}
+              className='rounded-full w-20 h-20 flex-shrink-0'
             />
-            <div className='ml-auto mr-8 mt-8'>
-              <Button
-                type='button'
-                onClick={handlePasswordButtonClick}
-                className='text-[#FFFFFF] text-sm 2xl:text-base rounded-lg px-5 h-[45px] 2xl:h-[52px] bg-[#5630FF]'>
-                Change Password
-              </Button>
+            <div className='ml-4 cursor-pointer' onClick={handleEditIconClick}>
+              <EditIcon />
+              <input
+                type='file'
+                accept='image/*'
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
             </div>
           </div>
-          <form className='bg-white' onSubmit={submitData} id='settings-form'>
-            <div className='gap-[10px] ml-6 mr-8 mb-2 mt-2'>
-              <Input
-                label='Full Name'
-                placeholder='Full Name'
-                id='fullName'
-                name='Name'
-                defaultValue={userInfo?.name}
-                onChange={handleInputChange}
-              />
-              <Input
-                label='Email'
-                placeholder='Email'
-                id='email'
-                name='Email'
-                readOnly
-                value={userInfo?.email}
-                onChange={handleInputChange}
-              />
-
-              <Input
-                label='Phone Number'
-                placeholder='Phone Number'
-                id='phone'
-                name='Phone'
-                value={userInfo?.phone}
-                onChange={handleInputChange}
-              />
-
-              <Input
-                label='Role (View Only)'
-                placeholder='Assignee'
-                id='role'
-                name='Role'
-                value={userInfo?.user_type}
-                readOnly
-              />
-            </div>
-
-            <div className='flex justify-end items-center gap-4 mr-7 mt-5'>
-              <Button
-                type='button'
-                className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB]  hover:text-white'>
-                Cancel
-              </Button>
-              <Button
-                type='submit'
-                className='text-white w-[110px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#4318FF] '>
-                Save
-              </Button>
-            </div>
-          </form>
+          <div className='flex'>
+            <button className='text-[#191D31] text-sm 2xl:text-base rounded-lg px-4 2xl:px-5 h-9 2xl:h-12 bg-transparent border border-[#d8d7d7] text-nowrap mr-2 2xl:mr-3'>
+              Edit Profile
+            </button>
+            <button
+              onClick={handlePasswordButtonClick}
+              className='text-white text-sm 2xl:text-base rounded-lg px-4 2xl:px-5 h-9 2xl:h-12 bg-[#5630FF] text-nowrap'>
+              Change Password
+            </button>
+          </div>
         </div>
+
+        <form className='bg-white' onSubmit={submitData} id='settings-form'>
+          <div className='gap-4 2xl:gap-5 mt-2'>
+            <Input
+              label='Full Name'
+              placeholder='Full Name'
+              id='fullName'
+              name='Name'
+              defaultValue={userInfo?.name}
+              onChange={handleInputChange}
+            />
+            <Input
+              label='Email'
+              id='email'
+              name='Email'
+              readOnly
+              value={userInfo?.email}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              label='Phone Number'
+              placeholder='Phone Number'
+              id='phone'
+              name='Phone'
+              value={userInfo?.phone}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              label='Role (View Only)'
+              id='role'
+              name='Role'
+              value={userInfo?.user_type}
+              readOnly
+            />
+          </div>
+
+          <div className='flex justify-end items-center gap-4 mr-7 mt-5'>
+            <Button
+              type='button'
+              className='text-[#69708C] w-[121px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#EBEBEB]  hover:text-white'>
+              Cancel
+            </Button>
+            <Button
+              type='submit'
+              className='text-white w-[110px] px-5 2xl:w-32 h-[45px] 2xl:h-[52px] text-sm 2xl:text-base rounded-lg  bg-[#4318FF] '>
+              Save
+            </Button>
+          </div>
+        </form>
       </div>
     </section>
   );
