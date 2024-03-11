@@ -9,6 +9,7 @@ import { Input } from '@/components/input';
 import { EditIcon } from '@/assets/icons';
 import { UserService } from '@/services/user-services';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 const AccountSettingsPage = ({
   setChangePasswordClicked = () => {},
@@ -22,6 +23,8 @@ const AccountSettingsPage = ({
   const [profileImageSrc, setProfileImageSrc] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState<any>();
   const { data } = useSession();
+
+  const UserServices = new UserService();
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -87,9 +90,7 @@ const AccountSettingsPage = ({
     setChangePasswordClicked(false);
   };
 
-  const submitData = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const checkErrors = (): boolean => {
     const newFormErrors: any = {};
 
     for (let field in formData) {
@@ -99,9 +100,31 @@ const AccountSettingsPage = ({
     }
 
     setFormErrors(newFormErrors);
+
+    return !newFormErrors.Name;
+  };
+
+  const submitData = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (checkErrors()) {
+      // @ts-ignore
+      const token = data?.user?.access_token || '';
+      const payload = {
+        name: formData.Name,
+        phone: formData.Phone || '',
+      };
+
+      UserServices.updateEmployeeInfo(userInfo.id, payload, token)
+        .then(() => toast.success('Account updated successfully!'))
+        .catch((error) => {
+          toast.error(error?.response?.data?.message || 'Cound not saved updated info!');
+        });
+    }
   };
 
   const cancelEditProfile = () => {
+    checkErrors();
     setIsEditProfile(false);
     setFormData({
       Name: userInfo?.name,
@@ -161,6 +184,7 @@ const AccountSettingsPage = ({
               name='Name'
               placeholder='Full Name'
               readOnly={!isEditProfile}
+              isError={!!formErrors.Name}
               value={formData.Name}
               onChange={handleInputChange}
             />
